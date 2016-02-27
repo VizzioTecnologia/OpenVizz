@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="user_preferences">
+		
+		<param name="time_zone" type="select" default="global" label="time_zone" tip="tip_time_zone">
+			
+			<option value="global">global</option>
+			
+			<option value="UM12">UM12</option>
+			<option value="UM11">UM11</option>
+			<option value="UM10">UM10</option>
+			<option value="UM95">UM95</option>
+			<option value="UM9">UM9</option>
+			<option value="UM8">UM8</option>
+			<option value="UM7">UM7</option>
+			<option value="UM6">UM6</option>
+			<option value="UM5">UM5</option>
+			<option value="UM45">UM45</option>
+			<option value="UM4">UM4</option>
+			<option value="UM35">UM35</option>
+			<option value="UM3">UM3</option>
+			<option value="UM2">UM2</option>
+			<option value="UM1">UM1</option>
+			
+			<option value="UTC">UTC</option>
+			
+			<option value="UP1">UP1</option>
+			<option value="UP2">UP2</option>
+			<option value="UP3">UP3</option>
+			<option value="UP35">UP35</option>
+			<option value="UP4">UP4</option>
+			<option value="UP45">UP45</option>
+			<option value="UP5">UP5</option>
+			<option value="UP55">UP55</option>
+			<option value="UP575">UP575</option>
+			<option value="UP6">UP6</option>
+			<option value="UP65">UP65</option>
+			<option value="UP7">UP7</option>
+			<option value="UP8">UP8</option>
+			<option value="UP875">UP875</option>
+			<option value="UP9">UP9</option>
+			<option value="UP95">UP95</option>
+			<option value="UP10">UP10</option>
+			<option value="UP105">UP105</option>
+			<option value="UP11">UP11</option>
+			<option value="UP115">UP115</option>
+			<option value="UP12">UP12</option>
+			<option value="UP1275">UP1275</option>
+			<option value="UP13">UP13</option>
+			<option value="UP14">UP14</option>
+			
+		</param>
+		
+		<param name="admin_language" type="select" default="" label="admin_language" tip="tip_admin_language">
+			
+			<option value="global">global</option>
+			
+		</param>
+		
+		<param name="site_language" type="select" default="" label="site_language" tip="tip_site_language">
+			
+			<option value="global">global</option>
+			
+		</param>
+		
+		<param name="js_text_editor" type="select" default="no_editor" label="text_editor" tip="tip_text_editor">
+			
+			<option value="global">global</option>
+			<option value="no_editor">no_editor</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

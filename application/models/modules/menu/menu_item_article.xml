@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="detail_view">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="article_id" type="select" default="-1" label="select_article" tip="tip_select_article">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+	</section>
+	
+</params>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="instagram_snapwidget_module_config">
+		
+		<param name="instagram_snapwidget_content" type="textarea" default="" label="instagram_snapwidget_content" tip="tip_instagram_snapwidget_content" >
+			
+			<validation rules="trim|xss" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="instagram_snapwidget_layout" type="select" default="default" label="instagram_snapwidget_layout" tip="tip_instagram_snapwidget_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

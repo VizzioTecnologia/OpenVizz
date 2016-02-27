@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery Switch, by Rawnet</title>
+    <meta name="description" content="An iOS-inspired slide/toggle switch for jQuery">
+    <meta name="author" content="Mike Fulcher">
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="demo/html5.js"></script>
+    <![endif]-->
+    
+    <!-- Le styles -->
+    <link rel="stylesheet" href="demo/bootstrap.css">
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+      
+      select.inline {
+        display: inline !important;
+        margin-bottom: 5px;
+      }
+    </style>
+    
+    <!-- Le jquery -->
+    <script type="text/javascript" src="demo/jquery.js"></script>
+    
+    <!-- Le syntax highlighting -->
+    <link href="demo/prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="demo/prettify.js"></script>
+    <script>$(function () { prettyPrint() })</script>
+    
+    <!-- Le jquery switch-->
+    <link href="jquery.switch/jquery.switch.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="jquery.switch/jquery.switch.min.js"></script>
+    
+    <script>
+      $(function() {
+        $('select:not(.args, .evented)').switchify();
+        $('select.args').switchify({ on: '1', off: '0' });
+        
+        $('.api').click(function(e) {
+          e.preventDefault();
+          var self = $(this),
+              $switch = $('#api-select').data('switch'),
+              controls = $switch.data('controls');
+              
+          controls[self.attr('data-action')]();
+        });
+        
+        $('select.evented').switchify().data('switch').bind('switch:slide', function(e, type) {
+          e.preventDefault();
+          $('.events').append('<li>Preparing to slide to "' + type + '" position</li>');
+          var answer = confirm('Switch to the "' + type + '" position?'),
+              $switch = $(this),
+              controls = $switch.data('controls');
+              
+          if (answer) {
+            $('.events').append('<li>Sliding to "' + type + '" position</li>');
+            setTimeout(function() {
+              controls[type]({ silent: true });
+            }, 50);
+          } else {
+            $('.events').append('<li>Cancelled slide to "' + type + '" position</li>');
+            setTimeout(function() {
+              controls[$switch.hasClass('on') ? 'on' : 'off']({ silent: true });
+            }, 50);
+          }
+        });
+        
+        $('.focus').click(function(e) {
+          e.preventDefault();
+          $(this).focus();
+        });
+      });
+    </script>
+    
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-20145-66']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  
+  <body>
+    <div class="container">
+      
+      <header>
+        <div class="page-header">
+          <h1>
+            jQuery/Switch <small>awesome slide/toggle switches</small>
+            <a href="https://github.com/rawnet/jquery-switch/zipball/v0.4.1" class="btn large primary" style="float:right;">download v0.4.1</a>
+            <a href="http://github.com/rawnet/jquery-switch" target="_blank" class="btn large" style="float:right;margin-right:5px;">github.com/rawnet/jquery-switch</a>
+          </h1>
+        </div>
+      </header>
+      
+      <section>
+        <div class="row">
+          <div class="span16">
+            <iframe style="width: 100%; height: 600px; border: solid 1px black;" src="http://jsfiddle.net/6twenty/3Uw2s/" frameborder="0"></iframe>
+          </div>
+          <div class="span16">
+            <p><a href="http://jsfiddle.net/6twenty/3Uw2s/" target="_blank">Go to this fiddle</a></p>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="page-header" style="margin-top:50px;">
+          <h1>Demos <small>cut to the chase</small></h1>
+        </div>
+        
+        <div class="row">
+          <div class="span4">
+            <h3>The defaults</h3>
+            <select class="example-1">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>the defaults</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Custom values/labels</h3>
+            <select class="example-2">
+              <option value="a">True</option>
+              <option value="b">False</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>custom values/labels</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="a"&gt;True&lt;/option&gt;
+  &lt;option value="b"&gt;False&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Respect initial value</h3>
+            <select class="example-3">
+              <option value="1">On</option>
+              <option value="0" selected="selected">Off</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>respect initial value</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0" selected="selected"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Override defaults</h3>
+            <select class="example-4 args">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>override defaults</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify({ on: '1', off: '0' });</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Respect initial state</h3>
+            <select class="example-5" disabled="disabled">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>respect initial state</small></h3>
+            <pre class="prettyprint linenums">&lt;select disabled="disabled"&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Multiple switches</h3>
+            <select class="example-6">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+            <select class="example-6">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>multiple switches</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Event driven</h3>
+            <select class="example-7 inline evented">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+            <ul class="events"></ul>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>event driven</small></h3>
+            <pre class="prettyprint linenums">&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify().data('switch').bind('switch:slide', function(e, type) {
+  e.preventDefault(); // cancel the default slide action
+  $('.events').append('&lt;li&gt;Preparing to slide to "' + type + '" position&lt;/li&gt;');
+  var answer = confirm('Switch to the "' + type + '" position?');
+  if (answer) {
+    $('.events').append('&lt;li&gt;Sliding to "' + type + '" position&lt;/li&gt;');
+    var controls = $(this).data('controls');
+    // manually perform the slide action, but without triggering the 'switch:slide' event again
+    controls[type]({ silent: true });
+  } else {
+    $('.events').append('&lt;li&gt;Cancelled slide to "' + type + '" position&lt;li&gt;');
+  }
+});</pre>
+            <pre class="prettyprint linenums">select { display: inline !important; }</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>API controls</h3>
+            <select id="api-select" class="example-8">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+            
+            <p>
+              <a href="#" class="api" data-action="on">Switch on</a> |
+              <a href="#" class="api" data-action="off">Switch off</a> |
+              <a href="#" class="api" data-action="toggle">Toggle</a>
+            </p>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>api controls</small></h3>
+            <pre class="prettyprint linenums">&lt;select id="api-select"&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;p&gt;
+  &lt;a href="#" class="api" data-action="on"&gt;Switch on&lt;/a&gt; |
+  &lt;a href="#" class="api" data-action="off"&gt;Switch off&lt;/a&gt; |
+  &lt;a href="#" class="api" data-action="toggle"&gt;Toggle&lt;/a&gt;
+&lt;/p&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();
+
+$('.api').click(function(e) {
+  e.preventDefault();
+  var self = $(this),
+      $switch = $('#api-select').data('switch'),
+      controls = $switch.data('controls');
+
+  controls[self.attr('data-action')]();
+});</pre>
+          </div>
+        </div><!-- /row -->
+        
+        <div class="row">
+          <div class="span4">
+            <h3>Keyboard support</h3>
+            <p><a href="#" class="focus">Click here, press <code>tab</code> to focus on the switch, then hit <code>enter</code> to toggle</a></p>
+            
+            <select class="example-9">
+              <option value="1">On</option>
+              <option value="0">Off</option>
+            </select>
+          </div>
+          
+          <div class="span12">
+            <h3>The code <small>keyboard support</small></h3>
+            <pre class="prettyprint linenums">&lt;p&gt;&lt;a href="#" class="focus"&gt;Click here, press &lt;code&gt;tab&lt;/code&gt; to focus on the switch, then hit &lt;code&gt;enter&lt;/code&gt; to toggle&lt;/a&gt;&lt;/p&gt;
+              
+&lt;select&gt;
+  &lt;option value="1"&gt;On&lt;/option&gt;
+  &lt;option value="0"&gt;Off&lt;/option&gt;
+&lt;/select&gt;</pre>
+            <pre class="prettyprint linenums">$('select').switchify();
+
+$('.api-keyboard-focus').click(function(e) {
+  e.preventDefault();
+  $(this).focus();
+});</pre>
+          </div>
+        </div><!-- /row -->
+      </section>
+      
+      <footer class="footer">
+        <div class="container">
+          <p class="pull-right"><a href="#">Back to top</a></p>
+          <p>&copy; 2011 <a href="http://www.rawnet.com/">Rawnet</a> - written by the <a href="http://rawnet.github.com/">Rawnet Engineering team</a></p>
+        </div>
+      </footer>
+      
+    </div> <!-- /container -->
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="facebook">
+		
+		<param name="show_facebook_comments" type="select" default="0" label="show_facebook_comments" tip="tip_show_facebook_comments">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

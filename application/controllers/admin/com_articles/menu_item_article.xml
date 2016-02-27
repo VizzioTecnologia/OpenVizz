@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+		
+	<section name="detail_view">
+		
+		<param name="php1" type="php">
+			
+			<![CDATA[
+				
+				$CI->voutput->append_head_script_declaration( 'menu_item_articles_js', $CI->load->view( 'admin/components/articles/articles_management/menu_item_articles_js', NULL, TRUE ), NULL, NULL );
+				
+			]]>
+			
+		</param>
+		
+		<param name="article_id" type="select" default="-1" label="select_article" tip="tip_select_article">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+	</section>
+	
+</params>

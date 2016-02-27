@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="vesm">
+		
+		<param name="tenders" type="spacer" label="tenders"/>
+		
+		<param name="tender_order_by" type="select" default="tender_code" label="tender_order_by" tip="tip_tender_order_by">
+			
+			<option value="tender_code">tender_code</option>
+			<option value="title">title</option>
+			<option value="date_creation">date_creation</option>
+			<option value="date_tender_order">date_tender_order</option>
+			<option value="date_issue">date_issue</option>
+			<option value="customer">customer</option>
+			<option value="contact">contact</option>
+			<option value="status">status</option>
+			
+		</param>
+		
+		<param name="tender_order_by_direction" type="select" default="tender_code" label="tender_order_by_direction" tip="tip_tender_order_by_direction">
+			
+			<option value="ASC">ascendant</option>
+			<option value="DESC">decrescent</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

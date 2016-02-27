@@ -1,0 +1,652 @@
+
+#main-tools-modules {
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	display: block;
+	text-align: left;
+	padding: <?= VUI_SPACING; ?>em 0;
+	padding: <?= VUI_SPACING; ?>em;
+	margin: 0;
+	overflow: visible;
+	
+	z-index: 10010;
+	
+	box-shadow: 0 1px 50px <?= $vui->colors->vui_extra_3->rgba_s( 30 ); ?>;
+	
+	background: <?= $vui->colors->vui_main_tools_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	
+	z-index: 10011;
+	
+}
+
+<?= '@media screen and ( max-width: 450px ) {'; ?>
+	
+	#main-tools-modules {
+		
+		max-width: 80%;
+		
+	}
+	
+}
+
+<?= '@media screen and ( max-width: 280px ) {'; ?>
+	
+	#main-tools-modules {
+		
+		max-width: 100%;
+		width: 100%;
+		
+	}
+	
+}
+
+#main-tools-modules:hover {
+	
+	min-width: calc( 48px + <?= VUI_SPACING * 2; ?>em );
+	width: 340px;
+	height: 100%;
+	overflow: auto;
+	padding: <?= VUI_SPACING; ?>em;
+	
+}
+
+.vui #main-tools-modules input[ type=button ],
+.vui #main-tools-modules input[ type=reset ],
+.vui #main-tools-modules input[ type=submit ],
+.vui #main-tools-modules button,
+.vui #main-tools-modules .button,
+.vui #main-tools-modules .btn,
+.vui #main-tools-modules .btn .content,
+.vui #main-tools-modules select,
+.vui #main-tools-modules .read-more ,
+.vui #main-tools-modules .vui-checkbox,
+.vui #main-tools-modules .toolbar-child > .to-toolbar {
+	
+	display: block;
+	width: 100%;
+	
+}
+
+#main-tools-modules h1, 
+#main-tools-modules h2, 
+#main-tools-modules h3, 
+#main-tools-modules h4, 
+#main-tools-modules h5, 
+#main-tools-modules h6 {
+	
+	color: <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	
+}
+#main-tools-modules .module-wrapper .module-title {
+	
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	
+	background: <?= $vui->colors->vui_main_tools_module_title_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_main_tools_module_title_fg->rgba_s(); ?>;
+	border: none;
+	text-align: center;
+	font-size: 0.5em;
+	
+}
+#main-tools-modules .module-wrapper .module-title h1, 
+#main-tools-modules .module-wrapper .module-title h2, 
+#main-tools-modules .module-wrapper .module-title h3, 
+#main-tools-modules .module-wrapper .module-title h4, 
+#main-tools-modules .module-wrapper .module-title h5, 
+#main-tools-modules .module-wrapper .module-title h6 {
+	
+	color: <?= $vui->colors->vui_main_tools_module_title_fg->rgba_s(); ?>;
+	
+}
+#main-tools-modules:hover .module-wrapper {
+	
+	width: 100%;
+	overflow: visible;
+	
+}
+#main-tools-modules:before {
+	
+	<?= FONT_ICONS_STYLESHEET; ?>
+	
+	content: "\e64e";
+	
+	<?= DEFAULT_BUTTONS_STYLESHEET; ?>
+	
+	color: <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	
+	border: none;
+	
+	padding-left: 0;
+	padding-right: 0;
+	
+	width: calc( <?= VUI_BUTTONS_PADDING_L; ?> + <?= VUI_BUTTONS_PADDING_R; ?> + 16px );
+	
+	margin: 0;
+	
+	text-align: center;
+	position: absolute;
+	left:0;
+	top: 0;
+	background-color: <?= $vui->colors->vui_main_tools_bg->rgba_s(); ?>;
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	<?= $vui->css->border_radius( '0' ) ?>
+	z-index: 10000;
+	
+	font-family: 'viacms-icons';
+	font-size: 16px;
+	
+	line-height: <?= VUI_BUTTONS_FONT_SIZE; ?>;
+	
+}
+#main-tools-modules:hover:before {
+	
+	position: fixed;
+	display: block;
+	width: 340px;
+	height: 48px;
+	line-height: 48px;
+	
+}
+#main-tools-modules:hover + #site-block {
+	
+}
+#main-tools-modules .module-wrapper {
+	
+	width: 0;
+	overflow: hidden;
+	
+}
+#main-tools-modules:hover .module-wrapper {
+	
+	width: auto;
+	overflow: visible;
+	
+}
+#main-tools-modules .module-wrapper:first-child {
+	
+	margin-top: 48px;
+	
+}
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------ */
+/* Actions elements */
+
+/* ------------------ */
+/* General inputs */
+
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el {
+	
+	color: <?= $vui->colors->vui_main_tools_input_fg->rgba_s(); ?>;
+	
+	border-top: thin solid <?= $vui->colors->vui_main_tools_input_border_top->rgba_s(); ?>;
+	border-right: thin solid <?= $vui->colors->vui_main_tools_input_border_right->rgba_s(); ?>;
+	border-bottom: thin solid <?= $vui->colors->vui_main_tools_input_border_bottom->rgba_s(); ?>;
+	border-left: thin solid <?= $vui->colors->vui_main_tools_input_border_left->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_main_tools_input_bg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:hover,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:focus,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:active,
+.vui #main-tools-modules .vui-interactive-el-wrapper:hover > .el {
+	
+	color: <?= $vui->colors->vui_main_tools_input_active_fg->rgba_s(); ?>;
+	
+	border-top: thin solid <?= $vui->colors->vui_main_tools_input_border_active_top->rgba_s(); ?>;
+	border-right: thin solid <?= $vui->colors->vui_main_tools_input_border_active_right->rgba_s(); ?>;
+	border-bottom: thin solid <?= $vui->colors->vui_main_tools_input_border_active_bottom->rgba_s(); ?>;
+	border-left: thin solid <?= $vui->colors->vui_main_tools_input_border_active_left->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_main_tools_input_active_bg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper .icon-wrapper {
+	
+	background: none;
+	
+	border-color: transparent;
+	
+	color: <?= $vui->colors->vui_main_tools_input_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper:hover .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:focus + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:active + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:focus .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:active .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_main_tools_input_active_fg->rgba_s(); ?>;
+	
+}
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_main_tools_input_fg->rgba_s() . ';
+	
+', '.vui #main-tools-modules .vui-interactive-el-wrapper > .el' ); ?>
+
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_main_tools_input_active_fg->rgba_s() . ';
+	
+', '
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:hover,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:focus,
+.vui #main-tools-modules .vui-interactive-el-wrapper > .el:active,
+.vui #main-tools-modules .vui-interactive-el-wrapper:hover > .el
+' ); ?>
+
+/* General inputs */
+/* ------------------ */
+
+/* ------------------ */
+/* Vui checkbox / radiobox */
+
+.vui #main-tools-modules .vui-checkbox input[type=checkbox],
+.vui #main-tools-modules .vui-radiobox input[type=radio]{
+	
+	display: none;
+	
+}
+.vui #main-tools-modules .vui-checkbox .check:before,
+.vui #main-tools-modules .vui-radiobox .check:before{
+	
+	border: 1px solid <?= $vui->colors->vui_main_tools_input_fg->rgba_s( 80 ); ?>;
+	color: <?= $vui->colors->vui_main_tools_input_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_main_tools_input_fg->rgba_s( 20 ); ?>;
+	
+}
+.vui #main-tools-modules .vui-checkbox input[type=checkbox]:checked + .check:before,
+.vui #main-tools-modules .vui-radiobox input[type=radio]:checked + .check:before{
+	
+	background: none;
+	
+	border: 1px solid <?= $vui->colors->vui_main_tools_input_fg->rgba_s(); ?>;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	
+}
+
+
+.vui #main-tools-modules .vui-checkbox.switch .check {
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_normal_border->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-checkbox.switch .check:before {
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_normal_bg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-checkbox.switch .check:after {
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_normal_border->darken( 9, TRUE )->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-checkbox.switch input[type=checkbox]:checked + .check:before {
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_checked_bg->darken( 9, TRUE )->rgba_s(); ?>;
+	
+}
+
+.vui #main-tools-modules .vui-checkbox.switch input[type=checkbox]:checked + .check:after {
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_checked_bg->rgba_s(); ?>;
+	
+}
+
+.vui #main-tools-modules .vui-checkbox.switch .content {
+	
+	color: <?= $vui->colors->vui_main_tools_checkbox_normal_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-checkbox.switch input[type=checkbox]:checked + * + .content {
+	
+}
+
+/* Vui checkbox / radiobox */
+/* ------------------ */
+
+/* ------------------ */
+/* Buttons */
+
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el {
+	
+	color: <?= $vui->colors->vui_main_tools_button_fg->rgba_s(); ?>;
+	
+	border-top: thin solid <?= $vui->colors->vui_main_tools_button_border_top->rgba_s(); ?>;
+	border-right: thin solid <?= $vui->colors->vui_main_tools_button_border_right->rgba_s(); ?>;
+	border-bottom: thin solid <?= $vui->colors->vui_main_tools_button_border_bottom->rgba_s(); ?>;
+	border-left: thin solid <?= $vui->colors->vui_main_tools_button_border_left->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_main_tools_button_bg->rgba_s(); ?>;
+	
+	<?= $vui->css->border_radius( 0 ); ?>
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:hover,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el {
+	
+	color: <?= $vui->colors->vui_main_tools_button_active_fg->rgba_s(); ?>;
+	
+	border-top: thin solid <?= $vui->colors->vui_main_tools_button_border_active_top->rgba_s(); ?>;
+	border-right: thin solid <?= $vui->colors->vui_main_tools_button_border_active_right->rgba_s(); ?>;
+	border-bottom: thin solid <?= $vui->colors->vui_main_tools_button_border_active_bottom->rgba_s(); ?>;
+	border-left: thin solid <?= $vui->colors->vui_main_tools_button_border_active_left->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_main_tools_button_active_bg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_main_tools_button_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper:hover .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_main_tools_button_active_fg->rgba_s(); ?>;
+	
+}
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_main_tools_button_fg->rgba_s() . ';
+	
+', '.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el' ); ?>
+
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_main_tools_button_active_fg->rgba_s() . ';
+	
+', '
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:hover,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el
+' ); ?>
+
+/* Buttons */
+/* ------------------ */
+
+/* ------------------ */
+/* Selects */
+
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el {
+	
+	background-image: url( <?= $vui->svg_file( 'icon-select', $vui->colors->vui_main_tools_button_fg->rgba_s() ); ?> );
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:-moz-focusring {
+	
+	text-shadow: 0 0 0 <?= $vui->colors->vui_main_tools_button_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:hover,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:focus,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:active,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper:hover > .el {
+	
+	background-image: url( <?= $vui->svg_file( 'icon-select', $vui->colors->vui_main_tools_button_active_fg->rgba_s() ); ?> );
+	
+}
+
+/* Selects */
+/* ------------------ */
+
+/* ------------------ */
+/* checkbox */
+
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > .el {
+	
+	border: transparent;
+	background: none;
+	
+	cursor: default;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > .el .check:before {
+	
+	border: 1px solid <?= $vui->colors->vui_main_tools_checkbox_fg->rgba_s( 80 ); ?>;
+	color: <?= $vui->colors->vui_main_tools_checkbox_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_fg->rgba_s( 20 ); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper:hover > .el .check:before,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:active + .el .check:before,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:focus + .el .check:before {
+	
+	border-color: <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s( 80 ); ?>;
+	color: <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s( 20 ); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:checked + .el .check:before {
+	
+	background: none;
+	
+	border: 1px solid <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s(); ?>;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > .el .content {
+	
+	color: <?= $vui->colors->vui_main_tools_checkbox_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:checked + .el .content,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:active + .el .content,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:focus + .el .content,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper:hover > .el .content {
+	
+	color: <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_main_tools_checkbox_fg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:checked + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:checked + .el + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:active + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:active + .el + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:focus + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper > input[type=checkbox]:focus + .el + .icon-wrapper,
+.vui #main-tools-modules .vui-interactive-el-wrapper.vui-checkbox-wrapper:hover .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_main_tools_checkbox_active_fg->rgba_s(); ?>;
+	
+}
+
+/* checkbox */
+/* ------------------ */
+
+/* Actions elements */
+/* ------------------------------------------------------ */
+
+
+
+
+
+
+.vui #toolbar .toolbar-child > .to-toolbar,
+.vui #toolbar ul.menu button,
+.vui #toolbar .btn .content,
+.vui #toolbar .toolbar-child form {
+	
+	display: block;
+	width: 100%;
+	
+}
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------ */
+/* Menus */
+
+.vui #main-tools-modules ul.menu .vui-interactive-el-wrapper,
+.vui #main-tools-modules ul.menu .vui-interactive-el-wrapper > .el,
+.vui #main-tools-modules ul.menu a {
+	
+	display: block;
+	text-align: center;
+	
+}
+
+
+
+
+
+#main-tools-modules ul.menu {
+	
+	display: block;
+	
+}
+#main-tools-modules .direction-v ul.menu ul:before {
+	
+	border-top: solid 2px <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	border-right: solid 2px <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	
+}
+#main-tools-modules ul.menu li > a:before {
+	
+	background: <?= $vui->colors->vui_main_tools_menu_item_level_1_bg->rgba_s(); ?>;
+	
+}
+.vui #main-tools-modules ul.menu li,
+.vui #main-tools-modules ul.menu ul,
+.vui #main-tools-modules ul.menu .vui-interactive-el-wrapper {
+	
+	position: relative;
+	
+	display: block;
+	
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+	
+	text-align: left;
+	
+}
+.vui #main-tools-modules ul.menu .vui-interactive-el-wrapper > .el {
+	
+	display: block;
+	
+	text-align: left;
+	
+}
+.vui #main-tools-modules ul.menu ul {
+	
+	position: relative;
+	background-color: transparent;
+	left: auto;
+	top: auto;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	
+	<?= $vui->css->opacity( 1 ); ?>
+	
+	<?= $vui->css->transition( 'none' ); ?>
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>
+	
+}
+
+.vui #main-tools-modules ul.menu li li {
+	
+	padding-left: calc( <?= VUI_BUTTONS_PADDING_L; ?> + <?= VUI_BUTTONS_PADDING_R; ?> + 16px );
+	
+}
+
+<?= '@media screen and ( max-width: 340px ) {'; ?>
+	
+	.vui #main-tools-modules ul.menu li li {
+		
+		padding-left: 0;
+		
+	}
+	
+}
+
+
+
+
+#main-tools-modules ul.menu.shortcuts {
+	
+	position: relative;
+	display: block;
+	width: 100%;
+	
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+}
+#main-tools-modules ul.menu.shortcuts li {
+	
+	<?= $vui->css->display_inline_block() ?>
+	
+	border-top: solid 2px <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	border-bottom: solid 2px <?= $vui->colors->vui_main_tools_fg->rgba_s(); ?>;
+	
+}
+#main-tools-modules ul.menu.shortcuts.total-6 li {
+	
+	width: <?= 100 / 6; ?>%;
+	
+}
+
+<?= '@media screen and ( max-width: 680px ) {'; ?>
+	
+	#main-tools-modules:hover {
+		
+		min-width: calc( 48px + <?= VUI_SPACING * 2; ?>em );
+		width: 80%;
+		overflow: auto;
+		
+	}
+	#main-tools-modules:hover:before {
+		
+		width: 80%;
+		
+	}
+	
+}

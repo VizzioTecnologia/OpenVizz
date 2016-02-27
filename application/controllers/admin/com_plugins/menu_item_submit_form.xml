@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="submit_form">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_id" type="select" default="-1" label="select_submit_form" tip="tip_select_submit_form">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_layout" type="select" default="default" label="submit_form_layout" tip="tip_submit_form_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

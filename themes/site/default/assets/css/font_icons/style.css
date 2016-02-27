@@ -1,0 +1,64 @@
+@font-face {
+	font-family: 'vui';
+	src:url('fonts/vui.eot?4mkw4t');
+	src:url('fonts/vui.eot?#iefix4mkw4t') format('embedded-opentype'),
+		url('fonts/vui.woff?4mkw4t') format('woff'),
+		url('fonts/vui.ttf?4mkw4t') format('truetype'),
+		url('fonts/vui.svg?4mkw4t#vui') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="vui-icon-"], [class*=" vui-icon-"] {
+	font-family: 'vui';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.vui-icon-ok:before {
+	content: "\e600";
+}
+.vui-icon-apply:before {
+	content: "\e600";
+}
+.vui-icon-add:before {
+	content: "\e601";
+}
+.vui-icon-increase:before {
+	content: "\e601";
+}
+.vui-icon-decrease:before {
+	content: "\e606";
+}
+.vui-icon-cancel:before {
+	content: "\e602";
+}
+.vui-icon-delete:before {
+	content: "\e602";
+}
+.vui-icon-remove:before {
+	content: "\e602";
+}
+.vui-icon-find:before {
+	content: "\e603";
+}
+.vui-icon-search:before {
+	content: "\e603";
+}
+.vui-icon-login:before {
+	content: "\e604";
+}
+.vui-icon-security:before {
+	content: "\e604";
+}
+.vui-icon-logout:before {
+	content: "\e605";
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="users_submits_module_config">
+		
+		<param name="submit_form_id" type="html" content="no_submit_forms" />
+		
+	</section>
+	
+</params>

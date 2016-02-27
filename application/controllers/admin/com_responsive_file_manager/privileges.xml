@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="responsive_file_manager">
+		
+		<param name="privileges[responsive_file_manager_management]" value="responsive_file_manager_management" type="checkbox" default="" label="responsive_file_manager_management" tip="tip_responsive_file_manager_management" />
+		
+	</section>
+	
+</params>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="nivo_slider_module_config">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout" type="select" default="" label="layout" tip="tip_layout" inline="1">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<param name="source_images" type="select" default="" label="source_images" tip="tip_source_images" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="images_dir">images_dir</option>
+			<option value="articles">articles</option>
+			
+		</param>
+		
+		<param type="spacer" />
+		
+		<param name="effect" type="select" default="random" label="effect" tip="tip_effect" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="random">random</option>
+			<option value="sliceDown">sliceDown</option>
+			<option value="sliceDownLeft">sliceDownLeft</option>
+			<option value="sliceUp">sliceUp</option>
+			<option value="sliceUpLeft">sliceUpLeft</option>
+			<option value="sliceUpDown">sliceUpDown</option>
+			<option value="sliceUpDownLeft">sliceUpDownLeft</option>
+			<option value="fold">fold</option>
+			<option value="fade">fade</option>
+			<option value="slideInRight">slideInRight</option>
+			<option value="slideInLeft">slideInLeft</option>
+			<option value="boxRandom">boxRandom</option>
+			<option value="boxRain">boxRain</option>
+			<option value="boxRainReverse">boxRainReverse</option>
+			<option value="boxRainGrow">boxRainGrow</option>
+			<option value="boxRainGrowReverse">boxRainGrowReverse</option>
+			
+		</param>
+		
+		<param name="box_cols" type="text" default="8" label="box_cols" tip="tip_box_cols" inline="1" />
+		
+		<param name="box_rows" type="text" default="4" label="box_rows" tip="tip_box_rows" inline="1" />
+		
+		<param name="slices" type="text" default="15" label="slices" tip="tip_slices" inline="1" />
+		
+		<param name="anim_speed" type="text" default="500" label="anim_speed" tip="tip_anim_speed" inline="1" />
+		
+		<param name="pause_time" type="text" default="3000" label="pause_time" tip="tip_pause_time" inline="1" />
+		
+		<param name="start_slide" type="text" default="0" label="start_slide" tip="tip_start_slide" inline="1" />
+		
+		<param name="direction_nav" type="select" default="1" label="direction_nav" tip="tip_direction_nav" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="control_nav" type="select" default="1" label="control_nav" tip="tip_control_nav" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="control_nav_thumbs" type="select" default="0" label="control_nav_thumbs" tip="tip_control_nav_thumbs" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="pause_on_hover" type="select" default="1" label="pause_on_hover" tip="tip_pause_on_hover" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="manual_advance" type="select" default="0" label="manual_advance" tip="tip_manual_advance" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="prev_text" type="text" default="[ auto ]" label="prev_text" tip="tip_prev_text" inline="1" />
+		
+		<param name="next_text" type="text" default="[ auto ]" label="next_text" tip="tip_next_text" inline="1" />
+		
+		<param name="random_start" type="select" default="0" label="random_start" tip="tip_random_start" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

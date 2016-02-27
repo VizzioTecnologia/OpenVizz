@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="html_module_config">
+		
+		<param name="test" type="text" default="valor1" label="test" tip="tip_test" />
+		
+		<param name="test" type="text" default="valor2" label="test" tip="tip_test" />
+		
+		<param name="test" type="text" default="valor3" label="test" tip="tip_test" />
+		
+		<param name="html_module_content" type="textarea" default="" label="html_module_content" tip="tip_html_module_content" editor="1" >
+			
+			<validation rules="trim|xss|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

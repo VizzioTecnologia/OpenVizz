@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="tenders"> <!-- obrigatório -->
+		
+		<!-- input text -->
+		<param
+			type="text"
+			name="product_profit_factor"
+			default="valor padrão do campo 1"
+			label="input text"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		>
+		
+			<validation rules="trim" />
+			
+		</param>
+		
+		
+		
+		<!-- Radios -->
+		<param
+			type="radio"
+			name="radio"
+			value="valor radio 1"
+			default="true"
+			label="radio 1"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		>
+		
+			<validation rules="trim" />
+			
+		</param>
+		<param
+			type="radio"
+			name="radio"
+			value="valor radio 2"
+			default=""
+			label="radio 2"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		>
+		
+			<validation rules="trim" />
+			
+		</param>
+		
+		
+		
+		<!-- select -->
+		<param
+			type="select"
+			name="select"
+			default="0"
+			label="select"
+			tip="teste"
+			ext_tip="teste"
+			class="classe do campo"
+		>
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		
+		
+		<!-- spacer -->
+		<param
+			type="spacer"
+			class="classe do campo"
+		/>
+		
+		
+		
+		<!-- spacer with label-->
+		<param
+			type="spacer"
+			label="spacer label"
+			class="classe do campo"
+		/>
+		
+		
+		
+		<!-- textarea -->
+		<param
+			type="textarea"
+			name="tender_notes_content"
+			default="valor padrão do campo 1"
+			label="tender_notes_content"
+			tip="teste"
+			ext_tip="teste"
+			class="classe do campo"
+		>
+		
+			<validation rules="trim" />
+			
+		</param>
+		
+		
+		
+		<!-- checkbox -->
+		<param
+			name="teste2"
+			type="checkbox"
+			value="valor checkbox 5"
+			default=""
+			label="checkbox"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		/>
+		
+		
+		
+		<!-- checkbox array -->
+		<param
+			name="teste"
+			type="checkbox"
+			value="valor checkbox 1"
+			default=""
+			label="checkbox array"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		/>
+		
+		<param
+			name="teste"
+			type="checkbox"
+			value="valor checkbox 2"
+			default="true"
+			label="checkbox array"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		/>
+		
+		<param
+			name="teste"
+			type="checkbox"
+			value="valor checkbox 3"
+			default=""
+			label="checkbox array"
+			tip="Tip do label"
+			ext_tip="Tip extendida do label"
+			class="classe do campo"
+		/>
+		
+	</section>
+	
+</params>

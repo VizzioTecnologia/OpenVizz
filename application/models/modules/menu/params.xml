@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="menu_module_config">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="menu_type_id" type="select" default="" label="menu_type" tip="tip_menu_type">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout" type="select" default="default" label="menu_layout" tip="tip_menu_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

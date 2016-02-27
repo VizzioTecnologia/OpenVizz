@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_list">
+		
+		<param name="articles_list_columns" type="text" default="global" label="articles_list_columns" tip="tip_articles_list_columns">
+			
+			<validation rules="integer"/>
+			
+		</param>
+		
+		<param name="articles_list_order" type="select" default="global" label="articles_list_order" tip="tip_articles_list_order">
+			
+			<option value="global">Global</option>
+			<option value="id">id</option>
+			<option value="title">article_title</option>
+			<option value="ordering">articles_ordering</option>
+			<option value="category_title">category</option>
+			<option value="category_order">category_order</option>
+			<option value="created_by_id">author</option>
+			<option value="created_date">created_date</option>
+			<option value="modified_date">modified_date</option>
+			
+		</param>
+		
+		<param name="articles_list_order_mode" type="select" default="global" label="articles_list_order_mode" tip="tip_articles_list_order_mode">
+			
+			<option value="global">Global</option>
+			<option value="asc">ascendant</option>
+			<option value="desc">decrescent</option>
+			
+		</param>
+		
+		<param name="pagination" type="select" default="global" label="pagination" tip="tip_pagination">
+			
+			<option value="global">Global</option>
+			<option value="5">5 per page</option>
+			<option value="10">10 per page</option>
+			<option value="15">15 per page</option>
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout_articles_list" type="select" default="global" label="layout" tip="tip_layout_articles_list">
+			
+			<validation rules="trim|required" />
+			
+			<option value="global">Global</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

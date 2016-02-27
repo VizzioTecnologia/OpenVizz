@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="layout_specific_params">
+
+		<param type="spacer" label="categories" />
+
+		<param name="show_categories_on_list_view" type="select" default="global" label="show_categories_on_list_view" tip="tip_show_categories_on_list_view">
+
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="max_cols_per_row" type="number" default="4" min="0" label="max_cols_per_row" tip="tip_max_cols_per_row" />
+
+		<param name="auto_adjust_number_of_cols_per_row" type="select" default="1" label="auto_adjust_number_of_cols_per_row" tip="tip_auto_adjust_number_of_cols_per_row">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_categories_images" type="select" default="1" label="show_categories_images" tip="tip_show_categories_images">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_category_on_no_articles" type="select" default="0" label="show_category_on_no_articles" tip="tip_show_category_on_no_articles">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_category_readmore" type="select" default="1" label="show_category_readmore" tip="tip_show_category_readmore">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="max_articles_per_category" type="number" default="5" min="-1" label="max_articles_per_category" tip="tip_max_articles_per_category" />
+
+		<param name="articles_per_category_load_mode" type="select" default="recursive" label="articles_per_category_load_mode" tip="tip_articles_per_category_load_mode">
+
+			<option value="recursive">recursive</option>
+			<option value="current">current</option>
+
+		</param>
+
+		<param name="articles_per_category_order_by" type="select" default="random" label="articles_per_category_order_by" tip="tip_articles_per_category_order_by">
+
+			<!-- dinamically loaded -->
+
+		</param>
+
+	</section>
+
+</params>

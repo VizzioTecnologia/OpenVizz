@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="c_users_register_section">
+		
+		<param name="c_users_register_allow_new_site_registers" type="checkbox" default="" value="1" label="c_users_register_allow_new_site_registers" tip="tip_c_users_register_allow_new_site_registers">
+			
+			<option value="0">no</option>
+			<option value="1">yes</option>
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="c_users_register_new_users_need_activate_account" type="checkbox" default="" value="1" label="c_users_register_new_users_need_activate_account" tip="tip_c_users_register_new_users_need_activate_account">
+			
+			<option value="0">no</option>
+			<option value="1">yes</option>
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="c_users_look_and_feel">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="c_users_layouts_login" type="select" default="default" label="c_users_layouts_login">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

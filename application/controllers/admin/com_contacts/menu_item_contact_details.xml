@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="contact_details">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="contact_id" type="select" default="-1" label="select_contact" tip="tip_select_contact">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="contact_details_layout" type="select" default="default" label="contact_details_layout" tip="tip_contact_details_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<param type="spacer" label="google_maps" />
+		
+		<param name="contact_details_show_gmaps" type="select" default="0" label="contact_details_show_gmaps" tip="tip_contact_details_show_gmaps">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_map_gmaps_query" type="textarea" default="" label="contact_details_map_gmaps_query" tip="tip_contact_details_map_gmaps_query" />
+		
+		<param name="contact_details_map_gmaps_width" type="text" default="auto" label="contact_details_map_gmaps_width" tip="tip_contact_details_map_gmaps_width" />
+		
+		<param name="contact_details_map_gmaps_height" type="text" default="350" label="contact_details_map_gmaps_height" tip="tip_contact_details_map_gmaps_height" />
+		
+		<param name="contact_details_show_gmaps_link" type="select" default="0" label="contact_details_show_gmaps_link" tip="tip_contact_details_show_gmaps_link">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_open_gmaps_link_target_blank" type="select" default="1" label="contact_details_open_gmaps_link_target_blank" tip="tip_contact_details_open_gmaps_link_target_blank">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_open_gmaps_link_text" type="text" default="" label="contact_details_open_gmaps_link_text" tip="tip_contact_details_open_gmaps_link_text">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" label="contact_info" />
+		
+		<param name="contact_details_show_image" type="select" default="0" label="contact_details_show_image" tip="tip_contact_details_show_image">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_show_name" type="select" default="0" label="contact_details_show_name" tip="tip_contact_details_show_name">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_show_emails" type="select" default="0" label="contact_details_show_emails" tip="tip_contact_details_show_emails">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_show_addresses" type="select" default="0" label="contact_details_show_addresses" tip="tip_contact_details_show_addresses">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_details_show_phones" type="select" default="0" label="contact_details_show_phones" tip="tip_contact_details_show_phones">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	<section name="contact_form">
+		
+		<param name="contact_form_title_text" type="text" default="" label="contact_form_title_text" tip="tip_contact_form_title_text" />
+		
+		<param name="contact_form_allow_html_tags" type="select" default="0" label="contact_form_allow_html_tags" tip="tip_contact_form_allow_html_tags">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_send_email_to" type="select" default="0" label="contact_form_send_email_to" tip="tip_contact_form_send_email_to">
+			
+			<validation rules="trim|required" />
+			
+			<option value="contact_emails">contact_emails</option>
+			<option value="custom_emails">custom_emails</option>
+			
+		</param>
+		
+		<param name="contact_form_custom_emails" type="textarea" default="" label="contact_form_custom_emails" tip="tip_contact_form_custom_emails">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="name" />
+		
+		<param name="contact_form_show_field_name" type="select" default="1" label="contact_form_show_field_name" tip="tip_contact_form_show_field_name">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_name_is_required" type="select" default="1" label="contact_form_field_name_is_required" tip="tip_contact_form_field_name_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="email" />
+		
+		<param name="contact_form_show_field_email" type="select" default="1" label="contact_form_show_field_email" tip="tip_contact_form_show_field_email">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_email_is_required" type="select" default="1" label="contact_form_field_email_is_required" tip="tip_contact_form_field_email_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="phones" />
+		
+		<param name="contact_form_show_field_phone_1" type="select" default="0" label="contact_form_show_field_phone_1" tip="tip_contact_form_show_field_phone_1">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_phone_1_is_required" type="select" default="0" label="contact_form_field_phone_1_is_required" tip="tip_contact_form_field_phone_1_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_phone_2" type="select" default="0" label="contact_form_show_field_phone_2" tip="tip_contact_form_show_field_phone_2">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_phone_2_is_required" type="select" default="0" label="contact_form_field_phone_2_is_required" tip="tip_contact_form_field_phone_2_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="subject" />
+		
+		<param name="contact_form_show_field_subject" type="select" default="1" label="contact_form_show_field_subject" tip="tip_contact_form_show_field_subject">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_subject_is_required" type="select" default="1" label="contact_form_field_subject_is_required" tip="tip_contact_form_field_subject_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_subject_is_hidden" type="select" default="0" label="contact_form_field_subject_is_hidden" tip="tip_contact_form_field_subject_is_hidden">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_subject_default_value" type="text" default="" label="contact_form_field_subject_default_value" tip="tip_contact_form_field_subject_default_value" />
+		
+		
+		
+		
+		
+		<param type="spacer" label="message" />
+		
+		<param name="contact_form_show_field_message" type="select" default="1" label="contact_form_show_field_message" tip="tip_contact_form_show_field_message">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_message_is_required" type="select" default="1" label="contact_form_field_message_is_required" tip="tip_contact_form_field_message_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_message_custom_title" type="text" default="" label="contact_form_field_message_custom_title" tip="tip_contact_form_field_message_custom_title" />
+		
+		
+		
+		
+		
+		<param type="spacer" label="company" />
+		
+		<param name="contact_form_show_field_company" type="select" default="0" label="contact_form_show_field_company" tip="tip_contact_form_show_field_company">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_company_is_required" type="select" default="0" label="contact_form_field_company_is_required" tip="tip_contact_form_field_company_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="address" />
+		
+		<param name="contact_form_show_field_addresses" type="select" default="0" label="contact_form_show_field_addresses" tip="tip_contact_form_show_field_addresses">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_country" type="select" default="0" label="contact_form_show_field_address_country" tip="tip_contact_form_show_field_address_country">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_country_is_required" type="select" default="0" label="contact_form_field_address_country_is_required" tip="tip_contact_form_field_address_country_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_state" type="select" default="0" label="contact_form_show_field_address_state" tip="tip_contact_form_show_field_address_state">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_state_is_required" type="select" default="0" label="contact_form_field_address_state_is_required" tip="tip_contact_form_field_address_state_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_city" type="select" default="0" label="contact_form_show_field_address_city" tip="tip_contact_form_show_field_address_city">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_city_is_required" type="select" default="0" label="contact_form_field_address_city_is_required" tip="tip_contact_form_field_address_city_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_neighborhood" type="select" default="0" label="contact_form_show_field_address_neighborhood" tip="tip_contact_form_show_field_address_neighborhood">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_neighborhood_is_required" type="select" default="0" label="contact_form_field_address_neighborhood_is_required" tip="tip_contact_form_field_address_neighborhood_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_public_area" type="select" default="0" label="contact_form_show_field_address_public_area" tip="tip_contact_form_show_field_address_public_area">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_public_area_is_required" type="select" default="0" label="contact_form_field_address_public_area_is_required" tip="tip_contact_form_field_address_public_area_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_number" type="select" default="0" label="contact_form_show_field_address_number" tip="tip_contact_form_show_field_address_number">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_number_is_required" type="select" default="0" label="contact_form_field_address_number_is_required" tip="tip_contact_form_field_address_number_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_complement" type="select" default="0" label="contact_form_show_field_address_complement" tip="tip_contact_form_show_field_address_complement">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_complement_is_required" type="select" default="0" label="contact_form_field_address_complement_is_required" tip="tip_contact_form_field_address_complement_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_address_postal_code" type="select" default="0" label="contact_form_show_field_address_postal_code" tip="tip_contact_form_show_field_address_postal_code">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_field_address_postal_code_is_required" type="select" default="0" label="contact_form_field_address_postal_code_is_required" tip="tip_contact_form_field_address_postal_code_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param type="spacer" label="extra_comboboxes" />
+		
+		<param name="contact_form_show_field_extra_combobox_1" type="select" default="0" label="contact_form_show_field_extra_combobox_1" tip="tip_contact_form_show_field_extra_combobox_1">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_title_field_extra_combobox_1" type="text" default="" label="contact_form_title_field_extra_combobox_1" tip="tip_contact_form_title_field_extra_combobox_1">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="contact_form_field_extra_combobox_1_is_required" type="select" default="0" label="contact_form_field_extra_combobox_1_is_required" tip="tip_contact_form_field_extra_combobox_1_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_options_field_extra_combobox_1" type="textarea" default="Option 1&#10;Option 2&#10;Option 3" label="contact_form_options_field_extra_combobox_1" tip="tip_contact_form_options_field_extra_combobox_1" />
+		
+		
+		
+		<param name="contact_form_show_field_extra_combobox_2" type="select" default="0" label="contact_form_show_field_extra_combobox_2" tip="tip_contact_form_show_field_extra_combobox_2">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_title_field_extra_combobox_2" type="text" default="" label="contact_form_title_field_extra_combobox_2" tip="tip_contact_form_title_field_extra_combobox_2">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="contact_form_options_field_extra_combobox_2" type="textarea" default="Option 1&#10;Option 2&#10;Option 3" label="contact_form_options_field_extra_combobox_2" tip="tip_contact_form_options_field_extra_combobox_2" />
+		
+		
+		
+		<param name="contact_form_field_extra_combobox_2_is_required" type="select" default="0" label="contact_form_field_extra_combobox_2_is_required" tip="tip_contact_form_field_extra_combobox_2_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_show_field_extra_combobox_3" type="select" default="0" label="contact_form_show_field_extra_combobox_3" tip="tip_contact_form_show_field_extra_combobox_3">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_title_field_extra_combobox_3" type="text" default="" label="contact_form_title_field_extra_combobox_3" tip="tip_contact_form_title_field_extra_combobox_3">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="contact_form_field_extra_combobox_3_is_required" type="select" default="0" label="contact_form_field_extra_combobox_3_is_required" tip="tip_contact_form_field_extra_combobox_3_is_required">
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_form_options_field_extra_combobox_3" type="textarea" default="Option 1&#10;Option 2&#10;Option 3" label="contact_form_options_field_extra_combobox_3" tip="tip_contact_form_options_field_extra_combobox_3" />
+		
+		
+		
+	</section>
+	
+</params>

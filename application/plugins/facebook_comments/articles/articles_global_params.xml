@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<!-- Articles component compatibility-->
+	
+	<section name="detail_view">
+		
+		<param name="show_facebook_comments_on_article_detail" type="select" default="global" label="show_facebook_comments_on_article_detail" tip="tip_show_facebook_comments_on_article_detail">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	<section name="articles_list">
+		
+		<param name="show_facebook_comments_on_articles_list" type="select" default="global" label="show_facebook_comments_on_articles_list" tip="tip_show_facebook_comments_on_articles_list">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

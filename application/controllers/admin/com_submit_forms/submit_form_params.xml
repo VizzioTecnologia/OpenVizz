@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="users_submits">
+		
+		<param name="submit_form_param_email_receiving" type="select" default="1" label="submit_form_param_email_receiving" tip="tip_submit_form_param_email_receiving" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to" type="select" default="contact_emails" label="submit_form_param_send_email_to" tip="tip_submit_form_param_send_email_to" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="contact_emails">contact_emails</option>
+			<option value="custom_emails">custom_emails</option>
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_param_send_email_to_contact" type="select" default="" label="submit_form_param_send_email_to_contact" tip="tip_submit_form_param_send_email_to_contact" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_custom_emails" type="textarea" default="" label="submit_form_param_send_email_to_custom_emails" tip="tip_submit_form_param_send_email_to_custom_emails" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param type="spacer" default="" label="message" />
+
+		<param name="submit_form_param_send_email_to_from" type="text" default="" label="submit_form_param_send_email_to_from" tip="tip_submit_form_param_send_email_to_from" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_from_name" type="text" default="" label="submit_form_param_send_email_to_from_name" tip="tip_submit_form_param_send_email_to_from_name" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_reply_to" type="text" default="" label="submit_form_param_send_email_to_reply_to" tip="tip_submit_form_param_send_email_to_reply_to" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_cc" type="text" default="" label="submit_form_param_send_email_to_cc" tip="tip_submit_form_param_send_email_to_cc" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_bcc" type="text" default="" label="submit_form_param_send_email_to_bcc" tip="tip_submit_form_param_send_email_to_bcc" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_param_send_email_to_subject" type="text" default="" label="submit_form_param_send_email_to_subject" tip="tip_submit_form_param_send_email_to_subject" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_sending_email_layout_source" type="select" default="layouts_list" label="submit_form_sending_email_layout_source" tip="tip_submit_form_sending_email_layout_source" inline="1" >
+
+			<validation rules="trim|required" />
+
+			<option value="layouts_list">layouts_list</option>
+			<option value="custom_layout">custom_layout</option>
+
+		</param>
+
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_sending_email_layout_view" type="select" default="default" label="submit_form_sending_email_layout_view" tip="tip_submit_form_sending_email_layout_view" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="submit_form_sending_email_show_empty_fields" type="select" default="1" label="submit_form_sending_email_show_empty_fields" tip="tip_submit_form_sending_email_show_empty_fields" inline="1" >
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="submit_form_sending_email_layout_custom" type="textarea"  editor="1" default="" label="submit_form_sending_email_layout_custom" tip="tip_submit_form_sending_email_layout_custom" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+
+		<param type="spacer" default="" label="security" />
+
+		<param name="submit_forms_allow_html_tags" type="select" default="0" label="submit_forms_allow_html_tags" tip="tip_submit_forms_allow_html_tags" inline="1" >
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="submit_forms_enable_xss_filtering" type="select" default="1" label="submit_forms_enable_xss_filtering" tip="tip_submit_forms_enable_xss_filtering" inline="1" >
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+		
+	</section>
+	
+	<section name="users_submits_list">
+		
+		<param type="spacer" label="us_search_pre_text" />
+		
+		<param name="us_search_pre_text" type="textarea" editor="1" default="" label="us_search_pre_text" tip="tip_us_search_pre_text" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="us_pre_text_position" type="select" default="1" label="us_pre_text_position" tip="tip_us_pre_text_position" inline="1" >
+			
+			<option value="before_search_fields">before_search_fields</option>
+			<option value="after_search_fields">after_search_fields</option>
+			
+		</param>
+		
+		<param name="us_show_search_pre_text_on_normal" value="us_show_search_pre_text_on_normal" type="checkbox" default="" label="us_show_search_pre_text_on_normal" tip="tip_us_show_search_pre_text_on_normal" inline="1" />
+		
+		<param name="us_show_search_pre_text_on_search" value="us_show_search_pre_text_on_search" type="checkbox" checked="1" label="us_show_search_pre_text_on_search" tip="tip_us_show_search_pre_text_on_search" inline="1" />
+		
+		<param type="spacer" label="us_search_results_pre_text" />
+		
+		<param name="us_search_results_pre_text" type="textarea" editor="1" default="" label="us_search_results_pre_text" tip="tip_us_search_results_pre_text">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="us_search_results_pre_text_on_normal" value="us_search_results_pre_text_on_normal" type="checkbox" default="" label="us_search_results_pre_text_on_normal" tip="tip_us_search_results_pre_text_on_normal" inline="1" />
+		
+		<param name="us_search_results_pre_text_on_search" value="us_search_results_pre_text_on_search" type="checkbox" checked="1" label="us_search_results_pre_text_on_search" tip="tip_us_search_results_pre_text_on_search" inline="1" />
+		
+		<param type="spacer" label="us_search_results_after_text" />
+		
+		<param name="us_search_results_after_text" type="textarea" editor="1" default="" label="us_search_results_after_text" tip="tip_us_search_results_after_text">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="us_search_results_after_text_on_normal" value="us_search_results_after_text_on_normal" type="checkbox" default="" label="us_search_results_after_text_on_normal" tip="tip_us_search_results_after_text_on_normal" inline="1" />
+		
+		<param name="us_search_results_after_text_on_search" value="us_search_results_after_text_on_search" type="checkbox" checked="1" label="us_search_results_after_text_on_search" tip="tip_us_search_results_after_text_on_search" inline="1" />
+		
+		<param type="spacer" />
+		
+		<param name="sf_us_list_max_ipp" type="number" default="100" min="0" label="sf_us_list_max_ipp" tip="tip_sf_us_list_max_ipp" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="ud_ds_api">
+		
+		<param name="ud_ds_api_access_active" type="select" default="0" label="users_submits_api_active" tip="tip_users_submits_api_active" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param type="html" content="ud_ds_api_short_help" />
+		
+		<param type="spacer" default="" label="access_level_api" />
+		
+		<param name="ud_ds_api_access_type" type="select" default="3" label="ud_ds_api_access_type" tip="tip_ud_ds_api_access_type" inline="1" >
+			
+			<option value="1">user_group</option>
+			<option value="2">users</option>
+			<option value="3">public</option>
+			
+		</param>
+		
+	</section>
+	
+	<section name="sf_redirecting">
+		
+		<param type="spacer" default="" label="sf_redirecting_on_success" />
+		
+		<param name="sf_redirecting_on_success_source" type="select" default="3" label="sf_redirecting_on_success_source" tip="tip_sf_redirecting_on_success_source" inline="1" >
+			
+			<option value="home">home_page</option>
+			<option value="self_form">self_form</option>
+			<option value="custom_url">custom_url</option>
+			
+		</param>
+		
+		<!-- Envio salvo com sucesso no banco -->
+		<param name="sf_redirecting_on_success_url" type="text" default="" label="sf_redirecting_on_success_url" tip="tip_sf_redirecting_on_success_url" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+<!--
+	<section name="data_types_fields_def">
+		
+		<param name="dtfd_title" type="select" default="" label="dtfd_title" tip="tip_dtfd_title">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="dtfd_image_thumb" type="select" default="" label="dtfd_image_thumb" tip="tip_dtfd_image_thumb">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="dtfd_image_normal" type="select" default="" label="dtfd_image_normal" tip="tip_dtfd_image_normal">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="dtfd_image_normal" type="select" default="" label="dtfd_image_normal" tip="tip_dtfd_image_normal">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	-->
+	<section name="post_sending_messages">
+		
+		<!-- sfpsm = submit form post sending messages -->
+		
+		<!-- Envio salvo com sucesso no banco -->
+		<param name="sfpsm_user_submit_save_into_db_success_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_save_into_db_success_title_default" label="sfpsm_user_submit_save_into_db_success_title" tip="tip_sfpsm_user_submit_save_into_db_success_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+		
+		<param name="sfpsm_user_submit_save_into_db_success" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_saved_into_db_default" label="sfpsm_user_submit_saved_into_db" tip="tip_sfpsm_user_submit_saved_into_db" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+
+
+		<param name="sfpsm_user_submit_save_into_db_error_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_save_into_db_error_title_default" label="sfpsm_user_submit_save_into_db_error_title" tip="tip_sfpsm_user_submit_save_into_db_error_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_save_into_db_error" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_save_into_db_error_default" label="sfpsm_user_submit_save_into_db_error" tip="tip_sfpsm_user_submit_save_into_db_error" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+
+
+		<param name="sfpsm_user_submit_email_sent_success_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_success_title_default" label="sfpsm_user_submit_email_sent_success_title" tip="tip_sfpsm_user_submit_email_sent_success_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_email_sent_success" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_success_default" label="sfpsm_user_submit_email_sent_success" tip="tip_sfpsm_user_submit_email_sent_success" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+
+
+		<param name="sfpsm_user_submit_email_sent_validation_error_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_validation_error_title_default" label="sfpsm_user_submit_email_sent_validation_error_title" tip="tip_sfpsm_user_submit_email_sent_validation_error_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_email_sent_validation_error" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_validation_error_default" label="sfpsm_user_submit_email_sent_validation_error" tip="tip_sfpsm_user_submit_email_sent_validation_error" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+
+
+		<param name="sfpsm_user_submit_email_sent_internal_error_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_internal_error_title_default" label="sfpsm_user_submit_email_sent_internal_error_title" tip="tip_sfpsm_user_submit_email_sent_internal_error_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_email_sent_internal_error" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_internal_error_default" label="sfpsm_user_submit_email_sent_internal_error" tip="tip_sfpsm_user_submit_email_sent_internal_error" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+
+
+		<param name="sfpsm_user_submit_email_sent_to_submitter_success_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_to_submitter_success_title_default" label="sfpsm_user_submit_email_sent_to_submitter_success_title" tip="tip_sfpsm_user_submit_email_sent_to_submitter_success_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_email_sent_to_submitter_success" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_to_submitter_success_default" label="sfpsm_user_submit_email_sent_to_submitter_success" tip="tip_sfpsm_user_submit_email_sent_to_submitter_success" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+
+
+		<param name="sfpsm_user_submit_email_sent_to_submitter_internal_error_title" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_to_submitter_internal_error_title_default" label="sfpsm_user_submit_email_sent_to_submitter_internal_error_title" tip="tip_sfpsm_user_submit_email_sent_to_submitter_internal_error_title" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfpsm_user_submit_email_sent_to_submitter_internal_error" type="textarea" editor="1" translate="1" default="sfpsm_user_submit_email_sent_to_submitter_internal_error_default" label="sfpsm_user_submit_email_sent_to_submitter_internal_error" tip="tip_sfpsm_user_submit_email_sent_to_submitter_internal_error">
+
+			<validation rules="trim" />
+
+		</param>
+
+	</section>
+
+	<section name="submitter_message_receiving">
+
+		<!-- sfsmr = submit form submitter message receiving -->
+		<param name="sfsmr_send_copy_to_submitter" type="select" default="0" label="sfsmr_send_copy_to_submitter" tip="tip_sfsmr_send_copy_to_submitter" inline="1" >
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sfsmr_email_field" type="text" default="" label="sfsmr_email_field" tip="tip_sfsmr_email_field" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_from" type="text" default="" label="sfsmr_from" tip="tip_sfsmr_from" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_from_name" type="text" default="" label="sfsmr_from_name" tip="tip_sfsmr_from_name" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_reply_to" type="text" default="" label="sfsmr_reply_to" tip="tip_sfsmr_reply_to" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_subject" type="text" default="" label="sfsmr_subject" tip="tip_sfsmr_subject" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_layout_source" type="select" default="layouts_list" label="sfsmr_layout_source" tip="tip_sfsmr_layout_source" inline="1" >
+
+			<validation rules="trim|required" />
+
+			<option value="layouts_list">layouts_list</option>
+			<option value="custom_layout">custom_layout</option>
+
+		</param>
+
+		<!-- as options deste campo são criadas via php -->
+		<param name="sfsmr_layout_view" type="select" default="default" label="sfsmr_layout_view" tip="tip_sfsmr_layout_view" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_message_prefix_custom" type="textarea" editor="1" default="" label="sfsmr_message_prefix_custom" tip="tip_sfsmr_message_prefix_custom" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+
+		<param name="sfsmr_message_suffix_custom" type="textarea" editor="1" default="" label="sfsmr_message_suffix_custom" tip="tip_sfsmr_message_suffix_custom" inline="1" >
+
+			<validation rules="trim" />
+
+		</param>
+		
+		<param name="sfsmr_show_empty_fields" type="select" default="1" label="sfsmr_show_empty_fields" tip="tip_sfsmr_show_empty_fields" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="sfsmr_layout_custom" type="textarea" editor="1" default="" label="sfsmr_layout_custom" tip="tip_sfsmr_layout_custom" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="look_and_feel">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_layout_view" type="select" default="default" label="submit_form_layout_view" tip="tip_submit_form_layout_view" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="submit_export_params">
+		
+		<param type="spacer" label="csv_export" />
+		
+		<param name="submit_form_export_csv_delimiter" maxlength="1" type="text" default="," label="submit_form_export_csv_delimiter" tip="tip_submit_form_export_csv_delimiter" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_export_csv_enclosure" maxlength="1" type="text" default="&quot;" label="submit_form_export_csv_enclosure" tip="tip_submit_form_export_csv_enclosure" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="sf_security_and_access">
+		
+		<param type="spacer" default="" label="ud_ds_access_level" />
+		
+		<param name="ud_ds_access_type" type="select" default="3" label="ud_ds_access_type" tip="tip_ud_ds_access_type" inline="1" >
+			
+			<option value="1">ud_ds_access_type_users_groups_dropdown_option</option>
+			<option value="2">ud_ds_access_type_users_dropdown_option</option>
+			<option value="3">ud_ds_access_type_public_dropdown_option</option>
+			<option value="4">ud_ds_access_type_have_account_dropdown_option</option>
+			
+		</param>
+		
+		<param type="spacer" />
+		
+		<param name="ud_ds_login_required_custom_msg" editor="1" translate="1" type="textarea" default="notif_ud_ds_login_required" label="ud_ds_login_required_custom_msg" tip="tip_ud_ds_login_required_custom_msg" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" default="" label="ud_d_access_level" />
+		
+		<param name="ud_d_default_owner" type="select" default="1" label="ud_d_default_owner" tip="tip_ud_d_default_owner" inline="1" >
+			
+			<option value="1">ud_d_default_owner_users_groups_dropdown_option</option>
+			<option value="2">ud_d_default_owner_users_dropdown_option</option>
+			<option value="3">ud_d_default_owner_public_dropdown_option</option>
+			<option value="4">ud_d_default_owner_current_user_dropdown_option</option>
+			<option value="5">ud_d_default_owner_from_prop_dropdown_option</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

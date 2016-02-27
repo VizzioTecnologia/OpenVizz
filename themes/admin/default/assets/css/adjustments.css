@@ -1,0 +1,379 @@
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Adjustments
+ ---------------------------------------------------------
+ */
+
+th.col-checkbox,
+th.col-id,
+th.col-image,
+th.col-operations,
+th.col-status,
+th.col-order,
+th.col-ordering,
+td.col-checkbox,
+td.col-id,
+td.col-image,
+td.col-priority,
+td.col-status,
+td.col-operations,
+td.col-ordering{
+	
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	
+	width: 1px;
+	
+}
+.vui table.no-bg tr td,
+.vui table.no-bg tr:nth-child(odd) td,
+.vui table.no-bg tr:nth-child(even) td,
+.vui table.no-bg tr.odd td,
+.vui table.no-bg tr.even td{
+
+	background: none;
+
+}
+
+tr th.col-hidden,
+tr td.col-hidden{
+
+	display: none;
+
+}
+
+td.tree-title{
+	
+	background-image: url('<?= $vui->svg_file( 'tree-level-bg', $vui->colors->vui_site_fg->rgba_s( 100 ) ); ?>');
+	background-repeat: no-repeat;
+	
+	text-align: left;
+	
+}
+tr.tree-level-0 td.tree-title{
+	
+	background-image: none;
+	
+}
+
+<?php
+	
+	for( $i = 1; $i < 100; $i++ ) {
+		
+		echo '
+			
+			tr.tree-level-'. $i . ' td.tree-title{
+				
+				background-position: ' . ( ( ( VUI_SPACING * 4 ) * $i ) - ( VUI_SPACING * 2 ) ) . 'em center;
+				padding-left: ' . ( ( VUI_SPACING * 4 ) * $i ) . 'em;
+				
+			}
+			
+		';
+		
+	}
+	
+?>
+/*'*/
+.btn.btn-sub-item{
+	
+	min-height:.95em;
+	height:.95em;
+	line-height:115%;
+	padding-top:0;
+	padding-bottom:0;
+	
+}
+.btn.btn-sub-item .icon-sub-item:before{
+	
+	line-height: 64%;
+	
+}
+.btn.btn-sub-item:hover{
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+th.order-by{
+	
+	position: relative;
+	
+}
+th.order-by-column{
+	
+	background: <?= $vui->colors->vui_site_fg->rgba_s( 25 ); ?>;
+	
+}
+th.order-by a:after{
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	content: '';
+	
+}
+th.order-by-ASC a:after,
+th.order-by-DESC a:after{
+	
+	background-size: 16px 16px;
+	background-position: center right <?= VUI_SPACING; ?>em;
+	background-image: url(<?= $vui->svg_file( 'icon-list-asc', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+th.order-by-DESC a:after{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-list-desc', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+th.order-by-ASC:hover a:after,
+th.order-by-DESC:hover a:after{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-list-asc', $vui->colors->vui_base->rgba_s() ); ?>);
+	
+}
+th.order-by-DESC:hover a:after{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-list-desc', $vui->colors->vui_base->rgba_s() ); ?>);
+	
+}
+th.order-by-column a{
+	
+	color: <?= $vui->colors->vui_darker->hex_s; ?>;
+	
+}
+@-moz-document url-prefix() {
+	
+	th.order-by a:after{
+		
+		display: none;
+		
+	}
+	
+}
+
+
+/* 
+ * ----------------------------
+ * ----------------------------
+ * Cover me feature
+ */
+
+td a.list-link-cover-me:before{
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	content: '';
+	z-index: 0;
+	
+}
+td a.list-link-cover-me:hover:before{
+	
+	background: <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
+	
+}
+td a.list-link-cover-me:hover{
+	
+	z-index: 2;
+	
+}
+
+@-moz-document url-prefix() {
+	
+	td a.list-link-cover-me:before{
+		display: none;
+	}
+	td a.list-link-cover-me:hover{
+		
+	}
+	
+}
+
+/* 
+ * Cover me feature
+ * ----------------------------
+ * ----------------------------
+ */
+
+
+.vui .col-checkbox{
+	
+	vertical-align: middle;
+	text-align: center;
+	
+}
+.vui .col-checkbox input{
+	
+	margin: 0;
+	
+}
+
+
+.vui input[type=text].inputbox-order,
+.vui input[type=text].inputbox-ordering,
+.vui input[type=number].inputbox-order,
+.vui input[type=number].inputbox-ordering{
+	
+	text-align:center;
+	min-width:70px;
+	width: 0px;
+	
+}
+
+.vui input[type=text].address-type{
+	
+	width:150px;
+	
+}
+.vui input[type=text].address-country-title{
+	
+	width:150px;
+	
+}
+.vui input[type=text].address-state-acronym{
+	
+	min-width: 70px;
+	width: 70px;
+	
+}
+.vui input[type=text].address-city-title{
+	
+	min-width: 150px;
+	width: 150px;
+	
+}
+.vui input[type=text].address-neighborhood-title{
+	
+	min-width: 150px;
+	width: 150px;
+	
+}
+.vui input[type=text].address-postal-code{
+	
+	min-width: 130px;
+	width: 130px;
+	
+}
+.vui input.ipp{
+	
+	text-align: center !important;
+	min-width: 108px;
+	width: 108px;
+	
+}
+.vui input[type=text].address-number{
+	
+	text-align:center;
+	
+	min-width: 70px;
+	width: 70px;
+	
+}
+.vui td input[type=text],
+.vui td input[type=number],
+.vui td input[type=button],
+.vui td textarea,
+.vui td select,
+.vui td .button{
+	
+	margin: 0;
+	
+}
+
+.vui .field-error{
+	
+	box-shadow: <?= ERROR_BOX_SHADOW; ?> !important;
+	
+}
+.vui .field-highlight{
+	
+	box-shadow: <?= HIGHLIGHT_BOX_SHADOW; ?> !important;
+	
+}
+
+
+.vui .input-file-wrapper{
+	
+	position:relative;
+	<?= $vui->css->display_inline_block(); ?>;
+	overflow:hidden;
+	margin-bottom:<?= VUI_SPACING; ?>em;
+	
+}
+.vui .input-file-wrapper input[type=file],
+.vui .input-file-wrapper input[type=file]:hover,
+.vui .input-file-wrapper input[type=file]:focus{
+	
+	position:absolute;
+	display:block;
+	-webkit-appearance: push-button;
+	left:0;
+	top:-2px;
+	cursor: pointer;
+	opacity:0;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ui-datepicker-div + input[type=text] {
+	
+	display: none;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.msg-inline-error{
+	
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+}
+
+
+
+
+
+
+
+/*
+ ---------------------------------------------------------
+ Adjustments
+ ---------------------------------------------------------
+ *********************************************************
+ */

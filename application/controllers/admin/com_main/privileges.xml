@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="admin_privileges">
+		
+		<param name="privileges[admin_access]" value="admin_access" type="checkbox" default="checked" label="admin_access" tip="tip_admin_access"/>
+		
+		<param name="privileges[admin_config_management]" value="admin_config_management" type="checkbox" default="" label="admin_config_management" tip="tip_admin_config_management" />
+		
+		<param name="privileges[content_management]" value="content_management" type="checkbox" default="" label="content_management" tip="tip_content_management" />
+		
+		<param name="privileges[addons_management]" value="addons_management" type="checkbox" default="" label="addons_management" tip="tip_addons_management" />
+		
+		<param name="privileges[media_management]" value="media_management" type="checkbox" default="" label="media_management" tip="tip_media_management" />
+		
+	</section>
+	
+</params>

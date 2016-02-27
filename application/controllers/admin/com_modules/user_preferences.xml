@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="modules">
+		
+		<param name="modules_list" type="spacer" label="modules_list"/>
+		
+		<param name="modules_list_order_by" type="select" default="title" label="modules_list_order_by" tip="tip_modules_list_order_by">
+			
+			<option value="title">title</option>
+			<option value="mi_cond">mi_cond</option>
+			<option value="position">position</option>
+			<option value="ordering">ordering</option>
+			<option value="status">status</option>
+			
+		</param>
+		
+		<param name="modules_list_order_by_direction" type="select" default="ASC" label="modules_list_order_by_direction" tip="tip_modules_list_order_by_direction">
+			
+			<option value="ASC">ascendant</option>
+			<option value="DESC">decrescent</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

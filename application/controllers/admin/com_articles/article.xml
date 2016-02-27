@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="general_article_params">
+		
+		<param name="article_custom_url" type="text" default="" label="article_custom_url" tip="tip_article_custom_url" />
+		
+		<param name="article_thumb_source" type="select" default="global" label="article_thumb_source" tip="tip_article_thumb_source">
+
+			<option value="global">Global</option>
+			<option value="resized_picture">resized_image</option>
+			<option value="original_picture">original_picture</option>
+
+		</param>
+
+	</section>
+	
+	<section name="detail_view">
+		
+		<param name="show_breadcrumb_on_detail_view" type="select" default="global" label="show_breadcrumb_on_detail_view" tip="tip_show_breadcrumb_on_detail_view">
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param type="spacer" label="image" />
+
+		<param name="show_image_on_detail_view" type="select" default="global" label="show_image_on_detail_view" tip="tip_show_image_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_image_as_link_on_detail_view" type="select" default="global" label="show_image_as_link_on_detail_view" tip="tip_show_image_as_link_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="detail_view_image_link_mode" type="select" default="global" label="detail_view_image_link_mode" tip="tip_detail_view_image_link_mode">
+
+			<option value="global">Global</option>
+			<option value="link_to_article">link_to_article</option>
+			<option value="link_to_image">link_to_image</option>
+
+		</param>
+
+		<param type="spacer" />
+
+		<param name="page_title_on_detail_view" type="select" default="global" label="page_title_on_detail_view" tip="tip_page_title_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="only_article_title">only_article_title</option>
+			<option value="article_title_menu_item_title_as_prefix">article_title_menu_item_title_as_prefix</option>
+			<option value="article_title_menu_item_title_as_sufix">article_title_menu_item_title_as_sufix</option>
+
+		</param>
+
+		<param name="show_title_on_detail_view" type="select" default="global" label="show_title_on_detail_view" tip="tip_show_title_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_title_as_link_on_detail_view" type="select" default="global" label="show_title_as_link_on_detail_view" tip="tip_show_title_as_link_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_article_category_on_detail_view" type="select" default="global" label="show_article_category_on_detail_view" tip="tip_show_article_category_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_article_category_as_link_on_detail_view" type="select" default="global" label="show_article_category_as_link_on_detail_view" tip="tip_show_article_category_as_link_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_introtext_on_detail_view" type="select" default="global" label="show_introtext_on_detail_view" tip="tip_show_introtext_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_created_by_on_detail_view" type="select" default="global" label="show_created_by_on_detail_view" tip="tip_show_created_by_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_created_date_on_detail_view" type="select" default="global" label="show_created_date_on_detail_view" tip="tip_show_created_date_on_detail_view">
+
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout_article_detail" type="select" default="global" label="layout" tip="tip_layout_article_detail">
+
+			<validation rules="trim|required" />
+
+			<option value="global">Global</option>
+
+		</param>
+
+	</section>
+
+</params>

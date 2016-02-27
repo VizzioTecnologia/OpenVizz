@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<!-- Articles component compatibility-->
+	
+	<section name="detail_view">
+		
+		<param name="show_disqus_comments_on_article_detail" type="select" default="global" label="show_disqus_comments_on_article_detail" tip="tip_show_disqus_comments_on_article_detail">
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

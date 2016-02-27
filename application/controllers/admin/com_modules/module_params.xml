@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="module">
+		
+		<param name="show_title" type="select" default="1" label="show_title" tip="tip_show_title" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="module_class" type="text" default="" label="module_class" tip="tip_module_class" inline="1" />
+		
+	</section>
+	
+</params>

@@ -1,0 +1,23 @@
+
+#toolbar .article-info .article-info-item {
+	
+	position: relative;
+	
+	<?= $vui->css->display_inline_block(); ?>
+	
+	padding: <?= VUI_SPACING; ?>em;
+	
+}
+.article-info-item .created-by-name,
+.article-info-item .modified-by-name,
+.article-info-item .created-date-time,
+.article-info-item .modified-date-time {
+	
+	font-weight: bold;
+	
+}
+.article-info-image {
+	
+	width: 20%;
+	
+}

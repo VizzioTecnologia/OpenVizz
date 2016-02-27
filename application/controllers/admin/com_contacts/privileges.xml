@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="contacts_management">
+		
+		<param name="privileges[contacts_management_contacts_management]" value="contacts_management_contacts_management" type="checkbox" default="" label="contacts_management_contacts_management" tip="tip_contacts_management_contacts_management" />
+		
+	</section>
+	
+</params>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="places_management">
+		
+		<param name="privileges[places_management_places_management]" value="places_management_places_management" type="checkbox" default="" label="places_management_places_management" tip="tip_places_management_places_management" />
+		
+	</section>
+	
+</params>

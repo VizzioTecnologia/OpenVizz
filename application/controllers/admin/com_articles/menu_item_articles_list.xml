@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_list">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="category_id" type="select" default="-1" label="articles_from_category" tip="tip_articles_from_category">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+	</section>
+	
+</params>

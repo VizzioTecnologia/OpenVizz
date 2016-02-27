@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="contact_module_config_contact">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="contact_module_contact_id" type="select" default="" label="contact_module_select_contact" tip="tip_contact_module_select_contact" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<param name="contact_module_show_name" type="select" default="0" label="contact_module_show_name" tip="tip_contact_module_show_name" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	
+	
+	<section name="contact_module_config_look_and_feel">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="contact_module_layout" type="select" default="default" label="contact_module_layout" tip="tip_contact_module_layout" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="contact_module_theme" type="select" default="default" label="contact_module_theme" tip="tip_contact_module_theme" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+	
+	
+	<section name="contact_module_config_phones">
+		
+		<param name="contact_module_show_phones" type="select" default="1" label="contact_module_show_phones" tip="tip_contact_module_show_phones" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_phones_title" type="select" default="1" label="contact_module_show_phones_title" tip="tip_contact_module_show_phones_title" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_phones_titles" type="select" default="1" label="contact_module_show_phones_titles" tip="tip_contact_module_show_phones_titles" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	
+	
+	<section name="contact_module_config_emails">
+		
+		<param name="contact_module_show_emails" type="select" default="1" label="contact_module_show_emails" tip="tip_contact_module_show_emails" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_emails_title" type="select" default="1" label="contact_module_show_emails_title" tip="tip_contact_module_show_emails_title" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_emails_titles" type="select" default="1" label="contact_module_show_emails_titles" tip="tip_contact_module_show_emails_titles" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	
+	
+	
+	
+	<section name="contact_module_config_websites">
+		
+		<param name="contact_module_show_websites" type="select" default="1" label="contact_module_show_websites" tip="tip_contact_module_show_websites" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_websites_title" type="select" default="1" label="contact_module_show_websites_title" tip="tip_contact_module_show_websites_title" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_websites_titles" type="select" default="1" label="contact_module_show_websites_titles" tip="tip_contact_module_show_websites_titles" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	
+	
+	<section name="contact_module_config_addresses">
+		
+		<param name="contact_module_show_addresses" type="select" default="1" label="contact_module_show_addresses" tip="tip_contact_module_show_addresses" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_addresses_title" type="select" default="1" label="contact_module_show_addresses_title" tip="tip_contact_module_show_addresses_title" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_addresses_titles" type="select" default="0" label="contact_module_show_addresses_titles" tip="tip_contact_module_show_addresses_titles" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param type="spacer" label="" />
+		
+		<param name="contact_module_show_public_area" type="select" default="1" label="contact_module_show_public_area" tip="tip_contact_module_show_public_area" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_number" type="select" default="1" label="contact_module_show_number" tip="tip_contact_module_show_number" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_complement" type="select" default="1" label="contact_module_show_complement" tip="tip_contact_module_show_complement" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_neighborhood" type="select" default="1" label="contact_module_show_neighborhood" tip="tip_contact_module_show_neighborhood" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_postal_code" type="select" default="1" label="contact_module_show_postal_code" tip="tip_contact_module_show_postal_code" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_city" type="select" default="1" label="contact_module_show_city" tip="tip_contact_module_show_city" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_state" type="select" default="1" label="contact_module_show_state" tip="tip_contact_module_show_state" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="contact_module_show_country" type="select" default="1" label="contact_module_show_country" tip="tip_contact_module_show_country" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

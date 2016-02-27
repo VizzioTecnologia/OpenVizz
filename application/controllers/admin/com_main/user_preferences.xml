@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="admin_config">
+		
+		<param name="admin_items_per_page" type="select" default="10" label="default_items_per_page" tip="tip_default_items_per_page">
+			
+			<option value="global">global</option>
+			<option value="-1">custom</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="0">all</option>
+			
+		</param>
+		
+		<param name="admin_custom_items_per_page" type="text" default="10" label="default_custom_items_per_page" tip="tip_default_custom_items_per_page" />
+		
+		<param name="admin_hide_pagination_when_only_one_page" type="select" default="1" label="hide_pagination_when_only_one_page" tip="tip_hide_pagination_when_only_one_page">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+	<section name="site_config">
+		
+		<param name="site_items_per_page" type="select" default="10" label="default_items_per_page" tip="tip_default_items_per_page">
+			
+			<option value="global">global</option>
+			<option value="-1">custom</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="12">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="0">all</option>
+			
+		</param>
+		
+		<param name="site_custom_items_per_page" type="text" default="10" label="default_custom_items_per_page" tip="tip_default_custom_items_per_page" />
+		
+		<param name="site_hide_pagination_when_only_one_page" type="select" default="1" label="hide_pagination_when_only_one_page" tip="tip_hide_pagination_when_only_one_page">
+			<option value="1">yes</option>
+			<option value="0">no</option>
+		</param>
+		
+	</section>
+	
+</params>

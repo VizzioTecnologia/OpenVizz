@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_list">
+		
+		<param name="articles_list_columns" type="number" min="0" default="global" label="articles_list_columns" tip="tip_articles_list_columns">
+			
+		</param>
+		
+		<param name="num_featured_articles" type="number" min="-50" default="global" label="num_featured_articles" tip="tip_num_featured_articles" />
+		
+		<param name="articles_load_mode" type="select" default="global" label="articles_load_mode" tip="tip_articles_load_mode">
+			
+			<option value="global">Global</option>
+			<option value="recursive">recursive</option>
+			<option value="current">current</option>
+			
+		</param>
+		
+		<param name="articles_list_order" type="select" default="global" label="articles_list_order" tip="tip_articles_list_order">
+			
+			<option value="global">Global</option>
+			<option value="random">random</option>
+			<option value="id">id</option>
+			<option value="title">article_title</option>
+			<option value="ordering">article_ordering</option>
+			<option value="category_title">category</option>
+			<option value="category_ordering">category_ordering</option>
+			<option value="created_by_id">author</option>
+			<option value="created_date">created_date</option>
+			<option value="modified_date">modified_date</option>
+			
+		</param>
+		
+		<param name="articles_list_order_mode" type="select" default="global" label="articles_list_order_mode" tip="tip_articles_list_order_mode">
+			
+			<option value="global">Global</option>
+			<option value="asc">ascendant</option>
+			<option value="desc">decrescent</option>
+			
+		</param>
+		
+		<param name="site_items_per_page" type="select" default="global" label="site_items_per_page" tip="tip_site_items_per_page">
+			
+			<option value="global">Global</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="12">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="0">all</option>
+			
+		</param>
+		
+		<param type="spacer" label="appearance" />
+		
+		<param name="article_list_use_js_tabs" type="select" default="global" label="article_list_use_js_tabs" tip="tip_article_list_use_js_tabs">
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout_articles_list" type="select" default="global" label="layout" tip="tip_layout_articles_list">
+			
+			<validation rules="trim|required" />
+			
+			<option value="global">Global</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

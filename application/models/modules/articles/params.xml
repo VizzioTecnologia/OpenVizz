@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_module_config">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="root_category_id" type="select" default="" label="root_category" tip="tip_root_category_id" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<param name="articles_load_mode" type="select" default="recursive" label="articles_load_mode" tip="tip_articles_load_mode" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="recursive">recursively</option>
+			<option value="current">current_category</option>
+			
+		</param>
+		
+		<param type="spacer" />
+		
+		<param name="group_articles_by_category" type="select" default="1" label="group_articles_by_category" tip="tip_group_articles_by_category" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_category_titles" type="select" default="1" label="show_category_titles" tip="tip_show_category_titles" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="use_articles_list_readmore_link" type="select" default="1" label="use_articles_list_readmore_link" tip="tip_use_articles_list_readmore_link" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="articles_list_readmore_text" type="text" default="" label="articles_list_readmore_text" tip="tip_articles_list_readmore_text" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="articles_list_readmore_link_custom_url" type="text" default="" label="articles_list_readmore_link_custom_url" tip="tip_articles_list_readmore_link_custom_url" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" />
+		
+		<param name="quantity_of_articles_to_show" type="number" min="0" default="10" label="quantity_of_articles_to_show" tip="tip_quantity_of_articles_to_show" inline="1" />
+		
+		<param name="articles_list_order" type="select" default="global" label="articles_list_order" tip="tip_articles_list_order" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="random">random</option>
+			<option value="id">id</option>
+			<option value="title">article_title</option>
+			<option value="ordering">article_ordering</option>
+			<option value="category_title">category</option>
+			<option value="category_order">category_order</option>
+			<option value="created_by_id">author</option>
+			<option value="created_date">created_date</option>
+			<option value="modified_date">modified_date</option>
+			
+		</param>
+		
+		<param name="articles_list_order_mode" type="select" default="global" label="articles_list_order_mode" tip="tip_articles_list_order_mode" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="asc">ascendant</option>
+			<option value="desc">decrescent</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="image" />
+		
+		<param name="show_image_on_list_view" type="select" default="global" label="show_image_on_list_view" tip="tip_show_image_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="article_thumb_source" type="select" default="global" label="article_thumb_source" tip="tip_article_thumb_source" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="resized_picture">resized_image</option>
+			<option value="original_picture">original_picture</option>
+			
+		</param>
+		
+		<param name="article_has_image_first" type="select" default="global" label="article_has_image_first" tip="tip_article_has_image_first" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_image_as_link_on_list_view" type="select" default="global" label="show_image_as_link_on_list_view" tip="tip_show_image_as_link_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="list_view_image_link_mode" type="select" default="global" label="list_view_image_link_mode" tip="tip_list_view_image_link_mode" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="link_to_article">link_to_article</option>
+			<option value="link_to_image">link_to_image</option>
+			
+		</param>
+		
+		
+		
+		
+		
+		<param type="spacer" label="articles_content" />
+		
+		<param name="show_introtext_on_list_view" type="select" default="global" label="show_introtext_on_list_view" tip="tip_show_introtext_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_full_text_on_list_view" type="select" default="global" label="show_full_text_on_list_view" tip="tip_show_full_text_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="2">auto</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="use_word_limiter" type="select" default="global" label="use_word_limiter" tip="tip_use_word_limiter" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="word_limiter" type="number" min="0" default="0" label="word_limiter" tip="tip_word_limiter"  inline="1" />
+		
+		<param name="word_limiter_str" type="text" default="global" label="word_limiter_str" tip="tip_word_limiter_str"  inline="1" />
+		
+		<param name="keep_html_content" type="select" default="global" label="keep_html_content" tip="tip_keep_html_content" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_readmore_link" type="select" default="global" label="show_readmore_link" tip="tip_show_readmore_link" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			<option value="2">auto</option>
+			
+		</param>
+		
+		<param name="show_title_on_list_view" type="select" default="global" label="show_title_on_list_view" tip="tip_show_title_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_title_as_link_on_list_view" type="select" default="global" label="show_title_as_link_on_list_view" tip="tip_show_title_as_link_on_list_view" inline="1" >
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		
+		
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="layout" type="select" default="default" label="layout" tip="tip_articles_module_layout" inline="1" >
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

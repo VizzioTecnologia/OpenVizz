@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="tenders">
+		
+		<param name="tender_notes_content" type="textarea" default="" label="tender_notes_content" tip="tip_tender_notes_content" editor="1">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="tender_footer_content" type="textarea" default="" label="tender_footer_content" tip="tip_tender_footer_content" editor="1">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="tender_date_format" type="text" default="Y-m-d" label="tender_date_format" tip="tip_tender_date_format" editor="1">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="product_profit_factor" type="text" default="25" label="product_profit_factor" tip="tip_product_profit_factor">
+		
+			<validation rules="trim|required"/>
+			
+		</param>
+		
+		<param name="company_tax" type="text" default="13.33" label="company_tax" tip="tip_company_tax">
+		
+			<validation rules="trim|required"/>
+			
+		</param>
+		
+		<param name="default_delivery_time" type="text" default="" label="default_delivery_time" tip="tip_default_delivery_time">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="default_product_unit" type="text" default="" label="default_product_unit" tip="tip_default_product_unit">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="default_prov_cond_tender_validity" type="text" default="" label="default_prov_cond_tender_validity" tip="tip_default_prov_cond_tender_validity">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="default_prov_cond_payment_conditions" type="text" default="" label="default_prov_cond_payment_conditions" tip="tip_default_prov_cond_payment_conditions">
+		
+			<validation rules="trim"/>
+			
+		</param>
+		
+		<param name="currency_symbol" type="text" default="R$" label="currency_symbol" tip="tip_currency_symbol">
+		
+			<validation rules="trim|required"/>
+			
+		</param>
+		
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="default_products_warranty" type="select" default="" label="default_products_warranty" tip="tip_default_products_warranty">
+		
+			<validation rules="trim|required"/>
+			
+		</param>
+		
+	</section>
+	
+</params>

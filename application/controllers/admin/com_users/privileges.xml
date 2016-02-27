@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="users_management">
+		
+		<param name="privileges[users_management_users_management]" value="users_management_users_management" type="checkbox" default="" label="users_management_users_management" tip="tip_users_management_users_management" />
+		
+		<param name="privileges[users_management_users_groups_management]" value="users_management_users_groups_management" type="checkbox" default="" label="users_management_users_groups_management" tip="tip_users_management_users_groups_management" />
+		
+		<param name="privileges[users_management_can_add_user]" value="users_management_can_add_user" type="checkbox" default="" label="users_management_can_add_user" tip="tip_users_management_can_add_user" />
+		
+		<param type="spacer" label="relation_to_other_users" />
+		
+		<param name="privileges_users_management_view_group_level" value="users_management_can_see_all_group_levels" type="radio" default="" label="users_management_can_see_all_group_levels" tip="tip_users_management_can_see_all_group_levels" />
+		<param name="privileges_users_management_view_group_level" value="users_management_can_see_only_same_and_low_group_level" type="radio" default="" label="users_management_can_see_only_same_and_low_group_level" tip="tip_users_management_can_see_only_same_and_low_group_level" />
+		<param name="privileges_users_management_view_group_level" value="users_management_can_see_only_same_group_level" type="radio" default="" label="users_management_can_see_only_same_group_level" tip="tip_users_management_can_see_only_same_group_level" />
+		<param name="privileges_users_management_view_group_level" value="users_management_can_see_only_low_group_level" type="radio" default="" label="users_management_can_see_only_low_group_level" tip="tip_users_management_can_see_only_low_group_level" />
+		<param name="privileges_users_management_view_group_level" value="users_management_cant_see_others_users" type="radio" default="checked" label="users_management_cant_see_others_users" tip="tip_users_management_cant_see_others_users" />
+		
+		<param type="spacer" label="editing_users" />
+		
+		<param name="privileges_users_management_edit" value="users_management_can_edit_all_users" type="radio" default="" label="users_management_can_edit_all_users" tip="tip_users_management_can_edit_all_users" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_same_and_low_group_level" type="radio" default="" label="users_management_can_edit_only_same_and_low_group_level" tip="tip_users_management_can_edit_only_same_and_low_group_level" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_same_group_level" type="radio" default="" label="users_management_can_edit_only_same_group_level" tip="tip_users_management_can_edit_only_same_group_level" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_same_group_and_below" type="radio" default="" label="users_management_can_edit_only_same_group_and_below" tip="tip_users_management_can_edit_only_same_group_and_below" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_same_group" type="radio" default="" label="users_management_can_edit_only_same_group" tip="tip_users_management_can_edit_only_same_group" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_low_groups" type="radio" default="" label="users_management_can_edit_only_low_groups" tip="tip_users_management_can_edit_only_low_groups" />
+		<param name="privileges_users_management_edit" value="users_management_can_edit_only_your_own_user" type="radio" default="checked" label="users_management_can_edit_only_your_own_user" tip="tip_users_management_can_edit_only_your_own_user" />
+		
+		<param name="privileges[users_management_view_info]" value="users_management_view_info" type="checkbox" default="" label="users_management_view_info" tip="tip_users_management_view_info" />
+		
+		<param name="privileges[users_management_view_personal_info]" value="users_management_view_personal_info" type="checkbox" default="" label="users_management_view_personal_info" tip="tip_users_management_view_personal_info" />
+		
+	</section>
+	
+	<section name="admin_privileges">
+		
+		<param name="c_users_receive_emails_on_new_accounts" value="c_users_receive_emails_on_new_accounts" type="checkbox" default="" label="c_users_receive_emails_on_new_accounts" tip="tip_c_users_receive_emails_on_new_accounts" />
+		
+		<param name="c_users_receive_emails_on_account_activation" value="c_users_receive_emails_on_account_activation" type="checkbox" default="" label="c_users_receive_emails_on_account_activation" tip="tip_c_users_receive_emails_on_account_activation" />
+		
+		<param name="c_users_receive_emails_on_account_removal" value="c_users_receive_emails_on_account_removal" type="checkbox" default="" label="c_users_receive_emails_on_account_removal" tip="tip_c_users_receive_emails_on_account_removal" />
+		
+	</section>
+	
+</params>

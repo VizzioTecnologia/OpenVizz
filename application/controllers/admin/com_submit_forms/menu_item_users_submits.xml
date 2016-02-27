@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="users_submits_config">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_id" type="select" default="" label="select_submit_form" tip="tip_select_submit_form" inline="1">
+			
+			<validation rules="trim|required|integer" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="users_submits_layout" type="select" default="default" label="users_submits_layout" tip="tip_users_submits_layout" inline="1">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

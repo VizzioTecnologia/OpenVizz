@@ -1,0 +1,9 @@
+- system
+	- database/DB_active_rec.php  >>  função order_by
+	- index.php >> Adicionado o include para o arquivo application/core/viacms_Common.php
+	- system/database/DB_active_rec.php >> Active records, removida a keyword protected da função _reset_write(), _compile_select() e _reset_select()
+	
+- Responsive File Manager
+	- desativado o fechamento do fancybox pelo script assets/js/responsivefilemanager/filemanager/js/include.js
+		- conteúdo do arquivo include.js copiado para o mesmo arquivo minificado
+		

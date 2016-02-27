@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="urls_management">
+		
+		<param name="privileges[urls_management_urls_management]" value="urls_management_urls_management" type="checkbox" default="" label="urls_management_urls_management" tip="tip_urls_management_urls_management" />
+		
+	</section>
+	
+</params>

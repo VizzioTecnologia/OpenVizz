@@ -1,0 +1,33 @@
+
+#jquery-scrolltop {
+	
+	position: fixed;
+	
+	display: block;
+	
+	right: 10px;
+	bottom: 10px;
+	
+	width: 64px;
+	height: 64px;
+	
+	background: url(arrow.png) no-repeat center center;
+	
+	z-index: 1000000;
+	
+	opacity: 0;
+	
+	cursor: pointer;
+	
+}
+#jquery-scrolltop.jquery-scrolltop-on{
+	
+	opacity: 0.3;
+	
+}
+#jquery-scrolltop:hover{
+	
+	opacity: 1;
+	
+}
+

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Draggable Test Suite</title>
+
+	<script src="../../jquery.js"></script>
+	<link rel="stylesheet" href="../../../external/qunit.css">
+
+	<style>
+		#main {
+			width: 1000px;
+			height: 1000px;
+			overflow: scroll;
+			overflow-x: scroll;
+			overflow-y: scroll;
+			position: relative;
+			left: 0;
+			top: 0;
+		}
+		#main-forceScrollable {
+			width: 1100px;
+			height: 1100px;
+		}
+		#scrollParent {
+			width: 1200px;
+			height: 1200px;
+			position: relative;
+			left: 0;
+			top: 0;
+			overflow: hidden;
+			overflow-x: hidden;
+			overflow-y: hidden;
+		}
+		#scrollParent-forceScrollable {
+			width: 1300px;
+			height: 1300px;
+		}
+		/* See #9077 */
+		#draggable3, #draggable4 {
+			z-index: 100;
+		}
+	</style>
+
+	<script src="../../../external/qunit.js"></script>
+	<script src="../../jquery.simulate.js"></script>
+	<script src="../testsuite.js"></script>
+	<script>
+	TestHelpers.loadResources({
+		css: [ "ui.core" ],
+		js: [
+			"ui/jquery.ui.core.js",
+			"ui/jquery.ui.widget.js",
+			"ui/jquery.ui.mouse.js",
+			"ui/jquery.ui.resizable.js",
+			"ui/jquery.ui.draggable.js",
+			"ui/jquery.ui.droppable.js"
+		]
+	});
+	</script>
+
+	<script src="draggable_common.js"></script>
+	<script src="draggable_core.js"></script>
+	<script src="draggable_events.js"></script>
+	<script src="draggable_methods.js"></script>
+	<script src="draggable_options.js"></script>
+	<script src="draggable_test_helpers.js"></script>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery UI Draggable Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">
+	<div id="scrollParent">
+		<div id="main">
+			<div id="draggable1" style="background: green; width: 200px; height: 100px;">Relative</div>
+			<div id="draggable2" style="background: green; width: 200px; height: 100px; position: absolute; top: 10px; left: 10px;"><span><em>Absolute</em></span></div>
+			<div id="droppable" style="background: green; width: 200px; height: 100px; position: absolute; top: 110px; left: 110px;"><span>Absolute</span></div>
+			<div id="main-forceScrollable"></div>
+		</div>
+		<div id="scrollParent-forceScrollable"></div>
+	</div>
+	<div style="width: 1px; height: 1000px;"></div>
+	<div style="position: absolute; width: 1px; height: 2000px;"></div>
+</div>
+
+</body>
+</html>

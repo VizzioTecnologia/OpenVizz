@@ -1,0 +1,149 @@
+
+/* ------------------------------------------------------ */
+/* Vui interactive buttons elements */
+
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el,
+
+.vui button,
+.vui input[ type="submit" ],
+.vui input[ type="button" ],
+.vui input[ type="reset" ],
+.vui select:not( [ multiple ] ) {
+	
+	<?= DEFAULT_BUTTONS_STYLESHEET; ?>
+	
+	vertical-align: middle;
+	
+	margin: 0;
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:hover,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el,
+
+.vui button:hover,
+.vui button:focus,
+.vui button:active,
+.vui input[ type="submit" ]:hover,
+.vui input[ type="submit" ]:focus,
+.vui input[ type="submit" ]:active,
+.vui input[ type="button" ]:hover,
+.vui input[ type="button" ]:focus,
+.vui input[ type="button" ]:active,
+.vui input[ type="reset" ]:hover,
+.vui input[ type="reset" ]:focus,
+.vui input[ type="reset" ]:active,
+.vui select:not( [ multiple ] ):hover,
+.vui select:not( [ multiple ] ):focus,
+.vui select:not( [ multiple ] ):active {
+	
+	color: <?= $vui->colors->vui_button_active_fg->rgba_s(); ?>;
+	
+	border-top: thin solid <?= $vui->colors->vui_button_border_active_top->rgba_s(); ?>;
+	border-right: thin solid <?= $vui->colors->vui_button_border_active_right->rgba_s(); ?>;
+	border-bottom: thin solid <?= $vui->colors->vui_button_border_active_bottom->rgba_s(); ?>;
+	border-left: thin solid <?= $vui->colors->vui_button_border_active_left->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_button_active_bg->rgba_s(); ?>;
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_button_fg->rgba_s(); ?>;
+	
+	cursor: pointer;
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper:hover .icon-wrapper,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus + .icon-wrapper,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active + .icon-wrapper,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus .icon-wrapper,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_button_active_fg->rgba_s(); ?>;
+	
+}
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_button_fg->rgba_s() . ';
+	
+', '.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el' ); ?>
+
+
+<?= $vui->css->placeholder('
+	
+	color: ' . $vui->colors->vui_button_active_fg->rgba_s() . ';
+	
+', '
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:hover,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el
+' ); ?>
+
+
+/* Vui interactive buttons elements */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* Selects */
+
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el,
+
+.vui select:not( [ multiple ] ) {
+	
+	background-image: url( <?= $vui->svg_file( 'icon-select', $vui->colors->vui_button_fg->rgba_s() ); ?> );
+	background-repeat: no-repeat;
+	background-position: right <?= VUI_BUTTONS_PADDING_R; ?> center;
+	padding-right: calc( <?= VUI_BUTTONS_PADDING_R; ?> + <?= DEFAULT_ICON_SIZE; ?> + <?= VUI_BUTTONS_PADDING_R; ?> / 2 );
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el optgroup,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el option,
+
+.vui select:not( [ multiple ] ) optgroup,
+.vui select:not( [ multiple ] ) option {
+	
+	font-family: <?= VUI_DEFAULT_FONT_FAMILY; ?> !important;
+	background-color: <?= $vui->colors->vui_base->get_ro_color( 100 )->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+	
+	<?= $vui->css->text_shadow( 'none' ); ?>
+	
+	text-align: left;
+	
+}
+/* Hiding dropdown arrows on IE*/
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el::-ms-expand,
+.vui select:not( [ multiple ] )::-ms-expand {
+	
+	display: none;
+	
+}
+
+
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:-moz-focusring,
+.vui select:not( [ multiple ] ):-moz-focusring {
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+	
+	color: transparent;
+	text-shadow: 0 0 0 <?= $vui->colors->vui_button_fg->rgba_s(); ?>;
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:hover,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:focus,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el:active,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper:hover > .el,
+.vui select:not( [ multiple ] ):hover,
+.vui select:not( [ multiple ] ):focus,
+.vui select:not( [ multiple ] ):active {
+	
+	background-image: url( <?= $vui->svg_file( 'icon-select', $vui->colors->vui_button_active_fg->rgba_s() ); ?> );
+	
+}
+
+/* Selects */
+/* ------------------------------------------------------ */

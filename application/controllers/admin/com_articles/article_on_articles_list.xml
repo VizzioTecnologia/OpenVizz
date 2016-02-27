@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_list">
+		
+		<param type="spacer" label="image" />
+		
+		<param name="show_image_on_list_view" type="select" default="global" label="show_image_on_list_view" tip="tip_show_image_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="article_has_image_first" type="select" default="global" label="article_has_image_first" tip="tip_article_has_image_first">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_image_as_link_on_list_view" type="select" default="global" label="show_image_as_link_on_list_view" tip="tip_show_image_as_link_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="list_view_image_link_mode" type="select" default="global" label="list_view_image_link_mode" tip="tip_list_view_image_link_mode">
+			
+			<option value="global">Global</option>
+			<option value="link_to_article">link_to_article</option>
+			<option value="link_to_image">link_to_image</option>
+			
+		</param>
+		
+		<param type="spacer" />
+		
+		<param name="show_title_on_list_view" type="select" default="global" label="show_title_on_list_view" tip="tip_show_title_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_title_as_link_on_list_view" type="select" default="global" label="show_title_as_link_on_list_view" tip="tip_show_title_as_link_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_article_category_on_list_view" type="select" default="global" label="show_article_category_on_list_view" tip="tip_show_article_category_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_article_category_as_link_on_list_view" type="select" default="global" label="show_article_category_as_link_on_list_view" tip="tip_show_article_category_as_link_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_introtext_on_list_view" type="select" default="global" label="show_introtext_on_list_view" tip="tip_show_introtext_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_full_text_on_list_view" type="select" default="global" label="show_full_text_on_list_view" tip="tip_show_full_text_on_list_view">
+			
+			<option value="global">global</option>
+			<option value="2">auto</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_readmore_link" type="select" default="global" label="show_readmore_link" tip="tip_show_readmore_link">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_created_by_on_list_view" type="select" default="global" label="show_created_by_on_list_view" tip="tip_show_created_by_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_created_date_on_list_view" type="select" default="global" label="show_created_date_on_list_view" tip="tip_show_created_date_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="readmore_text" type="text" default="global" label="readmore_text" tip="tip_readmore_text"/>
+		
+	</section>
+	
+</params>

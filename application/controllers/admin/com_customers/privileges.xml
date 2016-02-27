@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="customers_management">
+		
+		<param name="privileges[customers_management_customers_management]" value="customers_management_customers_management" type="checkbox" default="" label="customers_management_customers_management" tip="tip_customers_management_customers_management" />
+		
+	</section>
+	
+</params>

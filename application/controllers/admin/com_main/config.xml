@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="system_config">
+
+		<param name="time_reference" type="text" default="GMT" label="time_reference" tip="tip_time_reference" />
+
+		<param name="time_zone" type="select" default="UTC" label="time_zone" tip="tip_time_zone">
+
+			<option value="UM12">UM12</option>
+			<option value="UM11">UM11</option>
+			<option value="UM10">UM10</option>
+			<option value="UM95">UM95</option>
+			<option value="UM9">UM9</option>
+			<option value="UM8">UM8</option>
+			<option value="UM7">UM7</option>
+			<option value="UM6">UM6</option>
+			<option value="UM5">UM5</option>
+			<option value="UM45">UM45</option>
+			<option value="UM4">UM4</option>
+			<option value="UM35">UM35</option>
+			<option value="UM3">UM3</option>
+			<option value="UM2">UM2</option>
+			<option value="UM1">UM1</option>
+
+			<option value="UTC">UTC</option>
+
+			<option value="UP1">UP1</option>
+			<option value="UP2">UP2</option>
+			<option value="UP3">UP3</option>
+			<option value="UP35">UP35</option>
+			<option value="UP4">UP4</option>
+			<option value="UP45">UP45</option>
+			<option value="UP5">UP5</option>
+			<option value="UP55">UP55</option>
+			<option value="UP575">UP575</option>
+			<option value="UP6">UP6</option>
+			<option value="UP65">UP65</option>
+			<option value="UP7">UP7</option>
+			<option value="UP8">UP8</option>
+			<option value="UP875">UP875</option>
+			<option value="UP9">UP9</option>
+			<option value="UP95">UP95</option>
+			<option value="UP10">UP10</option>
+			<option value="UP105">UP105</option>
+			<option value="UP11">UP11</option>
+			<option value="UP115">UP115</option>
+			<option value="UP12">UP12</option>
+			<option value="UP1275">UP1275</option>
+			<option value="UP13">UP13</option>
+			<option value="UP14">UP14</option>
+
+		</param>
+
+		<param name="dst" type="select" default="1" label="use_daylight_saving" tip="tip_use_daylight_saving">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="js_text_editor" type="select" default="no_editor" label="text_editor" tip="tip_text_editor">
+
+			<option value="no_editor">no_editor</option>
+
+			<!-- Criado dinamicamente -->
+
+		</param>
+
+		<param name="minify_output" type="select" default="1" label="minify_output" tip="tip_minify_output">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="cache_path" type="text" default="application/cache/" label="cache_path" tip="tip_cache_path" />
+
+		<param type="spacer" label="log_files" />
+
+		<param name="log_threshold" type="select" default="0" label="log_threshold" tip="tip_log_threshold">
+
+			<option value="0">Off</option>
+			<option value="1">Error Messages</option>
+			<option value="2">Debug Messages</option>
+			<option value="3">Informational Messages</option>
+			<option value="4">All Messages</option>
+
+		</param>
+
+		<param name="log_path" type="text" default="application/logs/" label="log_path" tip="tip_log_path" />
+
+		<param name="log_date_format" type="text" default="Y-m-d H:i:s" label="log_date_format" tip="tip_log_date_format" />
+
+		<param type="spacer" label="sessions" />
+
+		<param name="sess_expiration" type="number" default="7200" label="sess_expiration" tip="tip_sess_expiration" />
+
+		<param name="sess_expire_on_close" type="select" default="0" label="sess_expire_on_close" tip="tip_sess_expire_on_close">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sess_encrypt_cookie" type="select" default="1" label="sess_encrypt_cookie" tip="tip_sess_encrypt_cookie">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sess_use_database" type="select" default="0" label="sess_use_database" tip="tip_sess_use_database">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sess_table_name" type="text" default="tb_sessions" label="sess_table_name" tip="tip_sess_table_name" />
+
+		<param name="sess_match_ip" type="select" default="0" label="sess_match_ip" tip="tip_sess_match_ip">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sess_match_useragent" type="select" default="1" label="sess_match_useragent" tip="tip_sess_match_useragent">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="sess_time_to_update" type="number" default="300" label="sess_time_to_update" tip="tip_sess_time_to_update" />
+
+		<param name="global_xss_filtering" type="select" default="0" label="global_xss_filtering" tip="tip_global_xss_filtering">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+	</section>
+
+	<section name="email_config">
+
+		<param name="email_config_enabled" type="select" default="0" label="email_config_enabled" tip="tip_email_config_enabled">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="email_config_protocol" type="select" default="" label="email_config_protocol" tip="tip_email_config_protocol">
+
+			<option value="smtp">smtp</option>
+
+		</param>
+
+		<param name="email_config_smtp_crypto" type="select" default="tls" label="email_config_smtp_crypto" tip="tip_email_config_smtp_crypto">
+
+			<option value="ssl">ssl</option>
+			<option value="tls">tls</option>
+
+		</param>
+
+		<param name="email_config_smtp_host" type="text" default="" label="email_config_smtp_host" tip="tip_email_config_smtp_host" />
+
+		<param name="email_config_smtp_port" type="text" default="" label="email_config_smtp_port" tip="tip_email_config_smtp_port" />
+
+		<param name="email_config_smtp_user" type="text" default="" label="email_config_smtp_user" tip="tip_email_config_smtp_user" />
+
+		<param name="email_config_smtp_pass" type="password" default="" label="email_config_smtp_pass" tip="tip_email_config_smtp_pass" />
+
+		<param name="email_config_mailtype" type="select" default="html" label="email_config_mailtype" tip="tip_email_config_mailtype">
+
+			<option value="html">html</option>
+			<option value="text">text</option>
+
+		</param>
+
+		<param name="email_config_charset" type="text" default="utf-8" label="email_config_charset" tip="tip_email_config_charset" />
+
+		<param name="email_config_wordwrap" type="select" default="1" label="email_config_wordwrap" tip="tip_email_config_wordwrap">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="email_config_newline" type="text" default="\r\n" label="email_config_newline" tip="tip_email_config_newline" />
+
+		<param name="email_config_useragent" type="text" default="ViaCMS" label="email_config_useragent" tip="tip_email_config_useragent" />
+
+	</section>
+
+	<section name="admin_config">
+
+		<param name="admin_name" type="text" default="Via CMS - Administração" label="admin_name" tip="tip_admin_name" />
+
+		<param name="admin_theme" type="select" default="default" label="admin_theme" tip="tip_admin_theme">
+
+			<!-- Criado dinamicamente -->
+
+		</param>
+
+		<param name="admin_language" type="select" default="" label="admin_language" tip="tip_admin_language">
+
+			<!-- Criado dinamicamente -->
+
+		</param>
+
+		<param name="admin_items_per_page" type="select" default="10" label="default_items_per_page" tip="tip_default_items_per_page">
+
+			<option value="-1">custom</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="12">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="0">all</option>
+
+		</param>
+
+		<param name="admin_custom_items_per_page" type="number" default="10" label="default_custom_items_per_page" tip="tip_default_custom_items_per_page" />
+
+		<param name="admin_hide_pagination_when_only_one_page" type="select" default="1" label="hide_pagination_when_only_one_page" tip="tip_hide_pagination_when_only_one_page">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+	</section>
+
+	<section name="site_config">
+
+		<param name="site_name" type="text" default="Via CMS" label="site_name" tip="tip_site_name" />
+
+		<param name="author_name" type="text" default="Via CMS" label="author_name" tip="tip_author_name" />
+
+		<param name="site_copyright" type="text" default="© Via CMS" label="site_copyright" tip="tip_site_copyright" />
+
+		<param name="site_theme" type="select" default="default" label="site_theme" tip="tip_site_theme">
+
+			<!-- Criado dinamicamente -->
+
+		</param>
+
+		<param name="site_language" type="select" default="" label="site_language" tip="tip_site_language">
+
+			<!-- Criado dinamicamente -->
+
+		</param>
+
+		<param name="site_items_per_page" type="select" default="10" label="default_items_per_page" tip="tip_default_items_per_page">
+
+			<option value="-1">custom</option>
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="0">all</option>
+
+		</param>
+
+		<param name="site_custom_items_per_page" type="number" default="10" label="default_custom_items_per_page" tip="tip_default_custom_items_per_page" />
+
+		<param name="site_hide_pagination_when_only_one_page" type="select" default="1" label="hide_pagination_when_only_one_page" tip="tip_hide_pagination_when_only_one_page">
+			<option value="1">yes</option>
+			<option value="0">no</option>
+		</param>
+
+	</section>
+
+	<section name="seo_config">
+
+		<param name="friendly_urls" type="select" default="1" label="friendly_urls" tip="tip_friendly_urls">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="seo_title_prefix" type="text" default="" label="seo_title_prefix" tip="tip_seo_title_prefix"/>
+
+		<param name="seo_title_suffix" type="text" default="" label="seo_title_suffix" tip="tip_seo_title_suffix"/>
+
+		<param name="seo_title_separator" type="text" default=" | " label="seo_title_separator" tip="tip_seo_title_separator"/>
+
+		<param name="meta_keywords" type="textarea" default="" label="default_meta_keywords" tip="tip_default_meta_keywords"/>
+
+		<param name="meta_description" type="textarea" default="" label="default_meta_description" tip="tip_default_meta_description"/>
+
+		<param name="meta_custom" type="textarea" default="" label="meta_custom" tip="tip_meta_custom"/>
+
+		<param name="meta_scripts_declaration_custom" type="textarea" default="" label="meta_scripts_declaration_custom" tip="tip_meta_scripts_declaration_custom"/>
+
+	</section>
+
+	<section name="google">
+
+		<param type="spacer" label="google" />
+
+		<param name="google_site_verification" type="text" default="" label="google_site_verification" tip="tip_google_site_verification" />
+
+		<param type="spacer" label="google_api" />
+
+		<param name="google_base_app_name" type="text" default="" label="google_base_app_name" tip="tip_google_base_app_name_config" />
+
+		<param name="google_client_id" type="text" default="" label="google_client_id" tip="tip_google_client_id_config" />
+
+		<param name="google_developer_key" type="text" default="" label="google_developer_key" tip="tip_google_developer_key_config" />
+
+		<param name="google_client_secret" type="text" default="" label="google_client_secret" tip="tip_google_client_secret_config" />
+
+		<param name="google_email_address" type="text" default="" label="google_email_address" tip="tip_google_email_address_config" />
+
+		<param name="google_service_client_id" type="text" default="" label="google_service_client_id" tip="tip_google_service_client_id_config" />
+
+		<param name="google_service_email_address" type="text" default="" label="google_service_email_address" tip="tip_google_service_email_address_config" />
+
+	</section>
+
+</params>

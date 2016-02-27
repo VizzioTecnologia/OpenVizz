@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="companies_management">
+		
+		<param name="privileges[companies_management_companies_management]" value="companies_management_companies_management" type="checkbox" default="" label="companies_management_companies_management" tip="tip_companies_management_companies_management" />
+		
+	</section>
+	
+</params>

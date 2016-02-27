@@ -1,0 +1,1054 @@
+
+<?php
+	
+	$preload_size = 48;
+	
+	$mini_size = '32px';
+	$mini_num_icon_items = '50% / 7';
+	
+	$title_font_size = '1em';
+	$field_icon_size = '40';
+	
+?>
+
+
+.validation-rules-fields-wrapper > .vui-field-wrapper-inline {
+	
+	border-left: thin solid <?= $vui->colors->vui_base->rgba_s( 35 ); ?>;
+	border-right: thin solid <?= $vui->colors->vui_base->rgba_s( 35 ); ?>;
+	
+	vertical-align: top;
+	
+}
+
+
+
+#content-block #submit-form-form .field-wrapper {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	min-width: calc( <?= VUI_SPACING; ?>em + <?= $preload_size; ?>px );
+	min-height: calc( <?= VUI_SPACING; ?>em + <?= $preload_size; ?>px );
+	width: calc( 100% / 3 - <?= 2 * VUI_SPACING / 2; ?>em );
+	margin: 0;
+	
+	border: none;
+	margin: <?= VUI_SPACING / 2; ?>em;
+	padding: <?= VUI_SPACING; ?>em;
+	
+	text-align: center;
+	
+	background: <?= $vui->colors->vui_sf_form_field_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->border_radius( '10px' ); ?>;
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper {
+	
+	min-height: <?= $mini_size; ?>;
+	height: <?= $mini_size; ?>;
+	padding: 0;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper.sortable-expanded {
+	
+	min-height: auto;
+	height: auto;
+	padding: 0;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini.loading .field-wrapper.sortable-expanded {
+	
+	min-height: auto;
+	height: <?= $mini_size; ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.sorting {
+	
+	<?= $vui->css->transition( 'none' ) ?>
+	
+}
+#content-block #submit-form-form .sortable-handle{
+	
+	background: none;
+	
+}
+#content-block #submit-form-form .field-wrapper.sortable-expanded{
+	
+	display: block;
+	width: calc( 100% - <?= 2 * VUI_SPACING / 2; ?>em );
+	
+}
+#content-block #submit-form-form #fields-wrapper {
+	
+	position: relative;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading {
+	
+	min-height: calc( <?= $preload_size; ?>px + <?= VUI_SPACING; ?>em * 2 );
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading:before {
+	
+	content: '';
+	
+	position: absolute;
+	display: block;
+	
+	top: 50%;
+	left: 50%;
+	
+	margin-left: -<?= $preload_size / 2; ?>px;
+	margin-top: -<?= $preload_size / 2; ?>px;
+	
+	width: <?= $preload_size; ?>px;
+	height: <?= $preload_size; ?>px;
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_fg->rgba_s() ); ?>');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 80%;
+	background-color: transparent;
+	
+	<?= $vui->css->animation( 'vui_sf_preloading 1s linear 0s infinite' ); ?>
+	
+	<?= $vui->css->opacity( 0.5 ); ?>
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading > * {
+	
+	display: none;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini.loading .field-wrapper:before {
+	
+	margin-left: -12px;
+	margin-top: -12px;
+	
+	width: 24px;
+	height: 24px;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper:before {
+	
+	content: '';
+	
+	position: absolute;
+	display: block;
+	
+	top: 50%;
+	left: 50%;
+	
+	margin-left: -<?= $preload_size / 2; ?>px;
+	margin-top: -<?= $preload_size / 2; ?>px;
+	
+	width: <?= $preload_size; ?>px;
+	height: <?= $preload_size; ?>px;
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_fg->rgba_s() ); ?>');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 80%;
+	background-color: transparent;
+	
+	<?= $vui->css->animation( 'vui_preloading 1s linear 0s infinite' ); ?>
+	
+	<?= $vui->css->opacity( 0.5 ); ?>
+	
+}
+
+
+
+
+
+#content-block #submit-form-form .field-wrapper .summary{
+	
+	position: relative;
+	display: block;
+	
+	padding: <?= VUI_SPACING; ?>em;
+	padding-top: calc( <?= $title_font_size; ?> + <?= VUI_SPACING * 3; ?>em );
+	
+	margin-left: -<?= VUI_SPACING; ?>em;
+	margin-top: -<?= VUI_SPACING; ?>em;
+	
+	width: calc( 100% + <?= VUI_SPACING; ?>em * 2 );
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary,
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini.loading .field-wrapper .summary {
+	
+	padding: <?= VUI_SPACING; ?>em;
+	
+	width: 100%;
+	height: <?= $mini_size; ?>;
+	
+	margin: 0;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .item{
+	
+	font-size: inherit;
+	position: relative;
+	display: block;
+	text-align: left;
+	float: left;
+	border: none;
+	
+	background: none;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item {
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: auto;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .field-label,
+#content-block #submit-form-form .field-wrapper .summary .field-presentation-label {
+	
+	font-size: inherit;
+	position: relative;
+	display: block;
+	text-align: left;
+	overflow: hidden;
+	
+	width: calc( 100% - ( <?= $field_icon_size; ?>px + <?= VUI_SPACING * 3 + VUI_SPACING * 2; ?>em ) );
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .field-presentation-label {
+	
+	font-size: 90%;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary > .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_title_fg->rgba_s(); ?>;
+	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	
+	<?= $vui->css->border_radius( '10px 10px 0 0' ); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary > .title {
+	
+	position: absolute;
+	
+	left: 0;
+	top: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	padding: 0;
+	margin: 0;
+	
+	background: none;
+	
+	color: inherit;
+	
+	<?= $vui->css->border_radius( '10px' ); ?>;
+	
+	z-index: 2;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary > .title > .item {
+	
+	font-size: <?= $title_font_size; ?>;
+	padding: <?= VUI_SPACING; ?>em;
+	line-height: 100%;
+	
+	z-index: 1;
+	
+}
+#content-block #submit-form-form  #fields-wrapper.fields-layout-mini .field-wrapper .item {
+	
+	text-align: center;
+	
+	z-index: 1;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item,
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary > .title > .item {
+	
+	font-size: <?= $title_font_size; ?>;
+	padding: <?= VUI_SPACING; ?>em;
+	line-height: 100%;
+	
+	width: calc( <?= $mini_num_icon_items; ?> );
+	
+	z-index: 3;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary > .title > .item {
+	
+	z-index: 1;
+	height: 100%;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.handle {
+	
+	left: 0;
+	top: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	padding: 0;
+	margin: 0;
+	
+	z-index: 2;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-type,
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-label {
+	
+	display: none;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-expand {
+	
+	left: auto;
+	right: calc( <?= $mini_num_icon_items; ?> );
+	
+	z-index: 3;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-remove {
+	
+	left: auto;
+	right: 0;
+	
+	<?= $vui->css->border_radius( '0 10px 10px 0' ); ?>;
+	
+	z-index: 3;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper.sortable-expanded .summary .item.field-remove {
+	
+	<?= $vui->css->border_radius( '0 10px 0 0' ); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-key {
+	
+	left: 0;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-icon {
+	
+	left: calc( <?= $mini_num_icon_items; ?> );
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .item.short-actions {
+	
+	width: calc( 100% - ( <?= $field_icon_size; ?>px + <?= VUI_SPACING * 3 + VUI_SPACING * 2; ?>em ) );
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.short-actions {
+	
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 0;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.short-actions .vui-interactive-el-wrapper {
+	
+	position: absolute;
+	left: calc( <?= $mini_num_icon_items; ?> * 2 );
+	
+	width: <?= $mini_size; ?>;
+	height: <?= $mini_size; ?>;
+	
+	margin: 0;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.short-actions .vui-interactive-el-wrapper + .vui-interactive-el-wrapper {
+	
+	left: calc( <?= $mini_num_icon_items; ?> * 3 );
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.short-actions .vui-interactive-el-wrapper + .vui-interactive-el-wrapper + .vui-interactive-el-wrapper {
+	
+	left: calc( <?= $mini_num_icon_items; ?> * 4 );
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .item.field-presentation-label {
+	
+	left: calc( <?= $mini_num_icon_items; ?> * 5 );
+	width: 50%;
+	
+	text-align: left;
+	
+	white-space: nowrap;
+	
+	text-overflow: ellipsis;
+	
+	overflow: hidden;
+	
+	z-index: 1;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary > .title > .field-expand {
+	
+}
+#content-block #submit-form-form .field-wrapper .summary:before,
+#content-block #submit-form-form .field-wrapper .summary:after,
+#content-block #submit-form-form .field-wrapper .summary > .title:after {
+	
+	content: '';
+	
+	position: relative;
+	display: block;
+	text-align: left;
+	float: none;
+	clear: both;
+	
+}
+
+
+#content-block #submit-form-form .field-wrapper .summary .sortable-handle{
+	
+	position: absolute;
+	display: block;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	
+}
+
+#content-block #submit-form-form .field-wrapper .summary .field-type{
+	
+	position: relative;
+	display: block;
+	
+}
+
+#content-block #submit-form-form .field-wrapper .summary .field-icon {
+	
+	position: relative;
+	display: block;
+	
+	width: calc( <?= $field_icon_size; ?>px + <?= VUI_SPACING * 3; ?>em );
+	height: calc( <?= $field_icon_size; ?>px + <?= VUI_SPACING * 3; ?>em );
+	
+	margin: <?= VUI_SPACING / 2; ?>em;
+	
+	<?= $vui->css->border_radius( '10000px' ); ?>;
+	
+	background: <?= $vui->colors->vui_sf_form_field_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .field-icon {
+	
+	width: 32px;
+	height: 32px;
+	
+	margin: 0;
+	
+	<?= $vui->css->border_radius( '10000px' ); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .field-icon:before {
+	
+	position: absolute;
+	display: block;
+	width: auto;
+	
+	font-family: "viacms-icons";
+	content: "\e649";
+	font-size: <?= $field_icon_size; ?>px;
+	line-height: 100%;
+	
+	left: 50%;
+	top: 50%;
+	
+	margin-left: -<?= $field_icon_size / 2; ?>px;
+	margin-top: -<?= $field_icon_size / 2; ?>px;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .field-icon:before {
+	
+	font-size: 16px;
+	
+	margin-left: -8px;
+	margin-top: -8px;
+	
+}
+
+
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .field-icon,
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .field-icon:before {
+	
+	background: none !important;
+	
+	color: inherit !important;
+	
+}
+
+
+#content-block #submit-form-form .field-wrapper.field-type-input_text{
+	
+	background: <?= $vui->colors->vui_sf_form_field_input_text_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_input_text_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-input_text .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_input_text_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-input_text .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_input_text_icon_fg->rgba_s(); ?>;
+	
+	content: "\e800";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-input_text .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_input_text_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_input_text_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-input_text .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_input_text_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_input_text_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-input_text .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_input_text_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_input_text_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-input_text:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_input_text_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-button{
+	
+	background: <?= $vui->colors->vui_sf_form_field_button_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_button_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-button .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_button_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-button .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_button_icon_fg->rgba_s(); ?>;
+	
+	content: "\e801";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-button .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_button_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_button_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-button .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_button_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_button_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-button .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_button_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_button_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-button:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_button_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-combo_box{
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_fg->rgba_s(); ?>;
+	
+	content: "\e802";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-combo_box:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_combo_box_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-date{
+	
+	background: <?= $vui->colors->vui_sf_form_field_date_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_date_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-date .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_date_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-date .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_date_icon_fg->rgba_s(); ?>;
+	
+	content: "\e803";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-date .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_date_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_date_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-date .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_date_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_date_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-date .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_date_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_date_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-date:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_date_fg->rgba_s() ); ?>');
+	
+}
+#content-block #submit-form-form #fields-wrapper .field-wrapper.field-type-date:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_date_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-checkbox{
+	
+	background: <?= $vui->colors->vui_sf_form_field_checkbox_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_checkbox_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-checkbox .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_checkbox_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-checkbox .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_checkbox_icon_fg->rgba_s(); ?>;
+	
+	content: "\e804";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-checkbox .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_checkbox_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_checkbox_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-checkbox .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_checkbox_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_checkbox_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-checkbox .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_checkbox_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_checkbox_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-checkbox:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_checkbox_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-textarea{
+	
+	background: <?= $vui->colors->vui_sf_form_field_textarea_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_textarea_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-textarea .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_textarea_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-textarea .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_textarea_icon_fg->rgba_s(); ?>;
+	
+	content: "\e805";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-textarea .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_textarea_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_textarea_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-textarea .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_textarea_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_textarea_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-textarea .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_textarea_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_textarea_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-textarea:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_textarea_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-combo_box{
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_fg->rgba_s(); ?>;
+	
+	content: "\e802";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_combo_box_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-combo_box .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_combo_box_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-combo_box:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_combo_box_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+#content-block #submit-form-form .field-wrapper.field-type-html{
+	
+	background: <?= $vui->colors->vui_sf_form_field_html_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_html_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-html .summary .field-icon{
+	
+	background: <?= $vui->colors->vui_sf_form_field_html_icon_bg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-html .summary .field-icon:before{
+	
+	color: <?= $vui->colors->vui_sf_form_field_html_icon_fg->rgba_s(); ?>;
+	
+	content: "\e649";
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-html .summary .title {
+	
+	background: <?= $vui->colors->vui_sf_form_field_html_title_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_html_title_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-html .summary .field-remove {
+	
+	background: <?= $vui->colors->vui_sf_form_field_html_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_html_remove_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form .field-wrapper.field-type-html .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_html_icon_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_html_icon_fg->rgba_s(); ?>;
+	
+}
+#content-block #submit-form-form #fields-wrapper.loading .field-wrapper.field-type-html:before {
+	
+	background-image: url('<?= $vui->svg_file( 'preload', $vui->colors->vui_sf_form_field_html_fg->rgba_s() ); ?>');
+	
+}
+
+
+
+
+#content-block #submit-form-form .field-wrapper .handle{
+	
+	position: absolute;
+	display: block;
+	
+	left: 15px;
+	top: 15px;
+	right: 15px;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .handle:before{
+	
+	display: none;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .field-remove{
+	
+	position: absolute;
+	display: block;
+	
+	right: 0;
+	top: 0;
+	
+	background: <?= $vui->colors->vui_sf_form_field_remove_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_sf_form_field_remove_fg->rgba_s(); ?>;
+	
+	display: block;
+	
+	padding: <?= VUI_SPACING / 2; ?>em;
+	
+	<?= $vui->css->border_radius( '0 10px 0 0' ); ?>;
+	
+}
+
+
+#content-block #submit-form-form .field-wrapper .summary .short-actions .short-action + .el + .icon-wrapper {
+	
+	width: 32px;
+	height: 32px;
+	
+	<?= $vui->css->border_radius( '100%' ); ?>;
+	
+	cursor: pointer;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .short-actions .action-availability-admin + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_action_availability_admin_bg->rgba_s(); ?> !important;
+	
+	color: <?= $vui->colors->vui_sf_form_field_action_availability_admin_fg->rgba_s(); ?> !important;
+	
+}
+#content-block #submit-form-form .field-wrapper .summary .short-actions .action-availability-site + .el + .icon-wrapper {
+	
+	background-color: <?= $vui->colors->vui_sf_form_field_action_availability_site_bg->rgba_s(); ?> !important;
+	
+	color: <?= $vui->colors->vui_sf_form_field_action_availability_site_fg->rgba_s(); ?> !important;
+	
+}
+#content-block #submit-form-form #fields-wrapper.fields-layout-mini .field-wrapper .summary .short-actions .vui-interactive-el-wrapper .icon-wrapper {
+	
+	background: none !important;
+	
+	color: inherit !important;
+	
+}
+
+
+
+
+
+
+
+
+
+/* date */
+
+.ud-prop-field-wrapper.ud-prop-type-date .vui-interactive-el-wrapper {
+	
+	width: <?= 100 / 3; ?>%;
+	
+}
+.ud-prop-field-wrapper.ud-prop-type-date-dm .vui-interactive-el-wrapper,
+.ud-prop-field-wrapper.ud-prop-type-date-dy .vui-interactive-el-wrapper,
+.ud-prop-field-wrapper.ud-prop-type-date-my .vui-interactive-el-wrapper {
+	
+	width: <?= 100 / 2; ?>%;
+	
+}
+.ud-prop-field-wrapper.ud-prop-type-date-d .vui-interactive-el-wrapper,
+.ud-prop-field-wrapper.ud-prop-type-date-m .vui-interactive-el-wrapper,
+.ud-prop-field-wrapper.ud-prop-type-date-y .vui-interactive-el-wrapper {
+	
+	width: 100%;
+	
+}
+
+/* ud image */
+
+.ud-prop-field-wrapper.ud-image .ud-field-control > .vui-interactive-el-wrapper {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	width: 100%;
+	
+}
+.ud-prop-field-wrapper.ud-image .ud-field-control > .thumb {
+	
+	margin: 0;
+	
+}
+.ud-prop-field-wrapper.ud-image .ud-field-control > .vui-interactive-el-wrapper > .el {
+	
+	width: 80%;
+	
+}
+.ud-prop-field-wrapper.ud-image .ud-field-control > .vui-interactive-el-wrapper > .vui-interactive-el-wrapper {
+	
+	width: 20%;
+	
+}
+.ud-prop-field-wrapper.ud-image .ud-field-control > .vui-interactive-el-wrapper > .vui-interactive-el-wrapper > .el {
+	
+	width: 100%;
+	
+}
+
+
+
+
+
+
+
+
+.modal-user-submit {
+	
+	width: 100%;
+	
+}
+.modal-user-submit .datalist-table tr.field-empty {
+	
+	display: none;
+	
+}
+.modal-user-submit .datalist-table td.title {
+	
+	width: 40%;
+	
+}

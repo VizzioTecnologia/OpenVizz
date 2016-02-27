@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="urls">
+		
+		<param name="urls_list" type="spacer" label="urls_list"/>
+		
+		<param name="urls_list_order_by" type="select" default="sef_url" label="urls_list_order_by" tip="tip_urls_list_order_by">
+			
+			<option value="sef_url">sef_url</option>
+			<option value="target">target</option>
+			
+		</param>
+		
+		<param name="urls_list_order_by_direction" type="select" default="ASC" label="urls_list_order_by_direction" tip="tip_urls_list_order_by_direction">
+			
+			<option value="ASC">ascendant</option>
+			<option value="DESC">decrescent</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

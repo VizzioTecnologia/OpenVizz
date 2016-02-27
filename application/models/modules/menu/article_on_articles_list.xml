@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles_list">
+		
+		<param name="show_title_on_list_view" type="select" default="global" label="show_title_on_list_view" tip="tip_show_title_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_title_as_link_on_list_view" type="select" default="global" label="show_title_as_link_on_list_view" tip="tip_show_title_as_link_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_article_category_on_list_view" type="select" default="global" label="show_article_category_on_list_view" tip="tip_show_article_category_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_article_category_as_link_on_list_view" type="select" default="global" label="show_article_category_as_link_on_list_view" tip="tip_show_article_category_as_link_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_introtext_on_list_view" type="select" default="global" label="show_introtext_on_list_view" tip="tip_show_introtext_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_readmore_link" type="select" default="global" label="show_readmore_link" tip="tip_show_readmore_link">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_created_by_on_list_view" type="select" default="global" label="show_created_by_on_list_view" tip="show_created_by_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="show_created_date_on_list_view" type="select" default="global" label="show_created_date_on_list_view" tip="tip_show_created_date_on_list_view">
+			
+			<option value="global">Global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="readmore_text" type="text" default="global" label="readmore_text" tip="tip_readmore_text"/>
+		
+	</section>
+	
+</params>

@@ -1,0 +1,332 @@
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Tabs
+ ---------------------------------------------------------
+ */
+
+.tabs-on #content{
+	
+	padding-left: 0;
+	margin-left: 0;
+	
+}
+
+.tabs-wrapper.tabs-on{
+	
+}
+.tabs-on .tabs-container{
+	
+	direction: rtl;
+	
+	position: fixed;
+	display: block;
+	overflow: auto;
+	float: left;
+	z-index: 1000;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	
+	color: <?= $vui->colors->vui_tabs_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_tabs_bg->rgba_s(); ?>;
+	
+	left: 0;
+	top: 0;
+	bottom: 0;
+	
+	width: 250px;
+	
+}
+
+.tabs-on .tabs-container > *{
+	
+	direction: ltr;
+	
+}
+.tabs-on .tabs-container::-webkit-scrollbar{
+	
+}
+
+.tabs-on .tabs-items{
+	
+	position: relative;
+	display: block;
+	margin-left: 250px;
+	z-index: 1;
+	
+}
+
+<?= '@media screen and ( max-width: 1200px ) {'; ?>
+	
+	.tabs-on .tabs-container{
+		
+		width: <?= 48 + 10; ?>px;
+		
+	}
+	
+	.tabs-on .tabs-items{
+		
+		margin-left: 50px;
+		
+	}
+	
+}
+
+.tabs-on .tab-item-wrapper{
+	
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 0;
+	
+}
+
+.tabs-on .tab-item{
+	
+	color: <?= $vui->colors->vui_tabs_tab_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_tabs_tab_bg->rgba_s(); ?>;
+	
+	position:relative;
+	display: block;
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	
+	padding: <?= VUI_SPACING / 2; ?>em;
+	
+	border-right: none;
+	
+	border-radius: 0;
+	z-index: 1;
+	
+}
+.tabs-on .tab-item .vui-interactive-el-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el {
+	
+	color: <?= $vui->colors->vui_tabs_tab_fg->rgba_s(); ?>;
+	
+	display: block;
+	width: 100%;
+	
+}
+.tabs-on .tab-item .vui-interactive-el-wrapper .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_tabs_tab_fg->rgba_s(); ?>;
+	
+	background: none;
+	
+	border: none;
+	
+}
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el,
+.tabs-on .tab-item.active .vui-interactive-el-wrapper > .el,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:hover,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:focus,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:active,
+.tabs-on .tab-item .vui-interactive-el-wrapper:hover > .el,
+.tabs-on .tab-item:hover .vui-interactive-el-wrapper > .el {
+	
+	color: <?= $vui->colors->vui_tabs_tab_active_fg->rgba_s(); ?>;
+	
+	background: none;
+	
+	border: none;
+	
+	vertical-align: middle;
+	
+	margin: 0;
+	
+}
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el,
+.tabs-on .tab-item .vui-interactive-el-wrapper .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_tabs_tab_fg->rgba_s(); ?>;
+	
+}
+.tabs-on .tab-item.active .vui-interactive-el-wrapper .icon-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper:hover .icon-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:focus + .icon-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:active + .icon-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:focus .icon-wrapper,
+.tabs-on .tab-item .vui-interactive-el-wrapper > .el:active .icon-wrapper,
+.tabs-on .tab-item:hover .vui-interactive-el-wrapper > .el .icon-wrapper {
+	
+	color: <?= $vui->colors->vui_tabs_tab_active_fg->rgba_s(); ?>;
+	
+}
+
+<?= '@media screen and ( max-width: 1200px ) {'; ?>
+	
+	.tabs-on .tab-item{
+		
+		text-align: center;
+		padding: <?= BUTTONS_PADDING_TOP * 0.5; ?>px 0 <?= BUTTONS_PADDING_BOTTOM * 0.5; ?>px;
+		
+	}
+	
+}
+
+.tabs-on .tab-item-wrapper:first-child .tab-item{
+	
+}
+.tabs-on .tab-item-wrapper:last-child .tab-item{
+	
+}
+.tabs-on a.tab-item.active,
+.tabs-on a.tab-item:hover{
+	
+	color: <?= $vui->colors->vui_tabs_tab_active_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_tabs_tab_active_bg->rgba_s(); ?>;
+	
+}
+.tabs-on a.tab-item.active{
+	
+	color: <?= $vui->colors->vui_tabs_tab_active_fg->rgba_s(); ?>;
+	
+	background: <?= $vui->colors->vui_tabs_tab_active_bg->rgba_s(); ?>;
+	
+	z-index: 2;
+	
+	<?= $vui->css->box_shadow( '0px 20px 50px ' . $vui->colors->vui_tabs_tab_active_bg->darken( 50, TRUE )->rgba_s( 30 ) ); ?>
+	
+}
+.tabs-on a.tab-item:before,
+.tabs-on a.tab-item:after{
+	
+	content: '';
+	
+	position: absolute;
+	display: block;
+	right: 0;
+	bottom: -<?= VUI_DEFAULT_BORDER_RADIUS; ?>;
+	
+	width: <?= VUI_DEFAULT_BORDER_RADIUS; ?>;
+	height: <?= VUI_DEFAULT_BORDER_RADIUS; ?>;
+	
+}
+.tabs-on a.tab-item:after{
+	
+	bottom: auto;
+	top: -<?= VUI_DEFAULT_BORDER_RADIUS; ?>;
+	
+}
+.tabs-on a.tab-item.active:before,
+.tabs-on a.tab-item.active:after{
+	
+	background: url(<?= $vui->svg_file( 'inner-round-tr', $vui->colors->vui_tabs_tab_active_bg->rgba_s() ); ?>) no-repeat right top;
+	background-size: 100% 100%;
+	
+}
+.tabs-on a.tab-item.active:after{
+	
+	background-image: url(<?= $vui->svg_file( 'inner-round-br', $vui->colors->vui_tabs_tab_active_bg->rgba_s() ); ?>);
+	
+}
+
+
+
+
+.tabs-on .tab-item .icon:before,
+.tabs-on .tab-item .ui-icon:before{
+	
+	font-size: 16px;
+	line-height: 0;
+	
+}
+
+.tabs-on .tabs-header .tab-item,
+.tabs-on .tabs-info .tab-item {
+	
+	margin: 0;
+	font-size: 120%;
+	background: none;
+	
+	font-family: <?= FONT_FAMILY_SEC; ?>;
+	font-weight: normal;
+	line-height: 130%;
+	
+	padding: <?= VUI_SPACING; ?>em;
+	text-shadow: <?= DEFAULT_TEXT_SHADOW; ?>;
+	
+	border-bottom: thin dashed <?= $vui->colors->vui_tabs_fg->rgba_s( 150 ); ?>;
+	
+}
+
+<?= '@media screen and ( max-width: 1200px ) {'; ?>
+	
+	.tabs-on .tabs-header,
+	.tabs-on .tabs-info{
+		
+		display: none;
+		
+	}
+	
+	.vui.tabs-on .tab-item .btn .content .text{
+		
+		display: none;
+		
+	}
+	
+	.tabs-on .tab-item .btn .content .icon:before,
+	.tabs-on .tab-item .btn .content .ui-icon:before{
+		
+		font-size: 18px;
+		margin-right: 0;
+		
+	}
+
+}
+
+.tabs-wrapper.tabs-on fieldset {
+	
+	display: block;
+	padding: 0;
+	border: none;
+	
+}
+.tabs-on .tab,
+.tabs-wrapper.tabs-on fieldset.tab {
+	
+	margin: 0;
+	padding: <?= VUI_SPACING; ?>em;
+	z-index: 1;
+	border: none;
+	
+}
+.tabs-on .tab fieldset .params-set{
+	
+	margin: 0;
+	
+}
+
+
+
+
+
+
+
+.tabs-on .tab-item .article-info-item {
+	
+	padding: 0 <?= VUI_SPACING; ?>em;
+	
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+}
+.tabs-on .tab-item .article-info-item.article-info-modified-by,
+.tabs-on .tab-item .article-info-item.article-info-last-modification {
+	
+	font-family: <?= VUI_DEFAULT_FONT_FAMILY; ?>;
+	
+}
+
+
+
+/*
+ ---------------------------------------------------------
+ Tabs
+ ---------------------------------------------------------
+ *********************************************************
+ */

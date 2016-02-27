@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="menu_item">
+		
+		<param name="show_page_content_title" type="select" default="1" label="show_page_content_title" tip="tip_show_page_content_title" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="custom_page_content_title" type="text" default="" label="custom_page_content_title" tip="tip_custom_page_content_title" inline="1" />
+		
+		<param name="custom_page_title" type="text" default="" label="custom_page_title" tip="tip_custom_page_title" inline="1" />
+		
+		<param name="page_class" type="text" default="" label="page_class" tip="tip_page_class" inline="1" />
+		
+		<param type="spacer" label="meta_tags" />
+		
+		<param name="meta_keywords" type="textarea" default="" label="meta_keywords" tip="tip_meta_keywords" inline="1" />
+		
+		<param name="meta_description" type="textarea" default="" label="meta_description" tip="tip_meta_description" inline="1" />
+		
+	</section>
+	
+</params>

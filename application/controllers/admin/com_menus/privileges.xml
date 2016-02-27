@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="menus_management">
+		
+		<param name="privileges[menus_management_menus_management]" value="menus_management_menus_management" type="checkbox" default="" label="menus_management_menus_management" tip="tip_menus_management_menus_management" />
+		
+		<param type="spacer" label="viewing_menus_items" />
+		
+		<param name="viewing_menus_items" value="menus_items_can_view_all" type="radio" default="" label="menus_items_can_view_all" tip="tip_menus_items_can_view_all" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_same_and_low_group_level" type="radio" default="" label="menus_items_can_view_only_same_and_low_group_level" tip="tip_menus_items_can_view_only_same_and_low_group_level" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_same_group_level" type="radio" default="" label="menus_items_can_view_only_same_group_level" tip="tip_menus_items_can_view_only_same_group_level" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_same_group_and_below" type="radio" default="" label="menus_items_can_view_only_same_group_and_below" tip="tip_menus_items_can_view_only_same_group_and_below" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_same_group" type="radio" default="" label="menus_items_can_view_only_same_group" tip="tip_menus_items_can_view_only_same_group" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_low_groups" type="radio" default="" label="menus_items_can_view_only_low_groups" tip="tip_menus_items_can_view_only_low_groups" />
+		<param name="viewing_menus_items" value="menus_items_can_view_only_accessible" type="radio" default="checked" label="menus_items_can_view_only_accessible" tip="tip_menus_items_can_view_only_accessible" />
+		
+	</section>
+	
+</params>

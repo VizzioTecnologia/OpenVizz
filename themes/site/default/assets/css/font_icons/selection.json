@@ -1,0 +1,278 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M832 214.822l-402 459.994-208-208-92 90.003 256 256 50 48 44-50.003 448-512-96-83.994z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"ok"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 2,
+				"id": 2,
+				"prevSize": 16,
+				"code": 58880,
+				"name": "ok, apply",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 0
+		},
+		{
+			"icon": {
+				"paths": [
+					"M128 448v128h320v320h128v-320h320v-128h-320v-320h-128v320z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"add",
+					"increase"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 6,
+				"id": 5,
+				"prevSize": 16,
+				"code": 58881,
+				"name": "add, increase",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 1
+		},
+		{
+			"icon": {
+				"paths": [
+					"M128 448v128h768v-128z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"decrease"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 7,
+				"id": 6,
+				"prevSize": 16,
+				"code": 58886,
+				"name": "decrease",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 2
+		},
+		{
+			"icon": {
+				"paths": [
+					"M163.216 770.272l90.51 90.509 258.274-258.272 258.274 258.272 90.51-90.509-258.274-258.272 258.274-258.272-90.51-90.509-258.274 258.272-258.274-258.272-90.51 90.509 258.274 258.272z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"remove"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 1,
+				"id": 1,
+				"prevSize": 16,
+				"code": 58882,
+				"name": "cancel, delete, remove",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 3
+		},
+		{
+			"icon": {
+				"paths": [
+					"M608.218 64.026c-193.715 0-352.122 158.406-352.122 352.122 0 73.626 23.014 141.402 62.022 198.074l-254.086 254.086 92.032 92.032 254.086-254.086c56.666 39.002 124.442 62.016 198.067 62.016 193.715 0 352.122-158.406 352.122-352.122s-158.406-352.122-352.122-352.122zM608.218 192.070c124.512 0 224.077 99.565 224.077 224.077s-99.565 224.077-224.077 224.077c-124.512 0-224.077-99.565-224.077-224.077s99.565-224.077 224.077-224.077z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"find"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 4,
+				"id": 4,
+				"prevSize": 16,
+				"code": 58883,
+				"name": "find, search",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 4
+		},
+		{
+			"icon": {
+				"paths": [
+					"M640 64c-176.731 0-320 143.269-320 320v128l-256 256v40l276-276 24 24-300 300v16l308-308 24 24-332 332v40h192v-64h64v-64h64v-64h64l64-64h128c176.731 0 320-143.269 320-320s-143.269-320-320-320zM736 192c53.019 0 96 42.981 96 96s-42.981 96-96 96c-53.019 0-96-42.981-96-96s42.981-96 96-96z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"security"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 5,
+				"id": 0,
+				"prevSize": 16,
+				"code": 58884,
+				"name": "login, security",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 5
+		},
+		{
+			"icon": {
+				"paths": [
+					"M512 128c-98.274 0-197.019 37.019-272 112-149.961 149.961-149.961 394.039 0 544 100.413 100.413 243.703 134.058 372 100l-118-118c-59.933-4.103-118.523-26.523-164-72-99.974-99.974-99.974-264.026 0-364 49.987-49.987 116.484-74 182-74s132.013 24.013 182 74c45.477 45.477 67.897 104.067 72 164l118 118c34.058-128.297 0.413-271.587-100-372-74.981-74.981-173.726-112-272-112zM512 448c-16.379 0-33.503 5.503-46 18-24.994 24.994-24.994 67.006 0 92l318 316-90 86h266v-266l-86 90-316-318c-12.497-12.497-29.621-18-46-18z"
+				],
+				"attrs": [
+					{
+						"opacity": 1,
+						"visibility": false
+					}
+				],
+				"grid": 0,
+				"tags": [
+					"logout"
+				]
+			},
+			"attrs": [
+				{
+					"opacity": 1,
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 3,
+				"id": 3,
+				"prevSize": 16,
+				"code": 58885,
+				"name": "logout",
+				"ligatures": ""
+			},
+			"setIdx": 0,
+			"iconIdx": 6
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "vui",
+		"license": "MIT",
+		"licenseURL": "http://opensource.org/licenses/MIT"
+	},
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"fontPref": {
+			"prefix": "vui-icon-",
+			"metadata": {
+				"fontFamily": "vui",
+				"majorVersion": 1,
+				"minorVersion": 0,
+				"copyright": "",
+				"licenseURL": "http://opensource.org/licenses/MIT",
+				"license": "MIT"
+			},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"ie7": true,
+			"showMetrics": true,
+			"showMetadata": false,
+			"showVersion": false
+		},
+		"imagePref": {
+			"color": 0,
+			"height": 32,
+			"columns": 16,
+			"margin": 16
+		},
+		"historySize": 100,
+		"showCodes": true,
+		"search": "",
+		"gridSize": 16,
+		"showLiga": true
+	}
+}

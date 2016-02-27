@@ -1,0 +1,55 @@
+
+.vui .params-group{
+	
+	position: relative;
+	display: block;
+	
+}
+
+.vui .params-set-wrapper{
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>;
+	display: block;
+	
+	border: none;
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>;
+	
+}
+.vui .field-param-wrapper{
+	
+	position: relative;
+	display: block;
+	
+	border: none;
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>;
+	
+	margin: 0px;
+	padding: <?= VUI_SPACING; ?>em;
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	width: <?= 100 / 6; ?>%;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer,
+.vui .field-param-wrapper.field-param-wrapper-html,
+.vui .field-param-wrapper.field-param-wrapper-textarea{
+	
+	display: block;
+	width: 100%;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer{
+	
+	border-bottom: thin solid <?= $vui->colors->vui_site_fg->rgba_s( 50 ); ?>;
+	
+}
+.vui .field-param-wrapper .vui-interactive-el-wrapper,
+.vui .field-param-wrapper .vui-interactive-el-wrapper > .el{
+	
+	width: 100%;
+	
+}

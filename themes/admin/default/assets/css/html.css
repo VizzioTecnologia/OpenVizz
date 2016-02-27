@@ -1,0 +1,763 @@
+
+.vui::-webkit-scrollbar-track,
+.vui ::-webkit-scrollbar-track{
+
+	-webkit-box-shadow: none;
+	border: none;
+
+}
+
+.vui::-webkit-scrollbar,
+.vui ::-webkit-scrollbar{
+
+	width: 12px;
+	border: none;
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+
+}
+
+.vui::-webkit-scrollbar-thumb,
+.vui ::-webkit-scrollbar-thumb{
+
+	border: 3px solid <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+
+}
+
+
+html{
+
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+
+}
+.vui body,
+body.vui{
+	
+	position: relative;
+	display: block;
+	margin: 0;
+	font-family: <?= VUI_DEFAULT_FONT_FAMILY; ?>;
+	font-size: <?= VUI_DEFAULT_FONT_SIZE; ?>;
+	line-height: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	font-weight: <?= VUI_DEFAULT_FONT_WEIGHT; ?>;
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	
+}
+
+.vui strong{
+
+	font-weight: bold;
+
+}
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Disabled
+ ---------------------------------------------------------
+ */
+
+.disabled,
+:disabled,
+[disabled] {
+	
+	<?= $vui->css->opacity( 0.4 ); ?>;
+	
+}
+
+/*
+ ---------------------------------------------------------
+ Paragraphs
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Paragraphs
+ ---------------------------------------------------------
+ */
+
+.vui p{
+
+	position: relative;
+	display: block;
+	margin: 0;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Paragraphs
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Rules
+ ---------------------------------------------------------
+ */
+
+.vui hr{
+
+	position: relative;
+	display: block;
+	clear: both;
+	height: 0;
+	border: none;
+	border-bottom: thin solid <?= $vui->colors->vui_darker->rgba_s( 30 ); ?>;
+	margin: 0;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Rules
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Pre, code, samp
+ ---------------------------------------------------------
+ */
+
+.vui code,
+.vui pre,
+.vui samp{
+
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+
+	font-family: <?= VUI_MONO_FONT_FAMILY; ?>;
+	font-weight: normal;
+	padding-left: <?= VUI_SPACING / 2; ?>em;
+	padding-right: <?= VUI_SPACING / 2; ?>em;
+	background-color: <?= $vui->colors->vui_light->rgba_s(); ?>;
+
+}
+.vui pre{
+
+	position: relative;
+	display: block;
+	padding: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+	overflow: auto;
+
+}
+.vui pre code,
+.vui pre samp{
+
+	font-family: inherit;
+	font-weight: inherit;
+	padding: 0;
+	background: none;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Pre, code, samp
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Mark
+ ---------------------------------------------------------
+ */
+
+.vui mark{
+
+	background: <?= $vui->colors->vui_yellow->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_yellow->get_ro_color( 35 )->rgba_s(); ?>;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Mark
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Blockquote
+ ---------------------------------------------------------
+ */
+
+.vui blockquote,
+.vui q{
+
+	font-style: italic;
+
+}
+.vui blockquote:before,
+.vui q:before{
+
+	content: '';
+
+}
+.vui blockquote{
+
+	padding: <?= VUI_SPACING; ?>em;
+	margin: <?= VUI_SPACING * 2; ?>em;
+	margin-top: 0;
+	margin-left: <?= VUI_SPACING * 3; ?>em;
+	background: <?= $vui->colors->vui_darker->rgba_s( 10 ); ?>;
+	border-left: 0.5em solid <?= $vui->colors->vui_darker->rgba_s( 15 ); ?>;
+	font-style: italic;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Blockquote
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Headings
+ ---------------------------------------------------------
+ */
+
+<?php
+
+	$max = 3;
+	$min = 1;
+	$meas_unit = 'em';
+	$diff = ( $max - $min ) / 5;
+
+?>
+
+.vui h1,
+.vui h2,
+.vui h3,
+.vui h4,
+.vui h5,
+.vui h6{
+	
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	color: <?= VUI_SEC_FONT_COLOR; ?>;
+	font-size: <?= ( $min + ( $diff * 5 ) ) . $meas_unit; ?>;
+	font-weight: <?= VUI_SEC_FONT_WEIGHT; ?>;
+	line-height: normal;
+	margin-top: <?= VUI_SPACING / 2; ?>em;
+	margin-bottom: <?= VUI_SPACING / 2; ?>em;
+	
+}
+.vui h1{
+	
+	padding-bottom: <?= VUI_SPACING / 3; ?>em;
+	
+}
+.vui h2{
+
+	font-size: <?= ( $min + ( $diff * 4 ) ) . $meas_unit; ?>;
+
+}
+.vui h3{
+
+	font-size: <?= ( $min + ( $diff * 3 ) ) . $meas_unit; ?>;
+
+}
+.vui h4{
+
+	font-size: <?= ( $min + ( $diff * 2 ) ) . $meas_unit; ?>;
+
+}
+.vui h5{
+
+	font-size: <?= ( $min + ( $diff * 1 ) ) . $meas_unit; ?>;
+
+}
+.vui h6{
+
+	font-size: <?= ( $min + $diff ) . $meas_unit; ?>;
+
+}
+
+.vui header h1{
+
+}
+
+/*
+ ---------------------------------------------------------
+ Headings
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Links
+ ---------------------------------------------------------
+ */
+
+.vui a{
+
+	text-decoration: none;
+	color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+
+}
+.vui a:hover{
+
+	color: <?= $vui->colors->vui_extra_1->rgba_s(); ?>;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Links
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Emphatized texts
+ ---------------------------------------------------------
+ */
+
+.vui em{
+
+	font-style: italic;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Emphatized texts
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ **************************************************************************************************
+ **************************************************************************************************
+ --------------------------------------------------------------------------------------------------
+ Figures
+ --------------------------------------------------------------------------------------------------
+ */
+
+.vui figure{
+
+	position: relative;
+	display: block;
+
+	padding: 0;
+	margin: 0;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+.vui figcaption{
+
+	position: relative;
+	display: block;
+
+	font-size: 90%;
+
+	margin: 0;
+	padding: <?= VUI_SPACING / 2; ?>em 0;
+
+}
+
+/*
+ --------------------------------------------------------------------------------------------------
+ Figures
+ --------------------------------------------------------------------------------------------------
+ **************************************************************************************************
+ **************************************************************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ List items
+ ---------------------------------------------------------
+ */
+
+.vui ul,
+.vui ol{
+
+	position: relative;
+	display: block;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+.vui ul ol,
+.vui ul ul,
+.vui ol ol,
+.vui ol ul{
+
+
+
+}
+.vui ol{
+
+	counter-reset: ol-counter;
+
+}
+	.vui li{
+
+		position: relative;
+		display: list-item;
+
+		margin-top: <?= VUI_SPACING; ?>em;
+		margin-bottom: <?= VUI_SPACING; ?>em;
+		margin-left: <?= VUI_SPACING; ?>em;
+
+		padding-left: <?= VUI_SPACING / 2; ?>em;
+		list-style-type: disc;
+		list-style-position: inside;
+
+	}
+		.vui li li{
+
+		}
+
+	.vui ol li{
+
+		display: block;
+		margin-left: <?= VUI_SPACING + ( VUI_SPACING * 2 ) - ( VUI_SPACING / 2 ); ?>em;
+		padding-left: 0;
+
+	}
+	.vui ol li:before{
+
+		content: counter( ol-counter, decimal );
+		counter-increment: ol-counter;
+
+		position: absolute;
+		display: block;
+		margin-left: -<?= VUI_SPACING * 1.3; ?>em;
+		padding-right: <?= VUI_SPACING + ( VUI_SPACING / 2 ); ?>em;
+		text-align: center;
+		width: <?= VUI_SPACING * 2; ?>em;
+
+		font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+
+	}
+
+/*
+ ---------------------------------------------------------
+ List items
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Definitions lists
+ ---------------------------------------------------------
+ */
+
+.vui dl,
+.vui dt,
+.vui dd{
+
+	position: relative;
+	display: block;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+
+.vui dt{
+
+	font-size: 130%;
+	font-weight: bold;
+
+}
+.vui dd{
+
+	left: <?= VUI_SPACING; ?>em;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Definitions lists
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Details, summary
+ ---------------------------------------------------------
+ */
+
+.vui details{
+
+	position: relative;
+	display: block;
+
+	padding: <?= VUI_SPACING; ?>em;
+	margin: <?= VUI_SPACING; ?>em;
+
+	border: thin solid <?= $vui->colors->vui_lighter->darken( 8, TRUE )->rgba_s(); ?>;
+
+}
+.vui details[open]{
+
+	border: thin solid <?= $vui->colors->vui_base->rgba_s(); ?>;
+
+}
+.vui details > summary{
+
+	display: block;
+	position: relative;
+
+}
+.vui details > summary *{
+
+}
+.vui details > summary:before,
+.vui details > summary:after{
+
+	content: '';
+	position: absolute;
+	top: -1em;
+	right: -1em;
+	bottom: -1em;
+	left: -1em;
+	background-color: yellow;
+	<?= $vui->colors->vui_lighter->getCssGradient( 2 ); ?>
+
+	z-index: -1;
+
+}
+.vui details > summary:after{
+
+	background: none;
+	z-index: 1;
+
+}
+.vui details[open] > summary{
+
+	color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+	margin-bottom: <?= VUI_SPACING * 2; ?>em;
+
+}
+
+/* ---------------------------------------------------- */
+/* Fix for Firefox */
+
+@-moz-document url-prefix() {
+
+	.vui details > summary{
+
+		margin-bottom: <?= VUI_SPACING * 2; ?>em;
+
+	}
+
+}
+/*
+ ---------------------------------------------------------
+ Details, summary
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Forms
+ ---------------------------------------------------------
+ */
+
+.vui form{
+
+	position: relative;
+	display: block;
+
+}
+.vui fieldset{
+
+	border-top: thin solid <?= $vui->colors->vui_lighter->darken( 8, TRUE )->rgba_s(); ?>;
+
+	padding: <?= VUI_SPACING; ?>em;
+
+}
+.vui legend{
+
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+
+	color: <?= VUI_SEC_FONT_COLOR; ?>;
+
+	padding: <?= VUI_SPACING / 2; ?>em;
+	margin: 0;
+
+}
+.vui legend:after{
+
+	position: relative;
+	content: '';
+	display: block;
+	clear: both;
+	height: 2px;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Forms
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Tables
+ ---------------------------------------------------------
+ */
+
+.vui table{
+
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+	width: 100%;
+	margin-top: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+.vui tr{
+
+	border:none;
+
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+
+}
+.vui td,
+.vui th,
+.vui table caption{
+
+	border: 1px solid <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
+	border-top: none;
+	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING; ?>em;
+	vertical-align: middle;
+
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+
+}
+.vui tr:hover,
+.vui td:hover,
+.vui th:hover{
+
+}
+.vui table:hover tr{
+
+}
+.vui table tr:hover{
+
+}
+.vui td:first-child,
+.vui th:first-child{
+
+	border-left: none;
+
+}
+.vui td:first-child,
+.vui th:first-child{
+
+	border-left: none;
+
+}
+.vui tr:last-of-type td,
+.vui tr:last-of-type th{
+
+	border-bottom: none;
+
+}
+.vui th,
+.vui table caption{
+
+	font-weight: bold;
+
+}
+.vui td{
+	
+	position:relative;
+	text-align: left;
+	<?= $vui->css->word_break(); ?>
+	
+}
+.vui th a{
+
+}
+.vui th a:hover{
+
+}
+
+.vui tr:nth-child(odd){
+
+}
+.vui tr:nth-child(odd) td{
+
+}
+.vui tr:nth-child(even) td{
+
+}
+.vui tr.odd{
+
+}
+.vui tr.even{
+
+}
+.vui tr:hover{
+
+}
+.vui th,
+.vui table caption,
+.vui thead td,
+.vui tfoot td{
+
+	background: <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
+
+}
+.vui tr:hover{
+
+	background: <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
+
+}
+.vui tr.selected{
+
+	background: <?= $vui->colors->vui_base->rgba_s( 30 ); ?>;
+
+}
+
+
+
+/*
+ ---------------------------------------------------------
+ Tables
+ ---------------------------------------------------------
+ *********************************************************
+ */

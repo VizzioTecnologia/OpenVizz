@@ -1,0 +1,262 @@
+
+/* ------------------------------------------------------ */
+/* Tooltips */
+
+label.info-tip:before {
+	
+	font-family: 'viacms-icons';
+	content: "\e632";
+	font-size: 16px;
+	line-height: 16px;
+	padding: 0 5px;
+	opacity: 0.3;
+	
+}
+label.info-tip:hover:before {
+	
+	opacity: 1;
+	
+}
+
+.vui-tooltip {
+	
+	<?= TOOLTIP_STYLESHEET; ?>
+	
+	z-index: 99999999999 !important;
+	
+}
+	
+.vui-tooltip .qtip-tip,
+.vui-tooltip .qtip-tip canvas {
+	
+	color: red;
+	
+}
+.vui-tooltip .qtip-titlebar {
+	
+	display: block;
+	
+	color: red;
+	padding: 0;
+	margin: 0;
+	font-weight: normal;
+	line-height: normal;
+	
+	background-color: <?= $vui->colors->vui_tooltip_bg->darken( 10, TRUE )->rgba_s(); ?>;
+	
+	overflow: visible;
+	height: 0;
+	background: none;
+	
+	z-index: 2;
+	
+	width: 100%;
+	text-align: right;
+	
+}
+
+.vui-tooltip .qtip-titlebar .qtip-close {
+	
+	<?= DEFAULT_BUTTONS_STYLESHEET; ?>
+	
+	right: 0;
+	top: 0;
+	position: absolute;
+	margin-top: 0;
+	margin-right: 0;
+	border-style: none;
+	opacity: 0.2;
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+	
+	text-align: center;
+	
+	width: 10%;
+	
+	background: none;
+	border: none;
+	color: <?= $vui->colors->vui_tooltip_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip .qtip-titlebar .qtip-close:hover {
+	
+	opacity: 1;
+	color: <?= $vui->colors->vui_tooltip_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip .qtip-titlebar .qtip-close:before {
+	
+	content: "\e61e";
+	
+	<?= FONT_ICONS_STYLESHEET; ?>
+	
+	font-size: 16px;
+	line-height: 100%;
+	
+}
+.vui-tooltip .qtip-titlebar .qtip-close .ui-icon {
+	display: none;
+}
+
+.vui-tooltip .qtip-content {
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	<?= TOOLTIP_CONTENT_STYLESHEET; ?>
+	
+	z-index: 1;
+	
+}
+.vui-tooltip .qtip-content > p:last-child,
+.vui-tooltip .qtip-content > ul:last-child,
+.vui-tooltip .qtip-content > ol:last-child,
+.vui-tooltip .qtip-content > table:last-child {
+
+	margin-bottom: 0;
+	padding-bottom: 0;
+
+}
+
+.vui-tooltip .qtip-icon {
+
+	background: transparent;
+
+}
+
+.vui-tooltip .qtip-icon .ui-icon {
+
+	width: auto;
+	height: auto;
+
+	float: right;
+	font-size: 110%;
+	font-weight: bold;
+	line-height: 18px;
+	
+	color: <?= $vui->colors->vui_tooltip_fg->rgba_s(); ?>;
+	
+	text-shadow: 0 1px 0 #ffffff;
+	opacity: 0.2;
+	filter: alpha(opacity=20);
+
+}
+
+.vui-tooltip .qtip-icon .ui-icon:hover {
+	
+	color: <?= $vui->colors->vui_tooltip_fg->rgba_s(); ?>;
+	
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+#qtip-growl-container {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	z-index: 1000;
+}
+#qtip-growl-container .qtip {
+	max-width: 400px;
+}
+	#qtip-growl-container .qtip {
+		position: static;
+		min-height: 0;
+		overflow: hidden;
+		margin: 0 0 5px 0;
+	}
+
+.vui-tooltip .msg-inline-error,
+.vui-tooltip .important {
+
+	color: #de8787;
+	font-weight: bold;
+
+}
+
+.vui-tooltip.msg-type-success {
+	
+	background-color: <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
+	
+	border: thin solid <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-success .qtip-titlebar .qtip-close,
+.vui-tooltip.msg-type-success .qtip-titlebar .qtip-close:hover {
+	
+	color: <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-error {
+	
+	background: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+	border: thin solid <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-error .qtip-titlebar .qtip-close,
+.vui-tooltip.msg-type-error .qtip-titlebar .qtip-close:hover {
+	
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+}
+.msg-type-error .error {
+	
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-warning {
+	
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+	border: thin solid <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-warning .qtip-titlebar .qtip-close,
+.vui-tooltip.msg-type-warning .qtip-titlebar .qtip-close:hover {
+	
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-info {
+	
+	background: <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
+	
+	border: thin solid <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-type-info .qtip-titlebar .qtip-close,
+.vui-tooltip.msg-type-info .qtip-titlebar .qtip-close:hover {
+	
+	color: <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
+	
+}
+.vui-tooltip.msg-inline-error {
+	
+	color: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	
+}
+.vui-tooltip .important,
+.vui-tooltip .text-warning {
+	
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+	font-weight: bold;
+	
+}
+.qtip.notification .qtip-content {
+	
+	width: 90%;
+	
+}
+
+/* Tooltips */
+/* ------------------------------------------------------ */

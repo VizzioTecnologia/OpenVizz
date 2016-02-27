@@ -1,0 +1,104 @@
+
+/* ------------------------------------------------------ */
+/* Menus */
+
+.vui ul.menu {
+	
+	<?= $vui->css->display_inline_block() ?>
+	
+	margin: 0;
+	
+}
+.vui ul.menu li,
+.vui ul.menu ul,
+.vui ul.menu .vui-interactive-el-wrapper {
+	
+	position: relative;
+	<?= $vui->css->display_inline_block() ?>
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+	
+}
+.vui ul.menu li,
+.vui ul.menu .vui-interactive-el-wrapper,
+.vui ul.menu .vui-interactive-el-wrapper > .el,
+.vui ul.menu a {
+	
+	display: block;
+	
+}
+.vui ul.menu > li {
+	
+	<?= $vui->css->display_inline_block() ?>
+	
+}
+.vui ul.menu ul {
+	
+	position: absolute;
+	display: block;
+	background-color: <?= $vui->colors->vui_toolbar_bg->rgba_s(); ?>;
+	
+	left: 0;
+	top: calc( 100% - <?= VUI_SPACING; ?>em );
+	
+	width: 200px;
+	height: 0;
+	overflow: hidden;
+	
+	<?= $vui->css->opacity( 0 ); ?>
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+	
+	<?= $vui->css->box_shadow( '0 1px 50px ' . $vui->colors->vui_toolbar_bg->darken( 50, TRUE )->rgba_s( 30 ) ); ?>
+	
+}
+.vui ul.menu ul,
+.vui ul.menu ul .vui-interactive-el-wrapper > .el {
+	
+	text-align: left;
+	
+}
+.vui ul.menu:not([disabled]) li:hover > ul {
+	
+	top: 100%;
+	height: auto;
+	overflow: visible;
+	
+	<?= $vui->css->opacity( 1 ); ?>
+	
+}
+.vui ul.menu ul ul {
+	
+	left: calc( 100% - <?= VUI_SPACING; ?>em );
+	top: 0;
+	
+}
+.vui ul.menu:not([disabled]) ul li:hover > ul {
+	
+	left: 100%;
+	top: 0;
+	
+}
+.vui ul.menu ul .vui-interactive-el-wrapper > .el {
+	
+	background-color: <?= $vui->colors->vui_toolbar_menu_item_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_toolbar_menu_item_fg->rgba_s(); ?>;
+	
+	border: none;
+	
+}
+.vui ul.menu ul .vui-interactive-el-wrapper > .el:hover,
+.vui ul.menu ul .vui-interactive-el-wrapper > .el:focus,
+.vui ul.menu ul .vui-interactive-el-wrapper > .el:active,
+.vui ul.menu ul .vui-interactive-el-wrapper:hover > .el {
+	
+	background-color: <?= $vui->colors->vui_toolbar_menu_item_active_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_toolbar_menu_item_active_fg->rgba_s(); ?>;
+	
+	border: none;
+	
+}
+
+/* Menus */
+/* ------------------------------------------------------ */

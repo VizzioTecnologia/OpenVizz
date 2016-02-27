@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="vesm">
+		
+		<param name="privileges[vesm_management_vesm_management]" value="vesm_management_vesm_management" type="checkbox" default="" label="vesm_management_vesm_management" tip="tip_vesm_management_vesm_management" />
+		
+	</section>
+	
+</params>

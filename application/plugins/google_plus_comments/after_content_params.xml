@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="google">
+		
+		<param type="spacer" label="google_plus" />
+		
+		<param name="show_google_plus_comments" type="select" default="global" label="show_google_plus_comments" tip="tip_show_google_plus_comments">
+			
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

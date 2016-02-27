@@ -1,0 +1,123 @@
+
+.contact-info-title{
+	
+	position: relative;
+	display: block;
+	font-weight: bold;
+	font-size: 120%;
+	margin-bottom: .5em;
+	
+}
+
+/* phones */
+
+.contact-module-phone{
+	
+	position: relative;
+	display: block;
+	font-weight: 100;
+	line-height: normal;
+	
+}
+.contact-module-email{
+	
+	position: relative;
+	display: block;
+	
+}
+.contact-module-phone-number,
+.contact-module-phone-title{
+	
+	position: relative;
+	display: inline-block;
+	font-size: 150%;
+	color: inherit;
+	text-decoration: inherit;
+	
+}
+.contact-module-phone-title{
+	
+	font-size: 100%;
+	opacity: 0.6;
+	
+}
+.contact-module-website-title{
+	
+	position: relative;
+	display: block;
+	font-size: 100%;
+	opacity: 0.5;
+	
+}
+.list-info-wrapper-website-facebookcom,
+.list-info-wrapper-website-wwwfacebookcom,
+.list-info-wrapper-website-plusgooglecom,
+.list-info-wrapper-website-twittercom,
+.list-info-wrapper-website-wwwtwittercom,
+.list-info-wrapper-website-youtubecom,
+.list-info-wrapper-website-wwwyoutubecom{
+	
+	position: relative;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	
+	background: url('../../../images/modules/contact/themes/icon-website-facebook.png') no-repeat center center;
+	
+}
+.list-info-wrapper-website-plusgooglecom{
+	
+	background-image: url('../../../images/modules/contact/themes/icon-website-plusgoogle.png');
+	
+}
+.list-info-wrapper-website-twittercom,
+.list-info-wrapper-website-wwwtwittercom{
+	
+	background-image: url('../../../images/modules/contact/themes/icon-website-twitter.png');
+	
+}
+.list-info-wrapper-website-youtubecom,
+.list-info-wrapper-website-wwwyoutubecom{
+	
+	background-image: url('../../../images/modules/contact/themes/icon-website-youtube.png');
+	
+}
+
+
+/* addresses */
+
+.contact-module-address-title{
+	
+	position: relative;
+	display: block;
+	font-weight: bold;
+	font-size: 120%;
+	margin-bottom: .5em;
+	
+}
+.contact-module-address-street,
+.contact-module-address-complement,
+.contact-module-address-city-state,
+.contact-module-address-postal-code,
+.contact-module-address-country{
+	
+	position: relative;
+	display: block;
+	
+}
+.contact-module-address-postal-code-title{
+	
+	opacity: 0.5;
+	
+}
+
+.contact-module-website{
+	
+	position: relative;
+	display: inline-block;
+	
+}

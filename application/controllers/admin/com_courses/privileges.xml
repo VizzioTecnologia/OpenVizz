@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="courses_management">
+		
+		<param name="privileges" value="courses_management_courses_management" type="checkbox" default="" label="courses_management_courses_management" tip="tip_courses_management_courses_management" />
+		<param name="privileges" value="courses_management_can_add_courses" type="checkbox" default="" label="courses_management_can_add_courses" tip="tip_courses_management_can_add_courses" />
+		
+	</section>
+	
+</params>

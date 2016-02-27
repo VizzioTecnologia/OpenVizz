@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="providers_management">
+		
+		<param name="privileges[providers_management_providers_management]" value="providers_management_providers_management" type="checkbox" default="" label="providers_management_providers_management" tip="tip_providers_management_providers_management" />
+		
+	</section>
+	
+</params>

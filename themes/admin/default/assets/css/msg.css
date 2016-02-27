@@ -1,0 +1,123 @@
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Msg
+ ---------------------------------------------------------
+ */
+
+ #msg-block {
+
+	position: relative;
+	z-index: 2;
+
+ }
+	#msg-block > .s1 {
+
+		position: relative;
+		display: block;
+	}
+
+
+.msg {
+
+	position: relative;
+	display: block;
+	margin: <?= VUI_SPACING; ?>em auto;
+	
+	background: <?= $vui->colors->vui_msg_main_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+
+}
+.width-640-960 .msg,
+.width-480-640 .msg,
+.width-480-lower .msg {
+	
+}
+.msg-type-title {
+
+	position: relative;
+	display: block;
+	padding: <?= VUI_SPACING; ?>em;
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	font-size: 120%;
+
+}
+.msg-item {
+	
+	padding: <?= VUI_SPACING; ?>em;
+	
+}
+.msg-item:last-child {
+
+	<?= $vui->css->border_radius( '0 0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS ); ?>
+
+}
+.msg-type-info {
+
+}
+.msg-type-success {
+	
+	background: <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
+	
+}
+.msg-type-error {
+	
+	background: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+}
+.msg-type-error .error {
+	
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+}
+.msg-type-warning {
+	
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+}
+.msg-type-info {
+	
+	background: <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
+	
+}
+.msg-inline-error {
+	
+	color: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	
+}
+.important,
+.text-warning {
+	
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+	font-weight: bold;
+	
+}
+
+.vui .msg-item > ul:last-child,
+.vui .msg-item > ul > li:last-child {
+
+	margin-bottom: 0;
+
+}
+.vui .msg-item > ul:last-child {
+
+	margin-bottom: 0;
+	padding-bottom: 0;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Msg
+ ---------------------------------------------------------
+ *********************************************************
+ */

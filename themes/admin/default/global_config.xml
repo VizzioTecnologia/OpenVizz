@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="template_options">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="template_color_theme" type="select" default="default" label="template_color_theme" tip="tip_template_color_theme">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

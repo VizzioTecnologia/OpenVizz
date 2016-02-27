@@ -1,0 +1,16 @@
+
+.contact-module-theme-vertically-centered{
+
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+
+}
+
+.contact-module-theme-vertically-centered .contact-module-phone-title{
+
+	position: relative;
+	display: block;
+	margin-bottom: .5em;
+
+}

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="621.54688"
+   height="324.56201"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="colors.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#c9c9c9"
+     borderopacity="1"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2"
+     inkscape:cx="157.54689"
+     inkscape:cy="149.13135"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="-5"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-page="true"
+     borderlayer="false"
+     inkscape:showpageshadow="false"
+     showborder="true"
+     inkscape:snap-global="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       id="grid4017"
+       type="xygrid"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="539.52246px"
+       originy="-686.60069px" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <filter
+       id="filter4432-9-4"
+       inkscape:collect="always"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur4434-4-5"
+         stdDeviation="2.8168001"
+         inkscape:collect="always" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4576"
+       x="-0.20999999"
+       width="1.42"
+       y="-0.20999999"
+       height="1.42"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.625"
+         id="feGaussianBlur4578" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter4576-0"
+       x="-0.20999999"
+       width="1.42"
+       y="-0.20999999"
+       height="1.42">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.625"
+         id="feGaussianBlur4578-3" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4673"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.1666667"
+         id="feGaussianBlur4675" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Camada 1"
+     transform="translate(539.52246,-41.199486)">
+    <g
+       id="g4595">
+      <rect
+         ry="0"
+         rx="0"
+         y="111.86218"
+         x="-490"
+         height="190"
+         width="190"
+         id="vui_thumb_shadow_bg"
+         style="color:#000000;fill:#000000;fill-opacity:0.06487552;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4673);enable-background:accumulate"
+         inkscape:label="vui_color" />
+      <rect
+         inkscape:label="vui_color"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="vui_thumb_bg"
+         width="190"
+         height="190"
+         x="-490"
+         y="107.36218"
+         rx="0"
+         ry="0" />
+      <rect
+         ry="0"
+         rx="0"
+         y="122.36218"
+         x="-475"
+         height="160"
+         width="160"
+         id="sdsd"
+         style="color:#000000;fill:none;stroke:#ffcc00;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:label="vui_color" />
+      <g
+         id="g4677"
+         style="fill:#000000;fill-opacity:0.05235602">
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,107.36218 1,-1 0,192 -1,-1 z"
+           id="vui_thumb_border_right"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -490,107.36218 -1,-1 0,192 1,-1 z"
+           id="vui_thumb_border_left"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,107.36218 1,-1 -192,0 1,1 z"
+           id="vui_thumb_border_top"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,297.36218 1,1 -192,0 1,-1 z"
+           id="vui_thumb_border_bottom"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <text
+         inkscape:label="vui_color"
+         sodipodi:linespacing="125%"
+         id="vui_thumb_fg"
+         y="166.86218"
+         x="-447"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Open Sans;-inkscape-font-specification:Open Sans"
+         xml:space="preserve"><tspan
+           y="166.86218"
+           x="-447"
+           id="tspan4593"
+           sodipodi:role="line">normal</tspan></text>
+    </g>
+    <g
+       id="g4595-1"
+       transform="translate(315,0)">
+      <rect
+         ry="0"
+         rx="0"
+         y="117.36218"
+         x="-490"
+         height="190"
+         width="190"
+         id="vui_thumb_shadow_active_bg"
+         style="color:#000000;fill:#000000;fill-opacity:0.22542593;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4576-0);enable-background:accumulate"
+         inkscape:label="vui_color" />
+      <rect
+         inkscape:label="vui_color"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="vui_thumb_active_bg"
+         width="190"
+         height="190"
+         x="-490"
+         y="107.36218"
+         rx="0"
+         ry="0" />
+      <rect
+         ry="0"
+         rx="0"
+         y="122.36218"
+         x="-475"
+         height="160"
+         width="160"
+         id="sdsd-0"
+         style="color:#000000;fill:none;stroke:#ffcc00;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:label="vui_color" />
+      <g
+         id="g4683"
+         style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate">
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,107.36218 1,-1 0,192 -1,-1 z"
+           id="vui_thumb_border_active_right"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -490,107.36218 -1,-1 0,192 1,-1 z"
+           id="vui_thumb_border_active_left"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,107.36218 1,-1 -192,0 1,1 z"
+           id="vui_thumb_border_active_top"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           inkscape:label="vui_color"
+           style="color:#000000;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m -300,297.36218 1,1 -192,0 1,-1 z"
+           id="vui_thumb_border_active_bottom"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <text
+         inkscape:label="vui_color"
+         sodipodi:linespacing="125%"
+         id="vui_thumb_active_fg"
+         y="166.86218"
+         x="-447"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Open Sans;-inkscape-font-specification:Open Sans"
+         xml:space="preserve"><tspan
+           y="166.86218"
+           x="-447"
+           id="tspan4593-0"
+           sodipodi:role="line">active</tspan></text>
+    </g>
+  </g>
+  <g
+     inkscape:label="cores"
+     id="layer2"
+     inkscape:groupmode="layer"
+     transform="translate(539.52246,-41.199486)" />
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="facebook_module_config">
+		
+		<param name="fb_page_id" type="text" default="" label="fb_page_id" tip="tip_fb_page_id" editor="1" >
+			
+			<validation rules="trim|xss|required" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="facebook_layout" type="select" default="default" label="facebook_layout" tip="tip_facebook_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+	</section>
+	
+</params>

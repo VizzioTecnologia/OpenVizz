@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	<param name="show_noauth" type="radio" default="0" label="Show UnAuthorized Links" tip="TIPLINKS">
+		<option value="0">No</option>
+		<option value="1">Yes</option>
+	</param>
+</params>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="articles">
+		
+		<param name="articles_list" type="spacer" label="articles_list"/>
+		
+		<param name="articles_order_by" type="select" default="sef_url" label="articles_order_by" tip="tip_articles_order_by">
+			
+			<option value="id">id</option>
+			<option value="title">title</option>
+			<option value="alias">alias</option>
+			<option value="category_id">category_id</option>
+			<option value="category_title">category_title</option>
+			<option value="ordering">ordering</option>
+			<option value="status">status</option>
+			<option value="access_type">access_type</option>
+			<option value="created_by_id">created_by_id</option>
+			<option value="created_by_name">created_by_name</option>
+			<option value="created_date">created_date</option>
+			<option value="modified_by_id">modified_by_id</option>
+			<option value="modified_date">modified_date</option>
+			<option value="created_by_alias">created_by_alias</option>
+			
+		</param>
+		
+		<param name="articles_order_by_direction" type="select" default="ASC" label="articles_order_by_direction" tip="tip_articles_order_by_direction">
+			
+			<option value="ASC">ascendant</option>
+			<option value="DESC">decrescent</option>
+			
+		</param>
+		
+	</section>
+	
+</params>

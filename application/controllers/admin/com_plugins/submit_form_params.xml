@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="sending">
+		
+		<param name="submit_form_param_send_email_to" type="select" default="contact_emails" label="submit_form_param_send_email_to" tip="tip_submit_form_param_send_email_to">
+			
+			<validation rules="trim|required" />
+			
+			<option value="contact_emails">contact_emails</option>
+			<option value="custom_emails">custom_emails</option>
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_param_send_email_to_contact" type="select" default="" label="submit_form_param_send_email_to_contact" tip="tip_submit_form_param_send_email_to_contact">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_custom_emails" type="textarea" default="" label="submit_form_param_send_email_to_custom_emails" tip="tip_submit_form_param_send_email_to_custom_emails">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" default="" label="message" />
+		
+		<param name="submit_form_param_send_email_to_from" type="text" default="" label="submit_form_param_send_email_to_from" tip="tip_submit_form_param_send_email_to_from">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_from_name" type="text" default="" label="submit_form_param_send_email_to_from_name" tip="tip_submit_form_param_send_email_to_from_name">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_reply_to" type="text" default="" label="submit_form_param_send_email_to_reply_to" tip="tip_submit_form_param_send_email_to_reply_to">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_cc" type="text" default="" label="submit_form_param_send_email_to_cc" tip="tip_submit_form_param_send_email_to_cc">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_bcc" type="text" default="" label="submit_form_param_send_email_to_bcc" tip="tip_submit_form_param_send_email_to_bcc">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_param_send_email_to_subject" type="text" default="" label="submit_form_param_send_email_to_subject" tip="tip_submit_form_param_send_email_to_subject">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_sending_email_layout_source" type="select" default="layouts_list" label="submit_form_sending_email_layout_source" tip="tip_submit_form_sending_email_layout_source">
+			
+			<validation rules="trim|required" />
+			
+			<option value="layouts_list">layouts_list</option>
+			<option value="custom_layout">custom_layout</option>
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_sending_email_layout_view" type="select" default="default" label="submit_form_sending_email_layout_view" tip="tip_submit_form_sending_email_layout_view">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="submit_form_sending_email_layout_custom" type="textarea" default="" label="submit_form_sending_email_layout_custom" tip="tip_submit_form_sending_email_layout_custom">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+	<section name="look_and_feel">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="submit_form_layout_view" type="select" default="default" label="submit_form_layout_view" tip="tip_submit_form_layout_view">
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+</params>
