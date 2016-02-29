@@ -121,7 +121,7 @@ class Menus extends Main {
 		if ( ! check_var( $data[ 'menu_types' ] ) ) {
 			
 			msg( 'no_menu_types_add_one_first', 'error' );
-			redirect( $this->menus->get_mtm_url( 'list' ) );
+			redirect( 'admin/menus/menu_types_management/menu_types_list' );
 			
 		}
 		
@@ -228,14 +228,9 @@ class Menus extends Main {
 						
 					) ) );
 					
-				}
-				else if ( $filter_by_menu_type === FALSE ){
-					
-					$filter_by_menu_type = '-1';
+					$menu_type_id = $filter_by_menu_type;
 					
 				}
-				
-				$menu_type_id = $filter_by_menu_type;
 				
 				// -------------
 				
@@ -1187,30 +1182,30 @@ class Menus extends Main {
 			$url = get_url('admin'.$this->uri->ruri_string());
 			
 			if ( $action == 'menu_types_list' ){
-				if ($menu_types = $this->menus_model->get_menu_types()->result()){
-					$data = array(
-						'component_name' => $this->component_name,
-						'menu_types' => $menu_types,
-					);
+				
+				$menu_types = $this->menus_model->get_menu_types()->result_array();
+				
+				$data = array(
+					'component_name' => $this->component_name,
+					'menu_types' => $menu_types,
+				);
+				
+				set_last_url($url);
+				
+				$this->_page(
 					
-					set_last_url($url);
-					
-					$this->_page(
+					array(
 						
-						array(
-							
-							'component_view_folder' => $this->component_view_folder,
-							'function' => __FUNCTION__,
-							'action' => $action,
-							'layout' => 'default',
-							'view' => $action,
-							'data' => $data,
-							
-						)
+						'component_view_folder' => $this->component_view_folder,
+						'function' => __FUNCTION__,
+						'action' => $action,
+						'layout' => 'default',
+						'view' => $action,
+						'data' => $data,
 						
-					);
+					)
 					
-				}
+				);
 				
 			}
 			else if ($action == 'add_menu_type'){

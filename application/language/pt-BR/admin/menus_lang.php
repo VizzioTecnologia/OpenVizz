@@ -2,8 +2,10 @@
 /* tradução: franksouza.com.br */
 
 $lang['menus'] = 																						"Menus";
-$lang['menu_types'] = 																					"Grupos de menus";
-$lang['new_menu_type'] = 																				"Novo grupo de menu";
+$lang['menu_types'] = 																					"Menus";
+$lang['menus_menu_types_management_menu_types_list'] = 													"Lista de menus";
+$lang['new_menu_type'] = 																				"Novo menu";
+$lang['menus_menu_types_management_add_menu_type'] = 													"Novo menu";
 $lang['edit_menu_type'] = 																				"Editar grupo de menu";
 $lang['menu_items'] = 																					"Itens de menu";
 $lang['menu_item'] = 																					"Item de menu";

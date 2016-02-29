@@ -329,7 +329,7 @@
 			
 			<p>
 				<?= lang('menu_no_items_message'); ?>
-				<?= anchor('admin/'.$component_name.'/' . $component_function . '/add/'.$layout . '/' . $menu_type_id,lang('new_menu_item'),'class="" title="'.lang('action_add').'"'); ?>
+				<?= anchor( $this->menus->get_mi_url( 'select_menu_item_type', array( 'menu_type_id' => isset( $menu_type_id ) ? $menu_type_id : NULL ) ), lang('new_menu_item'),'class="" title="'.lang('action_add').'"'); ?>
 			</p>
 			
 			<?php } ?>

@@ -114,25 +114,29 @@ $unique_hash = md5( uniqid( rand(), true ) );
 								$this->load->model( 'menus_mdl', 'menus' );
 								$menu_types = menus_mdl::get_menu_types();
 								
-								foreach ( $menu_types as $key => $menu_type ) {
+								if ( $menu_types ) {
 									
-									$_menu_types[ lang( $menu_type[ 'title' ] ) ] = $menu_type;
+									foreach ( $menu_types as $key => $menu_type ) {
+										
+										$_menu_types[ lang( $menu_type[ 'title' ] ) ] = $menu_type;
+										
+									}
+									
+									ksort( $_menu_types );
+									
+									echo '<ul>';
+									
+									foreach ( $_menu_types as $key => $menu_type ) {
+										
+										echo '<li>';
+										echo vui_el_button( array( 'url' => menus_mdl::get_mi_url( 'list', array( 'menu_type_id' => $menu_type[ 'id' ], ) ), 'text' => lang( $menu_type[ 'title' ] ), 'icon' => 'menus', ) );
+										echo '</li>';
+										
+									}
+									
+									echo '</ul>';
 									
 								}
-								
-								ksort( $_menu_types );
-								
-								echo '<ul>';
-								
-								foreach ( $_menu_types as $key => $menu_type ) {
-									
-									echo '<li>';
-									echo vui_el_button( array( 'url' => menus_mdl::get_mi_url( 'list', array( 'menu_type_id' => $menu_type[ 'id' ], ) ), 'text' => lang( $menu_type[ 'title' ] ), 'icon' => 'menus', ) );
-									echo '</li>';
-									
-								}
-								
-								echo '</ul>';
 								
 							}
 							

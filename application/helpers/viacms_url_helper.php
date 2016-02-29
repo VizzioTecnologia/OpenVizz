@@ -45,7 +45,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 	//echo '<small>' . print_r( $original_url, TRUE ) . '</small>';
 	$CI =& get_instance();
 	
-	$reverse_urls = $CI->mcm->system_params[ 'reverse_urls' ];
+	$reverse_urls = isset( $CI->mcm->system_params[ 'reverse_urls' ] ) ? $CI->mcm->system_params[ 'reverse_urls' ] : NULL;
 	
 	
 	if ( ( isset( $reverse_urls ) AND is_array( $reverse_urls ) ) ) {

@@ -334,9 +334,9 @@ class Menus_mdl extends CI_Model{
 	public function get_menu_type( $value = NULL ){
 
 		if ( is_array( $this->_menu_types ) AND empty( $this->_menu_types ) ) {
-
+			
 			$this->get_menu_types();
-
+			
 		}
 
 		if ( is_numeric( $value ) AND isset( $this->_menu_types[ $value ] ) ) {
@@ -393,14 +393,19 @@ class Menus_mdl extends CI_Model{
 		$this->db->select( '*' );
 		$this->db->from( 'tb_menu_types t1' );
 		$return = $this->db->get();
-
+		
 		if ( $return->num_rows() > 0 ) {
-
+			
 			$return = $return->result_array();
 			$this->_menu_types = $return;
-
+			
 		}
-
+		else {
+			
+			$return = NULL;
+			
+		}
+		
 		return $return;
 
 	}
