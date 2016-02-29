@@ -85,11 +85,21 @@
 								$options = array(
 									0=>lang('root'),
 								);
-								foreach($menu_items as $row):
-									if ($row['id'] != @$menu_item[ 'id' ]){
-										$options[$row['id']] = $row['indented_title'];
+								
+								if ( $menu_items ) {
+									
+									foreach( $menu_items as $row ) {
+										
+										if ( $row['id'] != @$menu_item[ 'id' ] ){
+											
+											$options[$row['id']] = $row['indented_title'];
+											
+										}
+									
 									}
-								endforeach;
+									
+								}
+								
 							?>
 							<?= form_dropdown('parent', $options, set_value('parent', @$menu_item[ 'parent' ]),'id="parent-menu-item"'); ?>
 							

@@ -25307,3 +25307,29 @@ ERROR - 2016-02-28 21:04:05 --> Severity: Notice  --> Undefined index: footer-ri
 DEBUG - 2016-02-28 21:04:05 --> File loaded: /var/www/sites/openvizz-dev/themes/site/default/index.php --- File: core/Loader.php --- Line: 836
 DEBUG - 2016-02-28 21:04:05 --> Final output sent to browser --- File: core/Output.php --- Line: 448
 DEBUG - 2016-02-28 21:04:05 --> Total execution time: 0.0243 --- File: core/Output.php --- Line: 449
+DEBUG - 2016-02-28 22:04:59 --> Config Class Initialized --- File: core/Config.php --- Line: 64
+DEBUG - 2016-02-28 22:04:59 --> Hooks Class Initialized --- File: core/Hooks.php --- Line: 57
+DEBUG - 2016-02-28 22:04:59 --> Utf8 Class Initialized --- File: core/Utf8.php --- Line: 39
+DEBUG - 2016-02-28 22:04:59 --> UTF-8 Support Enabled --- File: core/Utf8.php --- Line: 50
+DEBUG - 2016-02-28 22:04:59 --> URI Class Initialized --- File: core/URI.php --- Line: 73
+DEBUG - 2016-02-28 22:04:59 --> Router Class Initialized --- File: core/Router.php --- Line: 90
+DEBUG - 2016-02-28 22:04:59 --> Output Class Initialized --- File: core/Output.php --- Line: 109
+DEBUG - 2016-02-28 22:04:59 --> Security Class Initialized --- File: core/Security.php --- Line: 128
+DEBUG - 2016-02-28 22:04:59 --> Input Class Initialized --- File: core/Input.php --- Line: 86
+DEBUG - 2016-02-28 22:04:59 --> Global POST and COOKIE data sanitized --- File: core/Input.php --- Line: 650
+DEBUG - 2016-02-28 22:04:59 --> Language Class Initialized --- File: core/Lang.php --- Line: 49
+DEBUG - 2016-02-28 22:04:59 --> Loader Class Initialized --- File: core/Loader.php --- Line: 132
+DEBUG - 2016-02-28 22:04:59 --> Loader Class Initialized --- File: /media/sites/openvizz-dev/application/core/viacms_Loader.php --- Line: 20
+DEBUG - 2016-02-28 22:04:59 --> Helper loaded: language_helper --- File: core/Loader.php --- Line: 518
+DEBUG - 2016-02-28 22:04:59 --> Helper loaded: url_helper --- File: core/Loader.php --- Line: 518
+DEBUG - 2016-02-28 22:04:59 --> Helper loaded: themes_helper --- File: core/Loader.php --- Line: 530
+DEBUG - 2016-02-28 22:04:59 --> Session Class Initialized --- File: libraries/Session.php --- Line: 58
+DEBUG - 2016-02-28 22:04:59 --> Helper loaded: string_helper --- File: core/Loader.php --- Line: 518
+DEBUG - 2016-02-28 22:04:59 --> Encrypt Class Initialized --- File: libraries/Encrypt.php --- Line: 54
+DEBUG - 2016-02-28 22:04:59 --> Session routines successfully run --- File: libraries/Session.php --- Line: 124
+DEBUG - 2016-02-28 22:04:59 --> Controller Class Initialized --- File: core/Controller.php --- Line: 53
+DEBUG - 2016-02-28 22:04:59 --> Database Driver Class Initialized --- File: database/DB_driver.php --- Line: 91
+ERROR - 2016-02-28 22:04:59 --> Severity: 8192  --> mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead /media/sites/openvizz-dev/system/database/drivers/mysql/mysql_driver.php 91 --- File: core/Exceptions.php --- Line: 91
+ERROR - 2016-02-28 22:04:59 --> Severity: Warning  --> mysql_pconnect(): Access denied for user 'www-data'@'localhost' (using password: NO) /media/sites/openvizz-dev/system/database/drivers/mysql/mysql_driver.php 91 --- File: core/Exceptions.php --- Line: 91
+ERROR - 2016-02-28 22:04:59 --> Unable to connect to the database --- File: database/DB_driver.php --- Line: 120
+DEBUG - 2016-02-28 22:04:59 --> Language file loaded: language/pt-BR/db_lang.php --- File: core/Lang.php --- Line: 130
