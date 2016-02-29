@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 28/02/2016 às 12:46
+-- Tempo de Geração: 28/02/2016 às 22:19
 -- Versão do servidor: 5.5.43-0ubuntu0.14.04.1
 -- Versão do PHP: 5.5.9-1ubuntu4.9
 
@@ -307,7 +307,14 @@ CREATE TABLE IF NOT EXISTS `tb_menus` (
   `home` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `menu_type_id` (`menu_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Fazendo dump de dados para tabela `tb_menus`
+--
+
+INSERT INTO `tb_menus` (`id`, `alias`, `title`, `description`, `ordering`, `link`, `type`, `status`, `access_type`, `access_ids`, `parent`, `component_id`, `component_item`, `menu_type_id`, `params`, `home`) VALUES
+(1, 'home', 'Home', '', 0, 'main/bc/0/1', 'blank_content', 1, 'public', '0', 0, 0, '0', 1, '{"show_page_content_title":"1","custom_page_content_title":"","custom_page_title":"","page_class":"","meta_keywords":"","meta_description":""}', 1);
 
 -- --------------------------------------------------------
 
@@ -361,6 +368,13 @@ CREATE TABLE IF NOT EXISTS `tb_menu_types` (
   `description` longtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Fazendo dump de dados para tabela `tb_menu_types`
+--
+
+INSERT INTO `tb_menu_types` (`id`, `alias`, `title`, `description`) VALUES
+(1, 'main-menu', 'Main menu', '');
 
 -- --------------------------------------------------------
 
@@ -623,16 +637,16 @@ CREATE TABLE IF NOT EXISTS `tb_unid_data` (
 
 CREATE TABLE IF NOT EXISTS `tb_unid_data_schemas` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `alias` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `title` varchar(100) NOT NULL,
   `create_datetime` datetime NOT NULL,
   `mod_datetime` datetime NOT NULL,
   `ordering` int(10) NOT NULL,
   `status` int(11) NOT NULL,
-  `properties` mediumtext CHARACTER SET utf8,
-  `params` mediumtext CHARACTER SET utf8 NOT NULL,
+  `properties` mediumtext,
+  `params` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -645,7 +659,14 @@ CREATE TABLE IF NOT EXISTS `tb_urls` (
   `sef_url` mediumtext NOT NULL,
   `target` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Fazendo dump de dados para tabela `tb_urls`
+--
+
+INSERT INTO `tb_urls` (`id`, `sef_url`, `target`) VALUES
+(1, 'default_controller', 'main/bc/0/1');
 
 -- --------------------------------------------------------
 
@@ -671,7 +692,7 @@ CREATE TABLE IF NOT EXISTS `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `created_datetime`, `username`, `password`, `name`, `email`, `group_id`, `status`, `params`) VALUES
-(1, '', 'admin', 'ODhmOGM3YTcxMjA0ODQ1MjE1MzkzNTk4NDlmN2I4NmY=', 'Administrator', 'youremail@domain.com', 1, 1, '');
+(1, '', 'admin', 'ODhmOGM3YTcxMjA0ODQ1MjE1MzkzNTk4NDlmN2I4NmY=', 'Administrator', 'youremail@domain.com', 1, 1, '{"admin_user_session":{"login":true,"login_mode":"persistent","user":{"id":"1","username":"admin","name":"Administrator","email":"youremail@domain.com"},"access_hash":{"user_hash":"f50be7efdf62e3b4aedd624f52065368","client_hash":"72eaee3cf3d9d3f8e4d10f85e752de8c"},"last_url":"admin\\/menus\\/mim\\/mtid\\/1\\/cp\\/1\\/ipp\\/10\\/a\\/l","last_session_db_save":"2016-02-28 22:14:12","msg":[{"msg":"component_preferences_updated","type":"success"}]},"admin_user_hashes":{"user_hashf50be7efdf62e3b4aedd624f52065368":"f50be7efdf62e3b4aedd624f52065368"},"admin_client_hashes":{"client_hash72eaee3cf3d9d3f8e4d10f85e752de8c":"72eaee3cf3d9d3f8e4d10f85e752de8c"}}');
 
 -- --------------------------------------------------------
 
