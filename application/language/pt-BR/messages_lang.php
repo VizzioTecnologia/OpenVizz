@@ -74,7 +74,7 @@ $lang['state_deleted_fail'] = 																		"Erro ao tentar excluir estado!"
 
 $lang['thank_you_for_your_message'] = 																"Obrigado pela sua mensagem!";
 
-$lang['valid_email_dns']		= "The %s field must contain a valid domain.";
+$lang['valid_email_dns']		= "O campo %s deve conte um nome de domínio válido.";
 
 /* End of file messages_lang.php */
 /* Location: ./system/language/pt-br/messages_lang.php */
