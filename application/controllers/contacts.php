@@ -445,6 +445,7 @@ class Contacts extends Main {
 						$config = Array(
 							
 							'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
+							'mailpath' => $this->mcm->system_params[ 'email_config_sendmail_path' ],
 							'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
 							'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
 							'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
@@ -471,6 +472,7 @@ class Contacts extends Main {
 						$config = Array(
 							
 							'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
+							'mailpath' => $this->mcm->system_params[ 'email_config_sendmail_path' ],
 							'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
 							'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
 							'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],

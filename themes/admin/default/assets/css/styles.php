@@ -45,7 +45,7 @@ if ( ! defined( 'PROTOCOL' ) ) define( 'PROTOCOL',															'http' );
 }
 
 
-if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( '/themes/admin/' . $template . '/assets/css/theme.css.php', '', $_SERVER[ 'PHP_SELF' ] ), '/' ) );
+if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( '/themes/admin/' . $template . '/assets/css/styles.php', '', $_SERVER[ 'PHP_SELF' ] ), '/' ) );
 
 if ( ! defined( 'HTTP_HOST' ) ) define( 'HTTP_HOST',															PROTOCOL . '://' . HOST . ( SERVER_PORT ? ':' . SERVER_PORT : '' ) );
 if ( ! defined( 'BASE_URL' ) ) define( 'BASE_URL',																HTTP_HOST . RELATIVE_BASE_URL );
