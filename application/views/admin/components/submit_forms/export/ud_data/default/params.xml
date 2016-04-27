@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="ud_export_params">
+		
+		<param type="spacer" default="" label="ud_data_export_layout_specific_params_label" />
+		
+		<param type="spacer" default="" label="ud_data_export_pdf_layout_specific_params_label" />
+		
+		<param name="ud_data_export_pdf_logo_image_file" type="text" default="" label="ud_data_export_pdf_logo_image_file" tip="tip_ud_data_export_pdf_logo_image_file" />
+		
+		<param name="ud_data_export_pdf_bg_color" type="text" default="" label="ud_data_export_pdf_bg_color" />
+		
+		<param name="ud_data_export_pdf_content_bg_color" type="text" default="" label="ud_data_export_pdf_content_bg_color" />
+		
+		<param name="ud_data_export_pdf_content_fg_color" type="text" default="" label="ud_data_export_pdf_content_fg_color" />
+		
+		<param name="ud_data_export_pdf_content_link_color" type="text" default="" label="ud_data_export_pdf_content_link_color" />
+		
+		<param name="ud_data_export_pdf_content_border_color" type="text" default="" label="ud_data_export_pdf_content_border_color" />
+		
+		<param name="ud_data_export_pdf_show_title" type="select" default="1" label="ud_data_export_pdf_show_title" tip="tip_ud_data_export_pdf_show_title" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_data_export_pdf_custom_title" type="text" default="" label="ud_data_export_pdf_custom_title" />
+		
+		<param name="ud_data_export_pdf_show_empty_props" type="select" default="0" label="ud_data_export_pdf_show_empty_props" tip="tip_ud_data_export_pdf_show_empty_props" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param type="spacer" default="" label="ud_data_export_xls_layout_specific_params_label" />
+		
+		<param name="ud_data_export_xls_headers_bg_color" type="text" default="" label="ud_data_export_xls_headers_bg_color" />
+		
+		<param name="ud_data_export_xls_row_bg_color" type="text" default="" label="ud_data_export_xls_row_bg_color" />
+		
+		<param name="ud_data_export_xls_row_alt_bg_color" type="text" default="" label="ud_data_export_xls_row_alt_bg_color" />
+		
+		<param name="ud_data_export_xls_general_font_size" type="text" default="" label="ud_data_export_xls_general_font_size" tip="tip_ud_data_export_xls_general_font_size" />
+		
+		<param name="ud_data_export_xls_general_border_size" type="text" default="" label="ud_data_export_xls_general_border_size" />
+		
+		<param name="ud_data_export_xls_general_border_color" type="text" default="" label="ud_data_export_xls_general_border_color" />
+		
+	</section>
+	
+</params>

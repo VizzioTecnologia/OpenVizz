@@ -550,18 +550,18 @@ class Menus_common_model extends CI_Model{
 	// --------------------------------------------------------------------
 
 	public function get_menu_items( $f_params = NULL ){
-
+		
 		// inicializando as variáveis
-		$where_condition =						@$f_params['where_condition'] ? $f_params['where_condition'] : NULL;
-		$or_where_condition =					@$f_params['or_where_condition'] ? $f_params['or_where_condition'] : NULL;
-		$limit =								@$f_params['limit'] ? $f_params['limit'] : NULL;
-		$offset =								@$f_params['offset'] ? $f_params['offset'] : NULL;
-		$order_by =								@$f_params['order_by'] ? $f_params['order_by'] : 't1.title asc, t1.id asc';
-		$order_by_escape =						@$f_params['order_by_escape'] ? $f_params['order_by_escape'] : TRUE;
-		$return_type =							@$f_params['return_type'] ? $f_params['return_type'] : 'get';
-
+		$where_condition =						isset( $f_params['where_condition'] ) ? $f_params['where_condition'] : NULL;
+		$or_where_condition =					isset( $f_params['or_where_condition'] ) ? $f_params['or_where_condition'] : NULL;
+		$limit =								isset( $f_params['limit'] ) ? $f_params['limit'] : NULL;
+		$offset =								isset( $f_params['offset'] ) ? $f_params['offset'] : NULL;
+		$order_by =								isset( $f_params['order_by'] ) ? $f_params['order_by'] : 't1.title asc, t1.id asc';
+		$order_by_escape =						isset( $f_params['order_by_escape'] ) ? $f_params['order_by_escape'] : TRUE;
+		$return_type =							isset( $f_params['return_type'] ) ? $f_params['return_type'] : 'get';
+		
 		$this->db->select('
-
+			
 			t1.*,
 
 			t2.title as menu_type_title,

@@ -414,7 +414,7 @@ class Users extends Main {
 				
 				$db_data[ 'params' ][ 'login_wrong_pass_count' ] = 0;
 				
-				$db_data[ 'params' ] = json_encode( $db_data['params'] );
+				$db_data[ 'params' ] = json_encode( $db_data[ 'params' ] );
 				
 				//echo '<pre>' . print_r( $db_data, TRUE ) . '</pre>'; exit;
 				
@@ -445,16 +445,7 @@ class Users extends Main {
 					// -------------------------------------------------
 					// E-nail stuff
 					
-					if ( $this->input->post( 'submit_apply' ) ){
-						
-						redirect( 'admin/'.$this->component_name . '/' . __FUNCTION__ . '/edit_user/' . base64_encode(base64_encode(base64_encode(base64_encode( $return_id ) ) ) ) );
-						
-					}
-					else{
-						
-						redirect_last_url();
-						
-					}
+					redirect_last_url();
 					
 				}
 				

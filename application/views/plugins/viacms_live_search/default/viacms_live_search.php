@@ -14,7 +14,6 @@
 			
 			var elem = $(this);
 			
-			elem.attr('data-contactgrabed', true);
 			elem.attr('autocomplete', 'off');
 			
 			if ( ! search_url ){

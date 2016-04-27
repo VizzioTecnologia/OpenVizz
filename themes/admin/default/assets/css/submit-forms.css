@@ -985,6 +985,23 @@
 	width: <?= 100 / 3; ?>%;
 	
 }
+.ud-prop-field-wrapper.ud-prop-type-date-dmy > .submit-form-field-control-date {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	width: 80%;
+	
+}
+.ud-prop-field-wrapper.ud-prop-type-date-dmy > .vui-date-selector-wrapper {
+	
+	width: 20%;
+	
+}
+.ud-prop-field-wrapper.ud-prop-type-date-dmy > .vui-date-selector-wrapper > .el {
+	
+	width: 100%;
+	
+}
 .ud-prop-field-wrapper.ud-prop-type-date-dm .vui-interactive-el-wrapper,
 .ud-prop-field-wrapper.ud-prop-type-date-dy .vui-interactive-el-wrapper,
 .ud-prop-field-wrapper.ud-prop-type-date-my .vui-interactive-el-wrapper {

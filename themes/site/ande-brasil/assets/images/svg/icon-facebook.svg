@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="48.0001"
+   width="48"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="icon-facebook.svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="4.9166565"
+     inkscape:cx="-6.5085377"
+     inkscape:cy="24.00005"
+     inkscape:window-x="-5"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     d="M 24.000033,4.0000912 C 12.9543,4.0000912 4,12.954258 4,24.000091 c 0,11.045583 8.9543,20 20.000033,20 C 35.045692,44.000091 44,35.045674 44,24.000091 44,12.954341 35.0457,4.0000079 24.000033,4.0000079 z m 2.02343,9.2391668 2.968229,0 0,3.712416 -1.856222,0 c -1.387267,0 -1.479951,0.512584 -1.479951,1.479917 v 1.856167 h 3.36124 l -0.393011,3.712416 H 25.655519 V 34.761008 H 21.207406 V 24.000174 h -2.224099 v -3.712416 h 2.224099 v -2.224084 c 0,-3.025416 1.2524,-4.824333 4.816057,-4.824416 z"
+     style="color:#000000;fill:#3165a6;fill-opacity:1;fill-rule:nonzero;enable-background:accumulate"
+     id="path5853" />
+</svg>

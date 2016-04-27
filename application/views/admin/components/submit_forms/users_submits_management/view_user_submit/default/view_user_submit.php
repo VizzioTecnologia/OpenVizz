@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' ); ?>
 
 <div id="view-user-submit" class="view-user-submit">
 
@@ -47,15 +48,19 @@
 									
 									if ( $_tmp_array[ $us_key ][ 'field_type' ] == 'date' ){
 										
-										$format = '';
-										
-										$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_year' ] ? 'y' : '';
-										$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_month' ] ? 'm' : '';
-										$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_day' ] ? 'd' : '';
-										
-										$format = 'sf_us_dt_ft_pt_' . $format . '_' . $_tmp_array[ $us_key ][ 'sf_date_field_presentation_format' ];
-										
-										echo strftime( lang( $format ), strtotime( $user_submit[ $us_key ] ) );
+										if ( $user_submit[ $us_key ] !== '0000-00-00' ) {
+											
+											$format = '';
+											
+											$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_year' ] ? 'y' : '';
+											$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_month' ] ? 'm' : '';
+											$format .= $_tmp_array[ $us_key ][ 'sf_date_field_use_day' ] ? 'd' : '';
+											
+											$format = 'sf_us_dt_ft_pt_' . $format . '_' . $_tmp_array[ $us_key ][ 'sf_date_field_presentation_format' ];
+											
+											echo strftime( lang( $format ), strtotime( $user_submit[ $us_key ] ) );
+											
+										}
 										
 									} else {
 										

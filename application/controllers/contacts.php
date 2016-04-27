@@ -406,7 +406,7 @@ class Contacts extends Main {
 					
 				}
 				
-				if ( ( isset( $this->mcm->system_params[ 'email_config_enabled' ] ) AND $this->mcm->system_params[ 'email_config_enabled' ] ) AND ( $this->form_validation->run() AND $this->input->post( 'submit', TRUE ) ) ){
+				if ( $this->mcm->load_email_system() AND ( $this->form_validation->run() AND $this->input->post( 'submit', TRUE ) ) ){
 					
 					$data[ 'post' ] = $this->input->post();
 					
@@ -425,124 +425,68 @@ class Contacts extends Main {
 						
 					}
 					
-					if ( check_var( $this->mcm->system_params[ 'email_config_enabled' ] ) ) {
-						
-						$newline_search = array(
-							
-							'\r',
-							'\n'
-							
-						);
-						$newline_replace = array(
-							
-							"\r",
-							"\n"
-							
-						);
-						$newline = str_replace( $newline_search, $newline_replace, $this->mcm->system_params[ 'email_config_newline' ] );
-						$mail_useragent = check_var( $this->mcm->system_params[ 'email_config_useragent' ] ) ? $this->mcm->system_params[ 'email_config_useragent' ] : NULL;
-						
-						$config = Array(
-							
-							'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
-							'mailpath' => $this->mcm->system_params[ 'email_config_sendmail_path' ],
-							'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
-							'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
-							'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
-							'smtp_pass' => $this->mcm->system_params[ 'email_config_smtp_pass' ],
-							'mailtype' => $this->mcm->system_params[ 'email_config_mailtype' ],
-							'charset' => $this->mcm->system_params[ 'email_config_charset' ],
-							'wordwrap' => $this->mcm->system_params[ 'email_config_wordwrap' ],
-							'smtp_crypto' => $this->mcm->system_params[ 'email_config_smtp_crypto' ],
-							'newline' => $newline,
-							'useragent' => $mail_useragent,
-							
-						);
-						
-						$this->load->library( 'email', $config );
-						
-						$this->email->from( $email_from, $email_from_name );
-						$this->email->reply_to( $email_reply_to );
-						$this->email->to( $emails_to );
+					$this->email->from( $email_from, $email_from_name );
+					$this->email->reply_to( $email_reply_to );
+					$this->email->to( $emails_to );
 // 						$this->email->cc( $emails_cc);
 // 						$this->email->bcc( $emails_bcc);
-						$this->email->subject( $email_subject );
-						$this->email->message( $email_body );
-							
-						$config = Array(
-							
-							'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
-							'mailpath' => $this->mcm->system_params[ 'email_config_sendmail_path' ],
-							'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
-							'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
-							'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
-							'smtp_pass' => $this->mcm->system_params[ 'email_config_smtp_pass' ],
-							'mailtype' => $this->mcm->system_params[ 'email_config_mailtype' ],
-							'charset' => $this->mcm->system_params[ 'email_config_charset' ],
-							'wordwrap' => $this->mcm->system_params[ 'email_config_wordwrap' ],
-							'smtp_crypto' => $this->mcm->system_params[ 'email_config_smtp_crypto' ],
-							'newline' => $newline,
-							'useragent' => $mail_useragent,
-							
-						);
+					$this->email->subject( $email_subject );
+					$this->email->message( $email_body );
+					
+					//$this->email->cc( array( 'Produção' => 'fabiano@viaeletronica.com.br' ) ); 
+					//$this->email->bcc( array( 'Suporte' => 'suporte@viaeletronica.com.br' ) ); 
+					
+					$this->email->subject( $data[ 'post' ][ 'subject' ] );
+					
+					// verificando se o tema atual possui a view
+					if ( file_exists( THEMES_PATH . call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php') ){
 						
-						$this->load->library( 'email', $config );
+						$this->email->message( $this->load->view( call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE ) );
 						
-						//$this->email->cc( array( 'Produção' => 'fabiano@viaeletronica.com.br' ) ); 
-						//$this->email->bcc( array( 'Suporte' => 'suporte@viaeletronica.com.br' ) ); 
+					}
+					// verificando se a view existe no diretório de views padrão
+					else if ( file_exists( VIEWS_PATH . get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . DS . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php') ){
 						
-						$this->email->subject( $data[ 'post' ][ 'subject' ] );
+						$this->email->message( $this->load->view( get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE ) );
+						//echo $this->load->view( get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE );
 						
-						// verificando se o tema atual possui a view
-						if ( file_exists( THEMES_PATH . call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php') ){
-							
-							$this->email->message( $this->load->view( call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE ) );
-							
-						}
-						// verificando se a view existe no diretório de views padrão
-						else if ( file_exists( VIEWS_PATH . get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . DS . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php') ){
-							
-							$this->email->message( $this->load->view( get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE ) );
-							//echo $this->load->view( get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email', $data, TRUE );
-							
-						}
-						else{
-							
-							$this->email->message( lang( 'load_view_fail' ) . ': <b>' . VIEWS_PATH . get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php</b>' );
-							
-						}
+					}
+					else{
 						
-						$this->email->to( $emails_to );
-						
-						if ( $this->input->post( 'email' ) ){
-							
-							$this->email->from( $data[ 'post' ][ 'email' ], $data[ 'post' ][ 'name' ] );
-							$this->email->reply_to( $data[ 'post' ][ 'email' ] );
-							
-						}
-						
-						if ( $this->email->send() ){
-							
-							msg( ( 'sending_email_email_sent' ), 'success' );
-							
-						}
-						else{
-							
-							echo $this->email->print_debugger();
-							
-						}
-						
-						redirect_last_url();
+						$this->email->message( lang( 'load_view_fail' ) . ': <b>' . VIEWS_PATH . get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $this->component_view_folder . DS . __FUNCTION__ . DS . $action . DS . $data[ 'params' ][ 'contact_details_layout' ] . DS . 'sending_email.php</b>' );
 						
 					}
 					
+					$this->email->to( $emails_to );
+					
+					if ( $this->input->post( 'email' ) ) {
+						
+						$this->email->from( $data[ 'post' ][ 'email' ], $data[ 'post' ][ 'name' ] );
+						$this->email->reply_to( $data[ 'post' ][ 'email' ] );
+						
+					}
+					
+					if ( $this->email->send() ) {
+						
+						msg( ( 'sending_email_email_sent' ), 'success' );
+						
+					}
+					else {
+						
+						echo $this->email->print_debugger();
+						
+					}
+					
+					redirect_last_url();
+					
 				}
-				else if ( ! $this->form_validation->run() AND validation_errors() != '' ){
+				else if ( ! $this->form_validation->run() AND validation_errors() != '' ) {
 					
 					$data[ 'post' ] = $this->input->post();
 					
 					msg( ( 'sending_email_fail' ), 'title' );
 					msg( validation_errors( '<div class="error">', '</div>' ), 'error' );
+					
 				}
 				
 				$this->_page(

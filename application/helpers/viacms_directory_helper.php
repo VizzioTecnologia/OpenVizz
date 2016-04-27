@@ -119,21 +119,34 @@ function file_list_to_array( $dir, $matche_pattern ){
 }
 
 function rrmdir( $dir ) {
-	if ( is_dir( $dir ) ) {
+	
+	if ( is_dir( $dir ) AND $dir != '/' ) {
+		
 		$objects = scandir( $dir );
+		
 		foreach ( $objects as $object ) {
-			if ( $object != "." && $object != ".." ) {
-				if ( filetype( $dir."/".$object ) == "dir" ){
-					rrmdir( $dir."/".$object );
+			
+			if ( $object != "." AND $object != ".." ) {
+				
+				if ( filetype( $dir . "/" . $object ) == "dir" ) {
+					
+					rrmdir( $dir . "/" . $object );
+					
 				}
 				else {
-					unlink( $dir."/".$object );
+					
+					unlink( $dir . "/" . $object );
 				}
+				
 			}
+			
 		}
+		
 		reset( $objects );
 		rmdir( $dir );
+		
 	}
+	
 }
 
 

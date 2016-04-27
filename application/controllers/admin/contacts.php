@@ -880,7 +880,7 @@ class Contacts extends Main {
 				msg( ( $submit_action . '_success_message' ),'success' );
 
 			}
-			else if( in_array( $submit_action, array( 'cancel' ) ) ){
+			else if ( in_array( $submit_action, array( 'cancel' ) ) ){
 
 				redirect_last_url();
 

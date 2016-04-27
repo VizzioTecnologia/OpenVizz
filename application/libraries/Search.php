@@ -422,25 +422,27 @@ class Search{
 	 * @return	mixed
 	 */
 	public function db_search( $f_params = NULL ){
-
+		
 		// -------------------------------------------------
 		// Parsing vars ------------------------------------
-
+		
 		$plugin_name =							( isset( $f_params[ 'plugin_name' ] ) AND is_string( $f_params[ 'plugin_name' ] ) ) ? $f_params[ 'plugin_name' ] : NULL; // string
 		$table_name =							isset( $f_params[ 'table_name' ] ) ? $f_params[ 'table_name' ] : NULL; // string
 		$select_columns =						isset( $f_params[ 'select_columns' ] ) ? $f_params[ 'select_columns' ] : NULL; // array / string
 		$select_escape =						isset( $f_params[ 'select_escape' ] ) ? ( bool ) $f_params[ 'select_escape' ] : NULL; // array / string
 		$search_columns =						isset( $f_params[ 'search_columns' ] ) ? $f_params[ 'search_columns' ] : NULL; // array / string
 		$tables_to_join =						isset( $f_params[ 'tables_to_join' ] ) ? $f_params[ 'tables_to_join' ] : NULL; // array[ array[ join_param_1, join_param_2, join_param_3 ], array[ join_param_1, join_param_2, join_param_3 ], ... ]
-
+		
 		$return_type =							isset( $f_params[ 'return_type' ] ) ? $f_params[ 'return_type' ] : 'get'; // string
 		$_where_conditions =					isset( $f_params[ 'where_conditions' ] ) ? $f_params[ 'where_conditions' ] : array(); // array
 		$_or_where_conditions =					isset( $f_params[ 'or_where_conditions' ] ) ? $f_params[ 'or_where_conditions' ] : array(); // array
 		$where_conditions =						array();
 		$or_where_conditions =					array();
-
+		
 		$random =								check_var( $f_params[ 'random' ] ) ? TRUE : $this->config( 'random' );
-
+		
+		$ignore_cache =							check_var( $f_params[ 'ignore_cache' ] ) ? FALSE : $this->config( 'ignore_cache' );
+		
 		/**
 		 * Se order_by for do tipo array
 		 * cada item deve ser um array onde:
@@ -739,7 +741,7 @@ class Search{
 			
 			$_query_id .= $return_type;
 			
-			if ( $this->CI->cache->cache( $_query_id ) ) {
+			if ( $ignore_cache AND $this->CI->cache->cache( $_query_id ) ) {
 				
 				$query = $this->CI->db->_compile_select();
 				$this->CI->db->_reset_write();

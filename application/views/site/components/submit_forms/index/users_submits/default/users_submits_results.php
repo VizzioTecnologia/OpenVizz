@@ -80,6 +80,8 @@
 			
 		}
 		
+// 		echo '<pre>' . print_r( $users_submits, TRUE ) . '</pre>';
+		
 		echo '<div class="items ud-data-items">';
 		
 		foreach ( $users_submits as $key => $user_submit ) {
@@ -976,9 +978,9 @@
 					
 				}
 				
-				echo '</div>';
-				
 				echo '<div class="clear"></div>';
+				
+				echo '</div>';
 				
 				/* ---------------------------------------------------------------------------
 				* ---------------------------------------------------------------------------
@@ -1020,13 +1022,13 @@
 			
 		} else if ( check_var( $params[ 'show_default_results' ] ) ) {
 			
-			if ( check_var( $params[ 'ud_data_no_result_string' ] ) ) {
+			if ( check_var( $params[ 'ud_data_no_result_str' ] ) ) {
 				
-				$_result_string = lang( $params[ 'ud_data_no_result_string' ] );
+				$_result_string = lang( $params[ 'ud_data_no_result_str' ] );
 				
 			} else {
 				
-				$_result_string = lang( 'ud_data_no_result_string_value' );
+				$_result_string = lang( 'ud_data_no_result_str_value' );
 				
 			}
 			

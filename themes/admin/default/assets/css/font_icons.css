@@ -141,9 +141,8 @@
 .icon-uniE033:before {
 	content: "\e033";
 }
-.icon-ok:before {
-	content: "\e033";
-}
+.icon-ok:before,
+.icon-enabled:before,
 .icon-apply:before {
 	content: "\e033";
 }
@@ -366,7 +365,8 @@
 	content: "\e61d";
 }
 .icon-cancel:before,
-.icon-error:before {
+.icon-error:before,
+.icon-disabled:before {
 	content: "\e61e";
 }
 .icon-vecms:before,
@@ -592,19 +592,28 @@
 	content: "\e808";
 }
 .icon-filter:before {
-	content: "\e900";
+	content: "\e903";
 }
 .icon-redirect:before,
 .icon-redirecting:before,
 .icon-sf_redirecting:before,
 .icon-reset:before {
-	content: "\e901";
+	content: "\e904";
 }
 .icon-components:before {
-	content: "\e902";
+	content: "\e905";
 }
 .icon-backcolor:before {
-	content: "\e903";
+	content: "\e906";
+}
+.icon-swap:before {
+	content: "\e900";
+}
+.icon-list:before {
+	content: "\e901";
+}
+.icon-detail:before {
+	content: "\e902";
 }
 
 /*

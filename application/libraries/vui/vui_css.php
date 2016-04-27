@@ -438,6 +438,20 @@ class Vui_css extends Vui{
 		return $this->_minify( $css );
 		
 	}
+	function display_inline_box(){
+		
+		$css = '';
+		
+		$css .= "display: -webkit-inline-box;";
+		$css .= "display: -moz-inline-box;";
+		$css .= "display: -o-inline-box;";
+		$css .= "display: -ms-inline-box;";
+		$css .= "display: inline-box;";
+		
+		// Return our CSS
+		return $this->_minify( $css );
+		
+	}
 	function box_orient( $value = 'vertical' ){
 		
 		$css = '';

@@ -13,7 +13,8 @@ class Main_common_model extends CI_Model{
 	public $modules_types = FALSE; // Array dos tipos de módulos
 	public $loaded_modules = FALSE; // Array dos módulos carregados
 	public $html_data = FALSE; // Array dos elementos html da página enviados ao template
-
+	
+	private $_email_system_called = FALSE;
 	private $_items_tree = NULL;
 
 	public $params = array();
@@ -21,9 +22,312 @@ class Main_common_model extends CI_Model{
 	public function __construct(){
 
 	}
-
+	
 	// --------------------------------------------------------------------
-
+	
+	//TODO
+	// criar análise mais profunda para determinar se a funcionalidade de email está ok
+	public function load_email_system() {
+		
+		if ( check_var( $this->mcm->system_params[ 'email_config_enabled' ] ) ) {
+			
+			log_message( 'info', '[E-mail] Loading email config' );
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_protocol' ] ) ) {
+				
+				$config[ 'protocol' ] = $this->mcm->system_params[ 'email_config_protocol' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_sendmail_path' ] ) ) {
+				
+				$config[ 'mailpath' ] = $this->mcm->system_params[ 'email_config_sendmail_path' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_smtp_host' ] ) ) {
+				
+				$config[ 'smtp_host' ] = $this->mcm->system_params[ 'email_config_smtp_host' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_smtp_port' ] ) ) {
+				
+				$config[ 'smtp_port' ] = $this->mcm->system_params[ 'email_config_smtp_port' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_smtp_user' ] ) ) {
+				
+				$config[ 'smtp_user' ] = $this->mcm->system_params[ 'email_config_smtp_user' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_smtp_pass' ] ) ) {
+				
+				$config[ 'smtp_pass' ] = $this->mcm->system_params[ 'email_config_smtp_pass' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_mailtype' ] ) ) {
+				
+				$config[ 'mailtype' ] = $this->mcm->system_params[ 'email_config_mailtype' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_charset' ] ) ) {
+				
+				$config[ 'charset' ] = $this->mcm->system_params[ 'email_config_charset' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_wordwrap' ] ) ) {
+				
+				$config[ 'wordwrap' ] = $this->mcm->system_params[ 'email_config_wordwrap' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_smtp_crypto' ] ) ) {
+				
+				$config[ 'smtp_crypto' ] = $this->mcm->system_params[ 'email_config_smtp_crypto' ];
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_newline' ] ) ) {
+				
+				$newline_search = array(
+					
+					'\r',
+					'\n'
+					
+				);
+				
+				$newline_replace = array(
+					
+					"\r",
+					"\n"
+					
+				);
+				
+				$config[ 'newline' ] = str_replace( $newline_search, $newline_replace, $this->mcm->system_params[ 'email_config_newline' ] );
+				
+			}
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_useragent' ] ) ) {
+				
+				$config[ 'useragent' ] = $this->mcm->system_params[ 'email_config_useragent' ];
+				
+			}
+			else {
+				
+				$config[ 'useragent' ] = 'openvizz';
+				
+			}
+			
+			$this->load->library( 'email', $config );
+			
+			$this->_email_system_called = TRUE;
+			
+			return TRUE;
+			
+		}
+		
+		msg( ( 'email_system_disabled' ), 'error' );
+		
+		return FALSE;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function email_system_clear() {
+		
+		if ( $this->_email_system_called ) {
+			
+			if ( isset( $this->mcm->system_params[ 'email_config_useragent' ] ) ) {
+				
+				$config[ 'useragent' ] = $this->mcm->system_params[ 'email_config_useragent' ];
+				
+			}
+			else {
+				
+				$config[ 'useragent' ] = 'openvizz';
+				
+			}
+			
+		}
+		else {
+			
+			$this->load->library( 'email', $config );
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	private function _db_upgrade_info_cache_file_is_writable() {
+		
+		$urls_cache_file = APPPATH . 'cache/db_upgrade_info.php';
+		
+		$this->load->helper( 'file' );
+		
+		if ( ! file_exists( $urls_cache_file ) OR is_really_writable( $urls_cache_file ) ) {
+			
+			return TRUE;
+			
+		}
+		else {
+			
+			msg( sprintf( lang( 'unable_to_write_db_upgrade_info_cache_file' ), ( APPPATH . 'cache/db_upgrade_info.php' ) ), 'error' );
+			return FALSE;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function upgrade_db(){
+		
+		log_message( 'info', '[DB Upgrade] DB upgrade function initialized' );
+		
+		$file = 'cache/db_upgrade_info.php';
+		
+		if ( file_exists( APPPATH . $file ) ){
+			
+			require_once APPPATH . $file;
+			
+		}
+		
+		// verifica se o arquivo de cache é gravável
+		if ( $this->_db_upgrade_info_cache_file_is_writable() ) {
+			
+			$write = FALSE;
+			
+			// ----------------------------
+			// users
+			
+			if ( ! check_var( $db_upgrade_cache_vars[ 'users_images_col' ] ) ) {
+				
+				log_message( 'info', '[DB Upgrade] Upgrading "tb_users"' );
+				
+				$user_images_columns = "SHOW COLUMNS FROM `tb_users` LIKE 'images'";
+				$user_images_columns = $this->db->query( $user_images_columns )->row_array();
+				
+				if ( ! $user_images_columns ){
+					
+					$query = "ALTER TABLE  `tb_users` ADD  `images` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;";
+					$query = $this->db->query( $query );
+					
+					if ( $query ) {
+						
+						log_message( 'info', '[DB Upgrade] Col "images" add in "tb_users" table' );
+						
+						$db_upgrade_cache_vars[ 'users_images_col' ] = TRUE;;
+						
+					}
+					else {
+						
+						log_message( 'error', '[DB Upgrade] Can\'t add col "images" into "tb_users" table' );
+						
+						msg( sprintf( lang( 'unable_to_add_users_images_col_into_tb_users_table' ), ( APPPATH . $file ) ), 'error' );
+						
+					}
+					
+				}
+				else {
+					
+					log_message( 'info', '[DB Upgrade] "tb_users" already upgraded' );
+					
+					$db_upgrade_cache_vars[ 'users_images_col' ] = TRUE;;
+					
+				}
+				
+				$write = TRUE;
+				
+			}
+			
+			// users
+			// ----------------------------
+			
+			// ----------------------------
+			// tb_submit_forms_us, update submit forms users submits xml_data collumn
+			
+			if ( ! check_var( $db_upgrade_cache_vars[ 'sfus_xml_data_col' ] ) ) {
+				
+				log_message( 'info', '[DB Upgrade] Updating "xml_data" collumn in "tb_submit_forms_us" table' );
+				
+				$this->load->model( 'common/submit_forms_common_model', 'sfcm' );
+				
+				$this->db->select( 'id, submit_form_id, data' );
+				$this->db->from( 'tb_submit_forms_us' );
+				$users_submits = $this->db->get()->result_array();
+				
+				$db_data = array();
+				
+				foreach( $users_submits as $k => $us ) {
+					
+					$n_us[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $us );
+					
+					$this->db->update( 'tb_submit_forms_us', $n_us, array( 'id' => $us[ 'id' ] ) );
+					
+				}
+				
+				log_message( 'info', '[DB Upgrade] Updating "xml_data" collumn in "tb_submit_forms_us" table done!' );
+				
+				$db_upgrade_cache_vars[ 'sfus_xml_data_col' ] = TRUE;;
+				
+				$write = TRUE;
+				
+			}
+			
+			// tb_submit_forms_us, update submit forms users submits xml_data collumn
+			// ----------------------------
+			
+			log_message( 'info', '[DB Upgrade] The DB Upgrade cache file looks writable.' );
+			
+			if ( $write AND isset( $db_upgrade_cache_vars ) AND is_array( $db_upgrade_cache_vars ) ) {
+				
+				$output = array();
+				$output[] = '<?php if ( ! defined( \'BASEPATH\' ) ) exit( \'No direct script access allowed\' );';
+				
+				foreach( $db_upgrade_cache_vars as $key => $value ) {
+					
+					$output[] = '$db_upgrade_cache_vars[ \'' . $key . '\' ] = ' . $value . ';';
+					
+				}
+				
+				$output = implode( "\n", $output );
+				
+				if ( write_file( APPPATH . $file, $output ) ) {
+					
+					return TRUE;
+					
+				}
+				else{
+					
+					msg( sprintf( lang( 'unable_to_write_file' ), ( APPPATH . $file ) ), 'error' );
+					
+				}
+				
+			}
+			
+		}
+		else {
+			
+			log_message( 'error', 'The DB Upgrade cache file is not writable!' );
+			
+			msg( sprintf( lang( 'unable_db_upgrade_cache_file_is_not_writable' ), ( APPPATH . $file ) ), 'error' );
+			
+		}
+		
+		return FALSE;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
 	/**
 	 * Return a array tree (unidimensional or multidimensional array)
 	 *
@@ -37,18 +341,20 @@ class Main_common_model extends CI_Model{
 	 */
 
 	public function get_array_tree( $f_params = NULL ){
-
+		
 		// -------------------------------------------------
 		// Parsing vars ------------------------------------
-
+		
 		$type_options_allowed = array(
-
+			
 			'unidimensional',
 			'multidimensional',
-
+			
 		);
-
-		$f_params[ 'parent_id' ] =			( isset( $f_params[ 'parent_id' ] ) AND is_numeric( $f_params[ 'parent_id' ] ) AND $f_params[ 'parent_id' ] >= 0 ) ? ( int ) $f_params[ 'parent_id' ] : 0;
+		
+		$f_params[ 'parent_id_string' ] =	( isset( $f_params[ 'parent_id_string' ] ) AND $f_params[ 'parent_id_string' ] > 0 ) ? $f_params[ 'parent_id_string' ] : 'parent_id';
+		$parent_id_string = $f_params[ 'parent_id_string' ];
+		$f_params[ $parent_id_string ] =	( isset( $f_params[ $parent_id_string ] ) AND is_numeric( $f_params[ $parent_id_string ] ) AND $f_params[ $parent_id_string ] >= 0 ) ? ( int ) $f_params[ $parent_id_string ] : 0;
 		$f_params[ 'level' ] =				( isset( $f_params[ 'level' ] ) AND is_numeric( $f_params[ 'level' ] ) AND $f_params[ 'level' ] >= 0 ) ? ( int ) $f_params[ 'level' ] : 0;
 		$f_params[ 'array' ] =				( ! isset( $f_params[ 'array' ] ) OR ! is_array( $f_params[ 'array' ] ) ) ? array() : $f_params[ 'array' ];
 		$f_params[ 'array_type' ] =			( isset( $f_params[ 'type' ] ) AND is_string( $f_params[ 'array_type' ] ) AND in_array( $f_params[ 'array_type' ], $type_options_allowed ) ) ? $f_params[ 'array_type' ] : 'unidimensional';
@@ -63,7 +369,7 @@ class Main_common_model extends CI_Model{
 
 			if ( $f_params[ 'include_parent' ] ) {
 
-				$this->remove_item_from_array( $categories, $f_params[ 'parent_id' ] );
+				$this->remove_item_from_array( $categories, $f_params[ $parent_id_string ] );
 
 			}
 
@@ -76,7 +382,7 @@ class Main_common_model extends CI_Model{
 
 			if ( $f_params[ 'include_parent' ] ) {
 
-				$this->remove_item_from_array( $categories, $f_params[ 'parent_id' ] );
+				$this->remove_item_from_array( $categories, $f_params[ $parent_id_string ] );
 
 			}
 
@@ -113,6 +419,8 @@ class Main_common_model extends CI_Model{
 
 		}
 
+		$f_params[ 'parent_id_string' ] =		( isset( $f_params[ 'parent_id_string' ] ) AND $f_params[ 'parent_id_string' ] > 0 ) ? $f_params[ 'parent_id_string' ] : 'parent_id';
+		$parent_id_string = 					$f_params[ 'parent_id_string' ];
 		$f_params[ 'array' ] =					( isset( $f_params[ 'array' ] ) AND is_array( $f_params[ 'array' ] ) ) ? $f_params[ 'array' ] : array();
 
 		// Parsing vars ------------------------------------
@@ -137,7 +445,9 @@ class Main_common_model extends CI_Model{
 
 		}
 
-		$f_params[ 'parent_id' ] =						( isset( $f_params[ 'parent_id' ] ) AND is_numeric( $f_params[ 'parent_id' ] ) AND $f_params[ 'parent_id' ] >= 0 ) ? ( int ) $f_params[ 'parent_id' ] : 0;
+		$f_params[ 'parent_id_string' ] =				( isset( $f_params[ 'parent_id_string' ] ) AND $f_params[ 'parent_id_string' ] > 0 ) ? $f_params[ 'parent_id_string' ] : 'parent_id';
+		$parent_id_string = 							$f_params[ 'parent_id_string' ];
+		$f_params[ $parent_id_string ] =				( isset( $f_params[ $parent_id_string ] ) AND is_numeric( $f_params[ $parent_id_string ] ) AND $f_params[ $parent_id_string ] >= 0 ) ? ( int ) $f_params[ $parent_id_string ] : 0;
 		$f_params[ 'array' ] =							( isset( $f_params[ 'array' ] ) AND is_array( $f_params[ 'array' ] ) ) ? $f_params[ 'array' ] : array();
 		$f_params[ 'id_field' ] =						( isset( $f_params[ 'id_field' ] ) AND is_string( $f_params[ 'id_field' ] ) ) ? $f_params[ 'id_field' ] : 'id';
 		$f_params[ 'parent_field' ] =					( isset( $f_params[ 'parent_field' ] ) AND is_string( $f_params[ 'parent_field' ] ) ) ? $f_params[ 'parent_field' ] : 'parent';
@@ -175,8 +485,9 @@ class Main_common_model extends CI_Model{
 		foreach ( $new as $id => $item ) {
 
 			if ( isset( $item[ $f_params[ 'parent_field' ] ] ) AND $item[ $f_params[ 'parent_field' ] ] ) {
-
+				
 				unset( $new[ $id ] );
+				
 			}
 
 		}
@@ -245,7 +556,7 @@ class Main_common_model extends CI_Model{
 		}
 
 		// Force trailing slash on directory
-		$dir = rtrim( $dir, '/' ) . '/';
+		$dir = rtrim( $dir, DS ) . DS;
 		$dirlen = strlen( $dir );
 
 		// Find files/directories
@@ -362,7 +673,9 @@ class Main_common_model extends CI_Model{
 
 		}
 
-		$f_params[ 'parent_id' ] =				( isset( $f_params[ 'parent_id' ] ) AND is_numeric( $f_params[ 'parent_id' ] ) AND $f_params[ 'parent_id' ] >= 0 ) ? ( int ) $f_params[ 'parent_id' ] : 0;
+		$f_params[ 'parent_id_string' ] =		( isset( $f_params[ 'parent_id_string' ] ) AND $f_params[ 'parent_id_string' ] > 0 ) ? $f_params[ 'parent_id_string' ] : 'parent_id';
+		$parent_id_string = 					$f_params[ 'parent_id_string' ];
+		$f_params[ $parent_id_string ] =		( isset( $f_params[ $parent_id_string ] ) AND is_numeric( $f_params[ $parent_id_string ] ) AND $f_params[ $parent_id_string ] >= 0 ) ? ( int ) $f_params[ $parent_id_string ] : 0;
 		$f_params[ 'level' ] =					( isset( $f_params[ 'level' ] ) AND is_numeric( $f_params[ 'level' ] ) AND $f_params[ 'level' ] >= 0 ) ? ( int ) $f_params[ 'level' ] : 0;
 		$f_params[ 'array' ] =					( isset( $f_params[ 'array' ] ) AND is_array( $f_params[ 'array' ] ) ) ? $f_params[ 'array' ] : array();
 		$f_params[ 'id_field' ] =				( isset( $f_params[ 'id_field' ] ) AND is_string( $f_params[ 'id_field' ] ) ) ? $f_params[ 'id_field' ] : 'id';

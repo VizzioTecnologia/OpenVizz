@@ -12,9 +12,9 @@
 		
 		$( '#param-article_id' ).addClass( 'hidden' );
 		
-		$( '#param-article_id' ).after( '<input readonly type="text" name="article_id_live_search" value="' + selectedArticleText + '" id="article_id_live_search" class="live-search">' );
+		$( '#param-article_id' ).after( '<input readonly type="text" name="article_id_live_search" value="' + selectedArticleText + '" id="article_id_live_search" class="article-id live-search">' );
 		
-		$( '#article_id_live_search' ).after( '<?= vui_el_button( array( 'url' => '#', 'text' => lang( 'select_article' ), 'id' => 'article-picker', 'icon' => 'more', 'only_icon' => TRUE, 'class' => 'modal-articles-picker', ) ); ?>' );
+		$( '#article_id_live_search' ).after( '<?= vui_el_button( array( 'url' => '#', 'text' => lang( 'select_article' ), 'id' => 'article-picker', 'icon' => 'more', 'only_icon' => TRUE, 'wrapper_class' => 'modal-articles-picker-wrapper', 'class' => 'modal-articles-picker', ) ); ?>' );
 		
 		$( '#article_id_live_search' ).bind( 'blur', function(){
 			

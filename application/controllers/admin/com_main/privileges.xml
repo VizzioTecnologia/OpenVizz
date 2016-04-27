@@ -13,6 +13,8 @@
 		
 		<param name="privileges[media_management]" value="media_management" type="checkbox" default="" label="media_management" tip="tip_media_management" />
 		
+		<param name="site_can_view_profiler" value="site_can_view_profiler" type="checkbox" default="" label="site_can_view_profiler" tip="tip_site_can_view_profiler" />
+		
 	</section>
 	
 </params>

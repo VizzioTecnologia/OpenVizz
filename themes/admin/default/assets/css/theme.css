@@ -599,7 +599,7 @@ hr{
 .vui-field-wrapper-inline,
 .vui-field-wrapper-auto {
 	
-	vertical-align: bottom;
+	vertical-align: top;
 	<?= $vui->css->display_inline_block(); ?>;
 	
 	padding: <?= VUI_SPACING / 2; ?>em;
@@ -621,14 +621,12 @@ hr{
 }
 .vui-field-wrapper {
 	
-	vertical-align: bottom;
 	display: block;
 	
 }
 .vui-field-wrapper-inline,
 .vui-field-wrapper.vui-field-wrapper-inline {
 	
-	vertical-align: bottom;
 	<?= $vui->css->display_inline_block(); ?>;
 	
 	width: <?= 100 / 5; ?>%;
@@ -636,7 +634,6 @@ hr{
 }
 .vui-field-wrapper-auto {
 	
-	vertical-align: bottom;
 	<?= $vui->css->display_inline_block(); ?>;
 	
 	width: auto;

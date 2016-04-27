@@ -230,7 +230,7 @@ function get_params_spec_from_xml( $xml_file = NULL ){
 						
 					}
 					
-					eval( ( string )$param_1 );
+					eval( ( string ) $param_1 );
 					
 				}
 				else{
@@ -591,23 +591,28 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 			'text',
 			'textarea',
 			'spacer',
+			'php',
 			
 		);
 		
 		if ( in_array( $type, $f_types ) ) {
 			
-			if ( file_exists( THEMES_PATH . ADMIN_DIR_NAME . DS . $CI->config->item( 'admin_theme' ) . DS . 'views' . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . 'ft_' . $type . '.php' ) ){
+			if ( $type != 'php' ) {
 				
-				$html = $CI->load->view( 'admin' . DS . $CI->config->item( 'admin_theme' ) . DS . 'views' . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type, $data, TRUE );
+				if ( file_exists( THEMES_PATH . ADMIN_DIR_NAME . DS . $CI->config->item( 'admin_theme' ) . DS . 'views' . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . 'ft_' . $type . '.php' ) ){
+					
+					$html = $CI->load->view( 'admin' . DS . $CI->config->item( 'admin_theme' ) . DS . 'views' . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type, $data, TRUE );
+					
+				}
+				else if ( file_exists( VIEWS_PATH . ADMIN_DIR_NAME . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type . '.php' ) ){
+					
+					$html = $CI->load->view( ADMIN_DIR_NAME . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type, $data, TRUE );
+					
+				}
+				
+				return $html;
 				
 			}
-			else if ( file_exists( VIEWS_PATH . ADMIN_DIR_NAME . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type . '.php' ) ){
-				
-				$html = $CI->load->view( ADMIN_DIR_NAME . DS . OTHERS_VIEWS_DIR_NAME . DS . 'params' . DS . $layout . DS . 'ft_' . $type, $data, TRUE );
-				
-			}
-			
-			return $html;
 			
 		}
 		else {

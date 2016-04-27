@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 	
+	//echo get_last_url();
+	
 	$this->plugins->load( 'jquery_checkboxes' );
 	$this->plugins->load( 'fancybox' );
 	$this->plugins->load( 'modal_users_submits' );
@@ -18,8 +20,6 @@
 	}
 	
 	$filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
-	
-	$users_submits = $this->sfcm->parse_users_submits_list( $users_submits, $fields_to_show, $submit_form );
 	
 ?>
 
@@ -90,7 +90,7 @@
 			array(
 				
 				'text' => lang( 'filters' ),
-				'icon' => 'search',
+				'icon' => 'filter',
 				'only_icon' => FALSE,
 				'wrapper_class' => 'title',
 				
@@ -360,7 +360,7 @@
 	
 	<details>
 		
-		<summary>Gerenciar perfis de filtros</summary>
+		<summary><?= lang( 'ud_dl_filters_profiles' ); ?></summary>
 		
 		<div>
 			
@@ -398,7 +398,7 @@
 						
 						echo '<div class="ud-dl-filters-profiles-add-profile-wrapper vui-field-wrapper-inline">';
 						
-						echo form_label( lang( 'ud_dl_filter_profile_title' ) );
+						echo form_label( lang( 'lbl_ud_dl_filter_profile_url' ) );
 						
 						echo '<div class="vui-form-field-control vui-field-control">';
 						
@@ -637,7 +637,9 @@
 				
 			</tr>
 			
-			<?php foreach( $users_submits as $user_submit ) {
+			<?php foreach( $users_submits as & $ud_data ) {
+				
+				$ud_data = $this->sfcm->parse_ud_d_data( $ud_data, $fields_to_show, $submit_form );
 				
 				$_us_status = array();
 				$_us_status_classes = '';
@@ -670,7 +672,7 @@
 								
 								foreach( $_current_field_array as $_item ) {
 									
-									if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND $user_submit[ 'data' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
+									if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND $ud_data[ 'data' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
 										
 										if ( $_item == 'prop_is_ud_status_active' ) {
 											
@@ -749,7 +751,7 @@
 					
 					<td class="col-checkbox">
 						
-						<?= vui_el_checkbox( array( 'value' => $user_submit[ 'id' ], 'name' => 'selected_users_submits_ids[]', 'form' => 'users-submits-form', 'class' => 'multi-selection-action', ) ); ?>
+						<?= vui_el_checkbox( array( 'value' => $ud_data[ 'id' ], 'name' => 'selected_users_submits_ids[]', 'form' => 'users-submits-form', 'class' => 'multi-selection-action', ) ); ?>
 						
 					</td>
 					
@@ -780,18 +782,25 @@
 							
 						>
 							
-							<?php foreach( $user_submit[ 'parsed_data' ][ 'full' ] as $alias => $pd ) { ?>
+							<?php foreach( $ud_data[ 'parsed_data' ][ 'full' ] as $alias => $pd ) { ?>
 								
 								<?php if ( $column[ 'alias' ] == $alias ) { ?>
 									
 									<?php
+										
+										if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
+											
+											$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
+											$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
+											
+										}
 										
 										if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
 											
 											$thumb_params = array(
 												
 												'wrapper_class' => 'us-image-wrapper',
-												'src' => get_url( 'thumbs/' . $pd[ 'value' ] ),
+												'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
 												'href' => get_url( $pd[ 'value' ] ),
 												'rel' => 'us-thumb',
 												'title' => $pd[ 'value' ],
@@ -810,7 +819,7 @@
 										}
 										else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
 											
-											echo '<a href="' . $user_submit[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
+											echo '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
 											
 										}
 										else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
@@ -820,7 +829,7 @@
 										}
 										else if ( isset( $pd[ 'value' ] ) ) {
 											
-											if ( $fields[ $alias ][ 'field_type' ] == 'textarea' AND ! is_array( $user_submit[ 'data' ][ $alias ] ) ) {
+											if ( $fields[ $alias ][ 'field_type' ] == 'textarea' AND ! is_array( $ud_data[ 'data' ][ $alias ] ) ) {
 												
 												echo word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
 												
@@ -853,18 +862,18 @@
 								
 								array(
 									
-									'url' => $user_submit[ 'view_link' ],
+									'url' => $ud_data[ 'view_link' ],
 									'text' => lang( 'action_view' ),
 									'icon' => 'view',
 									'only_icon' => TRUE,
 									'class' => 'modal-users-submits',
 									'attr' => array(
 										
-										'rel' => 'submit-form-users-submits-' . $user_submit[ 'submit_form_id' ],
-										'data-mus-last-modal-group' => ( $this->input->get( 'last-modal-group' ) ? $this->input->get( 'last-modal-group' ) : 'users-submits-' . $user_submit[ 'submit_form_id' ] ),
+										'rel' => 'submit-form-users-submits-' . $ud_data[ 'submit_form_id' ],
+										'data-mus-last-modal-group' => ( $this->input->get( 'last-modal-group' ) ? $this->input->get( 'last-modal-group' ) : 'users-submits-' . $ud_data[ 'submit_form_id' ] ),
 										'data-mus-action' => 'gus',
-										'data-user-submit-id' => $user_submit[ 'id' ],
-										'data-submit-form-id' => $user_submit[ 'submit_form_id' ],
+										'data-user-submit-id' => $ud_data[ 'id' ],
+										'data-submit-form-id' => $ud_data[ 'submit_form_id' ],
 										
 									),
 									
@@ -874,15 +883,20 @@
 							
 						?>
 						
-						<?= vui_el_button( array( 'url' => $user_submit[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
+						<?= vui_el_button( array( 'url' => $ud_data[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
 						
-						<!--<?= vui_el_button( array( 'url' => $user_submit[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>-->
+						<!--<?= vui_el_button( array( 'url' => $ud_data[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>-->
 						
 					</td>
 					
 				</tr>
 				
-			<?php } ?>
+			<?php
+			
+				$ud_data = NULL;
+				unset( $user_submit );
+				
+			} ?>
 			
 		</table>
 		
@@ -1439,3 +1453,13 @@
 	
 </script>
 <?php } ?>
+
+<?php
+	
+	$submit_form = $users_submits = $fields = $columns = NULL;
+	unset( $submit_form );
+	unset( $users_submits );
+	unset( $fields );
+	unset( $columns );
+	
+?>

@@ -147,7 +147,35 @@ $this->fontdata = array(
 	"ocrb" => array(
 		'R' => "ocrb10.ttf",
 		),
-
+/* Open Sans*/
+	"opensans" => array(
+		'R' => "OpenSans-Regular.ttf",
+		'B' => "OpenSans-Bold.ttf",
+		'I' => "OpenSans-Italic.ttf",
+		'BI' => "OpenSans-BoldItalic.ttf",
+		),
+	"opensanssemibold" => array(
+		'R' => "OpenSans-Semibold.ttf",
+		'I' => "OpenSans-SemiboldItalic.ttf",
+		),
+	"opensansextrabold" => array(
+		'R' => "OpenSans-ExtraBold.ttf",
+		'I' => "OpenSans-ExtraBoldItalic.ttf",
+		),
+	"opensans" => array(
+		'R' => "OpenSans-ExtraBold.ttf",
+		'I' => "OpenSans-ExtraBoldItalic.ttf",
+		),
+	"opensanslight" => array(
+		'R' => "OpenSans-Light.ttf",
+		'I' => "OpenSans-LightItalic.ttf",
+		),
+	"opensanscondensed" => array(
+		'R' => "OpenSans-CondLight.ttf",
+		'B' => "OpenSans-CondBold.ttf",
+		'I' => "OpenSans-CondLightItalic.ttf",
+		),
+		
 /* Thai fonts */
 	"garuda" => array(
 		'R' => "Garuda.ttf",

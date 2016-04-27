@@ -3,8 +3,10 @@
 if ( ! function_exists('pdf')) {
 	function pdf($html, $filename = NULL, $destination = 'I', $dimension = NULL){
 		
+		$CI =& get_instance();
+		
 		$dimension=$dimension?$dimension:'A4-L';
-		$mpdf = new mPDF('utf-8', $dimension);
+		$CI->mpdf = new mPDF('utf-8', $dimension);
 		
 		//$mpdf->allow_charset_conversion=true;
 		//$mpdf->charset_in='iso-8859-1';
@@ -18,14 +20,14 @@ if ( ! function_exists('pdf')) {
 		//Rodapé: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
 		//$mpdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Texto no rodapé');
 		
-		$mpdf->WriteHTML($html);
+		$CI->mpdf->WriteHTML($html);
 		
 		// define um nome para o arquivo PDF
 		if( ! $filename ){
 			$filename = date("Y-m-d_his").'_impressao.pdf';
 		}
 		
-		$mpdf->Output($filename, $destination);
+		$CI->mpdf->Output($filename, $destination);
 	}
 }
 /* End of file mpdf_helper.php */

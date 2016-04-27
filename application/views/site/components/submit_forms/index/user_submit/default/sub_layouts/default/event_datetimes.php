@@ -19,7 +19,9 @@
 	
 ?>
 
-<?php if ( $_field AND isset( $fields[ $_alias ] ) ) { ?>
+<?php if ( $_field ) { 
+	
+	?>
 	
 	<div class="<?= check_var( $props[ $_alias ][ 'sf_date_field_relative_datetime' ] ) ? 'is-ud-date-prop-relative-datetime ' : ''; ?>ud-data-prop-date-format-<?= $format; ?> ud-data-prop ud-data-prop-event-datetime user-submit-event-datetime-wrapper user-submit-alias-<?= url_title( $_alias ); ?> user-submit-event-datetime-<?= url_title( $_field[ 'label' ] ); ?>">
 		

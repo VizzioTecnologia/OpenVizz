@@ -331,14 +331,14 @@
 
 		/* General params */
 		public function get_general_params(){
-
+			
 			$params = get_params_spec_from_xml(APPPATH.'controllers/admin/com_articles/general_params.xml');
-
+			
 			// carregando os layouts do tema atual
 			$layouts_articles_list = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . get_class_name( get_class() ) . DS . 'index' . DS . 'list' );
 			// carregando os layouts do diretório de views padrão
 			$layouts_articles_list = array_merge( $layouts_articles_list, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . get_class_name( get_class() ) . DS . 'index' . DS . 'list' ) );
-
+			
 			// carregando os layouts do tema atual
 			$layouts_article_detail = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . get_class_name( get_class() ) . DS . 'index' . DS . 'detail' );
 			// carregando os layouts do diretório de views padrão

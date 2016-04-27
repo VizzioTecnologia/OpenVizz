@@ -77,7 +77,7 @@
 			openEasing: 'swing',
 			type: 'ajax',
 			href: '<?= get_url( $this->articles->get_ajax_url( 'articles_search' ) ); ?>',
-			wrapCSS: 'vui-modal',
+			wrapCSS: 'vui-modal modal-articles-picker',
 			helpers:  {
 				
 				overlay : {
@@ -95,7 +95,7 @@
 				/************ montando a estrutura do diálogo modal ***********/
 				
 				this.inner.append( '<div class="modal-controls controls"><div class="modal-controls-inner controls-inner"></div></div>' );
-				this.content = '<div class="modal-content"><div id="modal-articles-categories"></div><div id="modal-articles-list">' + this.content + '</div></div>';
+				this.content = '<div class="modal-content"><div class="modal-articles-categories" id="modal-articles-categories"></div><div class="modal-articles-list" id="modal-articles-list">' + this.content + '</div></div>';
 				
 				var modalControls = $( '.modal-controls-inner' );
 				
@@ -112,6 +112,7 @@
 					type: "GET",
 					data: {
 						ajax: true,
+						ct: true
 					},
 					url: '<?= get_url( $this->articles->get_ajax_url( 'categories_search' ) ); ?>',
 					success: function(data){

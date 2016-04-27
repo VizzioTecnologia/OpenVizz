@@ -76,25 +76,13 @@
 			
 			if ( check_var( $prop_value ) AND check_var( $_prop[ 'advanced_options' ][ 'prop_is_ud_content' ] ) ) {
 				
-				$content_word_limit = check_var( $params[ 'users_submit_content_word_limit' ] ) ? $params[ 'users_submit_content_word_limit' ] : 120;
-				$word_limit_str = '...';
-				
-				if ( $content_word_limit > 0 AND strlen( $user_submit[ 't_data' ][ $_pk ] ) > $content_word_limit ) {
-					
-					$prop_value = word_limiter( htmlspecialchars_decode( $user_submit[ 't_data' ][ $_pk ] ), $content_word_limit, $word_limit_str );
-					
-				}
-				else {
-					
-					$prop_value = word_limiter( htmlspecialchars_decode( $user_submit[ 't_data' ][ $_pk ] ) );
-					
-				}
+				$prop_value = htmlspecialchars_decode( $user_submit[ 't_data' ][ $_pk ] );
 				
 			}
 			
 			if ( check_var( $prop_value ) AND check_var( $_prop[ 'advanced_options' ][ 'prop_is_ud_url' ] ) ) {
 				
-				$_tmp = preg_split( "/(;| |,)/", $prop_value );
+				$_tmp = preg_split( "/(;|,)/", $prop_value );
 				$_tmp_2 = array();
 				
 				if ( is_array( $_tmp ) ) {
@@ -192,7 +180,7 @@
 				
 				foreach ( $submit_form[ 'ud_image_prop' ] as $_alias => $_field ) {
 					
-					if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+					if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 						
 						$_us_wrapper_class[] = 'has-ud-image';
 						
@@ -234,6 +222,19 @@
 					
 				}
 				
+				foreach ( $submit_form[ 'ud_title_prop' ] as $_alias => $_field ) {
+					
+					if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
+						
+						$_us_wrapper_class[] = 'has-ud-title';
+						
+						$_ud_title_props[ $_alias ][ 'label' ] = lang( $props[ $_alias ][ 'presentation_label' ] );
+						$_ud_title_props[ $_alias ][ 'value' ] = $user_submit[ 't_data' ][ $_alias ];
+						
+					}
+					
+				}
+				
 			}
 			
 			// event datetime
@@ -267,7 +268,7 @@
 				
 				foreach ( $submit_form[ 'ud_event_datetime_prop' ] as $_alias => $_field ) {
 					
-					if ( isset( $user_submit[ 't_data' ][ $_alias ] ) ) {
+					if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 						
 						$_us_wrapper_class[] = 'has-ud-event-datetime';
 						
@@ -315,8 +316,8 @@
 					
 					foreach ( $submit_form[ 'ud_content_prop' ] as $_alias => $_field ) {
 						
-						if ( isset( $user_submit[ 't_data' ][ $_alias ] ) ) {
-							
+					if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
+						
 							$_ud_content_props[ $_alias ][ 'label' ] = lang( $props[ $_alias ][ 'presentation_label' ] );
 							$_ud_content_props[ $_alias ][ 'value' ] = $user_submit[ 't_data' ][ $_alias ];
 							
@@ -363,7 +364,7 @@
 					
 					foreach ( $submit_form[ 'ud_other_info_prop' ] as $_alias => $_field ) {
 						
-						if ( isset( $user_submit[ 't_data' ][ $_alias ] ) ) {
+						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 							
 							$_ud_other_info_props[ $_alias ][ 'label' ] = isset( $props[ $_alias ][ 'presentation_label' ] ) ? lang( $props[ $_alias ][ 'presentation_label' ] ) : '';
 							$_ud_other_info_props[ $_alias ][ 'value' ] = $user_submit[ 't_data' ][ $_alias ];
@@ -411,7 +412,7 @@
 					
 					foreach ( $submit_form[ 'ud_status_prop' ] as $_alias => $_field ) {
 						
-						if ( isset( $user_submit[ 't_data' ][ $_alias ] ) ) {
+						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 							
 							$_ud_status_props[ $_alias ][ 'label' ] = lang( $props[ $_alias ][ 'presentation_label' ] );
 							$_ud_status_props[ $_alias ][ 'value' ] = $user_submit[ 't_data' ][ $_alias ];
@@ -532,45 +533,19 @@
 			
 			echo '<div class="item ud-data ' . $_us_wrapper_class . ' ' . $_us_status_classes . '">';
 			
-			echo '<div class="item ud-event-datetimes-wrapper">';
-			
-			foreach ( $_ud_event_datetime_props as $_alias => $_field ) {
+				echo '<pre>' . print_r( $_ud_image_props, TRUE ) . '</pre>';
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
-					
-					if ( $_field AND isset( $props[ $_alias ] ) ) {
-						
-						require( 'event_datetimes.php' );
-						
-					}
-					
-				}
-				
-			}
-			
-			echo '</div>';
-			
 			echo '<div class="item ud-images-wrapper">';
 			
 			foreach ( $_ud_image_props as $_alias => $_field ) {
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 					
-					//echo '<pre>' . print_r( $user_submit, TRUE ) . '</pre>';
-					
-					$thumb_params = array(
+					if ( $_field AND isset( $props[ $_alias ] ) ) {
 						
-						'wrapper_class' => 'us-image-wrapper',
-						'src' => get_url( $user_submit[ 't_data' ][ $_alias . '_thumb_default' ] ),
-						'href' => get_url( $user_submit[ 't_data' ][ $_alias ] ),
-						'rel' => 'us-thumb',
-						'title' => $user_submit[ 't_data' ][ $_alias ],
-						'modal' => TRUE,
-						'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_' . environment() ] ) ? TRUE : FALSE,
+						require( 'images.php' );
 						
-					);
-					
-					echo vui_el_thumb( $thumb_params );
+					}
 					
 				}
 				
@@ -582,7 +557,7 @@
 			
 			foreach ( $_ud_title_props as $_alias => $_field ) {
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 					
 					if ( $_field AND isset( $props[ $_alias ] ) ) {
 						
@@ -596,11 +571,29 @@
 			
 			echo '</div>';
 			
+			echo '<div class="item ud-event-datetimes-wrapper">';
+			
+			foreach ( $_ud_event_datetime_props as $_alias => $_field ) {
+				
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
+					
+					if ( $_field AND isset( $props[ $_alias ] ) ) {
+						
+						require( 'event_datetimes.php' );
+						
+					}
+					
+				}
+				
+			}
+			
+			echo '</div>';
+			
 			echo '<div class="item ud-contents-wrapper">';
 			
 			foreach ( $_ud_content_props as $_alias => $_field ) {
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 					
 					if ( $_field AND isset( $props[ $_alias ] ) ) {
 						
@@ -620,7 +613,7 @@
 			
 			foreach ( $_ud_other_info_props as $_alias => $_field ) {
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 					
 					if ( $_field AND isset( $props[ $_alias ] ) ) {
 						
@@ -640,7 +633,7 @@
 			
 			foreach ( $_ud_status_props as $_alias => $_field ) {
 				
-				if ( check_var( $user_submit[ 't_data' ][ $_alias ] ) ) {
+				if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'detail' ] ) AND isset( $user_submit[ 't_data' ][ $_alias ] ) AND ! empty( $user_submit[ 't_data' ][ $_alias ] ) ) {
 					
 					if ( $_field AND isset( $props[ $_alias ] ) ) {
 						

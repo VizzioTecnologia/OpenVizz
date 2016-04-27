@@ -57,7 +57,9 @@
 		
 	?></div>
 	
-	<?php if ( check_var( $parsed_params[ 'articles_list_readmore_link_url' ] ) ) { ?>
+	<?php
+	
+	if ( check_var( $parsed_params[ 'use_articles_list_readmore_link' ] ) AND check_var( $parsed_params[ 'articles_list_readmore_link_url' ] ) ) { ?>
 	<div class="module-read-more read-more category-read-more-link-wrapper">
 		
 		<div class="s1 inner">

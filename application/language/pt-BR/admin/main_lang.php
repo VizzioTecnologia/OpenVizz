@@ -16,7 +16,7 @@ $lang['system_config'] = 																		"Configurações do sistema";
 
 $lang['log_files'] = 																			"Arquivos de log";
 $lang['log_threshold'] = 																		"Log de dados";
-$lang['tip_log_threshold'] = 																	"<p>Defina a política para gravação dos logs.</p><ul><li><strong>Desligado:</strong> Desliga o recurso de gravação de logs</li><li><strong>Erros:</strong> Registra apenas mensagens de erros</li><li><strong>Depuração:</strong> Registra apenas mensagens de erros e depuração</li><li><strong>Informações:</strong> Registra mensagens de erros, depuração e informacionais</li><li><strong>Todas as mensagens:</strong> Registra todas as mensagens</li></ul><p>Geralmente, para sites online, recomenda-se ativar apenas o registro de erros. As demais opções são úteis para sistemas em desenvolvimento.</p><p class=\"important\">Para utilizar o recurso de registro de logs, o diretório alvo deve ser gravável.</p>";
+$lang['tip_log_threshold'] = 																	"<p>Defina a política para gravação dos logs.</p><ul><li><strong>Desligado:</strong> Desliga o recurso de gravação de logs</li><li><strong>Mensagens de erros:</strong> Registra apenas mensagens de erros</li><li><strong>Mensagens de depuração:</strong> Registra apenas mensagens de erros e depuração</li><li><strong>Mensagens de informativas:</strong> Registra mensagens de erros, depuração e informativas</li><li><strong>Todas as mensagens:</strong> Registra todas as mensagens</li></ul><p>Geralmente, para sites online, recomenda-se ativar apenas o registro de erros. As demais opções são úteis para sistemas em desenvolvimento.</p><p class=\"important\">Para utilizar o recurso de registro de logs, o diretório alvo deve ser gravável.</p>";
 $lang['log_path'] = 																			"Diretório dos logs";
 $lang['tip_log_path'] = 																		"<p>Define o caminho onde salvar os arquivos de logs.</p><p>Deixe em branco a menos que deseje usar um caminho diferente do padrão <strong>(application/logs)</strong>.</p><p>Informe o caminho respeitando o formato <strong>/caminho/para/o/diretorio/de/logs</strong></p>";
 $lang['log_date_format'] = 																		"Formato das datas dos logs";
@@ -59,6 +59,9 @@ $lang['site_name'] = 																			"Nome do site";
 $lang['author_name'] = 																			"Nome do autor padrão";
 $lang['site_copyright'] = 																		"Direitos autorais do site";
 $lang['site_language'] = 																		"Idioma do site";
+$lang['config_to_developers'] = 																"Para desenvolvedores";
+$lang['site_enable_profiler'] = 																"Ativar analizador";
+$lang['tip_site_enable_profiler'] = 															"Ativar ou não o analizador para desenvolvedores";
 
 $lang['url_title_percent'] = 																	"porcento";
 
@@ -74,6 +77,10 @@ $lang['meta_scripts_declaration_custom'] = 														"Declarações javascri
 
 $lang['access_denied_media_management'] = 														"Você não possui privilégios suficientes para gerenciar mídia!";
 $lang['access_denied_admin_config_management'] = 												"Você não possui privilégios suficientes para gerenciar as configurações globais do sistema!";
+
+$lang['admin_privileges'] = 																	"Privilégios administrativos";
+$lang['site_can_view_profiler'] = 																"Pode visualizar os dados do analizador no site";
+$lang['tip_site_can_view_profiler'] = 															"Se marcado, o usuário terá acesso aos dados do analizador no site";
 
 
 

@@ -8,6 +8,12 @@
 		
 	}
 	
+	if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) ) {
+		
+		$users_fields = $this->current_component[ 'params' ][ 'users_fields' ];
+		
+	}
+	
 ?>
 
 <section class="submit-form <?= @$params['page_class']; ?>">
@@ -71,12 +77,6 @@
 		</header>
 		<?php } ?>
 		
-		<?php
-		
-		$post = $this->input->post();
-		
-		?>
-		
 		<?= form_open_multipart( get_url( $this->uri->ruri_string() ), array( 'id' => 'user-submit-form', ) ); ?>
 			
 			<?php foreach ( $fields as $key => $field ) {
@@ -111,19 +111,69 @@
 								
 								<?php
 									
-									echo vui_el_input_text(
+									if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file' ] ) ) {
 										
-										array(
+										echo vui_el_input_file(
 											
-											'text' => lang( $field[ 'presentation_label' ] ),
-											'id' => 'submit-form-' . $field_name,
-											'value' => $field_value,
-											'name' => $formatted_field_name,
-											'class' => 'form-element submit-form submit-form-' . $field_name,
+											array(
+												
+												'text' => lang( $field[ 'presentation_label' ] ),
+												'id' => 'submit-form-' . $field_name,
+												'name' => $formatted_field_name,
+												'class' => 'form-element submit-form submit-form-' . $field_name,
+												
+											)
 											
-										)
+										);
 										
-									);
+										if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file_max_size' ] ) ) {
+											
+											echo '<div class="submit-form-field-description">';
+											echo lang( 'ud_data_prop_ud_file_max_size_desc', NULL, format_file_size( kilobytes_to_b( $field[ 'advanced_options' ][ 'prop_is_ud_file_max_size' ] ) ) );
+											echo '</div>';
+											
+										}
+										
+										if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file_allowed_types' ] ) ) {
+											
+											echo '<div class="submit-form-field-description">';
+											
+											$allowed_types = explode( '|', $field[ 'advanced_options' ][ 'prop_is_ud_file_allowed_types' ] );
+											
+											$_allowed_types = '';
+											
+											foreach( $allowed_types as $a_type ) {
+												
+												$_allowed_types[] = '.' . strtolower( trim( $a_type ) );
+												
+											}
+											
+											$allowed_types = join( ', ', $_allowed_types );
+											
+											echo lang( 'ud_data_prop_ud_file_allowed_types_desc', NULL, $allowed_types );
+											
+											echo '</div>';
+											
+										}
+										
+									}
+									else {
+										
+										echo vui_el_input_text(
+											
+											array(
+												
+												'text' => lang( $field[ 'presentation_label' ] ),
+												'id' => 'submit-form-' . $field_name,
+												'value' => $field_value,
+												'name' => $formatted_field_name,
+												'class' => 'form-element submit-form submit-form-' . $field_name,
+												
+											)
+											
+										);
+										
+									}
 									
 								?>
 								
@@ -145,7 +195,11 @@
 							
 							<?php
 								
-								echo form_label( lang( $field[ 'label' ] ) . ( check_var( $field[ 'field_is_required' ] ) ? ' <span class="submit-form-required">*</span> ' . $error : ' ' . $error ) );
+								if ( ( in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) AND ( check_var( $field[ 'options' ] ) OR check_var( $field[ 'options_from_users_submits' ] ) ) ) OR ! ( in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) AND ! ( check_var( $field[ 'options' ] ) OR check_var( $field[ 'options_from_users_submits' ] ) ) ) OR ! in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) ) {
+									
+									echo form_label( lang( $field[ 'label' ] ) . ( check_var( $field[ 'field_is_required' ] ) ? ' <span class="submit-form-required">*</span> ' . $error : ' ' . $error ) );
+									
+								}
 								
 								$options = array();
 								
@@ -218,14 +272,23 @@
 								}
 								else {
 									
-									$options_temp = explode( "\n" , $field[ 'options' ] );
-									
-									foreach( $options_temp as $option ) {
+									if ( check_var( $field[ 'options' ] ) ) {
 										
-										$options[ $option ] = $option;
+										$options_temp = explode( "\n" , $field[ 'options' ] );
 										
-									};
-									
+										foreach( $options_temp as $option ) {
+											
+											$options[ $option ] = $option;
+											
+										};
+										
+									}
+									else {
+										
+										$options[ 1 ] = $field[ 'label' ];
+										
+									}
+								
 								}
 								
 							?>
@@ -611,6 +674,7 @@
 										
 										array(
 											
+											'button_type' => 'button',
 											'text' => lang( $field[ 'label' ] ),
 											'id' => 'submit-form-' . $field_name,
 											'value' => lang( $field[ 'label' ] ),
@@ -628,7 +692,7 @@
 									<div class="submit-form-field-description">
 										
 										<?= $field[ 'description' ]; ?>
-										
+
 									</div>
 									
 								<?php } ?>
@@ -670,7 +734,7 @@
 										
 									<?php } ?>
 									
-								<?php } else if ( $field[ 'conditional_field_cond' ] === 'different' AND $field[ 'conditional_field_values' ] === '' ) { ?>
+								<?php } else if ( $field[ 'conditional_field_cond' ] === 'different' AND ( ! isset( $field[ 'conditional_field_values' ] ) OR $field[ 'conditional_field_values' ] === '' ) ) { ?>
 									
 									<?php if ( in_array( $fields[ $field[ 'conditional_target_field' ] ][ 'field_type' ], array( 'checkbox', ) ) ) { ?>
 										
@@ -701,7 +765,7 @@
 										if ( $( '[name="<?= $target_formatted_field_name; ?>"]' ).val() !== '<?= $field[ 'conditional_field_values' ]; ?>' ) {
 										
 									<?php } ?>
-									
+										
 								<?php } ?>
 									
 									$( '#<?= $target_field_id; ?>' ).show();
@@ -809,6 +873,120 @@
 			}
 			
 		});
+		
+		<?php if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) ) { ?>
+		
+		// Verifica se CPF existe no BD
+		$('.submit-form-cpf').on('change','',function()
+		{
+			var sCPF = $('.submit-form-cpf');
+			if($.isNumeric(sCPF.val()) && sCPF.val().length ==11)
+			{
+				
+				console.log( 'CPF: ' + sCPF.val() );
+				
+				$.ajax({
+					type: 'post',
+					url: 'ajax/check_cpf',
+					data:
+					{
+						value:sCPF.val(),
+						field:sCPF.attr('name'),
+						alias:sCPF.attr('placeholder')
+					},
+					dataType: 'json'
+				}).done(function( retorno ){
+					
+					console.log( 'Retorno ajax: ' + retorno );
+					
+					console.log( 'user_id: ' + retorno.user_id );
+					
+					if ( retorno.user_id ) {
+					
+						console.log( retorno.email );
+						
+						<?php
+							
+							foreach( $users_fields as $uf_alias => $user_field ) {
+								
+								foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+									
+									if ( check_var( $field[ 'is_user_field' ] ) AND check_var( $field[ 'user_field' ] ) AND $field[ 'user_field' ] == $uf_alias ) {
+										
+										echo '$( \'#submit-form-' . $field[ 'alias' ] . '\' ).val( retorno.' . $uf_alias . ' );';
+										
+									}
+									
+								}
+								
+							}
+							
+						?>
+						
+						if(retorno.birthday)
+						{
+							var birthday = retorno.birthday.split('-');
+							$('#submit-form-birthday-d').val(birthday[2]);
+							$('#submit-form-birthday-d').attr('disabled','disabled');
+							$('input#submit-form-birthday-d').remove();
+							$('<input>').attr(
+							{
+								type: 'hidden',
+								id: 'submit-form-birthday-d',
+								name: 'form[birthday][d]',
+								value: birthday[2]
+							}).appendTo('#container-birthday');
+							
+							$('#submit-form-birthday-m').val(birthday[1]);
+							$('#submit-form-birthday-m').attr('disabled','disabled');
+							$('input#submit-form-birthday-m').remove();
+							$('<input>').attr(
+							{
+								type: 'hidden',
+								id: 'submit-form-birthday-m',
+								name: 'form[birthday][m]',
+								value: birthday[1]
+							}).appendTo('#container-birthday');
+							
+							$('#submit-form-birthday-y').val(birthday[0]);
+							$('#submit-form-birthday-y').attr('disabled','disabled');
+							$('input#submit-form-birthday-y').remove();
+							$('<input>').attr(
+							{
+								type: 'hidden',
+								id: 'submit-form-birthday-y',
+								name: 'form[birthday][y]',
+								value: birthday[0]
+							}).appendTo('#container-birthday');
+						}
+						$('#submit-form-genre').val(retorno.genre);
+						$('#submit-form-genre').attr('disabled','disabled');
+						$('#genre').remove();
+						$('<input>').attr(
+						{
+							type: 'hidden',
+							id: 'genre',
+							name: 'form[genre]',
+							value: retorno.genre
+						}).appendTo('#container-genre');
+						
+						$('#submit-form-place_of_birth').val(retorno.place_of_birth);
+						$('#submit-form-place_of_birth').attr('readonly','readonly');
+						
+						$('#user_id').remove();
+						$('<input>').attr(
+						{
+							type: 'hidden',
+							id: 'user_id',
+							name: 'user_id',
+							value: retorno.user_id
+						}).appendTo('#user-submit-form');
+					}
+				});
+			}
+		});
+		
+		<?php } ?>
 		
 	});
 	

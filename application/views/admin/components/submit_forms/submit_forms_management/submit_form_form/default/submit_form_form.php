@@ -9,6 +9,14 @@
 
 	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : date( 'H:i:s', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) );
 	
+	if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) ) {
+		
+		$users_fields = $this->current_component[ 'params' ][ 'users_fields' ];
+		
+	}
+	
+	
+	
 ?>
 
 
@@ -219,6 +227,7 @@
 								array(
 									
 									'text' => lang( 'submit_check_all_fields_available_on_admin' ),
+									'title' => lang( 'tip_submit_check_all_fields_available_on_admin' ),
 									'icon' => 'view',
 									'button_type' => 'button',
 									'name' => 'submit_check_all_fields_available_on_admin',
@@ -234,6 +243,7 @@
 								array(
 									
 									'text' => lang( 'submit_check_all_fields_available_on_site' ),
+									'title' => lang( 'tip_submit_check_all_fields_available_on_site' ),
 									'icon' => 'view',
 									'button_type' => 'button',
 									'name' => 'submit_check_all_fields_available_on_site',
@@ -249,10 +259,27 @@
 								array(
 									
 									'text' => lang( 'submit_check_all_fields_visible_on_site_list' ),
-									'icon' => 'view',
+									'title' => lang( 'tip_submit_check_all_fields_visible_on_site_list' ),
+									'icon' => 'list',
 									'button_type' => 'button',
 									'name' => 'submit_check_all_fields_visible_on_site_list',
 									'id' => 'submit-check-all-fields-visible-on-site-list',
+									'only_icon' => TRUE,
+									
+								)
+								
+							);
+							
+							echo vui_el_button(
+								
+								array(
+									
+									'text' => lang( 'submit_check_all_fields_visible_on_site_detail' ),
+									'title' => lang( 'tip_submit_check_all_fields_visible_on_site_detail' ),
+									'icon' => 'detail',
+									'button_type' => 'button',
+									'name' => 'submit_check_all_fields_visible_on_site_detail',
+									'id' => 'submit-check-all-fields-visible-on-site-detail',
 									'only_icon' => TRUE,
 									
 								)
@@ -301,9 +328,11 @@
 												'id' => 'field-' . $current_field . '_admin-' . $key,
 												'name' => 'fields[' . $key . '][' . $current_field . '][admin]',
 												'class' => 'sf-field-' . $current_field . '_admin',
+												'icon' => 'view',
+												'icon_as_check' => TRUE,
 												'value' => 'admin',
-												'text' => lang( 'available_on_admin' ),
-												'title' => lang( 'tip_' . $current_field . '_admin' ),
+												'text' => lang( 'ud_available_on_admin' ),
+												'title' => lang( 'tip_ud_available_on_admin' ),
 												'checked' => $checked,
 												
 											);
@@ -334,9 +363,11 @@
 												'id' => 'field-' . $current_field . '_site-' . $key,
 												'name' => 'fields[' . $key . '][' . $current_field . '][site]',
 												'class' => 'sf-field-' . $current_field . '_site',
+												'icon' => 'view',
+												'icon_as_check' => TRUE,
 												'value' => 'site',
-												'text' => lang( 'available_on_site' ),
-												'title' => lang( 'tip_' . $current_field . '_site' ),
+												'text' => lang( 'ud_available_on_site' ),
+												'title' => lang( 'tip_ud_available_on_site' ),
 												'checked' => $checked,
 												
 											);
@@ -347,39 +378,181 @@
 										
 									</div><?php
 									
-									$current_field = 'visibility';
-									?><div class="vui-field-wrapper-inline">
+									if ( ! in_array( $field[ 'field_type' ], array( 'button' ) ) ) {
 										
-										<?php
+										$current_field = 'visibility';
+										?><div class="vui-field-wrapper-inline">
 											
-											if ( isset( $post[ 'submit_check_all_fields_visible_on_site_list' ] ) ) {
+											<?php
 												
-												$checked = TRUE;
+												if ( isset( $post[ 'submit_check_all_fields_visible_on_site_list' ] ) ) {
+													
+													$checked = TRUE;
+													
+												}
+												else {
+													
+													$checked = ( isset( $field[ $current_field ][ 'site' ][ 'list' ] ) ) ? ( bool ) $field[ $current_field ][ 'site' ][ 'list' ] : FALSE;
+													
+												}
+												
+												$options = array(
+													
+													'id' => 'field-' . $current_field . '_site-' . $key,
+													'name' => 'fields[' . $key . '][' . $current_field . '][site][list]',
+													'class' => 'sf-field-' . $current_field . '_site_list',
+													'icon' => 'list',
+													'icon_as_check' => TRUE,
+													'value' => 1,
+													'text' => lang( 'ud_visible_on_site_list' ),
+													'title' => lang( 'tip_ud_visible_on_site_list' ),
+													'checked' => $checked,
+													
+												);
+												
+												echo vui_el_checkbox( $options );
+												
+											?>
+											
+										</div><?php
+										
+										?><div class="vui-field-wrapper-inline">
+											
+											<?php
+												
+												if ( isset( $post[ 'submit_check_all_fields_visible_on_site_detail' ] ) ) {
+													
+													$checked = TRUE;
+													
+												}
+												else {
+													
+													$checked = ( isset( $field[ $current_field ][ 'site' ][ 'detail' ] ) ) ? ( bool ) $field[ $current_field ][ 'site' ][ 'detail' ] : FALSE;
+													
+												}
+												
+												$options = array(
+													
+													'id' => 'field-' . $current_field . '_site-' . $key,
+													'name' => 'fields[' . $key . '][' . $current_field . '][site][detail]',
+													'class' => 'sf-field-' . $current_field . '_site_detail',
+													'icon' => 'detail',
+													'icon_as_check' => TRUE,
+													'value' => 1,
+													'text' => lang( 'ud_visible_on_site_detail' ),
+													'title' => lang( 'tip_ud_visible_on_site_detail' ),
+													'checked' => $checked,
+													
+												);
+												
+												echo vui_el_checkbox( $options );
+												
+											?>
+											
+										</div><?php
+											
+										if ( ! in_array( $field[ 'field_type' ], array( 'html' ) ) ) {
+											
+											if ( check_var( $users_fields ) ) {
+												
+												$current_field = 'is_user_field';
+												
+												echo '<div class="vui-field-wrapper-inline">';
+												
+												echo '<div class="vui-field-wrapper">';
+												
+												echo vui_el_checkbox(
+													
+													array(
+														
+														'text' => lang( 'ud_is_user_field' ),
+														'title' => lang( 'tip_ud_is_user_field' ),
+														'name' => 'fields[' . $key . '][' . $current_field . ']',
+														'checked' => isset( $field[ $current_field ] ) ? TRUE : FALSE,
+														'class' => 'ud-field-' . $current_field,
+														'icon' => 'user',
+														'icon_as_check' => TRUE,
+														'value' => 1,
+														'id' => 'field-' . $current_field . '-' . $key,
+														
+													)
+													
+												);
+												
+												echo '</div>';
+												
+												// ------------------------
+												// Users fields options
+												
+												$current_field = 'user_field';
+												
+												$users_fields_options = array(
+													
+													'' => lang( 'combobox_select' ),
+													
+												);
+												
+												foreach( $users_fields as $uf_alias => $user_field ) {
+													
+													$users_fields_options[ $uf_alias ] = $user_field[ 'title' ];
+													
+												}
+												
+												echo '<div class="vui-field-wrapper">';
+												
+												echo form_label( lang( 'ud_select_user_field' ) );
+												
+												echo vui_el_dropdown(
+													
+													array(
+														
+														'name' => 'fields[' . $key . '][' . $current_field . ']',
+														'options' => $users_fields_options,
+														'value' => isset( $field[ $current_field ] ) ? $field[ $current_field ] : $field_type_default,
+														'class' => 'ud-field-' . $current_field,
+														'id' => 'field-' . $current_field . '-' . $key,
+														
+													)
+													
+												);
+												
+												// Users fields options
+												// ------------------------
+												
+												echo '</div>';
+												
+												echo '</div>';
 												
 											}
-											else {
-												
-												$checked = ( isset( $field[ $current_field ][ 'site' ][ 'list' ] ) ) ? ( bool ) $field[ $current_field ][ 'site' ][ 'list' ] : FALSE;
-												
-											}
 											
-											$options = array(
+											$current_field = 'is_unique';
+											?><!--<div class="vui-field-wrapper-inline">
 												
-												'id' => 'field-' . $current_field . '_site-' . $key,
-												'name' => 'fields[' . $key . '][' . $current_field . '][site][list]',
-												'class' => 'sf-field-' . $current_field . '_site_list',
-												'value' => 1,
-												'text' => lang( 'visible_on_site_list' ),
-												'title' => lang( 'tip_' . $current_field . '_site_list' ),
-												'checked' => $checked,
+												<?php
+													
+													echo vui_el_checkbox(
+														
+														array(
+															
+															'text' => lang( $current_field ),
+															'title' => lang( 'tip_' . $current_field ),
+															'name' => 'fields[' . $key . '][' . $current_field . ']',
+															'checked' => isset( $field[ $current_field ] ) ? TRUE : FALSE,
+															'class' => 'ud-field-' . $current_field,
+															'value' => 1,
+															'id' => 'field-' . $current_field . '-' . $key,
+															
+														)
+														
+													);
+													
+												?>
 												
-											);
+											</div>--><?php
 											
-											echo vui_el_checkbox( $options );
-											
-										?>
+										}
 										
-									</div><?php
+									}
 									
 									echo '<hr />';
 									
@@ -1477,7 +1650,7 @@
 										
 									}
 									
-									if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', 'date' ) ) ){
+									if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html' ) ) ){
 										
 										echo '<details class="validation-rules-fields-wrapper">';
 										echo '<summary>';
@@ -1524,6 +1697,7 @@
 											'alpha' => lang( 'submit_forms_validation_rule_alpha' ),
 											'alpha_numeric' => lang( 'submit_forms_validation_rule_alpha_numeric' ),
 											'alpha_dash' => lang( 'submit_forms_validation_rule_alpha_dash' ),
+											'alpha_space' => lang( 'ud_validation_rule_alpha_space' ),
 											'alpha_dash_space' => lang( 'submit_forms_validation_rule_alpha_dash_space' ),
 											'numeric' => lang( 'submit_forms_validation_rule_numeric' ),
 											'integer' => lang( 'submit_forms_validation_rule_integer' ),
@@ -1536,6 +1710,7 @@
 											'uppercase' => lang( 'submit_forms_validation_rule_uppercase' ),
 											'lowercase' => lang( 'submit_forms_validation_rule_lowercase' ),
 											'mask' => lang( 'ud_validation_rule_mask' ),
+											'check_cpf' => lang( 'ud_validation_cpf_ptbr' ),
 											
 										);
 										
@@ -1621,7 +1796,7 @@
 																	
 																	'name' => 'fields[' . $key . '][field_' . $__current_field . ']',
 																	'options' => $options,
-																	'value' => isset( $field[ 'field_' . $__current_field ] ) ? $field[ 'field_' . $__current_field ] : $field_type_default,
+																	'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : $field_type_default,
 																	'class' => 'sf-field-' . $__current_field,
 																	'id' => 'field-' . $__current_field . '-' . $key,
 																	'title' => lang( 'tip_field_' . $__current_field ),
@@ -1752,7 +1927,8 @@
 										
 										$options =  array(
 											
-											'prop_is_ud_image' => lang( 'ud_' . $current_field . '_prop_is_ud_image' ),
+											'prop_is_ud_image' => lang( 'ud_advanced_options_prop_is_ud_image' ),
+											'prop_is_ud_file' => lang( 'ud_advanced_options_prop_is_ud_file' ),
 											'prop_is_ud_title' => lang( 'ud_advanced_options_prop_is_ud_title' ),
 											'prop_is_ud_content' => lang( 'ud_advanced_options_prop_is_ud_content' ),
 											'prop_is_ud_other_info' => lang( 'ud_advanced_options_prop_is_ud_other_info' ),
@@ -1762,13 +1938,21 @@
 											
 										);
 										
-										
 										if ( in_array( $field[ 'field_type' ], array( 'date', ) ) ) {
 											
 											unset( $options[ 'prop_is_ud_image' ] );
+											unset( $options[ 'prop_is_ud_file' ] );
+											unset( $options[ 'prop_is_ud_email' ] );
+											unset( $options[ 'prop_is_ud_url' ] );
 											unset( $options[ 'prop_is_ud_status' ] );
 											
 											$options[ 'prop_is_ud_event_datetime' ] = lang( 'ud_advanced_options_prop_is_ud_event_datetime' );
+											
+										}
+										
+										if ( ! in_array( $field[ 'field_type' ], array( 'input_text', ) ) ) {
+											
+											unset( $options[ 'prop_is_ud_file' ] );
 											
 										}
 										
@@ -1787,7 +1971,7 @@
 														'checked' => isset( $field[ $current_field ][ $k ] ) ? TRUE : ( ( isset( $field[ $current_field ] ) AND in_array( $k, $field[ $current_field ] ) ) ? TRUE : FALSE ),
 														'class' => 'sf-field-' . $current_field . '_' . $k,
 														'value' => $k,
-														'id' => 'field-' . $current_field . '-' . $key,
+														'id' => 'field-' . $current_field . '_' . $k . '-' . $key,
 														
 													)
 													
@@ -1796,7 +1980,8 @@
 												//------------------------------------------------------
 												// prop_is_ud_image
 												
-												if ( $k == 'prop_is_ud_image' AND isset( $field[ $current_field ][ $k ] ) ) {
+												if ( $k == 'prop_is_ud_image' ) {
+// 												if ( $k == 'prop_is_ud_image' AND isset( $field[ $current_field ][ $k ] ) ) {
 													
 													$this->plugins->load(
 														
@@ -1809,85 +1994,6 @@
 																'modal_rf_file_picker',
 																
 															),
-															
-														)
-														
-													);
-													
-													//------------------------------------------------------
-													// prop_is_ud_image_upload_dir
-													
-													$current_field_sub = 'prop_is_ud_image_upload_dir';
-													
-													echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
-													
-													if ( ! isset( $directories_options ) ) {
-														
-														$_directories_options = $this->mcm->dir_tree( array( 'dir' => MEDIA_PATH ) );
-														
-														if ( ! empty( $_directories_options ) ) {
-															
-															foreach ( $_directories_options as $_k => $_item ){
-																
-																$rpath = str_replace( BASE_PATH, '', $_k );
-																
-																$directories_options[ $rpath ] = $_item;
-																
-															}
-															
-														}
-														
-													}
-													
-													if ( ! empty( $_directories_options ) ) {
-														
-														echo vui_el_dropdown(
-																
-															array(
-																
-																'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
-																'options' => $directories_options,
-																'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : '',
-																'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
-																'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
-																'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
-																'title' => lang( 'tip_sf_' . $current_field . '_' . $current_field_sub ),
-																
-															)
-															
-														);
-														
-													}
-													else {
-														
-														echo vui_el_button(
-															
-															array(
-																
-																'button_type' => 'anchor',
-																'text' => lang( 'ud_no_directories' ),
-																
-															)
-															
-														);
-														
-													}
-													
-													//------------------------------------------------------
-													// prop_is_ud_image_email_send_attachment
-													
-													$current_field_sub = 'prop_is_ud_image_email_send_attachment';
-													
-													echo vui_el_checkbox(
-														
-														array(
-															
-															'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
-															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
-															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
-															'checked' => isset( $field[ $current_field ][ $current_field_sub ] ) ? TRUE : FALSE,
-															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
-															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
 															
 														)
 														
@@ -1926,6 +2032,172 @@
 															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
 															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
 															'checked' => isset( $field[ $current_field ][ $current_field_sub ] ) ? TRUE : FALSE,
+															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+															
+														)
+														
+													);
+													
+												}
+												
+												//------------------------------------------------------
+												// prop_is_ud_file
+												
+												if ( $k == 'prop_is_ud_file' ) {
+													
+													$this->plugins->load(
+														
+														array(
+															
+															'names' => array(
+																
+																'image_cropper',
+																'fancybox',
+																'modal_rf_file_picker',
+																
+															),
+															
+														)
+														
+													);
+													
+													//------------------------------------------------------
+													// prop_is_ud_file_upload_dir
+													
+													$current_field_sub = 'prop_is_ud_file_upload_dir';
+													
+													echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
+													
+													if ( ! isset( $directories_options ) ) {
+														
+														$_directories_options = $this->mcm->dir_tree( array( 'dir' => MEDIA_PATH ) );
+														
+														if ( ! empty( $_directories_options ) ) {
+															
+															foreach ( $_directories_options as $_k => $_item ){
+																
+																$rpath = str_replace( BASE_PATH, '', $_k );
+																
+																$directories_options[ $rpath ] = $_item;
+																
+															}
+															
+														}
+														
+													}
+													
+													if ( ! empty( $_directories_options ) ) {
+														
+														echo vui_el_dropdown(
+															
+															array(
+																
+																'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+																'options' => $directories_options,
+																'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : '',
+																'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+																'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+																'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
+																'title' => lang( 'tip_sf_' . $current_field . '_' . $current_field_sub ),
+																
+															)
+															
+														);
+														
+													}
+													else {
+														
+														echo vui_el_button(
+															
+															array(
+																
+																'button_type' => 'anchor',
+																'text' => lang( 'ud_no_directories' ),
+																
+															)
+															
+														);
+														
+													}
+													
+													//------------------------------------------------------
+													// prop_is_ud_file_overwrite
+													
+													$current_field_sub = 'prop_is_ud_file_overwrite';
+													
+													echo vui_el_checkbox(
+														
+														array(
+															
+															'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
+															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
+															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+															'checked' => isset( $field[ $current_field ][ $current_field_sub ] ) ? TRUE : FALSE,
+															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+															
+														)
+														
+													);
+													
+													//------------------------------------------------------
+													// prop_is_ud_file_email_send_attachment
+													
+													$current_field_sub = 'prop_is_ud_file_email_send_attachment';
+													
+													echo vui_el_checkbox(
+														
+														array(
+															
+															'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
+															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
+															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+															'checked' => isset( $field[ $current_field ][ $current_field_sub ] ) ? TRUE : FALSE,
+															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+															
+														)
+														
+													);
+													
+													//------------------------------------------------------
+													// file size limit
+													
+													$current_field_sub = 'prop_is_ud_file_max_size';
+													
+													echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
+													
+													echo vui_el_input_text(
+														
+														array(
+															
+															'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
+															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
+															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+															'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : 2048,
+															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+															
+														)
+														
+													);
+													
+													//------------------------------------------------------
+													// allowed types
+													
+													$current_field_sub = 'prop_is_ud_file_allowed_types';
+													
+													echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
+													
+													echo vui_el_input_text(
+														
+														array(
+															
+															'text' => lang( 'ud_' . $current_field . '_' . $current_field_sub ),
+															'title' => lang( 'tip_ud_' . $current_field . '_' . $current_field_sub ),
+															'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+															'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : '',
 															'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
 															'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
 															
@@ -2216,7 +2488,7 @@
 										?>
 										
 										<?= vui_el_dropdown(
-												
+											
 											array(
 												
 												'name' => 'fields[' . $key . '][' . $current_field . ']',
@@ -2247,25 +2519,41 @@
 												
 											);
 											
-											foreach( $submit_forms as & $_submit_form ) {
+											if ( isset( $field[ 'options_from_users_submits' ] ) ) {
 												
-												if ( check_var( $field[ 'options_from_users_submits' ] ) AND $field[ 'options_from_users_submits' ] == $_submit_form[ 'id' ] ) {
+												if ( ! isset( $users_submits_options_cache[ $field[ 'options_from_users_submits' ] ] ) ) {
 													
-													foreach( $_submit_form[ 'fields' ] as $_field ) {
+													foreach( $submit_forms as & $_submit_form ) {
 														
-														if ( ! in_array( $_field[ 'field_type' ], array( 'html', 'button', ) ) ) {
+														if ( check_var( $field[ 'options_from_users_submits' ] ) AND $field[ 'options_from_users_submits' ] == $_submit_form[ 'id' ] ) {
 															
-															$field_alias = isset( $_field[ 'alias' ] ) ? $_field[ 'alias' ] : FALSE;
-															
-															if ( $field_alias ) {
+															foreach( $_submit_form[ 'fields' ] as $_field ) {
 																
-																$options[ $field_alias ] = $_field[ 'label' ];
+																if ( ! in_array( $_field[ 'field_type' ], array( 'html', 'button', ) ) ) {
+																	
+																	$field_alias = isset( $_field[ 'alias' ] ) ? $_field[ 'alias' ] : FALSE;
+																	
+																	if ( $field_alias ) {
+																		
+																		$options[ $field_alias ] = $_field[ 'label' ];
+																		
+																	}
+																	
+																}
 																
 															}
+															
+															$users_submits_options_cache[ $_submit_form[ 'id' ] ] = $options;
+															
+															break;
 															
 														}
 														
 													}
+													
+												} else {
+													
+													$options = $users_submits_options_cache[ $field[ 'options_from_users_submits' ] ];
 													
 												}
 												
@@ -2285,16 +2573,18 @@
 												)
 												
 											);
-										
+											
 									?></div><?php
 									
 									$current_field = 'options_filter_order_by';
 									echo form_error( $current_field . '_' . $key, '<div class="msg-inline-error">', '</div>' );
 									?><div class="vui-field-wrapper-inline">
 										
-										<?= form_label( lang( $current_field ) ); ?>
+										<?php
 										
-										<?= vui_el_dropdown(
+										echo form_label( lang( $current_field ) );
+										
+										echo vui_el_dropdown(
 												
 											array(
 												
@@ -2307,7 +2597,11 @@
 												
 											)
 											
-										); ?>
+										);
+										
+										unset( $options );
+										
+										?>
 										
 									</div><?php
 									
@@ -2425,7 +2719,15 @@
 								
 							?></div><?php
 							
-						} ?>
+						}
+						
+						if ( isset( $users_submits_options_cache ) ) {
+							
+							unset( $users_submits_options_cache );
+							
+						}
+						
+						?>
 						
 						</div>
 						
@@ -2861,48 +3163,63 @@
 		
 	}
 	
+	function _get_visibility_site_detail( $field_wrapper ){
+		
+		return $field_wrapper.find( '.content .sf-field-visibility_site_detail' ).is(':checked') ? true : false;
+		
+	}
+	
 	function _check_global_availability(){
 		
-		// console.log( 'length of .field-wrapper is ' + $( '#fields-wrapper .field-wrapper' ).length )
-		
-		// console.log( 'length of .sf-field-availability_site:checked is ' + $( '#fields-wrapper .sf-field-availability_site:checked' ).length )
-		
-		// console.log( 'length of .sf-field-availability_admin:checked is ' + $( '#fields-wrapper .sf-field-availability_admin:checked' ).length )
-		
-		if ( $( '#fields-wrapper .sf-field-availability_site:checked' ).length < $( '#fields-wrapper .field-wrapper' ).length ) {
+		if ( $( '#fields-wrapper .sf-field-availability_site:checked' ).length < $( '#fields-wrapper .sf-field-availability_site' ).length ) {
 			
-			$( '#submit-check-all-fields-available-on-site' )[0].checked = false;
+			$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = false;
 			
 		}
 		else {
 			
-			$( '#submit-check-all-fields-available-on-site' )[0].checked = true;
+			$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = true;
 			
 		}
 		
-		if ( $( '#fields-wrapper .sf-field-availability_admin:checked' ).length < $( '#fields-wrapper .field-wrapper' ).length ) {
+		if ( $( '#fields-wrapper .sf-field-availability_admin:checked' ).length < $( '#fields-wrapper .sf-field-availability_admin' ).length ) {
 			
-			$( '#submit-check-all-fields-available-on-admin' )[0].checked = false;
+			$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = false;
 			
 		}
 		else {
 			
-			$( '#submit-check-all-fields-available-on-admin' )[0].checked = true;
+			$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = true;
 			
 		}
 		
 	}
 	
-	function _check_global_visibility(){
+	function _check_visibility_site_list(){
 		
-		if ( $( '#fields-wrapper .sf-field-visibility_site_list:checked' ).length < $( '#fields-wrapper .field-wrapper' ).length ) {
+		if ( $( '#fields-wrapper .sf-field-visibility_site_list:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_list' ).length ) {
 			
-			$( '#submit-check-all-fields-visible-on-site-list' )[0].checked = false;
+			$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = false;
 			
 		}
 		else {
 			
-			$( '#submit-check-all-fields-visible-on-site-list' )[0].checked = true;
+			$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = true;
+			
+		}
+		
+	}
+	
+	function _check_visibility_site_detail(){
+		
+		if ( $( '#fields-wrapper .sf-field-visibility_site_detail:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_detail' ).length ) {
+			
+			$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = false;
+			
+		}
+		else {
+			
+			$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = true;
 			
 		}
 		
@@ -3104,7 +3421,53 @@
 		$content.find( '.sf-field-visibility_site_list' ).attr( 'name', 'fields[' + fieldKey + '][visibility][site][list]' );
 		$content.find( '.sf-field-visibility_site_list' ).attr( 'id', 'field-visibility_site_list-' + fieldKey );
 		
-		_check_global_visibility();
+		_check_visibility_site_list();
+		
+	}
+	
+	function update_visibility_site_detail( $field_wrapper ){
+		
+		var $summary = _get_summary( $field_wrapper );
+		var $content = _get_content( $field_wrapper );
+		var fieldKey = _get_key( $field_wrapper );
+		
+		$content.find( '.sf-field-visibility_site_detail' ).attr( 'name', 'fields[' + fieldKey + '][visibility][site][detail]' );
+		$content.find( '.sf-field-visibility_site_detail' ).attr( 'id', 'field-visibility_site_detail-' + fieldKey );
+		
+		_check_visibility_site_detail();
+		
+	}
+	
+	function update_is_user_field( $field_wrapper ){
+		
+		var $summary = _get_summary( $field_wrapper );
+		var $content = _get_content( $field_wrapper );
+		var fieldKey = _get_key( $field_wrapper );
+		
+		$content.find( '.ud-field-is_user_field' ).attr( 'name', 'fields[' + fieldKey + '][is_user_field]' );
+		$content.find( '.ud-field-is_user_field' ).attr( 'id', 'field-is_user_field-' + fieldKey );
+		
+	}
+	
+	function update_user_field( $field_wrapper ){
+		
+		var $summary = _get_summary( $field_wrapper );
+		var $content = _get_content( $field_wrapper );
+		var fieldKey = _get_key( $field_wrapper );
+		
+		$content.find( '.ud-field-user_field' ).attr( 'name', 'fields[' + fieldKey + '][user_field]' );
+		$content.find( '.ud-field-user_field' ).attr( 'id', 'field-user_field-' + fieldKey );
+		
+	}
+	
+	function update_is_unique( $field_wrapper ){
+		
+		var $summary = _get_summary( $field_wrapper );
+		var $content = _get_content( $field_wrapper );
+		var fieldKey = _get_key( $field_wrapper );
+		
+		$content.find( '.ud-field-is_unique' ).attr( 'name', 'fields[' + fieldKey + '][is_unique]' );
+		$content.find( '.ud-field-is_unique' ).attr( 'id', 'field-is_unique-' + fieldKey );
 		
 	}
 	
@@ -3403,27 +3766,37 @@
 		$content.find( '.sf-field-advanced_options_prop_is_ud_image' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_image]' );
 		$content.find( '.sf-field-advanced_options_prop_is_ud_image' ).attr( 'id', 'field-advanced_options_prop_is_ud_image-' + fieldKey );
 		
+		$content.find( '.sf-field-advanced_options_prop_is_ud_image_thumb_prevent_cache_admin' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_image_thumb_prevent_cache_admin]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_image_thumb_prevent_cache_admin' ).attr( 'id', 'field-advanced_options_prop_is_ud_image_thumb_prevent_cache_admin-' + fieldKey );
+		
+		$content.find( '.sf-field-advanced_options_prop_is_ud_image_thumb_prevent_cache_site' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_image_thumb_prevent_cache_site]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_image_thumb_prevent_cache_site' ).attr( 'id', 'field-advanced_options_prop_is_ud_image_thumb_prevent_cache_site-' + fieldKey );
+		
 	}
 	
-	function update_advanced_options_prop_is_ud_image_upload_dir( $field_wrapper ){
+	function update_advanced_options_prop_is_ud_file( $field_wrapper ){
 		
 		var $summary = _get_summary( $field_wrapper );
 		var $content = _get_content( $field_wrapper );
 		var fieldKey = _get_key( $field_wrapper );
 		
-		$content.find( '.sf-field-advanced_options_prop_is_ud_image_upload_dir' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_image_upload_dir]' );
-		$content.find( '.sf-field-advanced_options_prop_is_ud_image_upload_dir' ).attr( 'id', 'field-advanced_options_prop_is_ud_image_upload_dir-' + fieldKey );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file' ).attr( 'id', 'field-advanced_options_prop_is_ud_file-' + fieldKey );
 		
-	}
-	
-	function update_advanced_options_prop_is_ud_image_email_send_attachment( $field_wrapper ){
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_upload_dir' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file_upload_dir]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_upload_dir' ).attr( 'id', 'field-advanced_options_prop_is_ud_file_upload_dir-' + fieldKey );
 		
-		var $summary = _get_summary( $field_wrapper );
-		var $content = _get_content( $field_wrapper );
-		var fieldKey = _get_key( $field_wrapper );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_overwrite' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file_overwrite]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_overwrite' ).attr( 'id', 'field-advanced_options_prop_is_ud_file_overwrite-' + fieldKey );
 		
-		$content.find( '.sf-field-advanced_options_prop_is_ud_image_email_send_attachment' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_image_email_send_attachment]' );
-		$content.find( '.sf-field-advanced_options_prop_is_ud_image_email_send_attachment' ).attr( 'id', 'field-advanced_options_prop_is_ud_image_email_send_attachment-' + fieldKey );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_email_send_attachment' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file_email_send_attachment]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_email_send_attachment' ).attr( 'id', 'field-advanced_options_prop_is_ud_file_email_send_attachment-' + fieldKey );
+		
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_max_size' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file_max_size]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_max_size' ).attr( 'id', 'field-advanced_options_prop_is_ud_file_max_size-' + fieldKey );
+		
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_allowed_types' ).attr( 'name', 'fields[' + fieldKey + '][advanced_options][prop_is_ud_file_allowed_types]' );
+		$content.find( '.sf-field-advanced_options_prop_is_ud_file_allowed_types' ).attr( 'id', 'field-advanced_options_prop_is_ud_file_allowed_types-' + fieldKey );
 		
 	}
 	
@@ -3731,6 +4104,18 @@
 				// visibility site list
 				update_visibility_site_list( $field_wrapper );
 				
+				// visibility site detail
+				update_visibility_site_detail( $field_wrapper );
+				
+				// is user field
+				update_is_user_field( $field_wrapper );
+				
+				// user field
+				update_user_field( $field_wrapper );
+				
+				// is unique
+				update_is_unique( $field_wrapper );
+				
 				// key
 				update_field_key( $field_wrapper );
 				
@@ -3809,9 +4194,7 @@
 				
 				update_advanced_options_prop_is_ud_image( $field_wrapper );
 				
-				update_advanced_options_prop_is_ud_image_upload_dir( $field_wrapper );
-				
-				update_advanced_options_prop_is_ud_image_email_send_attachment( $field_wrapper );
+				update_advanced_options_prop_is_ud_file( $field_wrapper );
 				
 				update_advanced_options_prop_is_ud_title( $field_wrapper );
 				
@@ -3826,8 +4209,6 @@
 				update_advanced_options_prop_is_ud_event_datetime( $field_wrapper );
 				
 				update_advanced_options_prop_is_ud_status( $field_wrapper );
-				
-				update_advanced_options_prop_is_ud_image_email_send_attachment( $field_wrapper );
 				
 				// --------------
 				
@@ -4268,7 +4649,12 @@ $( document ).on( 'ready', function(){
 		
 		//containment: "parent", // descomente para limitar o movimento ao container pai
 		items: '.sortable-item',
+		placeholder: 'field-wrapper sortable-item sortable-placeholder',
 		start: function(event, ui) {
+			
+			$( this ).css( 'height', $( this ).outerHeight() );
+			
+			$( this ).find( '.sortable-placeholder' ).css( 'height', ui.item.outerHeight() );
 			
 			<?php if ( $this->mcm->filtered_system_params[ 'js_text_editor' ] == 'tinymce' ) { ?>
 				
@@ -4284,7 +4670,7 @@ $( document ).on( 'ready', function(){
 			
 			sortable_old_position = ui.item.index() + 1;
 			
-			// console.log( "Old position: " + ( ui.item.index() + 1 ) )
+			console.log( "Old position: " + ( ui.item.index() + 1 ) )
 			
 		},
 		stop: function(event, ui) {
@@ -4301,6 +4687,8 @@ $( document ).on( 'ready', function(){
 			
 			ui.item.removeClass( 'sorting' );
 			
+			ui.item.css( 'position', '' );
+			
 			// console.log( "New position: " + ( ui.item.index() + 1 ) )
 			
 		},
@@ -4310,8 +4698,12 @@ $( document ).on( 'ready', function(){
 	
 	$( document ).on( "sortout", ".sortable", function( event, ui ){
 		
+		$( this ).css( 'height', '' );
+		
 		var start_pos = 1;
 		var sortable_new_position = ui.item.index() + 1;
+		
+		console.log( "New position: " + sortable_new_position )
 		
 		if ( sortable_new_position < sortable_old_position ) {
 			
@@ -4325,7 +4717,7 @@ $( document ).on( 'ready', function(){
 		}
 		
 	});
-		
+	
 	
 	
 	
@@ -4467,24 +4859,47 @@ $( document ).on( 'ready', function(){
 		
 	});
 	
-	$( '#submit-check-all-fields-available-on-admin, #submit-check-all-fields-available-on-site' ).closest( '.vui-interactive-el-wrapper' ).addClass( '__to_remove' );
+	<?php /*
+	
+	Quando o botão "marcar todos os campos disponíveis no site", por exemplo, são acionados,
+	a página atualizada recebrá em seu POST o valor deste botão, o qual todos os campos "[availability][site]"
+	de todos os submit_form_fields serão marcados. Isso somente quando o js não está disponível. Quando o navegador
+	possui suporte a js, substituímos esses campos por checkboxes, os quais irão marcar todos os campos via js,
+	sem a necessidade de atualizar a página, economizando banda.
+	
+	*/ ?>
+	
+	<?php /*
+	
+	O código a seguir adicionar a classe "__to_remove" para os botões que serão substituídos pelas checkboxes
+	
+	*/ ?>
+	
+	$( '#submit-check-all-fields-available-on-admin, #submit-check-all-fields-available-on-site, #submit-check-all-fields-visible-on-site-list, #submit-check-all-fields-visible-on-site-detail' ).closest( '.vui-interactive-el-wrapper' ).addClass( '__to_remove' );
+	
+	<?php /*
+	
+	O código a seguir substitui os botões pelas checkboxes
+	
+	*/ ?>
 	
 	$( '#submit-check-all-fields-available-on-admin' ).closest( '.vui-interactive-el-wrapper' ).before('<?=
 		
 		str_replace( "'", "\'",
 			
 			vui_el_checkbox(
-					
+				
 				array(
 					
 					'text' => lang( 'submit_check_all_fields_available_on_admin' ),
+					'title' => lang( 'tip_submit_check_all_fields_available_on_admin' ),
 					//'name' => 'submit_check_all_fields_available_on_admin',
 					'checked' => FALSE,
 					'value' => 1,
 					'id' => 'submit-check-all-fields-available-on-admin',
 					'only_icon' => TRUE,
-					'icon_as_check' => TRUE,
 					'icon' => 'view',
+					'icon_as_check' => TRUE,
 					
 				)
 				
@@ -4503,13 +4918,14 @@ $( document ).on( 'ready', function(){
 				array(
 					
 					'text' => lang( 'submit_check_all_fields_available_on_site' ),
+					'title' => lang( 'tip_submit_check_all_fields_available_on_site' ),
 					//'name' => 'submit_check_all_fields_available_on_site',
 					'checked' => FALSE,
 					'value' => 1,
 					'id' => 'submit-check-all-fields-available-on-site',
 					'only_icon' => TRUE,
-					'icon_as_check' => TRUE,
 					'icon' => 'view',
+					'icon_as_check' => TRUE,
 					
 				)
 				
@@ -4518,6 +4934,64 @@ $( document ).on( 'ready', function(){
 		);
 		
 	?>');
+	
+	$( '#submit-check-all-fields-visible-on-site-list' ).closest( '.vui-interactive-el-wrapper' ).before('<?=
+		
+		str_replace( "'", "\'",
+			
+			vui_el_checkbox(
+					
+				array(
+					
+					'text' => lang( 'submit_check_all_fields_visible_on_site_list' ),
+					'title' => lang( 'tip_submit_check_all_fields_visible_on_site_list' ),
+					//'name' => 'submit_check_all_fields_available_on_site',
+					'checked' => FALSE,
+					'value' => 1,
+					'id' => 'submit-check-all-fields-visible-on-site-list',
+					'only_icon' => TRUE,
+					'icon' => 'list',
+					'icon_as_check' => TRUE,
+					
+				)
+				
+			)
+			
+		);
+		
+	?>');
+	
+	$( '#submit-check-all-fields-visible-on-site-detail' ).closest( '.vui-interactive-el-wrapper' ).before('<?=
+		
+		str_replace( "'", "\'",
+			
+			vui_el_checkbox(
+					
+				array(
+					
+					'text' => lang( 'submit_check_all_fields_visible_on_site_detail' ),
+					'title' => lang( 'tip_submit_check_all_fields_visible_on_site_detail' ),
+					//'name' => 'submit_check_all_fields_available_on_site',
+					'checked' => FALSE,
+					'value' => 1,
+					'id' => 'submit-check-all-fields-visible-on-site-detail',
+					'only_icon' => TRUE,
+					'icon' => 'detail',
+					'icon_as_check' => TRUE,
+					
+				)
+				
+			)
+			
+		);
+		
+	?>');
+	
+	<?php /*
+	
+	O código a seguir aplica os eventos
+	
+	*/ ?>
 	
 	$( document ).on( 'change', '#submit-check-all-fields-available-on-admin', function( event ){
 		
@@ -4589,7 +5063,7 @@ $( document ).on( 'ready', function(){
 		
 	});
 	
-	$( document ).on( 'change', '#submit-check-all-fields-visibility-on-site-list', function( event ){
+	$( document ).on( 'change', '#submit-check-all-fields-visible-on-site-list', function( event ){
 		
 		var jthis = $( this );
 		
@@ -4624,7 +5098,54 @@ $( document ).on( 'ready', function(){
 		
 	});
 	
+	$( document ).on( 'change', '#submit-check-all-fields-visible-on-site-detail', function( event ){
+		
+		var jthis = $( this );
+		
+		var start = new Date().getTime();
+		
+		if ( jthis.is( ':checked' ) ) {
+			
+			$( '#fields-wrapper .sf-field-visibility_site_detail:not(:checked)' ).each( function( index ) {
+				
+				$( this )[ 0 ].checked = true;
+				$( this ).trigger( 'change' );
+				
+			});
+			
+		}
+		else {
+			
+			$( '#fields-wrapper .sf-field-visibility_site_detail:checked' ).each( function( index ) {
+				
+				$( this )[ 0 ].checked = false;
+				$( this ).trigger( 'change' );
+				
+			});
+			
+		}
+		
+		var end = new Date().getTime();
+		
+		createGrowl( '<?= lang( 'notification_done' ); ?>', null, null, 'msg-type-success' );
+		
+		// console.log( 'finished in ' + ( end - start ) + 'ms' )
+		
+	});
+	
+	<?php /*
+	
+	O código a seguir remove os elementos que foram substituídos pelas checkboxes
+	
+	*/ ?>
+	
 	$( '.__to_remove' ).remove();
+	
+	<?php /*
+	
+	-----------------------------------------
+	
+	*/ ?>
 	
 	$( document ).on( 'change', '#fields-wrapper .field-wrapper .content .sf-field-availability_admin', function( event ){
 		
@@ -4665,7 +5186,8 @@ $( document ).on( 'ready', function(){
 	});
 	
 	_check_global_availability();
-	_check_global_visibility();
+	_check_visibility_site_list();
+	_check_visibility_site_detail();
 	
 	
 	

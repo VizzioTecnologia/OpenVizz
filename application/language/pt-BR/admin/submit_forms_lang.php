@@ -19,10 +19,12 @@ $lang['tip_submit_form_title'] = 																"Informe um título para este f
 $lang['submit_form_alias'] = 																	"Apelido do formulário";
 $lang['tip_submit_form_alias'] = 																"Informe um apelido para este formulário. Deixe em branco para ser automaticamente preenchido";
 $lang['submit_form_layout_view'] = 																"Layout do formulário";
-$lang['submit_forms_enable_xss_filtering'] = 													"Ativar filtro XSS";
 $lang['submit_forms_allow_html_tags'] = 														"Permitir tags HTML";
 $lang['tip_submit_forms_allow_html_tags'] = 													"Permite tags HTML em campos de entrada de texto";
-$lang['tip_submit_forms_enable_xss_filtering'] = 												"Habilita o filtro XSS para todos os campos. Se você não sabe o que é isto, recomendamos que habilite.";
+$lang['ud_data_props_enable_xss_filtering_admin'] = 											"Ativar filtro XSS na administração";
+$lang['tip_ud_data_props_enable_xss_filtering_admin'] = 										"Habilita o filtro XSS para todos os campos na administração. Se você não sabe o que é isto, é recomendado que deixe habilitado.";
+$lang['ud_data_props_enable_xss_filtering_site'] = 												"Ativar filtro XSS no site";
+$lang['tip_ud_data_props_enable_xss_filtering_site'] = 											"Habilita o filtro XSS para todos os campos no site. Se você não sabe o que é isto, é recomendado que deixe habilitado.";
 $lang['fields_layout_preference_default'] = 													"Formato padrão";
 $lang['tip_fields_layout_preference_default'] = 												"Formato padrão de exibição dos campos";
 $lang['fields_layout_preference_mini'] = 														"Formato mini";
@@ -34,6 +36,16 @@ $lang['sf_redirecting_on_success_url'] = 														"Link personalizado";
 $lang['self_form'] = 																			"O próprio formulário";
 $lang['view_submit_form_on_site'] = 															"Ver formulário no site";
 $lang['view_users_submits_on_site'] = 															"Ver envios no site";
+$lang['ud_is_user_field'] = 																	"É um campo de usuário";
+$lang['ud_select_user_field'] = 																"Selecione o campo de usuário";
+$lang['tip_ud_is_user_field'] = 																"Se marcado, o campo será tratado como parte dos parâmetros dos usuários. Ex.: Data de nascimento, CPF, RG, etc.";
+$lang['is_unique'] = 																			"Campo único";
+$lang['tip_is_unique'] = 																		"<p>Se marcado, o sistema efetuará uma busca interna pelo valor informado neste campo no ato da inserção do envio.</p><p>Ex.: CNPJ, Nomes empresariais, Marcas, etc.</p><p>Caso a opção \"Campo de usuário\" também esteja marcado, o sistema buscará este valor somente nos parâmetros dos usuários.</p><p>Ex.: CPF, E-mail, RG, etc.</p>";
+
+$lang['ud_visible_on_site_list'] = 																"Visível em listagens no site";
+$lang['tip_ud_visible_on_site_list'] = 															"Defina se este campo será visível nas listagens no site";
+$lang['ud_visible_on_site_detail'] = 															"Visível em detalhamentos no site";
+$lang['tip_ud_visible_on_site_detail'] = 														"Defina se este campo será visível em visualizações de detalhamento no site";
 
 $lang['sf_security_and_access'] = 																"Segurança e acesso";
 $lang['ud_ds_access_level'] = 																	"Nível de acesso do formulário";
@@ -54,6 +66,10 @@ $lang['ud_d_default_owner_public_dropdown_option'] = 											"Não especifica
 $lang['ud_d_default_owner_current_user_dropdown_option'] = 										"Usuário atualmente logado";
 $lang['ud_d_default_owner_users_dropdown_option'] = 											"Usuários específicos";
 $lang['ud_d_default_owner_users_groups_dropdown_option'] = 										"Grupos de usuários específicos";
+$lang['ud_ds_default_user_group_registered_from_form'] = 										"Grupo de usuários padrão para novos registros";
+$lang['tip_ud_ds_default_user_group_registered_from_form'] = 									"Define o grupo de usuários padrão para novos registrados através deste formulário";
+$lang['ud_ds_send_user_data_to_submitter_on_registration'] = 									"Enviar dados de login para novos usuários";
+$lang['tip_ud_ds_send_user_data_to_submitter_on_registration'] = 								"Define se um e-mail será enviado para o usuário com os dados de login após se criar sua conta através deste formulário.";
 $lang['ud_d_default_owner_from_prop_dropdown_option'] = 										"Definido em um campo do formulário";
 
 $lang['notification_saving_submit_form'] = 														"Salvando formulário, aguarde...";
@@ -72,6 +88,8 @@ $lang['users_submits'] = 																		"Envios";
 $lang['users_submits_list'] = 																	"Listagem de envios";
 $lang['add_user_submit'] = 																		"Novo envio";
 $lang['user_submit_updated'] = 																	"Envio atualizado com sucesso!";
+$lang['submit_form_user_submit_created'] = 														"Envio criado com sucesso!";
+$lang['submit_form_user_submit_updated'] = 														"Envio atualizado com sucesso!";
 
 $lang['users_submits_config'] = 																"Configurações dos envios";
 $lang['select_submit_form'] = 																	"Selecione o formulário";
@@ -169,12 +187,40 @@ $lang['sfpsm_user_submit_email_sent_to_submitter_success_title_default'] = 					
 $lang['sfpsm_user_submit_email_sent_to_submitter_success'] = 									"Sucesso ao enviar para e-mail de usuário";
 $lang['sfpsm_user_submit_email_sent_to_submitter_success_default'] = 							"Sua mensagem foi enviada com sucesso para o endereço de e-mail fornecido!";
 
-$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error_title'] = 						"Erro interno ao enviar para e-mail de usuário (Título)";
-$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error_title_default'] = 				"Erro interno ao tentar enviar a mensagem!";
-$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error'] = 							"Erro interno ao tentar enviar a mensagem!";
+$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error_title'] = 						"Erro interno ao tentar enviar e-mail para o usuário (Título)";
+$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error_title_default'] = 				"Erro interno ao tentar enviar a mensagem para você!";
+$lang['sfpsm_user_submit_email_sent_to_submitter_internal_error'] = 							"Erro interno ao tentar enviar e-mail para o usuário";
 $lang['sfpsm_user_submit_email_sent_to_submitter_internal_error_default'] = 					"Ocorreu um erro interno ao tentar enviar a mensagem para o e-mail fornecido!";
 
+$lang['sfpsm_user_submit_email_sent_to_new_user_success_title'] = 								"Sucesso ao enviar mensagem com dados de acesso para o usuário (Título)";
+$lang['sfpsm_user_submit_email_sent_to_new_user_success_title_default'] = 						"E-mail com dados da sua conta foi enviado!";
+$lang['sfpsm_user_submit_email_sent_to_new_user_success'] = 									"Sucesso ao enviar mensagem com dados de acesso para o usuário";
+$lang['sfpsm_user_submit_email_sent_to_new_user_success_default'] = 							"Uma mensagem foi enviado para o e-mail informado contendo os dados de acesso da sua conta no site.";
 
+$lang['sfpsm_user_submit_email_sent_to_new_user_internal_error_title'] = 						"Erro interno ao tentar enviar e-mail para novos usuários (Título)";
+$lang['sfpsm_user_submit_email_sent_to_new_user_internal_error_title_default'] = 				"Erro interno ao tentar enviar e-mail contendo os dados de acesso ao sistema!";
+$lang['sfpsm_user_submit_email_sent_to_new_user_internal_error'] = 								"Erro interno ao tentar enviar e-mail para novos usuários!";
+$lang['sfpsm_user_submit_email_sent_to_new_user_internal_error_default'] = 						"Ocorreu um erro interno ao tentar enviar a mensagem para o e-mail informado contendo os dados de acesso da sua conta no site! Por favor, entre em contato com o administrador do sistema.";
+
+$lang['ud_psm_user_already_registered'] = 														"Usuário já possui uma conta";
+$lang['ud_psm_uar_t'] = 																		"Título";
+$lang['ud_psm_uar_t_default'] = 																"Conta de usuário já existente";
+$lang['ud_psm_uar_m'] = 																		"Mensagem";
+$lang['ud_psm_uar_m_default'] = 																"Parece que já existe uma conta usando alguns dos dados informados";
+
+$lang['ud_psm_user_already_sent_form'] = 														"Usuário já enviou o formulário";
+$lang['ud_psm_uasf_t'] = 																		"Título";
+$lang['ud_psm_uasf_t_default'] = 																"Você já envio este formulário";
+$lang['ud_psm_uasf_m'] = 																		"Mensagem";
+$lang['ud_psm_uasf_m_default'] = 																"Parece que você já enviou este formulário anteriormente com sucesso";
+
+
+$lang[ 'ud_dl_filters_profiles' ] = 															"Perfis de filtros";
+$lang[ 'lbl_ud_dl_filter_profile_name' ] = 														"Nome do perfil";
+$lang[ 'tip_lbl_ud_dl_filter_profile_name' ] = 													"Informe um nome para este perfil";
+$lang[ 'lbl_ud_dl_filter_profile_url' ] = 														"Url do perfil";
+$lang[ 'tip_lbl_ud_dl_filter_profile_url' ] = 													"Informe a url deste perfil (relativa)";
+$lang[ 'lbl_ud_dl_add_filter_profile' ] = 														"Adicionar perfil";
 
 // api
 $lang['ud_ds_api_short_help'] = 															'
@@ -594,33 +640,6 @@ $lang['ud_ds_api_access_type'] = 																"Nível de acesso";
 // submitter message receiving
 
 
-// email sending
-$lang['submit_form_param_email_receiving'] = 													"Recebimento via e-mail";
-$lang['tip_submit_form_param_email_receiving'] = 												"Se ativo, além do salvamento no banco de dados, os envios também serão enviados por e-mail.";
-$lang['sending'] = 																				"Envio";
-$lang['submit_form_param_send_email_to'] = 														"E-mails de destino";
-$lang['tip_submit_form_param_send_email_to'] = 													"<p>Defina para onde as mensagens devem ser enviadas.</p><ul><li><strong>E-mails do contato:</strong> Se selecionado, as mensagens serão enviadas para todos os e-mails do contato selecionado no campo <strong><i>Contato de recebimento</i></strong>. <span class=\"warning\"><strong>Importante: </strong>Tenha certeza que os e-mails do contato selecionado estão <strong>marcados para recebimento de mensagens</strong>. Você pode definir isto nas configurações do contato.</span></li><li><strong>E-mails personalizados:</strong> Se selecionado, as mensagens serão enviadas para os e-mails definidos no campo <strong><i>E-mails de recebimento personalizados</i></strong>.</li></ul>";
-$lang['submit_form_param_send_email_to_contact'] =												"Contato de recebimento";
-$lang['tip_submit_form_param_send_email_to_contact'] =											"<p>Se você selecionou a opção <strong><i>E-mails do contato</i></strong> no campo <strong><i>E-mails de destino</i></strong>, defina aqui o contato que recebrá as mensagens.</p><p><span class=\"warning\"><br /><strong>Importante: </strong>Tenha certeza que os e-mails do contato selecionado estão <strong>marcados para recebimento de mensagens</strong>. Você pode definir isto nas configurações do contato.</span></p>";
-$lang['submit_form_param_send_email_to_custom_emails'] =										"E-mails de recebimento personalizados";
-$lang['tip_submit_form_param_send_email_to_custom_emails'] =									"<p>Se você selecionou a opção <strong><i>E-mails personalizados</i></strong> no campo <strong><i>E-mails de destino</i></strong>, defina aqui os endereços de e-mail para os quais serão enviadas as mensagens.</p><p>Se desejar mais de um endereço de e-mail, informe um por linha.</p>";
-
-$lang['submitter_message_receiving'] = 															"Envio para usuários";
-$lang['sfsmr_send_copy_to_submitter'] = 														"Enviar para usuários";
-$lang['sfsmr_email_field'] = 																	"Campo com o endereço de e-mail";
-$lang['sfsmr_from'] = 																			"Remetente";
-$lang['sfsmr_from_name'] = 																		"Em nome de";
-$lang['sfsmr_reply_to'] = 																		"Responder para";
-$lang['sfsmr_subject'] = 																		"Assunto";
-$lang['sfsmr_layout_source'] = 																	"Origem do layout";
-$lang['layouts_list'] = 																		"Lista de layouts";
-$lang['custom_layout'] = 																		"Layout personalizado";
-$lang['sfsmr_layout_custom'] = 																	"Layout personalizado";
-$lang['sfsmr_layout_view'] = 																	"Layout";
-$lang['sfsmr_message_prefix_custom'] = 															"Pré-texto personalizado";
-$lang['sfsmr_message_suffix_custom'] = 															"Pós-texto personalizado";
-$lang['sfsmr_show_empty_fields'] = 																"Exibir campos com valores vazios";
-
 $lang['submit_form_param_send_email_to_from'] =													"Remetente";
 $lang['submit_form_param_send_email_to_from_name'] =											"Em nome de";
 $lang['submit_form_param_send_email_to_reply_to'] =												"Responder para";
@@ -663,6 +682,9 @@ $lang['remove_field'] = 																		"Remover campo";
 $lang['enter_amount_fields'] = 																	"Quantidade";
 
 $lang['question_delete_field'] = 																"Tem certeza que deseja remover este campo?";
+
+$lang[ 'sf_tip_sortable_handle_field_type' ] = 													"Tipo do campo";
+$lang[ 'sf_tip_sortable_handle' ] = 															"Arraste para reordenar, clique duas vezes para expandir/retrair";
 
 $lang['input_text'] = 																			"Texto";
 $lang['textarea'] = 																			"Área de texto";
@@ -714,20 +736,21 @@ $lang['submit_forms_validation_rule_valid_domain_dns'] =										"Domínio vál
 $lang['submit_forms_validation_rule_valid_email'] = 											"E-mail";
 $lang['submit_forms_validation_rule_valid_email_dns'] = 										"E-mail e DNS";
 $lang['submit_forms_validation_rule_valid_emails'] = 											"E-mails";
-$lang['submit_forms_validation_rule_min_length'] = 												"Mímimo de caractéres";
-$lang['validation_rule_parameter_min_length'] = 												"Mímimo de caractéres";
-$lang['submit_forms_validation_rule_max_length'] = 												"Máximo de caractéres";
-$lang['validation_rule_parameter_max_length'] = 												"Máximo de caractéres";
+$lang['submit_forms_validation_rule_min_length'] = 												"Mínimo de catacteres";
+$lang['validation_rule_parameter_min_length'] = 												"Mínimo de catacteres";
+$lang['submit_forms_validation_rule_max_length'] = 												"Máximo de catacteres";
+$lang['validation_rule_parameter_max_length'] = 												"Máximo de catacteres";
 $lang['submit_forms_validation_rule_exact_length'] = 											"Quantidade exata de caractéres";
 $lang['validation_rule_parameter_exact_length'] = 												"Quantidade exata de caractéres";
-$lang['submit_forms_validation_rule_greater_than'] = 											"Quantidade caractéres maior que";
-$lang['validation_rule_parameter_greater_than'] = 												"Quantidade caractéres maior que";
-$lang['submit_forms_validation_rule_less_than'] = 												"Quantidade caractéres menor que";
-$lang['validation_rule_parameter_less_than'] = 													"Quantidade caractéres menor que";
+$lang['submit_forms_validation_rule_greater_than'] = 											"Número maior que";
+$lang['validation_rule_parameter_greater_than'] = 												"Número maior que";
+$lang['submit_forms_validation_rule_less_than'] = 												"Número menor que";
+$lang['validation_rule_parameter_less_than'] = 													"Número menor que";
 $lang['submit_forms_validation_rule_alpha'] = 													"Apenas letras";
 $lang['submit_forms_validation_rule_alpha_numeric'] = 											"Letras e números";
 $lang['submit_forms_validation_rule_alpha_dash'] = 												"Letras, números e traços";
 $lang['submit_forms_validation_rule_alpha_dash_space'] = 										"Letras, números, traços e espaços";
+$lang['ud_validation_rule_alpha_space'] = 														"Letras e espaços";
 $lang['submit_forms_validation_rule_numeric'] = 												"Caractéres numéricos";
 $lang['submit_forms_validation_rule_integer'] = 												"Somente números inteiros";
 $lang['submit_forms_validation_rule_decimal'] = 												"Somente números decimais";
@@ -738,12 +761,24 @@ $lang['submit_forms_validation_rule_valid_base64'] = 											"Somente caract�
 $lang['submit_forms_validation_rule_normalizar_nome_ptbr'] = 									"Normaliza nomes de pessoas (pt-BR)";
 $lang['submit_forms_validation_rule_uppercase'] = 												"Tudo em maiúsculo";
 $lang['submit_forms_validation_rule_lowercase'] = 												"Tudo em minúsculo";
+$lang['ud_validation_cpf_ptbr']	=																"Validação de CPF (Brasil)";
 $lang['tip_field_validation_rule_parameter_matches'] = 											"Informe o campo com o qual este deve combinar";
 $lang['options_title_field'] = 																	"Campo de título das opções";
 $lang['tip_options_title_field'] = 																"Define qual campo do formulário será utilizado como título das opções";
 
-$lang['submit_check_all_fields_available_on_admin'] = 											"Todos os campos disponíveis na administração";
-$lang['submit_check_all_fields_available_on_site'] = 											"Todos os campos disponíveis no site";
+$lang['ud_available_on_admin'] = 																"Disponível na administração (formulários e filtros)";
+$lang['tip_ud_available_on_admin'] = 															"Marque para disponibilizar este campo na administração (somente em formulários de envios e filtros)";
+$lang['ud_available_on_site'] = 																"Disponível no site (formulários e filtros)";
+$lang['tip_ud_available_on_site'] = 															"Marque para disponibilizar este campo no site (somente em formulários de envios e filtros)";
+$lang['submit_check_all_fields_available_on_admin'] = 											"Todos os campos disponíveis na administração (formulários e filtros)";
+$lang['tip_submit_check_all_fields_available_on_admin'] = 										"Acione para marcar todos os campos como disponíveis na administração, somente para formulários de envios e filtros";
+$lang['submit_check_all_fields_available_on_site'] = 											"Todos os campos disponíveis no site (formulários e filtros)";
+$lang['tip_submit_check_all_fields_available_on_site'] = 										"Acione para marcar todos os campos como disponíveis no site, somente para formulários de envios e filtros";
+
+$lang['submit_check_all_fields_visible_on_site_list'] = 										"Todos os campos visíveis nas listagens no site";
+$lang['tip_submit_check_all_fields_visible_on_site_list'] = 									"Acione para marcar todos os campos como visíveis nas listagens de dados no site";
+$lang['submit_check_all_fields_visible_on_site_detail'] = 										"Todos os campos visíveis nos detalhamentos no site";
+$lang['tip_submit_check_all_fields_visible_on_site_detail'] = 									"Acione para marcar todos os campos como visíveis nos detalhamentos de dados no site";
 
 $lang['submit_export_params'] = 																"Exportação e download";
 $lang['csv_export'] = 																			"Exportação .CSV";
@@ -781,14 +816,6 @@ $lang['submit_forms_management_submit_forms_api_management'] = 									"Pode ge
 $lang['access_denied_submit_forms_management_submit_forms_management'] = 						"Você não possui privilégios suficientes para gerenciar formulários de submissão!";
 $lang['access_denied_submit_forms_management_submit_forms_api_management'] = 					"Você não possui privilégios suficientes para usar API's de formulários de submissão!";
 
-$lang['viewing_articles'] = 																	"Visualização de artigos";
-$lang['articles_management_can_view_all_articles'] = 											"Pode ver qualquer artigo";
-$lang['articles_management_can_view_only_same_and_low_group_level'] = 							"Somente de usuários de mesmo nível e inferiores";
-$lang['articles_management_can_view_only_same_group_level'] = 									"Somente de usuários de mesmo nível";
-$lang['articles_management_can_view_only_same_group_and_below'] = 								"Somente de usuários do mesmo grupo e inferiores";
-$lang['articles_management_can_view_only_same_group'] = 										"Somente de usuários do mesmo grupo";
-$lang['articles_management_can_view_only_low_groups'] = 										"Somente de usuários de grupos inferiores";
-$lang['articles_management_can_view_only_your_own'] = 											"Apenas seus artigos e acessíveis";
 
 
 
@@ -805,7 +832,7 @@ $lang[ 'sf_date_field_presentation_format' ] = 													"Apresentar como";
 
 $lang[ 'sf_us_dt_ft_op_pt_1' ] = 																'%d/%m/%Y';
 // submit forms users submits datetime format presentation
-$lang[ 'sf_us_dt_ft_pt_ymdhms_1' ] =															'<span class="date"><span class="item day-d">%d</span><span class="item">/</span><span class="item month-m">%m</span><span class="item">/</span><span class="item year-Y">%Y</span></span> <span class="time">%H:%M:%S</span>';
+$lang[ 'sf_us_dt_ft_pt_ymdhms_1_' ] =															'<span class="date"><span class="item day-d">%d</span><span class="item">/</span><span class="item month-m">%m</span><span class="item">/</span><span class="item year-Y">%Y</span></span> <span class="time">%H:%M:%S</span>';
 $lang[ 'sf_us_dt_ft_pt_ymd_1' ] =																'<span class="item day-d">%d</span><span class="item">/</span><span class="item month-m">%m</span><span class="item">/</span><span class="item year-Y">%Y</span>';
 $lang[ 'sf_us_dt_ft_pt_ym_1' ] =																'<span class="item month-m">%m</span><span class="item">/</span><span class="item year-Y">%Y</span>';
 $lang[ 'sf_us_dt_ft_pt_yd_1' ] =																'<span class="item day-d">%d</span><span class="item">/</span><span class="item year-Y">%Y</span>';
@@ -823,6 +850,7 @@ $lang[ 'sf_us_dt_ft_pt_md_2' ] =																'<span class="item day-d">%d</sp
 $lang[ 'sf_us_dt_ft_pt_d_2' ] =																	'<span class="item">Dia</span> <span class="item day-d">%d</span>';
 $lang[ 'sf_us_dt_ft_pt_m_2' ] =																	'<span class="item">Em</span> <span class="item month-B">%B</span>';
 $lang[ 'sf_us_dt_ft_pt_y_2' ] =																	'<span class="item">Em</span> <span class="item year-Y">%Y</span>';
+$lang[ 'sf_us_dt_ft_pt__2' ] =																	'<span class="item today">Hoje!</span>';
 
 $lang[ 'sf_us_dt_relative_tomorrow' ] =															"Amanhã";
 $lang[ 'sf_us_dt_relative_yesterday' ] =														"Ontem";

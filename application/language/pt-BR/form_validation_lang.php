@@ -1,4 +1,6 @@
 <?php
+/* tradução: Frank Souza */
+/* tradução: Thiago Arcanjo */
 /* tradução: ferreiramauricio.com */
 
 $lang['required']			= "O campo \"<strong><i>%s</i></strong>\" é obrigatório.";
@@ -33,6 +35,7 @@ $lang['validation_rule_valid_domain_is_invalid'] =					"O campo \"<strong><i>%s<
 $lang['validation_rule_valid_domain_dns_is_invalid'] =				"O campo \"<strong><i>%s</i></strong>\" deve conter um domínio válido.";
 $lang['validation_rule_valid_domain_dns_not_exists']=				"O campo \"<strong><i>%s</i></strong>\" deve conter um domínio existente.";
 $lang['validation_rule_captcha_is_invalid']	=						"O campo \"<strong><i>%s</i></strong>\" não corresponde a imagem captcha.";
+$lang['validation_rule_check_cpf_invalid']	=						"O \"<strong><i>%s</i></strong>\" informado é inválido.";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/pt-br/form_validation_lang.php */

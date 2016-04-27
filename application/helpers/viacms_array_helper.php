@@ -4,6 +4,33 @@
 
 /**
  *
+ * Intersect two multidimensional arrays by its keys
+ *
+ * @author deceze
+ * @link http://stackoverflow.com/questions/12171855/multidimensional-associative-array-intersection-php#answer-12173705
+ *
+ */
+ 
+function recursive_array_intersect_key( array $array1, array $array2 ) {
+	
+	$array1 = array_intersect_key( $array1, $array2 );
+	
+	foreach ( $array1 as $key => &$value ) {
+		
+		if ( is_array( $value ) ) {
+			
+			$value = recursive_array_intersect_key( $value, $array2[ $key ] );
+			
+		}
+		
+	}
+	return $array1;
+	
+}
+
+// ------------------------------------------------------------------------
+
+/**
  *
  * Convert multidimensional array into single array
  *

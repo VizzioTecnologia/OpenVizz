@@ -29,7 +29,7 @@ class Importer extends CI_controller {
 		
 		foreach( $users_submits as $k => $us ) {
 			
-			$n_us[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $us[ 'data' ] );
+			$n_us[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $us );
 			
 			$this->db->update( 'tb_submit_forms_us', $n_us, array( 'id' => $us[ 'id' ] ) );
 			
@@ -579,7 +579,7 @@ class Importer extends CI_controller {
 		
 		foreach( $db_data as $key => $result ) {
 			
-			$result[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $result[ 'data' ] );
+			$result[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $result );
 			$result[ 'data' ] = json_encode( $result[ 'data' ] );
 			
 			$data = elements( array(
@@ -2336,7 +2336,8 @@ class Importer extends CI_controller {
 				'<br></p>',
 				' </p>',
 				'<p><br>',
-				'<p><br>',
+				'<p>
+<br>',
 				"\t",
 				
 			);

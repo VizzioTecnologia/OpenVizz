@@ -49,24 +49,24 @@ $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index'
 		
 		<div class="s1">
 			
+			<?php
+				
+				/* ---------------------------------------------------------------------------
+				* ---------------------------------------------------------------------------
+				* Users submits
+				* ---------------------------------------------------------------------------
+				*/
+				
+				if ( file_exists( $_path . 'users_submits_results.php' ) ) {
+					
+					require( $_path . 'users_submits_results.php' );
+					
+				}
+				
+			?>
+			
 			<?php if ( check_var( $users_submits ) ) { ?>
-				
-				<?php
-					
-					/* ---------------------------------------------------------------------------
-					* ---------------------------------------------------------------------------
-					* Users submits
-					* ---------------------------------------------------------------------------
-					*/
-					
-					if ( file_exists( $_path . 'users_submits_results.php' ) ) {
-						
-						require( $_path . 'users_submits_results.php' );
-						
-					}
-					
-				?>
-				
+			
 				<div class="clear"></div>
 				
 				<?php

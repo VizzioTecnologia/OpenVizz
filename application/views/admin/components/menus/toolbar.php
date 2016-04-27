@@ -11,7 +11,7 @@ echo vui_el_button( array( 'url' => $this->menus->get_mi_url( 'select_menu_item_
 
 if ( isset( $menu_item ) ) {
 	
-	echo vui_el_button( array( 'url' => $this->menus->get_mi_url( 'select_menu_item_type', array( 'menu_type_id' => ( isset( $menu_type_id ) ? $menu_type_id : NULL ), 'menu_item' => $menu_item ) ), 'text' => lang( 'new_menu_item' ), 'icon' => 'add-menu-item', 'only_icon' => TRUE, ) );
+	echo vui_el_button( array( 'url' => $this->menus->get_mi_url( 'select_menu_item_type', array( 'menu_type_id' => ( isset( $menu_type_id ) ? $menu_type_id : NULL ), 'menu_item' => $menu_item ) ), 'text' => lang( 'swap_menu_item_type' ), 'icon' => 'swap', 'only_icon' => TRUE, ) );
 	
 }
 

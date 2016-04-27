@@ -18,6 +18,8 @@ $lang['home_page'] = 																			"Página inicial";
 $lang['custom_url'] = 																			"Link personalizado";
 $lang['advanced_options'] = 																	"Opções avançadas";
 
+$lang['unable_to_write_file'] = 																'Não foi possível gravar o arquivo <strong>%1$s</strong>! Por favor, verifique as permissões.';
+
 $lang['switch_profiler'] = 																		"Alternar analizador (para desenvolvedores)";
 $lang[ADMIN_ALIAS] = 																			"Administração";
 
@@ -210,7 +212,7 @@ $lang['Off'] = 																					$lang['off'];
 $lang['all_messages'] = 																		"Todas as mensagens";
 $lang['All messages'] = 																		$lang['all_messages'];
 $lang['All Messages'] = 																		$lang['all_messages'];
-$lang['informational_messages'] = 																"Mensagens informacionais";
+$lang['informational_messages'] = 																"Mensagens informativas";
 $lang['Informational messages'] = 																$lang['informational_messages'];
 $lang['Informational Messages'] = 																$lang['informational_messages'];
 $lang['debug_messages'] = 																		"Mensagens de depuração";

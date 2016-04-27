@@ -110,8 +110,8 @@ TinyMCE
 			valid_children : "+body[style]",
 			
 			valid_elements : '*[*]',
-// 			extend_valid_elements : "td[title|style|class|id|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup]"
-// 				+"",
+//  			extend_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align]"
+//  				+",td[title|style|class|id|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup]",
 			
 			//forced_root_block: false, // http://www.tinymce.com/wiki.php/Configuration:forced_root_block
 			

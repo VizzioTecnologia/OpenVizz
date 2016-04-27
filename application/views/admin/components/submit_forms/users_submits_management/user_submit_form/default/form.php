@@ -20,10 +20,12 @@
 			if ( $this->mcm->environment == ADMIN_ALIAS ) {
 				
 				$_is_ud_image = FALSE;
-				$_ud_image_upload_dir = MEDIA_DIR_NAME;
-				$_ud_image_start_dir = '';
+				$_is_ud_file = FALSE;
+				$_ud_upload_dir = MEDIA_DIR_NAME;
+				$_ud_upload_dir_start_dir = '';
 				
-				$_function_name = url_title( 'update_' . 'image_' . $field_name, '_' );
+				$_ud_image_js_function_name = url_title( 'update_image_' . $field_name, '_' );
+				$_ud_file_js_function_name = url_title( 'update_file_' . $field_name, '_' );
 				
 			}
 			if ( $this->mcm->environment == SITE_ALIAS ) {
@@ -44,6 +46,12 @@
 				
 			}
 			
+			if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file' ] ) ) {
+				
+				$_is_ud_file = TRUE;
+				
+			}
+			
 			if ( $field[ 'field_type' ] == 'html' AND isset( $field[ 'html' ] ) ) {
 				
 				require( $props_path . 'html.php' );
@@ -58,30 +66,34 @@
 						
 						<?php
 							
-							if ( $_is_ud_image ) {
+							if ( $_is_ud_file ) {
 								
-								if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_image_upload_dir' ] ) ) {
+								if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file_upload_dir' ] ) ) {
 									
-									$_ud_image_upload_dir = trim( $field[ 'advanced_options' ][ 'prop_is_ud_image_upload_dir' ], '/' );
+									$_ud_upload_dir = trim( $field[ 'advanced_options' ][ 'prop_is_ud_file_upload_dir' ], '/' );
 									
 								}
 								
-								if ( check_var( $field_value ) ) {
+								if ( $_is_ud_image ) {
 									
-									$thumb_params = array(
+									if ( check_var( $field_value ) ) {
 										
-										'wrapper_class' => 'us-image-wrapper',
-										'src' => get_url( 'thumbs/' . $field_value ),
-										'href' => get_url( $field_value ),
-										'rel' => 'us-thumb',
-										'title' => $field_value,
-										'id' => 'thumb-submit-form-' . $field_name,
-										'modal' => TRUE,
-										'prevent_cache' => TRUE,
+										$thumb_params = array(
+											
+											'wrapper_class' => 'us-image-wrapper',
+											'src' => url_is_absolute( $field_value ) ? $field_value : get_url( 'thumbs/' . $field_value ),
+											'href' => get_url( $field_value ),
+											'rel' => 'us-thumb',
+											'title' => $field_value,
+											'id' => 'thumb-submit-form-' . $field_name,
+											'modal' => TRUE,
+											'prevent_cache' => TRUE,
+											
+										);
 										
-									);
-									
-									echo vui_el_thumb( $thumb_params );
+										echo vui_el_thumb( $thumb_params );
+										
+									}
 									
 								}
 								
@@ -108,7 +120,7 @@
 								
 								if ( check_var( $_path[ 'dirname' ] ) ) {
 									
-									$_ud_image_start_dir = trim( str_replace( $_ud_image_upload_dir, '', $_path[ 'dirname' ] ), '/' );
+									$_ud_upload_dir_start_dir = trim( str_replace( $_ud_upload_dir, '', $_path[ 'dirname' ] ), '/' );
 									
 								}
 								
@@ -116,7 +128,7 @@
 							
 						?>
 						
-						<?php if ( $_is_ud_image ) { ?>
+						<?php if ( $_is_ud_file ) { ?>
 							
 							<script type="text/javascript">
 								
@@ -141,10 +153,10 @@
 													'attr' => array(
 														
 														'data-rffieldid' => 'submit-form-' . $field_name,
-														'data-rftype' => 'image',
-														'data-rfdir' => $_ud_image_upload_dir,
-														'data-rf-start-dir' => $_ud_image_start_dir,
-														'data-rf-callback-function-on-choose' => $_function_name,
+														'data-rftype' => $_is_ud_image ? 'image' : ( $_is_ud_file ? 'all' : '' ),
+														'data-rfdir' => $_ud_upload_dir,
+														'data-rf-start-dir' => $_ud_upload_dir_start_dir,
+														'data-rf-callback-function-on-choose' => $_is_ud_image ? $_ud_image_js_function_name : ( $_is_ud_file ? $_ud_file_js_function_name : '' ),
 														
 													)
 														
@@ -158,50 +170,62 @@
 									
 								});
 								
-								window.<?= $_function_name; ?> = function() {
+								<?php if ( $_is_ud_image ) { ?>
 									
-									console.log( 'file choosed' );
-									
-									var url = '<?= BASE_URL; ?>/' + $( '#<?= 'submit-form-' . $field_name; ?>' ).val();
-									
-									if ( url != '' ){
+									window.<?= $_ud_image_js_function_name; ?> = function() {
 										
-										$.imageCrop.open({
+										console.log( 'file choosed' );
+										
+										var url = '<?= BASE_URL; ?>/' + $( '#<?= 'submit-form-' . $field_name; ?>' ).val();
+										
+										if ( url != '' ){
 											
-											imgSrc: url,
-											callback: update_image_<?= $_function_name; ?>
+											$.imageCrop.open({
+												
+												imgSrc: url,
+												callback: update_image_<?= $_ud_image_js_function_name; ?>
+												
+											});
 											
-										});
+										}
+										
+									}
+									window.update_image_<?= $_ud_image_js_function_name; ?> = function(){
+										
+										var url = $( '#<?= 'submit-form-' . $field_name; ?>' ).val();
+										var $thumb_image = $( '#<?= 'thumb-submit-form-' . $field_name; ?>' );
+										
+										var image_src = url + '?' + Math.floor( ( Math.random() * 100 ) + 1 ); // prevent cache
+										
+										console.log( '<?= lang( 'Image src: ' ); ?>' + image_src );
+										
+										var thumb_image_src = 'thumbs/' + image_src;
+										
+										console.log( '<?= lang( 'Thumb image src: ' ); ?>' + thumb_image_src );
+										
+										if ( url != '' ){
+											
+											$thumb_image.attr( 'src', thumb_image_src );
+											
+											console.log( $thumb_image.attr( 'src' ) )
+											
+											console.log( '<?= lang( 'The picture should have changed now' ); ?>' )
+											
+										}
+										
+										$.fancybox.close();
 										
 									}
 									
-								}
-								window.update_image_<?= $_function_name; ?> = function(){
+								<?php } else if ( $_is_ud_file ) { ?>
 									
-									var url = $( '#<?= 'submit-form-' . $field_name; ?>' ).val();
-									var $thumb_image = $( '#<?= 'thumb-submit-form-' . $field_name; ?>' );
-									
-									var image_src = url + '?' + Math.floor( ( Math.random() * 100 ) + 1 ); // prevent cache
-									
-									console.log( '<?= lang( 'Image src: ' ); ?>' + image_src );
-									
-									var thumb_image_src = 'thumbs/' + image_src;
-									
-									console.log( '<?= lang( 'Thumb image src: ' ); ?>' + thumb_image_src );
-									
-									if ( url != '' ){
+									window.<?= $_ud_image_js_function_name; ?> = function() {
 										
-										$thumb_image.attr( 'src', thumb_image_src );
-										
-										console.log( $thumb_image.attr( 'src' ) )
-										
-										console.log( '<?= lang( 'The picture should have changed now' ); ?>' )
+										console.log( 'file choosed' );
 										
 									}
 									
-									$.fancybox.close();
-									
-								}
+								<?php } ?>
 								
 							</script>
 							
@@ -227,10 +251,10 @@
 					
 					<?php
 						
-						if ( ! ( in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) AND ! check_var( $field[ 'options' ] ) ) OR ! in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) ) {
-						
-						echo form_label( lang( $field[ 'label' ] ) . ( check_var( $field[ 'field_is_required' ] ) ? ' <span class="submit-form-required">*</span> ' . $error : ' ' . $error ) );
-						
+						if ( ( in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) AND ( check_var( $field[ 'options' ] ) OR check_var( $field[ 'options_from_users_submits' ] ) ) ) OR ! ( in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) AND ! ( check_var( $field[ 'options' ] ) OR check_var( $field[ 'options_from_users_submits' ] ) ) ) OR ! in_array( $field[ 'field_type' ], array( 'radiobox', 'checkbox' ) ) ) {
+							
+							echo form_label( lang( $field[ 'label' ] ) . ( check_var( $field[ 'field_is_required' ] ) ? ' <span class="submit-form-required">*</span> ' . $error : ' ' . $error ) );
+							
 						}
 						
 						$options = array();
@@ -491,6 +515,10 @@
 				$field_name = isset( $field[ 'alias' ] ) ? $field[ 'alias' ] : $this->sfcm->make_field_name( $field[ 'label' ] );
 				$formatted_field_name = 'form[' . $field_name . ']';
 				
+				$use_day = check_var( $field[ 'sf_date_field_use_day' ] );
+				$use_month = check_var( $field[ 'sf_date_field_use_month' ] );
+				$use_year = check_var( $field[ 'sf_date_field_use_year' ] );
+				
 				if ( isset( $post[ 'form' ][ $field_name ] ) ) {
 					
 					if ( is_array( $post[ 'form' ][ $field_name ] ) ) {
@@ -508,16 +536,31 @@
 						$field_value_m = ( isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
 						$field_value_d = ( isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
 						
+						$___date = NULL;
 						unset( $___date );
 						
 					}
 					
 				}
-				else if ( $field_value  AND $date = DateTime::createFromFormat( 'Y-m-d', $field_value ) AND $date->format( 'Y-m-d' ) == $field_value ) {
+				else if ( $field_value AND $use_day AND $use_month AND $use_year AND $date = DateTime::createFromFormat( 'Y-m-d', $field_value ) AND $date->format( 'Y-m-d' ) == $field_value ) {
 					
 					$field_value_y = $date->format( 'Y' );
 					$field_value_m = $date->format( 'm' );
 					$field_value_d = $date->format( 'd' );
+					
+					$date = NULL;
+					unset( $date );
+					
+				}
+				else if ( $field_value AND ( ! $use_day OR ! $use_month OR ! $use_year ) ) {
+					
+					$date = explode( '-', $field_value );
+					
+					$field_value_y = $date[ 0 ];
+					$field_value_m = $date[ 1 ];
+					$field_value_d = $date[ 2 ];
+					
+					$date = NULL;
 					unset( $date );
 					
 				}
@@ -529,10 +572,6 @@
 					
 				}
 				
-				$use_day = check_var( $field[ 'sf_date_field_use_day' ] );
-				$use_month = check_var( $field[ 'sf_date_field_use_month' ] );
-				$use_year = check_var( $field[ 'sf_date_field_use_year' ] );
-				
 				?><div id="<?= $unique_hash; ?>-ud-prop-field-<?= $field_name; ?>" class="<?= $ud_prop_date_unique_hash; ?> <?= $_is_ud_image ? 'ud-image' : ''; ?> ud-prop-field-wrapper ud-prop-type-<?= $field[ 'field_type' ]; ?> ud-prop-type-<?= $field[ 'field_type' ]; ?>-<?php if ( $use_day ) echo 'd'; ?><?php if ( $use_month ) echo 'm'; ?><?php if ( $use_year ) echo 'y'; ?> vui-field-wrapper vui-field-wrapper-inline <?= ( check_var( $field[ 'form_css_class' ] ) ) ? $field[ 'form_css_class' ] : ''; ?> submit-form-field-wrapper submit-form-field-wrapper-<?= $field_name; ?> submit-form-field-wrapper-<?= $field[ 'field_type' ]; ?> <?= ( $error ) ? 'form-error error' : ''; ?>">
 					
 					<?= form_label( lang( $field[ 'label' ] ) . $error ); ?>
@@ -543,9 +582,9 @@
 						<?= $field[ 'description' ]; ?>
 						
 					</div>
-					<?php } ?>
+					<?php }
 					
-					<div class="submit-form-field-control submit-form-field-control-date">
+					?><div class="submit-form-field-control submit-form-field-control-date">
 						
 						<?php
 							
@@ -603,15 +642,28 @@
 								
 							}
 							
-							if ( $this->plugins->performed( 'jquery_ui' ) ) { ?>
+							if ( $use_day AND $use_month AND $use_year AND $this->plugins->performed( 'jquery_ui' ) ) { ?>
 							
 							<script type="text/javascript">
 								
-								window.update_date_<?= $ud_prop_date_unique_hash; ?> = function( dateText, dp, el ) {
+								window.update_jqui_date_field_<?= $ud_prop_date_unique_hash; ?> = function() {
+									
+									var dateText = $( '[name="<?= $formatted_field_name . '[y]'; ?>"]' ).val() + '-' + $( '[name="<?= $formatted_field_name . '[m]'; ?>"]' ).val() + '-' + $( '[name="<?= $formatted_field_name . '[d]'; ?>"]' ).val();
+									
+									$( '#<?= 'ud-prop-date-' . $ud_prop_date_unique_hash; ?>' ).attr( 'data-jqui-dp-initial-date', dateText );
+									$( '#<?= 'ud-prop-date-' . $ud_prop_date_unique_hash; ?>' ).data( 'jqui-dp-initial-date', dateText );
+									
+								}
+								
+								window.update_date_fields_<?= $ud_prop_date_unique_hash; ?> = function( dateText, dp, el ) {
 									
 									console.log( new Date( dateText ) );
+									console.log( '<?= lang( 'console_logs_ud_prop_date_selected' ); ?>: ' + dateText );
 									
 									var date_arr = dateText.split( "-" );
+									
+									$( '#<?= 'ud-prop-date-' . $ud_prop_date_unique_hash; ?>' ).attr( 'data-jqui-dp-initial-date', dateText );
+									$( '#<?= 'ud-prop-date-' . $ud_prop_date_unique_hash; ?>' ).data( 'jqui-dp-initial-date', dateText );
 									
 									var day  = date_arr[ 2 ] ? date_arr[ 2 ] : '',  
 										month = date_arr[ 1 ] ? date_arr[ 1 ] : '',             
@@ -622,6 +674,12 @@
 									
 									$( '[name="<?= $formatted_field_name . '[d]'; ?>"] option:selected' ).removeAttr( 'selected' );
 									$( '[name="<?= $formatted_field_name . '[d]'; ?>"] [value=' + day + ']' ).attr( 'selected', true );
+									
+									$( '[name="<?= $formatted_field_name . '[m]'; ?>"] option:selected' ).removeAttr( 'selected' );
+									$( '[name="<?= $formatted_field_name . '[m]'; ?>"] [value=' + month + ']' ).attr( 'selected', true );
+									
+									$( '[name="<?= $formatted_field_name . '[y]'; ?>"] option:selected' ).removeAttr( 'selected' );
+									$( '[name="<?= $formatted_field_name . '[y]'; ?>"] [value=' + year + ']' ).attr( 'selected', true );
 									
 									$( '[name="<?= $formatted_field_name . '[d]'; ?>"]' ).val( day ).change();
 									$( '[name="<?= $formatted_field_name . '[m]'; ?>"]' ).val( month ).change();
@@ -635,22 +693,24 @@
 										
 										echo str_replace(
 											
-											"'", "\'", vui_el_input_text(
+											"'", "\'", vui_el_button(
 												
 												array(
 													
 													'button_type' => 'anchor',
-													'text' => lang( 'select_image' ),
+													'text' => lang( 'select_date' ),
 													'icon' => 'calendar',
 													'only_icon' => TRUE,
-													'wrapper-class' => 'vui-picker',
+													'wrapper_class' => 'vui-picker vui-date-selector-wrapper',
 													'class' => 'date',
 													'id' => 'ud-prop-date-' . $ud_prop_date_unique_hash,
 													'attr' => array(
 														
-														'data-jqui-dp-on-select-callback-function' => 'update_date_' . $ud_prop_date_unique_hash,
+														'data-jqui-dp-on-select-callback-function' => 'update_date_fields_' . $ud_prop_date_unique_hash,
 														'data-jqui-dp-dialog' => '1',
 														'data-jqui-dp-initial-date' => $field_value,
+														'data-max-date' => str_pad( $field[ 'sf_date_field_year_max_value' ], 2, "0", STR_PAD_LEFT ) . '-' . str_pad( $field[ 'sf_date_field_month_max_value' ], 2, "0", STR_PAD_LEFT ) . '-' . str_pad( $field[ 'sf_date_field_day_max_value' ], 2, "0", STR_PAD_LEFT ),
+														'data-min-date' => str_pad( $field[ 'sf_date_field_year_min_value' ], 2, "0", STR_PAD_LEFT ) . '-' . str_pad( $field[ 'sf_date_field_month_min_value' ], 2, "0", STR_PAD_LEFT ) . '-' . str_pad( $field[ 'sf_date_field_day_min_value' ], 2, "0", STR_PAD_LEFT ),
 														
 													)
 														
@@ -662,9 +722,9 @@
 										
 									?>' );
 									
-									$( document ).on( 'mousedown', '.<?= $ud_prop_date_unique_hash; ?>', function( e ){
+									$( document ).on( 'change', '.<?= $ud_prop_date_unique_hash; ?>', function( e ){
 										
-										e.preventDefault();
+										update_jqui_date_field_<?= $ud_prop_date_unique_hash; ?>();
 										
 									});
 									
@@ -674,9 +734,9 @@
 							
 						<?php } ?>
 						
-					</div>
+					</div><?php
 					
-				</div><?php
+				?></div><?php
 				
 			}
 			

@@ -102,6 +102,20 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
+	public function decode_user_id( $user_id ){
+		
+		return base64_decode( base64_decode( base64_decode( base64_decode( $user_id ) ) ) );
+		
+	}
+	
+	public function encode_user_id( $user_id ){
+		
+		return base64_encode( base64_encode( base64_encode( base64_encode( $user_id ) ) ) );
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
 	// Define preferências de um usuário
 	// a variável $update_db pode ser definida como FALSE se esta função estiver sendo chamada de alguma função que já atualize os dados do usuário
 	public function set_user_preferences( $data = NULL, $user_id = NULL, $update_db = TRUE, $override_per_key = FALSE ){
@@ -275,12 +289,12 @@ class Users_mdl extends CI_Model{
 		$this->db->from('tb_users t1');
 		$this->db->join('tb_users_groups t2', 't1.group_id = t2.id', 'left');
 
-		$this->db->order_by( $order_by, '', $order_by_escape );
+		if( isset( $f_params[ 'order_by' ] ) ) $this->db->order_by( $order_by, '', $order_by_escape );
 
 		if ( $where_condition ){
 			if( is_array( $where_condition ) ){
-				foreach ($where_condition as $key => $value) {
-					if(gettype($where_condition) === 'array' AND (strpos($key,'fake_index_') !== FALSE) ){
+				foreach ( $where_condition as $key => $value ) {
+					if(gettype( $where_condition ) === 'array' AND (strpos($key,'fake_index_') !== FALSE) ){
 						$this->db->where($value);
 					}
 					else $this->db->where($key, $value);
@@ -415,9 +429,11 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function insert_user($data = NULL){
+	public function insert_user( $data = NULL ) {
 		
-		if ($data != NULL){
+		log_message( 'info', "[Users] Insert user function called" );
+		
+		if ( $data != NULL ) {
 			
 			if ( ! isset( $data[ 'created_datetime' ] ) ) {
 				
@@ -425,17 +441,26 @@ class Users_mdl extends CI_Model{
 				
 			}
 			
-			if ($this->db->insert('tb_users',$data)){
+			if ( $this->db->insert( 'tb_users', $data ) ) {
+				
 				// confirm the insertion for controller
 				return $this->db->insert_id();
+				
 			}
 			else {
+			
 				// case the insertion fails, return false
 				return FALSE;
+				
 			}
+			
 		}
 		else {
-			redirect('admin');
+			
+			log_message( 'error', "[Users] " . lang( 'error_inserting_user_no_data' ) );
+			
+			msg( ( 'error_inserting_user_no_data' ), 'error' );
+			
 		}
 	}
 	
@@ -458,18 +483,27 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function update_user($data = NULL,$condition = NULL){
-		if ($data != NULL && $condition != NULL){
-			if ($this->db->update('tb_users',$data,$condition)){
-				// confirm update for controller
+	public function update_user( $data = NULL, $condition = NULL ){
+		
+		if ( $data != NULL && $condition != NULL ){
+			
+			if ( $this->db->update( 'tb_users', $data, $condition ) ){
+				
+				// confirm update to controller
 				return TRUE;
+				
 			}
 			else {
+				
 				// case update fails, return false
 				return FALSE;
+				
 			}
+			
 		}
+		
 		redirect('admin');
+		
 	}
 	
 	// --------------------------------------------------------------------
@@ -734,25 +768,38 @@ class Users_mdl extends CI_Model{
 	// --------------------------------------------------------------------
 	
 	// verifica se o usuário está em um grupo de mesmo nível ou abaixo do atual usuário
-	public function check_if_user_is_on_same_and_low_group_level($user_id){
-
+	public function check_if_user_is_on_same_and_low_group_level( $user_id ){
+		
 		$this->get_users_groups_query();
 		$this->get_users_query();
-
-		$user = $this->get_user(array('t1.id' => $user_id))->row();
-
-		$user_group_id = $user->group_id;
-		$current_user_group_id = $this->user_data['group_id'];
-
-		$above_groups = $this->get_user_group_path($user_group_id);
-
-		$output = FALSE;
-		foreach($above_groups as $row) {
-			if ( $this->user_data['parent_user_group_id'] == $row['parent'] OR $this->user_data['id'] == $row['parent'] OR $this->user_data['group_id'] == $row['id'] ) {
-				$output = TRUE;
+		
+		$user = $this->get_user( array( 't1.id' => $user_id ) )->row_array();
+		
+		if ( $user ) {
+			
+			$current_user_group_id = $this->user_data[ 'group_id' ];
+			$user_group_id = $user[ 'group_id' ];
+			
+			$above_groups = $this->get_user_group_path( $user_group_id );
+			
+			$output = FALSE;
+			
+			foreach( $above_groups as $row ) {
+				
+				if ( $this->user_data['parent_user_group_id'] == $row[ 'parent' ] OR $this->user_data[ 'id' ] == $row[ 'parent' ] OR $this->user_data[ 'group_id' ] == $row[ 'id' ] ) {
+					
+					$output = TRUE;
+					
+				}
+				
 			}
+			
+			return $output;
+			
 		}
-		return $output;
+		
+		return FALSE;
+		
 	}
 	
 	// --------------------------------------------------------------------
@@ -1226,7 +1273,7 @@ class Users_mdl extends CI_Model{
 	
 	public function check_privileges( $privilege = 'admin_access' ){
 		
-		if ( ! $this->is_logged_in() ){
+		if ( $this->mcm->environment != SITE_ALIAS AND ! $this->is_logged_in() ){
 			
 			redirect( 'admin/main/index/login' );
 			
@@ -1497,6 +1544,46 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
+	public function admin_get_link_edit( $user_id ){
+		
+		$enc_user_id = $this->users->encode_user_id( $user_id );
+		
+		return 'admin/users/um/a/e/uid/' . $enc_user_id;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function admin_get_link_remove( $user_id ){
+		
+		$enc_user_id = $this->users->encode_user_id( $user_id );
+		
+		return 'admin/users/um/a/r/uid/' . $enc_user_id;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function admin_get_link_enable( $user_id ){
+		
+		$enc_user_id = $this->users->encode_user_id( $user_id );
+		
+		return 'admin/users/um/a/ena/uid/' . $enc_user_id;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function admin_get_link_disable( $user_id ){
+		
+		$enc_user_id = $this->users->encode_user_id( $user_id );
+		
+		return 'admin/users/um/a/dis/uid/' . $enc_user_id;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
 	public function encode_password( $pass ){
 		
 		return base64_encode( md5( $pass ) );
@@ -1646,127 +1733,91 @@ class Users_mdl extends CI_Model{
 	
 	public function send_acode( $user_id, $notif = FALSE ){
 		
-		// -------------------------------------------------
-		// Parsing vars
-		
-		if ( is_array( $user_id ) ) {
+		if ( $this->mcm->load_email_system() ) {
 			
-			$f_params = $user_id;
+			// -------------------------------------------------
+			// Parsing vars
 			
-			$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
-			$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_your_acode_subject_string' ); // subject
-			$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_your_acode_body_string' ); // email_body
-			$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
-			
-		}
-		else {
-			
-			$subject =								lang( 'email_c_users_your_acode_subject_string' ); // subject
-			$email_body =							lang( 'email_c_users_your_acode_body_string' ); // email_body
-			
-		}
-		
-		// Parsing vars
-		// -------------------------------------------------
-		
-		$this->clear_expired_tmp_codes();
-		
-		if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
-			
-			if ( $notif ) {
+			if ( is_array( $user_id ) ) {
 				
-				msg( ( 'notif_c_users_send_acode_invalid_user_error' ), 'error' );
+				$f_params = $user_id;
+				
+				$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
+				$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_your_acode_subject_string' ); // subject
+				$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_your_acode_body_string' ); // email_body
+				$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
+				
+			}
+			else {
+				
+				$subject =								lang( 'email_c_users_your_acode_subject_string' ); // subject
+				$email_body =							lang( 'email_c_users_your_acode_body_string' ); // email_body
 				
 			}
 			
-			return FALSE;
+			// Parsing vars
+			// -------------------------------------------------
 			
-		}
-		
-		if ( $user[ 'status' ] == 1 ) {
+			$this->clear_expired_tmp_codes();
 			
-			if ( $notif ) {
+			if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
 				
-				msg( ( 'notif_c_users_account_already_active_error' ), 'error' );
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_send_acode_invalid_user_error' ), 'error' );
+					
+				}
 				
-			}
-			
-			return FALSE;
-			
-		}
-		
-		$user[ 'params' ] = get_params( $user[ 'params' ] );
-		
-		$db_data = array(
-			
-			'code' => $this->make_tmp_code(),
-			'user_id' => $user_id,
-			
-		);
-		
-		$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-		$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
-		
-		$db_data[ 'created_datetime' ] = $created_datetime;
-		
-		$date = strtotime( "+" . 1 . " days", strtotime( $created_datetime ) );
-		$db_data[ 'validity_datetime' ] =  date( "Y-m-d", $date );
-		
-		if ( ! $this->insert_tmp_code( $db_data ) ) {
-			
-			if ( $notif ) {
-				
-				msg( ( 'notif_c_users_insert_tmp_code_error' ), 'error' );
+				return FALSE;
 				
 			}
 			
-			return FALSE;
+			if ( $user[ 'status' ] == 1 ) {
+				
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_account_already_active_error' ), 'error' );
+					
+				}
+				
+				return FALSE;
+				
+			}
 			
-		}
-		
-		if ( check_var( $this->mcm->system_params[ 'email_config_enabled' ] ) ) {
+			$user[ 'params' ] = get_params( $user[ 'params' ] );
 			
-			$newline_search = array(
+			$db_data = array(
 				
-				'\r',
-				'\n'
-				
-			);
-			$newline_replace = array(
-				
-				"\r",
-				"\n"
-				
-			);
-			
-			$newline = str_replace( $newline_search, $newline_replace, $this->mcm->system_params[ 'email_config_newline' ] );
-			$mail_useragent = check_var( $this->mcm->system_params[ 'email_config_useragent' ] ) ? $this->mcm->system_params[ 'email_config_useragent' ] : NULL;
-			
-			$config = Array(
-				
-				'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
-				'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
-				'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
-				'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
-				'smtp_pass' => $this->mcm->system_params[ 'email_config_smtp_pass' ],
-				'mailtype' => $this->mcm->system_params[ 'email_config_mailtype' ],
-				'charset' => $this->mcm->system_params[ 'email_config_charset' ],
-				'wordwrap' => $this->mcm->system_params[ 'email_config_wordwrap' ],
-				'smtp_crypto' => $this->mcm->system_params[ 'email_config_smtp_crypto' ],
-				'newline' => $newline,
-				'useragent' => $mail_useragent,
+				'code' => $this->make_tmp_code(),
+				'user_id' => $user_id,
 				
 			);
 			
-			$this->load->library( 'email' );
+			$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
+			$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
 			
-			$this->email->initialize( $config );
+			$db_data[ 'created_datetime' ] = $created_datetime;
+			
+			$date = strtotime( "+" . 1 . " days", strtotime( $created_datetime ) );
+			$db_data[ 'validity_datetime' ] =  date( "Y-m-d", $date );
+			
+			if ( ! $this->insert_tmp_code( $db_data ) ) {
+				
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_insert_tmp_code_error' ), 'error' );
+					
+				}
+				
+				return FALSE;
+				
+			}
 			
 			$this->email->from( $this->mcm->system_params[ 'email_config_smtp_user' ], $this->mcm->system_params[ 'site_name' ] );
 			$this->email->reply_to( $this->mcm->system_params[ 'email_config_smtp_user' ] );
 			$this->email->to( $user[ 'email' ] );
-// 			$this->email->cc( $emails_cc);
-// 			$this->email->bcc( $emails_bcc);
+	// 			$this->email->cc( $emails_cc);
+	// 			$this->email->bcc( $emails_bcc);
 			$this->email->subject( sprintf(
 				
 				$subject,
@@ -1898,144 +1949,108 @@ class Users_mdl extends CI_Model{
 	
 	public function send_cplink( $user_id, $notif = FALSE ){
 		
-		// -------------------------------------------------
-		// Parsing vars
-		
-		if ( is_array( $user_id ) ) {
+		if ( $this->mcm->load_email_system() ) {
 			
-			$f_params = $user_id;
+			// -------------------------------------------------
+			// Parsing vars
 			
-			$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
-			$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_your_cplink_subject_string' ); // subject
-			$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_your_cplink_body_string' ); // email_body
-			$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
-			
-		}
-		else {
-			
-			$subject =								lang( 'email_c_users_your_cplink_subject_string' ); // subject
-			$email_body =							lang( 'email_c_users_your_cplink_body_string' ); // email_body
-			
-		}
-		
-		// Parsing vars
-		// -------------------------------------------------
-		
-		$this->clear_expired_tmp_codes();
-		
-		if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
-			
-			if ( $notif ) {
+			if ( is_array( $user_id ) ) {
 				
-				msg( ( 'notif_c_users_send_cplink_invalid_user_error' ), 'error' );
+				$f_params = $user_id;
+				
+				$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
+				$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_your_cplink_subject_string' ); // subject
+				$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_your_cplink_body_string' ); // email_body
+				$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
+				
+			}
+			else {
+				
+				$subject =								lang( 'email_c_users_your_cplink_subject_string' ); // subject
+				$email_body =							lang( 'email_c_users_your_cplink_body_string' ); // email_body
 				
 			}
 			
-			return FALSE;
+			// Parsing vars
+			// -------------------------------------------------
 			
-		}
-		
-		if ( $user[ 'status' ] == 0 ) {
+			$this->clear_expired_tmp_codes();
 			
-			if ( $notif ) {
+			if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
 				
-				msg( ( 'notif_c_users_already_have_account_disabled' ), 'error' );
-				
-				msg( lang( sprintf(
-						
-						lang( 'notif_c_users_already_have_account_disabled_desc' ),
-						/*
-							1° e-mail address
-							2° login page
-							3° pass recover page
-							4° email recover page
-							5° username recover page
-							6° resend activation code page
-							
-						*/
-						$user[ 'email' ],
-						$this->users->get_link_login_page(),
-						$this->users->get_link_get_cplink_page(),
-						$this->users->get_link_email_recover_page(),
-						$this->users->get_link_recover_username_page(),
-						$this->users->get_link_resend_acode_page()
-						
-					)
+				if ( $notif ) {
 					
-				), 'error' );
+					msg( ( 'notif_c_users_send_cplink_invalid_user_error' ), 'error' );
+					
+				}
+				
+				return FALSE;
 				
 			}
 			
-			return FALSE;
-			
-		}
-		
-		$user[ 'params' ] = get_params( $user[ 'params' ] );
-		
-		$db_data = array(
-			
-			'code' => $this->make_tmp_code(),
-			'user_id' => $user_id,
-			
-		);
-		
-		$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-		$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
-		
-		$db_data[ 'created_datetime' ] = $created_datetime;
-		
-		$date = strtotime( "+" . 1 . " days", strtotime( $created_datetime ) );
-		$db_data[ 'validity_datetime' ] =  date( "Y-m-d", $date );
-		
-		if ( ! $this->insert_tmp_code( $db_data ) ) {
-			
-			if ( $notif ) {
+			if ( $user[ 'status' ] == 0 ) {
 				
-				msg( ( 'notif_c_users_insert_tmp_code_error' ), 'error' );
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_already_have_account_disabled' ), 'error' );
+					
+					msg( lang( sprintf(
+							
+							lang( 'notif_c_users_already_have_account_disabled_desc' ),
+							/*
+								1° e-mail address
+								2° login page
+								3° pass recover page
+								4° email recover page
+								5° username recover page
+								6° resend activation code page
+								
+							*/
+							$user[ 'email' ],
+							$this->users->get_link_login_page(),
+							$this->users->get_link_get_cplink_page(),
+							$this->users->get_link_email_recover_page(),
+							$this->users->get_link_recover_username_page(),
+							$this->users->get_link_resend_acode_page()
+							
+						)
+						
+					), 'error' );
+					
+				}
+				
+				return FALSE;
 				
 			}
 			
-			return FALSE;
+			$user[ 'params' ] = get_params( $user[ 'params' ] );
 			
-		}
-		
-		if ( check_var( $this->mcm->system_params[ 'email_config_enabled' ] ) ) {
-			
-			$newline_search = array(
+			$db_data = array(
 				
-				'\r',
-				'\n'
-				
-			);
-			$newline_replace = array(
-				
-				"\r",
-				"\n"
+				'code' => $this->make_tmp_code(),
+				'user_id' => $user_id,
 				
 			);
 			
-			$newline = str_replace( $newline_search, $newline_replace, $this->mcm->system_params[ 'email_config_newline' ] );
-			$mail_useragent = check_var( $this->mcm->system_params[ 'email_config_useragent' ] ) ? $this->mcm->system_params[ 'email_config_useragent' ] : NULL;
+			$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
+			$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
 			
-			$config = Array(
+			$db_data[ 'created_datetime' ] = $created_datetime;
+			
+			$date = strtotime( "+" . 1 . " days", strtotime( $created_datetime ) );
+			$db_data[ 'validity_datetime' ] =  date( "Y-m-d", $date );
+			
+			if ( ! $this->insert_tmp_code( $db_data ) ) {
 				
-				'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
-				'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
-				'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
-				'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
-				'smtp_pass' => $this->mcm->system_params[ 'email_config_smtp_pass' ],
-				'mailtype' => $this->mcm->system_params[ 'email_config_mailtype' ],
-				'charset' => $this->mcm->system_params[ 'email_config_charset' ],
-				'wordwrap' => $this->mcm->system_params[ 'email_config_wordwrap' ],
-				'smtp_crypto' => $this->mcm->system_params[ 'email_config_smtp_crypto' ],
-				'newline' => $newline,
-				'useragent' => $mail_useragent,
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_insert_tmp_code_error' ), 'error' );
+					
+				}
 				
-			);
-			
-			$this->load->library( 'email' );
-			
-			$this->email->initialize( $config );
+				return FALSE;
+				
+			}
 			
 			$this->email->from( $this->mcm->system_params[ 'email_config_smtp_user' ], $this->mcm->system_params[ 'site_name' ] );
 			$this->email->reply_to( $this->mcm->system_params[ 'email_config_smtp_user' ] );
@@ -2175,83 +2190,47 @@ class Users_mdl extends CI_Model{
 	
 	public function send_username( $user_id, $notif = FALSE ){
 		
-		// -------------------------------------------------
-		// Parsing vars
-		
-		$layout =									'default'; // layout
-		
-		if ( is_array( $user_id ) ) {
+		if ( $this->mcm->load_email_system() ) {
 			
-			$f_params = $user_id;
+			// -------------------------------------------------
+			// Parsing vars
 			
-			$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
-			$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_recover_username_subject_string' ); // subject
-			$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_recover_username_body_string' ); // email_body
-			$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
-			$layout =								isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : $layout; // layout
+			$layout =									'default'; // layout
 			
-		}
-		else {
-			
-			$subject =								lang( 'email_c_users_recover_username_subject_string' ); // subject
-			$email_body =							lang( 'email_c_users_recover_username_body_string' ); // email_body
-			
-		}
-		
-		// Parsing vars
-		// -------------------------------------------------
-		
-		if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
-			
-			if ( $notif ) {
+			if ( is_array( $user_id ) ) {
 				
-				msg( ( 'notif_c_users_recover_username_invalid_user_error' ), 'error' );
+				$f_params = $user_id;
+				
+				$user_id =								isset( $f_params[ 'user_id' ] ) ? $f_params[ 'user_id' ] : NULL; // user id
+				$subject =								isset( $f_params[ 'subject' ] ) ? $f_params[ 'subject' ] : lang( 'email_c_users_recover_username_subject_string' ); // subject
+				$email_body =							isset( $f_params[ 'email_body' ] ) ? $f_params[ 'email_body' ] : lang( 'email_c_users_recover_username_body_string' ); // email_body
+				$notif =								isset( $f_params[ 'notif' ] ) ? $f_params[ 'notif' ] : NULL; // notifications
+				$layout =								isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : $layout; // layout
+				
+			}
+			else {
+				
+				$subject =								lang( 'email_c_users_recover_username_subject_string' ); // subject
+				$email_body =							lang( 'email_c_users_recover_username_body_string' ); // email_body
 				
 			}
 			
-			return FALSE;
+			// Parsing vars
+			// -------------------------------------------------
 			
-		}
-		
-		$user[ 'params' ] = get_params( $user[ 'params' ] );
-		
-		if ( check_var( $this->mcm->system_params[ 'email_config_enabled' ] ) ) {
+			if ( ! ( $user = $this->get_user( $user_id )->row_array() ) ) {
+				
+				if ( $notif ) {
+					
+					msg( ( 'notif_c_users_recover_username_invalid_user_error' ), 'error' );
+					
+				}
+				
+				return FALSE;
+				
+			}
 			
-			$newline_search = array(
-				
-				'\r',
-				'\n'
-				
-			);
-			$newline_replace = array(
-				
-				"\r",
-				"\n"
-				
-			);
-			
-			$newline = str_replace( $newline_search, $newline_replace, $this->mcm->system_params[ 'email_config_newline' ] );
-			$mail_useragent = check_var( $this->mcm->system_params[ 'email_config_useragent' ] ) ? $this->mcm->system_params[ 'email_config_useragent' ] : NULL;
-			
-			$config = Array(
-				
-				'protocol' => $this->mcm->system_params[ 'email_config_protocol' ],
-				'smtp_host' => $this->mcm->system_params[ 'email_config_smtp_host' ],
-				'smtp_port' => $this->mcm->system_params[ 'email_config_smtp_port' ],
-				'smtp_user' => $this->mcm->system_params[ 'email_config_smtp_user' ],
-				'smtp_pass' => $this->mcm->system_params[ 'email_config_smtp_pass' ],
-				'mailtype' => $this->mcm->system_params[ 'email_config_mailtype' ],
-				'charset' => $this->mcm->system_params[ 'email_config_charset' ],
-				'wordwrap' => $this->mcm->system_params[ 'email_config_wordwrap' ],
-				'smtp_crypto' => $this->mcm->system_params[ 'email_config_smtp_crypto' ],
-				'newline' => $newline,
-				'useragent' => $mail_useragent,
-				
-			);
-			
-			$this->load->library( 'email' );
-			
-			$this->email->initialize( $config );
+			$user[ 'params' ] = get_params( $user[ 'params' ] );
 			
 			$this->email->from( $this->mcm->system_params[ 'email_config_smtp_user' ], $this->mcm->system_params[ 'site_name' ] );
 			$this->email->reply_to( $this->mcm->system_params[ 'email_config_smtp_user' ] );
@@ -2317,6 +2296,7 @@ class Users_mdl extends CI_Model{
 				
 				$email_body,
 				/*
+					
 					1° name
 					2° username
 					3° e-mail
@@ -2633,43 +2613,43 @@ class Users_mdl extends CI_Model{
 					'group_id' => 4,
 					
 				);
-
+				
 				if ( ! $username ){
-
+					
 					$insert_data[ 'username' ] = explode( '@', $email );
 					$insert_data[ 'username' ] = $insert_data[ 'username' ][ 0 ];
-
+					
 					$insert_data[ 'username' ] = $this->_make_random_username( $insert_data[ 'username' ] );
-
+					
 				}
-
+				
 				if ( $name ){
-
+					
 					$insert_data[ 'name' ] = $name;
-
+					
 				}
-
+				
 				if ( $params ){
-
+					
 					$insert_data[ 'params' ] = $params;
-
+					
 				}
 				else{
-
+					
 					$params = array();
-
+					
 				}
-
+				
 				if ( $picture ){
-
+					
 					$insert_data[ 'params' ][ 'picture' ] = $picture;
-
+					
 				}
-
+				
 				$insert_data[ 'params' ] = json_encode( $insert_data[ 'params' ] );
-
+				
 				$return_id = $this->insert_user( $insert_data );
-
+				
 				if ( $return_id ){
 					
 					msg( ( 'user_created' ), 'success' );
@@ -2721,33 +2701,31 @@ class Users_mdl extends CI_Model{
 						'session_mode' => $session_mode,
 						
 					);
-
+					
 					$this->_make_login( $mlp );
-
-					redirect( 'admin/users/users_management/edit_user/' . base64_encode( base64_encode( base64_encode( base64_encode( $return_id ) ) ) ) );
-
+					
+					redirect( 'admin/users/users_management/edit_user/' . $this->encode_user_id( $return_id ) );
+					
 				}
 				else{
-
+					
 					msg( 'create_user_fail', 'title' );
 					msg( 'undefined_error', 'error' );
 					redirect_last_url();
-
+					
 				}
-
-
-
+				
 			}
-
+			
 		}
 		else{
-
+			
 			msg( 'login_fail', 'title' );
 			msg( 'insufficient_information', 'error' );
 			redirect_last_url();
-
+			
 		}
-
+		
 	}
 	
 	// --------------------------------------------------------------------
@@ -3018,21 +2996,23 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
+	/**
+	 * Gera um password aleatorio
+	 * @return String
+	 */
+	public function generatePassword()
+	{
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890$#%@.';
+		$pass = array();
+		$alphaLength = strlen($alphabet) - 1; //Tamanho da string de caracters
+		
+		for ($i = 0; $i < 8; $i++)
+		{
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		
+		return implode($pass); //Retorna a string formatada
+	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

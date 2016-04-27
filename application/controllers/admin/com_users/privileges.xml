@@ -9,6 +9,31 @@
 		
 		<param name="privileges[users_management_can_add_user]" value="users_management_can_add_user" type="checkbox" default="" label="users_management_can_add_user" tip="tip_users_management_can_add_user" />
 		
+		<param type="spacer" label="users_id" />
+		
+		<param name="privileges[users_management_can_change_id_others]" value="users_management_can_change_id_others" type="checkbox" default="" label="users_management_can_change_id_others" tip="tip_users_management_can_change_id_others" />
+		<param name="privileges[users_management_can_change_own_id]" value="users_management_can_change_own_id" type="checkbox" default="" label="users_management_can_change_own_id" tip="tip_users_management_can_change_own_id" />
+		
+		<param type="spacer" label="users_username" />
+		
+		<param name="privileges[users_management_can_change_username_others]" value="users_management_can_change_username_others" type="checkbox" default="" label="users_management_can_change_username_others" tip="tip_users_management_can_change_username_others" />
+		<param name="privileges[users_management_can_change_own_username]" value="users_management_can_change_own_username" type="checkbox" default="" label="users_management_can_change_own_username" tip="tip_users_management_can_change_own_username" />
+		
+		<param type="spacer" label="users_name" />
+		
+		<param name="privileges[users_management_can_change_name_others]" value="users_management_can_change_name_others" type="checkbox" default="" label="users_management_can_change_name_others" tip="tip_users_management_can_change_name_others" />
+		<param name="privileges[users_management_can_change_own_name]" value="users_management_can_change_own_name" type="checkbox" default="checked" label="users_management_can_change_own_name" tip="tip_users_management_can_change_own_name" />
+		
+		<param type="spacer" label="users_email" />
+		
+		<param name="privileges[users_management_can_change_email_others]" value="users_management_can_change_email_others" type="checkbox" default="" label="users_management_can_change_email_others" tip="tip_users_management_can_change_email_others" />
+		<param name="privileges[users_management_can_change_own_email]" value="users_management_can_change_own_email" type="checkbox" default="" label="users_management_can_change_own_email" tip="tip_users_management_can_change_own_email" />
+		
+		<param type="spacer" label="users_password" />
+		
+		<param name="privileges[users_management_can_change_password_others]" value="users_management_can_change_password_others" type="checkbox" default="" label="users_management_can_change_password_others" tip="tip_users_management_can_change_password_others" />
+		<param name="privileges[users_management_can_change_own_password]" value="users_management_can_change_own_password" type="checkbox" default="checked" label="users_management_can_change_own_password" tip="tip_users_management_can_change_own_password" />
+		
 		<param type="spacer" label="relation_to_other_users" />
 		
 		<param name="privileges_users_management_view_group_level" value="users_management_can_see_all_group_levels" type="radio" default="" label="users_management_can_see_all_group_levels" tip="tip_users_management_can_see_all_group_levels" />

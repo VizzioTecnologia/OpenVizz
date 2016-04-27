@@ -53,3 +53,18 @@
 	width: 100%;
 	
 }
+
+
+/* ------------------ */
+/* article modal picker */
+
+.vui .field-param-wrapper .article-id {
+	
+	width: calc( 100% - 50px );
+	
+}
+.vui .field-param-wrapper .vui-interactive-el-wrapper.modal-articles-picker-wrapper {
+	
+	width: 50px;
+	
+}

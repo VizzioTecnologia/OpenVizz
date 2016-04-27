@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="ud_ds_emails_for_submitters">
+		
+		<param type="spacer" default="" label="ud_ds_submitters_layout_specific_params_label" />
+		
+		<!-- related to the categories -->
+		
+		<param name="ud_ds_submitters_layout_logo_image_file" type="text" default="" label="ud_ds_submitters_layout_logo_image_file" tip="tip_ud_ds_submitters_layout_logo_image_file" />
+		
+		<param name="ud_ds_submitters_layout_bg_color" type="text" default="" label="ud_ds_submitters_layout_bg_color" />
+		
+		<param name="ud_ds_submitters_layout_content_bg_color" type="text" default="" label="ud_ds_submitters_layout_content_bg_color" />
+		
+		<param name="ud_ds_submitters_layout_content_fg_color" type="text" default="" label="ud_ds_submitters_layout_content_fg_color" />
+		
+		<param name="ud_ds_submitters_layout_content_link_color" type="text" default="" label="ud_ds_submitters_layout_content_link_color" />
+		
+		<param name="ud_ds_submitters_layout_content_border_color" type="text" default="" label="ud_ds_submitters_layout_content_border_color" />
+		
+		<param name="ud_ds_submitters_layout_show_title" type="select" default="1" label="ud_ds_submitters_layout_show_title" tip="tip_ud_ds_submitters_layout_show_title" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_submitters_layout_custom_title" type="text" default="" label="ud_ds_submitters_layout_custom_title" />
+		
+		<param name="ud_ds_submitters_layout_show_pre_text" type="select" default="1" label="ud_ds_submitters_layout_show_pre_text" tip="tip_ud_ds_submitters_layout_show_pre_text" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_submitters_layout_custom_pre_text" type="textarea" editor="1" default="" label="ud_ds_submitters_layout_custom_pre_text" tip="tip_ud_ds_submitters_layout_custom_pre_text" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="ud_ds_submitters_layout_show_footer_text" type="select" default="1" label="ud_ds_submitters_layout_show_footer_text" tip="tip_ud_ds_submitters_layout_show_footer_text" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_submitters_layout_custom_footer_text" type="textarea" editor="1" default="" label="ud_ds_submitters_layout_custom_footer_text" tip="tip_ud_ds_submitters_layout_custom_footer_text" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+	</section>
+	
+</params>

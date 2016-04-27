@@ -6,4 +6,17 @@
 - Responsive File Manager
 	- desativado o fechamento do fancybox pelo script assets/js/responsivefilemanager/filemanager/js/include.js
 		- conteúdo do arquivo include.js copiado para o mesmo arquivo minificado
-		
+	- arquivo include/utils.php, função create_folder() alterada:
+		- removido os comandos umask
+		- removida as definições de permissões das funções mkdir(), assim as permissões aplicadas são as do próprio sistema operacional
+	- Criadas as configurações de largura e altura das miniaturas
+		- Busca pelas dimensões 122 x 91, substituídas pelos respectivos valores do sistema
+		- Arquivos alterados:
+			- config.php
+			- upload.php
+			- ajax_calls.php
+			- dialog.php
+			
+- MPDF
+	- Configurações de fontes:
+		- Adicionada a fonte Open Sans e Open Sans Condensed

@@ -593,7 +593,7 @@ class CI_Upload {
 			$this->set_error('upload_no_file_types');
 			return FALSE;
 		}
-
+		
 		$ext = strtolower(ltrim($this->file_ext, '.'));
 
 		if ( ! in_array($ext, $this->allowed_types))

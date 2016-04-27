@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="48.0001"
+   width="48"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="icon-poll.svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview6"
+     showgrid="true"
+     inkscape:zoom="9.833313"
+     inkscape:cx="39.901638"
+     inkscape:cy="22.256576"
+     inkscape:window-x="-5"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:snap-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2989" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;enable-background:accumulate"
+     d="M 24,4 C 18.4792,4 13.7813,5.9687002 9.875,9.875 5.9687,13.7813 4,18.4792 4,24 4,29.5208 5.9687,34.2187 9.875,38.125 13.7813,42.0313 18.4792,44 24,44 29.5208,44 34.2187,42.0313 38.125,38.125 42.0313,34.2187 44,29.5208 44,24 44,18.4792 42.0313,13.7813 38.125,9.875 34.2187,5.9687002 29.5208,4 24,4 z m -11,11 22,0 0,18 -22,0 z m 2,2 0,14 18,0 0,-14 z m 16,2 0,10 -15,0 5,-5 4,1 5,-4 z"
+     id="path5853"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="sssssssssccccccccccccccccc"
+     class="vui_change_color" />
+</svg>

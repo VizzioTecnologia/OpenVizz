@@ -469,83 +469,97 @@
 		
 	}
 	
-	var options = {
+	$( document ).on( 'click', '.ui-datepicker-overlay', function( event ) {
 		
-		showButtonPanel: $( this ).data( 'show-button-panel' ) ? $( this ).data( 'show-button-panel' ) : true,
-		changeYear: $( this ).data( 'change-year' ) ? $( this ).data( 'change-year' ) : true,
-		changeMonth: $( this ).data( 'change-month' ) ? $( this ).data( 'change-month' ) : true,
-		dateFormat: $( this ).data( 'date-format' ) ? $( this ).data( 'date-format' ) : '<?= lang('jQueryUI.js_date_format_1'); ?>',
-		maxDate: $( this ).data( 'max-date' ) ? $( this ).data( 'max-date' ) : "+100y",
-		minDate: $( this ).data( 'min-date' ) ? $( this ).data( 'min-date' ) : "-100y",
-		autoSize: $( this ).data( 'auto-size' ) ? $( this ).data( 'auto-size' ) : true,
-		yearRange: $( this ).data( 'year-range' ) ? $( this ).data( 'year-range' ) : "-100y:+100y", // ex.: 1900:2000, 1900:-5y, 1900:y
+		remove_ui_datepicker_overlay();
+		$( '.date' ).datepicker( 'hide' );
 		
-		onClose: function() {
-			
-			if ( $( this ).data( 'on-close-callback-function' ) ){
-				
-				window[ $( this ).data( 'on-close-callback-function' ) ]();
-				console.log( '[jQuery UI][Datepicker] calling on close callback function ' + $( this ).data( 'on-close-callback-function' ) );
-				
-			}
-			else {
-				
-				$( this ).change();
-				console.log( '[jQuery UI][Datepicker] Change event triggered from onClose datepicker event' )
-				
-			}
-			
-		},
+	});
+	
+	function remove_ui_datepicker_overlay() {
 		
-		onSelect: function( dateText, dp ){
-			
-			jqui_dp_on_select_function( dateText, dp, $( this ) );
-			
-		},
-		
-		monthNames: [
-		
-			'<?= lang('cal_january'); ?>',
-			'<?= lang('cal_february'); ?>',
-			'<?= lang('cal_march'); ?>',
-			'<?= lang('cal_april'); ?>',
-			'<?= lang('cal_mayl'); ?>',
-			'<?= lang('cal_june'); ?>',
-			'<?= lang('cal_july'); ?>',
-			'<?= lang('cal_august'); ?>',
-			'<?= lang('cal_september'); ?>',
-			'<?= lang('cal_october'); ?>',
-			'<?= lang('cal_november'); ?>',
-			'<?= lang('cal_december'); ?>'
-			
-		],
-			
-		dayNamesShort: [
-			
-			'<?= lang('cal_su'); ?>',
-			'<?= lang('cal_mo'); ?>',
-			'<?= lang('cal_tu'); ?>',
-			'<?= lang('cal_we'); ?>',
-			'<?= lang('cal_th'); ?>',
-			'<?= lang('cal_fr'); ?>',
-			'<?= lang('cal_sa'); ?>'
-			
-		],
-		
-		dayNames: ['<?= lang('cal_sunday'); ?>','<?= lang('cal_monday'); ?>','<?= lang('cal_tuesday'); ?>','<?= lang('cal_wednesday'); ?>','<?= lang('cal_thursday'); ?>','<?= lang('cal_friday'); ?>','<?= lang('cal_saturday'); ?>'],
-		dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-		
-		closeText: '<?= lang('action_ok'); ?>',
-		currentText: '<?= lang('cal_today'); ?>',
-		nextText: '<?= lang('next'); ?>',
-		prevText: '<?= lang('previous'); ?>'
-		
-	};
+		$( '.ui-datepicker-overlay' ).detach();
+	}
 	
 	$( document ).on( 'click', '.date', function( event ) {
 		
 		var el = $( this );
+		
+		var options = {
+			
+			showButtonPanel: el.data( 'show-button-panel' ) ? el.data( 'show-button-panel' ) : true,
+			changeYear: el.data( 'change-year' ) ? el.data( 'change-year' ) : true,
+			changeMonth: el.data( 'change-month' ) ? el.data( 'change-month' ) : true,
+			dateFormat: el.data( 'date-format' ) ? el.data( 'date-format' ) : '<?= lang( 'jQueryUI.js_date_format_1' ); ?>',
+			maxDate: el.data( 'max-date' ) ? el.data( 'max-date' ) : "+100y",
+			minDate: el.data( 'min-date' ) ? el.data( 'min-date' ) : "-100y",
+			autoSize: el.data( 'auto-size' ) ? el.data( 'auto-size' ) : true,
+			yearRange: el.data( 'year-range' ) ? el.data( 'year-range' ) : "-100y:+100y", // ex.: 1900:2000, 1900:-5y, 1900:y
+			
+			onClose: function() {
+				
+				if ( el.data( 'on-close-callback-function' ) ){
+					
+					window[ el.data( 'on-close-callback-function' ) ]();
+					console.log( '[jQuery UI][Datepicker] calling on close callback function ' + el.data( 'on-close-callback-function' ) );
+					
+				}
+				else {
+					
+					el.change();
+					console.log( '[jQuery UI][Datepicker] Change event triggered from onClose datepicker event' )
+					
+				}
+				
+				remove_ui_datepicker_overlay();
+				
+			},
+			
+			onSelect: function( dateText, dp ){
+				
+				jqui_dp_on_select_function( dateText, dp, el );
+				
+			},
+			
+			monthNames: [
+			
+				'<?= lang('cal_january'); ?>',
+				'<?= lang('cal_february'); ?>',
+				'<?= lang('cal_march'); ?>',
+				'<?= lang('cal_april'); ?>',
+				'<?= lang('cal_mayl'); ?>',
+				'<?= lang('cal_june'); ?>',
+				'<?= lang('cal_july'); ?>',
+				'<?= lang('cal_august'); ?>',
+				'<?= lang('cal_september'); ?>',
+				'<?= lang('cal_october'); ?>',
+				'<?= lang('cal_november'); ?>',
+				'<?= lang('cal_december'); ?>'
+				
+			],
+				
+			dayNamesShort: [
+				
+				'<?= lang('cal_su'); ?>',
+				'<?= lang('cal_mo'); ?>',
+				'<?= lang('cal_tu'); ?>',
+				'<?= lang('cal_we'); ?>',
+				'<?= lang('cal_th'); ?>',
+				'<?= lang('cal_fr'); ?>',
+				'<?= lang('cal_sa'); ?>'
+				
+			],
+			
+			dayNames: ['<?= lang('cal_sunday'); ?>','<?= lang('cal_monday'); ?>','<?= lang('cal_tuesday'); ?>','<?= lang('cal_wednesday'); ?>','<?= lang('cal_thursday'); ?>','<?= lang('cal_friday'); ?>','<?= lang('cal_saturday'); ?>'],
+			dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+			monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+			
+			closeText: '<?= lang('action_ok'); ?>',
+			currentText: '<?= lang('cal_today'); ?>',
+			nextText: '<?= lang('next'); ?>',
+			prevText: '<?= lang('previous'); ?>'
+			
+		};
 		
 		switch ( event.which ) {
 			
@@ -553,6 +567,8 @@
 			case 1:
 				
 				if ( el.data( 'jqui-dp-dialog' ) == 1 ) {
+					
+					$( 'body' ).append( '<div class="ui-datepicker-overlay">' );
 					
 					el.datepicker( 'dialog', ( el.data( 'jqui-dp-initial-date' ) ? el.data( 'jqui-dp-initial-date' ) : null ), function( dateText, dp ){ jqui_dp_on_select_function( dateText, dp, el ) }, options );
 					

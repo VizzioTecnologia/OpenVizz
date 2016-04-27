@@ -502,177 +502,6 @@ class Articles_mdl extends CI_Model{
 
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Return a article function url
-	 *
-	 * Available aliases:
-	 *
-	 * 		Admin:
-	 * 			- list
-	 * 			- search
-	 * 			- cancel_search
-	 * 			- live_search
-	 * 			- add
-	 * 			- edit
-	 * 			- copy
-	 * 			- remove
-	 * 			- remove_all
-	 * 			- change_order_by
-	 * 			- change_ordering
-	 * 			- up_ordering
-	 * 			- down_ordering
-	 * 			- set_status_publish
-	 * 			- set_status_unpublish
-	 * 			- set_status_archived @TODO
-	 * 			- batch
-	 *
-	 * @access public
-	 * @param string
-	 * @param mixed
-	 * @param string
-	 * @return string
-	 */
-
-	public function get_a_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
-
-		// get url params
-		$gup[ 'alias' ] = ( string ) $alias;
-		$gup[ 'environemnt' ] = $environemnt;
-
-		if ( $alias === 'change_order_by' ){
-
-			$gup[ 'order_by_value' ] = $value;
-
-		}
-
-		if ( isset( $value ) ){
-
-			if ( is_array( $value ) ){
-
-				// detect if array is article or params array
-				if ( isset( $value[ 'id' ] ) ) {
-
-					$gup[ 'article' ] = $value;
-
-				}
-				// is params array
-				else {
-
-					$gup = array_merge( $gup, $value );
-
-				}
-
-			}
-			else {
-
-				$gup[ 'article_id' ] = ( int ) $value;
-
-			}
-
-		}
-
-		return ( string ) $this->_url( $gup );
-
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Return a article gallery function url
-	 *
-	 * Available aliases:
-	 *
-	 * 		Admin:
-	 * 			- add
-	 *
-	 * @access public
-	 * @param string
-	 * @param mixed
-	 * @param string
-	 * @return string
-	 */
-
-	public function get_ag_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
-
-		// get url params
-		$gup[ 'alias' ] = ( string ) $alias;
-		$gup[ 'environemnt' ] = $environemnt;
-		$gup[ 'function' ] = 'gallery';
-
-		if ( isset( $value ) ){
-
-			if ( is_array( $value ) ){
-
-				$gup = array_merge( $gup, $value );
-
-			}
-
-		}
-
-		return ( string ) $this->_url( $gup );
-
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Return a ajax function url
-	 *
-	 * Available aliases:
-	 *
-	 * 		Admin:
-	 * 			- search | this make a global search (articles + categories)
-	 * 			- articles_search
-	 * 			- categories_search
-	 *
-	 * @access public
-	 * @param string
-	 * @param mixed
-	 * @param string
-	 * @return string
-	 */
-
-	public function get_ajax_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
-
-		// get url params
-		$gup[ 'alias' ] = ( string ) $alias;
-		$gup[ 'environemnt' ] = $environemnt;
-		$gup[ 'function' ] = 'ajax';
-
-		if ( isset( $value ) ){
-
-			if ( is_array( $value ) ){
-
-				// detect if array is article or params array
-				if ( isset( $value[ 'id' ] ) ) {
-
-					$gup[ 'article' ] = $value;
-
-				}
-				// is params array
-				else {
-
-					$gup = array_merge( $gup, $value );
-
-				}
-
-			}
-			else {
-
-				$gup[ 'article_id' ] = ( int ) $value;
-
-			}
-
-		}
-
-		return ( string ) $this->_url( $gup );
-
-	}
-
-	// --------------------------------------------------------------------
-
 	/**
 	 * Return a prepared url for site articles detail page
 	 *
@@ -954,6 +783,175 @@ class Articles_mdl extends CI_Model{
 	// --------------------------------------------------------------------
 
 	/**
+	 * Return a article function url
+	 *
+	 * Available aliases:
+	 *
+	 * 		Admin:
+	 * 			- list
+	 * 			- search
+	 * 			- cancel_search
+	 * 			- live_search
+	 * 			- add
+	 * 			- edit
+	 * 			- copy
+	 * 			- remove
+	 * 			- remove_all
+	 * 			- change_order_by
+	 * 			- change_ordering
+	 * 			- up_ordering
+	 * 			- down_ordering
+	 * 			- set_status_publish
+	 * 			- set_status_unpublish
+	 * 			- set_status_archived @TODO
+	 * 			- batch
+	 *
+	 * @access public
+	 * @param string
+	 * @param mixed
+	 * @param string
+	 * @return string
+	 */
+
+	public function get_a_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
+
+		// get url params
+		$gup[ 'alias' ] = ( string ) $alias;
+		$gup[ 'environemnt' ] = $environemnt;
+
+		if ( $alias === 'change_order_by' ){
+
+			$gup[ 'order_by_value' ] = $value;
+
+		}
+
+		if ( isset( $value ) ){
+
+			if ( is_array( $value ) ){
+
+				// detect if array is article or params array
+				if ( isset( $value[ 'id' ] ) ) {
+
+					$gup[ 'article' ] = $value;
+
+				}
+				// is params array
+				else {
+
+					$gup = array_merge( $gup, $value );
+
+				}
+
+			}
+			else {
+
+				$gup[ 'article_id' ] = ( int ) $value;
+
+			}
+
+		}
+
+		return ( string ) $this->_url( $gup );
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Return a article gallery function url
+	 *
+	 * Available aliases:
+	 *
+	 * 		Admin:
+	 * 			- add
+	 *
+	 * @access public
+	 * @param string
+	 * @param mixed
+	 * @param string
+	 * @return string
+	 */
+
+	public function get_ag_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
+
+		// get url params
+		$gup[ 'alias' ] = ( string ) $alias;
+		$gup[ 'environemnt' ] = $environemnt;
+		$gup[ 'function' ] = 'gallery';
+
+		if ( isset( $value ) ){
+
+			if ( is_array( $value ) ){
+
+				$gup = array_merge( $gup, $value );
+
+			}
+
+		}
+
+		return ( string ) $this->_url( $gup );
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Return a ajax function url
+	 *
+	 * Available aliases:
+	 *
+	 * 		Admin:
+	 * 			- search | this make a global search (articles + categories)
+	 * 			- articles_search
+	 * 			- categories_search
+	 *
+	 * @access public
+	 * @param string
+	 * @param mixed
+	 * @param string
+	 * @return string
+	 */
+
+	public function get_ajax_url( $alias = NULL, $value = NULL, $environemnt = NULL ){
+
+		// get url params
+		$gup[ 'alias' ] = ( string ) $alias;
+		$gup[ 'environemnt' ] = $environemnt;
+		$gup[ 'function' ] = 'ajax';
+
+		if ( isset( $value ) ){
+
+			if ( is_array( $value ) ){
+
+				// detect if array is article or params array
+				if ( isset( $value[ 'id' ] ) ) {
+
+					$gup[ 'article' ] = $value;
+
+				}
+				// is params array
+				else {
+
+					$gup = array_merge( $gup, $value );
+
+				}
+
+			}
+			else {
+
+				$gup[ 'article_id' ] = ( int ) $value;
+
+			}
+
+		}
+
+		return ( string ) $this->_url( $gup );
+
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Return a Article component url
 	 *
 	 * Available aliases:
@@ -1005,6 +1003,7 @@ class Articles_mdl extends CI_Model{
 
 		$category =								isset( $f_params[ 'category' ] ) ? $f_params[ 'category' ] : NULL;
 		$category_id =							( isset( $f_params[ 'category_id' ] ) AND is_numeric( $f_params[ 'category_id' ] ) ) ? ( int ) $f_params[ 'category_id' ] : NULL;
+		$ct =									( isset( $f_params[ 'ct' ] ) ) ? ( boolean ) $f_params[ 'ct' ] : FALSE;
 
 		// -------------
 
@@ -1121,11 +1120,17 @@ class Articles_mdl extends CI_Model{
 					$_final_array[ 'cid' ] = $category_id;
 
 				}
-
+				
+				if ( key_exists( 'ct' , $template_fields ) ){
+					
+					$_final_array[ 'ct' ] = $template_fields[ 'ct' ];
+					
+				}
+				
 				if ( key_exists( 'cp' , $template_fields ) ){
-
+					
 					$_final_array[ 'cp' ] = $template_fields[ 'cp' ];
-
+					
 				}
 				else if ( $cp ){
 
@@ -1316,7 +1321,13 @@ class Articles_mdl extends CI_Model{
 					case 'categories_search': $_final_array[ 'a' ] = 'cs'; break;
 
 				}
-
+				
+				if ( $ct ){
+					
+					$_final_array[ 'ct' ] = ( int ) $ct;
+					
+				}
+				
 				$return = $_final_array ? '/' . $this->uri->assoc_to_uri( $_final_array ) : '';
 
 			}

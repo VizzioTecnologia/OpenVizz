@@ -142,6 +142,12 @@
 			
 		</param>
 		
+		<param type="spacer" label="images" />
+		
+		<param name="thumbnails_width" type="text" default="100" label="thumbnails_width" tip="tip_thumbnails_width" />
+		
+		<param name="thumbnails_height" type="text" default="100" label="thumbnails_height" tip="tip_thumbnails_height" />
+		
 	</section>
 	
 	<section name="email_config">
@@ -293,6 +299,15 @@
 		<param name="site_hide_pagination_when_only_one_page" type="select" default="1" label="hide_pagination_when_only_one_page" tip="tip_hide_pagination_when_only_one_page">
 			<option value="1">yes</option>
 			<option value="0">no</option>
+		</param>
+		
+		<param type="spacer" label="config_to_developers" />
+		
+		<param name="site_enable_profiler" type="select" default="0" label="site_enable_profiler" tip="tip_site_enable_profiler">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
 		</param>
 		
 	</section>

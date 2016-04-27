@@ -176,92 +176,100 @@ class Articles_categories_search_plugin extends Plugins_mdl{
 
 			// Checking the get categories tree function use ---
 			// -------------------------------------------------
-
+			
 			if ( $full_search_results ) {
-
+				
 				if ( $get_tree ) {
-
+					
 					$_tmp = $this->articles->get_categories_tree( array( 'array' => $full_search_results, ) );
-
+					
 					$full_search_results = check_var( $_tmp ) ? $_tmp : $full_search_results;
-
+					
 				}
-
+				
 				$default_search_results = array();
-
+				
 				foreach ( $full_search_results as $key => & $search_result ) {
-
+					
 					$this->articles->parse_category( $search_result );
-
+					
 					$line = & $default_search_results[];
-
+					
 					$line[ 'id' ] = isset( $search_result[ 'id' ] ) ? $search_result[ 'id' ] : '';
 					$line[ 'title' ] = isset( $search_result[ 'title' ] ) ? $search_result[ 'title' ] : '';
 					$line[ 'image' ] = isset( $search_result[ 'image' ] ) ? $search_result[ 'image' ] : '';
 					$line[ 'content' ] = $search_result[ 'description' ] ? word_limiter( strip_tags( html_entity_decode( $search_result[ 'description' ] ) ), 20, '...' ) : '';
-
+					
+					if ( $get_tree ) {
+						
+						$line[ 'indented_title' ] = $search_result[ 'indented_title' ];
+						
+					}
+					
 				}
-
+				
 				// apply the string highlight to default results
 				if ( $this->search->config( 'terms' ) ) {
-
+					
 					$keys = array(
-
+						
 						'title',
+						'indented_title',
 						'alias',
 						'description',
 						'content',
-
+						
 					);
 					$default_search_results = $this->search->array_highlight( $default_search_results, $keys );
-
+					
 				}
-
+				
 				// apply the string highlight to full results
 				if ( $this->search->config( 'terms' ) ) {
-
+					
 					$keys = array(
-
+						
 						'title',
+						'indented_title',
 						'alias',
 						'description',
 						'content',
-
+						
 					);
 					$full_search_results = $this->search->array_highlight( $full_search_results, $keys );
-
+					
 				}
-
+				
 				$result = array(
-
+					
 					'results' => $default_search_results,
 					'full_results' => $full_search_results,
-
+					
 				);
-
+				
 				$this->search->append_results( 'articles_categories_search', $result );
-
+				
 				$return = TRUE;
-
+				
 			}
-
+			
 		}
 		else {
-
+			
 			log_message( 'debug', '[Plugins] Articles categories search plugin could not be executed! Search library object not initialized!' );
-
+			
 			$return = FALSE;
-
+			
 		}
-
+		
 		//parent::_set_performed( 'articles_categories_search' );
-
+		
 		return $return;
-
+		
 	}
-
+	
 	public function get_params_spec(){
-
+	
 	}
-
+	
 }

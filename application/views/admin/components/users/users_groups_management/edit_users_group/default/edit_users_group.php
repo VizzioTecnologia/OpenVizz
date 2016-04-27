@@ -5,7 +5,7 @@
 		
 		<?= form_open( get_url( 'admin'.$this->uri->ruri_string() ), array( 'id' => 'users-group-form', ) ); ?>
 			
-			<div class="form-actions to-toolbar">
+			<div class="form-actions to-toolbar to-main-toolbar">
 				
 				<?= vui_el_button( array( 'text' => lang( 'action_save' ), 'icon' => 'save', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit', 'id' => 'submit', 'only_icon' => TRUE, 'form' => 'users-group-form', ) ); ?>
 				

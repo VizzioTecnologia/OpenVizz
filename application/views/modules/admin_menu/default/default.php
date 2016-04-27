@@ -35,7 +35,7 @@ $unique_hash = md5( uniqid( rand(), true ) );
 				
 				// echo vui_el_button( array( 'url' => 'admin/responsive_file_manager/index/a/rfm', 'text' => lang( 'file_manager' ), 'icon' => 'browse', 'only_icon' => TRUE, ) );
 				
-				echo vui_el_button( array( 'attr' => 'data-rftype="image"', 'url' => '#', 'text' => lang( 'select_image' ), 'get_url' => FALSE, 'icon' => 'browse', 'only_icon' => TRUE, 'class' => 'modal-file-picker', ) );
+				echo vui_el_button( array( 'attr' => 'data-rftype="all"', 'url' => '#', 'text' => lang( 'select_image' ), 'get_url' => FALSE, 'icon' => 'browse', 'only_icon' => TRUE, 'class' => 'modal-file-picker', ) );
 			
 			?></li><?php
 			

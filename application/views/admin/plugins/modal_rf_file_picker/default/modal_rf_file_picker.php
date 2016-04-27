@@ -44,7 +44,7 @@
 				
 				var jthis = $( this );
 				var dir = '';
-				var relUrl = '0';
+				var relUrl = '1';
 				
 				var fieldId = jthis.data( 'rffieldid' ) ? jthis.data( 'rffieldid' ) : ( jthis.attr( 'id' ) ? jthis.attr( 'id' ) : false );
 				var fldr = jthis.data( 'rf-start-dir' ) ? jthis.data( 'rf-start-dir' ) : '' ;
@@ -56,19 +56,32 @@
 					dir = '<?= MEDIA_DIR_NAME; ?>'
 					
 				}
+				else if ( type === 'all' ){
+					
+					type = 2;
+					dir = '<?= MEDIA_DIR_NAME; ?>'
+					
+				}
+				else if ( type === 'video' ){
+					
+					type = 3;
+					dir = '<?= MEDIA_DIR_NAME; ?>'
+					
+				}
 				else{
 					
 					type = 0;
-					dir = ''
+					dir = '<?= MEDIA_DIR_NAME; ?>'
 					
 				}
 				
-				if ( typeof jthis.data( 'rfdir' ) != 'undefined' ){
+				if ( typeof jthis.data( 'rfdir' ) != 'undefined' && jthis.data( 'rfdir' ) != '' ){
 					
 					dir = jthis.data( 'rfdir' );
 					
 				}
-				if ( typeof jthis.data( 'rf-relative-url' ) != 'undefined' ){
+				
+				if ( typeof jthis.data( 'rf-relative-url' ) != 'undefined' && jthis.data( 'rf-relative-url' ) != '0' ){
 					
 					relUrl = '1';
 					

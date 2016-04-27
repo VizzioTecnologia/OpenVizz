@@ -126,6 +126,112 @@ function check_var( & $var, $zero_is_valid = FALSE, $debug = FALSE ){
 
 }
 
+function return_bytes( $value ) {
+	
+	$value = trim( $value );
+	
+	$last = strtolower( $value[ strlen( $value ) - 1 ] );
+	
+	switch( $last ) {
+		
+		case 'g':
+			$value *= 1024;
+			
+		case 'm':
+			$value *= 1024;
+			
+		case 'k':
+			$value *= 1024;
+			
+	}
+	
+	return $value;
+	
+}
+
+function bytes_to_kb( $val ) {
+	
+	return $val / 1024;
+	
+}
+
+function kilobytes_to_b( $val ) {
+	
+	return $val * 1024;
+	
+}
+
+function format_file_size( $bytes ) {
+		
+		if ( $bytes >= 1073741824 ) {
+			
+			$bytes = number_format( $bytes / 1073741824, 2 ) . ' GB';
+			
+		}
+		else if ( $bytes >= 1048576 ) {
+			
+			$bytes = number_format($bytes / 1048576, 2) . ' MB';
+			
+		}
+		else if ( $bytes >= 1024 ) {
+			
+			$bytes = number_format( $bytes / 1024, 2 ) . ' KB';
+			
+		}
+		else if ( $bytes > 1 ) {
+			
+			$bytes = $bytes . ' bytes';
+			
+		}
+		else if ( $bytes == 1 ) {
+			
+			$bytes = $bytes . ' byte';
+			
+		}
+		else {
+			
+			$bytes = '0 bytes';
+			
+		}
+		
+		return $bytes;
+		
+}
+
+function get_ini_max_file_upload( $u = 'kilobytes' ) {
+	
+	$max_upload = return_bytes( ini_get( 'upload_max_filesize' ) );
+	
+	$max_post = return_bytes( ini_get( 'post_max_size' ) );
+	
+	$memory_limit = return_bytes( ini_get( 'memory_limit' ) );
+	
+	// return the smallest limit value
+	$return = min( $max_upload, $max_post, $memory_limit );
+	
+	if ( $u === 'bytes' ) {
+		
+		return $return;
+		
+	}
+	else if ( $u === 'kilobytes' ) {
+		
+		return $return * 1000;
+		
+	}
+	else if ( $u === 'megabytes' ) {
+		
+		return $return * 1000 * 1000;
+		
+	}
+	else if ( $u === 'terabytes' ) {
+		
+		return $return * 1000 * 1000 * 1000;
+		
+	}
+	
+}
+
 // limpa campos dinâmicos
 function clear_dinamics_fields( $dinamic_fields, $key = 'key', $target_fields ){
 

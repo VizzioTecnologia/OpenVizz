@@ -76,8 +76,10 @@ if ( ! defined( 'FOPEN_READ_WRITE_CREATE_STRICT' ) ) define( 'FOPEN_READ_WRITE_C
 
 
 
+if ( ! defined( 'TMP_PATH' ) ) define( 'TMP_PATH',																APPPATH . 'tmp' . DS );
 if ( ! defined( 'COMPONENTS_ALIAS' ) ) define( 'COMPONENTS_ALIAS',												'components' );
 if ( ! defined( 'COMPONENTS_DIR_NAME' ) ) define( 'COMPONENTS_DIR_NAME',										COMPONENTS_ALIAS );
+if ( ! defined( 'COMPONENTS_PATH' ) ) define( 'COMPONENTS_PATH',												APPPATH . 'controllers' . DS );
 if ( ! defined( 'ASSETS_DIR_NAME' ) ) define( 'ASSETS_DIR_NAME',												'assets' );
 if ( ! defined( 'ASSETS_PATH' ) ) define( 'ASSETS_PATH',														FCPATH . ASSETS_DIR_NAME . DS );
 if ( ! defined( 'ASSETS_URL' ) ) define( 'ASSETS_URL',															BASE_URL . '/' . ASSETS_DIR_NAME );
@@ -153,6 +155,7 @@ if ( ! defined( 'COMPONENTS_DOCUMENTS_URL' ) ) define( 'COMPONENTS_DOCUMENTS_URL
 
 if ( ! defined( 'ADMIN_ALIAS' ) ) define( 'ADMIN_ALIAS',														'admin');
 if ( ! defined( 'ADMIN_DIR_NAME' ) ) define( 'ADMIN_DIR_NAME',													ADMIN_ALIAS);
+if ( ! defined( 'ADMIN_COMPONENTS_PATH' ) ) define( 'ADMIN_COMPONENTS_PATH',									COMPONENTS_PATH . ADMIN_DIR_NAME . DS );
 if ( ! defined( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH' ) ) define( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH',				ADMIN_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'ADMIN_COMPONENTS_VIEWS_PATH' ) ) define( 'ADMIN_COMPONENTS_VIEWS_PATH',						VIEWS_PATH . ADMIN_COMPONENTS_LOAD_VIEWS_PATH );
 if ( ! defined( 'ADMIN_MODULES_VIEWS_PATH' ) ) define( 'ADMIN_MODULES_VIEWS_PATH',								ADMIN_DIR_NAME . DS . MODULES_DIR_NAME . DS );
@@ -170,6 +173,7 @@ if ( ! defined( 'ADMIN_THEMES_URL' ) ) define( 'ADMIN_THEMES_URL',												TH
 
 if ( ! defined( 'SITE_ALIAS' ) ) define( 'SITE_ALIAS',															'site');
 if ( ! defined( 'SITE_DIR_NAME' ) ) define( 'SITE_DIR_NAME',													SITE_ALIAS);
+if ( ! defined( 'SITE_COMPONENTS_PATH' ) ) define( 'SITE_COMPONENTS_PATH',										COMPONENTS_PATH );
 if ( ! defined( 'SITE_COMPONENTS_VIEWS_PATH' ) ) define( 'SITE_COMPONENTS_VIEWS_PATH',							SITE_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'SITE_COMPONENTS_VIEWS_STYLES_PATH' ) ) define( 'SITE_COMPONENTS_VIEWS_STYLES_PATH',			STYLES_PATH . VIEWS_DIR_NAME . DS . SITE_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'SITE_COMPONENTS_VIEWS_STYLES_URL' ) ) define( 'SITE_COMPONENTS_VIEWS_STYLES_URL',				STYLES_DIR_URL . '/' . VIEWS_DIR_NAME . '/' . SITE_DIR_NAME . '/' . COMPONENTS_DIR_NAME );

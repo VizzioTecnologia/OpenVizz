@@ -90,7 +90,7 @@ class Main extends CI_controller {
 			)
 
 		);
-
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
@@ -176,23 +176,9 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
-
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 * Profiler
-		 */
-
-// 		$this->output->enable_profiler( TRUE );
-		//$this->session->sess_destroy();
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 */
-
-
-
+		
+		
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Definimos algumas variáveis referente ao componente atual, no primeiro momento o Main
@@ -272,21 +258,21 @@ class Main extends CI_controller {
 		// Obtemos os componentes ativos
 		// Os componentes obtidos estarão disponíveis através do array $this->mcm->components
 		foreach ( $this->mcm->components as $key => $component ) {
-
+			
 			// adicionamos ao array de idomas a serem carregados os arquivos de idiomas dos componentes ativos
 			// estes arquivos são carregados mais a frente
 			if ( file_exists( APPPATH . 'language' . DS . $this->mcm->filtered_system_params[ $this->mcm->environment . '_language' ] . DS . $component[ 'unique_name' ] . '_lang.php' ) ) {
 				$langs[] = $component[ 'unique_name' ];
 			}
-
+			
 		}
-
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
-
-
+		
+		
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Obtemos os dados do item de menu atual.
@@ -372,19 +358,20 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
+		
 		$this->mcm->filtered_system_params = $this->mcm->parse_params( $this->mcm->filtered_system_params );
-
-
-
+		
+		
+		
 		foreach ( $this->config->config as $key => $value) {
-
+			
 			$this->config->set_item( $key, $this->mcm->filtered_system_params[ $key ] );
-
+			
 		}
-
-
-
+		
+		
+		
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Módulos
@@ -409,9 +396,9 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
-
-
+		
+		
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Carregando os arquivos de idiomas de cada componente ativo
@@ -439,6 +426,23 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
+		
+		
+		
+		/*
+		* -------------------------------------------------------------------------------------------------
+		* Profiler
+		*/
+		
+		if ( check_var( $this->mcm->filtered_system_params[ 'site_enable_profiler' ] ) AND $this->users->check_privileges( 'site_can_view_profiler' ) ) {
+			
+			$this->output->enable_profiler( TRUE );
+			
+		}
+		
+		/*
+		* -------------------------------------------------------------------------------------------------
+		*/
 		
 		
 		

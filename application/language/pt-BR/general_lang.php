@@ -150,9 +150,11 @@ $lang['states'] = 																				"Estados";
 $lang['add_state'] = 																			"Adicionar estado";
 $lang['edit_state'] = 																			"Editar estado";
 
-$lang['unable_to_write_file'] = 																"Impossível gravar arquivo!";
+$lang['unable_to_write_file'] = 																'Não foi possível gravar o arquivo <strong>%1$s</strong>! Por favor, verifique as permissões.';
 
 
+$lang['yes'] = 																					"Sim";
+$lang['no'] = 																					"Não";
 
 
 

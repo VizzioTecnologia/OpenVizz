@@ -69,13 +69,13 @@ class Submit_forms_common_model extends CI_Model{
 	public function get_submit_forms( $f_params = NULL ){
 		
 		// inicializando as variáveis
-		$where_condition =						@$f_params['where_condition'] ? $f_params['where_condition'] : NULL;
-		$or_where_condition =					@$f_params['or_where_condition'] ? $f_params['or_where_condition'] : NULL;
-		$limit =								@$f_params['limit'] ? $f_params['limit'] : NULL;
-		$offset =								@$f_params['offset'] ? $f_params['offset'] : NULL;
-		$order_by =								@$f_params['order_by'] ? $f_params['order_by'] : 't1.title asc, t1.id asc';
-		$order_by_escape =						@$f_params['order_by_escape'] ? $f_params['order_by_escape'] : TRUE;
-		$return_type =							@$f_params['return_type'] ? $f_params['return_type'] : 'get';
+		$where_condition =						isset( $f_params['where_condition'] ) ? $f_params['where_condition'] : NULL;
+		$or_where_condition =					isset( $f_params['or_where_condition'] ) ? $f_params['or_where_condition'] : NULL;
+		$limit =								isset( $f_params['limit'] ) ? $f_params['limit'] : NULL;
+		$offset =								isset( $f_params['offset'] ) ? $f_params['offset'] : NULL;
+		$order_by =								isset( $f_params['order_by'] ) ? $f_params['order_by'] : 't1.title asc, t1.id asc';
+		$order_by_escape =						isset( $f_params['order_by_escape'] ) ? $f_params['order_by_escape'] : TRUE;
+		$return_type =							isset( $f_params['return_type'] ) ? $f_params['return_type'] : 'get';
 		
 		$this->db->select('
 			
@@ -230,8 +230,7 @@ class Submit_forms_common_model extends CI_Model{
 		$params = get_params_spec_from_xml( APPPATH . 'controllers/admin/com_submit_forms/submit_form_params.xml' );
 		
 		$_current_params_values = isset( $current_params_values ) ? $current_params_values : array();
-		$current_params_values = isset( $post[ 'params' ] ) ? array_merge_recursive( $_current_params_values, $post[ 'params' ] ) : $_current_params_values;
-		
+		$current_params_values = isset( $post[ 'params' ] ) ? array_merge_recursive_distinct( $_current_params_values, $post[ 'params' ] ) : $_current_params_values;
 		
 		/*
 		 * ------------------------------------
@@ -429,6 +428,87 @@ class Submit_forms_common_model extends CI_Model{
 		 * ------------------------------------
 		 */
 		
+		$users_groups_options = array(
+			
+			'' => lang( 'combobox_select' ),
+			
+		);
+		
+		foreach ( $users_groups as $key => $ug ) {
+			
+			$users_groups_options[ $ug[ 'id' ] ] = $ug[ 'indented_title' ];
+			
+		}
+		
+		$new_params[ 'ud_ds_default_user_group_registered_from_form' ][] = array(
+			
+			'type' => 'select',
+			'inline' => TRUE,
+			'name' => 'ud_ds_default_user_group_registered_from_form',
+			'label' => 'ud_ds_default_user_group_registered_from_form',
+			'tip' => 'tip_ud_ds_default_user_group_registered_from_form',
+			'validation' => array(
+				
+				'rules' => 'trim',
+				
+			),
+			'options' => $users_groups_options,
+			
+		);
+		
+		$params[ 'params_spec_values' ][ 'ud_ds_default_user_group_registered_from_form' ] = '';
+		
+		/*
+		 * ------------------------------------
+		 */
+		
+		array_push_pos( $params[ 'params_spec' ][ 'sf_security_and_access' ], $new_params[ 'ud_ds_default_user_group_registered_from_form' ], 2  );
+		
+		/*
+		 * ------------------------------------
+		 */
+		
+		
+		
+		/*
+		 * ------------------------------------
+		 */
+		
+		$options = array(
+			
+			'1' => lang( 'yes' ),
+			'0' => lang( 'no' ),
+			
+		);
+		
+		$new_params[ 'ud_ds_send_user_data_to_submitter_on_registration' ][] = array(
+			
+			'type' => 'select',
+			'inline' => TRUE,
+			'name' => 'ud_ds_send_user_data_to_submitter_on_registration',
+			'label' => 'ud_ds_send_user_data_to_submitter_on_registration',
+			'tip' => 'tip_ud_ds_send_user_data_to_submitter_on_registration',
+			'validation' => array(
+				
+				'rules' => 'trim',
+				
+			),
+			'options' => $options,
+			
+		);
+		
+		$params[ 'params_spec_values' ][ 'ud_ds_send_user_data_to_submitter_on_registration' ] = '';
+		
+		/*
+		 * ------------------------------------
+		 */
+		
+		array_push_pos( $params[ 'params_spec' ][ 'sf_security_and_access' ], $new_params[ 'ud_ds_send_user_data_to_submitter_on_registration' ], 3  );
+		
+		/*
+		 * ------------------------------------
+		 */
+		
 		if ( check_var( $submit_form ) ) {
 			
 		}
@@ -453,16 +533,16 @@ class Submit_forms_common_model extends CI_Model{
 
 
 		// carregando os layouts do tema atual
-		$layouts_sending_email = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'sending_email' );
+		$layouts_sending_email = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'receivers' );
 		// carregando os layouts do diretório de views padrão
-		$layouts_sending_email = array_merge( $layouts_sending_email, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'sending_email' ) );
+		$layouts_sending_email = array_merge( $layouts_sending_email, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'receivers' ) );
 
 		// carregando os layouts de cópia para o usuário do tema atual
-		$layouts_sending_email_submitter = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'sending_email_submitter' );
+		$layouts_sending_email_submitter = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'submitters' );
 		// carregando os layouts de cópia para o usuário do diretório de views padrão
-		$layouts_sending_email_submitter = array_merge( $layouts_sending_email, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'sending_email_submitter' ) );
+		$layouts_sending_email_submitter = array_merge( $layouts_sending_email, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'submitters' ) );
 
-		$current_section = 'users_submits';
+		$current_section = 'ud_ds_emails_for_receivers';
 		foreach ( $params[ 'params_spec' ][ $current_section ] as $key => $element ) {
 
 			if ( $element[ 'name' ] == 'submit_form_param_send_email_to_contact' ){
@@ -488,7 +568,7 @@ class Submit_forms_common_model extends CI_Model{
 
 		}
 
-		$current_section = 'submitter_message_receiving';
+		$current_section = 'ud_ds_emails_for_submitters';
 		foreach ( $params[ 'params_spec' ][ $current_section ] as $key => $element ) {
 
 			if ( $element[ 'name' ] == 'sfsmr_layout_view' ){
@@ -525,6 +605,199 @@ class Submit_forms_common_model extends CI_Model{
 
 		}
 		
+		// ------------------------------------
+		// Receivers layout specific params
+		
+		$receivers_email_layout = check_var( $current_params_values[ 'submit_form_sending_email_layout_view' ] ) ? $current_params_values[ 'submit_form_sending_email_layout_view' ] : ( check_var( $params[ 'params_spec_values' ][ 'submit_form_sending_email_layout_view' ] ) ? $params[ 'params_spec_values' ][ 'submit_form_sending_email_layout_view' ] : FALSE );
+		
+			//echo '<pre>' . print_r( $current_params_values, TRUE ) . '</pre>'; exit;
+			
+		if ( $receivers_email_layout ) {
+			
+			$system_views_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'receivers' . DS;
+			$theme_views_path = THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'receivers' . DS;
+			
+			if ( file_exists( $system_views_path . $receivers_email_layout . DS . 'params.xml' ) ) {
+				
+				$receivers_layout_params = get_params_spec_from_xml( $system_views_path . $receivers_email_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $system_views_path . $receivers_email_layout . DS . 'params.php' ) ) {
+					
+					include_once $system_views_path . $receivers_email_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			else if ( file_exists( $theme_views_path . $receivers_email_layout . DS . 'params.xml' ) ) {
+				
+				$receivers_layout_params = get_params_spec_from_xml( $theme_views_path . $receivers_email_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $theme_views_path . $receivers_email_layout . DS . 'params.php' ) ) {
+					
+					include_once $theme_views_path . $receivers_email_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			
+			if ( check_var( $params ) AND check_var( $receivers_layout_params ) ) {
+			
+				$params[ 'params_spec_values' ] = array_merge_recursive( $params[ 'params_spec_values' ], $receivers_layout_params[ 'params_spec_values' ] );
+				
+				foreach( $params[ 'params_spec' ][ 'ud_ds_emails_for_receivers' ] as $k => $v ) {
+					
+					if ( $v[ 'name' ] == 'submit_form_sending_email_layout_view' ) {
+						
+						array_push_pos( $params[ 'params_spec' ][ 'ud_ds_emails_for_receivers' ], $receivers_layout_params[ 'params_spec' ][ 'ud_ds_emails_for_receivers' ], $k + 1 );
+						
+						break;
+						
+					}
+					
+				}
+				
+			}
+			
+			//echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
+			
+		}
+		
+		// Receivers layout specific params
+		// ------------------------------------
+		
+		// ------------------------------------
+		// Submitters layout specific params
+		
+		$submitters_email_layout = check_var( $current_params_values[ 'sfsmr_layout_view' ] ) ? $current_params_values[ 'sfsmr_layout_view' ] : ( check_var( $params[ 'params_spec_values' ][ 'sfsmr_layout_view' ] ) ? $params[ 'params_spec_values' ][ 'sfsmr_layout_view' ] : FALSE );
+		
+			//echo '<pre>' . print_r( $current_params_values, TRUE ) . '</pre>'; exit;
+			
+		if ( $submitters_email_layout ) {
+			
+			$system_views_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'submitters' . DS;
+			$theme_views_path = THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'emails' . DS . 'submitters' . DS;
+			
+			if ( file_exists( $system_views_path . $submitters_email_layout . DS . 'params.xml' ) ) {
+				
+				$submitters_layout_params = get_params_spec_from_xml( $system_views_path . $submitters_email_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $system_views_path . $submitters_email_layout . DS . 'params.php' ) ) {
+					
+					include_once $system_views_path . $submitters_email_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			else if ( file_exists( $theme_views_path . $submitters_email_layout . DS . 'params.xml' ) ) {
+				
+				$submitters_layout_params = get_params_spec_from_xml( $theme_views_path . $submitters_email_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $theme_views_path . $submitters_email_layout . DS . 'params.php' ) ) {
+					
+					include_once $theme_views_path . $submitters_email_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			
+			if ( check_var( $params ) AND check_var( $submitters_layout_params ) ) {
+			
+				$params[ 'params_spec_values' ] = array_merge_recursive( $params[ 'params_spec_values' ], $submitters_layout_params[ 'params_spec_values' ] );
+				
+				foreach( $params[ 'params_spec' ][ 'ud_ds_emails_for_submitters' ] as $k => $v ) {
+					
+					if ( $v[ 'name' ] == 'sfsmr_layout_view' ) {
+						
+						array_push_pos( $params[ 'params_spec' ][ 'ud_ds_emails_for_submitters' ], $submitters_layout_params[ 'params_spec' ][ 'ud_ds_emails_for_submitters' ], $k + 1 );
+						
+						break;
+						
+					}
+					
+				}
+				
+			}
+			
+			//echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
+			
+		}
+		
+		// Submitters layout specific params
+		// ------------------------------------
+		
+		
+		// ------------------------------------
+		// Export layout specific params
+		
+		$export_layout = check_var( $current_params_values[ 'ud_data_export_layout_view' ] ) ? $current_params_values[ 'ud_data_export_layout_view' ] : ( check_var( $params[ 'params_spec_values' ][ 'ud_data_export_layout_view' ] ) ? $params[ 'params_spec_values' ][ 'ud_data_export_layout_view' ] : FALSE );
+		
+			//echo '<pre>' . print_r( $current_params_values, TRUE ) . '</pre>'; exit;
+			
+		if ( $export_layout ) {
+			
+			$system_views_path = ADMIN_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'export' . DS . 'ud_data' . DS;
+			$theme_views_path = THEMES_PATH . admin_theme_components_views_path() . 'submit_forms' . DS . 'export' . DS . 'ud_data' . DS;
+			
+			// carregando os layouts do tema atual
+			$export_layouts_options = dir_list_to_array( $system_views_path );
+			// carregando os layouts do diretório de views padrão
+			$export_layouts_options = array_merge( $export_layouts_options, dir_list_to_array( $theme_views_path ) );
+			
+			if ( file_exists( $system_views_path . $export_layout . DS . 'params.xml' ) ) {
+				
+				$export_layout_params = get_params_spec_from_xml( $system_views_path . $export_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $system_views_path . $export_layout . DS . 'params.php' ) ) {
+					
+					include_once $system_views_path . $export_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			else if ( file_exists( $theme_views_path . $export_layout . DS . 'params.xml' ) ) {
+				
+				$export_layout_params = get_params_spec_from_xml( $theme_views_path . $export_layout . DS . 'params.xml' );
+				
+				if ( file_exists( $theme_views_path . $export_layout . DS . 'params.php' ) ) {
+					
+					include_once $theme_views_path . $export_layout . DS . 'params.php';
+					
+				}
+				
+			}
+			
+			if ( check_var( $params ) AND check_var( $export_layout_params ) ) {
+			
+				$params[ 'params_spec_values' ] = array_merge_recursive( $params[ 'params_spec_values' ], $export_layout_params[ 'params_spec_values' ] );
+				
+				$current_section = 'ud_export_params';
+				foreach( $params[ 'params_spec' ][ $current_section ] as $k => $v ) {
+					
+					if ( $v[ 'name' ] == 'ud_data_export_layout_view' ) {
+						
+						$spec_options = array();
+						
+						if ( isset( $params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ] ) )
+							$spec_options = $params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ];
+							
+						$params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ] = is_array( $spec_options ) ? $spec_options + $export_layouts_options : $export_layouts_options;
+						
+						array_push_pos( $params[ 'params_spec' ][ $current_section ], $export_layout_params[ 'params_spec' ][ $current_section ], $k + 1 );
+						
+						break;
+						
+					}
+					
+				}
+				
+			}
+			
+			//echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
+			
+		}
+		
+		// Receivers layout specific params
+		// ------------------------------------
 		
 		// print_r($params);
 
@@ -852,11 +1125,12 @@ class Submit_forms_common_model extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_user_submit( $id, $submit_form_id = NULL ) {
+	public function get_user_submit( $id, $submit_form_id = NULL, $ignore_cache = FALSE ) {
 		
 		$search_config = array(
 			
 			'plugins' => 'sf_us_search',
+			'ignore_cache' => $ignore_cache,
 			'allow_empty_terms' => TRUE,
 			'ipp' => 1,
 			'cp' => 1,
@@ -1029,7 +1303,267 @@ class Submit_forms_common_model extends CI_Model{
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Parse a users submits list
+	 * Parse a unid_data data
+	 *
+	 * @access public
+	 * @param array | should be the us array, not only data
+	 * @param bool | determines whether the parameters should be filtered
+	 * @return void
+	 */
+	
+	public function parse_ud_d_data( & $user_submit = NULL, $fields_to_show = NULL ){
+		
+		if ( is_array( $user_submit ) ) {
+			
+			$submit_form = FALSE;
+			$submit_form_id = $user_submit[ 'submit_form_id' ];
+			
+			if ( is_string( $user_submit[ 'data' ] ) ) {
+				
+				$user_submit[ 'data' ] = get_params( $user_submit[ 'data' ] );
+				
+			}
+			
+			if ( is_int( $submit_form_id ) OR ( is_string( $submit_form_id ) AND ctype_digit( $submit_form_id ) ) ) {
+				
+				// get submit form params
+				$gsfp = array(
+					
+					'where_condition' => 't1.id = ' . $submit_form_id,
+					'limit' => 1,
+					
+				);
+				
+				if ( $submit_form = $this->get_submit_forms( $gsfp )->row_array() ){
+					
+					$this->sfcm->parse_sf( $submit_form );
+					
+				}
+				
+			}
+			
+			if ( isset( $user_submit[ 'params' ][ 'created_by_user_id' ] ) AND ( is_int( $user_submit[ 'params' ][ 'created_by_user_id' ] ) OR ( is_string( $user_submit[ 'params' ][ 'created_by_user_id' ] ) AND ctype_digit( $user_submit[ 'params' ][ 'created_by_user_id' ] ) ) ) ) {
+				
+				$cbu_id = $user_submit[ 'params' ][ 'created_by_user_id' ];
+				
+				$user_submit[ 'created_by_user' ] = array();
+				
+				$user_submit[ 'created_by_user' ] = $this->users->get_user( array( 't1.id' => $cbu_id ) )->row_array();
+				
+				$user_submit[ 'created_by_user' ][ 'edit_link' ] = $this->users->admin_get_link_edit( $cbu_id );
+				$user_submit[ 'created_by_user' ][ 'remove_link' ] = $this->users->admin_get_link_remove( $cbu_id );
+				$user_submit[ 'created_by_user' ][ 'enable_link' ] = $this->users->admin_get_link_enable( $cbu_id );
+				$user_submit[ 'created_by_user' ][ 'disable_link' ] = $this->users->admin_get_link_disable( $cbu_id );
+				
+			}
+			
+			if ( isset( $user_submit[ 'params' ][ 'modified_by_user_id' ] ) AND ( is_int( $user_submit[ 'params' ][ 'modified_by_user_id' ] ) OR ( is_string( $user_submit[ 'params' ][ 'modified_by_user_id' ] ) AND ctype_digit( $user_submit[ 'params' ][ 'modified_by_user_id' ] ) ) ) ) {
+				
+				$mbu_id = $user_submit[ 'params' ][ 'modified_by_user_id' ];
+				
+				if ( isset( $cbu_id ) AND $mbu_id == $cbu_id ) {
+					
+					$user_submit[ 'modified_by_user' ] = $user_submit[ 'created_by_user' ];
+					
+				}
+				else {
+					
+					$user_submit[ 'modified_by_user' ] = array();
+					
+					$user_submit[ 'modified_by_user' ] = $this->users->get_user( array( 't1.id' => $mbu_id ) )->row_array();
+					
+					$user_submit[ 'modified_by_user' ][ 'edit_link' ] = $this->users->admin_get_link_edit( $mbu_id );
+					$user_submit[ 'modified_by_user' ][ 'remove_link' ] = $this->users->admin_get_link_remove( $mbu_id );
+					$user_submit[ 'modified_by_user' ][ 'enable_link' ] = $this->users->admin_get_link_enable( $mbu_id );
+					$user_submit[ 'modified_by_user' ][ 'disable_link' ] = $this->users->admin_get_link_disable( $mbu_id );
+					
+				}
+				
+			}
+			
+			if ( $submit_form ) {
+				
+				$_fields = $submit_form[ 'fields' ];
+				$fields = array();
+				
+				foreach ( $_fields as $key => $field ) {
+					
+					$fields[ $field[ 'alias' ] ] = $field;
+					
+				}
+				
+				$us_fields = $_titles_fields = $_contents_fields = array();
+				
+				$us_fields[ 'id' ][ 'label' ] = lang( 'id' );
+				$us_fields[ 'id' ][ 'value' ] = $user_submit[ 'id' ];
+				$us_fields[ 'id' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'id', $fields_to_show ) ) ? TRUE : FALSE;
+				
+				$us_fields[ 'submit_datetime' ][ 'label' ] = lang( 'submit_datetime' );
+				$us_fields[ 'submit_datetime' ][ 'value' ] = $user_submit[ 'submit_datetime' ];
+				$us_fields[ 'submit_datetime' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'submit_datetime', $fields_to_show ) ) ? TRUE : FALSE;
+				
+				$us_fields[ 'mod_datetime' ][ 'label' ] = lang( 'mod_datetime' );
+				$us_fields[ 'mod_datetime' ][ 'value' ] = $user_submit[ 'mod_datetime' ];
+				$us_fields[ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'mod_datetime', $fields_to_show ) ) ? TRUE : FALSE;
+				
+				foreach ( $user_submit[ 'data' ] as $key_2 => $field_value ) {
+					
+					//echo '<pre>' . $key_2 . ': ' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
+					
+					if ( isset( $fields[ $key_2 ] ) ) {
+						
+						//echo $key_2 . ': <br/><pre>' . print_r( $fields[ $key_2 ], TRUE ) . '</pre><br/>'; 
+						
+						if ( ! is_numeric( $key_2 ) ) {
+							
+							if ( $fields[ $key_2 ][ 'field_type' ] == 'date' ){
+								
+								$___date = explode( '-', $field_value );
+								
+								$format = '';
+								
+								$use_y = check_var( $fields[ $key_2 ][ 'sf_date_field_use_year' ] ) ? TRUE : FALSE;
+								$use_m = check_var( $fields[ $key_2 ][ 'sf_date_field_use_month' ] ) ? TRUE : FALSE;
+								$use_d = check_var( $fields[ $key_2 ][ 'sf_date_field_use_day' ] ) ? TRUE : FALSE;
+								
+								$format .= ( $use_y AND isset( $___date[ 0 ] ) AND ( int ) $___date[ 0 ] > 0 ) ? 'y' : '';
+								$format .= ( $use_m AND isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
+								$format .= ( $use_d AND isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
+								
+								// -------------------------
+								// This will prevent php to format partial dates
+								
+								$___date[ 0 ] = ( int ) $___date[ 0 ] > 0 ? $___date[ 0 ] : '2000';
+								$___date[ 1 ] = ( int ) $___date[ 1 ] > 1 ? $___date[ 1 ] : '01';
+								$___date[ 2 ] = ( int ) $___date[ 2 ] > 2 ? $___date[ 2 ] : '01';
+								
+								$field_value = $___date[ 0 ] . '-' . $___date[ 1 ] . '-' . $___date[ 2 ];
+								
+								// -------------------------
+								
+								if ( ! empty( $format ) ) {
+									
+									$format = 'sf_us_dt_ft_pt_' . $format . '_' . $fields[ $key_2 ][ 'sf_date_field_presentation_format' ];
+									
+									$field_value =  strftime( lang( $format ), strtotime( $field_value ) );
+									
+								}
+								else {
+									
+									$field_value =  '';
+									
+								}
+								
+							}
+							else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
+								
+								$_field_value = array();
+								
+								$__tmp = @json_decode( $field_value, TRUE );
+								
+								if ( is_array( $__tmp ) OR is_array( $field_value ) ) {
+									
+									if ( is_array( $__tmp ) ) {
+										
+										$field_value = $__tmp;
+										
+									}
+									
+									if ( count( $field_value ) == 1 ) {
+										
+										$field_value = $field_value[ 0 ];
+										
+										if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $field_value ) AND $_user_submit = $this->sfcm->get_user_submit( $field_value ) ) {
+											
+											$field_value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+											
+										}
+										else {
+											
+											if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $fields[ $key_2 ][ 'options' ] ) AND ( $field_value == '1' OR $field_value == '' ) ) {
+												
+												if ( check_var( $field_value ) ) {
+													
+													$field_value = lang( 'yes' );
+													
+												}
+												else {
+													
+													$field_value = lang( 'no' );
+													
+												}
+												
+											}
+											
+										}
+										
+									}
+									else {
+										
+										foreach ( $field_value as $k => $value ) {
+											
+											if ( is_string( $value ) ) {
+												
+												if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
+													
+													$value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+													
+												}
+												
+												$_field_value[] = $value;
+												
+											}
+											
+										}
+										
+										$field_value = join( ', ', $_field_value );
+										
+									}
+									
+								}
+								else {
+									
+									if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $field_value ) AND $_user_submit = $this->sfcm->get_user_submit( $field_value ) ) {
+										
+										$field_value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										
+									}
+									
+								}
+								
+							}
+							
+							$us_fields[ $key_2 ][ 'label' ] = isset( $fields[ $key_2 ][ 'presentation_label' ] ) ? $fields[ $key_2 ][ 'presentation_label' ] : $fields[ $key_2 ][ 'label' ];
+							$us_fields[ $key_2 ][ 'value' ] = $field_value;
+							$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
+							
+						}
+						
+					}
+					else {
+						
+						$us_fields[ $key_2 ][ 'label' ] = '[' . $key_2 . ']';
+						$us_fields[ $key_2 ][ 'value' ] = $field_value;
+						$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
+						
+					}
+					
+				}
+				
+				$user_submit[ 'parsed_data' ][ 'full' ] = $us_fields;
+				
+				return $user_submit;
+				
+			}
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Parse a unid_data data list
 	 *
 	 * @access public
 	 * @param array
@@ -1037,13 +1571,13 @@ class Submit_forms_common_model extends CI_Model{
 	 * @return void
 	 */
 	
-	public function parse_users_submits_list( & $users_submits = NULL, $fields_to_show = NULL, $submit_form_id = NULL ){
+	public function parse_ud_d_data_list( & $users_submits = NULL, $fields_to_show = NULL, $submit_form_id = NULL ){
 		
 		if ( is_array( $users_submits ) ) {
 			
 			$submit_form = FALSE;
 			
-			if ( is_int( $submit_form_id ) ) {
+			if ( is_int( $submit_form_id ) OR ( is_string( $submit_form_id ) AND ctype_digit( $submit_form_id ) ) ) {
 				
 				// get submit form params
 				$gsfp = array(
@@ -1095,7 +1629,7 @@ class Submit_forms_common_model extends CI_Model{
 					
 					foreach ( $user_submit[ 'data' ] as $key_2 => $field_value ) {
 						
-						//echo $key_2 . ': <br/><pre>' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
+						//echo '<pre>' . $key_2 . ': ' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
 						
 						if ( isset( $fields[ $key_2 ] ) ) {
 							
@@ -1127,17 +1661,19 @@ class Submit_forms_common_model extends CI_Model{
 									}
 									
 								}
-								else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'combo_box', ) ) ){
-									
-									if ( is_string( $field_value ) ) {
-										
-										$field_value = json_decode( $field_value, TRUE );
-										
-									}
+								else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
 									
 									$_field_value = array();
 									
-									if ( is_array( $field_value ) ) {
+									$__tmp = @json_decode( $field_value, TRUE );
+									
+									if ( is_array( $__tmp ) OR is_array( $field_value ) ) {
+										
+										if ( is_array( $__tmp ) ) {
+											
+											$field_value = $__tmp;
+											
+										}
 										
 										foreach ( $field_value as $k => $value ) {
 											
@@ -1226,11 +1762,19 @@ class Submit_forms_common_model extends CI_Model{
 	
 	public function insert_user_submit( $data = NULL ){
 		
+		if ( isset( $data[ 'data' ] ) ) {
+			
+			$data[ 'xml_data' ] = $this->us_json_data_to_xml( $data );
+			
+		}
+		
 		if ( $data != NULL AND is_array( $data ) ){
 			
 			if ( $this->db->insert( 'tb_submit_forms_us', $data ) ){
 				
-				return $this->db->insert_id();
+				$return_id = $this->db->insert_id();
+				
+				return $return_id;
 				
 			}
 			
@@ -1248,9 +1792,49 @@ class Submit_forms_common_model extends CI_Model{
 		
 		if ( $data != NULL && $condition != NULL ){
 			
-			$data[ 'xml_data' ] = $this->us_json_data_to_xml( $data[ 'data' ] );
+			if ( isset( $data[ 'data' ] ) ) {
+				
+				$data[ 'xml_data' ] = $this->us_json_data_to_xml( $data );
+				
+			}
+			
+			// detecting values differences
+			
+			if ( isset( $data[ 'id' ] ) ) {
+				
+				$_d_id = $data[ 'id' ];
+				
+				unset( $data[ 'id' ] );
+				
+				$current_data = $this->get_user_submit( $_d_id, NULL, TRUE );
+				
+				$d_data = get_params( $data[ 'data' ] );
+				
+				foreach( $d_data as $alias => $value ) {
+					
+					if ( isset( $current_data[ 'data' ][ $alias ] ) AND $current_data[ 'data' ][ $alias ] !== $d_data[ $alias ] ) {
+						
+						$diff[] = $alias;
+						
+					}
+					
+				}
+				
+			}
 			
 			if ( $this->db->update( 'tb_submit_forms_us', $data, $condition ) ){
+				
+				if ( isset( $diff ) ) {
+					
+					$data[ 'id' ] = $_d_id;
+					
+					foreach( $diff as $changed_prop_alias ) {
+						
+						$this->adjust_referenced_data( $data, $changed_prop_alias );
+						
+					}
+					
+				}
 				
 				// confirm update for controller
 				return TRUE;
@@ -1287,7 +1871,9 @@ class Submit_forms_common_model extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function us_json_data_to_xml( $us_data ){
+	public function us_json_data_to_xml( $us ){
+		
+		$us_data = $us[ 'data' ];
 		
 		if ( is_string( $us_data ) ) {
 			
@@ -1295,24 +1881,164 @@ class Submit_forms_common_model extends CI_Model{
 			
 		}
 		
+		//echo '<pre>' . print_r( $us_data, TRUE ) . '</pre>';
+		
 		if ( is_array( $us_data ) ) {
 			
 			$xml = '<?xml version="1.0" encoding="UTF-8" ?>';
 			
-			foreach ( $us_data as $key_1 => & $data_value_1 ) {
+			// get submit form params
+			$gsfp = array(
 				
-				if ( is_array( $data_value_1 ) ) {
+				'where_condition' => 't1.id = ' . $us[ 'submit_form_id' ],
+				'limit' => 1,
+				
+			);
+			
+			$submit_form = $this->get_submit_forms( $gsfp )->row_array();
+			
+			if ( ! $submit_form ) {
+				
+				return NULL;
+				
+			}
+			
+			$this->sfcm->parse_sf( $submit_form, TRUE );
+			
+			$fields = $submit_form[ 'fields' ];
+			
+			foreach ( $us_data as $alias => & $value ) {
+				
+				foreach( $fields as $k => & $field ) {
 					
-					$data_value_1 = json_encode( $data_value_1 );
+					if ( ! isset( $field[ 'field_type' ] ) ) { continue; }
+					
+					if ( $field[ 'alias' ] == $alias  ) {
+						
+						if ( $field[ 'field_type' ] == 'date' ){
+							
+							$___date = explode( '-', $value );
+							
+							$format = '';
+							
+							$use_y = check_var( $field[ 'sf_date_field_use_year' ] ) ? TRUE : FALSE;
+							$use_m = check_var( $field[ 'sf_date_field_use_month' ] ) ? TRUE : FALSE;
+							$use_d = check_var( $field[ 'sf_date_field_use_day' ] ) ? TRUE : FALSE;
+							
+							$format .= ( $use_y AND isset( $___date[ 0 ] ) AND ( int ) $___date[ 0 ] > 0 ) ? 'y' : '';
+							$format .= ( $use_m AND isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
+							$format .= ( $use_d AND isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
+							
+							$___date[ 0 ] = ( int ) $___date[ 0 ] > 0 ? $___date[ 0 ] : '2000';
+							$___date[ 1 ] = ( int ) $___date[ 1 ] > 1 ? $___date[ 1 ] : '01';
+							$___date[ 2 ] = ( int ) $___date[ 2 ] > 2 ? $___date[ 2 ] : '01';
+							
+							$value = $___date[ 0 ] . '-' . $___date[ 1 ] . '-' . $___date[ 2 ];
+							
+							if ( ! empty( $format ) ) {
+								
+								$format = 'sf_us_dt_ft_pt_' . $format . '_' . $field[ 'sf_date_field_presentation_format' ];
+								
+								$value =  strftime( lang( $format ), strtotime( $value ) );
+								
+							}
+							else {
+								
+								$value =  '';
+								
+							}
+							
+						}
+						else if ( in_array( $field[ 'field_type' ], array( 'combo_box', 'radiobox', 'checkbox', ) ) AND check_var( $field[ 'options_from_users_submits' ] ) ) {
+							
+							$__tmp = @json_decode( $value, TRUE );
+							
+							if ( is_array( $__tmp ) OR is_array( $value ) ) {
+								
+								if ( is_array( $__tmp ) ) {
+									
+									$value = $__tmp;
+									
+								}
+								
+								if ( count( $value ) == 1 ) {
+									
+									$value = $value[ 0 ];
+									
+									if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
+										
+										$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										
+									}
+									else {
+										
+										if ( in_array( $fields[ $alias ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $fields[ $alias ][ 'options' ] ) AND ( $value == '1' OR $value == '' ) ) {
+											
+											if ( check_var( $value ) ) {
+												
+												$value = lang( 'yes' );
+												
+											}
+											else {
+												
+												$value = lang( 'no' );
+												
+											}
+											
+										}
+										
+									}
+									
+								}
+								else {
+									
+									$_field_value = array();
+									
+									foreach ( $value as $k => $v ) {
+										
+										if ( is_string( $v ) ) {
+											
+											if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $v ) AND $_user_submit = $this->sfcm->get_user_submit( $v ) ) {
+												
+												$v = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												
+											}
+											
+											$_field_value[] = $v;
+											
+										}
+										
+									}
+									
+									$value = join( ', ', $_field_value );
+									
+								}
+								
+							}
+							else {
+								
+								if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_user_submit( $value, NULL, TRUE ) ) {
+									
+									$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+									
+								}
+								
+							}
+							
+						}
+						
+					}
 					
 				}
 				
-				$xml .= '<' . $key_1 . '>';
-				$xml .= $data_value_1;
-				$xml .= '</' . $key_1 . '>';
+				$xml .= '<' . $alias . '>';
+				$xml .= strip_tags( html_entity_decode( $value ) );
+				$xml .= '</' . $alias . '>' . "\n";
 				
 				
 			}
+			
+// 			echo '<pre>' . htmlspecialchars( print_r( $xml, TRUE ) ) . '</pre>'; exit;
 			
 			return $xml;
 			
@@ -1323,9 +2049,100 @@ class Submit_forms_common_model extends CI_Model{
 	// --------------------------------------------------------------------
 	
 	/**
+	 * Scan all data seeking referenced properties and adjusts its values
+	 *
+	 * @access public
+	 * @return array
+	 */
+	
+	public function adjust_referenced_data( $data, $changed_prop_alias ) {
+		
+		// We select data schemes that use the property of this data as reference
+		
+		$this->db->select( 'id' );
+		$this->db->from( 'tb_submit_forms' );
+		$this->db->where( '`fields` LIKE \'%"options_from_users_submits":"' . $data[ 'submit_form_id' ] . '"%\' COLLATE \'utf8_general_ci\'' );
+		
+		$where = '(';
+		$where .= '`fields` LIKE \'%"options_title_field":"' . $changed_prop_alias . '"%\' COLLATE \'utf8_general_ci\' OR ';
+		$where .= '`fields` LIKE \'%"options_filter_order_by":"' . $changed_prop_alias . '"%\' COLLATE \'utf8_general_ci\'';
+		$where .= ')';
+		
+		$this->db->where( $where );
+		
+		$ds_ids = $this->db->get()->result_array();
+		
+		if ( $ds_ids ) {
+			
+			$this->db->select( '
+				
+				id,
+				submit_form_id,
+				data
+				
+			' );
+			$this->db->from( 'tb_submit_forms_us' );
+			
+			$where_1 = array();
+			
+			foreach( $ds_ids as $value ) {
+				
+				$id = $value[ 'id' ];
+				
+				$where_1[] = '`submit_form_id` = ' . $id;
+				
+			}
+			
+			$where_1 = '(' . join( ' OR ', $where_1 ) . ')';
+			
+			// ----------------
+			
+			$where_2 = array();
+			
+			$where_2[] = '`data` LIKE \'%"%":["' . $data[ 'id' ] . '"]%\' COLLATE \'utf8_general_ci\'';
+			$where_2[] = '`data` LIKE \'%"%":["' . $data[ 'id' ] . '","%]%\' COLLATE \'utf8_general_ci\'';
+			$where_2[] = '`data` LIKE \'%"%":[%","' . $data[ 'id' ] . '"]%\' COLLATE \'utf8_general_ci\'';
+			$where_2[] = '`data` LIKE \'%"%":[%","' . $data[ 'id' ] . '","%]%\' COLLATE \'utf8_general_ci\'';
+			$where_2[] = '`data` LIKE \'%"%":"' . $data[ 'id' ] . '"%\' COLLATE \'utf8_general_ci\'';
+			
+			$where_2 = '(' . join( ' OR ', $where_2 ) . ')';
+			
+			$where = $where_1 . ' AND ' . $where_2;
+			
+			$this->db->where( $where );
+			
+			$data_results = $this->db->get()->result_array();
+			
+			if ( $data_results ) {
+				
+				foreach( $data_results as $_data ) {
+					
+					$_data[ 'xml_data' ] = $this->us_json_data_to_xml( $_data );
+					
+					$_d_id = $_data[ 'id' ];
+					
+					unset( $_data[ 'id' ] );
+					
+					if ( ! $this->db->update( 'tb_submit_forms_us', $_data, array( 'id' => $_d_id ) ) ){
+						
+						msg( lang( $data[ 'params' ][ 'ud_data_update_fail_referenced_data' ], NULL, $data[ 'id' ] ), 'error' );
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
 	 * Get the current url params and return the params allowed
 	 *
-	 * @access private
+	 * @access public
 	 * @return array
 	 */
 	

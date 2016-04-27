@@ -48,8 +48,56 @@ if ( ! function_exists('array_to_csv'))
 			
 		}
 		
-		$separator = ! isset( $separator ) ? ';' : $separator;
-		$enclosure = ! isset( $enclosure ) ? '"' : $enclosure;
+		if ( isset( $separator ) ) {
+			
+			switch ( $separator ) {
+				
+				case 'tab':
+					
+					$separator = '	';
+					break;
+					
+				case 'comma':
+					
+					$separator = ',';
+					break;
+					
+				case 'semicolon':
+					
+					$separator = ';';
+					break;
+					
+				case 'colon':
+					
+					$separator = ':';
+					break;
+					
+				case 'space':
+					
+					$separator = ' ';
+					break;
+					
+				case 'pipe':
+					
+					$separator = '|';
+					break;
+					
+				case 'return':
+					
+					$separator = chr( 13 );
+					break;
+					
+				case '':
+					
+					$separator = '';
+					break;
+					
+			}
+			
+		}
+		
+		$enclosure = isset( $enclosure ) ? $enclosure : '"';
+		$separator = isset( $separator ) ? $separator : ';';
 		
 		ob_start();
 		
@@ -60,8 +108,9 @@ if ( ! function_exists('array_to_csv'))
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Type: application/octet-stream' );
 			
-			header( 'Content-Encoding: iso-8859-1' );
-			header( 'Content-type: application/vnd.ms-excel; charset=iso-8859-1' );
+			header( 'Content-Encoding: utf-8' );
+			header( 'Content-type: text/csv; utf-8' );
+			header( 'Content-type: application/vnd.ms-excel; charset=utf-8' );
 			header( 'Content-Disposition: attachement; filename="' . $filename . '"' );
 			
 			header( 'Content-Transfer-Encoding: binary' );
@@ -72,13 +121,13 @@ if ( ! function_exists('array_to_csv'))
 		}
 		else {
 			
-			header( 'Content-Encoding: iso-8859-1' );
-			header( 'Content-type: text/plain; charset=iso-8859-1' );
+			header( 'Content-Encoding: utf-8' );
+			header( 'Content-type: text/plain; charset=utf-8' );
 			header( 'Content-Disposition: inline; filename="' . $filename . '"' );
 			
 		}
 		
-		//fwrite( $f, "\xEF\xBB\xBF" ); // UTF-8 BOM
+		fwrite( $f, "\xEF\xBB\xBF" ); // UTF-8 BOM
 		
 		$n = 0;
 		foreach ( $array as $line ) {
@@ -132,7 +181,7 @@ if ( ! function_exists('array_to_csv'))
 		fclose($f) or show_error("Can't close php://output");
 		
 		$str = ob_get_contents();
-		$str = utf8_decode( $str );
+// 		$str = utf8_decode( $str );
 		//$str = utf8_encode( chr(255) ) . utf8_encode( chr(254) ) . mb_convert_encoding( $str, 'UTF-16LE', 'UTF-8' );
 		
 		ob_end_clean();

@@ -11,7 +11,7 @@ $lang['users_logout'] = 																			"Sair";
 $lang['insufficient_information'] = 																"Informações insuficientes";
 $lang['login_i_have_no_account'] = 																	"Não tem conta? Cadastre-se!";
 $lang['login_get_cplink'] = 																		"Esqueci minha senha";
-$lang['login_recover_username'] = 																	"Recuperar nome de usuário";
+$lang['login_recover_username'] = 																	"Recuperar nome de login";
 $lang['login_resend_activation_code'] = 															"Renviar código de ativação";
 
 $lang['c_users_get_cplink_page_title'] = 															"Alterar senha de acesso";
@@ -73,11 +73,11 @@ $lang['notif_c_users_cplink_sent_error'] = 															"Erro ao tentar enviar
 
 // ------------------------
 
-$lang['c_users_recover_username_page_title'] = 														"Recuperar nome de usuário";
+$lang['c_users_recover_username_page_title'] = 														"Recuperar nome de login";
 $lang['c_users_recover_username_page_description'] = 												"
 	
 	<p>Informe o endereço de e-mail principal da sua conta.
-	Um e-mail contendo seu nome de usuário será enviado para o endereço informado.
+	Um e-mail contendo seu nome de login será enviado para o endereço informado.
 	
 ";
 $lang['c_users_submit_recover_username_field_label'] = 												"Enviar";
@@ -88,7 +88,7 @@ $lang['notif_c_users_recover_username_account_disabled_desc'] = 											'
 	<p>Antes de alterar sua senha, <a href="%6$s">ative sua conta</a>.<p>
 	
 ';
-$lang['email_c_users_recover_username_subject_string'] = 											'%1$s, aqui está seu nome de usuário';
+$lang['email_c_users_recover_username_subject_string'] = 											'%1$s, aqui está seu nome de login';
 $lang['email_c_users_recover_username_body_string'] = 												'
 	
 	<p>
@@ -99,7 +99,7 @@ $lang['email_c_users_recover_username_body_string'] = 												'
 	
 	<p>
 		
-		Seu nome de usuário é <strong>%2$s</strong>
+		Seu nome de login é <strong>%2$s</strong>
 		
 	</p>
 	
@@ -115,13 +115,13 @@ $lang['c_users_submit_submit_change_pass_field_label'] = 											"Alterar";
 $lang['notif_c_users_change_pass_error'] = 															"Erro ao tentar modificar sua senha";
 $lang['notif_c_users_recover_username_sent_success'] = 														"
 	
-	<p>O seu nome de usuário foi enviado para o e-mail informado, verifique sua caixa de entrada dentro de instantes.
+	<p>O seu nome de login foi enviado para o e-mail informado, verifique sua caixa de entrada dentro de instantes.
 	Caso não tenha recebido nenhum e-mail, verifique sua <spam>caixa de spam (lixo eletrônico)</strong></p>
 	
 ";
 $lang['notif_c_users_pass_changed_success'] = 														"Sua senha foi alterada com sucesso! Tente fazer login.";
 $lang['notif_c_users_recover_username_invalid_user_error'] = 										"Usuário inexistente";
-$lang['notif_c_users_recover_username_sent_error'] = 												"Erro ao tentar enviar e-mail de recuperação de nome de usuário";
+$lang['notif_c_users_recover_username_sent_error'] = 												"Erro ao tentar enviar e-mail de recuperação de nome de login";
 $lang['c_users_recover_username_invalid_data_error'] = 												"Erro ao processar os dados";
 
 // ------------------------
@@ -135,9 +135,13 @@ $lang['notif_c_users_account_created_success_no_active_site'] = 									"Sua co
 $lang['c_users_activate_account_page_title'] = 														"Ativar conta";
 $lang['c_users_acode_field_label'] = 																"Código de ativação";
 $lang['c_users_submit_acode_field_label'] = 														"Ativar";
-$lang['username'] = 																				"Nome de usuário";
+$lang['username'] = 																				"Nome de login";
+$lang['user_username'] = 																			"Nome de login";
 $lang['complete_name'] = 																			"Nome completo";
+$lang['user_name'] = 																				"Nome completo";
+$lang['user_email'] = 																				"E-mail";
 $lang['password'] = 																				"Senha";
+$lang['user_password'] = 																			"Senha";
 $lang['c_users_password_field_label'] = 															"Senha";
 $lang['confirm_password'] = 																		"Repita a senha";
 $lang['c_users_confirm_password_field_label'] = 													"Repita a senha";
@@ -159,8 +163,8 @@ $lang['c_users_form_validation_captcha_captcha_error'] = 											"O texto cap
 $lang['c_users_submit_resend_acode_field_label'] = 													"Enviar código";
 $lang['c_users_name_field_label'] = 																"Nome";
 $lang['c_users_complete_name_field_label'] = 														"Nome completo";
-$lang['c_users_username_field_label'] = 															"Nome de usuário";
-$lang['tip_c_users_username_field_label'] = 														"Informe um nome de usuário que será usado para fazer login no site";
+$lang['c_users_username_field_label'] = 															"Nome de login";
+$lang['tip_c_users_username_field_label'] = 														"Informe um nome de login que será usado para fazer login no site";
 $lang['c_users_email_field_label'] = 																"E-mail";
 $lang['notif_c_users_send_acode_error'] = 															"Não foi possível enviar código de ativação!";
 $lang['notif_c_users_resend_acode_success'] = 														"Um novo código de ativação foi enviado para seu e-mail, verifique sua caixa de entrada dentro de instantes. Se não recebeu nenhum e-mail em sua caixa de entrada, verifique sua <spam>caixa de spam (lixo eletrônico)</strong>";
@@ -220,17 +224,17 @@ $lang['c_users_form_validation_is_unique'] = 														"%s já existente em 
 $lang['c_users_form_validation_matches'] = 															"Os campos %s e %s não conferem";
 $lang['c_users_form_validation_name_required_error'] = 												"Por favor, informe seu <strong><i>nome completo</i></strong>";
 $lang['c_users_form_validation_name_min_length_error'] = 											'O <strong><i>nome</i></strong> deve conter pelo menos <strong><i>%2$s</i></strong> caractéres';
-$lang['c_users_form_validation_username_required_error'] = 											"Por favor, informe um <strong><i>nome de usuário</i></strong>";
-$lang['c_users_form_validation_username_min_length_error'] = 										'O <strong><i>nome de usuário</i></strong> deve conter pelo menos <strong><i>%2$s</i></strong> caractéres';
-$lang['c_users_form_validation_username_max_length_error'] = 										'O <strong><i>nome de usuário</i></strong> não pode conter mais que <strong><i>%2$s</i></strong> caractéres';
-$lang['c_users_form_validation_username_is_unique_error'] = 										'Já existe uma conta utilizando o nome de usuário <strong><i>%1$s</i></strong>. Se o nome de usuário está correto, você pode <a href="%2$s">fazer login</a> usando-o juntamente com sua senha.<p>Esqueceu sua senha? Acesse a <a href="%3$s">página de recuperação de senha</a>.<br/>Esqueceu seu e-mail? Acesse a <a href="%4$s">página de recuperação de e-mail</a>.</p>';
-$lang['c_users_form_validation_username_alpha_dash_error'] = 										'O <strong><i>nome de usuário</i></strong> pode conter apenas letras, números, traços e sublinhados.';
-$lang['c_users_form_validation_email_is_unique_error'] = 											'Já existe uma conta utilizando o e-mail <strong><i>%1$s</i></strong>. Se o e-mail está correto, você pode <a href="%2$s">fazer login</a> usando seu nome de usuário e senha.<p>Esqueceu seu nome de usuário? Acesse a <a href="%5$s">página de recuperação de nome de usuário</a>.<br/>Esqueceu sua senha? Acesse a <a href="%3$s">página de recuperação de senha</a>.</p>';
+$lang['c_users_form_validation_username_required_error'] = 											"Por favor, informe um <strong><i>nome de login</i></strong>";
+$lang['c_users_form_validation_username_min_length_error'] = 										'O <strong><i>nome de login</i></strong> deve conter pelo menos <strong><i>%2$s</i></strong> caractéres';
+$lang['c_users_form_validation_username_max_length_error'] = 										'O <strong><i>nome de login</i></strong> não pode conter mais que <strong><i>%2$s</i></strong> caractéres';
+$lang['c_users_form_validation_username_is_unique_error'] = 										'Já existe uma conta utilizando o nome de login <strong><i>%1$s</i></strong>. Se o nome de login está correto, você pode <a href="%2$s">fazer login</a> usando-o juntamente com sua senha.<p>Esqueceu sua senha? Acesse a <a href="%3$s">página de recuperação de senha</a>.<br/>Esqueceu seu e-mail? Acesse a <a href="%4$s">página de recuperação de e-mail</a>.</p>';
+$lang['c_users_form_validation_username_alpha_dash_error'] = 										'O <strong><i>nome de login</i></strong> pode conter apenas letras, números, traços e sublinhados.';
+$lang['c_users_form_validation_email_is_unique_error'] = 											'Já existe uma conta utilizando o e-mail <strong><i>%1$s</i></strong>. Se o e-mail está correto, você pode <a href="%2$s">fazer login</a> usando seu nome de login e senha.<p>Esqueceu seu nome de login? Acesse a <a href="%5$s">página de recuperação de nome de login</a>.<br/>Esqueceu sua senha? Acesse a <a href="%3$s">página de recuperação de senha</a>.</p>';
 $lang['c_users_form_validation_email_required_error'] = 											"Por favor, informe seu <strong><i>e-mail</i></strong>";
 $lang['c_users_form_validation_email_valid_email_error'] = 											"Por favor, informe um endereço de <strong><i>e-mail</i></strong> válido";
 $lang['c_users_form_validation_password_required_error'] = 											"Por favor, informe sua <strong><i>senha</i></strong>";
-$lang['c_users_form_validation_password_min_length_error'] = 										'O <strong><i>nome de usuário</i></strong> deve conter pelo menos <strong><i>%2$s</i></strong> caractéres';
-$lang['c_users_form_validation_password_max_length_error'] = 										'O <strong><i>nome de usuário</i></strong> não pode conter mais que <strong><i>%2$s</i></strong> caractéres';
+$lang['c_users_form_validation_password_min_length_error'] = 										'O <strong><i>nome de login</i></strong> deve conter pelo menos <strong><i>%2$s</i></strong> caractéres';
+$lang['c_users_form_validation_password_max_length_error'] = 										'O <strong><i>nome de login</i></strong> não pode conter mais que <strong><i>%2$s</i></strong> caractéres';
 $lang['c_users_form_validation_confirm_password_required_error'] = 									"Por favor, confirme a senha";
 $lang['c_users_form_validation_confirm_password_matche_error'] = 									"As senhas não conferem, tente novamente";
 

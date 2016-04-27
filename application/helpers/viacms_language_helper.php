@@ -38,23 +38,38 @@
  * @param	string	the id of the form element or a boolean value for activate, or not sprintf function with next arguments
  * @return	string
  */
-function lang( $line, $id = NULL, $sp1 = '', $sp2 = '', $sp3 = '', $sp4 = '' ){
+function lang(){
 	
-	$CI =& get_instance();
-	$line = $CI->lang->line($line) ? $CI->lang->line($line) : $line;
-
-	if ( $id ){
+	$num_args = func_num_args();
+	$arg_list = func_get_args();
+	
+	if ( $num_args > 0 ) {
 		
-		$line = '<label for="'.$id.'">'.$line."</label>";
+		$line = $arg_list[ 0 ];
+		$id = isset( $arg_list[ 1 ] ) ? $arg_list[ 1 ] : NULL;
+		$vsprintf_args = $arg_list;
+		
+		$CI =& get_instance();
+		$line = $CI->lang->line( $line ) ? $CI->lang->line( $line ) : $line;
+		
+		if ( $id ){
+			
+			$line = '<label for="' . $id . '">' . $line . "</label>";
+			
+		}
+		
+		if ( $num_args > 2 ) {
+			
+			unset( $vsprintf_args[ 1 ] );
+			unset( $vsprintf_args[ 0 ] );
+			
+			$line = vsprintf( $line, $vsprintf_args );
+			
+		}
+		
+		return $line;
+		
 	}
-	
-	if ( $sp1 OR $sp2 OR $sp3 OR $sp4 ){
-		
-		$line = sprintf( $line, ( $sp1 ? $sp1 : NULL ), ( $sp2 ? $sp2 : NULL ), ( $sp3 ? $sp3 : NULL ), ( $sp4 ? $sp4 : NULL ) );
-		
-	}
-	
-	return $line;
 	
 }
 

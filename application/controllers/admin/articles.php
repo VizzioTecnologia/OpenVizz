@@ -317,6 +317,61 @@ class Articles extends Main {
 	 **************************************************************************************************
 	 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*
 	 **************************************************************************************************
 	 **************************************************************************************************
@@ -324,7 +379,7 @@ class Articles extends Main {
 	 Articles management
 	 --------------------------------------------------------------------------------------------------
 	 */
-
+	
 	public function am(){
 
 		// -------------------------------------------------
@@ -1306,6 +1361,49 @@ class Articles extends Main {
 	 **************************************************************************************************
 	 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	/*
 	 **************************************************************************************************
 	 **************************************************************************************************
@@ -2097,7 +2195,53 @@ class Articles extends Main {
 		}
 
 	}
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function component_config($action = NULL, $layout = 'default'){
 
 		$this->component_function = __FUNCTION__;
@@ -2203,98 +2347,184 @@ class Articles extends Main {
 		}
 
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/******************************************************************************/
 	/******************************************************************************/
 	/************************************ Ajax ************************************/
-
+	
 	public function ajax( $action = NULL, $var1 = NULL ){
-
+		
 		// -------------------------------------------------
 		// Parsing vars ------------------------------------
-
+		
+		$post =									$this->input->post( NULL, TRUE ); // post array input
+		$get =									$this->input->get(); // get array input
+		$data = 								array();
+		
 		$f_params = $this->uri->ruri_to_assoc();
-
+		
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : 'l'; // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : NULL; // sub action
 		$article_id =							isset( $f_params[ 'aid' ] ) ? $f_params[ 'aid' ] : NULL; // id
 		$cp =									isset( $f_params[ 'cp' ] ) ? ( int ) $f_params[ 'cp' ] : NULL; // current page
 		$ipp =									isset( $f_params[ 'ipp' ] ) ? ( int ) $f_params[ 'ipp' ] : NULL; // items per page
 		$order_by =								isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
-		$post =									$this->input->post( NULL, TRUE ); // post array input
-		$get =									$this->input->get(); // get array input
+		
+		$obd =									isset( $post[ 'obd' ] ) ? $post[ 'obd' ] : 'ASC'; // order by
+		$obd =									isset( $get[ 'obd' ] ) ? $get[ 'obd' ] : $obd; // order by
+		$obd =									isset( $f_params[ 'obd' ] ) ? $f_params[ 'obd' ] : $obd; // order by
+		$obd = 									strtoupper( $obd );
+		$data[ 'obd' ] = &						$obd;
+		
+		$ct =									isset( $post[ 'ct' ] ) ? $post[ 'ct' ] : FALSE; // categories tree
+		$ct =									isset( $get[ 'ct' ] ) ? $get[ 'ct' ] : $ct; // categories tree
+		$ct =									isset( $f_params[ 'ct' ] ) ? $f_params[ 'ct' ] : $ct; // categories tree
+		$data[ 'ct' ] = &						$ct;
+		
 		$category_id =							isset( $f_params[ 'cid' ] ) ? $f_params[ 'cid' ] : '-1'; // category id
 			$category_id =						trim( ( isset( $get[ 'c' ] ) ) ? $get[ 'c' ] : $category_id ); // category id
 			$category_id =						trim( ( isset( $post[ 'category_id' ] ) ) ? $post[ 'category_id' ] : $category_id ); // category id
-
+			
 		// Parsing vars ------------------------------------
 		// -------------------------------------------------
-
+		
 		$this->component_function = __FUNCTION__;
 		$this->component_function_action = $action;
-
+		
 		if ( $action ){
-
+			
 			/**************************************************/
 			/******************* Live search ******************/
-
+			
 			if ( $action == 's' OR $action == 'as' OR $action == 'cs' ){
-
+				
 				// -------------------------------------------------
 				// list / search -----------------------------------
-
+				
 				$terms = trim( $this->input->post( 'terms', TRUE ) ? $this->input->post( 'terms', TRUE ) : ( ( $this->input->get( 'q' ) != FALSE ) ? $this->input->get( 'q' ) : FALSE ) );
 				
 				/**
 				 * @TODO falta criar a filtragem por categorias no plugin de busca de artigos
 				 */
-
+				
 				$plugins = NULL;
 				$plugins_params = NULL;
-
+				
+				$search_config = array();
+				
 				if ( ( $action === 'cs' ) ) {
-
+					
 					$plugins[] = 'articles_categories_search';
 					$plugins_params[ 'articles_categories_search' ] = array(
-
+						
 						'articles_categories_search' => $category_id,
-
+						
 					);
-
+					
+					if ( $ct ) {
+						
+						// With this order_by we get the categories tree
+						$search_config[ 'order_by' ][ 'articles_categories_search' ] = 't1.parent ' . $obd . ', t1.ordering ' . $obd . ', t1.title ' . $obd;
+						
+					}
+					else if ( $order_by ) {
+						
+						$search_config[ 'order_by' ][ 'articles_categories_search' ] = $order_by;
+						
+					}
+					
 				}
 				else if ( ( $action === 'as' ) ) {
-
+					
 					$plugins[] = 'articles_search';
 					$plugins_params[ 'articles_search' ] = array(
-
+						
 						'category_id' => $category_id,
-
+						
 					);
-
+					
 				}
 				else {
-
+					
 					$plugins[] = 'articles_search';
 					$plugins[] = 'articles_categories_search';
 					$plugins_params[ 'articles_search' ] = array(
-
+						
 						'category_id' => $category_id,
 						'articles_categories_search' => $category_id,
-
+						
 					);
-
+					
+					if ( $ct ) {
+						
+						// With this order_by we get the categories tree
+						$search_config[ 'order_by' ][ 'articles_categories_search' ] = 't1.parent ' . $obd . ', t1.ordering ' . $obd . ', t1.title ' . $obd;
+						
+					}
+					else if ( $order_by ) {
+						
+						$search_config[ 'order_by' ][ 'articles_categories_search' ] = $order_by;
+						
+					}
+					
 				}
-
-				$search_config = array(
-
-					'plugins' => $plugins,
-					'ipp' => $ipp,
-					'cp' => $cp,
-					'terms' => $terms,
-					'allow_empty_terms' => TRUE,
-					'plugins_params' => $plugins_params,
-
-				);
+				
+				$search_config[ 'plugins' ] = $plugins;
+				$search_config[ 'ipp' ] = $ipp;
+				$search_config[ 'cp' ] = $cp;
+				$search_config[ 'terms' ] = $terms;
+				$search_config[ 'allow_empty_terms' ] = TRUE;
+				$search_config[ 'plugins_params' ] = $plugins_params;
 				
 				$this->load->library( 'search' );
 				$this->search->config( $search_config );
@@ -2303,14 +2533,14 @@ class Articles extends Main {
 				
 				// list / search -----------------------------------
 				// -------------------------------------------------
-
+				
 				$data[ 'search_mode' ] = ( $action === 'cs' ) ? 'articles_categories_search' : ( $action === 'as' ? 'articles_search' : 'full' );
 				$data[ 'results' ] = $results;
-
+				
 				$this->_page(
-
+					
 					array(
-
+						
 						'component_view_folder' => $this->component_view_folder,
 						'function' => 'ajax',
 						'action' => 'live_search',
@@ -2319,11 +2549,11 @@ class Articles extends Main {
 						'data' => $data,
 						'html' => FALSE,
 						'load_index' => FALSE,
-
+						
 					)
-
+					
 				);
-
+				
 			}
 			else if ( $action == 'categories_live_search' ){
 

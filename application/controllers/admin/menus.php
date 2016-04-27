@@ -881,7 +881,7 @@ class Menus extends Main {
 					// se a validação dos campos for positiva
 					else if ( $this->form_validation->run() AND ( $this->input->post( 'submit' ) OR $this->input->post( 'submit_apply' ) ) ){
 						
-						if ( $menu_item[ 'home' ] === "1" ){
+						if ( $action == 'e' AND $menu_item[ 'home' ] === "1" ){
 							
 							$this->menus_model->set_home_page( $menu_item[ 'id' ] );
 							
@@ -954,7 +954,7 @@ class Menus extends Main {
 						
 						if ( $action == 'a' ){
 							
-							$return_id=$this->menus_model->insert( $db_data );
+							$return_id = $this->menus_model->insert( $db_data );
 							
 							if ( $return_id ){
 								
@@ -985,7 +985,7 @@ class Menus extends Main {
 									
 									if ( $type == 'component' ){
 										
-										$assoc_to_uri_array = array(
+										$gmiup = array(
 											
 											'menu_type_id' => $menu_type_id,
 											'menu_item_type' => $type,
@@ -1003,6 +1003,7 @@ class Menus extends Main {
 											'menu_type_id' => $menu_type_id,
 											'menu_item_type' => $type,
 											'menu_item_id' => $return_id,
+											'function' => 'menu_items',
 											
 										);
 										

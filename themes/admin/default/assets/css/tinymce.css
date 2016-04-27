@@ -375,7 +375,7 @@ div.mce-tinymce-inline {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: <?= $vui->colors->vui_modal_overlay->rgba_s(); ?>;
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
 	
 }
 #mce-modal-block.mce-in {
@@ -1519,6 +1519,8 @@ body.vui .mce-abs-layout-item, .vui .mce-abs-end {
 	margin: 0;
 	
 	<?= $vui->css->box_sizing( 'border-box' ); ?>;
+	
+	white-space: normal;
 	
 }
 .vui .mce-textbox:focus {

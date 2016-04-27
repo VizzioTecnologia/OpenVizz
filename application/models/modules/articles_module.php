@@ -68,14 +68,18 @@ class Articles_module extends CI_Model{
 		 * Articles list readmore
 		 */
 		
-		if ( ! check_var( $parsed_params[ 'articles_list_readmore_link_custom_url' ] ) ){
+		if ( check_var( $parsed_params[ 'use_articles_list_readmore_link' ] ) ) {
 			
-			$parsed_params[ 'articles_list_readmore_link_url' ] = get_url( $this->articles->get_link_articles_list( NULL, $parsed_params[ 'root_category_id' ] ) );
-			
-		}
-		else {
-			
-			$parsed_params[ 'articles_list_readmore_link_url' ] = get_url( $parsed_params[ 'articles_list_readmore_link_custom_url' ] );
+			if ( ! check_var( $parsed_params[ 'articles_list_readmore_link_custom_url' ] ) ){
+				
+				$parsed_params[ 'articles_list_readmore_link_url' ] = get_url( $this->articles->get_link_articles_list( NULL, $parsed_params[ 'root_category_id' ] ) );
+				
+			}
+			else {
+				
+				$parsed_params[ 'articles_list_readmore_link_url' ] = get_url( $parsed_params[ 'articles_list_readmore_link_custom_url' ] );
+				
+			}
 			
 		}
 		

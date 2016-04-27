@@ -338,7 +338,7 @@ class Viacms_Form_validation extends CI_Form_validation {
 		'^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$';
 	
 	 /**
-	 * Normaliza o nome próprio dado, aplicando a capitalização correta de acordo
+	 * Normaliza o nome pr�prio dado, aplicando a capitaliza��o correta de acordo
 	 * com as regras e exceções definidas no código.
 	 * POR UMA DECISÃO DE PROJETO, FORAM UTILIZADAS FUNÇÕES MULTIBYTE (MB_) SEMPRE
 	 * QUE POSSÍVEL, PARA GARANTIR SUA USABILIDADE EM STRINGS UNICODE.
@@ -347,89 +347,93 @@ class Viacms_Form_validation extends CI_Form_validation {
 	 */
 	public function normalizar_nome_ptbr( $nome ) {
 		
-		/*
-		 * A primeira tarefa da normalização é lidar com partes do nome que
-		 * porventura estejam abreviadas,considerando-se para tanto a existência de
-		 * pontos finais (p. ex. JOÃO A. DA SILVA, onde "A." é uma parte abreviada).
-		 * Dado que mais à frente dividiremos o nome em partes tomando em
-		 * consideração o caracter de espaço (" "), precisamos garantir que haja um
-		 * espaço após o ponto. Fazemos isso substituindo todas as ocorrências do
-		 * ponto por uma sequência de ponto e espaço.
-		 */
-		$nome = mb_ereg_replace(self::NN_PONTO, self::NN_PONTO_ESPACO, $nome);
-
-		/*
-		 * O procedimento anterior, ou mesmo a digitação errônea, podem ter
-		 * introduzido espaços múltiplos entre as partes do nome, o que é totalmente
-		 * indesejado. Para corrigir essa questão, utilizamos uma substituição
-		 * baseada em expressão regular, a qual trocará todas as ocorrências de
-		 * espaços múltiplos por espaços simples.
-		 */
-		$nome = mb_ereg_replace(self::NN_REGEX_MULTIPLOS_ESPACOS, self::NN_ESPACO,
-			$nome);
-
-		/*
-		 * Isso feito, podemos fazer a capitalização "bruta", deixando cada parte do
-		 * nome com a primeira letra maiúscula e as demais minúsculas. Assim,
-		 * JOÃO DA SILVA => João Da Silva.
-		 */
-		$nome = mb_convert_case($nome, MB_CASE_TITLE, mb_detect_encoding($nome));
-
-		/*
-		 * Nesse ponto, dividimos o nome em partes, para trabalhar com cada uma
-		 * delas separadamente.
-		 */
-		$partesNome = mb_split(self::NN_ESPACO, $nome);
-
-		/*
-		 * A seguir, são definidas as exceções à regra de capitalização. Como
-		 * sabemos, alguns conectivos e preposições da língua portuguesa e de outras
-		 * línguas jamais são utilizadas com a primeira letra maiúscula.
-		 * Essa lista de exceções baseia-se na minha experiência pessoal, e pode ser
-		 * adaptada, expandida ou mesmo reduzida conforme as necessidades de cada
-		 * caso.
-		 */
-		$excecoes = array(
-			'de', 'di', 'do', 'da', 'dos', 'das', 'dello', 'della',
-			'dalla', 'dal', 'del', 'e', 'em', 'na', 'no', 'nas', 'nos', 'van', 'von',
-			'y'
-		);
-		
-		for($i = 0; $i < count($partesNome); ++$i) {
+		if ( $nome ) {
 			
 			/*
-			 * Verificamos cada parte do nome contra a lista de exceções. Caso haja
-			 * correspondência, a parte do nome em questão é convertida para letras
-			 * minúsculas.
-			 */
-			foreach($excecoes as $excecao)
-				if(mb_strtolower($partesNome[$i]) == mb_strtolower($excecao))
-					$partesNome[$i] = $excecao;
+			* A primeira tarefa da normalização é lidar com partes do nome que
+			* porventura estejam abreviadas,considerando-se para tanto a existência de
+			* pontos finais (p. ex. JOÃO A. DA SILVA, onde "A." é uma parte abreviada).
+			* Dado que mais à frente dividiremos o nome em partes tomando em
+			* consideração o caracter de espaço (" "), precisamos garantir que haja um
+			* espaço após o ponto. Fazemos isso substituindo todas as ocorrências do
+			* ponto por uma sequência de ponto e espaço.
+			*/
+			$nome = mb_ereg_replace(self::NN_PONTO, self::NN_PONTO_ESPACO, $nome);
+
+			/*
+			* O procedimento anterior, ou mesmo a digitação errônea, podem ter
+			* introduzido espaços múltiplos entre as partes do nome, o que é totalmente
+			* indesejado. Para corrigir essa questão, utilizamos uma substituição
+			* baseada em expressão regular, a qual trocará todas as ocorrências de
+			* espaços múltiplos por espaços simples.
+			*/
+			$nome = mb_ereg_replace(self::NN_REGEX_MULTIPLOS_ESPACOS, self::NN_ESPACO,
+				$nome);
+
+			/*
+			* Isso feito, podemos fazer a capitalização "bruta", deixando cada parte do
+			* nome com a primeira letra maiúscula e as demais minúsculas. Assim,
+			* JOÃO DA SILVA => João Da Silva.
+			*/
+			$nome = mb_convert_case($nome, MB_CASE_TITLE, mb_detect_encoding($nome));
+
+			/*
+			* Nesse ponto, dividimos o nome em partes, para trabalhar com cada uma
+			* delas separadamente.
+			*/
+			$partesNome = mb_split(self::NN_ESPACO, $nome);
+
+			/*
+			* A seguir, são definidas as exceções à regra de capitalização. Como
+			* sabemos, alguns conectivos e preposições da língua portuguesa e de outras
+			* línguas jamais são utilizadas com a primeira letra maiúscula.
+			* Essa lista de exceções baseia-se na minha experiência pessoal, e pode ser
+			* adaptada, expandida ou mesmo reduzida conforme as necessidades de cada
+			* caso.
+			*/
+			$excecoes = array(
+				'de', 'di', 'do', 'da', 'dos', 'das', 'dello', 'della',
+				'dalla', 'dal', 'del', 'e', 'em', 'na', 'no', 'nas', 'nos', 'van', 'von',
+				'y'
+			);
+			
+			for($i = 0; $i < count($partesNome); ++$i) {
+				
+				/*
+				* Verificamos cada parte do nome contra a lista de exce��es. Caso haja
+				* correspond�ncia, a parte do nome em quest�o � convertida para letras
+				* min�ssculas.
+				*/
+				foreach($excecoes as $excecao)
+					if(mb_strtolower($partesNome[$i]) == mb_strtolower($excecao))
+						$partesNome[$i] = $excecao;
+				
+				/*
+				* Uma situa��o rara em nomes de pessoas, mas bastante comum em nomes de
+				* logradouros, � a presen�a de numerais romanos, os quais, como � sabido,
+				* s�o utilizados em letras MAI�SCULAS.
+				* No site
+				* http://htmlcoderhelper.com/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression/,
+				* encontrei uma express�o regular para a identifica��o dos ditos
+				* numerais. Com isso, basta testar se h� uma correspond�ncia e, em caso
+				* positivo, passar a parte do nome para MAI�SCULAS. Assim, o que antes
+				* era "Av. Papa Jo�o Xxiii" passa para "Av. Papa Jo�o XXIII".
+				*/
+				if(mb_ereg_match(self::NN_REGEX_NUMERO_ROMANO,
+					mb_strtoupper($partesNome[$i])))
+					$partesNome[$i] = mb_strtoupper($partesNome[$i]);
+			}
 			
 			/*
-			 * Uma situação rara em nomes de pessoas, mas bastante comum em nomes de
-			 * logradouros, é a presença de numerais romanos, os quais, como é sabido,
-			 * são utilizados em letras MAIÚSCULAS.
-			 * No site
-			 * http://htmlcoderhelper.com/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression/,
-			 * encontrei uma expressão regular para a identificação dos ditos
-			 * numerais. Com isso, basta testar se há uma correspondência e, em caso
-			 * positivo, passar a parte do nome para MAIÚSCULAS. Assim, o que antes
-			 * era "Av. Papa João Xxiii" passa para "Av. Papa João XXIII".
-			 */
-			if(mb_ereg_match(self::NN_REGEX_NUMERO_ROMANO,
-				mb_strtoupper($partesNome[$i])))
-				$partesNome[$i] = mb_strtoupper($partesNome[$i]);
+			* Finalmente, basta juntar novamente todas as partes do nome, colocando um
+			* espa�o entre elas.
+			*/
+			
+			$_return = implode( self::NN_ESPACO, $partesNome );
+			
+			return $_return != '' ? $_return : FALSE;
+			
 		}
-		
-		/*
-		 * Finalmente, basta juntar novamente todas as partes do nome, colocando um
-		 * espaço entre elas.
-		 */
-		
-		$_return = implode( self::NN_ESPACO, $partesNome );
-		
-		return $_return != '' ? $_return : FALSE;
 		
 	}
 	
@@ -505,30 +509,221 @@ class Viacms_Form_validation extends CI_Form_validation {
 		
 	}
 	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Valid Email
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function valid_email( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str ) ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+
 	function valid_email_dns( $str ){
 		
-		$this->ci->load->library( 'verify_email' );
-		
-		$email = $str;
-		
-		if ( $this->ci->verify_email->check( $email ) ) {
+		if ( $str ) {
 			
-			return TRUE;
+			$this->ci->load->library( 'verify_email' );
 			
-		} elseif ( $this->ci->verify_email->isValid( $email ) ) {
+			$email = $str;
 			
-			$this->CI->form_validation->set_message( 'valid_email_dns', sprintf( lang( 'valid_email_dns_not_exists' ), $email ) );
-			return FALSE;
+			if ( $this->ci->verify_email->check( $email ) ) {
+				
+				return TRUE;
+				
+			} elseif ( $this->ci->verify_email->isValid( $email ) ) {
+				
+				$this->CI->form_validation->set_message( 'valid_email_dns', sprintf( lang( 'valid_email_dns_not_exists' ), $email ) );
+				return FALSE;
+				
+			} else {
+				
+				$this->CI->form_validation->set_message( 'valid_email_dns', sprintf( lang( 'valid_email_dns_is_invalid' ), $email ) );
+				return FALSE;
+				
+			}
 			
-		} else {
-			
-			$this->CI->form_validation->set_message( 'valid_email_dns', sprintf( lang( 'valid_email_dns_is_invalid' ), $email ) );
-			return FALSE;
-		    
 		}
 		
 	}
 	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Greather than
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function greater_than( $str, $min ) {
+		
+		if ( $str ) {
+			
+			if ( ! is_numeric( $str ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			return $str > $min;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Less than
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function less_than( $str, $min ) {
+		
+		if ( $str ) {
+			
+			if ( ! is_numeric( $str ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			return $str < $min;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Minimum Length
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	value
+	 * @return	bool
+	 */
+	public function min_length( $str, $val ) {
+		
+		if ( $str ) {
+			
+			if ( preg_match( "/[^0-9]/", $val ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			if ( function_exists( 'mb_strlen' ) ) {
+				
+				return ( mb_strlen( $str ) < $val ) ? FALSE : TRUE;
+				
+			}
+			
+			return ( strlen( $str ) < $val ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Max Length
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	value
+	 * @return	bool
+	 */
+	public function max_length( $str, $val ) {
+		
+		if ( $str ) {
+			
+			if ( preg_match( "/[^0-9]/", $val ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			if (function_exists( 'mb_strlen' ) ) {
+				
+				return ( mb_strlen( $str ) > $val ) ? FALSE : TRUE;
+				
+			}
+			
+			return ( strlen( $str ) > $val ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Exact Length
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	value
+	 * @return	bool
+	 */
+	public function exact_length( $str, $val ) {
+		
+		if ( $str ) {
+			
+			if ( preg_match( "/[^0-9]/", $val ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			if (function_exists( 'mb_strlen' ) ) {
+				
+				return ( mb_strlen( $str ) != $val ) ? FALSE : TRUE;
+				
+			}
+			
+			return ( strlen( $str ) != $val ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Valid Base64
+	 *
+	 * Tests a string for characters outside of the Base64 alphabet
+	 * as defined by RFC 2045 http://www.faqs.org/rfcs/rfc2045
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function valid_base64( $str ) {
+		
+		if ( $str ) {
+			
+			return ( bool ) ! preg_match( '/[^a-zA-Z0-9\/\+=]/', $str );
+			
+		}
+		
+	}
+
 	public function add_message($field, $message) {
 		//this field was validated without error
 		if(isset($this->_field_data[$field]) AND (!isset($this->_field_data[$field]['error']) OR !$this->_field_data[$field]['error']) )
@@ -537,7 +732,6 @@ class Viacms_Form_validation extends CI_Form_validation {
 	}
 	
 	// --------------------------------------------------------------------
-
 	
 	// Substitui a função Matches padrão para suportar campos em formato de array
 	public function matches($str, $field){
@@ -590,16 +784,284 @@ class Viacms_Form_validation extends CI_Form_validation {
 		
 	}
 	
-	// Add a validation rule wich allow spaces no alphanumeric function
-	public function alpha_dash_space( $str ){
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Integer
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function integer( $str ) {
 		
-		$this->CI->form_validation->set_message( 'alpha_dash_space', lang( 'validation_rule_alpha_dash_spaces' ) );
+		if ( $str ) {
+			
+			return ( bool ) preg_match( '/^[\-+]?[0-9]+$/', $str );
+			
+		}
 		
-		return ( ! preg_match( '/^[a-z0-9 ._\-]+$/i', $str ) ) ? FALSE : TRUE;
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Decimal number
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function decimal( $str ) {
+		
+		if ( $str ) {
+			
+			return ( bool ) preg_match( '/^[\-+]?[0-9]+\.[0-9]+$/', $str );
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Is a Natural number  (0,1,2,3, etc.)
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function is_natural( $str ) {
+		
+		if ( $str ) {
+			
+			return ( bool ) preg_match( '/^[0-9]+$/', $str );
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Is a Natural number, but not a zero  (1,2,3, etc.)
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function is_natural_no_zero( $str ) {
+		
+		if ( $str ) {
+			
+			if ( ! preg_match( '/^[0-9]+$/', $str ) ) {
+				
+				return FALSE;
+				
+			}
+			
+			if ( $str == 0 ) {
+				
+				return FALSE;
+				
+			}
+			
+			return TRUE;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Validate IP Address
+	 *
+	 * @access	public
+	 * @param	string
+	 * @param	string "ipv4" or "ipv6" to validate a specific ip format
+	 * @return	string
+	 */
+	public function valid_ip( $ip, $which = '' ) {
+		
+		if ( $ip ) {
+			
+			return $this->CI->input->valid_ip( $ip, $which );
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Numeric
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function numeric( $str ) {
+		
+		if ( $str ) {
+			
+			return ( bool ) preg_match( '/^[\-+]?[0-9]*\.?[0-9]+$/', $str );
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Alpha
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function alpha( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match( "/^([a-z])+$/i", $str ) ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Alpha-numeric
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function alpha_numeric( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match( "/^([a-z0-9])+$/i", $str ) ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Alpha-numeric with underscores and dashes
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function alpha_dash( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match( "/^([-a-z0-9_-])+$/i", $str ) ) ? FALSE : TRUE;
+			
+		}
+		
+	}
+	
+	// Add a validation rule wich allow spaces in the alphanumeric function
+	public function alpha_dash_space( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match( '/^[a-z0-9 ._\-]+$/i', $str ) ) ? FALSE : TRUE;
+			
+		}
+		
+		//$this->CI->form_validation->set_message( 'alpha_dash_space', lang( 'validation_rule_alpha_dash_spaces' ) );
+		
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Alpha space
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	public function alpha_space( $str ) {
+		
+		if ( $str ) {
+			
+			return ( ! preg_match( "/^([a-z ])+$/i", $str ) ) ? FALSE : TRUE;
+			
+		}
 		
 	}
 
 	
+	// Verifica o CPF informado
+	public function check_cpf( $cpf ) {
+		
+		if ( $cpf ) {
+			
+			// Elimina possivel m�scara
+			$cpf = preg_replace( '[^0-9]', '', $cpf );
+			$cpf = str_pad( $cpf, 11, '0', STR_PAD_LEFT );
+			
+			// Verifica se o numero de d�gitos informados � igual a 11 
+			if ( strlen( $cpf ) != 11 ) {
+				
+				$this->CI->form_validation->set_message( 'check_cpf', lang( 'validation_rule_check_cpf_invalid' ) );
+				return FALSE;
+				
+			}
+			else {
+				
+				// Verifica se nenhuma das sequ�ncias de n�meros foi digitada.
+				// Caso afirmativo, retorna falso
+				for( $a = 0; $a < 10; $a++ ) {
+					
+					if( $cpf == str_repeat( $a, 11 ) ) {
+						
+						$this->CI->form_validation->set_message( 'check_cpf', lang( 'validation_rule_check_cpf_invalid' ) );
+						return FALSE;
+						
+					}
+					
+				}
+				
+				// Calcula os digitos verificadores para verificar se o
+				// CPF � v�lido
+				for ( $t = 9; $t < 11; $t++ ) {
+					
+					for ( $d = 0, $c = 0; $c < $t; $c++ ) {
+						
+						$d += $cpf{ $c } * ( ( $t + 1 ) - $c );
+						
+					}
+					
+					$d = ( ( 10 * $d ) % 11 ) % 10;
+					
+					if ( $cpf{ $c } != $d ) {
+						
+						$this->CI->form_validation->set_message( 'check_cpf', lang( 'validation_rule_check_cpf_invalid' ) );
+						return FALSE;
+						
+					}
+					
+				}
+				
+				return TRUE;
+				
+			}
+			
+			return FALSE;
+			
+		}
+		
+	}
 
 }
 // END Form Validation Class

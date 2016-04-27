@@ -93,7 +93,12 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				'random' => $random,
 				'select_columns' => '
 					
-					t1.*,
+					t1.id,
+					t1.submit_form_id,
+					t1.submit_datetime,
+					t1.mod_datetime,
+					t1.data,
+					t1.params,
 					t2.title as submit_form_title,
 					
 				',
@@ -477,9 +482,9 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			
 			foreach( $filters as $k => $filter ) {
 				
-				if ( is_array( $filter ) AND isset( $filter[ 'alias' ] ) AND isset( $filter[ 'comp_op' ] ) AND isset( $filter[ 'value' ] ) ) {
+				if ( isset( $filter[ 'alias' ] ) AND isset( $filter[ 'comp_op' ] ) AND isset( $filter[ 'value' ] ) ) {
 					
-					if ( $i > 0) {
+					if ( $i > 0 ) {
 						
 						if ( isset( $filter[ 'log_op' ] ) ) {
 							
@@ -491,17 +496,6 @@ class Sf_us_search_plugin extends Plugins_mdl{
 							$out .= ' AND ';
 							
 						}
-						
-					}
-					
-					if ( ! in_array( $filter[ 'alias' ], array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
-						
-						$_column = 'EXTRACTVALUE( `t1`.`xml_data`, \'//' . trim( $filter[ 'alias' ] ) . '\' )';
-						
-					}
-					else {
-						
-						$_column = '`t1`.`' . $filter[ 'alias' ] . '`';
 						
 					}
 					
@@ -523,14 +517,46 @@ class Sf_us_search_plugin extends Plugins_mdl{
 						
 					}
 					
+					$_column_is_native = FALSE;
+					
+					if ( ! in_array( $filter[ 'alias' ], array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
+						
+						$_column = 'EXTRACTVALUE( `t1`.`xml_data`, \'//' . trim( $filter[ 'alias' ] ) . '\' )';
+						
+					}
+					else {
+						
+						$_column_is_native = TRUE;
+						$_column = '`t1`.`' . $filter[ 'alias' ] . '`';
+						
+					}
+					
 					if ( $value_type == 'str' ) {
 						
-						$out .= $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\'';
+						if ( in_array( $filter[ 'comp_op' ], array( '=', '!=' ) ) ) {
+							
+							$out .= '( ' . $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\' ' . ( ! $_column_is_native ? ( ( $filter[ 'comp_op' ] == '=' ? 'OR' : 'AND' ) . ' `t1`.`data` ' . ( $filter[ 'comp_op' ] == '=' ? 'LIKE' : 'NOT LIKE' ) . ' \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $filter[ 'value' ] . '"%\'' . ( $filter[ 'comp_op' ] == '!=' ? ' AND `t1`.`data` LIKE \'%"' . trim( $filter[ 'alias' ] ) . '":"%"%\'' : '' ) ) : '' ) . ' )';
+							
+						}
+						else {
+							
+							$out .= $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\'';
+							
+						}
 						
 					}
 					else if ( $value_type == 'num' ) {
 						
-						$out .= $_column . ' ' . $filter[ 'comp_op' ] . ' ' . $filter[ 'value' ];
+						if ( in_array( $filter[ 'comp_op' ], array( '=', '!=' ) ) ) {
+							
+							$out .= '( ' . $_column . ' ' . $filter[ 'comp_op' ] . ' ' . $filter[ 'value' ] . ' ' . ( $filter[ 'comp_op' ] == '=' ? 'OR' : 'AND' ) . ' `t1`.`data` ' . ( $filter[ 'comp_op' ] == '=' ? 'LIKE' : 'NOT LIKE' ) . ' \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $filter[ 'value' ] . '"%\' )';
+							
+						}
+						else {
+							
+							$out .= $_column . ' ' . $filter[ 'comp_op' ] . ' ' . $filter[ 'value' ];
+							
+						}
 						
 					}
 					else if ( $value_type == 'func' ) {

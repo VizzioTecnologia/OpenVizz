@@ -289,7 +289,7 @@
 			<?php $current_column = 'created_by_name'; ?>
 			<td class="<?= $current_column; ?> col-<?= $current_column; ?>">
 				
-				<?= anchor( 'admin/users/users_management/edit_user/' . base64_encode( base64_encode( base64_encode( base64_encode( $article[ 'created_by_id' ] ) ) ) ), $article[ 'created_by_name' ], 'class="" title="' . $article[ 'created_by_name' ] . '"' ); ?>
+				<?= anchor( $this->users->admin_get_link_edit( $article[ 'created_by_id' ] ), $article[ 'created_by_name' ], 'class="" title="' . $article[ 'created_by_name' ] . '"' ); ?>
 				
 			</td>
 			
