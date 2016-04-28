@@ -58,7 +58,6 @@ while ($cycle && $i < $max_cycles)
 
 if ( ! empty($_FILES))
 {
-	echo '<pre>' . print_r( $_FILES, TRUE ) . '</pre>'; exit;
 	
 	$info = pathinfo($_FILES['file']['name']);
 	$mime_type = get_file_mime_type($_FILES['file']['tmp_name']);
