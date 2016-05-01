@@ -444,7 +444,7 @@ class Voutput{
 	// --------------------------------------------------------------------
 
 	public function get_head(){
-
+		
 		return $this->_get_string_from_array( $this->_buffer[ 'head' ] );
 
 	}
@@ -460,12 +460,24 @@ class Voutput{
 	// --------------------------------------------------------------------
 
 	protected function _get_string_from_array( $array = NULL ){
-
-		if( is_array( $array ) ){
-
+		
+		if( is_array( $array ) AND ! empty( $array ) ){
+			
 			$output = '';
 			
-			$_array = array();
+			// keeping the stuff in order
+			
+			$_array = array(
+				
+				'meta' => NULL,
+				'title' => NULL,
+				'favicons' => NULL,
+				'stylesheets' => NULL,
+				'stylesheets_declarations' => NULL,
+				'scripts' => NULL,
+				'scripts_declarations' => NULL,
+				
+			);
 			
 			if ( isset( $array[ 'scripts' ] ) ) {
 				
@@ -476,26 +488,28 @@ class Voutput{
 			
 			$array = array_merge( $_array, $array );
 			
+// 			echo '<pre>' . htmlspecialchars( print_r( $array, TRUE ) ) . '</pre>'; exit;
+			
 			foreach ( $array as $key => $item ) {
-
+				
 				if ( is_string( $item ) ){
-
+					
 					$output .= $item;
-
+					
 				}
 				else if ( is_array( $item ) ){
-
+					
 					$output .= $this->_get_string_from_array( $item );
-
+					
 				}
-
+				
 			}
-
+			
 			return $output;
-
+			
 		}
 		else return '';
-
+		
 	}
-
+	
 }
