@@ -14,7 +14,7 @@
    width="32"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="icon-readmore.svg">
+   sodipodi:docname="icon-close.svg">
   <defs
      id="defs8" />
   <sodipodi:namedview
@@ -59,18 +59,19 @@
     </rdf:RDF>
   </metadata>
   <rect
-     y="4.9999995"
-     x="15"
+     y="11.627417"
+     x="-1"
      height="22"
      width="2"
      id="rect2998"
-     style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+     style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" />
   <rect
      style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
      id="rect2996"
      width="2"
      height="22"
-     x="-17"
-     y="4.9999995"
-     transform="matrix(0,-1,1,0,0,0)" />
+     x="-23.627417"
+     y="-11"
+     transform="matrix(-0.70710678,-0.70710678,0.70710678,-0.70710678,0,0)" />
 </svg>

@@ -1,0 +1,289 @@
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Modules
+ ---------------------------------------------------------
+ */
+
+.module-wrapper{
+	
+	position: relative;
+	
+}
+.module-wrapper .module-title{
+	
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->display_inline_block(); ?>
+	padding-top: <?= VUI_SPACING / 2; ?>em;
+	padding-bottom: <?= VUI_SPACING / 2; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	vertical-align: middle;
+	width: 100%;
+	
+	border-bottom: 5px solid <?= $vui->colors->vui_site_fg->rgba_s( 31 ); ?>;
+	text-align: left;
+	
+}
+.module-wrapper .module-title h1,
+.module-wrapper .module-title h1 *,
+.module-wrapper .module-title h2,
+.module-wrapper .module-title h2 *,
+.module-wrapper .module-title h3,
+.module-wrapper .module-title h3 *,
+.module-wrapper .module-title h4,
+.module-wrapper .module-title h4 *,
+.module-wrapper .module-title h5,
+.module-wrapper .module-title h5 *,
+.module-wrapper .module-title h6,
+.module-wrapper .module-title h6 *{
+	
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	
+}
+.module-wrapper .module-title h1,
+.module-wrapper .module-title h2,
+.module-wrapper .module-title h3,
+.module-wrapper .module-title h4,
+.module-wrapper .module-title h5,
+.module-wrapper .module-title h6{
+	
+	<?= $vui->css->display_inline_block(); ?>
+	min-height: 48px;
+	vertical-align: middle;
+	width: 100%;
+	margin: 0;
+	
+}
+
+.module-wrapper .module-content{
+	
+	position: relative;
+	
+}
+.module-wrapper .module-read-more{
+	
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	font-size: <?= ( $min + ( $diff * 2 ) ) . $meas_unit; ?>;
+	font-weight: 100;
+	line-height: normal;
+	<?= $vui->css->display_inline_block(); ?>
+	padding-bottom: <?= VUI_SPACING / 2; ?>em;
+	padding-top: <?= VUI_SPACING / 2; ?>em;
+	margin-top: <?= VUI_SPACING; ?>em;
+	vertical-align: middle;
+	width: 100%;
+	
+	border-top: 5px solid <?= $vui->colors->vui_site_fg->rgba_s( 31 ); ?>;
+	text-align: right;
+	
+}
+.module-wrapper .module-read-more,
+.module-wrapper .module-read-more a{
+	
+}
+.module-wrapper .module-read-more a{
+	
+	color: <?= $vui->colors->vui_site_fg->lighten( 20, TRUE )->rgba_s(); ?>;
+	background: none;
+	
+}
+.module-wrapper .module-read-more a:hover{
+	
+	color: <?= $vui->colors->vui_site_fg->lighten( 20, TRUE )->darken( 20, TRUE )->rgba_s(); ?>;
+	background: none;
+	
+}
+.module-wrapper .module-read-more{
+	
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	
+}
+
+
+.announce .module-title,
+.gplus-module .module-title,
+.instagram-module .module-title,
+.instagram_snapwidget-module .module-title,
+.facebook-module .module-title,
+.contact-module .module-title,
+.calendar .module-title,
+.poll-module .module-title,
+.college .module-title {
+	
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	
+	background-size: 48px 48px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: calc( 48px + <?= VUI_SPACING; ?>em );
+	border-bottom-color: <?= $vui->colors->vui_site_fg->rgba_s( 31 ); ?>;
+	
+}
+.announce .module-title {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-announce', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.facebook-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.instagram-module .module-title,
+.instagram_snapwidget-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-instagram', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.facebook-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.contact-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-contact', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.calendar .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.poll-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-poll', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+.college .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-college', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	
+}
+
+
+
+
+<?php
+	
+	$_colors = array(
+		
+		'red',
+		'green',
+		'orange',
+		'yellow',
+		'blue',
+		'purple',
+		
+	);
+	
+?>
+
+<?php foreach ( $_colors as $color ) { ?>
+
+/* -------- <?= $color; ?> color -------- */
+
+.<?= $color; ?>.announce .module-title{
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+	padding-left: calc( 48px + <?= VUI_SPACING; ?>em );
+	border-bottom-color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s( 31 ); ?>;
+	
+}
+
+.<?= $color; ?>.announce .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-announce', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.facebook-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.instagram-module .module-title,
+.<?= $color; ?>.instagram_snapwidget-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-instagram', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.facebook-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.contact-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-contact', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.calendar .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.poll-module .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-poll', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+.<?= $color; ?>.college .module-title{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-college', $vui->colors->{ 'vui_' . $color }->rgba_s() ); ?>);
+	
+}
+
+
+.<?= $color; ?> .module-title h1,
+.<?= $color; ?> .module-title h1 *,
+.<?= $color; ?> .module-title h2,
+.<?= $color; ?> .module-title h2 *,
+.<?= $color; ?> .module-title h3,
+.<?= $color; ?> .module-title h3 *,
+.<?= $color; ?> .module-title h4,
+.<?= $color; ?> .module-title h4 *,
+.<?= $color; ?> .module-title h5,
+.<?= $color; ?> .module-title h5 *,
+.<?= $color; ?> .module-title h6,
+.<?= $color; ?> .module-title h6 *{
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+}
+.<?= $color; ?> .module-read-more,
+.<?= $color; ?> .module-read-more a{
+	
+}
+.<?= $color; ?> .module-read-more{
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	border-top-color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s( 31 ); ?>;
+	
+}
+.<?= $color; ?> .module-read-more a{
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+	background: none;
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+}
+.<?= $color; ?> .read-more a:hover{
+	
+	background: none;
+	color: <?= $vui->colors->{ 'vui_' . $color }->darken( 20, TRUE )->rgba_s(); ?>;
+	
+}
+
+<?php } ?>
+
+	
+/*
+ ---------------------------------------------------------
+ Modules
+ ---------------------------------------------------------
+ *********************************************************
+ */

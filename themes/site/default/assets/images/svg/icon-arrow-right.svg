@@ -14,7 +14,7 @@
    width="48"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="icon-facebook.svg">
+   sodipodi:docname="icon-arrow-right.svg">
   <defs
      id="defs8" />
   <sodipodi:namedview
@@ -29,14 +29,22 @@
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      id="namedview6"
-     showgrid="false"
-     inkscape:zoom="4.9166565"
-     inkscape:cx="-6.5085377"
-     inkscape:cy="24.00005"
+     showgrid="true"
+     inkscape:zoom="13.906405"
+     inkscape:cx="11.860964"
+     inkscape:cy="24.39318"
      inkscape:window-x="-5"
      inkscape:window-y="26"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2995"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -51,7 +59,9 @@
   </metadata>
   <path
      inkscape:connector-curvature="0"
-     d="M 24.000033,4.0000912 C 12.9543,4.0000912 4,12.954258 4,24.000091 c 0,11.045583 8.9543,20 20.000033,20 C 35.045692,44.000091 44,35.045674 44,24.000091 44,12.954341 35.0457,4.0000079 24.000033,4.0000079 z m 2.02343,9.2391668 2.968229,0 0,3.712416 -1.856222,0 c -1.387267,0 -1.479951,0.512584 -1.479951,1.479917 v 1.856167 h 3.36124 l -0.393011,3.712416 H 25.655519 V 34.761008 H 21.207406 V 24.000174 h -2.224099 v -3.712416 h 2.224099 v -2.224084 c 0,-3.025416 1.2524,-4.824333 4.816057,-4.824416 z"
-     style="color:#000000;fill:#3165a6;fill-opacity:1;fill-rule:nonzero;enable-background:accumulate"
-     id="path5853" />
+     id="rect4021"
+     d="m 30.567703,24.670411 -1.41421,1.4142 L 17.839781,37.398333 16.42557,35.984134 27.739273,24.670411 16.425567,13.356703 l 1.414212,-1.4142 11.313714,11.313708 z"
+     style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.74558342;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     sodipodi:nodetypes="ccccccccc"
+	  class="vui_change_color" />
 </svg>
