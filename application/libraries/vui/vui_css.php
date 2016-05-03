@@ -207,6 +207,59 @@ class Vui_css extends Vui{
 			// Return our CSS
 			return $this->_minify( $css );
 			
+		}
+		
+		return FALSE;
+		
+	}
+	function column_count( $value = '2' ) {
+		
+		if ( $value ){
+			
+			$css = '';
+			
+			$css .= "-moz-column-count: $value;";
+			$css .= "-webkit-column-count: $value;";
+			$css .= "column-count: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
+			
+		}
+		
+		return FALSE;
+		
+	}
+	function column_gap( $value = '1px' ) {
+		
+		if ( $value ){
+			
+			$css = '';
+			
+			$css .= "-moz-column-gap: $value;";
+			$css .= "-webkit-column-gap: $value;";
+			$css .= "column-gap: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
+			
+		}
+		
+		return FALSE;
+		
+	}
+	function break_inside( $value = 'avoid' ) {
+		
+		if ( $value ){
+			
+			$css = '';
+			
+			$css .= "-webkit-column-break-inside: $value;";
+			$css .= "page-break-inside: $value;";
+			$css .= "break-inside: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
 			
 		}
 		
