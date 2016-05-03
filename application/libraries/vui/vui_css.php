@@ -194,7 +194,7 @@ class Vui_css extends Vui{
 	}
 	function transform_style( $value = 'preserve-3d' ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -214,7 +214,7 @@ class Vui_css extends Vui{
 	}
 	function column_count( $value = '2' ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -232,7 +232,7 @@ class Vui_css extends Vui{
 	}
 	function column_gap( $value = '1px' ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -250,7 +250,7 @@ class Vui_css extends Vui{
 	}
 	function break_inside( $value = 'avoid' ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -268,7 +268,7 @@ class Vui_css extends Vui{
 	}
 	function backface_visibility( $value = 'hidden' ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -295,7 +295,7 @@ class Vui_css extends Vui{
 	}
 	function transform_origin( $value = '50% 50%', $minify = TRUE ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -315,7 +315,7 @@ class Vui_css extends Vui{
 	}
 	function user_select( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -341,7 +341,7 @@ class Vui_css extends Vui{
 	}
 	function transform( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -362,7 +362,7 @@ class Vui_css extends Vui{
 	}
 	function animation( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -383,7 +383,7 @@ class Vui_css extends Vui{
 	}
 	function animation_delay( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -404,7 +404,7 @@ class Vui_css extends Vui{
 	}
 	function animation_timing_function( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
@@ -425,7 +425,7 @@ class Vui_css extends Vui{
 	}
 	function animation_iteration_count( $value = NULL ) {
 		
-		if ( $value ){
+		if ( isset( $value ) ) {
 			
 			$css = '';
 			
