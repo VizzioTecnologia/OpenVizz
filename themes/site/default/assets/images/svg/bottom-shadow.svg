@@ -17,8 +17,8 @@
    id="svg2"
    style="overflow:visible"
    preserveAspectRatio="none"
-   inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="top-bottom.svg">
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="bottom-shadow.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -31,14 +31,18 @@
      inkscape:window-width="1920"
      inkscape:window-height="1023"
      id="namedview13"
-     showgrid="false"
-     inkscape:zoom="14.750001"
-     inkscape:cx="14.746926"
-     inkscape:cy="9.5280403"
+     showgrid="true"
+     inkscape:zoom="20.859651"
+     inkscape:cx="-1.609866"
+     inkscape:cy="10.351346"
      inkscape:window-x="-10"
      inkscape:window-y="35"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4140" />
+  </sodipodi:namedview>
   <defs
      id="defs4">
     <linearGradient
@@ -46,31 +50,35 @@
        class="vui_change_color">
       <stop
          offset="0"
-         style="stop-color:#000000;stop-opacity:0.13725491"
+         style="stop-color:#000000;stop-opacity:1"
          id="stop3021" />
       <stop
-         id="stop3029"
-         style="stop-color:#000000;stop-opacity:0.10617271"
-         offset="0.17813708" />
+         id="stop4142"
+         style="stop-color:#000000;stop-opacity:0.961"
+         offset="0.06250005" />
       <stop
-         offset="0.3785235"
-         style="stop-color:#000000;stop-opacity:0.06836429"
+         id="stop3029"
+         style="stop-color:#000000;stop-opacity:0.737"
+         offset="0.1875001" />
+      <stop
+         offset="0.37500018"
+         style="stop-color:#000000;stop-opacity:0.4463807"
          id="stop3023" />
       <stop
          id="stop3027"
-         style="stop-color:#000000;stop-opacity:0.02655126"
-         offset="0.6717813" />
+         style="stop-color:#000000;stop-opacity:0.17225201"
+         offset="0.6250003" />
       <stop
          offset="1"
          style="stop-color:#5e3915;stop-opacity:0"
          id="stop3025" />
     </linearGradient>
     <radialGradient
-       cx="-273.9743"
-       cy="-807.63397"
+       cx="-268.68903"
+       cy="-807.63403"
        r="206.5"
-       fx="-273.9743"
-       fy="-807.63397"
+       fx="-268.68903"
+       fy="-807.63403"
        id="radialGradient2995"
        xlink:href="#linearGradient3019"
        gradientUnits="userSpaceOnUse"
@@ -84,16 +92,13 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <rect
-     width="16"
-     height="16"
-     x="3.0737306e-06"
-     y="-15.999993"
-     id="rect5173"
-     style="fill:url(#radialGradient2995);fill-opacity:1;fill-rule:nonzero;stroke:none"
-     transform="scale(1,-1)" />
+  <path
+     transform="scale(1,-1)"
+     style="opacity:0.36500005;fill:url(#radialGradient2995);fill-opacity:1;fill-rule:nonzero;stroke:none"
+     d="m 3.0737306e-6,-15.999993 15.9999999262694,0 0,15.9999996757202 -15.9999999262694,0 z"
+     id="rect5173" />
 </svg>

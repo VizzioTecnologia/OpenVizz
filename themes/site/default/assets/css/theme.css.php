@@ -40,6 +40,7 @@ include( 'reset.css' );
 // include( 'fonts.css' );
 include( 'font_icons.css' );
 include( 'html.css' );
+include( 'tooltips.css' );
 
 include( 'inputs.css' );
 include( 'buttons.css' );

@@ -25,13 +25,19 @@
 }
 
 
-html{
-
+html,
+.vui body,
+body.vui {
+	
+	color: <?= VUI_DEFAULT_FONT_COLOR; ?>;
+	
 	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
-
+	background-image: url(<?= $vui->svg_file( 'site_bg_1', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	background-repeat: repeat;
+	
 }
 .vui body,
-body.vui{
+body.vui {
 
 	position: relative;
 	display: block;
@@ -40,10 +46,6 @@ body.vui{
 	font-size: <?= VUI_DEFAULT_FONT_SIZE; ?>;
 	line-height: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
 	font-weight: <?= VUI_DEFAULT_FONT_WEIGHT; ?>;
-	color: <?= VUI_DEFAULT_FONT_COLOR; ?>;
-	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
-	background-image: url(<?= $vui->svg_file( 'site_bg_1', $vui->colors->vui_site_fg->rgba_s() ); ?>);
-	background-repeat: repeat;
 	
 }
 
@@ -257,7 +259,7 @@ body.vui{
 .vui h4,
 .vui h5,
 .vui h6{
-
+	
 	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
 	color: <?= VUI_SEC_FONT_COLOR; ?>;
 	font-size: <?= ( $min + ( $diff * 5 ) ) . $meas_unit; ?>;
@@ -265,7 +267,9 @@ body.vui{
 	line-height: normal;
 	margin-top: <?= VUI_SPACING / 2; ?>em;
 	margin-bottom: <?= VUI_SPACING / 2; ?>em;
-
+	
+	text-transform: uppercase;
+	
 }
 .vui h1{
 
@@ -432,11 +436,11 @@ body.vui{
 
 		margin-top: <?= VUI_SPACING; ?>em;
 		margin-bottom: <?= VUI_SPACING; ?>em;
-		margin-left: <?= VUI_SPACING; ?>em;
+		margin-left: <?= VUI_SPACING * 2; ?>em;
 
-		padding-left: <?= VUI_SPACING / 2; ?>em;
+		padding-left: 0;
 		list-style-type: disc;
-		list-style-position: inside;
+		list-style-position: outside;
 
 	}
 		.vui li li{
