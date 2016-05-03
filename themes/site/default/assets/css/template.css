@@ -1,6 +1,4 @@
 
-
-
 .vui.mobile .no-mobile {
 	
 	display: none !important;
@@ -760,7 +758,7 @@ $logo_height = 90;
 		
 		background: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
 		
-		<?= $vui->css->border_radius( '0 0 50px 0' ) ?>
+		<?= $vui->css->border_radius( '0 0 25px 0' ) ?>
 		
 		border: <?= VUI_SPACING / 2; ?>em solid <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
 		
@@ -808,7 +806,10 @@ $logo_height = 90;
 	}
 	#top-menu.menu-open .menu-switch {
 		
-		left: calc( 50% - 24px );
+		left: calc( 50% - 48px );
+		
+		top: 0;
+		
 		width: 48px;
 		height: 48px;
 		
@@ -817,6 +818,8 @@ $logo_height = 90;
 		background-size: 70% auto;
 		
 		border: <?= VUI_SPACING / 2; ?>em solid <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+		
+		<?= $vui->css->border_radius( '100% 0 0 100%' ) ?>
 		
 	}
 	#top-menu.menu-open .menu-switch:hover {
@@ -889,7 +892,7 @@ $logo_height = 90;
 	#top-menu .menu-module ul.menu li a,
 	#top-menu .menu-module ul.menu li li a {
 		
-		padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING * 1.5; ?>em;
+		padding: <?= VUI_SPACING; ?>em <?= VUI_SPACING * 1.5; ?>em;
 		
 	}
 	#top-menu .menu-module ul.menu > li > a:before,
@@ -933,235 +936,13 @@ $logo_height = 90;
 	}
 	
 	
-	/*#top-menu ul.menu,
-	#top-menu ul.menu li,
-	#top-menu ul.menu a,
-	#top-menu ul.menu ul {
-		
-		position: relative;
-		display: block;
-		overflow: visible;
-		background: none;
-		
-	}
-	#top-menu ul.menu ul {
-		
-		display: block;
-		
-		padding: 0;
-		
-		opacity: 1;
-		overflow: visible;
-		height: auto;
-		
-		z-index: 1;
-		
-		<?= $vui->css->transition( 'none' ) ?>
-		<?= $vui->css->box_shadow( 'none' ); ?>
-		
-		<?= $vui->css->transform( 'rotate( 0deg ) translate( 0,0 ) scale( 1 )' ); ?>
-		
-	}
-	#top-menu > ul.menu {
-		
-		background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
-		background-repeat: no-repeat, no-repeat;
-		background-position: center center, center center;
-		background-size: auto auto, 100% 100%;
-
-		opacity: 0;
-
-		color: <?= $vui->colors->vui_base->get_ro_color()->rgba_s(); ?>;
-
-		width: 100%;
-		height: 100%;
-
-		padding: 64px;
-		margin: 0;
-
-		<?= $vui->css->box_shadow( '0 0 0 transparent' ); ?>
-		<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ) ?>
-
-		border-left: 0 solid <?= $vui->colors->vui_base->rgba_s(); ?>;
-
-		<?= $vui->css->transition( 'all 0.5s ease-in-out' ) ?>
-
-	}
-	#top-menu:hover > ul {
-
-		opacity: 1;
-
-		width: auto;
-		height: auto;
-		padding-left: 0;
-		padding-right: 0;
-		padding-top: <?= VUI_SPACING; ?>em;
-		padding-bottom: <?= VUI_SPACING; ?>em;
-		margin: <?= VUI_SPACING; ?>em;
-		margin-left: <?= VUI_SPACING * 2; ?>em;
-		border-left: 0.2em solid <?= $vui->colors->vui_base->rgba_s(); ?>;
-
-		<?= $vui->css->box_shadow( '0 0.5em ' . ( VUI_SPACING * 2 ) . 'em ' . $vui->colors->vui_base->darken( 20, TRUE )->rgba_s( 100 ) ); ?>
-
-	}
-		#top-menu ul.menu li li ul,
-		#top-menu li:hover > ul,
-		#top-menu ul.menu li li:hover ul {
-
-			position: relative;
-			left: auto;
-			display: block;
-
-			padding: 0;
-			margin: 0;
-
-			opacity: 1;
-			overflow: visible;
-			height: auto;
-
-			z-index: 1;
-
-			<?= $vui->css->transform( 'rotate( 0deg ) translate( 0,0 ) scale( 1 )' ); ?>
-
-		}
-	#top-menu ul li {
-
-
-
-	}
-	#top-menu > ul.menu > li:after {
-
-		content: '';
-		position: relative;
-		display: block;
-		width: 100%;
-		height: 0;
-		border-bottom: thin solid <?= $vui->colors->vui_base->darken( 10, TRUE )->rgba_s(); ?>;
-
-		background: <?= $vui->colors->vui_base->darken( 10, TRUE )->rgba_s(); ?>;
-
-	}
-	#top-menu li a,
-	#top-menu > ul.menu > li > a {
-
-		text-transform: none;
-		line-height: normal;
-		height: auto;
-		white-space: normal;
-
-	}
-	#top-menu > ul.menu > li > a:before {
-
-		content: '';
-
-		position: absolute;
-		left: 1em;
-		top: 50%;
-		margin-top: -1em;
-
-		width: 2em;
-		height: 2em;
-
-		background: <?= $vui->colors->vui_base->darken( 10, TRUE )->rgba_s(); ?>;
-
-		<?= $vui->css->border_radius( '100%' ); ?>
-
-		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
-
-		opacity: 0;
-
-		z-index: -1;
-
-	}
-	#top-menu > ul.menu > li.current > a:before,
-	#top-menu > ul.menu > li > a:hover:before,
-	#top-menu > ul.menu > li:hover > a:before,
-	#top-menu > ul.menu > li.parent > a:hover:before,
-	#top-menu > ul.menu > li.parent:hover > a:before,
-	#top-menu > ul.menu > li.parent:hover > a:hover:before,
-
-	#top-menu > ul.menu li.current > a:before,
-	#top-menu > ul.menu li > a:hover:before,
-	#top-menu > ul.menu li:hover > a:before,
-	#top-menu > ul.menu li.parent > a:hover:before,
-	#top-menu > ul.menu li.parent:hover > a:before,
-	#top-menu > ul.menu li.parent:hover > a:hover:before {
-
-		left: 0;
-		top: 0;
-
-		width: 100%;
-		height: 100%;
-		margin-top: 0;
-
-		background: <?= $vui->colors->vui_base->darken( 10, TRUE )->rgba_s(); ?>;
-
-		<?= $vui->css->border_radius( 0 ); ?>
-
-		opacity: 1;
-
-	}
-	#top-menu li.parent > a {
-
-		padding-right: <?= VUI_SPACING * 1.5; ?>em;
-
-	}
-	#top-menu ul.menu li.parent > a:after {
-
-		display: none;
-
-	}
-	#top-menu li.hash-link:hover > a,
-	#top-menu li:hover > a[href="#"],
-	#top-menu li.hash-link,
-	#top-menu li.hash-link > a,
-	#top-menu li > a[href="#"] {
-
-		display: none;
-
-	}
-	#top-menu > ul.menu > li > a,
-	#top-menu li a,
-	#top-menu li li a {
-
-		background: transparent;
-		color: <?= $vui->colors->vui_base->get_ro_color()->rgba_s(); ?>;
-		padding: <?= VUI_SPACING / 1.5; ?>em <?= VUI_SPACING * 1.5; ?>em;
-
-	}
-	#top-menu li li a {
-
-	}
-	#top-menu li.current > a,
-	#top-menu li.current:hover > a,
-	#top-menu li:hover > a,
-	#top-menu li a:hover,
-	#top-menu li:hover + a {
-
-		color: <?= $vui->colors->vui_base->darken( 10, TRUE )->get_ro_color()->rgba_s(); ?>;
-
-	}
-	#top-menu li.current li.current > a,
-	#top-menu li li a:hover {
-		
-	}
-	#top-menu ul.menu a {
-
-		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
-
-		white-space: normal;
-	}*/
-
 	#top-menu .menu-module li {
 	
 	}
 	
 	#top-menu .menu-module ul.menu > li > a .menu-item-content {
 		
-/* 				border-left: thin dashed <?= $vui->colors->vui_left_menu_level_1_fg->rgba_s(); ?>; */
-		
 		font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
-		font-style: italic;
 		
 	}
 	
@@ -1190,7 +971,7 @@ $logo_height = 90;
 	
 	#top-menu.menu-open .menu-switch {
 		
-		left: calc( 80% - 24px );
+		left: calc( 80% - 48px );
 		
 	}
 	
@@ -1206,7 +987,7 @@ $logo_height = 90;
 	
 	#top-menu.menu-open .menu-switch {
 		
-		left: calc( 100% - 48px - <?= VUI_SPACING; ?>em );
+		left: calc( 100% - 48px );
 		
 	}
 	

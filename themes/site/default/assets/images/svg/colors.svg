@@ -23,11 +23,11 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="2224.235"
-     inkscape:cy="1428.9148"
+     inkscape:zoom="1"
+     inkscape:cx="3056.921"
+     inkscape:cy="1885.6754"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg2"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1023"
@@ -1189,187 +1189,9 @@
        y="837.3623"
        clip-path="url(#clipPath5202)"
        inkscape:label="vui_color" />
-  </g>
-  <g
-     transform="translate(572,-1319.4347)"
-     id="g4415"
-     style="fill:#0076b1;fill-opacity:1">
-    <path
-       inkscape:label="vui_color"
-       sodipodi:nodetypes="cccccccc"
-       inkscape:connector-curvature="0"
-       id="vui_tooltip_bg"
-       d="m 1458.9999,1439.3622 304,0 0,142 -181.2021,0 -38.1837,24.0416 0,-24.0416 -84.6142,0 z"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#003b59;fill-opacity:0.91621983;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.47227192px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
-       x="1477.8108"
-       y="1475.1523"
-       id="vui_tooltip_fg"
-       sodipodi:linespacing="125%"
-       inkscape:label="vui_color"
-       transform="scale(1.0033763,0.99663506)"><tspan
-         sodipodi:role="line"
-         id="tspan3891-8-02-3"
-         x="1477.8108"
-         y="1475.1523">Tooltips text color</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       inkscape:label="vui_color"
-       id="vui_tooltip_border"
-       d="m 1458,1438.375 0,1 0,142 0,1 1,0 83.625,0 0,23.0312 0,1.8126 1.5312,-0.9688 37.9376,-23.875 180.9062,0 1,0 0,-1 0,-142 0,-1 -1,0 -304,0 -1,0 z m 1,1 304,0 0,142 -181.1875,0 -38.1875,24.0312 0,-24.0312 -84.625,0 0,-142 z"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#003b59;fill-opacity:0.91621983;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate" />
     <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_box_level_2_bg"
-       width="524.56738"
-       height="335.33514"
-       x="2153.1897"
-       y="329.67264"
-       inkscape:label="vui_color" />
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_box_level_2_fg"
-       y="358.83307"
-       x="2171.2371"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="358.83307"
-         x="2171.2371"
-         id="tspan4447-6"
-         sodipodi:role="line">vui_menu_box_level_2_fg</tspan></text>
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_level_2_bg"
-       width="482.56738"
-       height="51.335144"
-       x="2177.7163"
-       y="376.12943"
-       inkscape:label="vui_color" />
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_level_2_fg"
-       y="407.94098"
-       x="2201.8127"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="407.94098"
-         x="2201.8127"
-         id="tspan4447-6-3"
-         sodipodi:role="line">vui_menu_level_2_fg</tspan></text>
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:0.00392157;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_level_1_bg"
-       width="250.56738"
-       height="51.335144"
-       x="2154.7163"
-       y="264.1293"
-       inkscape:label="vui_color" />
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_level_1_fg"
-       y="295.92755"
-       x="2177.8159"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#2b313c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="295.92755"
-         x="2177.8159"
-         id="tspan4447-6-3-2"
-         sodipodi:role="line">vui_menu_level_1_fg</tspan></text>
-    <rect
-       inkscape:label="vui_color"
-       y="264.1293"
-       x="2405.2837"
-       height="51.335144"
-       width="269.56738"
-       id="vui_menu_level_1_bg_hover"
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#224082;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#224082;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.63948196;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_level_1_bg_active"
-       width="269.56738"
-       height="51.335144"
-       x="2674.8511"
-       y="264.1293"
-       inkscape:label="vui_color" />
-    <text
-       transform="scale(1.0001194,0.99988062)"
-       inkscape:label="vui_color"
-       xml:space="preserve"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       x="2429.4639"
-       y="295.92755"
-       id="vui_menu_level_1_fg_hover"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4778"
-         x="2429.4639"
-         y="295.92755">vui_menu_level_1_fg_hover</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_level_1_fg_active"
-       y="295.92755"
-       x="2698.999"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="295.92755"
-         x="2698.999"
-         id="tspan4447-6-3-2-0"
-         sodipodi:role="line">vui_menu_level_1_fg_active</tspan></text>
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_level_2_bg_hover"
-       width="482.56738"
-       height="51.335144"
-       x="2177.7163"
-       y="427.46451"
-       inkscape:label="vui_color" />
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_level_2_fg_hover"
-       y="459.28217"
-       x="2201.8127"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="459.28217"
-         x="2201.8127"
-         id="tspan4447-6-3-9"
-         sodipodi:role="line">vui_menu_level_2_fg_hover</tspan></text>
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="vui_menu_level_2_bg_active"
-       width="482.56738"
-       height="51.335144"
-       x="2177.7163"
-       y="478.79959"
-       inkscape:label="vui_color" />
-    <text
-       sodipodi:linespacing="125%"
-       id="vui_menu_level_2_fg_active"
-       y="510.62347"
-       x="2201.8127"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       xml:space="preserve"
-       inkscape:label="vui_color"
-       transform="scale(1.0001194,0.99988062)"><tspan
-         y="510.62347"
-         x="2201.8127"
-         id="tspan4447-6-3-9-4"
-         sodipodi:role="line">vui_menu_level_2_fg_active</tspan></text>
-    <rect
-       y="2414.3303"
-       x="-984.29578"
+       y="1094.8956"
+       x="-412.29578"
        height="130.93294"
        width="132.18343"
        id="vui_error"
@@ -1381,23 +1203,199 @@
        id="vui_success"
        width="132.18343"
        height="130.93294"
-       x="-806.73596"
-       y="2414.3303" />
+       x="-234.73596"
+       y="1094.8956" />
     <rect
        inkscape:label="vui_color"
        style="fill:#f2da51;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.09307149;stroke-opacity:0.17353198"
        id="vui_warning"
        width="132.18343"
        height="130.93294"
-       x="-617.33893"
-       y="2414.3303" />
+       x="-45.338924"
+       y="1094.8956" />
     <rect
        inkscape:label="vui_color"
        style="fill:#65a3d8;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.09307149;stroke-opacity:0.17353198"
        id="vui_info"
        width="132.18343"
        height="130.93294"
-       x="-431.88757"
-       y="2414.3303" />
+       x="140.1124"
+       y="1094.8956" />
+    <g
+       id="g4416">
+      <path
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#003b59;fill-opacity:0.91621985;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+         d="m 2030.9999,119.9275 304,0 0,142 -181.2021,0 -38.1837,24.0416 0,-24.0416 -84.6142,0 z"
+         id="vui_tooltip_bg"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:label="vui_color" />
+      <text
+         transform="scale(1.0033763,0.99663506)"
+         inkscape:label="vui_color"
+         sodipodi:linespacing="125%"
+         id="vui_tooltip_fg"
+         y="151.26285"
+         x="2047.886"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.47227192px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="151.26285"
+           x="2047.886"
+           id="tspan3891-8-02-3"
+           sodipodi:role="line">Tooltips text color</tspan></text>
+      <path
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#003b59;fill-opacity:0.91621985;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+         d="m 2030,118.9403 0,1 0,142 0,1 1,0 83.625,0 0,23.0312 0,1.8126 1.5312,-0.9688 37.9376,-23.875 180.9062,0 1,0 0,-1 0,-142 0,-1 -1,0 -304,0 -1,0 z m 1,1 304,0 0,142 -181.1875,0 -38.1875,24.0312 0,-24.0312 -84.625,0 0,-142 z"
+         id="vui_tooltip_border"
+         inkscape:label="vui_color"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
+  <rect
+     inkscape:label="vui_color"
+     y="-989.76208"
+     x="2725.1897"
+     height="335.33514"
+     width="524.56738"
+     id="vui_menu_box_level_2_bg"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="2743.1687"
+     y="-960.75916"
+     id="vui_menu_box_level_2_fg"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6"
+       x="2743.1687"
+       y="-960.75916">vui_menu_box_level_2_fg</tspan></text>
+  <rect
+     inkscape:label="vui_color"
+     y="-943.3053"
+     x="2749.7163"
+     height="51.335144"
+     width="482.56738"
+     id="vui_menu_level_2_bg"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="2773.7444"
+     y="-911.65125"
+     id="vui_menu_level_2_fg"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6-3"
+       x="2773.7444"
+       y="-911.65125">vui_menu_level_2_fg</tspan></text>
+  <rect
+     inkscape:label="vui_color"
+     y="-1055.3054"
+     x="2726.7163"
+     height="51.335144"
+     width="250.56738"
+     id="vui_menu_level_1_bg"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:0.00392157;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#2b313c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="2749.7476"
+     y="-1023.6647"
+     id="vui_menu_level_1_fg"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6-3-2"
+       x="2749.7476"
+       y="-1023.6647">vui_menu_level_1_fg</tspan></text>
+  <rect
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#224082;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     id="vui_menu_level_1_bg_hover"
+     width="269.56738"
+     height="51.335144"
+     x="2977.2837"
+     y="-1055.3054"
+     inkscape:label="vui_color" />
+  <rect
+     inkscape:label="vui_color"
+     y="-1055.3054"
+     x="3246.8511"
+     height="51.335144"
+     width="269.56738"
+     id="vui_menu_level_1_bg_active"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#224082;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.63948196;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     sodipodi:linespacing="125%"
+     id="vui_menu_level_1_fg_hover"
+     y="-1023.6647"
+     x="3001.3955"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     xml:space="preserve"
+     inkscape:label="vui_color"
+     transform="scale(1.0001194,0.99988062)"><tspan
+       y="-1023.6647"
+       x="3001.3955"
+       id="tspan4778"
+       sodipodi:role="line">vui_menu_level_1_fg_hover</tspan></text>
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="3270.9307"
+     y="-1023.6647"
+     id="vui_menu_level_1_fg_active"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6-3-2-0"
+       x="3270.9307"
+       y="-1023.6647">vui_menu_level_1_fg_active</tspan></text>
+  <rect
+     inkscape:label="vui_color"
+     y="-891.97021"
+     x="2749.7163"
+     height="51.335144"
+     width="482.56738"
+     id="vui_menu_level_2_bg_hover"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="2773.7444"
+     y="-860.31006"
+     id="vui_menu_level_2_fg_hover"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6-3-9"
+       x="2773.7444"
+       y="-860.31006">vui_menu_level_2_fg_hover</tspan></text>
+  <rect
+     inkscape:label="vui_color"
+     y="-840.63513"
+     x="2749.7163"
+     height="51.335144"
+     width="482.56738"
+     id="vui_menu_level_2_bg_active"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#c52d31;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+  <text
+     transform="scale(1.0001194,0.99988062)"
+     inkscape:label="vui_color"
+     xml:space="preserve"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.51191139px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     x="2773.7444"
+     y="-808.96875"
+     id="vui_menu_level_2_fg_active"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447-6-3-9-4"
+       x="2773.7444"
+       y="-808.96875">vui_menu_level_2_fg_active</tspan></text>
 </svg>

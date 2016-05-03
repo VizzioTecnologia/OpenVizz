@@ -52,11 +52,11 @@ $( document ).on( 'ready', function(){
 	
 	responsive_width();
 	
-	$( '.menu-module' ).prepend( '<div class="menu-switch">' );
+	$( '#top-menu' ).addClass( 'menus-wrapper' ).prepend( '<div class="menu-switch">' );
 	
 	$( '.menu-switch' ).on( 'click', function(){
 		
-		$( this ).closest( '.menu-module' ).toggleClass( 'menu-open' );
+		$( this ).closest( '.menus-wrapper' ).toggleClass( 'menu-open' );
 		$( 'body' ).toggleClass( 'menu-open' );
 		
 	});
