@@ -9,7 +9,8 @@
 .vui .button,
 .vui .btn,
 .vui select,
-.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el {
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el,
+.vui .read-more-link {
 	
 	<?= DEFAULT_BUTTONS_STYLESHEET; ?>
 	
@@ -42,7 +43,10 @@
 .vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:hover,
 .vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:focus,
 .vui .vui-interactive-el-wrapper.vui-btn-wrapper > .el:active,
-.vui .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el {
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el,
+.vui .read-more-link:hover,
+.vui .read-more-link:active,
+.vui .read-more-link:focus {
 	
 	color: <?= $vui->colors->vui_button_active_fg->rgba_s(); ?>;
 	

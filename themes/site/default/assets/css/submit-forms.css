@@ -1,0 +1,1409 @@
+
+<?php
+	
+	$preload_size = 48;
+	
+	$articles_horizontal_margins = VUI_SPACING * 2;
+	$max_columns = 20;
+	
+?>
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Submit forms
+ ---------------------------------------------------------
+ */
+
+.vui .loading {
+	
+	position: relative;
+	display: block;
+	text-align: center;
+	
+	width: 100%;
+	height: 48px;
+	
+	background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+	
+}
+.vui .full-screen-loading {
+	
+	position: fixed;
+	
+	display:block;
+	
+	top: 0;
+	left: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	background-color: <?= $vui->colors->vui_base->rgba_s( 200 ); ?>;
+	
+	z-index: 100000;
+	
+}
+.vui .loading * {
+	
+	display: none;
+	
+}
+.vui .loading:before,
+.vui .loading:after {
+	
+	content: '';
+	width: 24px;
+	height: 24px;
+	background-color: <?= $vui->colors->vui_base->get_ro_color( 48 )->rgba_s(); ?>;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	
+	margin-left: -12px;
+	margin-top: -12px;
+	
+	
+	<?= $vui->css->animation( 'vui_preload 2.0s infinite ease-in-out' ); ?>
+	<?= $vui->css->border_radius( '50%' ); ?>
+	<?= $vui->css->opacity( '1' ); ?>
+	
+}
+
+.vui .loading:after{
+	
+	<?= $vui->css->animation_delay( '-1.0s' ); ?>
+	background-color: <?= $vui->colors->vui_base_alt->rgba_s(); ?>;
+	
+}
+
+
+<?php
+	
+	$vui_preload_css = '
+		
+		0%{
+			
+			' . $vui->css->opacity( '0' ) . '
+			' . $vui->css->transform( 'scale( 0.0 ) translateX( -4em )' ) . '
+			
+		}
+		
+		50%{
+			
+			' . $vui->css->opacity( '1' ) . '
+			' . $vui->css->transform( 'scale( 1.0 ) translateX( 0 )' ) . '
+			
+		}
+		
+		100%{
+			
+			' . $vui->css->opacity( '0' ) . '
+			' . $vui->css->transform( 'scale( 0.0 ) translateX( 4em )' ) . '
+			
+		}
+		
+	';
+	
+?>
+
+<?= $vui->css->keyframes( 'vui_preload', $vui_preload_css ); ?>
+
+
+.submit-form #component-content{
+	
+}
+
+.submit-form .submit-form-field-wrapper{
+	
+	display: block;
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	width: 33.3333333%;
+	
+	padding: 0 <?= VUI_SPACING; ?>em;
+	
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+}
+.submit-form .loading .submit-form-field-wrapper{
+	
+	display: none;
+	
+}
+.submit-form .submit-form-field-control{
+	
+	display: block;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+.submit-form .vui-interactive-el-wrapper{
+	
+	<?= $vui->css->display_inline_block(); ?>
+	width: 100%;
+	text-align: left;
+	
+	<?= $vui->css->box_sizing(); ?>
+	
+}
+.submit-form .vui-interactive-el-wrapper > .el {
+	
+	width: 100%;
+	
+}
+.submit-form .submit-form-field-control-date .vui-interactive-el-wrapper{
+	
+}
+.submit-form .submit-form-field-control-date-dmy .vui-interactive-el-wrapper{
+	
+	width: 33.33333%;
+	
+}
+.submit-form .submit-form-field-control-date-dmy > select{
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS . ' 0 0 ' . VUI_DEFAULT_BORDER_RADIUS ); ?>
+	
+}
+.submit-form .submit-form-field-control-date-dmy > select + select{
+	
+	<?= $vui->css->border_radius( 0 ); ?>
+	
+}
+.submit-form .submit-form-field-control-date-dmy > select + select + select{
+	
+	<?= $vui->css->border_radius( '0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS . ' 0' ); ?>
+	
+}
+.submit-form .submit-form-field-control-date-dm .form-element,
+.submit-form .submit-form-field-control-date-dy .form-element,
+.submit-form .submit-form-field-control-date-my .form-element{
+	
+	width: 50%;
+	
+}
+.submit-form .submit-form-field-control-date-d .form-element,
+.submit-form .submit-form-field-control-date-m .form-element,
+.submit-form .submit-form-field-control-date-y .form-element{
+	
+	width: 100%;
+	
+}
+.submit-form .submit-form-field-wrapper label{
+	
+	text-align: left;
+	
+}
+.submit-form .submit-form-field-wrapper-html,
+.submit-form .submit-form-field-wrapper-textarea,
+.submit-form .submit-form-field-wrapper-button{
+	
+	width: 100%;
+	
+}
+.submit-form .submit-form-field-wrapper-button{
+	
+	width: 100%;
+	padding: 0;
+	
+}
+.submit-form .submit-form-field-wrapper-button,
+.submit-form .submit-form-field-wrapper-textarea{
+	
+}
+.submit-form .submit-form-field-wrapper-button .submit-form-field-control{
+	
+	text-align: right;
+	
+}
+.submit-form .submit-form-field-wrapper-button .vui-interactive-el-wrapper {
+	
+	text-align: center;
+	width: <?= 100 / 3; ?>%;
+	
+	padding: 0 <?= VUI_SPACING; ?>em;
+	
+}
+.submit-form .submit-form-field-wrapper-button .form-element{
+	
+}
+.submit-form .submit-form-field-wrapper-textarea .form-element{
+	
+	width: 100%;
+	
+}
+
+.submit-form .submit-form-field-description{
+	
+	font-size: 90%;
+	font-style: italic;
+	
+}
+
+
+
+<?= '@media screen and ( max-width: 1700px ) {'; ?>
+	
+	.content-disp-lcr .submit-form .submit-form-field-wrapper{
+		
+		width: 50%;
+		
+	}
+	.submit-form .submit-form-field-wrapper-button .form-element{
+		
+		width: 100%;
+		
+	}
+	
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-html,
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-textarea,
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button{
+		
+		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button .vui-interactive-el-wrapper {
+		
+		text-align: right;
+		
+		width: 50%;
+		
+	}
+	
+}
+
+
+<?= '@media screen and ( max-width: 960px ) {'; ?>
+	
+	.submit-form .submit-form-field-wrapper{
+		
+		width: 50%;
+		
+	}
+	.content-disp-lcr .submit-form .submit-form-field-wrapper{
+		
+		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper-button .form-element{
+		
+		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper-html,
+	.submit-form .submit-form-field-wrapper-textarea,
+	.submit-form .submit-form-field-wrapper-button{
+		
+		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button .vui-interactive-el-wrapper {
+		
+		width: 100%;
+		
+	}
+	
+}
+
+
+<?= '@media screen and ( max-width: 640px ) {'; ?>
+	
+	.submit-form .submit-form-field-wrapper{
+		
+		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper-html,
+	.submit-form .submit-form-field-wrapper-textarea,
+	.submit-form .submit-form-field-wrapper-button{
+		
+		width: 100%;
+		
+	}
+	
+}
+
+
+
+/* --------------- Users submits ----------------- */
+
+<?php
+	
+	$thumb_size_data_list = '96px';
+	
+?>
+
+
+.ud-data-schema-item {
+	
+	padding-left: <?= VUI_SPACING / 2; ?>em;
+	padding-right: <?= VUI_SPACING / 2; ?>em;
+	
+}
+.ud-data {
+	
+	position: relative;
+	
+	padding: <?= VUI_SPACING; ?>em 0;
+	margin: <?= VUI_SPACING; ?>em 0;
+	
+	border-bottom: thin dashed <?= $vui->colors->vui_site_fg->rgba_s( 50 ); ?>;
+	
+	width: 100%;
+	
+}
+.ud-data * {
+	
+	word-break: normal;
+	white-space: normal;
+	
+}
+.ud-data > .item {
+	
+	position: relative;
+	display: block;
+	
+	z-index: 1;
+	
+}
+.ud-data-schema-item:first-child,
+.ud-data-schema-item:last-child,
+.ud-data.has-ud-image > .item:not( .ud-images-wrapper ):not( .ud-event-datetimes-wrapper ):not( .ud-data-list-d-readmore-link-wrapper ) {
+	
+	padding-left: <?= VUI_SPACING; ?>em;
+	padding-right: <?= VUI_SPACING; ?>em;
+	
+}
+
+/* images */
+
+.ud-data.has-ud-image > .item.ud-images-wrapper {
+	
+	float: left;
+	width: calc( <?= $thumb_size_data_list; ?> + <?= VUI_SPACING; ?>em );
+	
+}
+.ud-data.has-ud-image > .item.ud-images-wrapper > .thumb {
+	
+	width: 100%;
+	margin: 0;
+	
+}
+.ud-data.has-ud-image > .item.ud-images-wrapper > .thumb > .s1 {
+	
+	max-height: 100%;
+	max-width: 100%;
+	display: block;
+	
+}
+.ud-data.has-ud-image > .item.ud-images-wrapper > .thumb > .s1 > .s2 img {
+	
+	max-width: 100%;
+	width: 100%;
+	
+}
+
+/* event datetime + image */
+
+.ud-data.has-ud-image.has-ud-event-datetime > .item.ud-images-wrapper {
+	
+	display: none;
+	
+}
+/*.ud-data.has-ud-image.has-ud-event-datetime > .item.ud-images-wrapper .thumb .s1 {
+	
+}
+.ud-data.has-ud-image.has-ud-event-datetime > .item.ud-images-wrapper * {
+	
+	position: absolute;
+	
+	left: 0;
+	top: 0;
+	
+	float: none;
+	
+	width: 100%;
+	height: 100%;
+	
+	padding: 0;
+	margin: 0;
+	
+	border: 0;
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>;
+	
+}*/
+
+/* event datetime */
+
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper {
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	min-height: <?= VUI_SPACING * 2 + 3; ?>em;
+	
+	padding: <?= VUI_SPACING; ?>em;
+	
+	background-color: <?= $vui->colors->vui_base->rgba_s( 10 ); ?>;
+	background-size: 50% auto;
+	background-position: left center;
+	
+	<?= $vui->css->box_shadow( '0 1px 15px ' . $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 10 ) . ', 0 0 50px ' . $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 30 ) ); ?>;
+	
+	z-index: 2;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:before,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:after {
+	
+	content: '';
+	
+	position: absolute;
+	
+	left: 50%;
+	top: calc( 50% - <?= VUI_SPACING; ?>em );
+	
+	float: none;
+	
+	width: 1em;
+	height: 0.5em;
+	
+	margin-left: -0.5em;
+	
+	background: white;
+	
+	<?= $vui->css->box_shadow( '0 0px 5px ' . $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 100 ) ); ?>;
+	
+	z-index: 3;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:after {
+	
+	top: calc( 50% + <?= VUI_SPACING / 2; ?>em );
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .ud-data-prop > .title,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item {
+	
+	position: relative;
+	display: none;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .ud-data-prop > .value {
+	
+	width: 100%;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime {
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item {
+	
+	position: relative;
+	
+	max-width: 50%;
+	
+	z-index: 2;
+	text-align: left;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime {
+	
+	font-size: 100%;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime {
+	
+	z-index: 0;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.day-d,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	display: block;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .day-d {
+	
+	float: left;
+	
+	font-size: 3em;
+	line-height: 100%;
+	
+	height: 100%;
+	
+	margin-left: 0;
+	
+	color: <?= $vui->colors->vui_base->get_ro_color( 60 )->rgba_s(); ?>;
+	
+}
+.ud-data.has-ud-event-datetime.has-ud-image .item.ud-event-datetimes-wrapper .normal-datetime .day-d {
+	
+	<?= $vui->css->text_shadow( '0 0 5px ' . $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 100 ) . ', 0 0 50px ' . $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 255 ) ); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	display: block;
+	
+	width: 50%;
+	
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	margin-left: 50%;
+	
+	text-align: right;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	margin-bottom: <?= VUI_SPACING / 3; ?>em;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B {
+	
+	font-size: 80%;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	font-size: 130%;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B::first-letter {
+	
+	text-transform: uppercase;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:after {
+	
+	content: '';
+	
+	position: absolute;
+	
+	left: 50%;
+	top: 0;
+	
+	width: 50%;
+	height: 100%;
+	
+	z-index: 1;
+	
+	background: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before {
+	
+	left: 0;
+	
+	background: <?= $vui->colors->vui_base->rgba_s( 150 ); ?>;
+	
+}
+
+
+/* title */
+
+.ud-data.has-ud-title > .item.ud-titles-wrapper {
+	
+	z-index: 2;
+	
+}
+.ud-data.has-ud-title > .item.ud-titles-wrapper > .ud-data-prop > .value {
+	
+	margin-top: 0;
+	font-size: 140%;
+	
+}
+
+
+
+
+
+/* content */
+
+
+
+/* other info */
+
+.ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+}
+.ud-data > .item.ud-other-infos-wrapper .ud-other-infos-table {
+	
+	width: 100%;
+	
+}
+.ud-data-list .ud-data > .item.ud-other-infos-wrapper .ud-data-prop {
+	
+	font-size: 80%;
+	
+}
+.ud-data > .item.ud-other-infos-wrapper .ud-data-prop .title,
+.ud-data > .item.ud-other-infos-wrapper .ud-data-prop .value {
+	
+	padding: 0;
+	border: none;
+	vertical-align: top;
+	
+	line-height: normal;
+	
+}
+
+
+.ud-data > .item.ud-other-infos-wrapper .ud-data-prop .title {
+	
+	font-style: italic;
+	
+	word-break: normal;
+	white-space: nowrap;
+	
+	width: 1px;
+	
+}
+.ud-data > .item.ud-other-infos-wrapper .ud-data-prop .value {
+	
+	padding-left: <?= VUI_SPACING; ?>em;
+	font-weight: normal;
+	
+	width: calc( 100% - 1px );
+	
+}
+.ud-data > .item .ud-data-prop.ud-data-prop-type-url > .value,
+.ud-data > .item .ud-data-prop.ud-data-prop-type-url > .value *,
+.ud-data > .item .ud-data-prop.ud-data-prop-type-email > .value,
+.ud-data > .item .ud-data-prop.ud-data-prop-type-email > .value * {
+	
+	word-break: break-all;
+	
+}
+
+
+
+
+.ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper {
+	
+	position: absolute;
+	
+	right: <?= VUI_SPACING; ?>em;
+	bottom: <?= VUI_SPACING; ?>em;
+	
+	width: <?= VUI_SPACING * 3; ?>em;
+	height: <?= VUI_SPACING * 3; ?>em;
+	
+	overflow: hidden;
+	
+	text-indent: -100000px;
+		
+	<?= $vui->css->border_radius( '100%' ) ?>
+	
+	border: none !important;
+	
+	margin: 0;
+	
+	z-index: 3;
+	
+}
+.desktop .ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper {
+	
+	display: none;
+	
+}
+.desktop .ud-data-list .ud-data:hover > .item.ud-data-list-d-readmore-link-wrapper {
+	
+	display: block;
+	
+}
+.ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper * {
+	
+	position: absolute;
+	
+	left: 0;
+	top: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	background: none;
+	
+	border: none !important;
+	
+}
+.ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper a {
+	
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_link->rgba_s() ); ?>);
+	background-position: center center;
+	
+}
+.ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper:hover a {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_link_hover->rgba_s() ); ?>);
+	
+}
+
+
+
+
+/* general */
+
+.ud-data.has-ud-content > .item.ud-contents-wrapper,
+.ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+	width: 100%;
+	
+}
+.ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper,
+.ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper,
+.ud-data-schema-item:not( .ud-no-other-infos ) .ud-data.has-ud-content > .item.ud-contents-wrapper,
+.ud-data-schema-item:not( .ud-no-contents ) .ud-data.has-ud-other_info.has-ud-content > .item.ud-other-infos-wrapper {
+	
+	width: 40%;
+	
+	float: left;
+	
+}
+.ud-data.has-ud-title.has-ud-event-datetime > .item.ud-event-datetimes-wrapper,
+.ud-data-schema-item:not( .ud-no-contents ) .ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+	clear: left;
+	
+}
+.ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper {
+	
+	margin-right: <?= VUI_SPACING; ?>em;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+}
+.ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+	padding-right: <?= VUI_SPACING; ?>em;
+	
+}
+.ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper,
+.ud-data-schema-item:not( .ud-no-other-infos ) .ud-data.has-ud-content.has-ud-other_info > .item.ud-contents-wrapper {
+	
+	width: 60%;
+	
+	float: right;
+	clear: right;
+	
+	padding-left: <?= VUI_SPACING; ?>em;
+	
+	margin-left: -<?= VUI_SPACING; ?>em;
+	
+}
+
+
+<?= '@media screen and ( max-width: 1920px ) {' ?>
+	
+	.ud-data-schema-list.items-list:not( .total-items-list-1 ) .ud-data-list .ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper,
+	.ud-data-schema-list.items-list:not( .total-items-list-1 ) .ud-data-list .ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper {
+		
+		display: block;
+		
+		width: 100%;
+		
+		float: none;
+		
+	}
+	
+}
+
+<?= '@media screen and ( max-width: 1200px ) {' ?>
+	
+	.ud-data-schema-list.items-list:not( .total-items-list-1 ) .ud-data-list .ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper,
+	.ud-data-schema-list.items-list:not( .total-items-list-1 ) .ud-data-list .ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper {
+		
+		display: block;
+		
+		width: 40%;
+		
+		float: left;
+		
+	}
+	.ud-data-schema-list.items-list:not( .total-items-list-1 ) .ud-data-list .ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper {
+		
+		width: 60%;
+		
+		float: right;
+		
+	}
+	
+}
+
+
+.ud-data.ud-no-images > .item.ud-images-wrapper,
+.ud-no-images .ud-data > .item.ud-images-wrapper,
+
+.ud-data.ud-no-titles > .item.ud-titles-wrapper,
+.ud-no-titles .ud-data > .item.ud-titles-wrapper,
+
+.ud-data.ud-no-event-datetimes > .item.ud-event-datetimes-wrapper,
+.ud-no-event-datetimes .ud-data > .item.ud-event-datetimes-wrapper,
+
+.ud-data.ud-no-contents > .item.ud-contents-wrapper,
+.ud-no-contents .ud-data > .item.ud-contents-wrapper,
+
+.ud-data.ud-no-other-infos > .item.ud-other-infos-wrapper,
+.ud-no-other-infos .ud-data > .item.ud-other-infos-wrapper,
+
+.ud-data.ud-no-status > .item.ud-status-wrapper,
+.ud-no-status .ud-data > .item.ud-status-wrapper {
+	
+	display: none;
+	
+}
+.ud-data.ud-no-images > .item.ud-event-datetimes-wrapper,
+.ud-no-images .ud-data > .item.ud-event-datetimes-wrapper {
+	
+	background-image: none !important;
+	
+}
+
+
+
+
+
+/* ud dl minimal */
+
+.ud-dl-minimal .ud-data {
+	
+	<?= $vui->css->display_inline_box(); ?>
+	width: 50%;
+	
+	padding: <?= VUI_SPACING / 2; ?>em 0;
+	margin: <?= VUI_SPACING / 2; ?>em 0;
+	
+	<?= $vui->css->box_orient( 'vertical' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-images-wrapper,
+.ud-dl-minimal .ud-data > .item.ud-titles-wrapper,
+.ud-dl-minimal .ud-data > .item.ud-event-datetimes-wrapper,
+.ud-dl-minimal .ud-data > .item.ud-contents-wrapper,
+.ud-dl-minimal .ud-data > .item.ud-other-infos-wrapper,
+.ud-dl-minimal .ud-data > .item.ud-status-wrapper {
+	
+	<?= $vui->css->display_box(); ?>
+	
+}
+
+.ud-dl-minimal .ud-data > .item.ud-images-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '1' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-titles-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '2' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-event-datetimes-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '3' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-contents-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '4' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-other-infos-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '5' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data > .item.ud-status-wrapper {
+	
+	<?= $vui->css->box_ordinal_group( '5' ); ?>;
+	
+}
+
+.ud-dl-minimal .ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper,
+.ud-dl-minimal .ud-data.has-ud-content > .item.ud-contents-wrapper,
+.ud-dl-minimal .ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+	width: 100%;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime > .item.ud-event-datetimes-wrapper {
+	
+	float: none;
+	
+	min-height: initial;
+	
+	padding: 0;
+	
+	margin-right: 0;
+	margin-bottom: <?= VUI_SPACING / 2; ?>em;
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:before,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:after {
+	
+	display: none;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-other_info > .item.ud-other-infos-wrapper {
+	
+	padding-right: <?= VUI_SPACING; ?>em;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-title.has-ud-event-datetime > .item.ud-titles-wrapper,
+.ud-dl-minimal .ud-data-schema-item:not( .ud-no-other-infos ) .ud-data.has-ud-content.has-ud-other_info > .item.ud-contents-wrapper {
+	
+	width: 100%;
+	
+	float: none;
+	clear: none;
+	
+	padding-left: <?= VUI_SPACING; ?>em;
+	
+	margin-left: -<?= VUI_SPACING; ?>em;
+	
+}
+
+
+<?= '@media screen and ( max-width: 1024px ) {' ?>
+	
+	.ud-dl-minimal .ud-data {
+		
+		width: 100%;
+		
+	}
+	
+}
+
+<?= '@media screen and ( max-width: 1200px ) {' ?>
+	
+}
+
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.day-d,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	position: initial;
+	display: initial;
+	
+	float: initial;
+	
+	width: initial;
+	height: initial;
+	max-width: initial;
+	
+	padding: initial;
+	margin: initial;
+	
+	font-size: initial;
+	line-height: initial;
+	
+	padding: initial;
+	margin: initial;
+	text-align: initial;
+	
+	vertical-align: initial;
+	
+	color: initial;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime {
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	font-size: 90%;
+	
+	padding: <?= VUI_SPACING / 2; ?>em;
+	margin: 0;
+	
+	vertical-align: initial;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.day-d,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.month-B,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .item.year-Y {
+	
+	position: relative;
+	display: initial;
+	
+	float: initial;
+	
+	width: initial;
+	height: initial;
+	max-width: initial;
+	
+	font-size: inherit;
+	line-height: inherit;
+	
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	
+	vertical-align: inherit;
+	
+	color: <?= $vui->colors->vui_base->get_ro_color( 60 )->rgba_s(); ?>;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .relative-datetime {
+	
+	color: inherit;
+	
+	padding: <?= VUI_SPACING / 2; ?>em;
+	
+}
+
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before,
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:after {
+	
+	display: none;
+	
+	left: 0;
+	
+	width: 100%;
+	
+	background: <?= $vui->colors->vui_base->rgba_s( 150 ); ?>;
+	
+}
+.ud-dl-minimal .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before {
+	
+	display: block;
+	
+	left: 0;
+	
+}
+
+.ud-dl-minimal .ud-data.ud-no-images > .item.ud-images-wrapper,
+.ud-dl-minimal .ud-no-images .ud-data > .item.ud-images-wrapper,
+
+.ud-dl-minimal .ud-data.ud-no-titles > .item.ud-titles-wrapper,
+.ud-dl-minimal .ud-no-titles .ud-data > .item.ud-titles-wrapper,
+
+.ud-dl-minimal .ud-data.ud-no-event-datetimes > .item.ud-event-datetimes-wrapper,
+.ud-dl-minimal .ud-no-event-datetimes .ud-data > .item.ud-event-datetimes-wrapper,
+
+.ud-dl-minimal .ud-data.ud-no-contents > .item.ud-contents-wrapper,
+.ud-dl-minimal .ud-no-contents .ud-data > .item.ud-contents-wrapper,
+
+.ud-dl-minimal .ud-data.ud-no-other-infos > .item.ud-other-infos-wrapper,
+.ud-dl-minimal .ud-no-other-infos .ud-data > .item.ud-other-infos-wrapper,
+
+.ud-dl-minimal .ud-data.ud-no-status > .item.ud-status-wrapper,
+.ud-dl-minimal .ud-no-status .ud-data > .item.ud-status-wrapper {
+	
+	display: none;
+	
+}
+.ud-dl-minimal .ud-data.ud-no-images > .item.ud-event-datetimes-wrapper,
+.ud-dl-minimal .ud-no-images .ud-data > .item.ud-event-datetimes-wrapper {
+	
+	background-image: none !important;
+	
+}
+
+
+
+
+
+
+/* Centros */
+
+.centros .legendas-status-centros{
+	
+	position: relative;
+	display: block;
+	
+}
+.centros .legenda-status-centro{
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING / 2; ?>em calc( 32px + <?= VUI_SPACING / 2; ?>em );
+	background: url(<?= $vui->svg_file( 'icon-centro-filiado', $vui->colors->vui_centro_filiado->rgba_s() ); ?>) no-repeat left center;
+	background-size: auto 100%;
+	
+}
+.centros .legenda-status-centro-agregado{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-centro-agregado', $vui->colors->vui_centro_agregado->rgba_s() ); ?>);
+	
+}
+.centros .legenda-status-centro-nao-renovado{
+	
+	background-image: url(<?= $vui->svg_file( 'icon-centro-nao-renovado', $vui->colors->vui_centro_nao_renovado->rgba_s() ); ?>);
+	
+}
+
+
+.centros .ud-data-item-value-centro-filiado .ud-status-wrapper .user-submit-status-centro-filiado .title,
+.centros .ud-data-item-value-centro-agregado .ud-status-wrapper .user-submit-status-centro-agregado .title,
+.centros .ud-data-item-value-nao-renovado .ud-status-wrapper .user-submit-status-nao-renovado .title {
+	
+	display: none;
+	
+}
+.centros .ud-data-item-value-centro-filiado .ud-status-wrapper .user-submit-status-centro-filiado .value,
+.centros .ud-data-item-value-centro-agregado .ud-status-wrapper .user-submit-status-centro-agregado .value,
+.centros .ud-data-item-value-nao-renovado .ud-status-wrapper .user-submit-status-nao-renovado .value {
+	
+	position: relative;
+	
+}
+.centros .ud-data-item-value-centro-filiado .ud-status-wrapper .user-submit-status-centro-filiado .value:before,
+.centros .ud-data-item-value-centro-agregado .ud-status-wrapper .user-submit-status-centro-agregado .value:before,
+.centros .ud-data-item-value-nao-renovado .ud-status-wrapper .user-submit-status-nao-renovado .value:before {
+	
+	content: '';
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	margin-right: <?= VUI_SPACING; ?>em;
+	
+	width: 48px;
+	height: 48px;
+	background: url(<?= $vui->svg_file( 'icon-centro-filiado', $vui->colors->vui_centro_filiado->rgba_s() ); ?>) no-repeat left center;
+	background-size: auto 100%;
+	
+	vertical-align: middle;
+	
+}
+.centros .ud-data .ud-titles-wrapper h4{
+	
+	margin-bottom: 0;
+	
+}
+.centros .ud-data-item-value-centro-agregado .ud-status-wrapper .user-submit-status-centro-agregado .value:before {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-centro-agregado', $vui->colors->vui_centro_agregado->rgba_s() ); ?>);
+	
+}
+.centros .ud-data-item-value-nao-renovado .ud-status-wrapper .user-submit-status-nao-renovado .value:before {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-centro-nao-renovado', $vui->colors->vui_centro_nao_renovado->rgba_s() ); ?>);
+	
+}
+
+
+
+
+
+
+
+
+/* Eventos / Cursos externos */
+
+.ud-data-schema-list.home-eventos-cursos-externos-wrapper .ud-data-schema-item .heading {
+	
+	<?= $vui->css->display_inline_block(); ?>
+	padding-left: calc( 48px + <?= VUI_SPACING; ?>em );
+	padding-top: <?= VUI_SPACING / 2; ?>em;
+	padding-bottom: <?= VUI_SPACING / 2; ?>em;
+	vertical-align: middle;
+	width: 100%;
+	
+	border-bottom: 5px solid;
+	
+}
+.ud-data-schema-list.home-eventos-cursos-externos-wrapper .ud-data-schema-item .heading h3 {
+	
+	<?= $vui->css->display_inline_block(); ?>
+	min-height: 48px;
+	vertical-align: middle;
+	width: 100%;
+	margin: 0;
+	
+}
+
+/* 	Eventos	 */
+
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data {
+	
+	border-bottom: thin dashed <?= $vui->colors->vui_eventos_fg->rgba_s( 50 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .heading h3,
+.ud-data-schema-list .ud-data-schema-item.eventos .heading h3 a {
+	
+	color: <?= $vui->colors->vui_eventos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos {
+	
+	background-color: <?= $vui->colors->vui_eventos_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_eventos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before {
+	
+	background-color: <?= $vui->colors->vui_eventos_fg->rgba_s( 200 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:after {
+	
+	background-color: <?= $vui->colors->vui_eventos_bg->lighten( 10, TRUE )->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data.has-ud-event-datetime.has-ud-image .item.ud-event-datetimes-wrapper .normal-datetime .day-d {
+	
+	color: <?= $vui->colors->vui_eventos_bg->rgba_s(); ?>;
+	
+	<?= $vui->css->text_shadow( '0 0 5px ' . $vui->colors->vui_eventos_fg->rgba_s( 100 ) . ', 0 0 50px ' . $vui->colors->vui_eventos_fg->rgba_s() ); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper {
+	
+	<?= $vui->css->box_shadow( '0 1px 15px ' . $vui->colors->vui_eventos_bg->darken( 30, TRUE )->rgba_s( 10 ) . ', 0 0 50px ' . $vui->colors->vui_eventos_bg->darken( 30, TRUE )->rgba_s( 30 ) ); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:before,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:after {
+	
+	<?= $vui->css->box_shadow( '0 0px 5px ' . $vui->colors->vui_eventos_bg->darken( 30, TRUE )->rgba_s( 100 ) ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data a {
+	
+	color: <?= $vui->colors->vui_eventos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .heading {
+	
+	background: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->vui_eventos_fg->rgba_s(), 'vui_change_color' ); ?>) no-repeat left center;
+	border-bottom-color: <?= $vui->colors->vui_eventos_fg->rgba_s( 31 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .heading h3 {
+	
+	color: <?= $vui->colors->vui_eventos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper a {
+	
+	background-color: <?= $vui->colors->vui_eventos_bg->rgba_s( 100 ); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_eventos_fg->rgba_s() ); ?>);
+	background-position: center center;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.eventos .ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper:hover a {
+	
+	background-color: <?= $vui->colors->vui_eventos_fg->rgba_s( 200 ); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_eventos_bg->rgba_s() ); ?>);
+	
+}
+
+/* 	Cursos externos	 */
+
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data {
+	
+	border-bottom-color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s( 50 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .heading h3,
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .heading h3 a {
+	
+	color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos {
+	
+	background-color: <?= $vui->colors->vui_cursos_externos_bg->rgba_s(); ?>;
+	
+	color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:before {
+	
+	background-color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s( 200 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime:after {
+	
+	background-color: <?= $vui->colors->vui_cursos_externos_bg->lighten( 7, TRUE )->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper .normal-datetime .day-d {
+	
+	color: <?= $vui->colors->vui_cursos_externos_bg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data.has-ud-event-datetime.has-ud-image .item.ud-event-datetimes-wrapper .normal-datetime .day-d {
+	
+	<?= $vui->css->text_shadow( '0 0 5px ' . $vui->colors->vui_cursos_externos_fg->rgba_s( 100 ) . ', 0 0 50px ' . $vui->colors->vui_cursos_externos_fg->rgba_s() ); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper {
+	
+	<?= $vui->css->box_shadow( '0 1px 15px ' . $vui->colors->vui_cursos_externos_bg->darken( 30, TRUE )->rgba_s( 10 ) . ', 0 0 50px ' . $vui->colors->vui_cursos_externos_bg->darken( 30, TRUE )->rgba_s( 30 ) ); ?>;
+	
+}
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:before,
+.ud-data.has-ud-event-datetime .item.ud-event-datetimes-wrapper:after {
+	
+	<?= $vui->css->box_shadow( '0 0px 5px ' . $vui->colors->vui_cursos_externos_bg->darken( 30, TRUE )->rgba_s( 100 ) ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data a {
+	
+	color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .heading {
+	
+	background: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->vui_cursos_externos_fg->rgba_s(), 'vui_change_color' ); ?>) no-repeat left center;
+	border-bottom-color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s( 31 ); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .heading h3 {
+	
+	color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s(); ?>;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper a {
+	
+	background-color: <?= $vui->colors->vui_cursos_externos_bg->rgba_s( 100 ); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_cursos_externos_fg->rgba_s() ); ?>);
+	background-position: center center;
+	
+}
+.ud-data-schema-list .ud-data-schema-item.cursos-externos .ud-data-list .ud-data > .item.ud-data-list-d-readmore-link-wrapper:hover a {
+	
+	background-color: <?= $vui->colors->vui_cursos_externos_fg->rgba_s( 200 ); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-readmore', $vui->colors->vui_cursos_externos_bg->rgba_s() ); ?>);
+	
+}
+
+
+
+
+
+
+
+
+/* ------------------ */
+/* estilos direcionados à ANDE */
+
+.ud-no-other-info-modalidade .user-submit-content-modalidade {
+	
+	display: none;
+	
+}

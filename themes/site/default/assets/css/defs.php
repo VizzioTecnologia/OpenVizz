@@ -19,8 +19,10 @@ if ( ! defined( 'VUI_SEC_BORDER' ) ) define( 'VUI_SEC_BORDER', '1px solid ' . $v
 
 if ( ! defined( 'VUI_DEFAULT_BORDER_RADIUS' ) ) define( 'VUI_DEFAULT_BORDER_RADIUS', '0.25em' );
 
-if ( ! defined( 'VUI_DEFAULT_TRANSITION' ) ) define( 'VUI_DEFAULT_TRANSITION', 'all 0.2s ease-in-out' );
-
+if ( ! defined( 'VUI_D_TT' ) ) define( 'VUI_D_TT', '0.3s' ); // default transition time
+if ( ! defined( 'VUI_D_TTF' ) ) define( 'VUI_D_TTF', 'ease-in-out' ); // default transition timing function
+if ( ! defined( 'VUI_D_TS' ) ) define( 'VUI_D_TS', VUI_D_TT . ' ' . VUI_D_TTF ); // default transition suffix
+if ( ! defined( 'VUI_DEFAULT_TRANSITION' ) ) define( 'VUI_DEFAULT_TRANSITION', 'all ' . VUI_D_TS );
 
 if ( ! defined( 'VUI_DEFAULT_SITE_WIDTH' ) ) define( 'VUI_DEFAULT_SITE_WIDTH', '70%' );
 if ( ! defined( 'VUI_SITE_WIDTH_480_L' ) ) define( 'VUI_SITE_WIDTH_480_L', '95%' );

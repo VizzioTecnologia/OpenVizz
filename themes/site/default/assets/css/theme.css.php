@@ -55,6 +55,14 @@ if ( isset( $_GET[ 'fb' ] ) AND $_GET[ 'fb' ] == 1 ) {
 include( 'pagination.css' );
 include( 'modules.css' );
 include( 'template.css' );
+
+// top menu module
+if ( isset( $_GET[ 'tmm' ] ) AND $_GET[ 'tmm' ] == 1 ) {
+	
+	include( 'module-top-menu.css' );
+	
+}
+
 include( 'articles.css' );
 include( 'submit-forms.css' );
 include( 'contacts.css' );

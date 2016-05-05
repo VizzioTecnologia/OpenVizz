@@ -11,6 +11,7 @@
 .vui ::-webkit-scrollbar{
 
 	width: 12px;
+	height: 12px;
 	border: none;
 	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
 

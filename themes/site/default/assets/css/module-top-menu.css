@@ -1,0 +1,695 @@
+
+/* ---------------------------------------------------- */
+/* Top menu */
+
+<?= '@media screen and ( min-width: 801px ) {' ?>
+	
+	#top-menu {
+		
+		position: relative;
+		<?= $vui->css->display_inline_block(); ?>
+		z-index: 3;
+		
+		width: calc( 100% - <?= $logo_width; ?>px );
+		
+		text-align: right;
+		
+	}
+	#top-menu .module-wrapper {
+		
+		<?= $vui->css->display_inline_block(); ?>
+		text-align: left;
+		
+	}
+	#top-menu .menu-module ul,
+	#top-menu .menu-module li {
+		
+		position: relative;
+		<?= $vui->css->display_inline_block() ?>
+		padding:0;
+		margin:0;
+		z-index:1;
+		
+	}
+	#top-menu .menu-module ul {
+		
+		padding: 0;
+		
+	}
+	#top-menu .menu-module > ul.menu {
+		
+		<?= $vui->css->display_inline_block() ?>
+		padding: 0;
+		
+	}
+	#top-menu .menu-module > ul.menu {
+		
+		text-align: left;
+		
+	}
+
+	#top-menu .menu-module li {
+		
+		overflow: hidden;
+		
+	}
+	#top-menu .menu-module li:hover {
+		
+		z-index: 1000;
+		overflow: visible;
+		
+	}
+	#top-menu .menu-module ul.menu ul {
+		
+		position:absolute;
+		top:100%;
+		left:0;
+		
+		text-align: left;
+		
+		background: <?= $vui->colors->vui_menu_box_level_2_bg->rgba_s(); ?>;
+		color: <?= $vui->colors->vui_menu_box_level_2_fg->rgba_s(); ?>;
+		
+		padding:0;
+		z-index: -11;
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+		<?= $vui->css->box_shadow( '0 0.5em 2.5em ' . $vui->colors->vui_base->darken( 20, TRUE )->rgba_s( 100 ) ); ?>
+		
+		<?= $vui->css->transform( 'rotate( 0deg ) translate( 0,-2em ) scale( 1 )' ); ?>
+		
+		opacity: 0;
+		overflow: hidden;
+		height: 0;
+		
+	}
+	#top-menu .menu-module ul.menu li li ul {
+		
+		position: absolute;
+		top: 0px;
+		left: 100%;
+		margin-top: -<?= VUI_SPACING; ?>em;
+		
+		<?= $vui->css->transform( 'rotate( 0deg ) translate( -2em,0 ) scale( 1 )' ); ?>
+		
+	}
+	#top-menu .menu-module li:hover > ul,
+	#top-menu .menu-module ul.menu li li:hover > ul {
+		
+		display: block;
+		
+		padding: <?= VUI_SPACING; ?>em 0;
+		
+		opacity: 1;
+		overflow: visible;
+		height: auto;
+		
+		z-index: 1;
+		
+		<?= $vui->css->transform( 'rotate( 0deg ) translate( 0,0 ) scale( 1 )' ); ?>
+		
+	}
+	#top-menu .menu-module > ul.menu > li {
+		
+		background: <?= $vui->colors->vui_menu_level_1_bg->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module li a {
+		
+		position: relative;
+		<?= $vui->css->display_inline_block() ?>
+		font-size: 100%;
+		text-transform: uppercase;
+		text-decoration: none;
+		text-shadow:none;
+		white-space:nowrap;
+		padding: <?= VUI_SPACING; ?>em;
+		z-index: 2;
+
+	}
+	#top-menu .menu-module > ul.menu > li > a {
+		
+		color: <?= $vui->colors->vui_menu_level_1_fg->rgba_s(); ?>;
+		
+		font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+		line-height: <?= $logo_height; ?>px;
+		height: <?= $logo_height; ?>px;
+		padding-top: 0;
+		padding-bottom: 0;
+		
+	}
+	#top-menu .menu-module > ul.menu > li > a:before {
+		
+		content: '';
+		position: absolute;
+		
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		
+		/* comment to stripe style */
+		top: auto;
+		bottom: calc( 100% / 2 - 1em - <?= VUI_SPACING; ?>em );
+		/* comment to stripe style */
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+		
+		background: <?= $vui->colors->vui_menu_level_1_bg->rgba_s(); ?>;
+		
+		opacity: 0;
+		
+		z-index: -1;
+		
+	}
+	#top-menu .menu-module > ul.menu > li.current > a:before,
+	#top-menu .menu-module > ul.menu > li > a:hover:before,
+	#top-menu .menu-module > ul.menu > li:hover > a:before {
+		
+		/* uncomment to stripe style */
+		left: 0%;
+		width: 100%;
+		height: 3px;
+		margin-top: -1.5px;
+		/* uncomment to stripe style */
+		
+		/* comment to stripe style
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		comment to stripe style */
+		
+		background: <?= $vui->colors->vui_menu_level_1_bg_active->rgba_s(); ?>;
+		
+		<?= $vui->css->border_radius( '0' ) ?>
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+		
+		opacity: 1;
+		
+	}
+	#top-menu .menu-module > ul.menu > li.parent > a:hover:before,
+	#top-menu .menu-module > ul.menu > li.parent:hover > a:before {
+		
+		/* uncomment to stripe style */
+		height: auto;
+		margin-top: 0;
+		top: 80%;
+		bottom: 0;
+		/* uncomment to stripe style */
+		
+		background: <?= $vui->colors->vui_menu_level_1_bg_hover->rgba_s(); ?>;
+		
+	}
+
+	/* comment to stripe style 
+	#top-menu .menu-module > ul.menu > li > a:hover:before,
+	#top-menu .menu-module > ul.menu > li:hover > a:before {
+		
+		background: <?= $vui->colors->vui_menu_level_1_bg_hover->rgba_s(); ?>;
+		
+	}
+	comment to stripe style */
+
+
+	#top-menu .menu-module ul.menu li.parent > a:after {
+		
+		content: '';
+		position: absolute;
+		
+		right: 1em;
+		top: 50%;
+		width: 0.333em;
+		height: 0.333em;
+		margin-top: -0.15em;
+		
+		<?= $vui->css->border_radius( '100%' ) ?>
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+		
+		background: <?= $vui->colors->vui_menu_level_1_fg->rgba_s(); ?>;
+		
+		opacity: 1;
+		
+	}
+	#top-menu .menu-module > ul.menu > li.current > a:after {
+		
+		background: <?= $vui->colors->vui_menu_level_1_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module > ul.menu > li > a:hover:after,
+	#top-menu .menu-module > ul.menu > li:hover > a:after,
+	#top-menu .menu-module > ul.menu > li.current > a:hover:after,
+	#top-menu .menu-module > ul.menu > li.current:hover > a:after,
+	#top-menu .menu-module > ul.menu > li.parent > a:hover:after,
+	#top-menu .menu-module > ul.menu > li.parent:hover > a:after {
+		
+		background: <?= $vui->colors->vui_menu_level_1_fg_hover->rgba_s(); ?>;
+		
+	}
+
+
+	#top-menu .menu-module ul.menu li li,
+	#top-menu .menu-module ul.menu li li a {
+		
+		text-transform: none;
+		display: block;
+		color: <?= $vui->colors->vui_menu_level_2_fg->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li {
+		
+		background: <?= $vui->colors->vui_menu_level_2_bg->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li a {
+		
+		padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING * 1.5; ?>em;
+		
+	}
+	#top-menu .menu-module ul.menu li.parent > a {
+		
+		padding-right: 2.3em;
+		
+	}
+	#top-menu .menu-module ul.menu li li a:before {
+		
+		content: '';
+		
+		position: absolute;
+		left: 1em;
+		top: 50%;
+		margin-top: -1em;
+		
+		width: 2em;
+		height: 2em;
+		
+		background: <?= $vui->colors->vui_menu_level_2_bg->rgba_s(); ?>;
+		
+		<?= $vui->css->border_radius( '100%' ); ?>
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+		
+		opacity: 0;
+		
+		z-index: -1;
+		
+	}
+	#top-menu .menu-module ul.menu li.current > a,
+	#top-menu .menu-module ul.menu li.current:hover > a,
+	#top-menu .menu-module ul.menu li:hover > a,
+	#top-menu .menu-module ul.menu li a:hover,
+	#top-menu .menu-module ul.menu > li:hover {
+		
+		color: <?= $vui->colors->vui_menu_level_1_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module > ul.menu > li:hover > a,
+	#top-menu .menu-module > ul.menu > li.current:hover > a {
+		
+		color: <?= $vui->colors->vui_menu_level_1_fg_hover->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a {
+		
+		color: <?= $vui->colors->vui_menu_level_2_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current:hover > a {
+		
+		color: <?= $vui->colors->vui_menu_level_2_fg_hover->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li a:hover,
+	#top-menu .menu-module ul.menu li li:hover > a {
+		
+		color: <?= $vui->colors->vui_menu_level_2_fg_hover->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a {
+		
+		color: <?= $vui->colors->vui_menu_level_2_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a:before,
+	#top-menu .menu-module ul.menu li li a:hover:before,
+	#top-menu .menu-module ul.menu li li:hover > a:before {
+		
+		left: 0;
+		top: 0;
+		
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		
+		background: <?= $vui->colors->vui_menu_level_2_bg_hover->rgba_s(); ?>;
+		
+		<?= $vui->css->border_radius( 0 ); ?>
+		
+		opacity: 1;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a:before {
+		
+		background: <?= $vui->colors->vui_menu_level_2_bg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a:hover:before,
+	#top-menu .menu-module ul.menu li li.current:hover > a:before {
+		
+		background: <?= $vui->colors->vui_menu_level_2_bg_hover->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.current > a:after {
+		
+		background: <?= $vui->colors->vui_menu_level_2_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li li.parent > a:hover:after,
+	#top-menu .menu-module ul.menu li li.parent:hover > a:after {
+		
+		background: <?= $vui->colors->vui_menu_level_2_fg_hover->rgba_s(); ?>;
+		
+	}
+
+}
+
+<?= '@media screen and ( max-width: 800px ) {' ?>
+	
+	#top-logo {
+		
+		float: none;
+		
+		width: 100%;
+		
+		text-align: center;
+		
+	}
+	
+	body.vui.menu-open {
+
+		overflow: hidden;
+		
+	}
+	#top-menu {
+		
+		position: fixed;
+		display: block;
+		left: 10px;
+		top: 10px;
+		width: 64px;
+		max-width: 100%;
+		height: 64px;
+		overflow: hidden;
+		
+		text-align: left;
+		
+		color: <?= $vui->colors->vui_base->get_ro_color()->rgba_s(); ?>;
+		
+		<?= $vui->css->transition( 'width ' . VUI_D_TS . ', height ' . VUI_D_TS . ', right ' . VUI_D_TS . ', background-color ' . VUI_D_TS . ', border-bottom-right-radius ' . VUI_D_TS . ', box-shadow ' . VUI_D_TS ) ?>
+		
+		z-index: 1000000;
+		
+		background-color: transparent;
+		
+		<?= $vui->css->border_radius( '0 0 0 0' ) ?>
+		
+	}
+	
+	#top-menu.menu-open {
+		
+		left: 0;
+		top: 0;
+		width: 50%;
+		height: auto;
+		max-height: 100%;
+		padding: 0;
+		overflow: auto;
+		
+		background: <?= $vui->colors->vui_r_menu_box_bg->rgba_s(); ?>;
+		
+		border: <?= VUI_SPACING / 2; ?>em solid <?= $vui->colors->vui_r_menu_box_border_color->rgba_s(); ?>;
+		
+		<?= $vui->css->box_shadow( '0 0.5em ' . ( VUI_SPACING * 2 ) . 'em ' . $vui->colors->vui_r_menu_fg->rgba_s( 100 ) ); ?>
+		
+		<?= $vui->css->border_radius( '0 0 25px 0' ) ?>
+		
+	}
+	#top-menu .menu-switch {
+		
+		content: '';
+		
+		position: fixed;
+		left: 10px;
+		top: 10px;
+		width: 64px;
+		height: 64px;
+		margin: 0;
+		
+		background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+		background-image: url( <?= $vui->svg_file( 'icon-menu', $vui->colors->vui_base->get_ro_color()->rgba_s() ); ?>);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 50% auto;
+		
+		<?= $vui->css->border_radius( '100%' ) ?>
+		
+		z-index: 2;
+		
+		<?= $vui->css->transition( 'left ' . VUI_D_TS . ', top ' . VUI_D_TS . ', width ' . VUI_D_TS . ', height ' . VUI_D_TS . ', border-radius ' . VUI_D_TS . ', background-size ' . VUI_D_TS . ', background-color ' . VUI_D_TS . ', background-image ' . VUI_D_TS . ', border ' . VUI_D_TS ) ?>
+		
+		border: 0 solid <?= $vui->colors->vui_base->rgba_s(); ?>;
+		
+		opacity: 1;
+		
+		<?= $vui->css->transform( 'rotate( 0deg ) translate( 0,0 ) scale( 1 )' ); ?>
+		
+		z-index: 2;
+		
+		<?= $vui->css->transform_style(); ?>
+		
+		cursor: pointer;
+		
+	}
+	#top-menu .menu-switch:hover {
+		
+		background-color: <?= $vui->colors->vui_base->lighten( 10, TRUE )->rgba_s(); ?>;
+		
+	}
+	#top-menu.menu-open .menu-switch {
+		
+		left: calc( 50% - 48px );
+		
+		top: 0;
+		
+		width: 48px;
+		height: 48px;
+		
+		background-color: <?= $vui->colors->vui_red->rgba_s(); ?>;
+		background-image: url( <?= $vui->svg_file( 'icon-close', $vui->colors->vui_red->get_ro_color()->rgba_s() ); ?>);
+		background-size: 70% auto;
+		
+		border: <?= VUI_SPACING / 2; ?>em solid <?= $vui->colors->vui_r_menu_box_border_color->rgba_s(); ?>;
+		
+		<?= $vui->css->border_radius( '100% 0 0 100%' ) ?>
+		
+	}
+	#top-menu.menu-open .menu-switch:hover {
+		
+		background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+		background-image: url( <?= $vui->svg_file( 'icon-close', $vui->colors->vui_base->get_ro_color()->rgba_s() ); ?>);
+		
+	}
+	
+	#top-menu .menu-module {
+		
+		display: none;
+		
+		z-index: 1;
+		
+	}
+	#top-menu.menu-open .menu-module {
+		
+		display: block;
+		
+		width: 100%;
+		max-height: 100%;
+		
+	}
+	
+	#top-menu .menu-module ul.menu {
+		
+		position: relative;
+		display: block;
+		
+		width: 100%;
+		max-height: 100%;
+		
+	}
+	#top-menu .menu-module ul.menu li,
+	#top-menu .menu-module ul.menu li a,
+	#top-menu .menu-module ul.menu ul,
+	#top-menu .menu-module ul.menu li a:before,
+	#top-menu .menu-module ul.menu li a:after {
+		
+		position: relative;
+		display: block;
+		margin: 0;
+		padding: 0;
+		line-height: 100%;
+		
+		white-space: initial;
+		
+		background: none;
+		color: <?= $vui->colors->vui_r_menu_box_fg->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li a,
+	#top-menu .menu-module ul.menu li li a {
+		
+		padding: <?= VUI_SPACING; ?>em <?= VUI_SPACING * 1.5; ?>em;
+		
+	}
+	#top-menu .menu-module ul.menu li a {
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+		
+	}
+	#top-menu .menu-module ul.menu li > a > span {
+		
+		position: relative;
+		z-index: 2;
+		
+	}
+	#top-menu .menu-module ul.menu > li > ul > li {
+		
+		margin-left: <?= VUI_SPACING * 2; ?>em;
+		
+	}
+	#top-menu .menu-module ul.menu li a:before,
+	#top-menu .menu-module ul.menu li a:after {
+		
+		content: '';
+		display: block;
+		z-index: 1;
+		
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+		
+	}
+	#top-menu .menu-module ul.menu li a:after {
+		
+		bottom: 0;
+		width: 3px;
+		
+		background: <?= $vui->colors->vui_r_menu_box_fg->rgba_s( 20 ); ?>;
+		
+		<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+		
+	}
+	#top-menu .menu-module ul.menu li a:hover,
+	#top-menu .menu-module ul.menu li:hover > a {
+		
+		color: <?= $vui->colors->vui_r_menu_box_fg->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li a:hover:before,
+	#top-menu .menu-module ul.menu li:hover > a:before {
+		
+		background: <?= $vui->colors->vui_r_menu_bg_hover->rgba_s( 20 ); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li > a:hover:after {
+		
+		width: 50%;
+		background: <?= $vui->colors->vui_r_menu_bg_hover->darken( 3, TRUE )->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li.current > a {
+		
+		color: <?= $vui->colors->vui_r_menu_fg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li.current > a:before {
+		
+		background: <?= $vui->colors->vui_r_menu_bg_active->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li > a:hover,
+	#top-menu .menu-module ul.menu li.current:hover > a {
+		
+		color: <?= $vui->colors->vui_r_menu_fg_hover->rgba_s(); ?>;
+		
+	}
+	#top-menu .menu-module ul.menu li > a:hover:before,
+	#top-menu .menu-module ul.menu li.current:hover > a:before {
+		
+		background: <?= $vui->colors->vui_r_menu_bg_hover->rgba_s(); ?>;
+		
+	}
+	
+	#top-menu .menu-module li {
+	
+	}
+	
+	#top-menu .menu-module ul.menu > li > a .menu-item-content {
+		
+		font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+		text-transform: uppercase;
+		
+	}
+	
+	#top-menu .menu-module li li {
+		
+		width: initial;
+		
+	}
+	
+	#top-menu .menu-module li li,
+	#top-menu .menu-module ul.menu ul{
+		
+		position: initial;
+		
+	}
+	
+}
+
+<?= '@media screen and ( max-width: 500px ) {' ?>
+	
+	#top-menu.menu-open {
+		
+		width: 80%;
+		
+	}
+	
+	#top-menu.menu-open .menu-switch {
+		
+		left: calc( 80% - 48px );
+		
+	}
+	
+}
+
+<?= '@media screen and ( max-width: 300px ) {' ?>
+	
+	#top-menu.menu-open {
+		
+		width: 100%;
+		<?= $vui->css->border_radius( '0' ) ?>
+		
+	}
+	
+	#top-menu.menu-open .menu-switch {
+		
+		left: calc( 100% - 48px );
+		
+	}
+	
+}
