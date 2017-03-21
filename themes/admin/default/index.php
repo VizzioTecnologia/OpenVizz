@@ -10,9 +10,8 @@
 			$this->voutput->append_head_script( 'jquery.ba-outside-events', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.ba-outside-events.min.js' );
 			$this->voutput->append_head_script( 'jquery.number', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.number.min.js' );
 			$this->voutput->append_head_script( 'js_numeral', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/numeral-js/numeral.js' );
-			$this->voutput->append_head_script( 'jquery.maskedinput', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.maskedinput.min.js' );
 			$this->voutput->append_head_script( 'jquery.maskMoney', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.maskMoney.js' );
-			$this->voutput->append_head_script( 'jquery.caret', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.caret.js' );
+// 			$this->voutput->append_head_script( 'jquery.caret', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.caret.js' );
 			$this->voutput->append_head_script( 'jquery.timer', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.timer.js' );
 			$this->voutput->append_head_script( 'jquery.switch', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.switch.min.js' );
 			$this->voutput->append_head_script( 'theme', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/functions.js' );

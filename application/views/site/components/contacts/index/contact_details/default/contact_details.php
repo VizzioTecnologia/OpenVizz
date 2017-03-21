@@ -18,32 +18,18 @@
 	
 	<div class="contact-wrapper">
 		
-		<?php if ( ( isset( $params[ 'contact_details_show_gmaps' ] ) AND $params[ 'contact_details_show_gmaps' ] ) AND ( isset( $params[ 'contact_details_map_gmaps_query' ] ) AND $params[ 'contact_details_map_gmaps_query' ] ) ) { ?>
-		
-		<div class="gmaps">
+		<?php if ( check_var( $params[ 'contact_details_show_gmaps' ] ) AND check_var( $params[ 'contact_details_map_gmaps_query' ] ) ) { ?>
 			
-			 <div class="inner">
+			<div class="gmaps">
 				
-				<iframe width="<?= ( isset( $params[ 'contact_details_map_gmaps_width' ] ) AND $params[ 'contact_details_map_gmaps_width' ] AND $params[ 'contact_details_map_gmaps_width' ] != 'auto' ) ? $params[ 'contact_details_map_gmaps_width' ] : 425; ?>" height="<?= ( isset( $params[ 'contact_details_map_gmaps_height' ] ) AND $params[ 'contact_details_map_gmaps_height' ] AND $params[ 'contact_details_map_gmaps_height' ] > 1 ) ? $params[ 'contact_details_map_gmaps_height' ] : 350; ?>" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=<?= $params[ 'contact_details_map_gmaps_query' ]; ?>&&amp;output=embed"></iframe>
-				
-				<div class="gmaps-link-container">
+				<div class="inner">
 					
-					<?php if ( isset( $params[ 'contact_details_show_gmaps_link' ] ) AND $params[ 'contact_details_show_gmaps_link' ] ) { ?>
-					
-					<a class="gmaps-link" href="https://maps.google.com/maps?q=<?= $params[ 'contact_details_map_gmaps_query' ]; ?>source=embed" <?= ( isset( $params[ 'contact_details_open_gmaps_link_target_blank' ] ) AND $params[ 'contact_details_open_gmaps_link_target_blank' ] ) ? 'target="_blank"' : ''; ?>>
-						
-						<?= ( isset( $params[ 'contact_details_open_gmaps_link_text' ] ) AND $params[ 'contact_details_open_gmaps_link_text' ] ) ? lang( $params[ 'contact_details_open_gmaps_link_text' ] ) : lang( 'open_larger_map' ); ?>
-						
-					</a>
-					
-					<?php } ?>
+					<?= $params[ 'contact_details_map_gmaps_query' ]; ?>
 					
 				</div>
 				
-			</div>
+			</div><?php
 			
-		</div><?php
-		
 		}
 		
 		 ?><div class="contact-info">
@@ -82,100 +68,130 @@
 				
 				<?php } ?>
 				
-				<?php if ( isset( $params[ 'contact_details_show_emails' ] ) AND $params[ 'contact_details_show_emails' ] AND $contact[ 'emails' ] ) { ?>
-				
-				<div id="contact-emails" class="contact-info-item">
+				<?php if ( check_var( $params[ 'contact_details_show_phones' ] ) AND check_var( $contact[ 'phones' ] ) ) { ?>
 					
-					<?php
-					
-					$emails = array();
-					
-					foreach ( $contact[ 'emails' ] as $key => $email ) {
+					<div id="contact-phones" class="contact-info-item">
 						
-						if ( @$email[ 'publicly_visible' ] ){
+						<?php
+						
+						$phones = array();
+						
+						foreach ( $contact[ 'phones' ] as $key => $phone ) {
 							
-							$emails[] = $email;
+							if ( check_var( $phone[ 'publicly_visible' ] ) ){
+								
+								$phones[] = $phone;
+								
+							}
 							
-						}
+						} ?>
 						
-					} ?>
-					
-					<?php if ( count( $emails ) > 1 ) { ?>
-					
-					<h4 class="contact-info-title"><?= lang( 'emails' ); ?></h4>
-					
-					<?php foreach ( $emails as $key => $email ) { ?>
+						<?php if ( count( $phones ) > 1 ) { ?>
+							
+							<h4 class="contact-info-title"><?= lang( 'phones' ); ?></h4>
+							
+						<?php } else if ( count( $phones ) == 1 ) { ?>
+							
+							<h4 class="contact-info-title"><?= lang( 'phone' ); ?></h4>
+							
+						<?php } ?>
 						
-						<?= $email[ 'email' ]; ?> ( <?= $email[ 'title' ]; ?> )<br />
+						<?php foreach ( $phones as $key => $phone ) { ?>
+							
+							<?php if ( check_var( $phone[ 'publicly_visible' ] ) ) { ?>
+								
+								<span class="contact-phone">
+									
+									<a href="tel://<?= str_replace( array( ' ', '-', '(', ')' ), '', ( check_var( $phone[ 'int_code' ] ) ? '+' . $phone[ 'int_code' ] : '' ) . ( check_var( $phone[ 'area_code' ] ) ? $phone[ 'area_code' ] : '' ) . $phone[ 'number' ] . ( check_var( $phone[ 'extension_number' ] ) ? $phone[ 'extension_number' ] : '' ) ); ?>">
+										
+										<span class="contact-phone-number" itemprop="telephone">
+											
+											<?= ( check_var( $phone[ 'int_code' ] ) ? '<span class="int-code">+' . $phone[ 'int_code' ] . '</span>' : '' ); ?> <?= ( check_var( $phone[ 'area_code' ] ) ? '<span class="area-code">(' . $phone[ 'area_code' ] . ')</span>' : '' ); ?> <span class="number"><?= $phone[ 'number' ]; ?></span> <span class="extension-number"><?= $phone[ 'extension_number' ]; ?></span>
+											
+										</span>
+										
+									</a>
+									
+									<?php if ( check_var( $phone[ 'phone_title_publicly_visible' ] ) AND check_var( $phone[ 'title' ] ) ) { ?>
+										
+										<span class="contact-item-title">
+											
+											<?= $phone[ 'title' ]; ?>
+											
+										</span>
+										
+									<?php } ?>
+									
+								</span>
+								
+							<?php } ?>
+							
+						<?php } ?>
 						
-					<?php } ?>
+					</div>
 					
-					<?php } else if ( count( $emails ) == 1 ) { ?>
-					
-					<?= lang( 'email' ); ?>: 
-					
-					<?php foreach ( $emails as $key => $email ) { ?>
-						
-						<?= $email[ 'email' ]; ?><br />
-						
-					<?php } ?>
-					
-					<?php } ?>
-					
-				</div>
-				
 				<?php } ?>
 				
-				<?php if ( isset( $params[ 'contact_details_show_phones' ] ) AND $params[ 'contact_details_show_phones' ] AND $contact[ 'phones' ] ) { ?>
-				
-				<div id="contact-phones" class="contact-info-item">
+				<?php if ( check_var( $params[ 'contact_details_show_emails' ] ) AND check_var( $contact[ 'emails' ] ) ) { ?>
 					
-					<?php
-					
-					$phones = array();
-					
-					foreach ( $contact[ 'phones' ] as $key => $phone ) {
+					<div id="contact-emails" class="contact-info-item">
 						
-						if ( @$phone[ 'publicly_visible' ] ){
+						<?php
+						
+						$emails = array();
+						
+						foreach ( $contact[ 'emails' ] as $key => $email ) {
 							
-							$phones[] = $phone;
+							if ( check_var( $email[ 'publicly_visible' ] ) ){
+								
+								$emails[] = $email;
+								
+							}
 							
-						}
+						} ?>
 						
-					} ?>
-					
-					<?php if ( count( $phones ) > 1 ) { ?>
-					
-					<h4 class="contact-info-title"><?= lang( 'phones' ); ?></h4>
-					
-					<?php foreach ( $phones as $key => $phone ) { ?>
-						
-						<?php if ( @$phone[ 'publicly_visible' ] ){ ?>
-						
-						(<?= $phone[ 'area_code' ]; ?>) <?= $phone[ 'number' ]; ?> <?= $phone[ 'extension_number' ]; ?> <?= ( ( @$phone[ 'title' ] AND @$phone[ 'phone_title_publicly_visible' ] ) ? '(' . $phone[ 'title' ] . ')' : '' ); ?><br />
-						
+						<?php if ( count( $emails ) > 1 ) { ?>
+							
+							<h4 class="contact-info-title"><?= lang( 'emails' ); ?></h4>
+							
+						<?php } else if ( count( $emails ) == 1 ) { ?>
+							
+							<h4 class="contact-info-title"><?= lang( 'email' ); ?></h4>
+							
 						<?php } ?>
 						
-					<?php } ?>
-					
-					<?php } else if ( count( $phones ) == 1 ) { ?>
-					
-					<h4 class="contact-info-title"><?= lang( 'phone' ); ?></h4>
-					
-					<?php foreach ( $phones as $key => $phone ) { ?>
-						
-						<?php if ( @$phone[ 'publicly_visible' ] ){ ?>
-						
-						(<?= $phone[ 'area_code' ]; ?>) <?= $phone[ 'number' ]; ?> <?= $phone[ 'extension_number' ]; ?>
-						
+						<?php foreach ( $emails as $key => $email ) { ?>
+							
+							<?php if ( check_var( $email[ 'publicly_visible' ] ) ) { ?>
+								
+								<?php $show_email_title = ( ( check_var( $email[ 'email_title_publicly_visible' ] ) AND check_var( $email[ 'title' ] ) ) ? TRUE : FALSE ); ?>
+								
+								<span class="contact-module-email">
+									
+									<a href="mailto:<?= $contact[ 'name' ]; ?><<?= $email[ 'email' ]; ?>>" class="contact-email-value" itemprop="email">
+										
+										<?= $email[ 'email' ]; ?>
+										
+									</a>
+									
+									<?php if ( $show_email_title ){ ?>
+										
+										<span class="contact-item-title">
+											
+											<?= $email[ 'title' ]; ?>
+											
+										</span>
+										
+									<?php } ?>
+									
+								</span>
+								
+							<?php } ?>
+							
 						<?php } ?>
 						
-					<?php } ?>
+					</div>
 					
-					<?php } ?>
-					
-				</div>
-				
 				<?php } ?>
 				
 				<?php if ( isset( $params[ 'contact_details_show_addresses' ] ) AND $params[ 'contact_details_show_addresses' ] AND $contact[ 'addresses' ] ) { ?>
@@ -814,35 +830,6 @@
 		$( '.thumb a' ).fancybox();
 		
 	} );
-	<?php } ?>
-	
-	<?php if ( ( isset( $params[ 'contact_details_show_gmaps' ] ) AND $params[ 'contact_details_show_gmaps' ] ) AND ( isset( $params[ 'contact_details_map_gmaps_query' ] ) AND $params[ 'contact_details_map_gmaps_query' ] ) ) { ?>
-	<?php if ( isset( $params[ 'contact_details_map_gmaps_width' ] ) AND $params[ 'contact_details_map_gmaps_width' ] == 'auto' ) { ?>
-	/*
-	function adjustMapWidth(){
-		
-		$( '.gmaps iframe' ).css( {
-			
-			'width' : $( '.gmaps iframe' ).parent().outerWidth()
-			
-		} );
-		
-	};
-	
-	$( document ).on( 'ready', function(){
-		
-		adjustMapWidth();
-		
-	} );
-	
-	$( window ).on( 'resize', function(){
-		
-		adjustMapWidth();
-		//$( '.gmaps iframe' ).attr( 'src', function ( i, val ) { return val; });
-		
-	});
-	*/
-	<?php } ?>
 	<?php } ?>
 	
 </script>

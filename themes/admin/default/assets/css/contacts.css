@@ -1,4 +1,78 @@
 
+
+#contact-photo-wrapper {
+	
+	position: relative;
+	
+	width: 96px;
+	height: 96px;
+	
+	padding: 0;
+	
+}
+
+#contact-photo-wrapper > *,
+#image-wrapper *,
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.photo-chooser > .el {
+	
+	position: absolute;
+	display: block;
+	
+	width: 100%;
+	height: 100%;
+	
+	margin: 0;
+	padding: 0;
+	
+}
+#image-wrapper img {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-photo', $vui->colors->vui_base->darken( 30, TRUE )->get_ro_color( 80 )->rgba_s() ); ?>');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50% auto;
+	background-color: <?= $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 150 ); ?>;
+	
+}
+#contact-photo-wrapper > .photo-chooser {
+	
+	bottom: 0;
+	height: auto;
+	
+}
+.vui .vui-interactive-el-wrapper.vui-btn-wrapper.photo-chooser > .el {
+	
+	position: relative;
+	height: 0;
+	padding: <?= VUI_SPACING; ?>em;
+	
+	<?= $vui->css->border_radius( 0 ); ?>
+	
+	background-color: <?= $vui->colors->vui_base->darken( 30, TRUE )->rgba_s( 150 ); ?>;
+	color: <?= $vui->colors->vui_base->darken( 30, TRUE )->get_ro_color( 80 )->rgba_s(); ?>;
+	
+	border: none;
+	
+	text-align: center;
+	
+	<?= $vui->css->opacity( 0 ); ?>
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+	
+}
+.vui #contact-photo-wrapper:hover .vui-interactive-el-wrapper.vui-btn-wrapper.photo-chooser > .el {
+	
+	height: auto;
+	<?= $vui->css->opacity( 1 ); ?>
+	
+}
+.vui .vui-interactive-el-wrapper.photo-chooser .icon-wrapper {
+	
+	display: none;
+	
+}
+
+
 /*
  *********************************************************
  ---------------------------------------------------------

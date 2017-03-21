@@ -338,37 +338,6 @@
 					
 				</div>
 				
-				<?php if ( $type == 'component' ) { ?>
-				
-				<div class="form-item">
-					
-					<fieldset>
-						
-						<legend>
-							
-							<?= vui_el_button( array( 'text' => lang( $component_item ), 'icon' => $component_item,  ) ); ?>
-							
-						</legend>
-						
-						<?php //echo parse_params($params, get_params($menu_item[ 'params)); ?>
-						
-						<?php
-						
-						/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
-						 * pois os erros de validação dos elementos dos parâmetros devem ser expostos
-						 * após a chamada da função $this->form_validation->run()
-						 */
-						
-						echo params_to_html( $component_params_spec, $component_final_params_values );
-						
-						?>
-						
-					</fieldset>
-					
-				</div>
-				
-				<?php } ?>
-				
 				<?php if ( $type == 'html_content' ) { ?>
 				
 				<div class="form-item">
@@ -395,32 +364,31 @@
 				
 				<?php } ?>
 				
-				<div class="form-item">
-					
-					<fieldset>
-						
-						<legend>
-							
-							<?= vui_el_button( array( 'text' => lang( 'menu_item' ), 'icon' => 'menu-items',  ) ); ?>
-							
-						</legend>
-						
-						<?php //echo parse_params($menu_item_params, get_params($menu_item[ 'params)); ?>
-						
-						<?php
-						
-						/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
-						 * pois os erros de validação dos elementos dos parâmetros devem ser expostos
-						 * após a chamada da função $this->form_validation->run()
-						 */
-						
-						echo params_to_html( $menu_item_params_spec, $menu_item_final_params_values );
-						
-						?>
-						
-					</fieldset>
-					
-				</div>
+				<?php
+				
+				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
+					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
+					* após a chamada da função $this->form_validation->run()
+					*/
+				
+				echo params_to_html( $menu_item_params_spec, $menu_item_final_params_values );
+				
+				?>
+				
+				<?php if ( $type == 'component' ) { ?>
+				
+				<?php
+				
+				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
+					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
+					* após a chamada da função $this->form_validation->run()
+					*/
+				
+				echo params_to_html( $component_params_spec, $component_final_params_values );
+				
+				?>
+				
+				<?php } ?>
 				
 			</div>
 			
@@ -443,7 +411,7 @@
 		/*************************************************/
 		/**************** Criando as tabs ****************/
 		
-		makeTabs( $( '.tabs-wrapper' ), '.form-item', 'legend' );
+		makeTabs( $( '.tabs-wrapper' ), '.form-item, .params-set-wrapper', 'legend, .params-set-title' );
 		
 		/**************** Criando as tabs ****************/
 		/*************************************************/

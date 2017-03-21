@@ -29,7 +29,7 @@
 		</param>
 		
 		<param name="contact_details_map_gmaps_query" type="textarea" default="" label="contact_details_map_gmaps_query" tip="tip_contact_details_map_gmaps_query" />
-		
+		<!--
 		<param name="contact_details_map_gmaps_width" type="text" default="auto" label="contact_details_map_gmaps_width" tip="tip_contact_details_map_gmaps_width" />
 		
 		<param name="contact_details_map_gmaps_height" type="text" default="350" label="contact_details_map_gmaps_height" tip="tip_contact_details_map_gmaps_height" />
@@ -57,7 +57,7 @@
 			<validation rules="trim" />
 			
 		</param>
-		
+		-->
 		<param type="spacer" label="contact_info" />
 		
 		<param name="contact_details_show_image" type="select" default="0" label="contact_details_show_image" tip="tip_contact_details_show_image">

@@ -881,7 +881,7 @@ class Menus extends Main {
 					// se a validação dos campos for positiva
 					else if ( $this->form_validation->run() AND ( $this->input->post( 'submit' ) OR $this->input->post( 'submit_apply' ) ) ){
 						
-						if ( $action == 'e' AND $menu_item[ 'home' ] === "1" ){
+						if ( $action == 'e' AND $menu_item[ 'home' ] == 1 ){
 							
 							$this->menus_model->set_home_page( $menu_item[ 'id' ] );
 							

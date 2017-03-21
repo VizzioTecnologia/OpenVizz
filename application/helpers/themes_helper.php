@@ -60,11 +60,18 @@ function theme_components_views_path( $environment = NULL ){
 	
 }
 
+function admin_theme_views_path(){
+	
+	$CI =& get_instance();
+	
+	return ADMIN_DIR_NAME . DS . admin_theme() . DS . VIEWS_DIR_NAME . DS;
+	
+}
 function admin_theme_components_views_path(){
 	
 	$CI =& get_instance();
 	
-	return ADMIN_DIR_NAME . DS . site_theme() . DS . VIEWS_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS;
+	return admin_theme_views_path() . COMPONENTS_DIR_NAME . DS;
 	
 }
 function admin_theme_views_url(){
@@ -82,11 +89,18 @@ function admin_theme_components_views_url(){
 	
 }
 
+function site_theme_views_path(){
+	
+	$CI =& get_instance();
+	
+	return SITE_DIR_NAME . DS . site_theme() . DS . VIEWS_DIR_NAME . DS;
+	
+}
 function site_theme_components_views_path(){
 	
 	$CI =& get_instance();
 	
-	return SITE_DIR_NAME . DS . site_theme() . DS . VIEWS_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS;
+	return site_theme_views_path() . COMPONENTS_DIR_NAME . DS;
 	
 }
 function site_theme_views_url(){

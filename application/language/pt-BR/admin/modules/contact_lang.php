@@ -26,6 +26,7 @@ $lang['contact_module_show_emails_title'] = 													"Exibir título";
 $lang['tip_contact_module_show_emails_title'] = 												"Defina se o título <b>Emails</b> deve ser exibido.";
 $lang['contact_module_show_emails_titles'] = 													"Exibir título de cada email";
 $lang['tip_contact_module_show_emails_titles'] = 												"Defina se o título de cada email deve ser exibido. Note que a exibição dos títulos também depende das configurações de cada um.";
+$lang['contact_module_emails_to_show'] = 														"E-mails visíveis";
 
 $lang['contact_module_config_websites'] = 														"Websites";
 $lang['contact_module_show_websites'] = 														"Exibir websites";
@@ -34,6 +35,7 @@ $lang['contact_module_show_websites_title'] = 													"Exibir título";
 $lang['tip_contact_module_show_websites_title'] = 												"Defina se o título <b>websites</b> deve ser exibido.";
 $lang['contact_module_show_websites_titles'] = 													"Exibir título de cada website";
 $lang['tip_contact_module_show_websites_titles'] = 												"Defina se o título de cada website deve ser exibido. Note que a exibição dos títulos também depende das configurações de cada um.";
+$lang['contact_module_websites_to_show'] = 														"Websites visíveis";
 
 $lang['contact_module_config_addresses'] = 														"Endereços";
 $lang['contact_module_show_addresses'] = 														"Exibir endereços";

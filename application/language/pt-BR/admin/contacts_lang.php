@@ -4,6 +4,9 @@
 $lang['contact'] = 																				"Contato";
 $lang['Contacts'] = 																			"Contatos";
 $lang['contacts'] = 																			"Contatos";
+$lang['contacts_contacts_management_contacts_list'] = 											"Listagem";
+$lang['contacts_contacts_management_add_contact'] = 											"Novo";
+$lang['contacts_contacts_management_edit_contact'] = 											"Edição de contato";
 $lang['tip_view_contacts_list'] = 																"Ir para lista de contatos";
 $lang['user_associated'] = 																		"Usuário associado";
 $lang['contacts_management'] = 																	"Gerenciamento contatos";
@@ -15,6 +18,7 @@ $lang['action_edit_contact'] = 																	"Editar este contato";
 $lang['tip_action_edit_contact'] = 																"Clique para editar este contato";
 $lang['remove_contact'] = 																		"Remover contato";
 $lang['tip_remove_contact'] = 																	"Remover este contato";
+$lang['contacts_set_photo'] = 																	"Definir foto";
 
 $lang['tip_enter_amount_contacts'] = 															"Informe a quantidade de campos de contatos que deseja adicionar";
 
@@ -43,6 +47,7 @@ $lang['enter_amount_phones'] = 																	"Informe a quantidade";
 $lang['tip_enter_amount_phones'] = 																"Informe a quantidade de campos de telefones que deseja adicionar";
 $lang['phone_type'] = 																			"Tipo de telefone";
 $lang['tip_phone_type'] = 																		"Informe o tipo de telefone. Ex.: Pessoal, profissional, etc";
+$lang['phone_int_code'] = 																		"Código internacional";
 $lang['phone_area_code'] = 																		"DDD";
 $lang['phone_number'] = 																		"Número";
 $lang['subject'] = 																				"Assunto";

@@ -4,14 +4,14 @@ if ( ! defined( 'VUI_SCALE' ) ) define( 'VUI_SCALE', 0.9 );
 if ( ! defined( 'VUI_SPACING' ) ) define( 'VUI_SPACING', 1 * VUI_SCALE );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_FAMILY' ) ) define( 'VUI_DEFAULT_FONT_FAMILY', '\'Open Sans\', \'Arial\', sans-serif' );
-if ( ! defined( 'VUI_SEC_FONT_FAMILY' ) ) define( 'VUI_SEC_FONT_FAMILY', '\'Open Sans Condensed\', \'Arial\', sans-serif' );
+if ( ! defined( 'VUI_SEC_FONT_FAMILY' ) ) define( 'VUI_SEC_FONT_FAMILY', '\'Open Sans\', \'Arial\', sans-serif' );
 if ( ! defined( 'VUI_MONO_FONT_FAMILY' ) ) define( 'VUI_MONO_FONT_FAMILY', '\'Droid Sans Mono\', \'Menlo\', \'Monaco\', monospace' );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_COLOR' ) ) define( 'VUI_DEFAULT_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
 if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', ( 1 * VUI_SCALE ) . 'em' );
-if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', '300' );
+if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', '100' );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', ( 1.5 * VUI_SCALE ) . 'em' );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', '1px solid ' . $vui->colors->vui_extra_3->rgba_s( 40 ) );
@@ -33,6 +33,7 @@ if ( ! defined( 'VUI_SITE_WIDTH_1280_1400' ) ) define( 'VUI_SITE_WIDTH_1280_1400
 if ( ! defined( 'VUI_SITE_WIDTH_1400_1920' ) ) define( 'VUI_SITE_WIDTH_1400_1920', '75%' );
 
 
+if ( ! defined( 'VUI_MAX_COLUMNS' ) ) define( 'VUI_MAX_COLUMNS', 20 );
 
 
 //------------------------------------------------------

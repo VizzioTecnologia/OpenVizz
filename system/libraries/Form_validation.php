@@ -280,12 +280,13 @@ class CI_Form_validation {
 	 */
 	public function run($group = '')
 	{
+		
 		// Do we even have any data to process?  Mm?
 		if (count($_POST) == 0)
 		{
 			return FALSE;
 		}
-
+		
 		// Does the _field_data array containing the validation rules exist?
 		// If not, we look to see if they were assigned via a config file
 		if (count($this->_field_data) == 0)
@@ -293,6 +294,7 @@ class CI_Form_validation {
 			// No validation rules?  We're done...
 			if (count($this->_config_rules) == 0)
 			{
+			
 				return FALSE;
 			}
 
@@ -314,8 +316,9 @@ class CI_Form_validation {
 				log_message('debug', "Unable to find validation rules");
 				return FALSE;
 			}
+			
 		}
-
+		
 		// Load the language file containing error messages
 		$this->CI->lang->load('form_validation');
 

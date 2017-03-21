@@ -28,6 +28,9 @@ $lang[ 'tip_ud_validation_rule_matches' ] = 													"Se marcado, o valor do
 
 $lang[ 'ud_prop_type' ] = 																		"Tipo da propriedade";
 
+$lang[ 'ud_edit_prop' ] = 																		"Editar propriedade";
+$lang[ 'ud_edit_prop_click' ] = 																"Clique para editar a propriedade";
+
 // email sending
 $lang[ 'ud_ds_notify_unid_data_via_email' ] = 													"Ativar notificações de dados via e-mail";
 $lang[ 'tip_ud_ds_notify_unid_data_via_email' ] = 												"Se ativo, além do salvamento no banco de dados, os novos dados (envios) serão também enviados por e-mail para receptores específicos.";

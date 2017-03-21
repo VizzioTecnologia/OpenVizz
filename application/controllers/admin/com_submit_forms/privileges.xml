@@ -5,7 +5,7 @@
 		
 		<param name="privileges[submit_forms_management_submit_forms_management]" value="submit_forms_management_submit_forms_management" type="checkbox" default="" label="submit_forms_management_submit_forms_management" tip="tip_submit_forms_management_submit_forms_management" />
 		
-		<param name="privileges[submit_forms_management_submit_forms_api_management]" value="submit_forms_management_submit_forms_api_management" type="checkbox" default="" label="submit_forms_management_submit_forms_api_management" tip="tip_submit_forms_management_submit_forms_api_management" />
+		<param name="privileges[priv_ds_api]" value="priv_ds_api" type="checkbox" default="" label="priv_ds_api" tip="tip_priv_ds_api" />
 		
 	</section>
 	

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="32.001099"
+   width="31.999998"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="icon-32-phone.svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview6"
+     showgrid="true"
+     inkscape:zoom="13.906405"
+     inkscape:cx="19.095743"
+     inkscape:cy="14.509659"
+     inkscape:window-x="-5"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2989"
+       originx="-10.00001"
+       originy="-7.9988754" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="path10032"
+     d="m 20.215747,17.806756 c -1.204519,1.20452 -1.204519,2.409039 -2.409039,2.409039 -1.204519,0 -2.408981,-1.204519 -3.6135,-2.409039 -1.204519,-1.204519 -2.409039,-2.408981 -2.409039,-3.6135 0,-1.20452 1.20452,-1.20452 2.409039,-2.409039 1.204519,-1.204519 -2.409039,-4.8180197 -3.613558,-4.8180197 -1.2044617,0 -3.6135005,3.6135007 -3.6135005,3.6135007 0,2.409038 2.4749295,7.292949 4.8180195,9.636097 2.343148,2.34309 7.227059,4.81802 9.636097,4.81802 0,0 3.613501,-2.409039 3.613501,-3.613501 0,-1.204519 -3.613501,-4.818077 -4.81802,-3.613558 z"
+     inkscape:connector-curvature="0"
+     style="display:inline;opacity:1;fill:#000000;fill-opacity:1" />
+</svg>

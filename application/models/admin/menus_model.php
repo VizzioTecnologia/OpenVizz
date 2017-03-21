@@ -243,6 +243,12 @@ class Menus_model extends CI_Model{
 					
 					$this->db->update( 'tb_urls', array( 'target' => $menu_item[ 'link' ] ), array( 'sef_url' => 'default_controller' ) );
 					
+					if ( ! $this->urls_common_model->update_urls_cache() ){
+						
+						return FALSE;
+						
+					}
+					
 					// confirm update for controller
 					return TRUE;
 					

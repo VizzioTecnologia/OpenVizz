@@ -353,6 +353,7 @@ function create_folder($path = null, $path_thumbs = null)
 	{
 		mkdir($path);
 	}
+	
 	if ($path_thumbs && ! file_exists($path_thumbs))
 	{
 		mkdir($path_thumbs) or die("$path_thumbs cannot be found");

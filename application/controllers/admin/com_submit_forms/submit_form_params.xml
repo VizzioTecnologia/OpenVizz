@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <params>
 	
+	<section name="ud_ds_default_data">
+		
+		<param type="spacer" label="ud_ds_default_data_id" />
+		
+		<param name="ud_ds_default_data_id_site_list_show" type="select" default="1" label="ud_ds_default_data_id_site_list_show" tip="tip_ud_ds_default_data_id_site_list_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_id_site_detail_show" type="select" default="1" label="ud_ds_default_data_id_site_detail_show" tip="tip_ud_ds_default_data_id_site_detail_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_id_pres_title" type="text" default="Id" translate="1" label="ud_ds_default_data_id_pres_title" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" label="ud_ds_default_data_sdt" />
+		
+		<param name="ud_ds_default_data_sdt_site_list_show" type="select" default="1" label="ud_ds_default_data_sdt_site_list_show" tip="tip_ud_ds_default_data_sdt_site_list_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_sdt_site_detail_show" type="select" default="1" label="ud_ds_default_data_sdt_site_detail_show" tip="tip_ud_ds_default_data_sdt_site_detail_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_sdt_pres_title" type="text" default="submit_datetime" translate="1" label="ud_ds_default_data_sdt_pres_title" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="ud_ds_default_data_sdt_dt_format" type="text" default="%d/%m/%Y às %T" label="ud_ds_default_data_sdt_dt_format" tip="tip_ud_ds_default_data_sdt_dt_format" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" label="ud_ds_default_data_mdt" />
+		
+		<param name="ud_ds_default_data_mdt_site_list_show" type="select" default="1" label="ud_ds_default_data_mdt_site_list_show" tip="tip_ud_ds_default_data_mdt_site_list_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_mdt_site_detail_show" type="select" default="1" label="ud_ds_default_data_mdt_site_detail_show" tip="tip_ud_ds_default_data_mdt_site_detail_show" inline="1" >
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="ud_ds_default_data_mdt_pres_title" type="text" default="mod_datetime" translate="1" label="ud_ds_default_data_mdt_pres_title" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param name="ud_ds_default_data_mdt_dt_format" type="text" default="%d/%m/%Y às %T" label="ud_ds_default_data_mdt_dt_format" tip="tip_ud_ds_default_data_mdt_dt_format" inline="1" >
+			
+			<validation rules="trim" />
+			
+		</param>
+		
+		<param type="spacer" label="ud_ds_default_data_dt_format_help_title" />
+		
+		<param type="html" content="ud_ds_default_data_dt_format_help" />
+		
+	</section>
+	
 	<section name="ud_ds_emails_for_receivers">
 		
 		<param name="ud_ds_notify_unid_data_via_email" type="select" default="1" label="ud_ds_notify_unid_data_via_email" tip="tip_ud_ds_notify_unid_data_via_email" inline="1" >

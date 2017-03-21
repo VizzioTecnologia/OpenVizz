@@ -57,13 +57,13 @@
 	
 }
 .contact-details .gmaps > .inner,
-.contact-details .gmaps iframe{
+.contact-details .gmaps iframe {
 	
 	position: absolute;
 	display: block;
 	
-	width: 100% !important;
-	height: 100% !important;
+	width: calc( 100% - <?= VUI_SPACING * 2; ?>em );
+	height: calc( 100% - <?= VUI_SPACING * 2; ?>em );
 	
 }
 
@@ -82,6 +82,36 @@
 	
 }
 
+.contact-details .contact-phone,
+.contact-details .contact-email,
+.contact-details .contact-phone-number {
+	
+	position: relative;
+	display: block;
+	font-weight: 100;
+	line-height: 100%;
+	
+}
+.contact-details .contact-phone-number > * {
+	
+	font-size: 150%;
+	vertical-align: middle;
+	line-height: 150%;
+	
+}
+.contact-details .contact-phone-number .int-code {
+	
+	font-size: 100%;
+	
+}
+
+.contact-details .contact-item-title {
+	
+	display: block;
+	font-size: 100%;
+	<?= $vui->css->opacity( '0.6' ); ?>
+	
+}
 
 
 /* ---------------------------------------------------- */

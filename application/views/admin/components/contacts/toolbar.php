@@ -5,8 +5,8 @@ echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/contacts_mana
 
 echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/contacts_management/add_contact', 'text' => lang( 'new_contact' ), 'icon' => 'add', 'only_icon' => TRUE, ) );
 
-echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/contacts_management/google_contacts', 'icon' => 'google', 'text' => lang( 'google_contacts' ), 'only_icon' => TRUE, ) );
-		
+//echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/contacts_management/google_contacts', 'icon' => 'google', 'text' => lang( 'google_contacts' ), 'only_icon' => TRUE, ) );
+
 ?>
 
 <div class="search-toolbar-wrapper fr">

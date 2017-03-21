@@ -4,12 +4,9 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 0;
-	height: 0;
 	display: block;
 	text-align: left;
-	padding: <?= VUI_SPACING; ?>em 0;
-	padding: <?= VUI_SPACING; ?>em;
+	padding: 0;
 	margin: 0;
 	overflow: visible;
 	
@@ -24,6 +21,21 @@
 	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
 	
 	z-index: 10011;
+	
+}
+
+#main-tools-modules .admin-menu-module {
+	
+	display: none;
+	
+}
+#main-tools-modules .admin-menu-switch {
+	
+	width: calc( <?= VUI_BUTTONS_PADDING_L; ?> + <?= VUI_BUTTONS_PADDING_R; ?> + 16px );
+	
+	margin: 0;
+	
+	text-align: center;
 	
 }
 
@@ -55,6 +67,11 @@
 	height: 100%;
 	overflow: auto;
 	padding: <?= VUI_SPACING; ?>em;
+	
+}
+#main-tools-modules:hover .admin-menu-module {
+	
+	display: block;
 	
 }
 
@@ -114,7 +131,7 @@
 	overflow: visible;
 	
 }
-#main-tools-modules:before {
+#ma in-tools-modules:before {
 	
 	<?= FONT_ICONS_STYLESHEET; ?>
 	
@@ -142,7 +159,7 @@
 	<?= $vui->css->border_radius( '0' ) ?>
 	z-index: 10000;
 	
-	font-family: 'viacms-icons';
+	font-family: 'openvizz-set';
 	font-size: 16px;
 	
 	line-height: <?= VUI_BUTTONS_FONT_SIZE; ?>;

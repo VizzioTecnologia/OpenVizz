@@ -6,6 +6,9 @@ $lang['admin_config_management'] = 																"Gerenciamento das configura�
 
 
 $lang['load_view_fail'] = 																		"Falha ao tentar carregar view";
+$lang[ 'unable_to_write_db_upgrade_info_cache_file' ] = 										"Arquivo de cache de atualização não gravável!";
+$lang[ 'unable_db_upgrade_cache_file_is_not_writable' ] = 										"Não foi possível gravar o arquivo de cache de atualização do banco de dados! Verifique as permissões do arquivo e/ou diretório.";
+
 
 
 

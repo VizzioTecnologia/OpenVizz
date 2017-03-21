@@ -3000,8 +3000,7 @@ class Users_mdl extends CI_Model{
 	 * Gera um password aleatorio
 	 * @return String
 	 */
-	public function generatePassword()
-	{
+	public function generatePassword() {
 		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890$#%@.';
 		$pass = array();
 		$alphaLength = strlen($alphabet) - 1; //Tamanho da string de caracters

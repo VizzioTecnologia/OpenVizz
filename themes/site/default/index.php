@@ -21,8 +21,14 @@
 				
 			}
 			
-			$this->voutput->append_head_stylesheet( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/css/theme.css.php' . ( ! empty( $get_args ) ? '?' . join( '&', $get_args ) : '' ) );
+			if ( check_var( $this->current_component[ 'unique_name' ] ) ) {
+				
+				$get_args[] = 'ct=1';
+				
+			}
+			
 			$this->voutput->append_head_stylesheet( 'google_font', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700|Open+Sans:400,300,300italic,400italic,700,700italic' );
+			$this->voutput->append_head_stylesheet( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/css/theme.css.php' . ( ! empty( $get_args ) ? '?' . join( '&', $get_args ) : '' ) );
 			$this->voutput->append_head_script( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/js/functions.js' );
 			
 			$google_font_script = "

@@ -26,7 +26,7 @@
 	
 }
 .contact-module-phone-number,
-.contact-module-phone-title{
+.contact-item-title {
 	
 	position: relative;
 	display: inline-block;
@@ -35,13 +35,13 @@
 	text-decoration: inherit;
 	
 }
-.contact-module-phone-title{
+.contact-item-title {
 	
 	font-size: 100%;
 	opacity: 0.6;
 	
 }
-.contact-module-website-title{
+.contact-websites .contact-item-title {
 	
 	position: relative;
 	display: block;
@@ -90,7 +90,7 @@
 
 /* addresses */
 
-.contact-module-address-title{
+.contact-addresses .contact-item-title{
 	
 	position: relative;
 	display: block;

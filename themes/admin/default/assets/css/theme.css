@@ -114,7 +114,7 @@ hr{
 	
 	content: '\e614';
 	
-	font-family: 'viacms-icons';
+	font-family: 'openvizz-set';
 	font-size: 64px;
 	line-height: 128px;
 	text-align: center;
@@ -884,7 +884,7 @@ input.field-label{
 .sortable-item .sortable-retracted:before,
 .sortable-item .sortable-remove:before{
 
-	font-family: "viacms-icons";
+	font-family: "openvizz-set";
 
 }
 .sortable-item .sortable-handle:before{

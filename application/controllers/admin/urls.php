@@ -452,7 +452,7 @@ class Urls extends Main {
 			$this->form_validation->set_rules( 'sef_url', lang( 'sef_url' ), 'trim|required' );
 			$this->form_validation->set_rules( 'target', lang( 'target' ), 'trim|required' );
 			
-			if( $this->input->post( 'submit_cancel' ) ){
+			if ( $this->input->post( 'submit_cancel' ) ){
 				
 				redirect_last_url();
 				

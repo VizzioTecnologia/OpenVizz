@@ -37,7 +37,7 @@ RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
-ErrorDocument 404 /index.php
+# ErrorDocument 404 /index.php
 </IfModule>
 
 
@@ -50,8 +50,9 @@ ErrorDocument 404 /index.php
 # https://suhosin.org/stories/configuration.html#suhosin-post-max-vars
 # https://suhosin.org/stories/configuration.html#suhosin-request-max-vars
 
-# php_value max_execution_time 300
-# php_value max_input_vars 10000
-# php_value suhosin.get.max_vars 10000
-# php_value suhosin.post.max_vars 10000
-# php_value suhosin.request.max_vars 10000
+php_value max_execution_time 300
+php_value max_input_vars 100000
+php_value upload_max_filesize 50M
+php_value suhosin.get.max_vars 100000
+php_value suhosin.post.max_vars 100000
+php_value suhosin.request.max_vars 100000

@@ -52,6 +52,14 @@
 	<?= $vui->css->box_shadow( 'none' ); ?>
 	
 }
+
+.vui select[ multiple ] {
+	
+	overflow: auto;
+	max-height: 200px;
+	
+}
+
 .vui .vui-interactive-el-wrapper.only-icon > .el {
 	
 	width: calc( <?= VUI_BUTTONS_PADDING_L; ?> * 2 + <?= DEFAULT_ICON_SIZE; ?> );

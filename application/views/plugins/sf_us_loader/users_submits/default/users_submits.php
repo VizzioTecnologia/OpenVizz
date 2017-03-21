@@ -9,6 +9,8 @@ $params = $submit_form[ 'plugin_params' ];
 
 $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
 
+// echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
+
 ?>
 
 <section id="users-submits-<?= $unique_hash; ?>" class="ud-data-schema ud-data-schema-item users-submits <?= $params['wc']; ?> item item-<?= $__index; ?>">

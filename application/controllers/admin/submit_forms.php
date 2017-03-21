@@ -62,7 +62,7 @@ class Submit_forms extends Main {
 		);
 		$sf_remove_link_array = $base_link_array + array(
 
-			'a' => 'r',
+			'a' => 'rds',
 
 		);
 		$sf_remove_all_link_array = $base_link_array + array(
@@ -86,8 +86,8 @@ class Submit_forms extends Main {
 
 		);
 
-		$submit_forms_management_alias = 'sfm/';
-		$c_urls[ 'sf_management_link' ] = $base_link_prefix . $submit_forms_management_alias;
+		$data_schemes_management_alias = 'sfm/';
+		$c_urls[ 'sf_management_link' ] = $base_link_prefix . $data_schemes_management_alias;
 		$c_urls[ 'sf_add_link' ] = $c_urls[ 'sf_management_link' ] . $this->uri->assoc_to_uri( $sf_add_link_array );
 		$c_urls[ 'sf_edit_link' ] = $c_urls[ 'sf_management_link' ] . $this->uri->assoc_to_uri( $sf_edit_link_array );
 		$c_urls[ 'sf_list_link' ] = $c_urls[ 'sf_management_link' ] . $this->uri->assoc_to_uri( $sf_list_link_array );
@@ -493,7 +493,7 @@ class Submit_forms extends Main {
 
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : 'sfl'; // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : NULL; // sub action
-		$submit_form_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : NULL; // submit form id
+		$ds_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : NULL; // submit form id
 		$cp =									isset( $f_params[ 'cp' ] ) ? $f_params[ 'cp' ] : NULL; // current page
 		$ipp =									isset( $f_params[ 'ipp' ] ) ? $f_params[ 'ipp' ] : NULL; // items per page
 		$ob =									isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
@@ -705,33 +705,31 @@ class Submit_forms extends Main {
 
 			}
 			
-			$submit_forms = $this->sfcm->get_submit_forms( $gsf_params )->result_array();
+			$data_schemes = $this->sfcm->get_submit_forms( $gsf_params )->result_array();
 			
-			foreach ( $submit_forms as $key => & $submit_form ) {
+			foreach ( $data_schemes as $key => & $data_scheme ) {
 				
-				$this->sfcm->parse_sf( $submit_form );
+				$this->sfcm->parse_sf( $data_scheme );
 				
-				$submit_form_base_link_array = array(
+				$data_scheme_base_link_array = array(
 					
-					'sfid' => $submit_form[ 'id' ],
+					'sfid' => $data_scheme[ 'id' ],
 					
 				);
 				
-				$submit_form[ 'edit_link' ] = $c_urls[ 'sf_edit_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'remove_link' ] = $c_urls[ 'sf_remove_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
+				$data_scheme[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
 				
 				if ( ! empty( $terms ) ){
 					
 					foreach ( $terms as $term ) {
 						
-						$submit_form[ 'id' ] = str_highlight( $submit_form[ 'id' ], $term );
-						$submit_form[ 'sef_submit_form' ] = str_highlight( $submit_form[ 'sef_submit_form' ], $term );
-						$submit_form[ 'target' ] = str_highlight( $submit_form[ 'target' ], $term );
+						$data_scheme[ 'id' ] = str_highlight( $data_scheme[ 'id' ], $term );
+						$data_scheme[ 'sef_submit_form' ] = str_highlight( $data_scheme[ 'sef_submit_form' ], $term );
+						$data_scheme[ 'target' ] = str_highlight( $data_scheme[ 'target' ], $term );
 						
 					}
 					
@@ -739,7 +737,7 @@ class Submit_forms extends Main {
 				
 			}
 			
-			foreach ( $submit_forms as $key => & $submit_form ) {
+			foreach ( $data_schemes as $key => & $data_scheme ) {
 				
 				$search_config = array(
 					
@@ -749,7 +747,7 @@ class Submit_forms extends Main {
 						
 						'sf_us_search' => array(
 							
-							'sf_id' => $submit_form[ 'id' ],
+							'sf_id' => $data_scheme[ 'id' ],
 							
 						),
 						
@@ -762,11 +760,11 @@ class Submit_forms extends Main {
 				
 				$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
 				
-				$submit_form[ 'users_submit_count' ] = $this->search->count_all_results( 'sf_us_search' );
+				$data_scheme[ 'users_submit_count' ] = $this->search->count_all_results( 'sf_us_search' );
 				
 			}
 			
-			$data[ 'submit_forms' ] = $submit_forms;
+			$data[ 'submit_forms' ] = $data_schemes;
 			
 			unset( $gsf_params[ 'order_by' ] );
 			unset( $gsf_params[ 'limit' ] );
@@ -878,7 +876,7 @@ class Submit_forms extends Main {
 			
 			if ( $action == 'asf' ){
 				
-				$submit_form = array();
+				$data_scheme = array();
 				
 			}
 			
@@ -887,34 +885,52 @@ class Submit_forms extends Main {
 			if ( $action == 'esf' ){
 				
 				// -------------------------
+				// Loading UniD API model
+				
+				$this->load->model( 'common/unid_api_common_model', 'ud_api' );
+				
+				// -------------------------
 				// Obtenção do formulário
+				/*
+				$data_scheme = $this->ud_api->get_submit_form( $ds_id )->row_array();
+				*/
 				
-				$submit_form = $this->sfcm->get_submit_form( $submit_form_id )->row_array();
+				$ud_api = & $this->ud_api;
 				
-				if ( ! $submit_form ) {
+				$data_scheme = $ud_api(
 					
-					show_404();
+					array(
+						
+						'a' => 'gds',
+						'rt' => 2,
+						'dsi' => $ds_id,
+						
+					), TRUE, TRUE
+					
+				);
+				
+				if ( isset( $data_scheme[ 'errors' ] ) OR ! isset( $data_scheme[ 'out' ][ 'data_schemes' ][ $ds_id ] ) ) {
+					
+					echo $data_scheme[ 'errors' ];
 					
 				}
 				else {
 					
-					$this->sfcm->parse_sf( $submit_form );
+					$data_scheme = $data_scheme[ 'out' ][ 'data_schemes' ][ $ds_id ];
 					
-					$submit_form_base_link_array = array(
+					$data_scheme_base_link_array = array(
 						
-						'sfid' => $submit_form[ 'id' ],
+						'sfid' => $data_scheme[ 'id' ],
 						
 					);
 					
-					$submit_form[ 'edit_link' ] = $c_urls[ 'sf_edit_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'remove_link' ] = $c_urls[ 'sf_remove_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-					$submit_form[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
+					$data_scheme[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+					$data_scheme[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+					$data_scheme[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+					$data_scheme[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+					$data_scheme[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
 					
-					$data[ 'submit_form' ] = & $submit_form;
+					$data[ 'submit_form' ] = & $data_scheme;
 					
 				}
 				
@@ -937,12 +953,12 @@ class Submit_forms extends Main {
 			Claro que isso não é um problema nas páginas em ajax.
 			*/
 			
-			$data[ 'submit_forms' ] = $this->sfcm->get_submit_forms()->result_array();
-			$submit_forms = & $data[ 'submit_forms' ];
+			$data[ 'data_schemes' ] = $this->sfcm->get_submit_forms()->result_array();
+			$data_schemes = & $data[ 'data_schemes' ];
 			
-			foreach( $submit_forms as $key => & $_submit_form ){
+			foreach( $data_schemes as $key => & $ds ){
 				
-				$this->sfcm->parse_sf( $_submit_form );
+				$this->sfcm->parse_sf( $ds );
 				
 			}
 			
@@ -960,18 +976,18 @@ class Submit_forms extends Main {
 				
 				if( $action == 'asf' ){
 					
-					$submit_form[ 'params' ] = array();
+					$data_scheme[ 'params' ] = array();
 					
 				}
 				
 			}
 			else {
 				
-				$admin_ud_dl_filters_profiles = isset( $submit_form[ 'params' ][ 'admin_ud_dl_filters_profiles' ] ) ? $submit_form[ 'params' ][ 'admin_ud_dl_filters_profiles' ]: array();
+				$admin_ud_dl_filters_profiles = isset( $data_scheme[ 'params' ][ 'admin_ud_dl_filters_profiles' ] ) ? $data_scheme[ 'params' ][ 'admin_ud_dl_filters_profiles' ]: array();
 				
 				$post_data[ 'params' ][ 'admin_ud_dl_filters_profiles' ] = $admin_ud_dl_filters_profiles;
 				
-				$submit_form[ 'params' ] = $post_data[ 'params' ];
+				$data_scheme[ 'params' ] = $post_data[ 'params' ];
 				
 				// ------------------------------------------------------------------------
 				// Fields
@@ -979,7 +995,9 @@ class Submit_forms extends Main {
 				// Checking for remove field request
 				if ( isset( $post_data[ 'submit_remove_field' ] ) ){
 					
-					foreach ( $post_data[ 'submit_remove_field' ] as $key => $value ) {
+					reset( $post_data[ 'submit_remove_field' ] );
+					
+					while ( list( $key, $value ) = each( $post_data[ 'submit_remove_field' ] ) ) {
 						
 						unset( $post_data[ 'fields' ][ $key ] );
 						
@@ -1034,7 +1052,7 @@ class Submit_forms extends Main {
 				
 				if ( $this->sfcm->parse_sf( $post_data ) === TRUE ) {
 					
-					$submit_form = $post_data;
+					$data_scheme = $post_data;
 					
 				}
 				else if ( $errors = $this->sfcm->parse_sf( $post_data ) ) {
@@ -1053,7 +1071,7 @@ class Submit_forms extends Main {
 			// Fields
 			// Processos pós definição final dos campos (se é a original ou POST)
 			
-			if ( isset( $submit_form[ 'fields' ] ) AND is_array( $submit_form[ 'fields' ] ) ) {
+			if ( isset( $data_scheme[ 'fields' ] ) AND is_array( $data_scheme[ 'fields' ] ) ) {
 				
 				$temp_array = array();
 				
@@ -1064,7 +1082,9 @@ class Submit_forms extends Main {
 				// cache var
 				$articles_categories_loaded = FALSE;
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+				reset( $data_scheme[ 'fields' ] );
+				
+				while ( list( $key, $field ) = each( $data_scheme[ 'fields' ] ) ) {
 					
 					if ( ! isset( $field[ 'key' ] ) ) { echo '<pre>' . print_r( $field, TRUE ) . '</pre>'; exit; }
 					
@@ -1090,12 +1110,40 @@ class Submit_forms extends Main {
 					
 				}
 				
-				$submit_form[ 'fields' ] = $temp_array;
+				/*
+				foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
+					
+					if ( ! isset( $field[ 'key' ] ) ) { echo '<pre>' . print_r( $field, TRUE ) . '</pre>'; exit; }
+					
+					$temp_array[ $field[ 'key' ] ] = $field;
+					
+					// articles categories
+					if ( $field[ 'field_type' ] === 'articles' AND ! $articles_categories_loaded ) {
+						
+						// loading articles main model
+						if ( ! $this->load->is_model_loaded( 'articles' ) ) {
+							
+							$this->load->model( 'articles_mdl', 'articles' );
+							
+						}
+						
+						// loading articles categories
+						$data[ 'articles_categories' ] = $this->articles->get_categories_tree( array( 'array' => $this->articles->get_categories( array( 'status' => '1' ) ) ) );
+						
+						// cache for reuse
+						$articles_categories_loaded = TRUE;
+						
+					}
+					
+				}
+				*/
+				
+				$data_scheme[ 'fields' ] = $temp_array;
 				unset( $temp_array );
 				
-				ksort( $submit_form[ 'fields' ] );
+				ksort( $data_scheme[ 'fields' ] );
 				
-				$post_data[ 'fields' ] = & $submit_form[ 'fields' ];
+				$post_data[ 'fields' ] = & $data_scheme[ 'fields' ];
 				
 			}
 			
@@ -1108,12 +1156,15 @@ class Submit_forms extends Main {
 			if ( $action == 'esf' ){
 				
 				// obtendo os valores atuais dos parâmetros
-				$data[ 'current_params_values' ] = get_params( $submit_form[ 'params' ] );
+				$data[ 'current_params_values' ] = get_params( $data_scheme[ 'params' ] );
 				
 				//-------------------
 				// Adjusting params array values
 				$new_values = array();
-				foreach( $data[ 'current_params_values' ] as $k => $item ) {
+				
+				$current_values = $data[ 'current_params_values' ];
+				
+				while ( list( $k, $item ) = each( $current_values ) ) {
 					
 					if ( is_array( $item ) ) {
 						
@@ -1127,6 +1178,22 @@ class Submit_forms extends Main {
 					
 				}
 				
+				/*
+				foreach( $data[ 'current_params_values' ] as $k => $item ) {
+					
+					if ( is_array( $item ) ) {
+						
+						$new_values = _resolve_array_param_value( $k, $item );
+						
+						unset( $data[ 'current_params_values' ][ $k ] );
+						
+					}
+					
+					$data[ 'current_params_values' ] = $data[ 'current_params_values' ] + $new_values;
+					
+				}
+				*/
+				
 			}
 			else{
 				
@@ -1135,7 +1202,7 @@ class Submit_forms extends Main {
 			}
 			
 			// obtendo as especificações dos parâmetros
-			$data[ 'params_spec' ] = $this->sfcm->get_submit_form_params( $submit_form, $data[ 'current_params_values' ] );
+			$data[ 'params_spec' ] = $this->sfcm->get_submit_form_params( $data_scheme, $data[ 'current_params_values' ] );
 			
 			// cruzando os valores padrões das especificações com os do DB
 			$data[ 'final_params_values' ] = array_merge( $data[ 'params_spec' ][ 'params_spec_values' ], $data[ 'current_params_values' ] );
@@ -1156,11 +1223,11 @@ class Submit_forms extends Main {
 			// Validation
 			// ------------------------------------------------------------------------
 			
-			$data[ 'submit_form' ] = $submit_form;
+			$data[ 'submit_form' ] = $data_scheme;
 			$data[ 'post' ] = & $post_data;
 			
 			// ------------------------------------------------------------------------
-			// UniData plugin submit POST signal
+			// UniD plugin submit POST signal
 			
 			/*
 			Definimos aqui uma variável que servirá de permissão para a verficação
@@ -1192,7 +1259,7 @@ class Submit_forms extends Main {
 				
 			}
 			
-			// UniData plugin submit POST signal
+			// UniD plugin submit POST signal
 			// ------------------------------------------------------------------------
 			
 			if ( $this->unid->continue_after_udgdps() ) {
@@ -1285,7 +1352,7 @@ class Submit_forms extends Main {
 					}
 					else if ( $action == 'esf' ){
 						
-						if ( $this->sfcm->update( $db_data, array( 'id' => $submit_form_id ) ) ){
+						if ( $this->sfcm->update( $db_data, array( 'id' => $ds_id ) ) ){
 
 							msg( ( 'submit_form_updated' ), 'success' );
 
@@ -1349,10 +1416,42 @@ class Submit_forms extends Main {
 			--------------------------------------------------------
 			*/
 
-		else if ( $action == 'rsf' ){
-
-			if ( $submit_form_id AND ( $submit_form = $this->sfcm->get_submit_form( $submit_form_id )->row_array() ) ){
-
+		else if ( $action == 'rds' ){
+			
+			// -------------------------
+			// Loading UniD API model
+			
+			$this->load->model( 'common/unid_api_common_model', 'ud_api' );
+			
+			// -------------------------
+			// Obtenção do formulário
+			/*
+			$data_scheme = $this->ud_api->get_submit_form( $ds_id )->row_array();
+			*/
+			
+			$ud_api = & $this->ud_api;
+			
+			$data_scheme = $ud_api(
+				
+				array(
+					
+					'a' => 'gds',
+					'rt' => 2,
+					'dsi' => $ds_id,
+					
+				), TRUE, TRUE
+				
+			);
+			
+			if ( isset( $data_scheme[ 'errors' ] ) OR ! isset( $data_scheme[ 'out' ][ 'data_schemes' ][ $ds_id ] ) ) {
+				
+				echo $data_scheme[ 'errors' ];
+				
+			}
+			else {
+				
+				$data_scheme = $data_scheme[ 'out' ][ 'data_schemes' ][ $ds_id ];
+				
 				if( $this->input->post( 'submit_cancel' ) ){
 
 					redirect_last_url();
@@ -1360,7 +1459,7 @@ class Submit_forms extends Main {
 				}
 				else if ( $this->input->post( 'submit' ) ){
 
-					if ( $this->sfcm->delete( array( 'id'=>$submit_form_id ) ) ){
+					if ( $this->sfcm->delete( array( 'id'=>$ds_id ) ) ){
 
 						msg( 'submit_form_deleted', 'success');
 						redirect_last_url();
@@ -1375,29 +1474,28 @@ class Submit_forms extends Main {
 
 				}
 				else{
-
-					$data[ 'submit_form' ] = $submit_form;
-
+					
+					$data[ 'submit_form' ] = $data_scheme;
+					
 					$this->_page(
-
+						
 						array(
-
+							
 							'component_view_folder' => $this->component_view_folder,
 							'function' => 'submit_forms_management',
 							'action' => 'remove_submit_form',
 							'layout' => 'default',
 							'view' => 'remove_submit_form',
 							'data' => $data,
-
+							
 						)
-
+						
 					);
-
+					
 				}
+				
 			}
-			else{
-				show_404();
-			}
+			
 		}
 
 		/*
@@ -1452,6 +1550,86 @@ class Submit_forms extends Main {
 	 **************************************************************************************************
 	 **************************************************************************************************
 	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 **************************************************************************************************
@@ -1684,7 +1862,7 @@ class Submit_forms extends Main {
 		
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : 'usl'; // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : NULL; // sub action
-		$submit_form_id =						( isset( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] AND is_numeric( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] > 0 ) ? $f_params[ 'sfid' ] : NULL; // submit form id
+		$ds_id =						( isset( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] AND is_numeric( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] > 0 ) ? $f_params[ 'sfid' ] : NULL; // submit form id
 		$user_submit_id =						( isset( $f_params[ 'usid' ] ) AND $f_params[ 'usid' ] AND is_numeric( $f_params[ 'usid' ] ) AND $f_params[ 'usid' ] > 0 ) ? $f_params[ 'usid' ] : NULL; // user submit id
 		$ob =									isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
 		$f =									isset( $f_params[ 'f' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'f' ] ) ), TRUE ) : array(); // filters
@@ -1715,7 +1893,7 @@ class Submit_forms extends Main {
 
 		);
 
-		$submit_forms_list_link_array = $base_link_array + array(
+		$data_schemes_list_link_array = $base_link_array + array(
 
 			'a' => 'sfl',
 
@@ -1739,7 +1917,7 @@ class Submit_forms extends Main {
 		);
 
 		$data[ 'add_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $add_link_array );
-		$data[ 'submit_forms_list_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $submit_forms_list_link_array );
+		$data[ 'submit_forms_list_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $data_schemes_list_link_array );
 		$data[ 'users_submits_list_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $users_submits_list_link_array );
 		$data[ 'search_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $search_link_array );
 		$data[ 'delete_all_link' ] = $base_link_prefix . $this->uri->assoc_to_uri( $delete_all_link_array );
@@ -1751,9 +1929,9 @@ class Submit_forms extends Main {
 		// admin url
 		$a_url = get_url( $this->environment . $this->uri->ruri_string() );
 
-		if ( $submit_form_id ){
+		if ( $ds_id ){
 
-			$data[ 'submit_form_id' ] = $submit_form_id;
+			$data[ 'submit_form_id' ] = $ds_id;
 
 		}
 		
@@ -1943,25 +2121,23 @@ class Submit_forms extends Main {
 			);
 			
 			// se o id do formulário foi informado, iremos listar as submissões daquele formulário, e com as suas colunas
-			if ( $submit_form = $this->sfcm->get_submit_form( $submit_form_id )->row_array() ){
+			if ( $data_scheme = $this->sfcm->get_submit_form( $ds_id )->row_array() ){
 				
-				$this->sfcm->parse_sf( $submit_form );
+				$this->sfcm->parse_sf( $data_scheme );
 				
-				$submit_form_base_link_array = array(
+				$data_scheme_base_link_array = array(
 					
-					'sfid' => $submit_form[ 'id' ],
+					'sfid' => $data_scheme[ 'id' ],
 					
 				);
 				
-				$submit_form[ 'edit_link' ] = $c_urls[ 'sf_edit_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'remove_link' ] = $c_urls[ 'sf_remove_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
+				$data_scheme[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
 				
-				$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'sf_id' ] = $submit_form_id;
+				$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'sf_id' ] = $ds_id;
 				
 				/*
 				********************************************************
@@ -1984,10 +2160,10 @@ class Submit_forms extends Main {
 				
 				if ( check_var( $__filtered_params ) AND is_array( $__filtered_params ) ){
 					
-					$__sf_params = isset( $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ] ) ? get_params( $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ] ) : array();
+					$__sf_params = isset( $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] ) ? get_params( $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] ) : array();
 					
-					$this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ] = $__sf_params;
-					$user_sf_us_columns = & $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ];
+					$this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] = $__sf_params;
+					$user_sf_us_columns = & $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ];
 					
 					// comparando as colunas salvas nas preferências do usuário, com as atuais
 					// esta comparação deve ser rápida e simples, pois será executada sempre
@@ -2021,7 +2197,7 @@ class Submit_forms extends Main {
 						
 					);
 					
-					foreach( $submit_form[ 'fields' ] as $key => $field ){
+					foreach( $data_scheme[ 'fields' ] as $key => $field ){
 						
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ){
 							
@@ -2120,7 +2296,7 @@ class Submit_forms extends Main {
 							
 						);
 						
-						foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+						foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 							
 							if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ){
 								
@@ -2137,19 +2313,19 @@ class Submit_forms extends Main {
 						
 						$user_preference[ 'admin_submit_form_users_submits_columns' ] = get_params( isset( $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] ) ? $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] : NULL );
 						
-						$user_preference[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ] = $columns;
+						$user_preference[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] = $columns;
 						
 						$this->users->set_user_preferences( $user_preference, NULL, TRUE, TRUE );
 						
 					}
 					else {
 						
-						$columns = $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ];
+						$columns = $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ];
 						
 					}
 					
 				}
-				else if ( ! isset( $__filtered_params[ 'submit_form_' . $submit_form_id ] ) OR ! is_array( $__filtered_params[ 'submit_form_' . $submit_form_id ] ) OR ( ! $cols_equals ) ){
+				else if ( ! isset( $__filtered_params[ 'submit_form_' . $ds_id ] ) OR ! is_array( $__filtered_params[ 'submit_form_' . $ds_id ] ) OR ( ! $cols_equals ) ){
 					
 					$max_columns = 7;
 					
@@ -2204,7 +2380,7 @@ class Submit_forms extends Main {
 						
 					);
 					
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 						
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ){
 							
@@ -2258,14 +2434,14 @@ class Submit_forms extends Main {
 					
 					$user_preference[ 'admin_submit_form_users_submits_columns' ] = get_params( isset( $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] ) ? $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] : NULL );
 					
-					$user_preference[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ] = $columns;
+					$user_preference[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] = $columns;
 					
 					$this->users->set_user_preferences( $user_preference, NULL, TRUE, TRUE );
 					
 				}
 				else {
 					
-					$columns = $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $submit_form_id ];
+					$columns = $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ];
 					
 				}
 				//echo '<pre>' . print_r( $columns, TRUE ) . '</pre>';
@@ -2280,7 +2456,7 @@ class Submit_forms extends Main {
 				********************************************************
 				*/
 				
-				$data[ 'submit_form' ] = $submit_form;
+				$data[ 'submit_form' ] = $data_scheme;
 				
 			}
 			
@@ -2294,10 +2470,10 @@ class Submit_forms extends Main {
 			$ob_user_preference_name = 'users_submits_list_order_by';
 			$obd_user_preference_name = 'users_submits_list_order_by_direction';
 			
-			if ( $submit_form_id ){
+			if ( $ds_id ){
 				
-				$ob_user_preference_name .= '_sf' . $submit_form_id;
-				$obd_user_preference_name .= '_sf' . $submit_form_id;
+				$ob_user_preference_name .= '_sf' . $ds_id;
+				$obd_user_preference_name .= '_sf' . $ds_id;
 				
 			}
 			
@@ -2456,14 +2632,14 @@ class Submit_forms extends Main {
 			else if (
 				
 				! isset( $ipp ) AND
-				$submit_form_id AND
-				is_numeric( $this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $submit_form_id ) ) AND
-				$this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $submit_form_id ) > -1 AND
+				$ds_id AND
+				is_numeric( $this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $ds_id ) ) AND
+				$this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $ds_id ) > -1 AND
 				! isset( $post[ 'ipp' ] )
 				
 			){
 				
-				$ipp = $this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $submit_form_id );
+				$ipp = $this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $ds_id );
 				
 			}
 			else if (
@@ -2513,17 +2689,17 @@ class Submit_forms extends Main {
 				
 			}
 			
-			if ( isset( $submit_form[ 'params' ][ 'sf_us_list_max_ipp' ] ) AND $ipp > $submit_form[ 'params' ][ 'sf_us_list_max_ipp' ] ) {
+			if ( isset( $data_scheme[ 'params' ][ 'sf_us_list_max_ipp' ] ) AND $ipp > $data_scheme[ 'params' ][ 'sf_us_list_max_ipp' ] ) {
 				
-				$ipp = $submit_form[ 'params' ][ 'sf_us_list_max_ipp' ];
+				$ipp = $data_scheme[ 'params' ][ 'sf_us_list_max_ipp' ];
 				
 			}
 			
 			if ( $__new_ipp ) {
 				
-				if ( $submit_form_id ) {
+				if ( $ds_id ) {
 					
-					$this->users->set_user_preferences( array( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $submit_form_id => $ipp ) );
+					$this->users->set_user_preferences( array( $this->mcm->environment . '_users_submits_list_items_per_page_sf_' . $ds_id => $ipp ) );
 					
 				}
 				else {
@@ -2565,11 +2741,11 @@ class Submit_forms extends Main {
 
 			foreach ( $users_submits as $key => & $user_submit ) {
 				
-				if ( $submit_form_id ){
+				if ( $ds_id ){
 					
 					$sfbla = array(
 						
-						'sfid' => $submit_form_id,
+						'sfid' => $ds_id,
 						
 					);
 					
@@ -2793,10 +2969,10 @@ class Submit_forms extends Main {
 			$ob_user_preference_name = 'users_submits_list_order_by';
 			$obd_user_preference_name = 'users_submits_list_order_by_direction';
 			
-			if ( $submit_form_id ){
+			if ( $ds_id ){
 				
-				$ob_user_preference_name .= '_sf' . $submit_form_id;
-				$obd_user_preference_name .= '_sf' . $submit_form_id;
+				$ob_user_preference_name .= '_sf' . $ds_id;
+				$obd_user_preference_name .= '_sf' . $ds_id;
 				
 			}
 			
@@ -3091,41 +3267,41 @@ class Submit_forms extends Main {
 		
 		
 		/*
-			********************************************************
-			--------------------------------------------------------
-			Add / edit submit form
-			--------------------------------------------------------
-			*/
+		********************************************************
+		--------------------------------------------------------
+		Add / edit submit form
+		--------------------------------------------------------
+		*/
 		
 		else if ( $action == 'aus' OR $action == 'eus' ){
 			
-			if ( $submit_form_id ) {
+			if ( $ds_id ) {
 				
 				// get submit form params
 				$gsfp = array(
 					
-					'where_condition' => 't1.id = ' . $submit_form_id,
+					'where_condition' => 't1.id = ' . $ds_id,
 					'limit' => 1,
 					
 				);
 				
-				$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+				$data_scheme = $this->sfcm->get_submit_forms( $gsfp )->row_array();
 				
-				if ( ! $submit_form ) {
+				if ( ! $data_scheme ) {
 					
 					msg( ( 'submit_form_do_not_exist' ), 'error' );
 					redirect_last_url();
 					
 				}
 				
-				$this->sfcm->parse_sf( $submit_form, TRUE );
-				$data[ 'submit_form' ] = & $submit_form;
+				$this->sfcm->parse_sf( $data_scheme, TRUE );
+				$data[ 'submit_form' ] = & $data_scheme;
 				
 				$xss_filtering = TRUE;
 				
-				if ( isset( $submit_form[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
+				if ( isset( $data_scheme[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
 					
-					if ( ! check_var( $submit_form[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
+					if ( ! check_var( $data_scheme[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
 						
 						$xss_filtering = FALSE;
 						
@@ -3144,19 +3320,19 @@ class Submit_forms extends Main {
 					
 				}
 				
-				$submit_form_base_link_array = array(
+				$data_scheme_base_link_array = array(
 					
-					'sfid' => $submit_form[ 'id' ],
+					'sfid' => $data_scheme[ 'id' ],
 					
 				);
 				
-				$submit_form[ 'edit_link' ] = $c_urls[ 'sf_edit_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'remove_link' ] = $c_urls[ 'sf_remove_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
-				$submit_form[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $submit_form_base_link_array );
+				$data_scheme[ 'edit_link' ] = $c_urls[ 'sf_edit_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'remove_link' ] = $c_urls[ 'sf_remove_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'users_submits_link' ] = $c_urls[ 'us_list_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'users_submits_add_link' ] = $c_urls[ 'us_add_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'change_order_link' ] = $c_urls[ 'sf_change_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'up_order_link' ] = $c_urls[ 'sf_up_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
+				$data_scheme[ 'down_order_link' ] = $c_urls[ 'sf_down_order_link' ] . '/' . $this->uri->assoc_to_uri( $data_scheme_base_link_array );
 				
 				if ( $action == 'aus' ){
 					
@@ -3165,7 +3341,7 @@ class Submit_forms extends Main {
 					
 					$user_submit = $this->sfcm->get_user_submit( $user_submit_id );
 					
-					if ( ! $submit_form ) {
+					if ( ! $data_scheme ) {
 						
 						msg( ( 'user_submit_do_not_exist' ), 'error' );
 						redirect_last_url();
@@ -3176,7 +3352,7 @@ class Submit_forms extends Main {
 					
 				}
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $prop ) {
+				foreach ( $data_scheme[ 'fields' ] as $key => $prop ) {
 					
 					$prop_name = $prop[ 'alias' ];
 					
@@ -3202,7 +3378,27 @@ class Submit_forms extends Main {
 									
 									case 'matches':
 										
-										$comp .= '[form[' . $prop[ 'alias' ] . ']]';
+										$comp .= '[form[' . $prop[ 'validation_rule_parameter_matches'] . ']]';
+										break;
+										
+									case 'min_length':
+										
+										$comp .= '[' . $prop[ 'validation_rule_parameter_min_length'] . ']';
+										break;
+										
+									case 'max_length':
+										
+										$comp .= '[' . $prop[ 'validation_rule_parameter_max_length'] . ']';
+										break;
+										
+									case 'exact_length':
+										
+										$comp .= '[' . $prop[ 'validation_rule_parameter_exact_length'] . ']';
+										break;
+										
+									case 'less_than':
+										
+										$comp .= '[' . $prop[ 'validation_rule_parameter_less_than'] . ']';
 										break;
 										
 								}
@@ -3229,7 +3425,7 @@ class Submit_forms extends Main {
 					}
 					
 					// xss filtering
-					if ( check_var( $submit_form[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
+					if ( check_var( $data_scheme[ 'params' ][ 'ud_data_props_enable_xss_filtering_admin' ] ) ) {
 						
 						$rules[] = 'xss';
 						
@@ -3261,7 +3457,7 @@ class Submit_forms extends Main {
 						
 						$articles = $this->search->get_full_results( 'articles_search', TRUE );
 						
-						$submit_form[ 'fields' ][ $key ][ 'articles' ] = check_var( $articles ) ? $articles : array();
+						$data_scheme[ 'fields' ][ $key ][ 'articles' ] = check_var( $articles ) ? $articles : array();
 						
 					}
 					
@@ -3308,14 +3504,15 @@ class Submit_forms extends Main {
 					
 				
 				//echo '<pre>' . print_r( $user_submit, TRUE ) . '</pre>'; exit;
-				
-				//echo '<pre>' . print_r( $user_submit, TRUE ) . '</pre>'; exit;
-				
+				/*
+		echo '<pre>' . print_r( $_POST, TRUE ) . '</pre>'; exit;
+		*/
 				if ( in_array( $submit_action, array( 'cancel' ) ) ) {
 					
 					redirect_last_url();
 					
 				}
+				
 				// se a validação dos campos for positiva
 				else if ( $this->form_validation->run() AND ( in_array( $submit_action, array( 'submit', 'apply' ) ) ) ){
 					
@@ -3323,7 +3520,7 @@ class Submit_forms extends Main {
 					
 					$_tmp = array();
 					
-					foreach ( $submit_form[ 'fields' ] as $k => $prop ) {
+					foreach ( $data_scheme[ 'fields' ] as $k => $prop ) {
 						
 						if ( $prop[ 'field_type' ] == 'textarea' AND ! is_array( $data[ 'post' ][ 'form' ][ $prop[ 'alias' ] ] ) ) {
 							
@@ -3351,7 +3548,7 @@ class Submit_forms extends Main {
 					$mod_datetime = strftime( '%Y-%m-%d %T', $mod_datetime );
 					
 					$db_data[ 'id' ] = $user_submit_id;
-					$db_data[ 'submit_form_id' ] = $submit_form_id;
+					$db_data[ 'submit_form_id' ] = $ds_id;
 					$db_data[ 'mod_datetime' ] = $mod_datetime;
 					
 					
@@ -3383,7 +3580,7 @@ class Submit_forms extends Main {
 								
 								$assoc_to_uri_array = array(
 									
-									'sfid' => $submit_form_id,
+									'sfid' => $ds_id,
 									'usid' => $return_id,
 									'a' => 'eus',
 									
@@ -3614,7 +3811,7 @@ class Submit_forms extends Main {
 
 		else if ( $action == 'vus' ){
 
-			if ( $submit_form_id AND $user_submit_id ){
+			if ( $ds_id AND $user_submit_id ){
 
 				// get submit form params
 				$gus_params = array(
@@ -3627,19 +3824,19 @@ class Submit_forms extends Main {
 				// get submit form params
 				$gsfp = array(
 
-					'where_condition' => 't1.id = ' . $submit_form_id,
+					'where_condition' => 't1.id = ' . $ds_id,
 					'limit' => 1,
 
 					);
 
-				$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
-				$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $submit_form_id );
+				$data_scheme = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+				$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $ds_id );
 
-				$data[ 'submit_form' ] = & $submit_form;
+				$data[ 'submit_form' ] = & $data_scheme;
 				$data[ 'user_submit' ] = & $user_submit;
 
-				$submit_form[ 'fields' ] = get_params( $submit_form[ 'fields' ] );
-				$submit_form[ 'params' ] = get_params( $submit_form[ 'params' ] );
+				$data_scheme[ 'fields' ] = get_params( $data_scheme[ 'fields' ] );
+				$data_scheme[ 'params' ] = get_params( $data_scheme[ 'params' ] );
 
 			}
 
@@ -4115,7 +4312,7 @@ class Submit_forms extends Main {
 
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : ( isset( $get[ 'a' ] ) ? $get[ 'a' ] : NULL ); // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : ( isset( $get[ 'sa' ] ) ? $get[ 'sa' ] : NULL ); // sub action
-		$submit_form_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : ( isset( $get[ 'sfid' ] ) ? $get[ 'sfid' ] : NULL ); // submit form id
+		$ds_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : ( isset( $get[ 'sfid' ] ) ? $get[ 'sfid' ] : NULL ); // submit form id
 		$user_submit_id =						isset( $f_params[ 'usid' ] ) ? $f_params[ 'usid' ] : ( isset( $get[ 'usid' ] ) ? $get[ 'usid' ] : NULL ); // user submit id
 		$content_type =							isset( $f_params[ 'ct' ] ) ? $f_params[ 'ct' ] : ( isset( $get[ 'ct' ] ) ? $get[ 'ct' ] : 'txt' ); // return type: json, xml, pdf, etc.
 		$cp =									isset( $f_params[ 'cp' ] ) ? $f_params[ 'cp' ] : ( isset( $get[ 'cp' ] ) ? $get[ 'cp' ] : NULL ); // current page
@@ -4134,7 +4331,7 @@ class Submit_forms extends Main {
 			
 			if ( check_var( $post[ 'submit_form_id' ] ) ){
 				
-				$submit_form_id = $post[ 'submit_form_id' ];
+				$ds_id = $post[ 'submit_form_id' ];
 				
 			}
 			
@@ -4163,7 +4360,7 @@ class Submit_forms extends Main {
 		 --------------------------------------------------------
 		 */
 		
-		$submit_forms = $users_submits = FALSE;
+		$data_schemes = $users_submits = FALSE;
 		
 		if ( $action == 'usl' ){
 			
@@ -4180,7 +4377,7 @@ class Submit_forms extends Main {
 							'sf_us_search' => array(
 								
 								'us_id' => $user_submit_id,
-								'sf_id' => $submit_form_id,
+								'sf_id' => $ds_id,
 								
 							),
 							
@@ -4196,7 +4393,7 @@ class Submit_forms extends Main {
 				}
 				else{
 					
-					$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $submit_form_id );
+					$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $ds_id );
 					
 				}
 				
@@ -4216,25 +4413,25 @@ class Submit_forms extends Main {
 							
 						);
 						
-						if ( check_var( $submit_forms[ $user_submit[ 'submit_form_id' ] ] ) ){
+						if ( check_var( $data_schemes[ $user_submit[ 'submit_form_id' ] ] ) ){
 							
-							$submit_forms[ $user_submit[ 'submit_form_id' ] ][ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
+							$data_schemes[ $user_submit[ 'submit_form_id' ] ][ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
 							
 						}
 						else {
 							
-							$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+							$data_scheme = $this->sfcm->get_submit_forms( $gsfp )->row_array();
 							
-							if ( $submit_form ){
+							if ( $data_scheme ){
 								
-								$submit_form[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
+								$data_scheme[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
 								
-								$submit_form[ 'fields' ] = get_params( $submit_form[ 'fields' ] );
-								$submit_form[ 'params' ] = get_params( $submit_form[ 'params' ] );
+								$data_scheme[ 'fields' ] = get_params( $data_scheme[ 'fields' ] );
+								$data_scheme[ 'params' ] = get_params( $data_scheme[ 'params' ] );
 								
 							}
 							
-							$submit_forms[ $submit_form[ 'id' ] ] = $submit_form;
+							$data_schemes[ $data_scheme[ 'id' ] ] = $data_scheme;
 							
 						}
 						
@@ -4253,45 +4450,45 @@ class Submit_forms extends Main {
 						
 					);
 					
-					$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+					$data_scheme = $this->sfcm->get_submit_forms( $gsfp )->row_array();
 					
-					$this->sfcm->parse_sf( $submit_form );
+					$this->sfcm->parse_sf( $data_scheme );
 					
-					if ( $submit_form ){
+					if ( $data_scheme ){
 						
-						$submit_form[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
+						$data_scheme[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
 						
 					}
 					
-					$submit_forms[ $submit_form[ 'id' ] ] = $submit_form;
+					$data_schemes[ $data_scheme[ 'id' ] ] = $data_scheme;
 					
 				}
 				
 			}
 			else {
 				
-				if ( $submit_form_id ){
+				if ( $ds_id ){
 					
 					// get submit form params
 					$gsfp = array(
 						
-						'where_condition' => 't1.id = ' . $submit_form_id,
+						'where_condition' => 't1.id = ' . $ds_id,
 						'limit' => 1,
 						
 					);
 					
-					$submit_forms = $this->sfcm->get_submit_forms( $gsfp )->result_array(); // note, we're calling result_array(), not row_array()
+					$data_schemes = $this->sfcm->get_submit_forms( $gsfp )->result_array(); // note, we're calling result_array(), not row_array()
 					
 				}
 				else{
 					
-					$submit_forms = $this->sfcm->get_submit_forms()->result_array();
+					$data_schemes = $this->sfcm->get_submit_forms()->result_array();
 					
 				}
 				
-				foreach ( $submit_forms as $key => & $submit_form ) {
+				foreach ( $data_schemes as $key => & $data_scheme ) {
 					
-					$this->sfcm->parse_sf( $submit_form );
+					$this->sfcm->parse_sf( $data_scheme );
 					
 					$search_config = array(
 						
@@ -4301,7 +4498,7 @@ class Submit_forms extends Main {
 							
 							'sf_us_search' => array(
 								
-								'sf_id' => $submit_form[ 'id' ],
+								'sf_id' => $data_scheme[ 'id' ],
 								
 							),
 							
@@ -4314,13 +4511,13 @@ class Submit_forms extends Main {
 					
 					$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
 					
-					$submit_form[ 'users_submits' ] = array();
+					$data_scheme[ 'users_submits' ] = array();
 					
 					foreach ( $users_submits as $key => $user_submit ) {
 						
 						$user_submit = $this->sfcm->parse_ud_d_data( $user_submit );
 						
-						$submit_form[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
+						$data_scheme[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
 						
 					}
 					
@@ -4328,9 +4525,9 @@ class Submit_forms extends Main {
 				
 			}
 			
-			if ( $submit_forms ){
+			if ( $data_schemes ){
 				
-				$data[ 'submit_forms' ] = & $submit_forms;
+				$data[ 'submit_forms' ] = & $data_schemes;
 				$data[ 'download' ] = $download ? TRUE : ( ( $sub_action == 'dl' ) ? TRUE : FALSE );
 				
 				$page_params = array(
@@ -4753,7 +4950,7 @@ class Submit_forms extends Main {
 		$ajax =									( isset( $post[ 'ajax' ] ) ? $post[ 'ajax' ] : NULL );
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : ( isset( $get[ 'a' ] ) ? $get[ 'a' ] : NULL ); // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : ( isset( $get[ 'sa' ] ) ? $get[ 'sa' ] : NULL ); // sub action
-		$submit_form_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : ( isset( $get[ 'sfid' ] ) ? $get[ 'sfid' ] : NULL ); // submit form id
+		$ds_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : ( isset( $get[ 'sfid' ] ) ? $get[ 'sfid' ] : NULL ); // submit form id
 		$user_submit_id =						isset( $f_params[ 'usid' ] ) ? $f_params[ 'usid' ] : ( isset( $get[ 'usid' ] ) ? $get[ 'usid' ] : NULL ); // user submit id
 		$return_format =						isset( $f_params[ 'rf' ] ) ? $f_params[ 'rf' ] : ( isset( $get[ 'rf' ] ) ? $get[ 'rf' ] : 'ajax' ); // return type: json, xml, pdf, etc.
 		$cp =									isset( $f_params[ 'cp' ] ) ? $f_params[ 'cp' ] : ( isset( $get[ 'cp' ] ) ? $get[ 'cp' ] : NULL ); // current page
@@ -4781,29 +4978,29 @@ class Submit_forms extends Main {
 		 --------------------------------------------------------
 		 */
 
-		if ( $action == 'gus' AND $submit_form_id AND $user_submit_id ){
+		if ( $action == 'gus' AND $ds_id AND $user_submit_id ){
 			
 			// get submit form params
 			$gsfp = array(
 				
-				'where_condition' => 't1.id = ' . $submit_form_id,
+				'where_condition' => 't1.id = ' . $ds_id,
 				'limit' => 1,
 				
 			 );
 			
-			$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
-			$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $submit_form_id );
+			$data_scheme = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+			$user_submit = $this->sfcm->get_user_submit( $user_submit_id, $ds_id );
 			
-			if ( $submit_form AND $user_submit ){
+			if ( $data_scheme AND $user_submit ){
 				
-				$this->sfcm->parse_sf( $submit_form );
+				$this->sfcm->parse_sf( $data_scheme );
 				
-				$data[ 'submit_form' ] = & $submit_form;
+				$data[ 'submit_form' ] = & $data_scheme;
 				$data[ 'user_submit' ] = & $user_submit;
 				
 				$us_export_base_link_array = array(
 					
-					'sfid' => $submit_form_id,
+					'sfid' => $ds_id,
 					'usid' => $user_submit_id,
 					
 				);
@@ -4815,7 +5012,7 @@ class Submit_forms extends Main {
 				$c_urls[ 'us_export_download_txt_link' ] = $c_urls[ 'us_export_download_txt_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );
 				$c_urls[ 'us_export_download_pdf_link' ] = $c_urls[ 'us_export_download_pdf_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );
 
-				$dl_filename = url_title( $submit_form[ 'title' ] . ' - ' . $user_submit[ 'submit_datetime' ] );
+				$dl_filename = url_title( $data_scheme[ 'title' ] . ' - ' . $user_submit[ 'submit_datetime' ] );
 
 				if ( $return_format === 'json' ){
 
@@ -4829,7 +5026,7 @@ class Submit_forms extends Main {
 
 					$out = array();
 
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ) {
 
@@ -4850,7 +5047,7 @@ class Submit_forms extends Main {
 
 					$out = array();
 
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ) {
 
@@ -4860,7 +5057,7 @@ class Submit_forms extends Main {
 
 					}
 
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ) {
 

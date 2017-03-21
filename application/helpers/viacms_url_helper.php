@@ -4,7 +4,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 	
 	if ( ! $original_url ) {
 		
-		return base_url();
+		return site_url();
 		
 	}
 	
@@ -53,7 +53,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 		if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND array_key_exists( $original_url, $reverse_urls ) ){
 		
 			//echo 'array_key_exists é: ' . $reverse_urls[ $original_url ] . ' : ' . $original_url . '<br />';
-			return base_url() . $reverse_urls[ $original_url ];
+			return site_url( $reverse_urls[ $original_url ] );
 			
 		}
 		else if ( 0 === strpos( $original_url, 'submit_forms' ) ) {
@@ -135,7 +135,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 						
 						$menu_item = $menu_item->row_array();
 						
-						return base_url() . $menu_item[ 'link' ];
+						return site_url( $menu_item[ 'link' ] );
 						
 					}
 					
@@ -153,7 +153,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 						
 						$menu_item = $menu_item->row_array();
 						
-						return base_url() . $menu_item[ 'link' ];
+						return site_url( $menu_item[ 'link' ] );
 						
 					}
 					
@@ -235,14 +235,14 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 					}
 					else {
 
-						return $tb_urls_data[ 'sef_url' ];
+						return site_url( $tb_urls_data[ 'sef_url' ] );
 
 					}
 
 				}
 				else {
 
-					return ( $url[ 'sef_url' ] == 'default_controller' ? base_url() : $url[ 'sef_url' ] );
+					return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $tb_urls_data[ 'sef_url' ] ) );
 
 				}
 
@@ -316,7 +316,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 						}
 						else {
 
-							return base_url() . $tb_urls_data[ 'sef_url' ];
+							return site_url( $tb_urls_data[ 'sef_url' ] );
 
 						}
 
@@ -325,7 +325,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 
 
-						return ( $url[ 'sef_url' ] == 'default_controller' ? base_url() : $url[ 'sef_url' ] );
+						return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $url[ 'sef_url' ] ) );
 
 					}
 
@@ -404,14 +404,14 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 						}
 						else {
 
-							return $tb_urls_data[ 'sef_url' ];
+							return site_url( $tb_urls_data[ 'sef_url' ] );
 
 						}
 
 					}
 					else{
 
-						return ( $url[ 'sef_url' ] == 'default_controller' ? base_url() : $url[ 'sef_url' ] );
+						return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $url[ 'sef_url' ] ) );
 
 					}
 
@@ -423,7 +423,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 	}
 	
-	return base_url() . $original_url;
+	return site_url( $original_url );
 	
 }
 

@@ -585,9 +585,24 @@ class Search{
 				}
 				else if ( is_array( $order_by ) ){
 					
-					call_user_func_array( array( $this->CI->db, 'order_by' ), $order_by );
-					
-					$_query_id .= join( '', $order_by );
+					if ( is_array( $order_by[ 0 ] ) ) {
+						
+						foreach( $order_by as $ob ) {
+							
+							$this->CI->db->order_by( $ob[ 0 ], $ob[ 1 ], $ob[ 2 ] );
+							
+							$_query_id .= join( '_', $ob );
+							
+						}
+						
+					}
+					else {
+						
+						call_user_func_array( array( $this->CI->db, 'order_by' ), $order_by );
+						
+						$_query_id .= join( '_', $order_by );
+						
+					}
 					
 				}
 				

@@ -43,6 +43,23 @@ class Viacms_Form_validation extends CI_Form_validation {
 	
 	// --------------------------------------------------------------------
 	
+	public function clear() {
+		
+		$this->_field_data = array();
+		$this->_config_rules = array();
+		$this->_error_array = array();
+		$this->_error_messages = array();
+		$this->_error_prefix = '<p>';
+		$this->_error_suffix = '</p>';
+		$this->error_string = '';
+		$this->_safe_form_data = FALSE;
+		
+		return $this;
+		
+	}
+
+	// --------------------------------------------------------------------
+	
 	public function set_custom_message($field = '', $rule = '', $message = '' ){
 		if(is_array($field)){
 			foreach($field as $id){

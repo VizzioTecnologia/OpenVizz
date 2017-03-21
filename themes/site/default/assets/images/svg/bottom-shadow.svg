@@ -33,8 +33,8 @@
      id="namedview13"
      showgrid="true"
      inkscape:zoom="20.859651"
-     inkscape:cx="-1.609866"
-     inkscape:cy="10.351346"
+     inkscape:cx="11.765238"
+     inkscape:cy="5.1738864"
      inkscape:window-x="-10"
      inkscape:window-y="35"
      inkscape:window-maximized="1"
@@ -83,6 +83,64 @@
        xlink:href="#linearGradient3019"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,0.07748181,-0.03883518,-7.9622738e-6,-23.364613,4.8120942)" />
+    <radialGradient
+       cx="-268.68903"
+       cy="-807.63403"
+       r="206.5"
+       fx="-268.68903"
+       fy="-807.63403"
+       id="radialGradient2995-1"
+       xlink:href="#linearGradient3019-4"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0,0.07748181,-0.03883518,-7.9622738e-6,-23.364613,4.812094)" />
+    <linearGradient
+       id="linearGradient3019-4"
+       class="vui_change_color">
+      <stop
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1"
+         id="stop3021-4" />
+      <stop
+         id="stop4151"
+         style="stop-color:#000000;stop-opacity:0.92962468"
+         offset="0.03125003" />
+      <stop
+         id="stop4142-5"
+         style="stop-color:#000000;stop-opacity:0.85723859"
+         offset="0.06250005" />
+      <stop
+         offset="0.12500007"
+         style="stop-color:#000000;stop-opacity:0.76206434"
+         id="stop4153" />
+      <stop
+         id="stop3029-5"
+         style="stop-color:#000000;stop-opacity:0.65884721"
+         offset="0.1875001" />
+      <stop
+         offset="0.28125015"
+         style="stop-color:#000000;stop-opacity:0.50804287"
+         id="stop4155" />
+      <stop
+         offset="0.37500018"
+         style="stop-color:#000000;stop-opacity:0.37600535"
+         id="stop3023-1" />
+      <stop
+         id="stop4157"
+         style="stop-color:#000000;stop-opacity:0.23525469"
+         offset="0.50000024" />
+      <stop
+         id="stop3027-9"
+         style="stop-color:#000000;stop-opacity:0.12466488"
+         offset="0.6250003" />
+      <stop
+         offset="0.81250012"
+         style="stop-color:#2e1c0a;stop-opacity:0.03820375"
+         id="stop4159" />
+      <stop
+         offset="1"
+         style="stop-color:#5e3915;stop-opacity:0"
+         id="stop3025-0" />
+    </linearGradient>
   </defs>
   <metadata
      id="metadata7">
@@ -96,9 +154,12 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <path
-     transform="scale(1,-1)"
-     style="opacity:0.36500005;fill:url(#radialGradient2995);fill-opacity:1;fill-rule:nonzero;stroke:none"
-     d="m 3.0737306e-6,-15.999993 15.9999999262694,0 0,15.9999996757202 -15.9999999262694,0 z"
-     id="rect5173" />
+  <rect
+     width="16"
+     height="16"
+     x="3.0737306e-06"
+     y="-15.999993"
+     id="rect5173"
+     style="overflow:visible;opacity:0.156;fill:url(#radialGradient2995-1);fill-opacity:1;fill-rule:nonzero;stroke:none"
+     transform="scale(1,-1)" />
 </svg>

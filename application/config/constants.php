@@ -46,7 +46,38 @@ if( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] == 'on' ) {
 	if ( ! defined( 'PROTOCOL' ) ) define( 'PROTOCOL',															'http' );
 	
 }
-if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( 'index.php', '', $_SERVER[ 'PHP_SELF' ] ), '/' ) );
+
+$_tmp = isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : $_SERVER[ 'QUERY_STRING' ];
+
+$_tmp = explode( '/', $_tmp );
+
+reset( $_tmp );
+while ( list( $k, $v ) = each( $_tmp ) ) {
+	
+	$_tmp[ $k ] = urlencode( $v );
+	
+}
+
+$_tmp = '/' . trim( join( '/', $_tmp ), '/' );
+
+$_rel = $_SERVER[ 'REQUEST_URI' ];
+
+$_rel = explode( '?', $_rel );
+
+$_rel = $_rel[ 0 ];
+
+// echo '<pre>' . print_r( $_tmp, TRUE ) . '</pre><br>';
+// echo '<pre>' . print_r( $_rel, TRUE ) . '</pre><br>';
+
+$_rel = preg_replace( '/'. preg_quote( $_tmp, '/' ) . '$/', '', $_rel );
+
+// echo '<pre>' . print_r( $_rel, TRUE ) . '</pre><br>';
+
+// $_rel = rtrim( $_rel, $_tmp );
+
+// echo '<pre>' . print_r( $_SERVER, TRUE ) . '</pre>'; exit();
+
+if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( 'index.php', '', $_rel ), '/' ) );
 
 if ( ! defined( 'BASE_PATH' ) ) define( 'BASE_PATH',															$base_path );
 
@@ -58,7 +89,10 @@ if ( file_exists( BASE_PATH . 'application' . DS . 'config' . DS . 'host.php' ) 
 
 if ( ! defined( 'HTTP_HOST' ) ) define( 'HTTP_HOST',															PROTOCOL . '://' . HOST . ( SERVER_PORT ? ':' . SERVER_PORT : '' ) );
 if ( ! defined( 'BASE_URL' ) ) define( 'BASE_URL',																HTTP_HOST . RELATIVE_BASE_URL );
+if ( ! defined( 'BASE_URL_CI' ) ) define( 'BASE_URL_CI',														HTTP_HOST . rtrim( $_rel, '/' ) );
 //if ( ! defined( 'BASE_URL' ) ) define( 'BASE_URL',																HOST . RELATIVE_BASE_URL );
+
+// echo '<pre>' . print_r( BASE_URL_CI, TRUE ) . '</pre>'; exit();
 
 if ( ! defined( 'APPURL' ) ) define( 'APPURL',																	BASE_URL . '/application' );
 
@@ -156,7 +190,8 @@ if ( ! defined( 'COMPONENTS_DOCUMENTS_URL' ) ) define( 'COMPONENTS_DOCUMENTS_URL
 if ( ! defined( 'ADMIN_ALIAS' ) ) define( 'ADMIN_ALIAS',														'admin');
 if ( ! defined( 'ADMIN_DIR_NAME' ) ) define( 'ADMIN_DIR_NAME',													ADMIN_ALIAS);
 if ( ! defined( 'ADMIN_COMPONENTS_PATH' ) ) define( 'ADMIN_COMPONENTS_PATH',									COMPONENTS_PATH . ADMIN_DIR_NAME . DS );
-if ( ! defined( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH' ) ) define( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH',				ADMIN_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
+if ( ! defined( 'ADMIN_LOAD_VIEWS_PATH' ) ) define( 'ADMIN_LOAD_VIEWS_PATH',									ADMIN_DIR_NAME . DS );
+if ( ! defined( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH' ) ) define( 'ADMIN_COMPONENTS_LOAD_VIEWS_PATH',				ADMIN_LOAD_VIEWS_PATH . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'ADMIN_COMPONENTS_VIEWS_PATH' ) ) define( 'ADMIN_COMPONENTS_VIEWS_PATH',						VIEWS_PATH . ADMIN_COMPONENTS_LOAD_VIEWS_PATH );
 if ( ! defined( 'ADMIN_MODULES_VIEWS_PATH' ) ) define( 'ADMIN_MODULES_VIEWS_PATH',								ADMIN_DIR_NAME . DS . MODULES_DIR_NAME . DS );
 if ( ! defined( 'ADMIN_MODULES_VIEWS_STYLES_PATH' ) ) define( 'ADMIN_MODULES_VIEWS_STYLES_PATH',				STYLES_PATH . VIEWS_DIR_NAME . DS . ADMIN_DIR_NAME . DS . ADMIN_MODULES_VIEWS_PATH . DS );
@@ -174,7 +209,8 @@ if ( ! defined( 'ADMIN_THEMES_URL' ) ) define( 'ADMIN_THEMES_URL',												TH
 if ( ! defined( 'SITE_ALIAS' ) ) define( 'SITE_ALIAS',															'site');
 if ( ! defined( 'SITE_DIR_NAME' ) ) define( 'SITE_DIR_NAME',													SITE_ALIAS);
 if ( ! defined( 'SITE_COMPONENTS_PATH' ) ) define( 'SITE_COMPONENTS_PATH',										COMPONENTS_PATH );
-if ( ! defined( 'SITE_COMPONENTS_VIEWS_PATH' ) ) define( 'SITE_COMPONENTS_VIEWS_PATH',							SITE_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
+if ( ! defined( 'SITE_LOAD_VIEWS_PATH' ) ) define( 'SITE_LOAD_VIEWS_PATH',										SITE_DIR_NAME . DS );
+if ( ! defined( 'SITE_COMPONENTS_VIEWS_PATH' ) ) define( 'SITE_COMPONENTS_VIEWS_PATH',							SITE_LOAD_VIEWS_PATH . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'SITE_COMPONENTS_VIEWS_STYLES_PATH' ) ) define( 'SITE_COMPONENTS_VIEWS_STYLES_PATH',			STYLES_PATH . VIEWS_DIR_NAME . DS . SITE_DIR_NAME . DS . COMPONENTS_DIR_NAME . DS );
 if ( ! defined( 'SITE_COMPONENTS_VIEWS_STYLES_URL' ) ) define( 'SITE_COMPONENTS_VIEWS_STYLES_URL',				STYLES_DIR_URL . '/' . VIEWS_DIR_NAME . '/' . SITE_DIR_NAME . '/' . COMPONENTS_DIR_NAME );
 if ( ! defined( 'SITE_MODULES_VIEWS_PATH' ) ) define( 'SITE_MODULES_VIEWS_PATH',								SITE_DIR_NAME . DS . MODULES_DIR_NAME . DS );

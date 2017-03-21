@@ -1,3 +1,4 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 	<div class="items-list">
 		
@@ -109,22 +110,22 @@
 					<?php $current_column = 'operations'; ?>
 
 					<td class="col-<?= $current_column; ?>">
-
+						
 						<?php if ( $submit_form[ 'users_submit_count' ] ){ ?>
-
-						<?= vui_el_button( array( 'url' => $submit_form[ 'users_submits_link' ], 'text' => lang( 'users_submits_for_this_submit_form' ), 'icon' => 'users_submits', 'only_icon' => TRUE, ) ); ?>
-
+						
+						<?= vui_el_button( array( 'url' => $submit_form[ 'users_submits_link' ], 'text' => ( $submit_form[ 'users_submit_count' ] > 1 ? lang( 'ud_dsl_data_count', NULL, $submit_form[ 'users_submit_count' ] ) : lang( 'ud_dsl_data_count_one' ) ), 'icon' => 'users_submits', 'only_icon' => TRUE, ) ); ?>
+						
 						<?php } else { ?>
-
-						<?= vui_el_button( array( 'text' => lang( 'submit_forms_no_users_submits' ), 'icon' => 'users_submits disabled', 'only_icon' => TRUE, ) ); ?>
-
+						
+						<?= vui_el_button( array( 'text' => lang( 'ud_dsl_data_count_zero' ), 'icon' => 'users_submits disabled', 'only_icon' => TRUE, ) ); ?>
+						
 						<?php } ?>
 						
 						<?= vui_el_button( array( 'url' => $submit_form[ 'users_submits_add_link' ], 'text' => lang( 'add_user_submit' ), 'icon' => 'add', 'only_icon' => TRUE, ) ); ?>
 						
 						<?= vui_el_button( array( 'url' => $submit_form[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
 						
-						<!--<?= vui_el_button( array( 'url' => $submit_form[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>-->
+						<?= vui_el_button( array( 'url' => $submit_form[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>
 
 					</td>
 

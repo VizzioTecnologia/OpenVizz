@@ -3,6 +3,7 @@
 
 
 $lang['module_type_html'] = 																"HTML personalizado";
+$lang['html_module_config'] = 																"HTML personalizado";
 
 /* End of file general_lang.php */
 /* Location: ./system/language/pt-br/admin/modules/html_lang.php */

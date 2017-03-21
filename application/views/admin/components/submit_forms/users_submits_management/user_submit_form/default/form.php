@@ -120,7 +120,7 @@
 								
 								if ( check_var( $_path[ 'dirname' ] ) ) {
 									
-									$_ud_upload_dir_start_dir = trim( str_replace( $_ud_upload_dir, '', $_path[ 'dirname' ] ), '/' );
+									$_ud_upload_dir_start_dir = trim( str_replace( $_ud_upload_dir, '', $_path[ 'dirname' ] ), DS );
 									
 								}
 								

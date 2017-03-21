@@ -1,4 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+
+?>
 
 <section id="component-content" class="article-detail <?= @$params['page_class']; ?>">
 	

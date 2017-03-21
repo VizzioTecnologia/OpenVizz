@@ -115,7 +115,7 @@
 	text-align: left;
 	
 }
-/* Hiding dropdown arrows on IE*/
+/* Hiding dropdown arrows on IE */
 .vui .vui-interactive-el-wrapper.vui-btn-wrapper.vui-dropdown-wrapper > .el::-ms-expand,
 .vui select:not( [ multiple ] )::-ms-expand {
 	
@@ -144,6 +144,9 @@
 	background-image: url( <?= $vui->svg_file( 'icon-select', $vui->colors->vui_button_active_fg->rgba_s() ); ?> );
 	
 }
+
+
+
 
 /* Selects */
 /* ------------------------------------------------------ */

@@ -4,7 +4,6 @@
 	$preload_size = 48;
 	
 	$articles_horizontal_margins = VUI_SPACING * 2;
-	$max_columns = 20;
 	
 ?>
 
@@ -369,6 +368,23 @@
 	z-index: 1;
 	
 }
+
+
+
+<?php for ( $i = 1; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
+
+.ud-data-list.columns-<?= $i; ?> .ud-data {
+
+	<?= $vui->css->display_inline_block(); ?>
+
+	width: <?= 100 / $i; ?>%;
+
+}
+
+<?php } ?>
+
+
+
 .ud-data-schema-item:first-child,
 .ud-data-schema-item:last-child,
 .ud-data.has-ud-image > .item:not( .ud-images-wrapper ):not( .ud-event-datetimes-wrapper ):not( .ud-data-list-d-readmore-link-wrapper ) {
@@ -881,7 +897,6 @@
 .ud-dl-minimal .ud-data {
 	
 	<?= $vui->css->display_inline_box(); ?>
-	width: 50%;
 	
 	padding: <?= VUI_SPACING / 2; ?>em 0;
 	margin: <?= VUI_SPACING / 2; ?>em 0;
@@ -981,8 +996,6 @@
 <?= '@media screen and ( max-width: 1024px ) {' ?>
 	
 	.ud-dl-minimal .ud-data {
-		
-		width: 100%;
 		
 	}
 	

@@ -47,7 +47,7 @@
 						delay: 700
 					},
 					events: {
-						show : function(event, api){
+						show : function( event, api ){
 							
 							var leng = api.elements.target.val();
 							leng = leng.length;
@@ -119,9 +119,11 @@
 										
 										console.log('content.text', status + ': ' + error);
 										
-										for(i in xhr){
+										for( i in xhr ){
+											
 											if(i!="channel")
 											console.log(i + '>> ' + xhr[i]);
+											
 										};
 										
 									}

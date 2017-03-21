@@ -2,8 +2,8 @@
 /* tradução: franksouza.com.br */
 
 
-$lang['contact_module_config'] = 																"Contato";
-$lang['contact_module_select_contact'] = 														"Selecione um contato";
+$lang['module_type_articles'] = 																"Artigos";
+$lang['articles_module_config'] = 																"Artigos";
 
-/* End of file contact_lang.php */
-/* Location: ./system/language/pt-br/admin/modules/contact_lang.php */
+/* End of file articles_lang.php */
+/* Location: ./system/language/pt-br/admin/modules/articles_lang.php */

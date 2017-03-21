@@ -45,96 +45,255 @@
 							
 						</legend>
 						
-						<div id="title-container" class="vui-field-wrapper-inline">
+						<?php
 							
-							<?= form_error( 'title', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'title' ) ); ?>
-							<?= form_input( array( 'id'=>'title', 'name'=>'title' ), set_value( 'title', @$module[ 'title' ] ),'autofocus' ); ?>
+							// --------------------------
 							
-						</div>
-						
-						<div id="alias-container" class="vui-field-wrapper-inline">
+							$field_name = 'title';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
 							
-							<?= form_error( 'alias', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'alias' ) ); ?>
-							<?= form_input( array( 'id'=>'alias', 'name'=>'alias' ), set_value('alias', @$module[ 'alias' ] ) ); ?>
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
 							
-						</div>
-						
-						<div id="environment-container" class="vui-field-wrapper-inline">
+							echo form_label( lang( 'set_module_' . $field_name ) );
 							
-							<?= form_error( 'environment', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'environment' ) ); ?>
-							<?php
-								$options = array(
+							echo vui_el_input_text(
+								
+								array(
 									
-									'site' => lang( 'site' ),
-									'admin' => lang( 'admin' ),
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, check_var( $module[ $field_name ] ) ? $module[ $field_name ] : '' ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'autofocus' => TRUE,
 									
-								);
-							?>
-							<?= form_dropdown( 'environment', $options, set_value( 'environment', @$module[ 'environment' ] ),'id="environment"' ); ?>
+								)
+								
+							);
 							
-						</div>
-						
-						<div id="status-container" class="vui-field-wrapper-inline">
+							echo '</div>';
 							
-							<?= form_error( 'status', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'status' ) ); ?>
-							<?php
-								$options = array(
+							// --------------------------
+							
+							$field_name = 'alias';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_input_text(
+								
+								array(
 									
-									0 => lang( 'unpublished' ),
-									1 => lang( 'published' ),
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, check_var( $module[ $field_name ] ) ? $module[ $field_name ] : '' ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
 									
-								);
-							?>
-							<?= form_dropdown( 'status', $options, set_value( 'status', @$module[ 'status' ] ),'id="status"' ); ?>
+								)
+								
+							);
 							
-						</div>
-						
-						<div id="ordering-container" class="vui-field-wrapper-inline">
+							echo '</div>';
 							
-							<?= form_error( 'ordering', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'ordering' ) ); ?>
-							<?= form_input( array( 'id'=>'ordering', 'name'=>'ordering' ), set_value('ordering', @$module[ 'ordering' ] ) ); ?>
+							// --------------------------
 							
-						</div>
-						
-						<div id="position-container" class="vui-field-wrapper-inline">
+							$field_name = 'environment';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
 							
-							<?= form_error( 'position', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'position' ) ); ?>
-							<?= form_input( array( 'id'=>'position', 'name'=>'position' ), set_value('position', @$module[ 'position' ] ) ); ?>
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
 							
-						</div>
-						
-						<div id="mi-cond-container" class="vui-field-wrapper-inline">
+							$field_options = array(
+								
+								'site' => lang( 'site' ),
+								'admin' => lang( 'admin' ),
+								
+							);
 							
-							<?= form_error( 'mi_cond', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'mi_cond_label' ) ); ?>
-							<?php
-								$options = array(
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_dropdown(
+								
+								array(
 									
-									'all' => lang( 'option_menus_items_modules_all' ),
-									//'none' => lang( 'option_menus_items_modules_none' ),
-									'specific' => lang( 'option_menus_items_modules_specific' ),
-									'all_except' => lang( 'option_menus_items_modules_all_except' ),
-									'none_except' => lang( 'option_menus_items_modules_none_except' ),
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, check_var( $module[ $field_name ] ) ? $module[ $field_name ] : 'site' ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'options' => $field_options,
 									
-								);
-							?>
-							<?= form_dropdown( 'mi_cond', $options, set_value( 'mi_cond', @$module[ 'mi_cond' ] ),'id="mi-cond"' ); ?>
+								)
+								
+							);
 							
-						</div>
-						
-						<div id="menus-items-container" class="vui-field-wrapper-inline">
+							echo '</div>';
 							
-							<?= form_error( 'menus_items[]', '<div class="msg-inline-error">', '</div>' ); ?>
-							<?= form_label( lang( 'menus_items' ) ); ?>
-							<?= form_multiselect('menus_items[]', $menus_items_options, set_value('menus_items', @$module[ 'menus_items' ]), 'id="menu-items"' . ' size="' . $menu_items_count . '"' ); ?>
+							// --------------------------
 							
-						</div>
+							$field_name = 'status';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							$field_options = array(
+								
+								0 => lang( 'unpublished' ),
+								1 => lang( 'published' ),
+								
+							);
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_dropdown(
+								
+								array(
+									
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, isset( $module[ $field_name ] ) ? $module[ $field_name ] : 0 ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'options' => $field_options,
+									
+								)
+								
+							);
+							
+							echo '</div>';
+							
+							// --------------------------
+							
+							$field_name = 'ordering';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							$field_options = array(
+								
+								'site' => lang( 'site' ),
+								'admin' => lang( 'admin' ),
+								
+							);
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_input_number(
+								
+								array(
+									
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, check_var( $module[ $field_name ] ) ? $module[ $field_name ] : 1 ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'min' => 1,
+									
+								)
+								
+							);
+							
+							echo '</div>';
+							
+							// --------------------------
+							
+							$field_name = 'position';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_input_text(
+								
+								array(
+									
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, check_var( $module[ $field_name ] ) ? $module[ $field_name ] : '' ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									
+								)
+								
+							);
+							
+							echo '</div>';
+							
+							// --------------------------
+							
+							$field_name = 'mi_cond';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							$field_options = array(
+								
+								'all' => lang( 'option_menus_items_modules_all' ),
+								//'none' => lang( 'option_menus_items_modules_none' ),
+								'specific' => lang( 'option_menus_items_modules_specific' ),
+								'all_except' => lang( 'option_menus_items_modules_all_except' ),
+// 									'none_except' => lang( 'option_menus_items_modules_none_except' ),
+								
+							);
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_dropdown(
+								
+								array(
+									
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name,
+									'value' => set_value( $field_name, isset( $module[ $field_name ] ) ? $module[ $field_name ] : 0 ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'options' => $field_options,
+									
+								)
+								
+							);
+							
+							echo '</div>';
+							
+							// --------------------------
+							
+							$field_name = 'menus_items';
+							$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+							
+							echo '<div id="' . $field_name . '-container" class="vui-field-wrapper-inline' . ( $field_error ? ' error' : '' ) . '">';
+							
+							echo form_label( lang( 'set_module_' . $field_name ) );
+							
+							echo vui_el_dropdown(
+								
+								array(
+									
+									'text' => $field_error ? $field_error : lang( 'set_module_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_set_module_' . $field_name ),
+									'name' => $field_name . '[]',
+									'value' => set_value( $field_name, isset( $module[ $field_name ] ) ? $module[ $field_name ] : 0 ),
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'id' => 'module-' . $field_name,
+									'options' => $menus_items_options,
+									'multiselect' => TRUE,
+									
+								)
+								
+							);
+							
+							echo '</div>';
+							
+						?>
 						
 						<div class="divisor-h"></div>
 						
@@ -345,59 +504,27 @@
 					
 				</div>
 				
-				<div class="form-item">
-					
-					<fieldset>
-						
-						<legend>
-							
-							<?= vui_el_button( array( 'text' => lang( 'parameters' ) . ' - ' . lang( $module[ 'type' ] ), 'icon' => $module[ 'type' ],  ) ); ?>
-							
-						</legend>
-						
-						<?php //echo parse_params($params, get_params($menu_item[ 'params)); ?>
-						
-						<?php
-						
-						/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
-						 * pois os erros de validação dos elementos dos parâmetros devem ser expostos
-						 * após a chamada da função $this->form_validation->run()
-						 */
-						
-						echo params_to_html( $module_type_params_spec, $module_type_final_params_values );
-						
-						?>
-						
-					</fieldset>
-					
-				</div>
+				<?php
 				
-				<div class="form-item">
-					
-					<fieldset>
-						
-						<legend>
-							
-							<?= vui_el_button( array( 'text' => lang( 'parameters' ) . ' - ' . lang( 'module' ), 'icon' => 'modules',  ) ); ?>
-							
-						</legend>
-						
-						<?php //echo parse_params($menu_item_params, get_params($menu_item[ 'params)); ?>
-						
-						<?php
-						
-						/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
-						 * pois os erros de validação dos elementos dos parâmetros devem ser expostos
-						 * após a chamada da função $this->form_validation->run()
-						 */
-						
-						echo params_to_html( $module_params_spec, $module_final_params_values );
-						
-						?>
-						
-					</fieldset>
-					
-				</div>
+				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
+					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
+					* após a chamada da função $this->form_validation->run()
+					*/
+				
+				echo params_to_html( $module_params_spec, $module_final_params_values );
+				
+				?>
+				
+				<?php
+				
+				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
+					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
+					* após a chamada da função $this->form_validation->run()
+					*/
+				
+				echo params_to_html( $module_type_params_spec, $module_type_final_params_values );
+				
+				?>
 				
 			</div>
 			
@@ -420,7 +547,7 @@ $( document ).ready(function(){
 	/*************************************************/
 	/**************** Criando as tabs ****************/
 	
-	makeTabs( $( '.tabs-wrapper' ), '.form-item', 'legend' );
+	makeTabs( $( '.tabs-wrapper' ), '.form-item, .params-set-wrapper', 'legend, .params-set-title' );
 	
 	/**************** Criando as tabs ****************/
 	/*************************************************/

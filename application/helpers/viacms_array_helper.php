@@ -15,6 +15,16 @@ function recursive_array_intersect_key( array $array1, array $array2 ) {
 	
 	$array1 = array_intersect_key( $array1, $array2 );
 	
+	while ( list( $key, $value ) = each( $array1 ) ) {
+		
+		if ( is_array( $value ) ) {
+			
+			$value = recursive_array_intersect_key( $value, $array2[ $key ] );
+			
+		}
+		
+	}
+	/*
 	foreach ( $array1 as $key => &$value ) {
 		
 		if ( is_array( $value ) ) {
@@ -24,6 +34,7 @@ function recursive_array_intersect_key( array $array1, array $array2 ) {
 		}
 		
 	}
+	*/
 	return $array1;
 	
 }
@@ -40,33 +51,48 @@ function recursive_array_intersect_key( array $array1, array $array2 ) {
  */
  
 function array_flatten( $array ){
-
-	if ( !is_array( $array ) ){
-
+	
+	if ( ! is_array( $array ) ){
+		
 		return FALSE;
-
+		
 	}
-
+	
 	$result = array();
-
-	//echo 'analisando o array' . "\n";
-	foreach ( $array as $key => $value ){
-
-		//echo 'analisando ' . $key . ' => ' . $value . "\n";
-
+	
+	while ( list( $key, $value ) = each( $array ) ) {
+		
 		if ( is_array( $value ) ){
-
+			
 			$result = array_merge( $result, array_flatten( $value ) );
-
+			
 		}
 		else{
-
+			
 			$result[ $key ] = $value;
-
+			
 		}
-
+		
 	}
-
+	
+	/*
+	foreach ( $array as $key => $value ){
+		
+		//echo 'analisando ' . $key . ' => ' . $value . "\n";
+		
+		if ( is_array( $value ) ){
+			
+			$result = array_merge( $result, array_flatten( $value ) );
+			
+		}
+		else{
+			
+			$result[ $key ] = $value;
+			
+		}
+		
+	}*/
+	
 	return $result;
 
 }
@@ -103,28 +129,51 @@ function array_flatten( $array ){
 
 function array_search_recursive( $needle, $haystack, $strict = FALSE, $path = array() ){
 
-	if( ! is_array( $haystack ) ) {
+	if ( ! is_array( $haystack ) ) {
+		
 		return FALSE;
+		
 	}
-
-	foreach( $haystack as $key => $val ) {
-
+	
+	while ( list( $key, $val ) = each( $haystack ) ) {
+		
 		if( is_array( $val ) AND $sub_path = array_search_recursive( $needle, $val, $strict, $path ) ) {
-
+			
 			$path = array_merge( $path, array( $key ), $sub_path );
-
+			
 			return $path;
-
+			
 		}
 		else if( ( ! $strict AND $val == $needle ) || ( $strict AND $val === $needle ) ) {
-
+			
 			$path[] = $key;
-
+			
 			return $path;
-
+			
 		}
+		
 	}
-
+	
+	/*
+	foreach( $haystack as $key => $val ) {
+		
+		if( is_array( $val ) AND $sub_path = array_search_recursive( $needle, $val, $strict, $path ) ) {
+			
+			$path = array_merge( $path, array( $key ), $sub_path );
+			
+			return $path;
+			
+		}
+		else if( ( ! $strict AND $val == $needle ) || ( $strict AND $val === $needle ) ) {
+			
+			$path[] = $key;
+			
+			return $path;
+			
+		}
+		
+	}*/
+	
 	return FALSE;
 
 }
@@ -149,7 +198,9 @@ function array_clean_empty_values( & $array ) {
 	
 	if( is_array( $array ) ) {
 		
-		foreach ( $array as $k => & $v ) {
+		reset( $array );
+		
+		while ( list( $k, $v ) = each( $array ) ) {
 			
 			if ( $v == '' ) {
 				
@@ -172,6 +223,30 @@ function array_clean_empty_values( & $array ) {
 			
 		}
 		
+		/*
+		foreach ( $array as $k => & $v ) {
+			
+			if ( $v == '' ) {
+				
+				unset( $array[ $k ] );
+				
+			}
+			else if ( is_array( $v ) ) {
+				
+				$_tmp = array_clean_empty_values( $v );
+				
+				empty( $_tmp );
+				
+				if ( empty( $v ) ) {
+					
+					unset( $array[ $k ] );
+					
+				}
+				
+			}
+			
+		}
+		*/
 	}
 	
 	return FALSE;
@@ -182,7 +257,7 @@ function array_clean_empty_values( & $array ) {
 
 function array_find( $needle, $haystack ) {
 	
-	foreach ( $haystack as $item ) {
+	while ( list( $key, $item ) = each( $haystack ) ) {
 		
 		if ( strpos( strtolower( $item ), strtolower( $needle ) ) !== FALSE ) {
 			
@@ -192,6 +267,17 @@ function array_find( $needle, $haystack ) {
 		
 	}
 	
+	/*
+	foreach ( $haystack as $item ) {
+		
+		if ( strpos( strtolower( $item ), strtolower( $needle ) ) !== FALSE ) {
+			
+			return TRUE;
+			
+		}
+		
+	}
+	*/
 }
 
 // ------------------------------------------------------------------------
@@ -212,7 +298,9 @@ function array_merge_recursive_distinct ( & $array1 = NULL, & $array2 = NULL ){
 		
 		$merged = $array1;
 		
-		foreach ( $array2 as $key => & $value ) {
+		reset( $array2 );
+		
+		while ( list( $key, $value ) = each( $array2 ) ) {
 			
 			if ( is_array ( $value ) && isset ( $merged [$key] ) && is_array ( $merged [$key] ) ) {
 				
@@ -227,6 +315,22 @@ function array_merge_recursive_distinct ( & $array1 = NULL, & $array2 = NULL ){
 			
 		}
 		
+		/*
+		foreach ( $array2 as $key => & $value ) {
+			
+			if ( is_array ( $value ) && isset ( $merged [$key] ) && is_array ( $merged [$key] ) ) {
+				
+				$merged [$key] = array_merge_recursive_distinct ( $merged [$key], $value );
+				
+			}
+			else {
+				
+				$merged [$key] = $value;
+				
+			}
+			
+		}
+		*/
 		return $merged;
 		
 	}
@@ -263,42 +367,7 @@ function array_merge_recursive_distinct ( & $array1 = NULL, & $array2 = NULL ){
  *
  */
 function array_push_pos ( & $original_array, $array_to_insert, $pos ) {
-	/*
-	if ( count( $array_to_insert ) > 1 ){
-		
-		$_pos = 0;
-		$array_before = array();
-		$array_after = array();
-		
-		foreach( $original_array as $k => $a ){
-			
-			if ( $_pos < $pos ){
-				
-				$array_before[ $k ] = $a;
-				
-			}
-			else if ( $_pos >= $pos ){
-				
-				$array_after[ $k ] = $a;
-				
-			}
-			
-			$_pos++;
-			
-			//print_r( $array_before );
-			
-		}
-		
-		$original_array = $array_before + $array_to_insert + $array_after;
-		
-	}
-	else if ( count( $array_to_insert ) === 1 ){
-		
-		$array_tmp = array_splice ( $original_array, 0, $pos );
-		$original_array = array_merge ( $array_tmp, $array_to_insert, $original_array );
-		
-	}
-	*/
+	
 	$array_tmp = array_splice ( $original_array, 0, $pos );
 	$original_array = array_merge ( $array_tmp, $array_to_insert, $original_array );
 	

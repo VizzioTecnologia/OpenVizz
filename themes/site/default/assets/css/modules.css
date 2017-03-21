@@ -11,7 +11,7 @@
 	position: relative;
 	
 }
-.module-wrapper .module-title{
+.module-wrapper .module-title {
 	
 	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
 	
@@ -50,9 +50,7 @@
 .module-wrapper .module-title h6{
 	
 	<?= $vui->css->display_inline_block(); ?>
-	min-height: 48px;
 	vertical-align: middle;
-	width: 100%;
 	margin: 0;
 	
 }
@@ -102,62 +100,59 @@
 }
 
 
-.announce .module-title,
-.gplus-module .module-title,
-.instagram-module .module-title,
-.instagram_snapwidget-module .module-title,
-.facebook-module .module-title,
-.contact-module .module-title,
-.calendar .module-title,
-.poll-module .module-title,
-.college .module-title {
+.module-wrapper .module-title:before {
 	
-	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
+	content: '';
 	
-	background-size: 48px 48px;
+	<?= $vui->css->display_inline_block(); ?>
+	vertical-align: middle;
+	width: 48px;
+	height: 48px;
+	
+	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	background-position: left center;
-	padding-left: calc( 48px + <?= VUI_SPACING; ?>em );
-	border-bottom-color: <?= $vui->colors->vui_site_fg->rgba_s( 31 ); ?>;
+	background-position: center center;
+	padding: <?= VUI_SPACING; ?>em;
+	margin-right: <?= VUI_SPACING; ?>em;
 	
 }
-.announce .module-title {
+.announce .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-announce', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.facebook-module .module-title{
+.facebook-module .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.instagram-module .module-title,
-.instagram_snapwidget-module .module-title{
+.instagram-module .module-title:before,
+.instagram_snapwidget-module .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-instagram', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.facebook-module .module-title{
+.facebook-module .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.contact-module .module-title{
+.contact-module .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-contact', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.calendar .module-title{
+.calendar .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.poll-module .module-title{
+.poll-module .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-poll', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	
 }
-.college .module-title{
+.college .module-title:before {
 	
 	background-image: url(<?= $vui->svg_file( 'icon-college', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	

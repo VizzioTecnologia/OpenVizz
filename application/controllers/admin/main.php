@@ -116,6 +116,7 @@ class Main extends CI_controller {
 		// Se o usuário não está conectado, verificamos se existe algum usuário com o client_hash igual ao calculado,
 		// se sim, quer dizer que está logado em modo persistente
 		
+		
 		if ( ! $this->users->is_logged_in() ){
 			
 			$hash_user = $this->users->check_client_hash();
@@ -1042,12 +1043,12 @@ class Main extends CI_controller {
 
 			// pegando os parâmetros
 			$data[ 'params' ] = $this->main_model->get_config_params();
-
+			
 			/******************************/
 			/********* Parâmetros *********/
 
 			// cruzando os parâmetros globais com os parâmetros locais para obter os valores atuais
-			$data[ 'current_params_values' ] = get_params($component->params);
+			$data[ 'current_params_values' ] = get_params( $component->params );
 
 			// obtendo as especificações dos parâmetros
 			$data[ 'params_spec' ] = $this->main_model->get_config_params();
@@ -1074,11 +1075,12 @@ class Main extends CI_controller {
 				),$this->input->post());
 
 				//$update_data[ 'params' ][ 'language' ] = $update_data[ 'params' ][ 'site_language' ];
-				$update_data[ 'params' ] = json_encode($update_data[ 'params' ]);
-
+				$update_data[ 'params' ] = json_encode( $update_data[ 'params' ] );
+				
 				if ($this->main_model->update_component($update_data, array('id' => $this->input->post('component_id')))){
+					
 					msg( ('component_preferences_updated'), 'success' );
-
+					
 					$this->mcm->update_config_file( get_params( $update_data[ 'params' ] ) );
 
 					if ($this->input->post('submit_apply')){

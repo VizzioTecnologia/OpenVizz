@@ -200,12 +200,12 @@ class Submit_forms extends Main {
 									
 								}
 								
-								if ( ! $this->users->_check_privileges( 'submit_forms_management_submit_forms_api_management', $user ) ){
+								if ( ! $this->users->_check_privileges( 'priv_ds_api', $user ) ){
 									
 									$submit_form = array(
 										
 										'id' => $sfpid,
-										'error' => ( lang( 'access_denied_submit_forms_management_submit_forms_api_management' ) ),
+										'error' => ( lang( 'access_denied_priv_ds_api' ) ),
 										
 									);
 									
@@ -431,7 +431,6 @@ class Submit_forms extends Main {
 		$s =									isset( $f_params[ 's' ] ) ? ( int )( ( bool ) $f_params[ 's' ] ) : NULL; // search flag
 		$f =									isset( $f_params[ 'f' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'f' ] ) ), TRUE ) : array(); // filters
 		$sfsp =									isset( $f_params[ 'sfsp' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'sfsp' ] ) ), TRUE ) : array(); // search filters
-		
 		
 		// Parsing vars
 		// -------------------------------------------------
@@ -830,7 +829,7 @@ class Submit_forms extends Main {
 					
 				}
 				
-				// xss fieltering
+				// xss filtering
 				if ( check_var( $data[ 'params' ][ 'ud_data_props_enable_xss_filtering_site' ] ) ) {
 					
 					$rules[] = 'xss';
@@ -2347,7 +2346,7 @@ class Submit_forms extends Main {
 		
 		else if ( $action === 'us' AND ( $submit_form_id AND is_numeric( $submit_form_id ) AND is_int( $submit_form_id + 0 ) ) ){
 			
-			$layout = $menu_item_params[ 'users_submits_layout' ];
+			$layout = isset( $menu_item_params[ 'users_submits_layout' ] ) ? $menu_item_params[ 'users_submits_layout' ] : 'default';
 			
 			// get submit form params
 			$gsfp = array(
@@ -2690,14 +2689,14 @@ class Submit_forms extends Main {
 					
 				}
 				
-				if ( isset( $this->mcm->current_menu_item ) ) {
+				if ( check_var( $this->mcm->current_menu_item ) ) {
 					
 					$miid = $this->mcm->current_menu_item[ 'id' ];
 					
 				}
 				else {
 					
-					$miid = 0;
+					$miid = '0';
 					
 				}
 				

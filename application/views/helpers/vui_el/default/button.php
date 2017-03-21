@@ -17,9 +17,27 @@
 		
 	}
 	
+	$_wrapper_attr = array();
+	
+	if ( $wrapper_attr ) {
+		
+		foreach( $wrapper_attr as $key => $value ) {
+			
+			if ( isset( $value ) AND $value != '' ) {
+				
+				$_wrapper_attr[] = "$key=\"$value\"";
+				
+			}
+			
+		}
+		
+	}
+	
+	$_wrapper_attr = join( ' ', $_wrapper_attr );
+	
 ?>
 
-<span class="vui-interactive-el-wrapper vui-btn-wrapper vui-<?= $button_type; ?>-wrapper<?= $wrapper_class ? ' ' . $wrapper_class : ''; ?><?= $icon ? ' with-icon' : ''; ?><?= ( ! in_array( $button_type, array( 'reset', 'submit' ) ) AND $icon AND $only_icon OR ( $icon AND ! $text ) ) ? ' only-icon' : ''; ?>" <?= $_title ? $_title : ''; ?>><?php
+<span id="<?= $wrapper_id; ?>" class="vui-interactive-el-wrapper vui-btn-wrapper vui-<?= $button_type; ?>-wrapper<?= $wrapper_class ? ' ' . $wrapper_class : ''; ?><?= $icon ? ' with-icon' : ''; ?><?= ( ! in_array( $button_type, array( 'reset', 'submit' ) ) AND $icon AND $only_icon OR ( $icon AND ! $text ) ) ? ' only-icon' : ''; ?>" <?= $_title ? $_title : ''; ?> <?= $_wrapper_attr; ?>><?php
 	
 	$_attr = array(
 		
@@ -31,7 +49,6 @@
 	);
 	
 	$attr = ( is_array( $attr ) ) ? array_merge( $_attr, $attr ) : $_attr;
-	
 	
 	if ( $button_type == 'anchor' ){
 		

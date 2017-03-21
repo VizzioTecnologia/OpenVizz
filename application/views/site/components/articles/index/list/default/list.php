@@ -215,8 +215,6 @@
 		</div>
 		<?php } ?>
 
-	<hr />
-
 	<?php } ?>
 
 	<div class="articles-list-wrapper articles-wrapper columns-<?= $params['articles_list_columns']; ?>">

@@ -1,4 +1,17 @@
 
+<?php
+/* ---------------------------------------------------- */
+/* Theme specific styles */
+?>
+
+<?php
+/* Theme specific styles */
+/* ---------------------------------------------------- */
+?>
+
+
+
+
 .vui.mobile .no-mobile {
 	
 	display: none !important;
@@ -283,7 +296,6 @@ $logo_height = 90;
 		display: block;
 		text-align: left;
 		margin: 0 auto;
-		width: <?= VUI_DEFAULT_SITE_WIDTH; ?>;
 
 	}
 	#after-banner-block > .s1{
@@ -357,7 +369,6 @@ $logo_height = 90;
 		<?= $vui->css->display_inline_block(); ?>
 		text-align: left;
 		margin: 0 auto;
-		width: <?= VUI_DEFAULT_SITE_WIDTH; ?>;
 		z-index: 1;
 
 	}
@@ -419,7 +430,6 @@ $logo_height = 90;
 		<?= $vui->css->display_inline_block(); ?>
 		margin: 0 auto;
 		text-align: left;
-		width: <?= VUI_DEFAULT_SITE_WIDTH; ?>;
 		
 	}
 		#content-block > .s1 > .s2{
@@ -605,19 +615,7 @@ $logo_height = 90;
 			padding-right: <?= VUI_SPACING ; ?>em;
 			
 		}
-		#right-modules .articles-module.announce .module-title,
-		#right-modules .articles-module.gplus-module .module-title,
-		#right-modules .articles-module.instagram-module .module-title,
-		#right-modules .articles-module.instagram_snapwidget-module .module-title,
-		#right-modules .articles-module.facebook-module .module-title,
-		#right-modules .articles-module.contact-module .module-title,
-		#right-modules .articles-module.calendar .module-title,
-		#right-modules .articles-module.poll-module .module-title,
-		#right-modules .articles-module.college .module-title {
-			
-			padding-left: calc( 48px + <?= VUI_SPACING; ?>em );
-			
-		}
+		
 		#right-modules .articles-module .article-wrapper {
 			
 			padding: <?= VUI_SPACING / 2; ?>em;
@@ -1948,13 +1946,13 @@ $logo_height = 90;
 		
 	}
 	#footer-top-block .module-wrapper .module-title,
-	#footer-block .module-wrapper .module-title{
+	#footer-block .module-wrapper .module-title {
 		
 		color: <?= $vui->colors->vui_footer_block_fg->rgba_s(); ?>;
 		border-bottom: 5px solid <?= $vui->colors->vui_footer_block_fg->rgba_s(); ?>;
 		
 	}
-	#footer-top-block .module-wrapper .module-title{
+	#footer-top-block .module-wrapper .module-title {
 		
 		text-align: center;
 		color: <?= $vui->colors->vui_footer_top_block_fg->rgba_s(); ?>;
@@ -2005,43 +2003,43 @@ $logo_height = 90;
 
 	}
 	
-	#footer-block .announce .module-title{
+	#footer-block .announce .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-announce', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .facebook-module .module-title{
+	#footer-block .facebook-module .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .instagram-module .module-title,
-	#footer-block .instagram_snapwidget-module .module-title{
+	#footer-block .instagram-module .module-title:before ,
+	#footer-block .instagram_snapwidget-module .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-instagram', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .facebook-module .module-title{
+	#footer-block .facebook-module .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-facebook', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .contact-module .module-title{
+	#footer-block .contact-module .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-contact', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .calendar .module-title{
+	#footer-block .calendar .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-calendar', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .poll-module .module-title{
+	#footer-block .poll-module .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-poll', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
 	}
-	#footer-block .college .module-title{
+	#footer-block .college .module-title:before {
 		
 		background-image: url(<?= $vui->svg_file( 'icon-college', $vui->colors->vui_footer_block_fg->rgba_s() ); ?>);
 		
@@ -2067,7 +2065,6 @@ $logo_height = 90;
 		<?= $vui->css->display_inline_block() ?>
 		margin: 0 auto;
 		text-align: left;
-		width: <?= VUI_DEFAULT_SITE_WIDTH; ?>;
 		
 	}
 	.width-500-960 #footer-top-block > .s1,
@@ -2144,6 +2141,19 @@ $logo_height = 90;
 	height: 32px;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	
+}
+#footer-block .contact-module-theme-footer-centered .contact-info-item:before {
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>;
+	left: auto;
+	top: auto;
+	
+}
+#footer-block .contact-module-theme-footer-centered .contact-info-item {
+	
+	padding-left: 0;
 	
 }
 #footer-block .contact-info-item.contact-phones:before {

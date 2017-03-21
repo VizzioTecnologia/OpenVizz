@@ -4,6 +4,7 @@
 	
 	$this->plugins->load( 'jquery_checkboxes' );
 	$this->plugins->load( 'fancybox' );
+	$this->plugins->load( 'jquery_inline_edit' );
 	$this->plugins->load( 'modal_users_submits' );
 	$this->load->helper( 'text' );
 	
@@ -563,7 +564,7 @@
 		</div>
 		<?php } ?>
 		
-		<table class="data-list responsive multi-selection-table">
+		<table class="arrow-nav data-list responsive multi-selection-table">
 			
 			<tr>
 				
@@ -598,10 +599,6 @@
 						<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) .  '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
 						
 					</th>
-					
-				<?php } ?>
-				
-				<?php if ( ! check_var( $submit_form_id ) AND ! check_var( $columns ) ) { ?>
 					
 					<?php $current_column = 'output'; ?>
 					
@@ -747,7 +744,7 @@
 				
 			?>
 				
-				<tr class="<?= $_us_has_status ? $_us_status_classes : ''; ?>">
+				<tr class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?>">
 					
 					<td class="col-checkbox">
 						
@@ -757,6 +754,83 @@
 					
 					<?php foreach ( $columns as $key => $column ) {
 						
+						$ile_id = uniqid();
+						
+						$cel_attr = '';
+						$cel_ile_class = '';
+						
+						if ( ! in_array( $column[ 'alias' ], array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
+							
+							$ile_type = 'text';
+							
+							if ( $fields[ $column[ 'alias' ] ][ 'field_type' ] == 'input_text' ) {
+								
+							}
+							else if ( $fields[ $column[ 'alias' ] ][ 'field_type' ] == 'combo_box' ) {
+								
+								$ile_type = 'select';
+								
+							}
+							else if ( $fields[ $column[ 'alias' ] ][ 'field_type' ] == 'textarea' ) {
+								
+								$ile_type = 'textarea';
+								
+							}
+							
+							$cel_attr = '
+								
+								id="ile-cfg-el-' . $ile_id . '"
+								
+								data-ile-type="' . $ile_type . '"
+								data-ile-el-id="' . $ile_id . '"
+								data-ile-ef="ud_data_ile_ef"
+								data-ile-ef-arg1="' . $ile_id . '"
+								data-ile-cf="ud_data_ile_cf"
+								data-ile-cf-arg1="' . $ile_id . '"
+								data-ile-wnvf="ud_data_ile_wnvf"
+								data-ile-wnvf-arg1="' . $ile_id . '"
+								data-udapi-dsi="' . $submit_form_id . '"
+								data-udapi-di="' . $ud_data[ 'id' ] . '"
+								data-udapi-pa="' . $column[ 'alias' ] . '"
+								
+							';
+							
+							$cel_ile_class = 'ud-data-edit-value-wrapper ile';
+							
+							/*
+							echo vui_el_button(
+								
+								array(
+									
+									'wrapper_id' => 'ile-cfg-el-' . $ile_id,
+									'url' => '',
+									'text' => lang( 'ud_edit_prop_click' ),
+									'icon' => 'edit',
+									'only_icon' => TRUE,
+									'wrapper_class' => 'ud-data-edit-value-wrapper ile',
+									'class' => '',
+									'wrapper_attr' => array(
+										
+										'data-ile-type' => $ile_type,
+										'data-ile-el-id' => $ile_id,
+										'data-ile-ef' => 'ud_data_ile_ef',
+										'data-ile-ef-arg1' => $ile_id,
+										'data-ile-cf' => 'ud_data_ile_cf',
+										'data-ile-cf-arg1' => $ile_id,
+										'data-ile-wnvf' => 'ud_data_ile_wnvf',
+										'data-ile-wnvf-arg1' => $ile_id,
+										'data-udapi-dsi' => $submit_form_id,
+										'data-udapi-di' => $ud_data[ 'id' ],
+										'data-udapi-pa' => $column[ 'alias' ],
+										
+									),
+									
+								)
+								
+							);
+							*/
+						}
+						
 						$_prop_is_ud_status = FALSE;
 						
 						$advanced_options = check_var( $fields[ $column[ 'alias' ] ][ 'advanced_options' ] ) ? $fields[ $column[ 'alias' ] ][ 'advanced_options' ] : FALSE;
@@ -765,8 +839,11 @@
 						
 						<td
 							
+							<?= $cel_attr; ?>
 							class="
 								
+								<?= $cel_ile_class; ?>
+								ud-data-prop-wrapper
 								col-<?= $column[ 'alias' ]; ?>
 								col-<?= $column[ 'visible' ] ? 'visible' : 'hidden'; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_image' ] ) ? ' field-is-image' : ''; ?>
@@ -782,71 +859,102 @@
 							
 						>
 							
-							<?php foreach( $ud_data[ 'parsed_data' ][ 'full' ] as $alias => $pd ) { ?>
+							<?php
 								
-								<?php if ( $column[ 'alias' ] == $alias ) { ?>
-									
-									<?php
-										
-										if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-											
-											$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-											$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-											
-										}
-										
-										if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
-											
-											$thumb_params = array(
-												
-												'wrapper_class' => 'us-image-wrapper',
-												'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
-												'href' => get_url( $pd[ 'value' ] ),
-												'rel' => 'us-thumb',
-												'title' => $pd[ 'value' ],
-												'modal' => TRUE,
-												'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
-												
-											);
-											
-											echo vui_el_thumb( $thumb_params );
-											
-										}
-										else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
-											
-											echo '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
-											
-										}
-										else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
-											
-											echo '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
-											
-										}
-										else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
-											
-											echo '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
-											
-										}
-										else if ( isset( $pd[ 'value' ] ) ) {
-											
-											if ( $fields[ $alias ][ 'field_type' ] == 'textarea' AND ! is_array( $ud_data[ 'data' ][ $alias ] ) ) {
-												
-												echo word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
-												
-											}
-											else {
-												
-												echo word_limiter( $pd[ 'value' ] );
-												
-											}
-											
-										}
-										
-									?>
-									
-								<?php } ?>
+								reset( $ud_data[ 'parsed_data' ][ 'full' ] );
 								
-							<?php } ?>
+								$alias_found = FALSE;
+								$pd = NULL;
+								$alias = $column[ 'alias' ];
+								
+								while( list( $_alias, $_pd ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
+									
+									if ( $column[ 'alias' ] == $_alias ) {
+										
+										$alias = $_alias;
+										$pd = $_pd;
+										$alias_found = TRUE;
+										
+										break;
+										
+									}
+									
+								}
+								
+								if ( ! $alias_found ) {
+									
+									$pd = array(
+										
+										'label' => $column[ 'title' ],
+										'value' => '',
+										
+									);
+									
+								}
+								
+								if ( $pd ) {
+									
+									echo '<span id="' . $ile_id . '" class="ud-data-value-wrapper">';
+									
+									if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
+										
+										$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
+										$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
+										
+									}
+									
+									if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
+										
+										$thumb_params = array(
+											
+											'wrapper_class' => 'us-image-wrapper',
+											'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
+											'href' => get_url( $pd[ 'value' ] ),
+											'rel' => 'us-thumb',
+											'title' => $pd[ 'value' ],
+											'modal' => TRUE,
+											'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
+											
+										);
+										
+										echo vui_el_thumb( $thumb_params );
+										
+									}
+									else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
+										
+										echo '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
+										
+									}
+									else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
+										
+										echo '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
+										
+									}
+									else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
+										
+										echo '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
+										
+									}
+									else if ( isset( $pd[ 'value' ] ) ) {
+										
+										if ( $fields[ $alias ][ 'field_type' ] == 'textarea' AND ( ! isset( $ud_data[ 'data' ][ $alias ] ) OR ! is_array( $ud_data[ 'data' ][ $alias ] ) ) ) {
+											
+											echo word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
+											
+										}
+										else {
+											
+											echo word_limiter( $pd[ 'value' ] );
+											
+										}
+										
+									}
+									
+									echo '</span>';
+									
+								}
+								
+							?>
 							
 						</td>
 						
@@ -1031,6 +1139,582 @@
 
 
 <script type="text/javascript" >
+	
+	window.ud_data_ile_cf = function( $nv, $ile_el_id ){
+		
+	}
+	
+	// edit function
+	window.ud_data_ile_ef = function( $cv, $ile_el_id ){
+		
+		var $ile_el = $( '#' + $ile_el_id );
+		var $ile_cfg_el = $( '#ile-cfg-el-' + $ile_el_id );
+		var $ile_el_allowed = ! $ile_el.parent().hasClass( 'col-id' ) && ! $ile_el.parent().hasClass( 'col-submit_datetime' ) && ! $ile_el.parent().hasClass( 'col-mod_datetime' ) ? true : false;
+		
+		// loading progress
+		$ile_cfg_el.attr( 'data-lp', 10 );
+		
+		if ( $ile_el_allowed ) {
+			
+			$ile_cfg_el.attr( 'data-lp', 20 );
+			
+			var $dsi = $ile_cfg_el.data( 'udapi-dsi' ) != null ? $ile_cfg_el.data( 'udapi-dsi' ) : null;
+			var $pa = $ile_cfg_el.data( 'udapi-pa' ) != null ? $ile_cfg_el.data( 'udapi-pa' ) : null;
+			
+			var $data = {
+				
+				a: "gdsp",
+				dsi: $dsi,
+				pa: $pa,
+				
+			}
+			
+			$ile_cfg_el.attr( 'data-lp', 25 );
+			
+			$.ajax({
+			
+				url : 'admin/unid/api/',
+				type: "POST",
+				data : $.param( $data ),
+				dataType: "json",
+				success: function( data, textStatus, jqXHR ) {
+					
+					if ( data.errors != null ) {
+						
+						console.error( data.errors );
+						
+						for( var error in data.errors ) {
+							
+							$( '<span class="error">' + $( data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+							
+						}
+						
+						$ile_cfg_el.attr( 'data-lp', 100 );
+						
+					}
+					else if ( data.out != null ) {
+						
+						$ile_cfg_el.attr( 'data-lp', 30 );
+						
+						console.debug( data.out );
+						
+						$dsp = data.out;
+						
+						$old_content = $ile_el.html();
+						
+						var $di = $ile_cfg_el.data( 'udapi-di' ) != null ? $ile_cfg_el.data( 'udapi-di' ) : null;
+						var $cv = null;
+						
+						var $data2 = {
+							
+							a: "gdp",
+							di: $di,
+							pa: $pa,
+							
+						}
+						
+						console.log( $data2 )
+						
+						$ile_cfg_el.attr( 'data-lp', 35 );
+						
+						$.ajax({
+						
+							url : 'admin/unid/api/',
+							type: "POST",
+							data : $.param( $data2 ),
+							dataType: "json",
+							success: function( gdp_data, textStatus, jqXHR ) {
+								
+								if ( gdp_data.errors != null ) {
+									
+									console.error( gdp_data.errors );
+									
+									for( var error in gdp_data.errors ) {
+										
+										$( '<span class="error">' + $( gdp_data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+										
+									}
+									
+									$ile_cfg_el.attr( 'data-lp', 100 );
+									
+								}
+								else if ( gdp_data.out != null ) {
+									
+									$ile_cfg_el.attr( 'data-lp', 50 );
+									
+									console.debug( gdp_data.out );
+									
+									if ( gdp_data.out.constructor === Array ) {
+										
+										$_tmp = gdp_data.out;
+										
+										for( var val in $_tmp ) {
+											
+											gdp_data.out[ val ] = htmlspecialchars_decode( gdp_data.out[ val ] );
+											
+										}
+										
+										$cv = gdp_data.out;
+										
+									}
+									else {
+										
+										$cv = htmlspecialchars_decode( gdp_data.out );
+										
+									}
+									
+									console.debug( 'gdp cv: ' );
+									console.debug( $cv );
+									
+									console.debug( '<?= lang( 'ud_js_dbg_ef_udpt' ); ?> ' + $dsp.field_type );
+									
+									$ile_el.empty();
+									var inputElWrapper = $ile_el.append( '<span class="ile-input-wrapper"></span>' );
+									inputElWrapper = $ile_el.find( '.ile-input-wrapper' );
+									
+									$ile_cfg_el.attr( 'data-lp', 60 );
+									
+									if ( $dsp.field_type == 'input_text' ) {
+										
+										console.debug( $old_content );
+										
+										<?php
+											
+											$attrs = array(
+												
+												'class' => 'ile-input', // required class for live update plugin
+												
+											);
+											
+										?>
+										
+										inputElWrapper.append( '<?= form_input( $attrs ); ?>' );
+										var inputEl = inputElWrapper.find( '.ile-input' );
+										
+										inputEl.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+										
+										inputEl.val( $cv );
+										inputEl.focus();
+										inputEl.select();
+										
+										$ile_cfg_el.attr( 'data-lp', 100 );
+										$ile_cfg_el.addClass( 'ile-cfg-el-editing' );
+										
+									}
+									else if ( $dsp.field_type == 'textarea' ) {
+										
+										console.debug( $old_content );
+										
+										<?php
+											
+											$attrs = array(
+												
+												'class' => 'ile-input', // required class for live update plugin
+												
+											);
+											
+											$textarea = form_textarea( $attrs );
+											$textarea = str_replace( "'", "\'", $textarea );
+											
+										?>
+										
+										inputElWrapper.append( '<?= $textarea; ?>' );
+										var inputEl = inputElWrapper.find( '.ile-input' );
+										
+										inputEl.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+										
+										inputEl.val( $cv );
+										inputEl.focus();
+										inputEl.select();
+										
+										$ile_cfg_el.attr( 'data-lp', 100 );
+										$ile_cfg_el.addClass( 'ile-cfg-el-editing' );
+										
+									}
+									else if ( $dsp.field_type == 'combo_box' || $dsp.field_type == 'checkbox' || $dsp.field_type == 'radiobox' ) {
+										
+										console.debug( '<?= lang( 'ud_js_dbg_ef_udpt_combo_box' ); ?>' );
+										
+										var $data3 = {
+											
+											a: "gdspo",
+											dsi: $dsi,
+											pa: $pa,
+											
+										}
+										
+										$ile_cfg_el.attr( 'data-lp', 70 );
+										
+										$.ajax({
+										
+											url : 'admin/unid/api/',
+											type: "POST",
+											data : $.param( $data3 ),
+											dataType: "json",
+											success: function( gdspo_data, textStatus, jqXHR ) {
+												
+												if ( gdspo_data.errors != null ) {
+													
+													console.error( gdspo_data.errors );
+													
+													for( var error in gdspo_data.errors ) {
+														
+														$( '<span class="error">' + $( gdspo_data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+														
+													}
+													
+													$ile_cfg_el.attr( 'data-lp', 100 );
+													
+												}
+												else if ( gdspo_data.out != null ) {
+													
+													$ile_cfg_el.attr( 'data-lp', 80 );
+													
+													var $ile_el_options = gdspo_data.out;
+													
+													console.debug( '$ile_el_options: ' );
+													console.debug( $ile_el_options );
+													
+													$options_length = Object.getOwnPropertyNames( $ile_el_options ).length;
+													
+													console.debug( '$options_length: ' + $options_length );
+													
+													if ( $dsp.field_type == 'checkbox' && $options_length == 1 ) {
+														
+														// The idea here is simulate a user choice action, alternating between null and 1
+														
+														for( var val in $ile_el_options ) {
+															
+															var s = $('<select multiple data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="hidden ile-input" />');
+															
+															s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+															
+															$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+															
+															break;
+															
+														}
+														
+														inputElWrapper.append( s );
+														var inputEl = inputElWrapper.find( '.ile-input' );
+														
+														if ( $cv == '' ) {
+															
+															inputEl.val( [ 1 ] ).blur();
+															
+														}
+														else {
+															
+															inputEl.val( null ).blur();
+															
+														}
+														
+													}
+													else {
+													
+														if ( $dsp.field_type == 'checkbox' ) {
+															
+															var s = $('<select multiple data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="ile-input" />');
+															s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+															
+															for( var val in $ile_el_options ) {
+																
+																$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+																
+															}
+															
+														}
+														else {
+															
+															var s = $('<select data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="ile-input" />');
+															s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+															
+															for( var val in $ile_el_options ) {
+																
+																$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+																
+															}
+															
+														}
+														
+														inputElWrapper.append( s );
+														var inputEl = inputElWrapper.find( '.ile-input' );
+														
+														inputEl.val( $cv );
+														inputEl.focus();
+														inputEl.select();
+														
+													}
+													
+													$ile_cfg_el.attr( 'data-lp', 100 );
+													$ile_cfg_el.addClass( 'ile-cfg-el-editing' );
+													
+												}
+												else {
+													
+													console.debug( gdspo_data );
+													
+													$ile_cfg_el.attr( 'data-lp', 100 );
+													
+												}
+												
+											},
+											complete: function( e, xhr, settings ) {
+												
+												var dataText = e.responseText
+												
+												if ( e.status === 200 ) {
+													
+												} else if( e.status === 401 ) {
+													
+												} else {
+													
+												}
+												
+												$ile_cfg_el.attr( 'data-lp', 100 );
+												
+											},
+											error: function( jqXHR, textStatus, errorThrown ) {
+												
+												console.debug( textStatus );
+												
+												$ile_cfg_el.attr( 'data-lp', 100 );
+												
+											}
+											
+										});
+							
+									}
+									
+								}
+								else {
+									
+									console.debug( gdp_data );
+									
+								}
+								
+							},
+							complete: function( e, xhr, settings ) {
+								
+								var dataText = e.responseText
+								
+								if ( e.status === 200 ) {
+									
+								} else if( e.status === 401 ) {
+									
+								} else {
+									
+								}
+								
+							},
+							error: function( jqXHR, textStatus, errorThrown ) {
+								
+								console.debug( textStatus );
+								
+							}
+							
+						});
+						
+					}
+					else {
+						
+						console.debug( data );
+						
+					}
+					
+				},
+				complete: function( e, xhr, settings ) {
+					
+					var dataText = e.responseText
+					
+					if ( e.status === 200 ) {
+						
+					} else if( e.status === 401 ) {
+						
+					} else {
+						
+					}
+					
+				},
+				error: function( jqXHR, textStatus, errorThrown ) {
+					
+					console.debug( textStatus );
+					
+				}
+				
+			});
+			
+		}
+		
+	}
+	
+	// write new value function
+	window.ud_data_ile_wnvf = function( $nv, $ile_el_id ){
+		
+		var $ile_el = $( '#' + $ile_el_id );
+		var $ile_cfg_el = $( '#ile-cfg-el-' + $ile_el_id );
+		$ile_el_allowed = ! $ile_el.parent().hasClass( 'col-id' ) && ! $ile_el.parent().hasClass( 'col-submit_datetime' ) && ! $ile_el.parent().hasClass( 'col-mod_datetime' ) ? true : false;
+		
+		// loading progress
+		$ile_cfg_el.attr( 'data-lp', 10 );
+		
+		console.debug( '[wnvf] received new value: ' );
+		console.debug( $nv );
+		
+		if ( $ile_el_allowed ) {
+			
+			$di = $ile_cfg_el.data( 'udapi-di' ) != null ? $ile_cfg_el.data( 'udapi-di' ) : null;
+			$pa = $ile_cfg_el.data( 'udapi-pa' ) != null ? $ile_cfg_el.data( 'udapi-pa' ) : null;
+			
+			var $data = {
+				
+				a: "udp",
+				di: $di,
+				pa: $pa,
+				nv: $nv,
+				
+			}
+			
+			$ile_cfg_el.attr( 'data-lp', 30 );
+			
+			$.ajax({
+			
+				url : 'admin/unid/api/',
+				type: "POST",
+				data : $.param( $data ),
+				dataType: "json",
+				success: function( data, textStatus, jqXHR ) {
+					
+					if ( data.errors != null ) {
+						
+						console.log( data.errors )
+						
+						for( var error in data.errors ) {
+							
+							data.errors[ error ] = data.errors[ error ].replace(/<(?!\/?b>|\/?strong>)[^>]+>/g, '');
+							
+							$( '<span class="error">' + data.errors[ error ] + '</span>').appendTo( $ile_el );
+							
+						}
+						
+						$ile_cfg_el.attr( 'data-lp', 100 );
+						
+					}
+					else if ( data.out != null ) {
+						
+						$ile_cfg_el.attr( 'data-lp', 70 );
+						
+						console.log( data.out )
+						
+						var $data2 = {
+							
+							a: "gdp",
+							di: $di,
+							pa: $pa,
+							pp: 1,
+							
+						}
+						
+						$.ajax({
+						
+							url : 'admin/unid/api/',
+							type: "POST",
+							data : $.param( $data2 ),
+							dataType: "json",
+							success: function( gdp_data, textStatus, jqXHR ) {
+								
+								if ( gdp_data.errors != null ) {
+									
+									console.error( gdp_data.errors );
+									
+									for( var error in gdp_data.errors ) {
+										
+										gdp_data.errors[ error ] = gdp_data.errors[ error ].replace(/<(?!\/?b>|\/?strong>)[^>]+>/g, '');
+										
+										$( '<span class="error">' + gdp_data.errors[ error ] + '</span>').appendTo( $ile_el );
+										
+									}
+									
+									$ile_cfg_el.attr( 'data-lp', 100 );
+									
+								}
+								else if ( gdp_data.out != null ) {
+									
+									$cv = gdp_data.out;
+									
+									$cv = htmlspecialchars_decode( $cv );
+									
+									console.debug( '[wnvf] value to write: ' );
+									console.debug( $cv );
+									
+									$ile_el.html( $cv );
+									
+									$ile_el.removeClass( 'ile-editing' );
+									$ile_cfg_el.attr( 'data-lp', 100 );
+									$ile_cfg_el.removeClass( 'ile-cfg-el-editing' );
+									
+								}
+								else {
+									
+									console.debug( gdp_data );
+									
+								}
+								
+							},
+							complete: function( e, xhr, settings ) {
+								
+								var dataText = e.responseText
+								
+								if ( e.status === 200 ) {
+									
+								} else if( e.status === 401 ) {
+									
+								} else {
+									
+								}
+								
+								$ile_cfg_el.attr( 'data-lp', 100 );
+								
+							},
+							error: function( jqXHR, textStatus, errorThrown ) {
+								
+								console.error( textStatus );
+								
+								$( '<span class="error">' + textStatus + '</span>').appendTo( $ile_el );
+								
+								$ile_cfg_el.attr( 'data-lp', 100 );
+								
+							}
+							
+						});
+						
+					}
+					
+				},
+				complete: function( e, xhr, settings ) {
+					
+					dataText = e.responseText
+					
+					if ( e.status === 200 ) {
+						
+					} else if( e.status === 401 ) {
+						
+					} else {
+						
+					}
+					
+				},
+				error: function( jqXHR, textStatus, errorThrown ) {
+					
+					console.log( jqXHR.responseText );
+					
+				}
+				
+			});
+			
+		}
+		
+	}
 	
 	$( document ).ready( function(){
 		

@@ -17,7 +17,9 @@ class Urls_common_model extends CI_Model{
 		}
 		else{
 			
-			msg( sprintf( lang( 'unable_to_write_urls_cache_file' ), ( APPPATH . 'cache/urls.php' ) ), 'error' );
+			log_message( 'error', '[Urls common model] ' . lang( 'unable_to_write_urls_cache_file', NULL, $urls_cache_file ) );
+			msg( lang( 'unable_to_write_urls_cache_file', NULL, $urls_cache_file ), 'error' );
+			
 			return FALSE;
 			
 		}
@@ -57,11 +59,6 @@ class Urls_common_model extends CI_Model{
 					if ( write_file( APPPATH . 'cache/urls.php', $output ) ){
 						
 						return TRUE;
-						
-					}
-					else{
-						
-						msg( sprintf( lang( 'unable_to_write_file' ), ( APPPATH . 'cache/urls.php' ) ), 'error' );
 						
 					}
 					
@@ -191,7 +188,7 @@ class Urls_common_model extends CI_Model{
 					
 					$return_id = $this->db->insert_id();
 					
-					if( $this->update_urls_cache() ){
+					if ( $this->update_urls_cache() ){
 						
 						if( $return_id ){
 							
@@ -207,12 +204,6 @@ class Urls_common_model extends CI_Model{
 						}
 						
 					}
-					else{
-						
-						log_message( 'error', '[Urls common model] ' . lang( 'erro ao atualizar arquivo de cache' ) );
-						return FALSE;
-						
-					}
 					
 				}
 				else {
@@ -225,7 +216,6 @@ class Urls_common_model extends CI_Model{
 			}
 			else{
 				
-				log_message( 'error', '[Urls common model] ' . lang( 'o arquivo de urls não é gravável' ) );
 				return FALSE;
 				
 			}

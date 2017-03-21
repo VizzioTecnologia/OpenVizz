@@ -1821,20 +1821,6 @@
 												echo form_error( $__current_field . '_' . $key, '<div class="msg-inline-error">', '</div>' );
 												echo '<div class="vui-field-wrapper ud_validation_rule_parameter_mask_elements_wrapper">';
 												
-												$this->plugins->load(
-													
-													array(
-														
-														'names' => array(
-															
-															'vanilla_masker',
-															
-														),
-														
-													)
-													
-												);
-												
 												// ------------------------------------
 												// Mask type selector
 												
@@ -1891,7 +1877,7 @@
 													array(
 														
 														'name' => 'fields[' . $key . '][' . $__current_field . ']',
-														'class' => 'input-mask ud-field-' . $__current_field,
+														'class' => 'ud-field-' . $__current_field,
 														'id' => $__current_field . '-' . $key,
 														'title' => lang( 'tip_field_' . $__current_field ),
 														'attr' => array( 'data-input-mask-el-id' => $__current_field . '-' . $key, )
@@ -1899,6 +1885,46 @@
 													)
 													
 												);
+												
+												$this->plugins->load( 'jquery_maskedinput' );
+												
+												?>
+												
+												<script type="text/javascript">
+													
+													$( document ).on( 'keypress', '#ud_validation_rule_parameter_mask_test-<?= $key; ?>', function(){
+														
+														if ( $( this ).attr( 'data-masked' ) != '1' ) {
+															
+															$( this ).attr( 'data-masked', '1' );
+															
+															$mask = $( '#ud_validation_rule_parameter_mask_custom_mask-<?= $key; ?>' ).val();
+															
+															$( this ).mask( '(99) 9999-9999x9' );
+															
+														}
+														
+													});
+													
+													$( document ).on( 'blur', '#ud_validation_rule_parameter_mask_test-<?= $key; ?>', function(){
+														
+														if ( $( this ).attr( 'data-masked' ) == '1' ) {
+															
+															$( this ).attr( 'data-masked', null );
+															
+															if($(this).val().length == 16){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+																$(this).mask('(99) 99999-9999');
+															} else {
+																$(this).mask('(99) 9999-9999');
+															}
+															
+														}
+														
+													});
+													
+												</script>
+												
+												<?php
 												
 												echo '</div>';
 												
@@ -2478,9 +2504,9 @@
 												
 											);
 											
-											foreach( $submit_forms as & $_submit_form ) {
+											foreach( $data_schemes as $ds ) {
 												
-												$options[ $_submit_form[ 'id' ] ] = $_submit_form[ 'title' ];
+												$options[ $ds[ 'id' ] ] = $ds[ 'title' ];
 												
 											}
 											
@@ -2523,11 +2549,11 @@
 												
 												if ( ! isset( $users_submits_options_cache[ $field[ 'options_from_users_submits' ] ] ) ) {
 													
-													foreach( $submit_forms as & $_submit_form ) {
+													foreach( $data_schemes as & $ds ) {
 														
-														if ( check_var( $field[ 'options_from_users_submits' ] ) AND $field[ 'options_from_users_submits' ] == $_submit_form[ 'id' ] ) {
+														if ( check_var( $field[ 'options_from_users_submits' ] ) AND $field[ 'options_from_users_submits' ] == $ds[ 'id' ] ) {
 															
-															foreach( $_submit_form[ 'fields' ] as $_field ) {
+															foreach( $ds[ 'fields' ] as $_field ) {
 																
 																if ( ! in_array( $_field[ 'field_type' ], array( 'html', 'button', ) ) ) {
 																	
@@ -2543,7 +2569,7 @@
 																
 															}
 															
-															$users_submits_options_cache[ $_submit_form[ 'id' ] ] = $options;
+															$users_submits_options_cache[ $ds[ 'id' ] ] = $options;
 															
 															break;
 															
@@ -3666,7 +3692,7 @@
 	});
 	
 	function check_validation_rule_mask_type( $field_wrapper ){
-		
+		/*
 		var $summary = _get_summary( $field_wrapper );
 		var $content = _get_content( $field_wrapper );
 		var fieldKey = _get_key( $field_wrapper );
@@ -3696,7 +3722,7 @@
 				;
 				
 		}
-		
+		*/
 	}
 	
 	function update_validation_rule_parameter_min_length( $field_wrapper ){

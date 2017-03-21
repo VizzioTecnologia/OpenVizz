@@ -509,10 +509,6 @@ class Submit_forms_common_model extends CI_Model{
 		 * ------------------------------------
 		 */
 		
-		if ( check_var( $submit_form ) ) {
-			
-		}
-		
 		/*************************************/
 		/******* Carregando os contatos ******/
 
@@ -822,7 +818,7 @@ class Submit_forms_common_model extends CI_Model{
 		reset( $sf );
 		if ( is_array( $sf ) AND is_numeric( key( $sf ) ) ) {
 			
-			foreach ( $sf as $key => $item ) {
+			while ( list( $key, $item ) = each( $sf ) ) {
 				
 				if ( key_exists( 'id', $item ) ) {
 					
@@ -832,6 +828,17 @@ class Submit_forms_common_model extends CI_Model{
 				
 			}
 			
+			/*
+			foreach ( $sf as $key => $item ) {
+				
+				if ( key_exists( 'id', $item ) ) {
+					
+					$this->parse_sf( $item );
+					
+				}
+				
+			}
+			*/
 		}
 		
 		if ( is_array( $sf ) AND key_exists( 'id', $sf ) ){
@@ -882,7 +889,7 @@ class Submit_forms_common_model extends CI_Model{
 			
 			if ( $_ds_menu_item ) {
 				
-				$sf[ 'site_link' ] = base_url() . $_ds_menu_item[ 'link' ];
+				$sf[ 'site_link' ] = site_url( $_ds_menu_item[ 'link' ] );
 				
 			}
 			
@@ -925,14 +932,14 @@ class Submit_forms_common_model extends CI_Model{
 			
 			if ( $_dl_menu_item ) {
 				
-				$sf[ 'users_submits_site_link' ] = base_url() . $_dl_menu_item[ 'link' ]; /*TODO Remove all references to "users submits and submit forms"*/
-				$sf[ 'data_list_site_link' ] = base_url() . $_dl_menu_item[ 'link' ];
+				$sf[ 'users_submits_site_link' ] = site_url( $_dl_menu_item[ 'link' ] ); /*TODO Remove all references to "users submits and submit forms"*/
+				$sf[ 'data_list_site_link' ] = site_url( $_dl_menu_item[ 'link' ] );
 				
 			}
 			else {
 				
-				$sf[ 'users_submits_site_link' ] = base_url() . 'submit_forms/index/miid/0/a/us/sfid/' . $sf[ 'id' ]; /*TODO Remove all references to "users submits and submit forms"*/
-				$sf[ 'data_list_site_link' ] = base_url() . 'submit_forms/index/miid/0/a/us/sfid/' . $sf[ 'id' ]; 
+				$sf[ 'users_submits_site_link' ] = site_url( 'submit_forms/index/miid/0/a/us/sfid/' . $sf[ 'id' ] ); /*TODO Remove all references to "users submits and submit forms"*/
+				$sf[ 'data_list_site_link' ] = site_url( 'submit_forms/index/miid/0/a/us/sfid/' . $sf[ 'id' ] ); 
 				
 			}
 			
@@ -953,6 +960,8 @@ class Submit_forms_common_model extends CI_Model{
 				$component_params = $component_params[ 'params' ];
 				
 				$params = array();
+				
+				$sf[ 'params' ] = filter_params( $component_params, $sf[ 'params' ] );
 				
 				if ( $_ds_menu_item ){
 					
@@ -978,12 +987,11 @@ class Submit_forms_common_model extends CI_Model{
 					
 				}
 				
-				$sf[ 'params' ] = filter_params( $component_params, $sf[ 'params' ] );
-				
 			}
 			
 			$sf[ 'fields' ] = get_params( $sf[ 'fields' ], TRUE );
-			$sf[ 'edit_link' ] = $this->mcm->environment . '/' . $this->component_name . '/sfm/' . $this->uri->assoc_to_uri(
+			
+			$sf[ 'edit_link' ] = ADMIN_ALIAS . '/' . $this->component_name . '/sfm/' . $this->uri->assoc_to_uri(
 				
 				array(
 					
@@ -994,10 +1002,138 @@ class Submit_forms_common_model extends CI_Model{
 				
 			);
 			
+			$sf[ 'users_submits_link' ] = ADMIN_ALIAS . '/' . $this->component_name . '/usm/' . $this->uri->assoc_to_uri(
+				
+				array(
+					
+					'a' => 'usl',
+					'sfid' => $sf[ 'id' ],
+					
+				)
+				
+			);
+			
+			$sf[ 'remove_link' ] = ADMIN_ALIAS . '/' . $this->component_name . '/sfm/' . $this->uri->assoc_to_uri(
+				
+				array(
+					
+					'a' => 'rds',
+					'sfid' => $sf[ 'id' ],
+					
+				)
+				
+			);
+			
 			$_fields = array();
 			
 			$sf[ 'ud_image_prop' ] = NULL;
 			
+			reset( $sf[ 'fields' ] );
+			
+			while ( list( $k, $prop ) = each( $sf[ 'fields' ] ) ) {
+				
+				if ( ! check_var( $prop[ 'key' ] ) ) {
+					
+					unset( $sf[ 'fields' ][ $k ] );
+					//$prop[ 'alias' ] = isset( $prop[ 'alias' ] ) ? $prop[ 'alias' ] : $this->make_field_name( $prop[ 'label' ] );
+					
+				}
+				else {
+					
+					if ( empty( $prop[ 'label' ] ) ) {
+						
+						if ( isset( $prop[ 'presentation_label' ] ) ) {
+							
+							$prop[ 'label' ] = $prop[ 'presentation_label' ];
+							
+						}
+						else {
+							
+							$prop[ 'label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
+							
+						}
+						
+					}
+					
+					if ( empty( $prop[ 'presentation_label' ] ) ) {
+						
+						if ( isset( $prop[ 'label' ] ) ) {
+							
+							$prop[ 'presentation_label' ] = $prop[ 'label' ];
+							
+						}
+						else {
+							
+							$prop[ 'presentation_label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
+							
+						}
+						
+					}
+					
+					if ( empty( $prop[ 'alias' ] ) ) {
+						
+						if ( isset( $prop[ 'label' ] ) ) {
+							
+							$prop[ 'alias' ] = $this->make_field_name( $prop[ 'label' ] );
+							
+						}
+						else {
+							
+							$prop[ 'alias' ] = $this->make_field_name( lang( 'field' ) . ' ' . $prop[ 'key' ] );
+							
+						}
+						
+					}
+					
+					// -------------------------------------------------
+					// Properties types
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_image' ] ) ) {
+						
+						$sf[ 'ud_image_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_title' ] ) ) {
+						
+						$sf[ 'ud_title_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_content' ] ) ) {
+						
+						$sf[ 'ud_content_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_other_info' ] ) ) {
+						
+						$sf[ 'ud_other_info_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_status' ] ) ) {
+						
+						$sf[ 'ud_status_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_event_datetime' ] ) ) {
+						
+						$sf[ 'ud_event_datetime_prop' ][ $prop[ 'alias' ] ] = 1;
+						
+					}
+					
+					// Properties types
+					// -------------------------------------------------
+					
+					$_fields[ $prop[ 'alias' ] ] = $prop;
+					
+				}
+				
+			}
+			
+			/*
 			foreach( $sf[ 'fields' ] as $k => & $prop ) {
 				
 				if ( ! check_var( $prop[ 'key' ] ) ) {
@@ -1100,6 +1236,7 @@ class Submit_forms_common_model extends CI_Model{
 				}
 				
 			}
+			*/
 			
 			$sf[ 'fields' ] = $_fields;
 			
@@ -1248,9 +1385,21 @@ class Submit_forms_common_model extends CI_Model{
 		
 		if ( ! $menu_item_id ) $menu_item_id = 0;
 		
-		reset( $us );
 		if ( is_array( $us ) AND is_numeric( key( $us ) ) ) {
 			
+			reset( $us );
+			
+			while ( list( $key, $item ) = each( $us ) ) {
+				
+				if ( key_exists( 'id', $item ) ) {
+					
+					$this->parse_us( $item );
+					
+				}
+				
+			}
+			
+			/*
 			foreach ( $us as $key => $item ) {
 				
 				if ( key_exists( 'id', $item ) ) {
@@ -1260,6 +1409,7 @@ class Submit_forms_common_model extends CI_Model{
 				}
 				
 			}
+			*/
 			
 		}
 		
@@ -1386,11 +1536,21 @@ class Submit_forms_common_model extends CI_Model{
 				$_fields = $submit_form[ 'fields' ];
 				$fields = array();
 				
+				reset( $_fields );
+				
+				while ( list( $key, $field ) = each( $_fields ) ) {
+					
+					$fields[ $field[ 'alias' ] ] = $field;
+					
+				}
+				
+				/*
 				foreach ( $_fields as $key => $field ) {
 					
 					$fields[ $field[ 'alias' ] ] = $field;
 					
 				}
+				*/
 				
 				$us_fields = $_titles_fields = $_contents_fields = array();
 				
@@ -1406,6 +1566,173 @@ class Submit_forms_common_model extends CI_Model{
 				$us_fields[ 'mod_datetime' ][ 'value' ] = $user_submit[ 'mod_datetime' ];
 				$us_fields[ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'mod_datetime', $fields_to_show ) ) ? TRUE : FALSE;
 				
+				reset( $user_submit[ 'data' ] );
+				
+				while ( list( $key_2, $field_value ) = each( $user_submit[ 'data' ] ) ) {
+					
+					//echo '<pre>' . $key_2 . ': ' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
+					
+					if ( isset( $fields[ $key_2 ] ) ) {
+						
+						//echo $key_2 . ': <br/><pre>' . print_r( $fields[ $key_2 ], TRUE ) . '</pre><br/>'; 
+						
+						if ( ! is_numeric( $key_2 ) ) {
+							
+							if ( $fields[ $key_2 ][ 'field_type' ] == 'date' ){
+								
+								$___date = explode( '-', $field_value );
+								
+								$format = '';
+								
+								$use_y = check_var( $fields[ $key_2 ][ 'sf_date_field_use_year' ] ) ? TRUE : FALSE;
+								$use_m = check_var( $fields[ $key_2 ][ 'sf_date_field_use_month' ] ) ? TRUE : FALSE;
+								$use_d = check_var( $fields[ $key_2 ][ 'sf_date_field_use_day' ] ) ? TRUE : FALSE;
+								
+								$format .= ( $use_y AND isset( $___date[ 0 ] ) AND ( int ) $___date[ 0 ] > 0 ) ? 'y' : '';
+								$format .= ( $use_m AND isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
+								$format .= ( $use_d AND isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
+								
+								// -------------------------
+								// This will prevent php to format partial dates
+								
+								$___date[ 0 ] = ( int ) $___date[ 0 ] > 0 ? $___date[ 0 ] : '2000';
+								$___date[ 1 ] = ( int ) $___date[ 1 ] > 1 ? $___date[ 1 ] : '01';
+								$___date[ 2 ] = ( int ) $___date[ 2 ] > 2 ? $___date[ 2 ] : '01';
+								
+								$field_value = $___date[ 0 ] . '-' . $___date[ 1 ] . '-' . $___date[ 2 ];
+								
+								// -------------------------
+								
+								if ( ! empty( $format ) ) {
+									
+									$format = 'sf_us_dt_ft_pt_' . $format . '_' . $fields[ $key_2 ][ 'sf_date_field_presentation_format' ];
+									
+									$field_value =  strftime( lang( $format ), strtotime( $field_value ) );
+									
+								}
+								else {
+									
+									$field_value =  '';
+									
+								}
+								
+							}
+							else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
+								
+								$_field_value = array();
+								
+								$__tmp = ( is_string( $field_value ) ) ? json_decode( $field_value, TRUE ) : $__tmp;
+								
+								if ( is_array( $__tmp ) OR is_array( $field_value ) ) {
+									
+									if ( is_array( $__tmp ) ) {
+										
+										$field_value = $__tmp;
+										
+									}
+									
+									if ( count( $field_value ) == 1 ) {
+										
+										$field_value = $field_value[ 0 ];
+										
+										if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $field_value ) AND $_user_submit = $this->sfcm->get_user_submit( $field_value ) ) {
+											
+											$field_value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+											
+										}
+										else {
+											
+											if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $fields[ $key_2 ][ 'options' ] ) AND ( $field_value == '1' OR $field_value == '' ) ) {
+												
+												if ( check_var( $field_value ) ) {
+													
+													$field_value = lang( 'yes' );
+													
+												}
+												else {
+													
+													$field_value = lang( 'no' );
+													
+												}
+												
+											}
+											
+										}
+										
+									}
+									else {
+										
+										reset( $field_value );
+										
+										while ( list( $k, $value ) = each( $field_value ) ) {
+											
+											if ( is_string( $value ) ) {
+												
+												if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
+													
+													$value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+													
+												}
+												
+												$_field_value[] = $value;
+												
+											}
+											
+										}
+										
+										/*
+										foreach ( $field_value as $k => $value ) {
+											
+											if ( is_string( $value ) ) {
+												
+												if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
+													
+													$value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+													
+												}
+												
+												$_field_value[] = $value;
+												
+											}
+											
+										}
+										*/
+										
+										$field_value = join( ', ', $_field_value );
+										
+									}
+									
+								}
+								else {
+									
+									if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $field_value ) AND $_user_submit = $this->sfcm->get_user_submit( $field_value ) ) {
+										
+										$field_value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										
+									}
+									
+								}
+								
+							}
+							
+							$us_fields[ $key_2 ][ 'label' ] = isset( $fields[ $key_2 ][ 'presentation_label' ] ) ? $fields[ $key_2 ][ 'presentation_label' ] : $fields[ $key_2 ][ 'label' ];
+							$us_fields[ $key_2 ][ 'value' ] = $field_value;
+							$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
+							
+						}
+						
+					}
+					else {
+						
+						$us_fields[ $key_2 ][ 'label' ] = '[' . $key_2 . ']';
+						$us_fields[ $key_2 ][ 'value' ] = $field_value;
+						$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
+						
+					}
+					
+				}
+				
+				/*
 				foreach ( $user_submit[ 'data' ] as $key_2 => $field_value ) {
 					
 					//echo '<pre>' . $key_2 . ': ' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
@@ -1549,208 +1876,11 @@ class Submit_forms_common_model extends CI_Model{
 					}
 					
 				}
-				
+				*/
+
 				$user_submit[ 'parsed_data' ][ 'full' ] = $us_fields;
 				
 				return $user_submit;
-				
-			}
-			
-		}
-		
-	}
-	
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Parse a unid_data data list
-	 *
-	 * @access public
-	 * @param array
-	 * @param bool | determines whether the parameters should be filtered
-	 * @return void
-	 */
-	
-	public function parse_ud_d_data_list( & $users_submits = NULL, $fields_to_show = NULL, $submit_form_id = NULL ){
-		
-		if ( is_array( $users_submits ) ) {
-			
-			$submit_form = FALSE;
-			
-			if ( is_int( $submit_form_id ) OR ( is_string( $submit_form_id ) AND ctype_digit( $submit_form_id ) ) ) {
-				
-				// get submit form params
-				$gsfp = array(
-					
-					'where_condition' => 't1.id = ' . $submit_form_id,
-					'limit' => 1,
-					
-				);
-				
-				if ( $submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array() ){
-					
-					$this->sfcm->parse_sf( $submit_form );
-					
-				}
-				
-			}
-			else if ( is_array( $submit_form_id ) ) {
-				
-				$submit_form = $submit_form_id;
-				
-			}
-			
-			if ( $submit_form ) {
-				
-				$_fields = $submit_form[ 'fields' ];
-				$fields = array();
-				
-				foreach ( $_fields as $key => $field ) {
-					
-					$fields[ $field[ 'alias' ] ] = $field;
-					
-				}
-				
-				foreach ( $users_submits as $key => & $user_submit ) {
-					
-					$us_fields = $_titles_fields = $_contents_fields = array();
-					
-					$us_fields[ 'id' ][ 'label' ] = lang( 'id' );
-					$us_fields[ 'id' ][ 'value' ] = $user_submit[ 'id' ];
-					$us_fields[ 'id' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'id', $fields_to_show ) ) ? TRUE : FALSE;
-					
-					$us_fields[ 'submit_datetime' ][ 'label' ] = lang( 'submit_datetime' );
-					$us_fields[ 'submit_datetime' ][ 'value' ] = $user_submit[ 'submit_datetime' ];
-					$us_fields[ 'submit_datetime' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'submit_datetime', $fields_to_show ) ) ? TRUE : FALSE;
-					
-					$us_fields[ 'mod_datetime' ][ 'label' ] = lang( 'mod_datetime' );
-					$us_fields[ 'mod_datetime' ][ 'value' ] = $user_submit[ 'mod_datetime' ];
-					$us_fields[ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( 'mod_datetime', $fields_to_show ) ) ? TRUE : FALSE;
-					
-					foreach ( $user_submit[ 'data' ] as $key_2 => $field_value ) {
-						
-						//echo '<pre>' . $key_2 . ': ' . print_r( $field_value, TRUE ) . '</pre><br/>'; 
-						
-						if ( isset( $fields[ $key_2 ] ) ) {
-							
-							//echo $key_2 . ': <br/><pre>' . print_r( $fields[ $key_2 ], TRUE ) . '</pre><br/>'; 
-							
-							if ( ! is_numeric( $key_2 ) ) {
-								
-								if ( $fields[ $key_2 ][ 'field_type' ] == 'date' ){
-									
-									$___date = explode( '-', $field_value );
-									
-									$format = '';
-									
-									$format .= ( check_var( $fields[ $key_2 ][ 'sf_date_field_use_year' ] ) AND isset( $___date[ 0 ] ) AND ( int ) $___date[ 0 ] > 0 ) ? 'y' : '';
-									$format .= ( check_var( $fields[ $key_2 ][ 'sf_date_field_use_month' ] ) AND isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
-									$format .= ( check_var( $fields[ $key_2 ][ 'sf_date_field_use_day' ] ) AND isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
-									
-									if ( ! empty( $format ) ) {
-										
-										$format = 'sf_us_dt_ft_pt_' . $format . '_' . $fields[ $key_2 ][ 'sf_date_field_presentation_format' ];
-										
-										$field_value =  strftime( lang( $format ), strtotime( $field_value ) );
-										
-									}
-									else {
-										
-										$field_value =  '';
-										
-									}
-									
-								}
-								else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
-									
-									$_field_value = array();
-									
-									$__tmp = @json_decode( $field_value, TRUE );
-									
-									if ( is_array( $__tmp ) OR is_array( $field_value ) ) {
-										
-										if ( is_array( $__tmp ) ) {
-											
-											$field_value = $__tmp;
-											
-										}
-										
-										foreach ( $field_value as $k => $value ) {
-											
-											if ( is_string( $value ) ) {
-												
-												if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
-													
-													$value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
-													
-													$_field_value[] = $value;
-													
-												}
-												else {
-													
-													$_field_value[] = $value;
-													
-												}
-												
-											}
-											
-										}
-										
-										$field_value = join( ', ', $_field_value );
-										
-									}
-									else {
-										
-										if ( check_var( $fields[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $key_2 ][ 'options_title_field' ] ) OR check_var( $fields[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $field_value ) AND $_user_submit = $this->sfcm->get_user_submit( $field_value ) ) {
-											
-											$field_value = isset( $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
-											
-										}
-										
-									}
-									
-								}
-								
-								$us_fields[ $key_2 ][ 'label' ] = isset( $fields[ $key_2 ][ 'presentation_label' ] ) ? $fields[ $key_2 ][ 'presentation_label' ] : $fields[ $key_2 ][ 'label' ];
-								$us_fields[ $key_2 ][ 'value' ] = $field_value;
-								$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
-								
-							}
-							
-						}
-						else {
-							
-							$us_fields[ $key_2 ][ 'label' ] = '[' . $key_2 . ']';
-							$us_fields[ $key_2 ][ 'value' ] = $field_value;
-							$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $fields_to_show ) OR in_array( $key_2, $fields_to_show ) ) ? TRUE : FALSE;
-							
-						}
-						
-					}
-					
-					// defining user submit titles and contents
-					foreach ( $us_fields as $key_2 => $us_field ) {
-						
-						if ( check_var( $params[ 'results_title_field' ] ) AND $key_2 == $params[ 'results_title_field' ] ) {
-							
-							$_titles_fields[ $key_2 ] = $us_field;
-							
-						}
-						else {
-							
-							$_contents_fields[ $key_2 ] = $us_field;
-							
-						}
-						
-					}
-					
-					$user_submit[ 'parsed_data' ][ 'full' ] = $us_fields;
-					$user_submit[ 'parsed_data' ][ 'titles' ] = $_titles_fields;
-					$user_submit[ 'parsed_data' ][ 'contents' ] = $_contents_fields;
-					
-				}
-				
-				return $users_submits;
 				
 			}
 			
@@ -1907,6 +2037,145 @@ class Submit_forms_common_model extends CI_Model{
 			
 			$fields = $submit_form[ 'fields' ];
 			
+			reset( $us_data );
+			
+			while ( list( $alias, $value ) = each( $us_data ) ) {
+				
+				reset( $fields );
+				
+				while ( list( $k, $field ) = each( $fields ) ) {
+					
+					if ( ! isset( $field[ 'field_type' ] ) ) { continue; }
+					
+					if ( $field[ 'alias' ] == $alias  ) {
+						
+						if ( $field[ 'field_type' ] == 'date' ){
+							
+							$___date = explode( '-', $value );
+							
+							$format = '';
+							
+							$use_y = check_var( $field[ 'sf_date_field_use_year' ] ) ? TRUE : FALSE;
+							$use_m = check_var( $field[ 'sf_date_field_use_month' ] ) ? TRUE : FALSE;
+							$use_d = check_var( $field[ 'sf_date_field_use_day' ] ) ? TRUE : FALSE;
+							
+							$format .= ( $use_y AND isset( $___date[ 0 ] ) AND ( int ) $___date[ 0 ] > 0 ) ? 'y' : '';
+							$format .= ( $use_m AND isset( $___date[ 1 ] ) AND ( int ) $___date[ 1 ] > 0 ) ? 'm' : '';
+							$format .= ( $use_d AND isset( $___date[ 2 ] ) AND ( int ) $___date[ 2 ] > 0 ) ? 'd' : '';
+							
+							$___date[ 0 ] = ( int ) $___date[ 0 ] > 0 ? $___date[ 0 ] : '2000';
+							$___date[ 1 ] = ( int ) $___date[ 1 ] > 1 ? $___date[ 1 ] : '01';
+							$___date[ 2 ] = ( int ) $___date[ 2 ] > 2 ? $___date[ 2 ] : '01';
+							
+							$value = $___date[ 0 ] . '-' . $___date[ 1 ] . '-' . $___date[ 2 ];
+							
+							if ( ! empty( $format ) ) {
+								
+								$format = 'sf_us_dt_ft_pt_' . $format . '_' . $field[ 'sf_date_field_presentation_format' ];
+								
+								$value =  strftime( lang( $format ), strtotime( $value ) );
+								
+							}
+							else {
+								
+								$value =  '';
+								
+							}
+							
+						}
+						else if ( in_array( $field[ 'field_type' ], array( 'combo_box', 'radiobox', 'checkbox', ) ) ) {
+							
+							if ( ! is_array( $value ) ) {
+								
+								$__tmp = @json_decode( $value, TRUE );
+								
+								if ( is_array( $__tmp ) ) {
+									
+									$value = $__tmp;
+									
+								}
+								
+							}
+							
+							if ( is_array( $value ) ) {
+								
+								if ( count( $value ) == 1 ) {
+									
+									$value = $value[ 0 ];
+									
+									if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
+										
+										$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										
+									}
+									else {
+										
+										if ( in_array( $fields[ $alias ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $fields[ $alias ][ 'options' ] ) AND ( $value == '1' OR $value == '' ) ) {
+											
+											if ( check_var( $value ) ) {
+												
+												$value = lang( 'yes' );
+												
+											}
+											else {
+												
+												$value = lang( 'no' );
+												
+											}
+											
+										}
+										
+									}
+									
+								}
+								else {
+									
+									$_field_value = array();
+									
+									foreach ( $value as $k => $v ) {
+										
+										if ( is_string( $v ) ) {
+											
+											if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $v ) AND $_user_submit = $this->sfcm->get_user_submit( $v ) ) {
+												
+												$v = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												
+											}
+											
+											$_field_value[] = $v;
+											
+										}
+										
+									}
+									
+									$value = join( ', ', $_field_value );
+									
+								}
+								
+							}
+							else {
+								
+								if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_user_submit( $value, NULL, TRUE ) ) {
+									
+									$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+									
+								}
+								
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+				$xml .= '<' . $alias . '>';
+				$xml .= strip_tags( html_entity_decode( $value ) );
+				$xml .= '</' . $alias . '>' . "\n";
+				
+			}
+			
+			/*
 			foreach ( $us_data as $alias => & $value ) {
 				
 				foreach( $fields as $k => & $field ) {
@@ -2037,8 +2306,7 @@ class Submit_forms_common_model extends CI_Model{
 				
 				
 			}
-			
-// 			echo '<pre>' . htmlspecialchars( print_r( $xml, TRUE ) ) . '</pre>'; exit;
+			*/
 			
 			return $xml;
 			
@@ -2085,6 +2353,17 @@ class Submit_forms_common_model extends CI_Model{
 			
 			$where_1 = array();
 			
+			reset( $ds_ids );
+			
+			while ( list( $k, $value ) = each( $ds_ids ) ) {
+				
+				$id = $value[ 'id' ];
+				
+				$where_1[] = '`submit_form_id` = ' . $id;
+				
+			}
+			
+			/*
 			foreach( $ds_ids as $value ) {
 				
 				$id = $value[ 'id' ];
@@ -2092,6 +2371,7 @@ class Submit_forms_common_model extends CI_Model{
 				$where_1[] = '`submit_form_id` = ' . $id;
 				
 			}
+			*/
 			
 			$where_1 = '(' . join( ' OR ', $where_1 ) . ')';
 			
@@ -2115,6 +2395,25 @@ class Submit_forms_common_model extends CI_Model{
 			
 			if ( $data_results ) {
 				
+				reset( $data_results );
+				
+				while ( list( $k, $_data ) = each( $data_results ) ) {
+					
+					$_data[ 'xml_data' ] = $this->us_json_data_to_xml( $_data );
+					
+					$_d_id = $_data[ 'id' ];
+					
+					unset( $_data[ 'id' ] );
+					
+					if ( ! $this->db->update( 'tb_submit_forms_us', $_data, array( 'id' => $_d_id ) ) ){
+						
+						msg( lang( $data[ 'params' ][ 'ud_data_update_fail_referenced_data' ], NULL, $data[ 'id' ] ), 'error' );
+						
+					}
+					
+				}
+				
+				/*
 				foreach( $data_results as $_data ) {
 					
 					$_data[ 'xml_data' ] = $this->us_json_data_to_xml( $_data );
@@ -2130,6 +2429,7 @@ class Submit_forms_common_model extends CI_Model{
 					}
 					
 				}
+				*/
 				
 			}
 			
@@ -2187,6 +2487,19 @@ class Submit_forms_common_model extends CI_Model{
 			
 		}
 		
+		reset( $params[ 'submit_form_id' ] );
+		
+		while ( list( $k, $sfid ) = each( $params[ 'submit_form_id' ] ) ) {
+			
+			if ( ! ( $sfid AND is_numeric( $sfid ) AND is_int( $sfid + 0 ) ) ) {
+				
+				unset( $params[ 'submit_form_id' ][ $k ] );
+				
+			}
+			
+		}
+		
+		/*
 		foreach( $params[ 'submit_form_id' ] as $k => $sfid ) {
 			
 			if ( ! ( $sfid AND is_numeric( $sfid ) AND is_int( $sfid + 0 ) ) ) {
@@ -2196,6 +2509,7 @@ class Submit_forms_common_model extends CI_Model{
 			}
 			
 		}
+		*/
 		
 		$params[ 'user_submit_id' ] =							isset( $url_params[ 'usid' ] ) ? $url_params[ 'usid' ] : NULL; // user submit id(s)
 		
@@ -2211,6 +2525,19 @@ class Submit_forms_common_model extends CI_Model{
 			
 		}
 		
+		reset( $params[ 'user_submit_id' ] );
+		
+		while ( list( $k, $usid ) = each( $params[ 'submit_form_id' ] ) ) {
+			
+			if ( ! ( $usid AND is_numeric( $usid ) AND is_int( $usid + 0 ) ) ) {
+				
+				unset( $params[ 'user_submit_id' ][ $k ] );
+				
+			}
+			
+		}
+		
+		/*
 		foreach( $params[ 'user_submit_id' ] as $k => $usid ) {
 			
 			if ( ! ( $usid AND is_numeric( $usid ) AND is_int( $usid + 0 ) ) ) {
@@ -2220,6 +2547,7 @@ class Submit_forms_common_model extends CI_Model{
 			}
 			
 		}
+		*/
 		
 		$params[ 'current_page' ] =								isset( $url_params[ 'cp' ] ) ? $url_params[ 'cp' ] : NULL; // current page
 		$params[ 'items_per_page' ] =							isset( $url_params[ 'ipp' ] ) ? $url_params[ 'ipp' ] : NULL; // items per page

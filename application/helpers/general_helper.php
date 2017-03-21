@@ -13,11 +13,11 @@ function get_constant_name( $str ){
 
 }
 
-function set_current_component(){
+function set_current_component( $component_name = NULL ){
 
 	$CI =& get_instance();
 
-	$CI->component_name = get_class_name( get_class( $CI ) );
+	$CI->component_name = isset( $component_name ) ? $component_name : get_class_name( get_class( $CI ) );
 
 	if ( $CI->mcm->validate_component_dependencies( $CI->component_name ) ){
 
@@ -119,6 +119,12 @@ function check_var( & $var, $zero_is_valid = FALSE, $debug = FALSE ){
 			return $var;
 			
 		}
+		
+	}
+	else {
+		
+		$var = NULL;
+		unset( $var );
 		
 	}
 	

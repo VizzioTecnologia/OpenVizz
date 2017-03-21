@@ -1403,52 +1403,80 @@ class Main_common_model extends CI_Model{
 				if ( $params AND gettype( $params ) === 'array' ){
 
 					$data[] = '<?php if ( ! defined( \'BASEPATH\' ) ) exit( \'No direct script access allowed\' );';
-
+					
+					$int_params = array(
+						
+						'log_threshold',
+						'sess_expiration',
+						'sess_time_to_update',
+						'csrf_expire',
+						'email_config_smtp_port',
+						'admin_items_per_page',
+						'admin_custom_items_per_page',
+						'site_items_per_page',
+						'site_custom_items_per_page',
+						'thumbnails_width',
+						'thumbnails_height',
+						
+					);
+					
 					foreach ( $params as $key => $param ) {
-
-						if ( gettype( $param ) === 'string' ){
-
-							if ( $param === '1' ){
-
-								$value = "TRUE";
-
-							}
-							else if ( $param === '0' ){
-
-								$value = "FALSE";
-
-							}
-							else{
-								$value = str_replace( "'", "\'" , $param );
-
-								$value = "'" . $value . "'";
-
-							}
-
+						
+						if ( in_array( $key, $int_params ) ) {
+							
+							$value = ( int )$param;
+							
 						}
-						else if ( gettype( $param ) === 'boolean' ){
-
-							$value = ( int )$param > 0 ? 'TRUE' : 'FALSE';
-
+						else {
+							
+							if ( is_string( $param ) ){
+								
+								if ( $param === '1' ){
+									
+									$value = "TRUE";
+									
+								}
+								else if ( $param === '0' ){
+									
+									$value = "FALSE";
+									
+								}
+								else{
+									$value = str_replace( "'", "\'" , $param );
+									
+									$value = "'" . $value . "'";
+									
+								}
+								
+							}
+							else if ( is_bool( $param ) ){
+								
+								$value = ( int )$param > 0 ? 'TRUE' : 'FALSE';
+								
+							}
+							
+							if ( $key === 'base_url' ){
+								
+								$value = 'BASE_URL';
+								
+							}
+							if ( $key === 'params' ){
+								
+								unset( $params[ $key ] );
+								
+							}
+							
 						}
-
+						
 						//print "<pre>" . print_r( $param, true ) . "</pre>";
-
-						if ( $key === 'base_url' ){
-
-							$value = 'BASE_URL';
-
-						}
-						if ( $key === 'params' ){
-
-							unset( $params[ $key ] );
-
-						}
-
+						
 						$data[] = '$config[\'' . $key . '\'] = ' . "$value" . ';';
-
+						
 					}
-
+					
+					$int_params = NULL;
+					unset( $int_params );
+					
 					$output = implode( "\n", $data );
 
 					if ( write_file( APPPATH . 'config/config.php', $output ) ){
@@ -1650,30 +1678,30 @@ class Main_common_model extends CI_Model{
 		}
 
 		return $validate;
-
+	
 	}
-
+	
 	function check_session_config(){
-
+		
 		// Antes de carregar a biblioteca Sessions, verificamos se esta utilizará o banco de dados, se sim criamos a tabela apropriada, caso não exista
 		if ( $this->config->item( 'sess_use_database' ) === TRUE AND $this->config->item( 'sess_table_name' ) != '' AND ! $this->db->table_exists( $this->config->item( 'sess_table_name' ) ) AND file_exists( APPPATH . DS . 'libraries' . DS . 'session' . DS . 'tb_sessions.sql' ) ){
-
+			
 			$this->load->database();
-
+			
 			$sess_table_query = file_get_contents( APPPATH . DS . 'libraries' . DS . 'session' . DS . 'tb_sessions.sql' );
 			$sess_table_query = str_replace( '{sess_table_name}' , $this->db->dbprefix . $this->config->item( 'sess_table_name' ), $sess_table_query );
 
 			$sql_clean = '';
 			foreach (explode("\n", $sess_table_query) as $line){
-
+				
 				if(isset($line[0]) && $line[0] != "#"){
 					$sql_clean .= $line."\n";
 				}
-
+				
 			}
-
+			
 			//echo $sql_clean;
-
+			
 			foreach (explode(";\n", $sql_clean) as $sql){
 				$sql = trim($sql);
 				//echo  $sql.'<br/>============<br/>';
@@ -1682,9 +1710,54 @@ class Main_common_model extends CI_Model{
 					$this->db->query($sql);
 				}
 			}
-
+			
 		}
-
+		
 	}
+	
+	function load_view( $env = NULL, $rel_view_path = NULL, $view, $data = NULL, $html = FALSE ){
+		
+		if ( ! ( isset( $env ) AND in_array( $env, array( 'admin', 'site' ) ) ) ) {
+			
+			$env = $this->environment;
+			
+		}
+		
+		$content = '';
+		
+		if ( isset( $env ) ) {
+			
+			$theme_load_views_path = call_user_func( $env . '_theme_views_path' ) . rtrim( $rel_view_path, DS ) . DS;
+			$theme_views_path = THEMES_PATH . $theme_load_views_path;
+			
+			$default_load_views_path = get_constant_name( strtoupper( $env ) . '_LOAD_VIEWS_PATH' ) . rtrim( $rel_view_path, DS ) . DS;
+			
+			$default_views_path = VIEWS_PATH . $default_load_views_path;
+			
+			// verificando se o tema atual possui a view
+			if ( file_exists( $theme_views_path . $view . '.php') ){
+				
+				$content = $this->load->view( $theme_load_views_path . $view, $data, $html );
 
+			}
+			// verificando se a view existe no diretório de views padrão
+			else if ( file_exists( $default_views_path . $view . '.php') ){
+				
+				$content = $this->load->view( get_constant_name( $env . '_LOAD_VIEWS_PATH' ) . rtrim( $rel_view_path, DS ) . DS . $view, $data, $html );
+
+			}
+			else {
+				
+				$content = lang( 'load_view_fail' ) . ': <b>' . rtrim( $rel_view_path, DS ) . DS . $view . '.php</b>';
+				
+			}
+		}
+		else if ( $content = $this->load->view( $view, $data, $html ) ){
+			
+		}
+		
+		return $content;
+		
+	}
+	
 }

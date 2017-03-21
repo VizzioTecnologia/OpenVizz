@@ -462,6 +462,56 @@ class Main extends CI_controller {
 		
 	}
 	
+	// função index vazia para impedir acesso direto ao componente main
+	public function csv_lucas(){
+		
+		$csv = array_map( 'str_getcsv', file( 'emails.csv' ) );
+		
+		echo 'total antes da validação: ' . count( $csv );
+		
+		$i = 0;
+		$limite = 8000;
+		
+		foreach( $csv as & $row ) {
+			
+			$row = explode( ';', $row[ 0 ] );
+			
+			$row = array(
+				
+				'nome' => $row[ 3 ],
+				'email' => $row[ 6 ],
+				'estado' => $row[ 11 ],
+				'telefone' => $row[ 17 ],
+				
+			);
+			
+			if ( ! $this->form_validation->valid_email_dns( $row[ 'email' ] ) ) {
+				
+				$row = NULL;
+				unset( $row );
+				
+			}
+			else {
+				
+				$txt = $row[ 'nome' ] . ';' . $row[ 'email' ] . ';' . $row[ 'estado' ] . ';' . $row[ 'telefone' ];
+				file_put_contents( FCPATH . 'novos_emails.csv', $txt.PHP_EOL , FILE_APPEND );
+				
+				echo $txt . "\n\r";
+				
+			}
+			
+			$i++;
+			
+			if ( $i == $limite ) break;
+			
+		}
+		
+		echo 'total após validação: ' . count( $csv );
+		
+		echo '<pre>' . print_r( $csv, TRUE ) . '</pre>';
+		
+	}
+	
 	// função para conteúdo em branco
 	public function bc(){
 		
@@ -502,6 +552,53 @@ class Main extends CI_controller {
 
 	}
 
+	public function plg(){
+
+		$get = $this->input->get();
+		$post = $this->input->post();
+
+		// -------------------------------------------------
+		// Parsing vars ------------------------------------
+
+		$f_params = $this->uri->ruri_to_assoc();
+
+		$plugin_name =							isset( $f_params['pn'] ) ? $f_params['pn'] : NULL; // plugin name
+		$plugin_type =							isset( $f_params['pt'] ) ? $f_params['pt'] : NULL; // plugin type
+
+		// Parsing vars ------------------------------------
+		// -------------------------------------------------
+
+		$params[ 'get' ] = $get;
+		$params[ 'post' ] = $post;
+
+		if ( $plugin_name ){
+
+			// load params
+			$lp = array(
+
+				'name' => $plugin_name,
+				'params' => $params,
+
+			);
+
+			$this->plugins->load( $lp );
+		}
+		else if ( $plugin_type ){
+
+			// load params
+			$lp = array(
+
+				'type' => $plugin_type,
+				'params' => $params,
+
+			);
+
+			$this->plugins->load( $lp );
+
+		}
+
+	}
+	
 	// função para montar páginas
 	protected function _page( $f_params = NULL ){
 		
@@ -692,7 +789,7 @@ class Main extends CI_controller {
 
 			}
 			else{
-
+				
 				$this->load->helper( 'file' );
 				
 				$theme_views_url = call_user_func( $this->mcm->environment . '_theme_components_views_url' ) . '/' . $component_view_folder . '/' . $function . '/' . $action . '/' . $layout;
@@ -701,29 +798,8 @@ class Main extends CI_controller {
 				
 				$default_component_views_styles_path = SITE_COMPONENTS_VIEWS_STYLES_PATH . $component_view_folder . DS . $function . DS . $action . DS . $layout . DS;
 				$default_component_views_styles_url = SITE_COMPONENTS_VIEWS_STYLES_URL . '/' . $component_view_folder . '/' . $function . '/' . $action . '/' . $layout;
-				$default_load_views_path = get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $component_view_folder . DS . $function . DS . $action . DS . $layout . DS;
-				$default_views_path = VIEWS_PATH . $default_load_views_path;
-
-				// verificando se o tema atual possui a view
-				if ( file_exists( $theme_views_path . $view . '.php') ){
-					
-					$content = $this->load->view( $theme_load_views_path . $view, $data, TRUE );
-
-				}
-				// verificando se a view existe no diretório de views padrão
-				else if ( file_exists( $default_views_path . $view . '.php') ){
-					
-					$content = $this->load->view( get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $component_view_folder . DS . $function . DS . $action . DS . $layout . DS . $view, $data, TRUE );
-
-				}
-				else if ( $content = $this->load->view( $action, $data, TRUE ) ){
-
-				}
-				else{
-
-					$content = lang( 'load_view_fail' ) . ': <b>' . VIEWS_PATH . get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . $component_view_folder . DS . $function . DS . $action . DS . $layout . DS . $view . '.php</b>';
-
-				}
+				
+				$content = $this->mcm->load_view( $this->mcm->environment, COMPONENTS_DIR_NAME . DS . $component_view_folder . DS . $function . DS . $action . DS . $layout . DS, $view, $data, TRUE );
 				
 				$this->voutput->append_content( $content );
 				

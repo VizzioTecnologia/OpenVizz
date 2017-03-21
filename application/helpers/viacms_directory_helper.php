@@ -149,6 +149,56 @@ function rrmdir( $dir ) {
 	
 }
 
+function mkpath( $path ) {
+	/*
+	$dir = pathinfo( $path , PATHINFO_DIRNAME );
+	
+	if ( is_dir( $dir ) ) {
+		
+		return TRUE;
+		
+	}
+	else {
+		
+		if ( mkpath( $dir ) ) {
+			if( mkdir( $dir ) ) {
+				
+				$current_umask = umask(0);
+				
+				$perm = 777 - $current_umask;
+				
+				chmod( $dir , $perm );
+				return TRUE;
+			}
+		}
+	}
+	
+	return FALSE;
+	*/
+	$dirs = explode( DS, $path );
+	$dir='';
+	foreach ( $dirs as $part ) {
+		
+		$dir .= $part . DS;
+		
+		if ( ! is_dir( $dir ) && strlen( $dir ) > 0 ) {
+			
+			$current_umask = umask();
+			
+			$perm = 777 - $current_umask;
+			
+			@mkdir( $dir );
+			
+			chmod( trim( $dir, DS ) , $perm );
+			
+		}
+		
+	}
+	
+	return TRUE;
+	
+}
+
 
 /* End of file VECMS_directory_helper.php */
 /* Location: ./application/helpers/VECMS_directory_helper.php */

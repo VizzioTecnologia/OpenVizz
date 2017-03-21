@@ -103,6 +103,8 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'oif' => NULL, // Other info fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
 								'sf' => NULL, // Status fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
 								
+								'mc' => 2, // max columns, this param depends on css
+								
 								'f' => NULL, // filter
 								'ni' => 0, // number of items, 0 = all users submits
 								'ob' => NULL, // order by
@@ -269,6 +271,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							
 							$us_params[ 'ud_data_list_d_titles_as_link' ] = $us_params[ 'tal' ];
 							$us_params[ 'ud_data_list_d_readmore_link' ] = $us_params[ 'srml' ];
+							$us_params[ 'ud_data_list_max_columns' ] = $us_params[ 'mc' ];
 							$us_params[ 'show_default_results' ] = TRUE;
 							
 							$this->load->library( 'search' );
@@ -280,6 +283,17 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							
 							
 							//------------------------------------------------------
+							
+							$_tmp = get_params( $us_params[ 'ob' ] );
+							
+							if ( is_array( $_tmp ) ) {
+								
+								$us_params[ 'ob' ] = $_tmp;
+								
+							}
+							
+							$_tmp = NULL;
+							unset( $_tmp );
 							
 							$search_config = array(
 								

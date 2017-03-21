@@ -196,7 +196,7 @@ define( 'FONT_ICONS_STYLESHEET', '
 	
 	position: relative;
 	display: inline-block;
-	font-family: "viacms-icons";
+	font-family: "openvizz-set";
 	speak: none;
 	font-size: ' . DEFAULT_ICON_SIZE . ';
 	font-style: normal;

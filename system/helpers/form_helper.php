@@ -261,7 +261,7 @@ if ( ! function_exists('form_textarea'))
 			unset($data['value']); // textareas don't use the value attribute
 		}
 
-		$name = (is_array($data)) ? $data['name'] : $data;
+		$name = ( is_array( $data ) AND isset( $data['name'] ) ) ? $data['name'] : $data;
 		return "<textarea "._parse_form_attributes($data, $defaults).$extra.">".form_prep($val, $name)."</textarea>";
 	}
 }

@@ -843,6 +843,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function order_by($orderby, $direction = '', $escape = TRUE)
 	{
+		
 		if (strtolower($direction) == 'random')
 		{
 			$orderby = ''; // Random results want or don't need a field name

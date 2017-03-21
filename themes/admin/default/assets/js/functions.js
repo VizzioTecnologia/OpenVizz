@@ -1,4 +1,16 @@
 
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 jQuery.fn.preventDoubleSubmit = function() {
 	/* ta dando pau na geração de pdf
 	jQuery(this).submit(function() {
@@ -232,7 +244,49 @@ $(document).on( 'ready', function(){
 	
 	adjust_site_block();
 	
+	
 });
+
+$('table.arrow-nav').on( 'keydown', function(e){
+	
+	var $table = $(this);
+	var $active = $('input:focus,select:focus',$table);
+	var $next = null;
+	var focusableQuery = 'input:visible,select:visible,textarea:visible';
+	var position = parseInt( $active.closest('td').index()) + 1;
+	console.log('position :',position);
+	switch(e.keyCode){
+		case 37: // <Left>
+			$next = $active.parent('td').prev().find(focusableQuery);   
+			break;
+		case 38: // <Up>                    
+			$next = $active
+				.closest('tr')
+				.prev()                
+				.find('td:nth-child(' + position + ')')
+				.find(focusableQuery)
+			;
+			
+			break;
+		case 39: // <Right>
+			$next = $active.closest('td').next().find(focusableQuery);            
+			break;
+		case 40: // <Down>
+			$next = $active
+				.closest('tr')
+				.next()                
+				.find('td:nth-child(' + position + ')')
+				.find(focusableQuery)
+			;
+			break;
+	}       
+	if($next && $next.length)
+	{        
+		$next.focus();
+	}
+	
+});
+
 $( window ).on( 'resize', function(){
 	
 	reset_toolbar();
@@ -537,8 +591,8 @@ function responsive_width() {
 /** Adiciona classes ao body baseado na largura **/
 /*************************************************/
 
-$( document ).on( 'keyup keydown', function( e ){
-	
+$( document ).on( 'keydown', function( e ){
+	/*
 	shifted = e.shiftKey;
 	
 	key = e.which;
@@ -550,8 +604,8 @@ $( document ).on( 'keyup keydown', function( e ){
 	pressed_key.trim();
 	
 	window.pressedKey = pressed_key;
-	console.log('key code is: ' + pressed_key);
-	
+	console.debug('key code is: ' + pressed_key);
+	*/
 });
 
 $( window ).on( 'resize', function(){
@@ -561,11 +615,9 @@ $( window ).on( 'resize', function(){
 });
 
 $(document).bind('ready', function(){
-	
-	
-	
+	/*
 	window.pressedKey = null;
-	
+	*/
 	// checa se tinyMCE foi carregado
 	is_tinyMCE_active = false;
 	if (typeof(tinyMCE) != "undefined") {
@@ -578,14 +630,20 @@ $(document).bind('ready', function(){
 	
 	responsive_width();
 	
-	$(document).delegate('.js-editor', 'keydown', function(e) {
+	/*
+	$( '.js-editor, .mce-textbox' ).on( 'keydown keypress', function( e ) {
 		
-		var keyCode = e.keyCode || e.which;
-	
-		if (keyCode == 9) {
+		var keyCode = ( e.keyCode ? e.keyCode : e.which );
+		
+		console.debug( 'Textarea key pressed: ' + keyCode );
+		
+		if ( keyCode == 9 ){
+			
 			e.preventDefault();
-			var start = $(this).get(0).selectionStart;
-			var end = $(this).get(0).selectionEnd;
+            e.stopPropagation();
+			
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
 	
 			// set textarea value to: text before caret + tab + text after caret
 			$(this).val($(this).val().substring(0, start)
@@ -593,11 +651,13 @@ $(document).bind('ready', function(){
 				+ $(this).val().substring(end));
 	
 			// put caret at right position again
-			$(this).get(0).selectionStart =
-			$(this).get(0).selectionEnd = start + 1;
+			this.selectionStart =
+			this.selectionEnd = start + 1;
+			
 		}
 		
 	});
+*/
 	
 	msgContent = '';
 	$('body').append('<div id="qtip-growl-container">');
@@ -725,7 +785,7 @@ $(document).bind('ready', function(){
 				url: form.attr( 'action' ) + '?ajax=submit_apply',
 				data: formData,
 				success: function( data ) {
-					console.log( data );
+					console.debug( data );
 					
 					var object = $('<div/>').html(data).contents();
 					
@@ -734,7 +794,7 @@ $(document).bind('ready', function(){
 				},
 				error: function( request, status, error ){
 					
-					console.log(request);
+					console.debug(request);
 					//console.log( 'request.responseText', request.responseText );
 					
 					msg = '<div class="msg-item msg-type-error">';

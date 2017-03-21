@@ -31,10 +31,10 @@
      inkscape:window-width="1920"
      inkscape:window-height="1023"
      id="namedview13"
-     showgrid="true"
-     inkscape:zoom="20.859651"
-     inkscape:cx="6.1563234"
-     inkscape:cy="10.351346"
+     showgrid="false"
+     inkscape:zoom="41.719302"
+     inkscape:cx="9.0178635"
+     inkscape:cy="9.4651132"
      inkscape:window-x="-10"
      inkscape:window-y="35"
      inkscape:window-maximized="1"
@@ -53,21 +53,41 @@
          style="stop-color:#000000;stop-opacity:1"
          id="stop3021" />
       <stop
+         id="stop4151"
+         style="stop-color:#000000;stop-opacity:0.92962468"
+         offset="0.03125003" />
+      <stop
          id="stop4142"
-         style="stop-color:#000000;stop-opacity:0.961"
+         style="stop-color:#000000;stop-opacity:0.85723859"
          offset="0.06250005" />
       <stop
+         offset="0.12500007"
+         style="stop-color:#000000;stop-opacity:0.76206434"
+         id="stop4153" />
+      <stop
          id="stop3029"
-         style="stop-color:#000000;stop-opacity:0.737"
+         style="stop-color:#000000;stop-opacity:0.65884721"
          offset="0.1875001" />
       <stop
+         offset="0.28125015"
+         style="stop-color:#000000;stop-opacity:0.50804287"
+         id="stop4155" />
+      <stop
          offset="0.37500018"
-         style="stop-color:#000000;stop-opacity:0.4463807"
+         style="stop-color:#000000;stop-opacity:0.37600535"
          id="stop3023" />
       <stop
+         id="stop4157"
+         style="stop-color:#000000;stop-opacity:0.23525469"
+         offset="0.50000024" />
+      <stop
          id="stop3027"
-         style="stop-color:#000000;stop-opacity:0.17225201"
+         style="stop-color:#000000;stop-opacity:0.12466488"
          offset="0.6250003" />
+      <stop
+         offset="0.81250012"
+         style="stop-color:#2e1c0a;stop-opacity:0.03820375"
+         id="stop4159" />
       <stop
          offset="1"
          style="stop-color:#5e3915;stop-opacity:0"
@@ -102,5 +122,5 @@
      x="3.0737306e-06"
      y="-7.109375e-06"
      id="rect5173"
-     style="fill:url(#radialGradient2995);fill-opacity:1;fill-rule:nonzero;stroke:none;opacity:0.365" />
+     style="fill:url(#radialGradient2995);fill-opacity:1;fill-rule:nonzero;stroke:none;opacity:0.156" />
 </svg>

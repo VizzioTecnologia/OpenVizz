@@ -54,29 +54,33 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			// -------------
 			
 			$order_by =											$this->search->config( 'order_by' );
-			$order_by =											( isset( $order_by[ 'sf_us_search' ] ) ) ? $order_by[ 'sf_us_search' ] : 'submit_datetime';
+			$order_by =											( isset( $order_by[ 'sf_us_search' ] ) ) ? $order_by[ 'sf_us_search' ] : 'mod_datetime';
 			$order_by =											( isset( $plugin_params[ 'order_by' ] ) ) ? $plugin_params[ 'order_by' ] : $order_by;
 			
-			$order_by_direction =								$this->search->config( 'order_by_direction' );
-			$order_by_direction =								( isset( $order_by_direction[ 'sf_us_search' ] ) ) ? $order_by_direction[ 'sf_us_search' ] : 'DESC';
-			$order_by_direction =								strtoupper( ( isset( $plugin_params[ 'order_by_direction' ] ) ) ? $plugin_params[ 'order_by_direction' ] : $order_by_direction );
-			
-			if ( in_array( $order_by_direction, array( 'A', 'ASC', 'D', 'DESC', 'R', 'RANDOM', ) ) ) {
+			if ( ! is_array( $order_by ) ) {
 				
-				if ( $order_by_direction === 'A' ) {
+				$order_by_direction =								$this->search->config( 'order_by_direction' );
+				$order_by_direction =								( isset( $order_by_direction[ 'sf_us_search' ] ) ) ? $order_by_direction[ 'sf_us_search' ] : 'DESC';
+				$order_by_direction =								strtoupper( ( isset( $plugin_params[ 'order_by_direction' ] ) ) ? $plugin_params[ 'order_by_direction' ] : $order_by_direction );
+				
+				if ( in_array( $order_by_direction, array( 'A', 'ASC', 'D', 'DESC', 'R', 'RANDOM', ) ) ) {
 					
-					$order_by_direction = 'ASC';
-					
-				}
-				else if ( $order_by_direction === 'D' ) {
-					
-					$order_by_direction = 'DESC';
-					
-				}
-				else if ( $order_by_direction === 'R' OR $order_by_direction === 'RANDOM' ) {
-					
-					$order_by_direction = 'RANDOM';
-					$random = TRUE;
+					if ( $order_by_direction === 'A' ) {
+						
+						$order_by_direction = 'ASC';
+						
+					}
+					else if ( $order_by_direction === 'D' ) {
+						
+						$order_by_direction = 'DESC';
+						
+					}
+					else if ( $order_by_direction === 'R' OR $order_by_direction === 'RANDOM' ) {
+						
+						$order_by_direction = 'RANDOM';
+						$random = TRUE;
+						
+					}
 					
 				}
 				
@@ -252,37 +256,41 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				
 				$i = 0;
 				
-				foreach( $submit_form[ 'fields' ] as $k => & $field ) {
+				foreach( $submit_form[ 'fields' ] as $alias => & $field ) {
 					
-					if ( $order_by AND ! in_array( $order_by, array( 'id', 'submit_datetime', 'mod_datetime', ) ) AND $order_by == $field[ 'alias' ] ) {
+					if ( ! is_array( $order_by ) ) {
 						
-						$order_by_allowed = TRUE;
-						
-					}
-					
-					if ( $order_by == $field[ 'alias' ] ) {
-						
-						if ( isset( $field[ 'validation_rule' ] ) ) {
+						if ( $order_by AND ! in_array( $order_by, array( 'id', 'submit_datetime', 'mod_datetime', ) ) AND $order_by == $field[ 'alias' ] ) {
 							
-							foreach( $field[ 'validation_rule' ] as $rule ) {
+							$order_by_allowed = TRUE;
+							
+						}
+						
+						if ( $order_by == $field[ 'alias' ] ) {
+							
+							if ( isset( $field[ 'validation_rule' ] ) ) {
 								
-								if ( $rule == 'integer' ) {
+								foreach( $field[ 'validation_rule' ] as $rule ) {
 									
-									$order_by_is_int = TRUE;
+									if ( $rule == 'integer' ) {
+										
+										$order_by_is_int = TRUE;
+										
+									}
 									
 								}
 								
 							}
 							
-						}
-						if ( in_array( $field[ 'field_type' ], array( 'date' ) ) ) {
-							
-							$order_by_is_date = TRUE;
+							if ( in_array( $field[ 'field_type' ], array( 'date' ) ) ) {
+								
+								$order_by_is_date = TRUE;
+								
+							}
 							
 						}
 						
 					}
-					
 					
 					if ( in_array( $field[ 'field_type' ], array( 'combo_box', 'radiobox', 'checkbox', ) ) AND check_var( $field[ 'options_from_users_submits' ] ) ) {
 						
@@ -298,27 +306,6 @@ class Sf_us_search_plugin extends Plugins_mdl{
 						
 					}
 					
-					
-					
-					/*
-					if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html' ) ) AND check_var( $field[ 'alias' ] ) ) {
-						
-						if ( in_array( $field[ 'field_type' ], array( 'combo_box', 'radiobox', 'checkbox', ) ) AND check_var( $field[ 'options_from_users_submits' ] ) ) {
-							
-							$dsp[ 'select_columns' ] .= ', EXTRACTVALUE( `__us' . $i . 'sf' . $field[ 'options_from_users_submits' ] . '__`.`xml_data`,  \'//' . $field[ 'options_title_field' ] . '\' ) AS `' . $field[ 'alias' ] . '`';
-							$dsp[ 'tables_to_join' ][] = array( 'tb_submit_forms_us `__us' . $i . 'sf' . $field[ 'options_from_users_submits' ] . '__`', 'EXTRACTVALUE( `t1`.`xml_data`, \'//' . $field[ 'alias' ] . '\' ) = `__us' . $i . 'sf' . $field[ 'options_from_users_submits' ] . '__`.`id`', 'left', FALSE );
-							
-							$i++;
-							
-						}
-						else {
-							
-							$dsp[ 'select_columns' ] .= ', EXTRACTVALUE( `t1`.`xml_data`,  \'//' . $field[ 'alias' ] . '\' ) AS `' . $field[ 'alias' ] . '`';
-							
-						}
-						
-					}
-					*/
 				}
 				
 				$dsp[ 'select_escape' ] = FALSE;
@@ -328,7 +315,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			// -------------------------------------------------
 			// Order by ----------------------------------------
 			
-			if ( $order_by_allowed AND $order_by ) {
+			if ( ! is_array( $order_by ) AND $order_by_allowed AND $order_by ) {
 				
 				// order by complement
 				$comp_ob = '';
@@ -384,6 +371,91 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				}
 				
 			}
+			
+			else if ( is_array( $order_by ) ) {
+				
+				$final_ob = array();
+				
+				foreach( $order_by as $ob_alias => $dir ) {
+					
+					if ( ! isset( $submit_form[ 'fields' ][ $ob_alias ] ) ) {
+						
+						if ( ! in_array( $ob_alias, array( 'id', 'submit_datetime', 'mod_datetime', ) ) ) {
+							
+							unset( $order_by[ $ob_alias ] );
+							continue;
+							
+						}
+						
+					}
+					
+					if ( in_array( $ob_alias, array( 'id', 'submit_datetime', 'mod_datetime',  ) ) ) {
+						
+						switch ( $ob_alias ) {
+							
+							case 'id':
+								
+								$final_ob[] = array( '`t1`.`id` ', $dir, FALSE );
+								break;
+								
+							case 'submit_datetime':
+								
+								$final_ob[] = array( '`t1`.`mod_datetime` ', $dir, FALSE );
+								break;
+								
+							case 'mod_datetime':
+								
+								$final_ob[] = array( '`t1`.`mod_datetime` ', $dir, FALSE );
+								break;
+								
+						}
+						
+					}
+					else if ( ! in_array( $ob_alias, array( 'id', 'submit_datetime', 'mod_datetime',  ) ) AND $sf_id ) {
+						
+						$ob_is_int = FALSE;
+						
+						if ( isset( $submit_form[ 'fields' ][ $ob_alias ][ 'validation_rule' ] ) ) {
+							
+							foreach( $submit_form[ 'fields' ][ $ob_alias ][ 'validation_rule' ] as $rule ) {
+								
+								if ( $rule == 'integer' ) {
+									
+									$ob_is_int = TRUE;
+									
+								}
+								
+							}
+							
+						}
+						
+						if ( $ob_is_int ) {
+							
+							$final_ob[] = array( 'CAST( `' . $ob_alias . '` as SIGNED INTEGER ) ', $dir, FALSE );
+							
+						}
+						else if ( $order_by_is_date ) {
+							
+							$final_ob[] = array( 'STR_TO_DATE(`' . $ob_alias . '`,\'%Y-%m-%d\') ', $dir, FALSE );
+							
+						}
+						else {
+							
+							$final_ob[] = array( '`' . $ob_alias . '`', $dir, TRUE );
+							
+						}
+						
+					}
+					
+				}
+				
+				$order_by = $final_ob;
+				$order_by_direction = "";
+				
+				$search_config[ 'order_by' ][ 'sf_us_search' ] = $order_by;
+				$search_config[ 'order_by_direction' ][ 'sf_us_search' ] = $order_by_direction;
+				
+			}
 			else {
 				
 				$order_by = '`t1`.`id`';
@@ -394,6 +466,8 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				
 			}
 			
+// 			echo '<pre>' . print_r( $order_by, TRUE ) . '</pre>'; exit;
+			
 			$search_config[ 'random' ] = $random;
 			
 			// Order by ----------------------------------------
@@ -401,21 +475,26 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			
 			$this->search->config( $search_config );
 			
+			
 			$full_search_results = $this->search->db_search( $dsp );
+			$search_config[ 'order_by' ][ 'sf_us_search' ] = NULL;
+			$this->search->config( $search_config );
 			$full_search_results = $full_search_results ? $full_search_results->result_array() : $full_search_results;
 			
 			if ( $full_search_results ) {
 				
 				$default_search_results = array();
 				
-				foreach ( $full_search_results as $key => & $search_result ) {
+				reset( $full_search_results );
+				
+				while ( list( $key, $search_result ) = each( $full_search_results ) ) {
 					
 					$this->sfcm->parse_us( $search_result, $filter_params, $menu_item_id );
 					
 					// -------------------------------------------------
 					// Ordering by dinamic fields ----------------------
 					
-					$search_result[ 'order_by' ] = isset( $search_result[ 'data' ][ $order_by ] ) ? $search_result[ 'data' ][ $order_by ] : '';
+					$full_search_results[ $key ][ 'order_by' ] = ( ! is_array( $order_by ) AND isset( $search_result[ 'data' ][ $order_by ] ) ) ? $search_result[ 'data' ][ $order_by ] : '';
 					
 					// Ordering by dinamic fields ----------------------
 					// -------------------------------------------------
@@ -423,6 +502,8 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					$line = & $default_search_results[];
 					
 					$line[ 'id' ] = isset( $search_result[ 'id' ] ) ? $search_result[ 'id' ] : '';
+					
+					$full_search_results[ $key ] = $search_result;
 					
 				}
 				
@@ -486,6 +567,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					if ( $i > 0 ) {
 						
+						// logical operator
 						if ( isset( $filter[ 'log_op' ] ) ) {
 							
 							$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
@@ -519,7 +601,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					$_column_is_native = FALSE;
 					
-					if ( ! in_array( $filter[ 'alias' ], array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
+					if ( ! in_array( $filter[ 'alias' ], array( 'submit_form_id', 'id', 'submit_datetime', 'mod_datetime', 'params' ) ) ) {
 						
 						$_column = 'EXTRACTVALUE( `t1`.`xml_data`, \'//' . trim( $filter[ 'alias' ] ) . '\' )';
 						

@@ -5,20 +5,20 @@
 $lang['submit_form'] = 																			"Formulário";
 $lang['Submit_forms'] = 																		"Formulários";
 $lang['submit_forms'] = 																		"Formulários";
-$lang['submit_form_id'] = 																		"Id do formulário";
-$lang['submit_form_title'] = 																	"Título do formulário";
-$lang['no_submit_forms'] = 																		"Não há formulários cadastrados. <a href=\"submit_forms/sfm/a/asf\" target=\"_blank\">Clique aqui</a> para criar um novo formulário";
-$lang['add_submit_form'] = 																		"Novo formulário";
+$lang['submit_form_id'] = 																		"Id do Esquema de Dados";
+$lang['submit_form_title'] = 																	"Título do Esquema de Dados";
+$lang['no_submit_forms'] = 																		"Não há Esquemas de Dados cadastrados. <a href=\"admin/submit_forms/sfm/a/asf\" target=\"_blank\">Clique aqui</a> para criar um novo Esquema de Dados";
+$lang['add_submit_form'] = 																		"Novo Esquema de Dados";
 $lang['new_submit_form'] = 																		$lang['add_submit_form'];
 $lang['submit_forms_sfm_asf'] = 																$lang['add_submit_form'];
-$lang['add_submit_form_fail'] = 																"Erro na criação do formulário";
+$lang['add_submit_form_fail'] = 																"Erro na criação do Esquema de Dados";
 $lang['options_from_users_submits'] = 															"Envios como opções";
-$lang['tip_field_options_from_users_submits'] = 												"Use os envios de um formulário como opções para esse campo";
-$lang['submit_form_title'] = 																	"Titulo do formulário";
-$lang['tip_submit_form_title'] = 																"Informe um título para este formulário";
-$lang['submit_form_alias'] = 																	"Apelido do formulário";
-$lang['tip_submit_form_alias'] = 																"Informe um apelido para este formulário. Deixe em branco para ser automaticamente preenchido";
-$lang['submit_form_layout_view'] = 																"Layout do formulário";
+$lang['tip_field_options_from_users_submits'] = 												"Use os Dados UniD de um Esquema de Dados como opções para esse campo";
+$lang['submit_form_title'] = 																	"Titulo do Esquema de Dados";
+$lang['tip_submit_form_title'] = 																"Informe um título para este Esquema de Dados";
+$lang['submit_form_alias'] = 																	"Apelido do Esquema de Dados";
+$lang['tip_submit_form_alias'] = 																"Informe um apelido para este Esquema de Dados. Deixe em branco para ser automaticamente preenchido";
+$lang['submit_form_layout_view'] = 																"Layout do Esquema de Dados";
 $lang['submit_forms_allow_html_tags'] = 														"Permitir tags HTML";
 $lang['tip_submit_forms_allow_html_tags'] = 													"Permite tags HTML em campos de entrada de texto";
 $lang['ud_data_props_enable_xss_filtering_admin'] = 											"Ativar filtro XSS na administração";
@@ -33,79 +33,433 @@ $lang['sf_redirecting'] = 																		"Redirecionamento";
 $lang['sf_redirecting_on_success'] = 															"Redirecionamento em caso de sucesso";
 $lang['sf_redirecting_on_success_source'] = 													"Redirecionar para";
 $lang['sf_redirecting_on_success_url'] = 														"Link personalizado";
-$lang['self_form'] = 																			"O próprio formulário";
-$lang['view_submit_form_on_site'] = 															"Ver formulário no site";
-$lang['view_users_submits_on_site'] = 															"Ver envios no site";
+$lang['self_form'] = 																			"O próprio Esquema de Dados";
+$lang['view_submit_form_on_site'] = 															"Ver Esquema de Dados no site";
+$lang['view_users_submits_on_site'] = 															"Ver Dados UniD no site";
 $lang['ud_is_user_field'] = 																	"É um campo de usuário";
 $lang['ud_select_user_field'] = 																"Selecione o campo de usuário";
 $lang['tip_ud_is_user_field'] = 																"Se marcado, o campo será tratado como parte dos parâmetros dos usuários. Ex.: Data de nascimento, CPF, RG, etc.";
 $lang['is_unique'] = 																			"Campo único";
-$lang['tip_is_unique'] = 																		"<p>Se marcado, o sistema efetuará uma busca interna pelo valor informado neste campo no ato da inserção do envio.</p><p>Ex.: CNPJ, Nomes empresariais, Marcas, etc.</p><p>Caso a opção \"Campo de usuário\" também esteja marcado, o sistema buscará este valor somente nos parâmetros dos usuários.</p><p>Ex.: CPF, E-mail, RG, etc.</p>";
+$lang['tip_is_unique'] = 																		"<p>Se marcado, o sistema efetuará uma busca interna pelo valor informado neste campo no ato da inserção do Dado UniD.</p><p>Ex.: CNPJ, Nomes empresariais, Marcas, etc.</p><p>Caso a opção \"Campo de usuário\" também esteja marcado, o sistema buscará este valor somente nos parâmetros dos usuários.</p><p>Ex.: CPF, E-mail, RG, etc.</p>";
 
 $lang['ud_visible_on_site_list'] = 																"Visível em listagens no site";
 $lang['tip_ud_visible_on_site_list'] = 															"Defina se este campo será visível nas listagens no site";
 $lang['ud_visible_on_site_detail'] = 															"Visível em detalhamentos no site";
 $lang['tip_ud_visible_on_site_detail'] = 														"Defina se este campo será visível em visualizações de detalhamento no site";
 
+
+
+
+$lang['ud_ds_default_data'] = 																	"Campos padrões";
+$lang['ud_ds_default_data_id'] = 																"Id";
+$lang['ud_ds_default_data_id_site_list_show'] = 												"Exibir em listagens no site";
+$lang['tip_ud_ds_default_data_id_site_list_show'] = 											"Defina se este campo será exibido por padrão em listagens no site.";
+$lang['ud_ds_default_data_id_site_detail_show'] = 												"Exibir em páginas de detalhamento no site";
+$lang['tip_ud_ds_default_data_id_site_detail_show'] = 											"Defina se este campo será exibido por padrão em páginas de detalhamento no site.";
+$lang['ud_ds_default_data_id_pres_title'] = 													"Título de apresentação";
+
+$lang['ud_ds_default_data_sdt'] = 																"Data e hora do Dado UniD";
+$lang['ud_ds_default_data_sdt_site_list_show'] = 												$lang['ud_ds_default_data_id_site_list_show'];
+$lang['tip_ud_ds_default_data_sdt_site_list_show'] = 											$lang['tip_ud_ds_default_data_id_site_list_show'];
+$lang['ud_ds_default_data_sdt_site_detail_show'] = 												$lang['ud_ds_default_data_id_site_detail_show'];
+$lang['tip_ud_ds_default_data_sdt_site_detail_show'] = 											$lang['tip_ud_ds_default_data_id_site_detail_show'];
+$lang['ud_ds_default_data_sdt_pres_title'] = 													$lang['ud_ds_default_data_id_pres_title'];
+$lang['ud_ds_default_data_sdt_dt_format'] = 													"Formato da data e hora";
+$lang['tip_ud_ds_default_data_sdt_dt_format'] = 												"<p>Formato de data e hora. Ex.: %d/%m/%Y às às %T. Para mais informações, veja a ajuda abaixo.";
+
+$lang['ud_ds_default_data_mdt'] = 																"Data e hora da última modificação";
+$lang['ud_ds_default_data_mdt_site_list_show'] = 												$lang['ud_ds_default_data_id_site_list_show'];
+$lang['tip_ud_ds_default_data_mdt_site_list_show'] = 											$lang['tip_ud_ds_default_data_id_site_list_show'];
+$lang['ud_ds_default_data_mdt_site_detail_show'] = 												$lang['ud_ds_default_data_id_site_detail_show'];
+$lang['tip_ud_ds_default_data_mdt_site_detail_show'] = 											$lang['tip_ud_ds_default_data_id_site_detail_show'];
+$lang['ud_ds_default_data_mdt_pres_title'] = 													$lang['ud_ds_default_data_id_pres_title'];
+$lang['ud_ds_default_data_mdt_dt_format'] = 													$lang['ud_ds_default_data_sdt_dt_format'];
+$lang['tip_ud_ds_default_data_mdt_dt_format'] = 												$lang['tip_ud_ds_default_data_sdt_dt_format'];
+
+
+$lang['ud_ds_default_data_dt_format_help_title'] = 												"Formatação de data e hora";
+$lang['ud_ds_default_data_dt_format_help'] = 													"<table class=\"doctable table\">
+        <caption><strong>Os seguintes caracteres são reconhecidos</strong></caption>
+        
+         <thead>
+          <tr>
+           <th><code class=\"parameter\">format</code></th>
+           <th>Descrição</th>
+           <th>Exemplo de valores retornados</th>
+          </tr>
+
+         </thead>
+
+         <tbody class=\"tbody\">
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Dia</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%a</em></td>
+           <td>Representação textual abreviada do dia</td>
+           <td><em>Sun</em> até <em>Sat</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%A</em></td>
+           <td>Representação textual completa do dia</td>
+           <td><em>Sunday</em> até <em>Saturday</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%d</em></td>
+           <td>Dia do mês, com dois dígitos (com zeros à esquerda)</td>
+           <td><em>01</em> a <em>31</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%e</em></td>
+           <td>
+            Dia do mês com um dígito, precedido com um espaço. Não
+            implementado como descrito no Windows. Veja abaixo para mais informações.
+           </td>
+           <td><em> 1</em> a <em>31</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%j</em></td>
+           <td>Dia do ano, com 3 dígitos e zeros à esquerda</td>
+           <td><em>001</em> a <em>366</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%u</em></td>
+           <td>Representação numérica, do dia da semana, compatível com a ISO-8601</td>
+           <td><em>1</em> (para Monday) até <em>7</em> (para Sunday)</td>
+          </tr>
+
+          <tr>
+           <td><em>%w</em></td>
+           <td>Representação numérica do dia da semana</td>
+           <td><em>0</em> (para Sunday) até <em>6</em> (para Saturday)</td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Semana</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%U</em></td>
+           <td>Número da semana de um dado ano, iniciado com o primeiro
+           Domingo sendo a primeira semana</td>
+           <td><em>13</em> (como a 13ª semana completa do ano)</td>
+          </tr>
+
+          <tr>
+           <td><em>%V</em></td>
+           <td>Número da semana, compatível com a ISO-8601:1988 de um dado ano, iniciada com
+           a primeira semana do ano com pelo menos 4 finais de semana, sendo a Segunda-feira
+           como o início da semana.</td>
+           <td><em>01</em> até <em>53</em> (onde 53
+           é responsável por uma sobreposição)</td>
+          </tr>
+
+          <tr>
+           <td><em>%W</em></td>
+           <td>Representação numérica da semana do ano, começando
+           pela primeira Segunda-feira como primeira semana</td>
+           <td><em>46</em> (como a 46ª semana do do ano iniciando
+           na Segunda-feira)</td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Mês</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%b</em></td>
+           <td>Nome do mês abreviado, baseado no idioma</td>
+           <td><em>Jan</em> até <em>Dez</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%B</em></td>
+           <td>Nome completo do mês, baseado no idioma</td>
+           <td><em>Janeiro</em> até <em>Dezembro</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%h</em></td>
+           <td>Nome do mês abreviado, baseado no idioma (sinônimo de %b)</td>
+           <td><em>Jan</em> até <em>Dez</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%m</em></td>
+           <td>Representação com dois dígitos do mês</td>
+           <td><em>01</em> (para January) through <em>12</em> (para December)</td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Ano</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%C</em></td>
+           <td>Representação, com dois dígitos, do século (ano dividido por 100, truncado como inteiro)</td>
+           <td><em>19</em> para o século 20</td>
+          </tr>
+
+          <tr>
+           <td><em>%g</em></td>
+           <td>Representação do ano, com dois dígitos, seguindo o padrão ISO-8601:1988 (veja %V)</td>
+           <td>Exemplo: <em>09</em> de January 6, 2009</td>
+          </tr>
+
+          <tr>
+           <td><em>%G</em></td>
+           <td>Versão de 4 dígitos de %g</td>
+           <td>Exemplo: <em>2008</em> de January 3, 2009</td>
+          </tr>
+
+          <tr>
+           <td><em>%y</em></td>
+           <td>Representação, com dois dígitos, do ano</td>
+           <td>Exemplo: <em>09</em> de 2009, <em>79</em> de 1979</td>
+          </tr>
+
+          <tr>
+           <td><em>%Y</em></td>
+           <td>Representação, com quatro dígitos, do ano</td>
+           <td>Exemplo: <em>2038</em></td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Hora</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%H</em></td>
+           <td>Representação, com dois dígitos, da hora no formato 24 horas</td>
+           <td><em>00</em> até <em>23</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%k</em></td>
+           <td>Representação, com dois dígitos, da hora no formato 24 horas, com
+           um espaço precedendo aqueles com somente um dígito</td>
+           <td><em> 0</em> até <em>23</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%I</em></td>
+           <td>Representação, com dois dígitos, da hora no formato 12 horas</td>
+           <td><em>01</em> até <em>12</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%l ('L' minúsculo)</em></td>
+           <td>Representação, com dois dígitos, da hora no formato 12 horas, com um espaço precedendo aqueles com somente um dígito</td>
+           <td><em> 1</em> até <em>12</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%M</em></td>
+           <td>Representação, com dois dígitos, do minuto</td>
+           <td><em>00</em> até <em>59</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%p</em></td>
+           <td>'AM' ou 'PM' maiúsculo baseado na hora informada</td>
+           <td>Exemplo: <em>AM</em> para 00:31, <em>PM</em> para 22:23</td>
+          </tr>
+
+          <tr>
+           <td><em>%P</em></td>
+           <td>'am' ou 'pm' maiúsculo baseado na hora informada</td>
+           <td>Exemplo: <em>am</em> para 00:31, <em>pm</em> para 22:23</td>
+          </tr>
+
+          <tr>
+           <td><em>%r</em></td>
+           <td>O mesmo que \"%I:%M:%S %p\"</td>
+           <td>Exemplo: <em>09:34:17 PM</em> de 21:34:17</td>
+          </tr>
+
+          <tr>
+           <td><em>%R</em></td>
+           <td>O mesmo que \"%H:%M\"</td>
+           <td>Exemplo: <em>00:35</em> de 12:35 AM, <em>16:44</em> de 4:44 PM</td>
+          </tr>
+
+          <tr>
+           <td><em>%S</em></td>
+           <td>Representação, com dois dígitos, do segundo</td>
+           <td><em>00</em> até <em>59</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%T</em></td>
+           <td>O mesmo que \"%H:%M:%S\"</td>
+           <td>Exemplo: <em>21:34:17</em> para 09:34:17 PM</td>
+          </tr>
+
+          <tr>
+           <td><em>%X</em></td>
+           <td>Representação escolhida baseada no idioma, sem a data</td>
+           <td>Exemplo: <em>03:59:16</em> ou <em>15:59:16</em></td>
+          </tr>
+
+          <tr>
+           <td><em>%z</em></td>
+           <td>O deslocamento do fuso horário. Não implementado como descrito no
+           Windows. Veja mais informações a seguir.</td>
+           <td>Exemplo: <em>-0500</em> para hora à leste dos EUA</td>
+          </tr>
+
+          <tr>
+           <td><em>%Z</em></td>
+           <td>A abreviação do fuso horário. Não implementado como descrito no
+           Windows. Veja mais informações a seguir.</td>
+           <td>Exemplo: <em>EST</em> para Eastern Time</td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Carimbos de Data e Hora</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%c</em></td>
+           <td>Carimbo escolhido de data e hora baseado no idioma</td>
+           <td>Exemplo: <em>Ter Fev  5 00:45:10 2009</em> de
+           February 5, 2009 at 12:45:10 AM</td>
+          </tr>
+
+          <tr>
+           <td><em>%D</em></td>
+           <td>O mesmo que \"%m/%d/%y\"</td>
+           <td>Exemplo: <em>02/05/09</em> de February 5, 2009</td>
+          </tr>
+
+          <tr>
+           <td><em>%F</em></td>
+           <td>O mesmo que \"%Y-%m-%d\" (geralmente utilizado em carimbos de data em bancos de dados)</td>
+           <td>Exemplo: <em>2009-02-05</em> de February 5, 2009</td>
+          </tr>
+
+          <tr>
+           <td><em>%s</em></td>
+           <td>Timestamp Unix Epoch Time (o mesmo que a função <span class=\"function\"><a href=\"function.time.php\" class=\"function\">time()</a></span>
+           function)</td>
+           <td>Exemplo: <em>305815200</em> de September 10, 1979 08:40:00 AM</td>
+          </tr>
+
+          <tr>
+           <td><em>%x</em></td>
+           <td>Carimbo escolhido de data e hora baseado no idioma, sem a hora</td>
+           <td>Exemplo: <em>02/05/09</em> de February 5, 2009</td>
+          </tr>
+
+          <tr>
+           <td style=\"text-align: center;\"><em class=\"emphasis\">Miscelânea</em></td>
+           <td>---</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%n</em></td>
+           <td>Uma nova linha (\"\n\")</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%t</em></td>
+           <td>Um caractere TAB (\"\t\")</td>
+           <td>---</td>
+          </tr>
+
+          <tr>
+           <td><em>%%</em></td>
+           <td>Um caractere literal de porcento (\"%\")</td>
+           <td>---</td>
+          </tr>
+
+         </tbody>
+        
+       </table>";
+
+
 $lang['sf_security_and_access'] = 																"Segurança e acesso";
-$lang['ud_ds_access_level'] = 																	"Nível de acesso do formulário";
-$lang['ud_ds_access_type'] = 																	"Disponibilidade do formulário";
-$lang['tip_ud_ds_access_type'] = 																"Determine quem terá acesso formulário de submissão no site. Se <strong><i>Grupos de usuários</i></strong> for selecionado, o formulário estará disponível apenas para os usuários pertencentes aos grupos selecionados. Se <strong><i>Usuários</i></strong> for selecionado, o formulário será acessível apenas para os usuários selecionados.";
+$lang['ud_ds_access_level'] = 																	"Nível de acesso do Esquema de Dados";
+$lang['ud_ds_access_type'] = 																	"Disponibilidade do Esquema de Dados";
+$lang['tip_ud_ds_access_type'] = 																"Determine quem terá acesso Esquema de Dados de submissão no site. Se <strong><i>Grupos de usuários</i></strong> for selecionado, o Esquema de Dados estará disponível apenas para os usuários pertencentes aos grupos selecionados. Se <strong><i>Usuários</i></strong> for selecionado, o Esquema de Dados será acessível apenas para os usuários selecionados.";
 $lang['notif_ud_ds_login_required'] = 															"Para acessar esta página é necessário fazer login!";
 $lang['ud_ds_login_required_custom_msg'] = 														"Texto para mensagens de <strong><i>\"Login necessário\"</i></strong>";
-$lang['tip_ud_ds_login_required_custom_msg'] = 													"Escreva uma mensagem de alerta para o usuário, informando que o formulário requer login para ser acessado";
+$lang['tip_ud_ds_login_required_custom_msg'] = 													"Escreva uma mensagem de alerta para o usuário, informando que o Esquema de Dados requer login para ser acessado";
 $lang['ud_ds_access_type_users_groups_dropdown_option'] = 										"Grupos de usuários específicos";
 $lang['ud_ds_access_type_users_dropdown_option'] = 												"Usuários específicos";
 $lang['ud_ds_access_type_public_dropdown_option'] = 											"Público";
 $lang['ud_ds_access_type_have_account_dropdown_option'] = 										"Qualquer usuário com uma conta";
 $lang['ud_ds_access_users_label'] = 															"Usuários permitidos";
 $lang['tip_ud_ds_access_users_label'] = 														"Se você definiu a disponibilidade apenas para usuários, selecione-os aqui.";
-$lang['ud_d_access_level'] = 																	"Nível de acesso dos envios";
-$lang['ud_d_default_owner'] = 																	"Proprietário(s) padrão(ões) dos envios";
+$lang['ud_d_access_level'] = 																	"Nível de acesso dos Dados UniD";
+$lang['ud_d_default_owner'] = 																	"Proprietário(s) padrão(ões) dos Dados UniD";
 $lang['ud_d_default_owner_public_dropdown_option'] = 											"Não especificado";
 $lang['ud_d_default_owner_current_user_dropdown_option'] = 										"Usuário atualmente logado";
 $lang['ud_d_default_owner_users_dropdown_option'] = 											"Usuários específicos";
 $lang['ud_d_default_owner_users_groups_dropdown_option'] = 										"Grupos de usuários específicos";
 $lang['ud_ds_default_user_group_registered_from_form'] = 										"Grupo de usuários padrão para novos registros";
-$lang['tip_ud_ds_default_user_group_registered_from_form'] = 									"Define o grupo de usuários padrão para novos registrados através deste formulário";
+$lang['tip_ud_ds_default_user_group_registered_from_form'] = 									"Define o grupo de usuários padrão para novos registrados através deste Esquema de Dados";
 $lang['ud_ds_send_user_data_to_submitter_on_registration'] = 									"Enviar dados de login para novos usuários";
-$lang['tip_ud_ds_send_user_data_to_submitter_on_registration'] = 								"Define se um e-mail será enviado para o usuário com os dados de login após se criar sua conta através deste formulário.";
-$lang['ud_d_default_owner_from_prop_dropdown_option'] = 										"Definido em um campo do formulário";
+$lang['tip_ud_ds_send_user_data_to_submitter_on_registration'] = 								"Define se um e-mail será enviado para o usuário com os dados de login após se criar sua conta através deste Esquema de Dados.";
+$lang['ud_d_default_owner_from_prop_dropdown_option'] = 										"Definido em um campo do Esquema de Dados";
 
-$lang['notification_saving_submit_form'] = 														"Salvando formulário, aguarde...";
+$lang['notification_saving_submit_form'] = 														"Salvando Esquema de Dados, aguarde...";
 $lang['submit_form_updated'] = 																	"Formulário atualizado!";
 $lang['notification_success_add_field'] = 														"Campo adicionado";
 $lang['notification_success_remove_field'] = 													"Campo removido";
 $lang['notification_loading_fields'] = 															"Carregando campos, aguarde...";
 
 $lang['submit_forms_sfm_sfl'] = 																"Listagem";
-$lang['submit_forms_sfm_esf'] = 																"Edição de formulário";
+$lang['submit_forms_sfm_esf'] = 																"Edição de Esquema de Dados";
 $lang['submit_forms_usm_usl'] = 																"Envios";
 
 // users submits
 $lang['user_submit'] = 																			"Envio";
 $lang['users_submits'] = 																		"Envios";
-$lang['users_submits_list'] = 																	"Listagem de envios";
-$lang['add_user_submit'] = 																		"Novo envio";
+$lang['users_submits_list'] = 																	"Listagem de Dados UniD";
+$lang['add_user_submit'] = 																		"Novo Dado UniD";
 $lang['user_submit_updated'] = 																	"Envio atualizado com sucesso!";
 $lang['submit_form_user_submit_created'] = 														"Envio criado com sucesso!";
 $lang['submit_form_user_submit_updated'] = 														"Envio atualizado com sucesso!";
 
-$lang['users_submits_config'] = 																"Configurações dos envios";
-$lang['select_submit_form'] = 																	"Selecione o formulário";
-$lang['users_submits_layout'] = 																"Layout dos envios";
+$lang['users_submits_config'] = 																"Configurações dos Dados UniD";
+$lang['select_submit_form'] = 																	"Selecione o Esquema de Dados";
+$lang['users_submits_layout'] = 																"Layout dos Dados UniD";
 $lang['fields_to_show'] = 																		"Campos visíveis";
-$lang['users_submits_search'] = 																"Pesquisa dos envios";
+$lang['users_submits_search'] = 																"Pesquisa dos Dados UniD";
 $lang['use_search'] = 																			"Usar pesquisa";
 $lang['search_terms_string'] = 																	"Título do campo \"<strong>Termos de pesquisa</strong>\"";
-$lang['submit_datetime'] = 																		"Data e hora do envio";
+$lang['submit_datetime'] = 																		"Data e hora do Dado UniD";
 $lang['mod_datetime'] = 																		"Última modificação";
-$lang['user_submit_id'] = 																		"Id do envio";
-$lang['no_users_submits'] = 																	"Não há envios";
-$lang['submit_forms_no_users_submits'] = 														"Este formulário ainda não possui qualquer envio. Quando o formulário possuir envios registrados, esta opção estará disponível";
-$lang['edit_user_submit'] = 																	"Editar envio";
-$lang['user_submit_confirm_delete'] = 															"Tem certeza que deseja remover o envio de id %s?";
-$lang['users_submits_for_this_submit_form'] = 													"Ver os envios deste formulário";
+$lang['user_submit_id'] = 																		"Id do Dado UniD";
+$lang['no_users_submits'] = 																	"Não há Dados UniD";
+$lang['edit_user_submit'] = 																	"Editar Dado UniD";
+$lang['user_submit_confirm_delete'] = 															"Tem certeza que deseja remover o Dados UniD #%s?";
+
+$lang['ud_dsl_data_count'] = 																	"Ver todos os <strong>%s</strong> Dados UniD deste Esquema de Dados";
+$lang['ud_dsl_data_count_one'] = 																"Ver todos o Dado UniD deste Esquema de Dados";
+$lang['ud_dsl_data_count_zero'] = 																"Este Esquema de Dados ainda não possui qualquer Dado UniD. Quando o Esquema de Dados possuir Dados UniD registrados, esta opção estará disponível";
+
 $lang['hide_on_no_results'] = 																	"Ocultar quando não existirem resultados";
 $lang['show_results_count'] = 																	"Exibir número de resultados";
 $lang['users_submits_search_single_result_string'] = 											"%s resultado encontrado";
@@ -113,23 +467,23 @@ $lang['users_submits_search_single_result_string_config_label'] = 								"Strin
 $lang['tip_users_submits_search_single_result_string_config_label'] = 							"Frase padrão para um resultado encontrado. %s será substituído pelo número 1";
 $lang['users_submits_search_results_string'] = 													"%s resultados encontrados";
 $lang['ud_data_no_result_str'] = 																"Texto para \"sem resultados\"";
-$lang['tip_ud_data_no_result_str'] = 															"Frase padrão para quando não existirem envios a serem mostrados";
+$lang['tip_ud_data_no_result_str'] = 															"Frase padrão para quando não existirem Dados UniD a serem mostrados";
 $lang['ud_data_no_result_str_value'] = 															"Sem resultados";
 $lang['ud_data_no_search_result_str'] = 														"Texto para \"sem resultados\" ao efetuar busca";
-$lang['tip_ud_data_no_search_result_str'] = 													"Frase padrão para quando não existirem envios a serem mostrados, exibido somente ao efetuar uma pesquisa";
+$lang['tip_ud_data_no_search_result_str'] = 													"Frase padrão para quando não existirem Dados UniD a serem mostrados, exibido somente ao efetuar uma pesquisa";
 $lang['ud_data_no_search_result_str_value'] = 													"Sem resultados";
-$lang['ud_data_list_init_search_str'] = 														"Inicie uma pesquisa preenchendo o formulário de busca";
+$lang['ud_data_list_init_search_str'] = 														"Inicie uma pesquisa preenchendo o Esquema de Dados de busca";
 $lang['users_submits_search_results_string_config_label'] = 									"String para vários resultados";
 $lang['tip_users_submits_search_results_string_config_label'] = 								"Frase padrão para resultados encontrados (plural). %s será substituído pelo número de resultados";
 $lang['results_title_field'] = 																	"Título dos resultados";
-$lang['tip_results_title_field'] = 																"Especifica qual campo, de cada envio, será tratado como título do resultado.";
-$lang['users_submits_order_by_field'] = 														"Ordenação dos envios";
+$lang['tip_results_title_field'] = 																"Especifica qual campo, de cada Dado UniD, será tratado como título do resultado.";
+$lang['users_submits_order_by_field'] = 														"Ordenação dos Dados UniD";
 $lang['users_submits_order_by_direction'] = 													"Direção da ordenação";
 $lang['users_submits_items_per_page'] = 														"Itens por página";
 $lang['show_default_results'] = 																"Exibir resultados iniciais";
 $lang['us_default_results_filters'] = 															"Filtros padrões";
 $lang['us_results'] = 																			"Envios";
-$lang['users_submits_num_items_to_show'] = 														"Número de envios a mostrar";
+$lang['users_submits_num_items_to_show'] = 														"Número de Dados UniD a mostrar";
 
 $lang['ud_data_list_search_results'] = 															"Resultados de pesquisa";
 $lang['ud_data_list_search_results_specific_config'] = 											"Configurações específicas para as pesquisas";
@@ -154,7 +508,7 @@ $lang['ud_data_list_d_readmore_link_url'] = 													"Endereço URL";
 $lang['ud_data_list_d_readmore_link_target'] = 													"Alvo";
 
 // post sending messages
-$lang['post_sending_messages'] = 																"Mensagens pós envio";
+$lang['post_sending_messages'] = 																"Mensagens pós Dado UniD";
 $lang['sfpsm_user_submit_save_into_db_success_title'] = 										"Sucesso ao salvar no banco de dados (Título)";
 $lang[ 'sfpsm_user_submit_save_into_db_success_title_default' ] =								"Obrigado pela sua mensagem!";
 $lang['tip_sfpsm_user_submit_save_into_db_success_title'] = 									"Título da mensagem exibida ao salvar no banco de dados com sucesso";
@@ -208,11 +562,11 @@ $lang['ud_psm_uar_t_default'] = 																"Conta de usuário já existente
 $lang['ud_psm_uar_m'] = 																		"Mensagem";
 $lang['ud_psm_uar_m_default'] = 																"Parece que já existe uma conta usando alguns dos dados informados";
 
-$lang['ud_psm_user_already_sent_form'] = 														"Usuário já enviou o formulário";
+$lang['ud_psm_user_already_sent_form'] = 														"Usuário já Dado UniDu o Esquema de Dados";
 $lang['ud_psm_uasf_t'] = 																		"Título";
-$lang['ud_psm_uasf_t_default'] = 																"Você já envio este formulário";
+$lang['ud_psm_uasf_t_default'] = 																"Você já Dado UniD este Esquema de Dados";
 $lang['ud_psm_uasf_m'] = 																		"Mensagem";
-$lang['ud_psm_uasf_m_default'] = 																"Parece que você já enviou este formulário anteriormente com sucesso";
+$lang['ud_psm_uasf_m_default'] = 																"Parece que você já Dado UniDu este Esquema de Dados anteriormente com sucesso";
 
 
 $lang[ 'ud_dl_filters_profiles' ] = 															"Perfis de filtros";
@@ -271,7 +625,7 @@ $lang['ud_ds_api_short_help'] = 															'
 					
 					<p>
 						
-						<strong>Ação (<i>Action</i>)</strong> - A ação que deve ser efetuada, obter listagens, obter envios, etc. As opções são:
+						<strong>Ação (<i>Action</i>)</strong> - A ação que deve ser efetuada, obter listagens, obter Dados UniD, etc. As opções são:
 						
 					<p>
 						
@@ -279,7 +633,7 @@ $lang['ud_ds_api_short_help'] = 															'
 						
 						<li>
 							
-							<strong>getsf</strong> - [Get submit form] - Obtém os dados de um formulário, onde pode-se incluir seus envios. Pode ser usado em conjunto com a variável <strong>sfid</strong>.
+							<strong>getsf</strong> - [Get submit form] - Obtém os dados de um Esquema de Dados, onde pode-se incluir seus Dados UniD. Pode ser usado em conjunto com a variável <strong>sfid</strong>.
 							
 						</li>
 						
@@ -311,9 +665,9 @@ $lang['ud_ds_api_short_help'] = 															'
 				
 				<td>
 					
-					<strong>ID(s) do(s) formulário(s) (<i>Submit form ID</i>)</strong> - O(s) id(s) do(s) formulário(s).
-					<br/>Para buscar mais de um formulário, especifique as ID\'s separado-as por vírgula ",". Ex.: <code>sfid=1,2,25,4</code>
-					<br/>Para buscar todos os formulários, não informe esta variável (isso inclui não informar a variável com valor vazio)
+					<strong>ID(s) do(s) Esquema de Dados(s) (<i>Submit form ID</i>)</strong> - O(s) id(s) do(s) Esquema de Dados(s).
+					<br/>Para buscar mais de um Esquema de Dados, especifique as ID\'s separado-as por vírgula ",". Ex.: <code>sfid=1,2,25,4</code>
+					<br/>Para buscar todos os Esquemas de Dados, não informe esta variável (isso inclui não informar a variável com valor vazio)
 					
 				</td>
 				
@@ -341,7 +695,7 @@ $lang['ud_ds_api_short_help'] = 															'
 				
 				<td>
 					
-					<strong>Incluir envios (<i>Include users submits</i>)</strong> - Especifica se cada formulário deve incluir seus envios.
+					<strong>Incluir Dados UniD (<i>Include users submits</i>)</strong> - Especifica se cada Esquema de Dados deve incluir seus Dados UniD.
 					
 				</td>
 				
@@ -429,7 +783,7 @@ $lang['ud_ds_api_short_help'] = 															'
 						
 						<li>
 							
-							<strong>full</strong> - Retorna todos os dados dos formulários. Se os envios estiverem incluídos, todos os dados destes também serão retornados.
+							<strong>full</strong> - Retorna todos os dados dos Esquemas de Dados. Se os Dados UniD estiverem incluídos, todos os dados destes também serão retornados.
 							
 						</li>
 						
@@ -585,7 +939,7 @@ $lang['ud_ds_api_short_help'] = 															'
 				
 				<td>
 					
-					Apenas se o formulário estiver configurado para permitir o acesso à API somente através de login
+					Apenas se o Esquema de Dados estiver configurado para permitir o acesso à API somente através de login
 					
 				</td>
 				
@@ -611,7 +965,7 @@ $lang['ud_ds_api_short_help'] = 															'
 				
 				<td>
 					
-					Apenas se o formulário estiver configurado para permitir o acesso à API somente através de login
+					Apenas se o Esquema de Dados estiver configurado para permitir o acesso à API somente através de login
 					
 				</td>
 				
@@ -626,13 +980,13 @@ $lang['ud_ds_api_short_help'] = 															'
 	</div>
 	
 ';
-$lang['api_disabled'] = 																		"API desativada para este formulário!";
+$lang['api_disabled'] = 																		"API desativada para este Esquema de Dados!";
 $lang['api_login_wrong_password'] = 															"Senha incorreta!";
 $lang['api_login_username_not_found'] = 														"Nome de usuário não encontrado!";
-$lang['api_require_user_login'] = 																"Acesso à API deste formulário requer login!";
-$lang['ud_ds_api'] = 																			"API do formulário";
+$lang['api_require_user_login'] = 																"Acesso à API deste Esquema de Dados requer login!";
+$lang['ud_ds_api'] = 																			"API do Esquema de Dados";
 $lang['users_submits_api_active'] = 															"Disponibilizar API";
-$lang['tip_users_submits_api_active'] = 														"Ative para disponibilizar a API deste formulário externamente. Com a API ativa, uma aplicação externa poderá \"entrar em contato\" com este formulário, para requisitar a listagem dos envios, por exemplo.";
+$lang['tip_users_submits_api_active'] = 														"Ative para disponibilizar a API deste Esquema de Dados externamente. Com a API ativa, uma aplicação externa poderá \"entrar em contato\" com este Esquema de Dados, para requisitar a listagem dos Dados UniD, por exemplo.";
 
 $lang['access_level_api'] = 																	"Nível de acesso à API";
 $lang['ud_ds_api_access_type'] = 																"Nível de acesso";
@@ -648,19 +1002,19 @@ $lang['submit_form_param_send_email_to_bcc'] =													"Cópia oculta para (
 $lang['submit_form_param_send_email_to_subject'] =												"Assunto";
 
 
-$lang['submit_form_sending_email_layout_source'] =												"Origem do modelo de envio";
-$lang['submit_form_sending_email_layout_view'] =												"Modelo de envio";
+$lang['submit_form_sending_email_layout_source'] =												"Origem do modelo de Dado UniD";
+$lang['submit_form_sending_email_layout_view'] =												"Modelo de Dado UniD";
 $lang['submit_form_sending_email_show_empty_fields'] =											"Enviar campos em branco";
-$lang['submit_form_sending_email_layout_custom'] =												"Modelo de envio personalizado";
+$lang['submit_form_sending_email_layout_custom'] =												"Modelo de Dado UniD personalizado";
 
 $lang['us_search_pre_text'] = 																	"Pré-texto";
-$lang['us_search_pos_text'] = 																	"Texto após o formulário";
+$lang['us_search_pos_text'] = 																	"Texto após o Esquema de Dados";
 $lang['before_search_fields'] = 																"Antes dos campos de pesquisa";
 $lang['after_search_fields'] = 																	"Depois dos campos de pesquisa";
 $lang['us_show_search_pre_text_on_normal'] = 													"Exibir antes de efetuar uma busca";
-$lang['tip_us_show_search_pre_text_on_normal'] = 												"Esta opção definirá se o texto antes do formulário de busca será exibido antes de uma busca ser efetuada.";
+$lang['tip_us_show_search_pre_text_on_normal'] = 												"Esta opção definirá se o texto antes do Esquema de Dados de busca será exibido antes de uma busca ser efetuada.";
 $lang['us_show_search_pre_text_on_search'] = 													"Exibir após efetuar uma busca";
-$lang['tip_us_show_search_pre_text_on_search'] = 												"Esta opção definirá se o texto antes do formulário de busca será exibido após uma busca ser efetuada.";
+$lang['tip_us_show_search_pre_text_on_search'] = 												"Esta opção definirá se o texto antes do Esquema de Dados de busca será exibido após uma busca ser efetuada.";
 $lang['us_pre_text_position'] = 																"Disposição do pré-texto";
 
 
@@ -668,7 +1022,7 @@ $lang['us_pre_text_position'] = 																"Disposição do pré-texto";
 
 
 $lang['look_and_feel'] = 																		"Aparência";
-$lang['edit_submit_form'] = 																	"Editar formulário";
+$lang['edit_submit_form'] = 																	"Editar Esquema de Dados";
 
 // fields
 $lang['fields'] = 																				"Campos";
@@ -692,9 +1046,9 @@ $lang['select'] = 																				"Seleção";
 $lang['combo_box'] = 																			"Seleção";
 $lang['button'] = 																				"Botão";
 $lang['label'] = 																				"Título";
-$lang['tip_field_label'] = 																		"Título usado no ato da inserção / edição dos envios. Ex.: Preenchimento de um formulário, edição de um envio no painel administrativo.";
+$lang['tip_field_label'] = 																		"Título usado no ato da inserção / edição dos Dados UniD. Ex.: Preenchimento de um Esquema de Dados, edição de um Dado UniD no painel administrativo.";
 $lang['presentation_label'] = 																	"Título de apresentação";
-$lang['tip_field_presentation_label'] = 														"<p>Título usado em visualizações de dados de envios. Ex.: Listagens, páginas de detalhes.</p><p>Se deixado em branco, o campo <b><i>" . $lang['label'] . "</i></b> será utilizado.</p>";
+$lang['tip_field_presentation_label'] = 														"<p>Título usado em visualizações de dados de Dados UniD. Ex.: Listagens, páginas de detalhes.</p><p>Se deixado em branco, o campo <b><i>" . $lang['label'] . "</i></b> será utilizado.</p>";
 $lang['conditional_field'] = 																	"Condicional";
 $lang['conditional_field_function'] = 															"Função condicional";
 $lang['show'] =																					"Exibir";
@@ -724,7 +1078,7 @@ $lang['sf_date_field_year_min_value'] = 														"Ano mínimo";
 $lang['sf_date_field_year_max_value'] = 														"Ano máximo";
 $lang['sf_date_field_year_def_value'] = 														"Ano padrão";
 
-$lang['submit_forms_error_no_field_on_submit_form'] = 											"Este campo não foi encontrado no formulário, pode ter sido removido ou seu nome foi alterado.";
+$lang['submit_forms_error_no_field_on_submit_form'] = 											"Este campo não foi encontrado no Esquema de Dados, pode ter sido removido ou seu nome foi alterado.";
 
 $lang['submit_forms_validation_rule_comp_fields'] = 											"Campos extras para as validações";
 $lang['submit_forms_validation_rule_matches'] = 												"Combinação";
@@ -764,16 +1118,16 @@ $lang['submit_forms_validation_rule_lowercase'] = 												"Tudo em minúscul
 $lang['ud_validation_cpf_ptbr']	=																"Validação de CPF (Brasil)";
 $lang['tip_field_validation_rule_parameter_matches'] = 											"Informe o campo com o qual este deve combinar";
 $lang['options_title_field'] = 																	"Campo de título das opções";
-$lang['tip_options_title_field'] = 																"Define qual campo do formulário será utilizado como título das opções";
+$lang['tip_options_title_field'] = 																"Define qual campo do Esquema de Dados será utilizado como título das opções";
 
-$lang['ud_available_on_admin'] = 																"Disponível na administração (formulários e filtros)";
-$lang['tip_ud_available_on_admin'] = 															"Marque para disponibilizar este campo na administração (somente em formulários de envios e filtros)";
-$lang['ud_available_on_site'] = 																"Disponível no site (formulários e filtros)";
-$lang['tip_ud_available_on_site'] = 															"Marque para disponibilizar este campo no site (somente em formulários de envios e filtros)";
-$lang['submit_check_all_fields_available_on_admin'] = 											"Todos os campos disponíveis na administração (formulários e filtros)";
-$lang['tip_submit_check_all_fields_available_on_admin'] = 										"Acione para marcar todos os campos como disponíveis na administração, somente para formulários de envios e filtros";
-$lang['submit_check_all_fields_available_on_site'] = 											"Todos os campos disponíveis no site (formulários e filtros)";
-$lang['tip_submit_check_all_fields_available_on_site'] = 										"Acione para marcar todos os campos como disponíveis no site, somente para formulários de envios e filtros";
+$lang['ud_available_on_admin'] = 																"Disponível na administração (Esquemas de Dados e filtros)";
+$lang['tip_ud_available_on_admin'] = 															"Marque para disponibilizar este campo na administração (somente em Esquemas de Dados de Dados UniD e filtros)";
+$lang['ud_available_on_site'] = 																"Disponível no site (Esquemas de Dados e filtros)";
+$lang['tip_ud_available_on_site'] = 															"Marque para disponibilizar este campo no site (somente em Esquemas de Dados de Dados UniD e filtros)";
+$lang['submit_check_all_fields_available_on_admin'] = 											"Todos os campos disponíveis na administração (Esquemas de Dados e filtros)";
+$lang['tip_submit_check_all_fields_available_on_admin'] = 										"Acione para marcar todos os campos como disponíveis na administração, somente para Esquemas de Dados de Dados UniD e filtros";
+$lang['submit_check_all_fields_available_on_site'] = 											"Todos os campos disponíveis no site (Esquemas de Dados e filtros)";
+$lang['tip_submit_check_all_fields_available_on_site'] = 										"Acione para marcar todos os campos como disponíveis no site, somente para Esquemas de Dados de Dados UniD e filtros";
 
 $lang['submit_check_all_fields_visible_on_site_list'] = 										"Todos os campos visíveis nas listagens no site";
 $lang['tip_submit_check_all_fields_visible_on_site_list'] = 									"Acione para marcar todos os campos como visíveis nas listagens de dados no site";
@@ -793,8 +1147,8 @@ $lang['download_txt'] = 																		"Baixar .TXT";
 $lang['download_html'] = 																		"Baixar .HTML";
 $lang['download_pdf'] = 																		"Baixar .PDF";
 $lang['users_submits_export_error'] = 															"Erro ao tentar exportar";
-$lang['no_users_submits_selected'] = 															"Nenhum envio selecionado";
-$lang['select_submissions_to_export'] = 														"Por favor, selecione os envios que deseja exportar";
+$lang['no_users_submits_selected'] = 															"Nenhum Dado UniD selecionado";
+$lang['select_submissions_to_export'] = 														"Por favor, selecione os Dados UniD que deseja exportar";
 $lang['users_submits_removed_success'] = 														"Envios excluídos com sucesso!";
 $lang['columns_to_show'] = 																		"Colunas visíveis";
 
@@ -805,16 +1159,16 @@ $lang['submit_form_id_sprintf'] = 																"Id: %s";
 $lang['submit_form_records_sprintf'] = 															"Registros: %s";
 
 $lang['submit_form_user_submit_id_sprintf'] = 													"Submissão: %s";
-$lang['submit_form_user_submit_datetime_sprintf'] = 											"Data e hora do envio: %s";
+$lang['submit_form_user_submit_datetime_sprintf'] = 											"Data e hora do Dado UniD: %s";
 
 
 
 // privileges
 $lang['submit_forms_management'] = 																"Formulários de submissão";
-$lang['submit_forms_management_submit_forms_management'] = 										"Pode gerenciar formulários de submissão";
-$lang['submit_forms_management_submit_forms_api_management'] = 									"Pode gerenciar API's de formulários de submissão";
-$lang['access_denied_submit_forms_management_submit_forms_management'] = 						"Você não possui privilégios suficientes para gerenciar formulários de submissão!";
-$lang['access_denied_submit_forms_management_submit_forms_api_management'] = 					"Você não possui privilégios suficientes para usar API's de formulários de submissão!";
+$lang['submit_forms_management_submit_forms_management'] = 										"Pode gerenciar Esquemas de Dados de submissão";
+$lang['access_denied_submit_forms_management_submit_forms_management'] = 															"Você não possui privilégios suficientes para gerenciar Esquemas de Dados de submissão!";
+$lang['priv_ds_api'] = 																			"Pode gerenciar API's de Esquemas de Dados";
+$lang['access_denied_priv_ds_api'] = 															"Sem privilégios suficientes para acessar a API Esquemas de Dados UniD!";
 
 
 

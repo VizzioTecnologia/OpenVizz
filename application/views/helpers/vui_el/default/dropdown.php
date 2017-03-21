@@ -19,7 +19,7 @@
 	
 ?>
 
-<span class="vui-interactive-el-wrapper vui-btn-wrapper vui-dropdown-wrapper<?= $wrapper_class ? ' ' . $wrapper_class : ''; ?><?= $icon ? ' with-icon' : ''; ?>" <?= $_title ? $_title : ''; ?>><?php
+<span class="vui-interactive-el-wrapper <?= ( ! $multiselect ? 'vui-btn-wrapper' : '' ); ?> vui-dropdown<?= ( $multiselect ? '-multi' : '' ); ?>-wrapper<?= $wrapper_class ? ' ' . $wrapper_class : ''; ?><?= $icon ? ' with-icon' : ''; ?>" <?= $_title ? $_title : ''; ?>><?php
 	
 	$input_params = array(
 		

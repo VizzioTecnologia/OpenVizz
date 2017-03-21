@@ -42,21 +42,21 @@ class Contacts extends Main {
 		/************* Contacts list / search *************/
 
 		if ( $action == 'contacts_list' OR $action == 'search' ){
-
+			
 			$this->load->helper(array('pagination'));
-
+			
 			// $var1 = página atual
 			// $var2 = itens por página
 			if ( $var1 < 1 OR ! gettype($var1) == 'int' ) $var1 = 1;
 			if ( $var2 < 1 OR ! gettype($var2) == 'int' ) $var2 = $this->mcm->filtered_system_params['admin_items_per_page'];
 			$offset = ($var1-1)*$var2;
-
+			
 			//validação dos campos
 			$errors = FALSE;
 			$errors_msg = '';
 			$terms = trim($this->input->post('terms', TRUE) ? $this->input->post('terms', TRUE) : ($this->input->get('q') ? $this->input->get('q') : FALSE) );
 			if ( ( $this->input->post('submit_search', TRUE) AND ( $terms OR $terms == 0) ) ){
-
+				
 				if ( strlen($terms) == 0 ){
 					$errors = TRUE;
 					$errors_msg .= '<div class="error">'.lang('validation_error_terms_not_blank').'</div>';
@@ -65,7 +65,7 @@ class Contacts extends Main {
 					$errors = TRUE;
 					$errors_msg .= '<div class="error">'.sprintf(lang('validation_error_terms_min_lenght'), 2).'</div>';
 				}
-
+				
 			}
 			else if ( $this->input->post('submit_cancel_search', TRUE) ){
 				redirect( 'admin/'.$this->component_name . '/' . __FUNCTION__.'/contacts_list' );
@@ -236,7 +236,12 @@ class Contacts extends Main {
 
 			if ( $action == 'add_contact' ){
 
-				$contact = array();
+				$contact = array(
+					
+					'photo_local' => '',
+					'thumb_local' => '',
+					
+				);
 
 			}
 			else if ( $action == 'edit_contact' ){
@@ -446,7 +451,7 @@ class Contacts extends Main {
 					else{
 						$contact['websites'] = array();
 					}
-
+					
 					/************** websites *************/
 					/*************************************/
 
@@ -821,55 +826,59 @@ class Contacts extends Main {
 
 
 			if ( $action == 'add_contact' AND ! $post_data ) {
-
+				
 				$rand = md5( rand( 2000, 15223 ) );
-
-				if( ! is_dir( FCPATH . 'tmp' ) ){
-
-					mkdir( FCPATH . 'tmp', 0777, TRUE );
-
-				}
-
-				$contact_image_path = 'tmp' . DS . $rand . DS;
-
+				
+				$contact_image_path = ASSETS_PATH . 'images' . DS . 'components' . DS . 'contacts' . DS . 'tmp' . DS . $rand . DS;
+				$thumb_contact_image_path = THUMBS_PATH . ASSETS_DIR_NAME . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . 'tmp' . DS . $rand . DS;
+				
 			}
 			else if ( $post_data AND isset( $post_data[ 'contact_image_path' ] ) ) {
-
+				
 				$contact_image_path = $post_data[ 'contact_image_path' ];
-
+				
 			}
 			else if ( $action == 'edit_contact' ) {
-
+				
 				$contact_image_path = 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $var1;
-
+				
 			}
-
+			
 			// criando o diretório destino das imagens, caso este não exista
 			if( ! is_dir( $contact_image_path ) ){
-
-				if ( ! @mkdir( $contact_image_path, 0777, TRUE ) ){
-
+				
+				if ( ! @mkpath( $thumb_contact_image_path ) ){
+					
+					msg( 'unable_to_create_directory', 'title' );
+					msg( sprintf( lang( 'unable_to_create_company_temporary_images_directory' ), $thumb_contact_image_path ), 'error' );
+					
+					log_message( 'error', sprintf( lang( 'unable_to_create_company_temporary_images_directory' ), $thumb_contact_image_path ) );
+					
+				}
+				if ( ! @mkpath( $contact_image_path ) ){
+					
 					msg( 'unable_to_create_directory', 'title' );
 					msg( sprintf( lang( 'unable_to_create_company_temporary_images_directory' ), $contact_image_path ), 'error' );
-
+					
 					log_message( 'error', sprintf( lang( 'unable_to_create_company_temporary_images_directory' ), $contact_image_path ) );
-
+					
 				}
-
+				
 			}
-
-
-
-
+			
+			
+			
 			$data = array(
-
+				
 				'component_name' => $this->component_name,
 				'f_action' => $action,
 				'contact' => $contact,
 				'contact_image_path' => $contact_image_path,
-
+				
 			);
-
+			
+// 			echo '<pre>' . print_r( $contact, TRUE ) . '</pre>'; exit;
+			
 			//validação dos campos
 			$this->form_validation->set_rules( 'name', lang( 'name' ), 'trim|required|max_legth[100]' );
 			$this->form_validation->set_rules( 'birthday_date', lang( 'birthday_date' ), 'trim' );
@@ -895,7 +904,7 @@ class Contacts extends Main {
 			}
 			// se a validação dos campos for bem sucedida
 			else if ( $this->form_validation->run() AND ( in_array( $submit_action, array( 'submit', 'apply' ) ) ) ){
-
+				
 				// convertendo os arrays de campos dinâmicos em json para inserção no db
 				$post_data['emails'] = json_encode($post_data['emails']);
 				$post_data['phones'] = json_encode($post_data['phones']);
@@ -953,54 +962,98 @@ class Contacts extends Main {
 					$return_id = $this->contacts_model->insert_contact( $db_data );
 
 					if ( $return_id ){
-
-						$file = explode( '/', $db_data[ 'thumb_local' ] );
-						$file = $file[ count( $file ) - 1 ];
-
+						
+						$new_contact_image_path = ASSETS_PATH . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id . DS;
+						$new_thumb_contact_image_path = THUMBS_PATH . ASSETS_DIR_NAME . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id . DS;
+						
 						if ( $db_data[ 'thumb_local' ] ){
-
-							if( ! is_dir( 'thumbs' . DS . 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id ) ){
-
-								mkdir( 'thumbs' . DS . 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id, 0777, TRUE );
-								copy( $db_data[ 'thumb_local' ], 'thumbs' . DS . 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id . '/' . $file );
-								$new_db_data[ 'thumb_local' ] = 'thumbs/assets/images/components/contacts/' . $return_id . '/' . $file;
-
+							
+							$file = pathinfo( $db_data[ 'thumb_local' ] , PATHINFO_BASENAME );
+							$file = explode( '?', $file );
+							$file = $file[ 0 ];
+							
+							if ( ! is_dir( $new_thumb_contact_image_path ) ){
+								
+								if ( ! @mkpath( $new_thumb_contact_image_path ) ){
+									
+									msg( 'unable_to_create_directory', 'title' );
+									msg( lang( 'unable_to_create_contact_thumb_directory', $new_thumb_contact_image_path ), 'error' );
+									
+									log_message( 'error', lang( 'unable_to_create_contact_thumb_directory', $new_thumb_contact_image_path ) );
+									
+								}
+								
+								if ( ! @copy( pathinfo( $db_data[ 'thumb_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_thumb_contact_image_path . $file ) ){
+									
+									msg( 'unable_to_create_directory', 'title' );
+									msg( lang( 'unable_to_copy_contact_thumb_image_to_destination', pathinfo( $db_data[ 'thumb_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_thumb_contact_image_path . $file ), 'error' );
+									
+									log_message( 'error', lang( 'unable_to_copy_contact_thumb_image_to_destination', pathinfo( $db_data[ 'thumb_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_thumb_contact_image_path . $file ) );
+									
+								}
+								
+								$new_db_data[ 'thumb_local' ] = THUMBS_DIR_NAME . '/' . ASSETS_DIR_NAME . '/images/components/contacts/' . $return_id . '/' . $file;
+								
 							}
-
+							
+							rrmdir( $thumb_contact_image_path );
+							
 						}
-
+						
 						if ( $db_data[ 'photo_local' ] ){
-
-							if( ! is_dir( 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id ) ){
-
-								mkdir( 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id, 0777, TRUE );
-								copy( $db_data[ 'photo_local' ], 'assets' . DS . 'images' . DS . 'components' . DS . 'contacts' . DS . $return_id . '/' . $file );
-								$new_db_data[ 'photo_local' ] = 'assets/images/components/contacts/' . $return_id . '/' . $file;
-
+							
+							$file = pathinfo( $db_data[ 'photo_local' ] , PATHINFO_BASENAME );
+							$file = explode( '?', $file );
+							$file = $file[ 0 ];
+							
+							if ( ! is_dir( $new_contact_image_path ) ){
+								
+								if ( ! @mkpath( $new_contact_image_path ) ){
+									
+									msg( 'unable_to_create_directory', 'title' );
+									msg( lang( 'unable_to_create_contact_images_directory', $new_contact_image_path ), 'error' );
+									
+									log_message( 'error', lang( 'unable_to_create_contact_images_directory', $new_contact_image_path ) );
+									
+								}
+								
+								if ( ! @copy( pathinfo( $db_data[ 'photo_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_contact_image_path . $file ) ){
+									
+									msg( 'unable_to_create_directory', 'title' );
+									msg( lang( 'unable_to_copy_contact_image_to_destination', pathinfo( $db_data[ 'photo_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_contact_image_path . $file ), 'error' );
+									
+									log_message( 'error', lang( 'unable_to_copy_contact_image_to_destination', pathinfo( $db_data[ 'photo_local' ] , PATHINFO_DIRNAME ) . DS . $file, $new_contact_image_path . $file ) );
+									
+								}
+								
+								$new_db_data[ 'photo_local' ] = ASSETS_DIR_NAME . '/images/components/contacts/' . $return_id . '/' . $file;
+								
 							}
-
+							
+							rrmdir( $contact_image_path );
+							
 						}
-
+						
 						if ( check_var( $new_db_data ) ){
-
+							
 							$this->contacts_model->update_contact( $new_db_data, array( 'id' => $return_id ) );
-
+							
 						}
-
+						
 						msg( ( 'contact_added' ), 'success' );
-
+						
 						if ( $this->input->post( 'submit_apply' ) ){
-
+							
 							redirect( 'admin/contacts/contacts_management/edit_contact/' . $return_id );
-
+							
 						}
 						else{
-
+							
 							redirect_last_url();
-
+							
 						}
 					}
-
+					
 				}
 				else if ( $action == 'edit_contact' ) {
 
@@ -1796,17 +1849,11 @@ class Contacts extends Main {
 		else if ( $action == 'add' OR $action == 'edit' ){
 
 			if ( $action == 'add_contact' AND ! $post_data ) {
-
+				
 				$rand = md5( rand( 2000, 15223 ) );
-
-				if( ! is_dir( FCPATH . 'tmp' ) ){
-
-					mkdir( FCPATH . 'tmp', 0777, TRUE );
-
-				}
-
-				$contact_image_path = 'tmp' . DS . $rand . DS;
-
+				
+				$contact_image_path = ASSETS_PATH . 'images' . DS . 'components' . DS . 'contacts' . DS . 'tmp' . DS . $rand . DS;
+				
 			}
 			else if ( $action == 'edit' AND isset( $get[ 'contact_id' ] ) ) {
 
@@ -1828,7 +1875,7 @@ class Contacts extends Main {
 			// criando o diretório destino das imagens, caso este não exista
 			if( ! is_dir( $contact_image_path ) ){
 
-				if ( ! @mkdir( $contact_image_path, 0777, TRUE ) ){
+				if ( ! @mkdir( $contact_image_path ) ){
 
 					msg( 'unable_to_create_directory', 'title' );
 					msg( sprintf( lang( 'unable_to_create_company_temporary_images_directory' ), $contact_image_path ), 'error' );

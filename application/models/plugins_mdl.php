@@ -285,7 +285,7 @@ class Plugins_mdl extends CI_Model{
 			}
 			
 		}
-		// heart's function
+		// function's heart 
 		else if ( isset( $name ) AND ! isset( $type ) AND isset( self::$_plugins[ 'by_name' ][ $name ] ) ) {
 			
 			if ( ! $this->_performed( $name ) AND $this->_check_dependencies( $name ) ) {

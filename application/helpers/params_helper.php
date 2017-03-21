@@ -31,7 +31,9 @@ function get_params( $attributes = NULL, $ignore_empty_values = FALSE ){
 		$array = array();
 		$array2 = array();
 		
-		foreach ( $attributes as $value ) {
+		reset( $attributes );
+		
+		while ( list( $key, $value ) = each( $attributes ) ) {
 			
 			$array2 = explode( "=", $value );
 			$array2[ 1 ] = trim( isset( $array2[ 1 ] ) ? ( string ) $array2[ 1 ] : '' );
@@ -44,6 +46,20 @@ function get_params( $attributes = NULL, $ignore_empty_values = FALSE ){
 			
 		}
 		
+		/*
+		foreach ( $attributes as $value ) {
+			
+			$array2 = explode( "=", $value );
+			$array2[ 1 ] = trim( isset( $array2[ 1 ] ) ? ( string ) $array2[ 1 ] : '' );
+			
+			if ( $value != '' AND ! $ignore_empty_values ) {
+				
+				$array[ $array2[ 0 ] ] = trim( $array2[ 1 ] );
+				
+			}
+			
+		}
+		*/
 		return array_merge( array(), $array );
 		
 	}
@@ -73,6 +89,35 @@ function filter_params( $base_params, $params, $keep_blank = FALSE ){
 	
 	if ( is_array( $base_params ) AND is_array( $params ) ){
 		
+		while ( list( $key, $param ) = each( $params ) ) {
+			
+			$_final_params[ $key ] = $param;
+			
+			if ( ! isset( $param ) OR $param == '' AND ! $keep_blank AND isset( $base_params[ $key ] ) ) {
+				
+				$_final_params[ $key ] = $param;
+				
+			}
+			
+			if ( is_array( $param ) AND isset( $base_params[ $key ] ) AND is_array( $base_params[ $key ] ) ) {
+				
+				$_final_params[ $key ] = filter_params( $base_params[ $key ], $param, $keep_blank );
+				
+			}
+			else if ( ( ! isset( $param ) OR $param == 'global' OR ( $param == '' AND ! $keep_blank ) ) AND isset( $base_params[ $key ] ) ) {
+				
+				$_final_params[ $key ] = $base_params[ $key ];
+				
+			}
+			else if ( ! isset( $base_params[ $key ] ) ) {
+				
+				$_final_params[ $key ] = $param;
+				
+			}
+			
+		}
+		
+		/*
 		foreach ( $params as $key => $param ) {
 			
 			$_final_params[ $key ] = $param;
@@ -99,9 +144,8 @@ function filter_params( $base_params, $params, $keep_blank = FALSE ){
 				
 			}
 			
-			//echo 'entre <strong>$base_params[ ' . print_r( $key, TRUE ) . ' ]</strong> = ' . $base_params[ $key ] . ' e <strong>$param</strong> = ' . print_r( $param, TRUE ) . ', <strong>resultado</strong>: ' . print_r( $_final_params[ $key ], TRUE ) . '<br/>';
-			
 		}
+		*/
 		
 	}
 	
@@ -249,8 +293,8 @@ function get_params_spec_from_xml( $xml_file = NULL ){
 					
 				}
 				
-				
-				/************* criando o array final com os valores padrões *************/
+				// ----------------------------------------------------------
+				// criando o array final com os valores padrões
 				
 				$key = $_new['name'];
 				
@@ -315,7 +359,26 @@ function params_to_string( $data = NULL ){
 	
 	if ( $data ){
 		$output = '';
+		
+		while ( list( $key, $value ) = each( $data ) ) {
+			
+			if ( strpos( $key,PARAM_PREFIX ) !== FALSE ) {
+				
+				if ( is_array( $value ) ) {
+					
+					$output .= str_replace( PARAM_PREFIX, '', $key ).'[]='.( implode( '|', $value ) )."\n";
+				}
+				else {
+					
+					$output .= str_replace( PARAM_PREFIX, '', $key ).'='.$value."\n";
+				}
+			}
+			
+		}
+		
+		/*
 		foreach ( $data as $key => $value ) {
+			
 			if ( strpos( $key,PARAM_PREFIX ) !== FALSE ){
 				if ( is_array( $value ) ){
 					$output .= str_replace( PARAM_PREFIX, '', $key ).'[]='.( implode( '|', $value ) )."\n";
@@ -324,7 +387,9 @@ function params_to_string( $data = NULL ){
 					$output .= str_replace( PARAM_PREFIX, '', $key ).'='.$value."\n";
 				}
 			}
+			
 		}
+		*/
 		return $output;
 	}
 }
@@ -337,6 +402,46 @@ function set_params_validations( $params_spec = NULL, $param_prefix = PARAM_PREF
 		$CI =& get_instance();
 		$CI->load->library( array( 'form_validation' ) );
 		
+		if ( is_array( $params_spec ) ) {
+			
+			reset( $params_spec );
+			
+			while ( list( $section_key, $section ) = each( $params_spec ) ) {
+				
+				if ( is_array( $section ) ) {
+					
+					reset( $section );
+					
+					while ( list( $element_key, $element ) = each( $section ) ) {
+						
+						if ( isset( $element[ 'name' ] ) ) {
+							
+							$name = & $element[ 'name' ];
+							
+							$name_sbrackets = '';
+							preg_match_all( '/\[[^\]]*\]/', $name, $sbrackets );
+							
+							if ( count( $sbrackets[ 0 ] ) ) {
+								
+								$name_sbrackets = join( '', $sbrackets[ 0 ] );
+								
+							}
+							
+							$name_no_brackets = str_replace( $name_sbrackets, '', $name );
+							
+							$CI->form_validation->set_rules( $param_prefix . '[' . $name_no_brackets . ']' . $name_sbrackets, lang( ( in_array( $element[ 'type' ], array( 'checkbox', 'radio', ) ) ? $element[ 'name' ] : $element[ 'label' ] ) ), isset( $element[ 'validation' ][ 'rules' ] ) ? $element[ 'validation' ][ 'rules' ] : '' );
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		/*
 		foreach ( $params_spec as $section_key => $section ) {
 			
 			foreach ( $section as $element_key => $element ) {
@@ -363,7 +468,7 @@ function set_params_validations( $params_spec = NULL, $param_prefix = PARAM_PREF
 			}
 			
 		}
-		
+		*/
 	}
 	
 }
@@ -413,7 +518,7 @@ function _resolve_array_param_value( $prefix, $value ) {
 	
 	$new_values = array();
 	
-	foreach( $value as $k => $v ) {
+	while ( list( $k, $v ) = each( $value ) ) {
 		
 		$new_k = array();
 		
@@ -432,6 +537,26 @@ function _resolve_array_param_value( $prefix, $value ) {
 		
 	}
 	
+	/*
+	foreach( $value as $k => $v ) {
+		
+		$new_k = array();
+		
+		if ( is_array( $v ) ) {
+			
+			$new_k = _resolve_array_param_value( $prefix . '[' . $k . ']', $v );
+			
+		}
+		else {
+			
+			$new_values[ $prefix . '[' . $k . ']' ] = $v;
+			
+		}
+		
+		$new_values = $new_values + $new_k;
+		
+	}
+	*/
 	return $new_values;
 	
 }
@@ -450,31 +575,31 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 			
 		}
 		
+		// -------------------------------------------
+		// Este bloco de código converte a variável multidimensional $post para unidimensional
+		
 		if ( isset( $post ) ){
 			
 			$new_values = array();
 			
-			foreach( $post as $pk => $post_item ) {
+			reset( $post );
+			
+			while ( list( $pk, $post_item ) = each( $post ) ) {
 				
 				if ( is_array( $post_item ) ) {
 					
-					$new_values = _resolve_array_param_value( $pk, $post_item );
-					
 					unset( $post[ $pk ] );
+					
+					$post = $post + _resolve_array_param_value( $pk, $post_item );
+					
+				}
+				else {
+					
+					$post_item = htmlspecialchars_decode( $post_item );
 					
 				}
 				
 			}
-			
-			$post = $post + $new_values;
-			
-			foreach( $post as $pk => & $post_item ) {
-				
-				$post_item = htmlspecialchars_decode( $post_item );
-				
-			}
-			
-			//echo '<pre>' . print_r( $new_values, TRUE ) . '</prev>';
 			
 			// substitui os valores padrões pelos obtidos via post
 			$params_values = array_merge_recursive_distinct( $params_values, $post );

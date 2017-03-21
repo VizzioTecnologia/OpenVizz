@@ -84,7 +84,6 @@ $lang[ 'c_users_look_and_feel' ] = 																"Aparência";
 $lang[ 'c_users_layouts_login' ] = 																"Layout da página de login";
 
 $lang[ 'unable_to_add_users_images_col_into_tb_users_table' ] = 								"Não foi possível adicionar a coluna <strong>images</strong> à tabela <strong>tb_users</strong>!";
-$lang[ 'unable_db_upgrade_cache_file_is_not_writable' ] = 										"Não foi possível gravar o arquivo de cache de atualização do banco de dados!";
 $lang[ 'create_user_fail' ] = 																	"Erro ao tentar criar conta de usuário!";
 $lang[ 'update_user_fail' ] = 																	"Erro ao tentar atualizar conta de usuário!";
 $lang[ 'user_created' ] = 																		"Usuário criado com sucesso!";

@@ -2,8 +2,7 @@
 <?php
 
 	$articles_horizontal_margins = VUI_SPACING * 2;
-	$max_columns = 20;
-
+	
 ?>
 
 /*
@@ -26,7 +25,7 @@
 
 }
 
-<?php for ( $i = 1; $i <= $max_columns; $i++ ) { ?>
+<?php for ( $i = 1; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 .article-wrapper.columns-<?= $i; ?>,
 .total-items-list-<?= $i; ?> > .item {
@@ -196,7 +195,7 @@
 	overflow: visible;
 
 }
-<?php for ( $i = 2; $i <= $max_columns; $i++ ) { ?>
+<?php for ( $i = 2; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 .articles-wrapper .columns-<?= $i; ?> .title{
 
@@ -554,7 +553,7 @@
 
 	}
 
-	<?php for ( $i = 2; $i <= $max_columns; $i++ ) { ?>
+	<?php for ( $i = 2; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 	.articles-wrapper.columns-<?= $i; ?> .col{
 
@@ -596,7 +595,7 @@
 
 <?= '@media screen and ( min-width: 440px ) and ( max-width: 960px ) {'; ?>
 
-	<?php for ( $i = 2; $i <= $max_columns; $i++ ) { ?>
+	<?php for ( $i = 2; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 	.articles-wrapper.columns-<?= $i; ?> .col{
 
@@ -624,7 +623,7 @@
 		display: none;
 
 	}
-	<?php for ( $i = 4; $i <= $max_columns; $i++ ) { ?>
+	<?php for ( $i = 4; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 	.articles-wrapper .columns-<?= $i; ?> .col{
 
@@ -859,7 +858,7 @@
 	<?= $vui->css->transition(); ?>
 
 }
-<?php for ( $i = 2; $i <= $max_columns; $i++ ) { ?>
+<?php for ( $i = 2; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 .article-loader.columns-<?= $i; ?>,
 .articles-category-loader.columns-<?= $i; ?>{
@@ -1322,7 +1321,7 @@
 
 @media screen and ( max-width: 480px ) {
 
-	<?php for ( $i = 1; $i <= $max_columns; $i++ ) { ?>
+	<?php for ( $i = 1; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 	.article-loader.columns-<?= $i; ?>,
 	.articles-category-loader.columns-<?= $i; ?>{
@@ -1337,7 +1336,7 @@
 
 @media screen and ( min-width: 480px ) and ( max-width: 960px ) {
 
-	<?php for ( $i = 2; $i <= $max_columns; $i++ ) { ?>
+	<?php for ( $i = 2; $i <= VUI_MAX_COLUMNS; $i++ ) { ?>
 
 	.article-loader.columns-<?= $i; ?>,
 	.articles-category-loader.columns-<?= $i; ?>{

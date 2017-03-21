@@ -10,6 +10,8 @@ $params = $module_data[ 'params' ];
 
 $unique_hash = md5( uniqid( rand(), true ) );
 
+echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'admin', 'get_url' => FALSE, 'text' => lang( 'admin_menu' ), 'icon' => 'start', 'only_icon' => TRUE, ) );
+
 ?>
 
 <section id="admin-menu-module-<?= $unique_hash; ?>" class="module-wrapper admin-menu-module admin-menu-module-wrapper direction-<?= $params[ 'admin_menu_direction' ]; ?> <?= $params[ 'module_class' ]; ?>">
@@ -36,7 +38,7 @@ $unique_hash = md5( uniqid( rand(), true ) );
 				// echo vui_el_button( array( 'url' => 'admin/responsive_file_manager/index/a/rfm', 'text' => lang( 'file_manager' ), 'icon' => 'browse', 'only_icon' => TRUE, ) );
 				
 				echo vui_el_button( array( 'attr' => 'data-rftype="all"', 'url' => '#', 'text' => lang( 'select_image' ), 'get_url' => FALSE, 'icon' => 'browse', 'only_icon' => TRUE, 'class' => 'modal-file-picker', ) );
-			
+				
 			?></li><?php
 			
 			?><li><?php

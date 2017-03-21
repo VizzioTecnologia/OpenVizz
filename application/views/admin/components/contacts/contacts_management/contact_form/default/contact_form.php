@@ -47,13 +47,29 @@
 							
 						<?php } ?>
 						
-						<div id="contact-thumb-wrapper" class="contact-thumb">
-							
-							<?= form_hidden( 'thumb_local', ( isset( $contact[ 'thumb_local' ] ) ? $contact[ 'thumb_local' ] : '' ) ); ?>
-							
-						</div>
-						
 						<div id="contact-photo-wrapper" class="vui-field-wrapper-auto contact-photo">
+							
+							<?php
+								
+								$field_name = 'thumb_local';
+								$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
+								
+							?>
+							
+							<?= vui_el_input_text(
+								
+								array(
+									
+									'name' => $field_name,
+									'value' => isset( $contact[ $field_name ] ) ? $contact[ $field_name ] : '',
+									'id' => 'contact-' . $field_name,
+									'class' => $field_name . ' ' . ( $field_error ? 'field-error' : '' ),
+									'text' => lang( 'contact_' . $field_name ),
+									'title' => $field_error ? element_title( $field_error ) : lang( 'tip_contact_' . $field_name ),
+									
+								)
+								
+							); ?>
 							
 							<?php
 								
@@ -61,12 +77,6 @@
 								$field_error = form_error( $field_name, '<div class="msg-inline-error">', '</div>' );
 								
 							?>
-							
-							<div class="contact-photo-wrapper edit-page">
-								
-								<?= anchor( $contact['thumb_local'], img( array( 'class' => 'contact-image-thumb', 'src' => $contact[ $field_name ], 'height' => 120 ) ),'target="_blank" class="contact-image-thumb-link" title="'.lang('action_view').'"'); ?>
-							
-							</div>
 							
 							<?= form_label( lang( $field_name ) ); ?>
 							
@@ -204,7 +214,7 @@
 													
 													'title' => lang( 'publicly_visible' ),
 													'name' => 'emails[' . $key . '][publicly_visible]',
-													'value' => isset( $field[ 'publicly_visible' ] ) ? $field[ 'publicly_visible' ] : 1,
+													'value' => isset( $email[ 'publicly_visible' ] ) ? $email[ 'publicly_visible' ] : 1,
 													'id' => 'email-publicly-visible-' . $key,
 													'options' => array(
 														
@@ -260,7 +270,7 @@
 													
 													'title' => lang( 'tip_title_publicly_visible' ),
 													'name' => 'emails[' . $key . '][email_title_publicly_visible]',
-													'value' => isset( $field[ 'email_title_publicly_visible' ] ) ? $field[ 'email_title_publicly_visible' ] : 1,
+													'value' => isset( $email[ 'email_title_publicly_visible' ] ) ? $email[ 'email_title_publicly_visible' ] : 1,
 													'id' => 'email-title-publicly-visible-' . $key,
 													'options' => array(
 														
@@ -462,6 +472,14 @@
 									
 								?>
 								<?= form_dropdown( 'phones['.$key.'][phone_title_publicly_visible]', $options, isset( $phone[ 'phone_title_publicly_visible' ] ) ? $phone[ 'phone_title_publicly_visible' ] : 1, 'id="phone-title-publicly-visible-' . $key . '"'); ?>
+							</div>
+							
+							<div class="vui-field-wrapper-inline">
+								
+								<?= form_error('phones['.$key.'][int_code]', '<div class="msg-inline-error">', '</div>'); ?>
+								<?= form_label(lang('phone_int_code')); ?>
+								<?= form_input(array('id'=>'phone-int-code-'.$key,'name'=>'phones['.$key.'][int_code]','class'=>'phone-int-code', 'maxlength'=>'4', 'size'=>'4'), isset($phone['int_code']) ? $phone['int_code'] : '' ); ?>
+								
 							</div>
 							
 							<div class="vui-field-wrapper-inline">
@@ -832,24 +850,28 @@ $( document ).ready(function(){
 	
 	window.updateImage = function(){
 		
-		var url = $( '#contact-photo_local' ).val(),
-			thumb_image = $( '.contact-thumb-wrapper .contact-image-thumb' );
-			
-		var image_src = url + '?' + Math.floor( ( Math.random() * 100 ) + 1 );
-		var thumb_image_src = 'thumbs/' + image_src;
-		
-		$( '[name=thumb_local]' ).val( thumb_image_src );
-		thumb_image.src = $( '#contact-thumb_local' ).val();
-		
-		$( '.contact-photo-wrapper' ).empty();
+		var url = $( '#contact-photo_local' ).val();
 		
 		if ( url != '' ){
 			
-			$( '.contact-photo-wrapper' ).append( '<a class="contact-image-photo-link" href="' + url + '" target="_blank"><img class="contact-image-photo" src="' + image_src + '" /></a>' );
+			var image_src = url + '?' + Math.floor( ( Math.random() * 100 ) + 1 );
+			var thumb_image_src = 'thumbs/' + image_src;
+			
+			$( '[name=thumb_local]' ).val( thumb_image_src );
+			$( '[name=photo_local]' ).val( $( '#contact-photo_local' ).val() );
+			
+			$( '#image-wrapper' ).empty().append( '<a class="contact-image-photo-link" href="' + url + '" target="_blank"><img id="contact-photo" class="contact-image-photo" src="' + image_src + '" /></a>' );
 			
 			var image = $( '.contact-image-photo' );
 			
 			image.attr( 'src', thumb_image_src );
+			
+			$( '.contact-image-photo-link' ).fancybox();
+			
+		}
+		else {
+			
+			$( '#image-wrapper' ).prepend( '<img id="contact-photo" class="contact-image-photo" src="<?= ASSETS_URL . '/images/alpha.gif'; ?>" />' );
 			
 		}
 		
@@ -875,9 +897,30 @@ $( document ).ready(function(){
 	
 	$( document ).bind( 'ready', function(){
 		
-		window.updateImage();
+		var thumb_el = '<?= str_replace( array( "'", "\n" ), array( "\'", '' ), form_hidden( array(
+			
+			'name' => 'thumb_local',
+			'value' => ( isset( $contact[ 'thumb_local' ] ) ? $contact[ 'thumb_local' ] : '' ),
+			'id' => 'contact-thumb_local',
+			
+		) ) ); ?>';
 		
-		$( '#contact-photo_local' ).after( '<?=
+		var photo_el = '<?= str_replace( array( "'", "\n" ), array( "\'", '' ), form_hidden( array(
+			
+			'name' => 'photo_local',
+			'value' => ( isset( $contact[ 'photo_local' ] ) ? $contact[ 'photo_local' ] : '' ),
+			'id' => 'contact-photo_local',
+			
+		) ) ); ?>';
+		
+		$( '#contact-photo-wrapper' ).html( '' );
+		
+		$( '#contact-photo-wrapper' ).prepend( '<div id="image-wrapper" ></div>' );
+		
+		$( '#contact-photo-wrapper' ).append( thumb_el );
+		$( '#contact-photo-wrapper' ).append( photo_el );
+		
+		$( '#contact-photo-wrapper' ).append( '<?=
 			
 			str_replace(
 				
@@ -886,17 +929,18 @@ $( document ).ready(function(){
 					array(
 						
 						'url' => '#',
-						'text' => lang( 'select_image' ),
+						'text' => lang( 'contacts_set_photo' ),
 						'get_url' => FALSE,
 						'id' => 'image-picker',
 						'icon' => 'more',
-						'only_icon' => TRUE,
+						'wrapper_class' => 'photo-chooser',
 						'class' => 'modal-file-picker',
 						'attr' => array(
 							
 							'data-rffieldid' => 'contact-photo_local',
 							'data-rftype' => 'image',
-							'data-rfdir' => trim( $contact_image_path, DS ),
+							'data-rfdir' => trim( str_replace( FCPATH, '', $contact_image_path ), DS ),
+							'data-rf-start-dir' => trim( str_replace( FCPATH, '', $contact_image_path ), DS ),
 							
 						)
 							
@@ -908,7 +952,7 @@ $( document ).ready(function(){
 			
 		?>' );
 		
-		$( '.contact-image-photo-link' ).fancybox();
+		window.updateImage();
 		
 	});
 	

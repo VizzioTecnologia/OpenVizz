@@ -12,6 +12,14 @@ class Cache_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
+	public function __invoke( $var1 = NULL, $var2 = NULL ) {
+		
+		return $this->api( $var1, $var2 );
+		
+    }
+    
+	// --------------------------------------------------------------------
+	
 	// --------------------------------------------------------------------
 	
 	/**
@@ -27,12 +35,21 @@ class Cache_mdl extends CI_Model{
 		// batch cache setter, associative array must be given
 		if ( is_array( $var1 ) AND ! isset( $var2 ) ){
 			
-			foreach ( $var1 as $c_key => $c_value ) {
+			reset( $var1 );
+			
+			while ( list( $c_key, $c_value ) = each( $var1 ) ) {
 				
 				$this->cache( $c_key, $c_value );
 				
 			}
 			
+			/*
+			foreach ( $var1 as $c_key => $c_value ) {
+				
+				$this->cache( $c_key, $c_value );
+				
+			}
+			*/
 		}
 		// getter
 		else if ( $var1 AND is_string( $var1 ) AND ! isset( $var2 ) ){

@@ -3,27 +3,27 @@
 require( APPPATH . 'controllers/main.php' );
 
 class Articles extends Main {
-
+	
 	public function __construct(){
-
+		
 		parent::__construct();
-
+		
 		if ( ! $this->load->is_model_loaded( 'articles' ) ) {
-
+			
 			$this->load->model( 'articles_mdl', 'articles' );
-
+			
 		}
-
+		
 		$this->load->language( array( 'articles' ) );
-
+		
 		set_current_component();
-
+		
 	}
-
+	
 	/******************************************************************************/
 	/******************************************************************************/
 	/******************************* Component index ******************************/
-
+	
 	public function index( $action = NULL, $current_menu_item_id = 0, $var1 = NULL, $var2 = NULL, $var3 = NULL, $var4 = NULL ){
 
 		$this->component_function = __FUNCTION__;
