@@ -2498,18 +2498,21 @@
 										<?= form_label( lang( $current_field ) ); ?>
 										<?php
 											
-											$options = array(
+											if ( ! isset( $options_ds ) ) {
 												
-												'' => lang( 'combobox_select' ),
+												$options_ds = array(
+													
+													'' => lang( 'combobox_select' ),
+													
+												);
 												
-											);
-											
-											foreach( $data_schemes as $ds ) {
-												
-												$options[ $ds[ 'id' ] ] = $ds[ 'title' ];
+												foreach( $data_schemes as $ds ) {
+													
+													$options_ds[ $ds[ 'id' ] ] = $ds[ 'title' ];
+													
+												}
 												
 											}
-											
 											
 										?>
 										
@@ -2518,7 +2521,7 @@
 											array(
 												
 												'name' => 'fields[' . $key . '][' . $current_field . ']',
-												'options' => $options,
+												'options' => $options_ds,
 												'value' => isset( $field[ $current_field ] ) ? $field[ $current_field ] : 0,
 												'class' => 'sf-field-' . $current_field,
 												'id' => 'field-' . $current_field . '-' . $key,
@@ -2549,7 +2552,7 @@
 												
 												if ( ! isset( $users_submits_options_cache[ $field[ 'options_from_users_submits' ] ] ) ) {
 													
-													foreach( $data_schemes as & $ds ) {
+													foreach( $data_schemes as $ds ) {
 														
 														if ( check_var( $field[ 'options_from_users_submits' ] ) AND $field[ 'options_from_users_submits' ] == $ds[ 'id' ] ) {
 															
