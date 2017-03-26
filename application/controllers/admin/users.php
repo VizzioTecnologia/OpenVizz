@@ -678,7 +678,7 @@ class Users extends Main {
 							
 							$user_data[ 'params' ] = get_params( $user_data[ 'params' ] );
 							
-							$this->users->set_user_preferences( $user_data[ 'params' ], FALSE );
+							$this->users->set_user_preferences( $user_data[ 'params' ] );
 							
 						}
 						

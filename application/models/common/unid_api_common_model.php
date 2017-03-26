@@ -1027,7 +1027,6 @@ class Unid_api_common_model extends CI_Model{
 															$out[ 'errors' ] = $validation_result[ 'errors' ];
 															
 														}
-														
 														else {
 															
 															// We need set this variable again, because some validation rules may change its values on $this->input->post()
@@ -1575,7 +1574,8 @@ class Unid_api_common_model extends CI_Model{
 	
 	private function _validate_ud_data_property( & $data_scheme, $pa, $nv = "" ){
 		
-		$orig_post = $_POST;
+		$orig_post = $this->input->post( NULL, TRUE );
+		$out = NULL;
 		
 		$prop = $data_scheme[ 'fields' ][ $pa ];
 		
@@ -1605,6 +1605,7 @@ class Unid_api_common_model extends CI_Model{
 			foreach ( $prop[ 'validation_rule' ] as $key => $rule ) {
 				
 				$comp = '';
+				$skip = FALSE;
 				
 				switch ( $rule ) {
 					/*
@@ -1633,9 +1634,25 @@ class Unid_api_common_model extends CI_Model{
 						$comp .= '[' . $prop[ 'validation_rule_parameter_less_than'] . ']';
 						break;
 						
+					case 'mask':
+						
+						if ( isset( $prop[ 'ud_validation_rule_parameter_mask_type' ] ) ) {
+							
+							$orig_post[ 'nv' ] = $_POST[ $formatted_field_name ] = $nv = unmask( $nv, $prop[ 'ud_validation_rule_parameter_mask_type' ], isset( $prop[ 'ud_validation_rule_parameter_mask_custom_mask' ] ) ? $prop[ 'ud_validation_rule_parameter_mask_custom_mask' ] : '' );
+							
+						}
+						
+						$skip = TRUE;
+						unset( $prop[ 'validation_rule' ][ $key ] );
+						break;
+					
 				}
 				
-				$rules[] = $rule . $comp;
+				if ( ! $skip ) {
+					
+					$rules[] = $rule . $comp;
+					
+				}
 				
 			}
 			
@@ -1700,14 +1717,12 @@ class Unid_api_common_model extends CI_Model{
 		
 		$this->form_validation->set_rules( $formatted_field_name, lang( $prop[ 'label' ] ), $rules );
 		
-		if ( $this->form_validation->run() ){
+		if ( ! isset( $out[ 'errors' ] ) AND $this->form_validation->run() ){
 			
-			$out = TRUE;
+			$out = $nv;
 			
 		}
 		else if ( isset( $out[ 'errors' ] ) ){
-			
-			$out = $out;
 			
 		}
 		else {

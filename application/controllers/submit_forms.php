@@ -778,11 +778,12 @@ class Submit_forms extends Main {
 				
 				$rules = array( 'trim' );
 				
-				if ( ! check_var( $no_validation_fields[ $field_name ] ) ) {
+				if ( ! check_var( $no_validation_fields[ $field_name ] ) AND check_var( $field[ 'availability' ][ 'site' ] ) ) {
 					
 					if ( ! check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file' ] ) AND check_var( $field[ 'field_is_required' ] ) ){
 						
 						$rules[] = 'required';
+						$skip = FALSE;
 						
 					}
 					
@@ -819,9 +820,33 @@ class Submit_forms extends Main {
 									$comp .= '[' . $field[ 'validation_rule_parameter_less_than'] . ']';
 									break;
 									
+								case 'valid_email':
+									
+									if ( ! isset( $data[ 'post' ][ 'form' ][ $prop_name ] ) OR $data[ 'post' ][ 'form' ][ $prop_name ] != '' ) {
+										
+										$rules[] = $rule . $comp;
+										
+									}
+									
+								case 'mask':
+									
+									if ( $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ] AND isset( $field[ 'ud_validation_rule_parameter_mask_type' ] ) ) {
+										
+										$_POST[ 'form' ][ $field[ 'alias' ] ] = $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ] = unmask( $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ], $field[ 'ud_validation_rule_parameter_mask_type' ], isset( $field[ 'ud_validation_rule_parameter_mask_custom_mask' ] ) ? $field[ 'ud_validation_rule_parameter_mask_custom_mask' ] : '' );
+										
+									}
+									
+									$skip = TRUE;
+									unset( $field[ 'validation_rule' ][ $key ] );
+									break;
+									
 							}
 							
-							$rules[] = $rule . $comp;
+							if ( ! $skip ) {
+								
+								$rules[] = $rule . $comp;
+								
+							}
 							
 						}
 						

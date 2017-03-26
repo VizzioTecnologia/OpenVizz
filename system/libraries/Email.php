@@ -1680,14 +1680,16 @@ class CI_Email {
 	protected function _smtp_connect()
 	{
 		$ssl = NULL;
+		
 		if ($this->smtp_crypto == 'ssl')
 			$ssl = 'ssl://';
-		$this->_smtp_connect = fsockopen($ssl.$this->smtp_host,
+		$this->_smtp_connect = @fsockopen($ssl.$this->smtp_host,
 										$this->smtp_port,
 										$errno,
 										$errstr,
 										$this->smtp_timeout);
-
+		
+		
 		if ( ! is_resource($this->_smtp_connect))
 		{
 			$this->_set_error_message('lang:email_smtp_error', $errno." ".$errstr);
@@ -1843,15 +1845,24 @@ class CI_Email {
 	 */
 	protected function _send_data($data)
 	{
-		if ( ! fwrite($this->_smtp_connect, $data . $this->newline))
+	
+		if ( is_resource($this->_smtp_connect))
 		{
-			$this->_set_error_message('lang:email_smtp_data_failure', $data);
-			return FALSE;
+			
+			if ( ! fwrite($this->_smtp_connect, $data . $this->newline))
+			{
+				$this->_set_error_message('lang:email_smtp_data_failure', $data);
+				return FALSE;
+			}
+			else
+			{
+				return TRUE;
+			}
+			
 		}
-		else
-		{
-			return TRUE;
-		}
+		
+		return FALSE;
+		
 	}
 
 	// --------------------------------------------------------------------
@@ -1864,19 +1875,28 @@ class CI_Email {
 	 */
 	protected function _get_smtp_data()
 	{
-		$data = "";
-
-		while ($str = fgets($this->_smtp_connect, 512))
+		
+		if ( is_resource($this->_smtp_connect))
 		{
-			$data .= $str;
-
-			if (substr($str, 3, 1) == " ")
+			
+			$data = "";
+		
+			while ($str = fgets($this->_smtp_connect, 512))
 			{
-				break;
-			}
-		}
+				$data .= $str;
 
-		return $data;
+				if (substr($str, 3, 1) == " ")
+				{
+					break;
+				}
+			}
+			
+			return $data;
+			
+		}
+		
+		return FALSE;
+		
 	}
 
 	// --------------------------------------------------------------------

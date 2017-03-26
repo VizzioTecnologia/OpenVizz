@@ -6,6 +6,8 @@
 	$this->plugins->load( 'fancybox' );
 	$this->plugins->load( 'jquery_inline_edit' );
 	$this->plugins->load( 'modal_users_submits' );
+	$this->plugins->load( 'jquery_maskedinput' );
+	
 	$this->load->helper( 'text' );
 	
 	$fields_to_show = NULL;
@@ -564,7 +566,7 @@
 		</div>
 		<?php } ?>
 		
-		<table class="arrow-nav data-list responsive multi-selection-table">
+		<table id="ud-data-list-main-table" class="arrow-nav data-list responsive multi-selection-table">
 			
 			<tr>
 				
@@ -642,11 +644,16 @@
 				$_us_status_classes = '';
 				$_us_has_status = FALSE;
 				
-				if ( check_var( $submit_form[ 'ud_status_props' ] ) ) {
+				if ( check_var( $submit_form[ 'ud_status_prop' ] ) ) {
 					
 					foreach( $submit_form[ 'fields' ] as $status_field ) {
 						
-						if ( isset( $submit_form[ 'ud_status_props' ][ $status_field[ 'alias' ] ] ) ) {
+						if ( ! isset( $submit_form[ 'ud_status_prop' ][ $status_field[ 'alias' ] ] ) ) {
+							
+							continue;
+							
+						}
+						else {
 							
 							if ( check_var( $status_field[ 'options_from_users_submits' ] )
 							AND ( check_var( $status_field[ 'options_title_field' ] )
@@ -669,64 +676,18 @@
 								
 								foreach( $_current_field_array as $_item ) {
 									
+									// Se o valor do dado unid for igual
+									
 									if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND $ud_data[ 'data' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
 										
-										if ( $_item == 'prop_is_ud_status_active' ) {
-											
-											$_us_status[ 'active' ] = 'status-active';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_inactive' ) {
-											
-											$_us_status[ 'inactive' ] = 'status-inactive';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_enabled' ) {
-											
-											$_us_status[ 'enabled' ] = 'status-enabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_disabled' ) {
-											
-											$_us_status[ 'disabled' ] = 'status-disabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_canceled' ) {
-											
-											$_us_status[ 'disabled' ] = 'status-disabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_postponed' ) {
-											
-											$_us_status[ 'postponed' ] = 'status-postponed';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_archived' ) {
-											
-											$_us_status[ 'archived' ] = 'status-archived';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_published' ) {
-											
-											$_us_status[ 'published' ] = 'status-published';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_unpublished' ) {
-											
-											$_us_status[ 'unpublished' ] = 'status-unpublished';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_scheduled' ) {
-											
-											$_us_status[ 'scheduled' ] = 'status-scheduled';
-											
-										}
+										$_us_status[] = $_item;
+										$_us_status[] = 'status-' . str_replace( 'prop_is_ud_status_', '', $_item );
 										
 										$_us_has_status = TRUE;
 										
 									}
 									
-								};
+								}
 								
 							}
 							
@@ -744,7 +705,7 @@
 				
 			?>
 				
-				<tr class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?>">
+				<tr id="ud-data-list-main-table-row-<?= $ud_data[ 'id' ]; ?>" class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?>">
 					
 					<td class="col-checkbox">
 						
@@ -756,7 +717,7 @@
 						
 						$ile_id = uniqid();
 						
-						$cel_attr = '';
+						$cel_attr = 'data-ud-id="ud-data-list-main-table-cell-' . $ud_data[ 'id' ] . '-' . $column[ 'alias' ] . '"';
 						$cel_ile_class = '';
 						
 						if ( ! in_array( $column[ 'alias' ], array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
@@ -777,7 +738,7 @@
 								
 							}
 							
-							$cel_attr = '
+							$cel_attr .= '
 								
 								id="ile-cfg-el-' . $ile_id . '"
 								
@@ -795,7 +756,7 @@
 								
 							';
 							
-							$cel_ile_class = 'ud-data-edit-value-wrapper ile';
+							$cel_ile_class .= ' ud-data-edit-value-wrapper ile';
 							
 							/*
 							echo vui_el_button(
@@ -835,6 +796,95 @@
 						
 						$advanced_options = check_var( $fields[ $column[ 'alias' ] ][ 'advanced_options' ] ) ? $fields[ $column[ 'alias' ] ][ 'advanced_options' ] : FALSE;
 						
+						reset( $ud_data[ 'parsed_data' ][ 'full' ] );
+						
+						$alias_found = FALSE;
+						$pd = NULL;
+						$alias = $column[ 'alias' ];
+						
+						while( list( $_alias, $_pd ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
+							
+							if ( $alias == $_alias ) {
+								
+								$alias = $_alias;
+								$pd = $_pd;
+								$alias_found = TRUE;
+								
+								break;
+								
+							}
+							
+						}
+						
+						if ( ! $alias_found ) {
+							
+							$pd = array(
+								
+								'label' => $column[ 'title' ],
+								'value' => '',
+								
+							);
+							
+						}
+						
+						if ( $pd ) {
+							
+							if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
+								
+								$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
+								$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
+								
+							}
+							
+							if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
+								
+								$thumb_params = array(
+									
+									'wrapper_class' => 'us-image-wrapper',
+									'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
+									'href' => get_url( $pd[ 'value' ] ),
+									'rel' => 'us-thumb',
+									'title' => $pd[ 'value' ],
+									'modal' => TRUE,
+									'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
+									
+								);
+								
+								$pd[ 'value' ] = vui_el_thumb( $thumb_params );
+								
+							}
+							else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
+								
+								$pd[ 'value' ] = '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
+								
+							}
+							else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
+								
+								$pd[ 'value' ] = '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
+								
+							}
+							else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
+								
+								$pd[ 'value' ] = '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
+								
+							}
+							else if ( isset( $pd[ 'value' ] ) ) {
+								
+								if ( check_var( $fields[ $alias ][ 'field_type' ] ) AND $fields[ $alias ][ 'field_type' ] == 'textarea' AND ( ! isset( $ud_data[ 'data' ][ $alias ] ) OR ! is_array( $ud_data[ 'data' ][ $alias ] ) ) ) {
+									
+									$pd[ 'value' ] = word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
+									
+								}
+								else {
+									
+									$pd[ 'value' ] = word_limiter( $pd[ 'value' ] );
+									
+								}
+								
+							}
+							
+						}
+						
 						?>
 						
 						<td
@@ -844,7 +894,7 @@
 								
 								<?= $cel_ile_class; ?>
 								ud-data-prop-wrapper
-								col-<?= $column[ 'alias' ]; ?>
+								col-<?= $alias; ?>
 								col-<?= $column[ 'visible' ] ? 'visible' : 'hidden'; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_image' ] ) ? ' field-is-image' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_title' ] ) ? ' field-is-presentation-title' : ''; ?>
@@ -853,7 +903,55 @@
 								<?= check_var( $advanced_options[ 'prop_is_ud_email' ] ) ? ' field-is-email' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_url' ] ) ? ' field-is-url' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_status' ] ) ? ' field-is-status' : ''; ?>
-								sf-field-type-<?= check_var( $fields[ $column[ 'alias' ] ][ 'field_type' ] ) ? $fields[ $column[ 'alias' ] ][ 'field_type' ] : 'default'; ?>-wrapper
+								<?= $pd[ 'value' ] ? ' ud-data-prop-value-' . $alias . '-' . url_title( base64_encode( $pd[ 'value' ] ), '-', TRUE ) : ' oia'; ?>
+								<?php
+									
+									if ( ! check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ! check_var( $fields[ $alias ][ 'options' ] ) ) {
+										
+										echo ' ud-data-value-bit';
+										
+									}
+									
+									if ( isset( $submit_form[ 'ud_status_prop' ][ $alias ] ) ) {
+										
+										if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] )
+										AND ( check_var( $fields[ $alias ][ 'options_title_field' ] )
+										OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) ) {
+											
+											$_current_field_array = array(
+												
+												'prop_is_ud_status_active',
+												'prop_is_ud_status_inactive',
+												'prop_is_ud_status_enabled',
+												'prop_is_ud_status_disabled',
+												'prop_is_ud_status_canceled',
+												'prop_is_ud_status_postponed',
+												'prop_is_ud_status_archived',
+												'prop_is_ud_status_published',
+												'prop_is_ud_status_unpublished',
+												'prop_is_ud_status_scheduled',
+												
+											);
+											
+											foreach( $_current_field_array as $_item ) {
+												
+												// Se o valor do dado unid for igual
+												
+												if ( check_var( $fields[ $alias ][ 'advanced_options' ][ $_item ] ) AND $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] == $fields[ $alias ][ 'advanced_options' ][ $_item ] ) {
+													
+													echo ' ' . $_item;
+													echo ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+													
+												}
+												
+											}
+											
+										}
+										
+									}
+									
+								?>
+								sf-field-type-<?= check_var( $fields[ $alias ][ 'field_type' ] ) ? $fields[ $alias ][ 'field_type' ] : 'default'; ?>-wrapper
 								
 							"
 							
@@ -861,98 +959,11 @@
 							
 							<?php
 								
-								reset( $ud_data[ 'parsed_data' ][ 'full' ] );
+								echo '<span id="' . $ile_id . '" class="ud-data-value-wrapper">';
 								
-								$alias_found = FALSE;
-								$pd = NULL;
-								$alias = $column[ 'alias' ];
+								echo $pd[ 'value' ];
 								
-								while( list( $_alias, $_pd ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
-									
-									if ( $column[ 'alias' ] == $_alias ) {
-										
-										$alias = $_alias;
-										$pd = $_pd;
-										$alias_found = TRUE;
-										
-										break;
-										
-									}
-									
-								}
-								
-								if ( ! $alias_found ) {
-									
-									$pd = array(
-										
-										'label' => $column[ 'title' ],
-										'value' => '',
-										
-									);
-									
-								}
-								
-								if ( $pd ) {
-									
-									echo '<span id="' . $ile_id . '" class="ud-data-value-wrapper">';
-									
-									if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-										
-										$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-										$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-										
-									}
-									
-									if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
-										
-										$thumb_params = array(
-											
-											'wrapper_class' => 'us-image-wrapper',
-											'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
-											'href' => get_url( $pd[ 'value' ] ),
-											'rel' => 'us-thumb',
-											'title' => $pd[ 'value' ],
-											'modal' => TRUE,
-											'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
-											
-										);
-										
-										echo vui_el_thumb( $thumb_params );
-										
-									}
-									else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
-										
-										echo '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
-										
-									}
-									else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
-										
-										echo '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
-										
-									}
-									else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
-										
-										echo '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
-										
-									}
-									else if ( isset( $pd[ 'value' ] ) ) {
-										
-										if ( $fields[ $alias ][ 'field_type' ] == 'textarea' AND ( ! isset( $ud_data[ 'data' ][ $alias ] ) OR ! is_array( $ud_data[ 'data' ][ $alias ] ) ) ) {
-											
-											echo word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
-											
-										}
-										else {
-											
-											echo word_limiter( $pd[ 'value' ] );
-											
-										}
-										
-									}
-									
-									echo '</span>';
-									
-								}
+								echo '</span>';
 								
 							?>
 							
@@ -1300,6 +1311,65 @@
 										$ile_cfg_el.attr( 'data-lp', 100 );
 										$ile_cfg_el.addClass( 'ile-cfg-el-editing' );
 										
+										var length = $dsp.validation_rule.length;
+										var mask = false;
+										
+										for ( var i = 0; i < length; i++ ) {
+											
+											if ( $dsp.validation_rule[ i ] == 'mask' ) mask = true;
+											
+										}
+										
+										if ( mask ) {
+											
+											if ( $dsp.ud_validation_rule_parameter_mask_type == 'custom_mask' && $dsp.ud_validation_rule_parameter_mask_custom_mask != null ) {
+												
+												inputEl.mask( $dsp.ud_validation_rule_parameter_mask_custom_mask );
+												
+											}
+											else if ( $dsp.ud_validation_rule_parameter_mask_type == 'money' ) {
+												
+												var $dp = $dsp.ud_validation_rule_parameter_mask_money_dec_point;
+												var $ts = $dsp.ud_validation_rule_parameter_mask_money_thous_sep;
+												
+												$dp = $dp ? $dp: ',';
+												$ts = $ts ? $ts: '.';
+												
+												inputEl.mask( '#' + $ts + '##0' + $dp + '00', {
+													
+													reverse: true
+													
+												});
+												
+											}
+											else if ( $dsp.ud_validation_rule_parameter_mask_type == 'zip_brazil' ) {
+												
+												inputEl.mask( '00000-000' );
+												
+											}
+											else if ( $dsp.ud_validation_rule_parameter_mask_type == 'phone_brazil' ) {
+												
+												var $pb_mask_behavior = function (val) {
+													
+													return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+													
+												},
+												$pb_options = {
+													
+													onKeyPress: function( val, e, field, options ) {
+														
+														field.mask( $pb_mask_behavior.apply( {}, arguments ), options );
+														
+													}
+													
+												};
+												
+												inputEl.mask( $pb_mask_behavior, $pb_options );
+												
+											}
+											
+										}
+										
 									}
 									else if ( $dsp.field_type == 'textarea' ) {
 										
@@ -1383,11 +1453,11 @@
 														
 														// The idea here is simulate a user choice action, alternating between null and 1
 														
+														var s = $('<select multiple data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="hidden ile-input" />');
+														
+														s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+														
 														for( var val in $ile_el_options ) {
-															
-															var s = $('<select multiple data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="hidden ile-input" />');
-															
-															s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
 															
 															$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
 															
@@ -1428,6 +1498,12 @@
 															
 															var s = $('<select data-ile-cfg-el-id="ile-cfg-el-' + $ile_el_id + '" class="ile-input" />');
 															s.data( 'ile-cfg-el-id', 'ile-cfg-el-' + $ile_el_id );
+															
+															if ( $dsp.field_is_required == null || $dsp.field_is_required == '0' ) {
+															
+																$( '<option value="" ><?= lang( 'combobox_select' ); ?></option>' ).appendTo(s);
+																
+															}
 															
 															for( var val in $ile_el_options ) {
 																
@@ -1585,9 +1661,12 @@
 				dataType: "json",
 				success: function( data, textStatus, jqXHR ) {
 					
+					console.log( 'udp data:' );
+					console.log( data );
+					
 					if ( data.errors != null ) {
 						
-						console.log( data.errors )
+						console.log( data.errors );
 						
 						for( var error in data.errors ) {
 							
@@ -1614,15 +1693,18 @@
 							pp: 1,
 							
 						}
-						
+						console.log( '<?= current_url(); ?>' );
 						$.ajax({
 						
-							url : 'admin/unid/api/',
-							type: "POST",
-							data : $.param( $data2 ),
-							dataType: "json",
+							url : '<?= current_url(); ?>',
+							type: "GET",
+							dataType: "html",
 							success: function( gdp_data, textStatus, jqXHR ) {
 								
+								$ile_el.removeClass( 'ile-editing' );
+								$ile_cfg_el.attr( 'data-lp', 100 ).removeClass( 'ile-cfg-el-editing' ).replaceWith( $( gdp_data ).find( '[data-ud-id=ud-data-list-main-table-cell-' + $di + '-' + $pa + ']' ) );
+								
+								/*
 								if ( gdp_data.errors != null ) {
 									
 									console.error( gdp_data.errors );
@@ -1659,7 +1741,7 @@
 									console.debug( gdp_data );
 									
 								}
-								
+								*/
 							},
 							complete: function( e, xhr, settings ) {
 								

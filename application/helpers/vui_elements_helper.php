@@ -143,6 +143,7 @@ function vui_el_input_password( $f_params = NULL ){
 	$id = $f_params['id'] =														isset( $f_params['id'] ) ? $f_params['id'] : '';
 	$value = $f_params['value'] =												isset( $f_params['value'] ) ? $f_params['value'] : '';
 	$name = $f_params['name'] =													isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$label = $f_params['label'] =												isset( $f_params['label'] ) ? $f_params['label'] : NULL;
 	$form = $f_params['form'] =													isset( $f_params['form'] ) ? $f_params['form'] : '';
 	$attr = $f_params['attr'] =													isset( $f_params['attr'] ) ? $f_params['attr'] : '';
 	$minify = $f_params['minify'] =												isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
@@ -197,6 +198,7 @@ function vui_el_input_text( $f_params = NULL ){
 	$id = $f_params['id'] =														isset( $f_params['id'] ) ? $f_params['id'] : '';
 	$value = $f_params['value'] =												isset( $f_params['value'] ) ? $f_params['value'] : '';
 	$name = $f_params['name'] =													isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$label = $f_params['label'] =												isset( $f_params['label'] ) ? $f_params['label'] : NULL;
 	$form = $f_params['form'] =													isset( $f_params['form'] ) ? $f_params['form'] : '';
 	$attr = $f_params['attr'] =													isset( $f_params['attr'] ) ? $f_params['attr'] : '';
 	$minify = $f_params['minify'] =												isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
@@ -251,6 +253,7 @@ function vui_el_input_file( $f_params = NULL ){
 	$id = $f_params['id'] =														isset( $f_params['id'] ) ? $f_params['id'] : '';
 	$value = $f_params['value'] =												isset( $f_params['value'] ) ? $f_params['value'] : '';
 	$name = $f_params['name'] =													isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$label = $f_params['label'] =												isset( $f_params['label'] ) ? $f_params['label'] : NULL;
 	$form = $f_params['form'] =													isset( $f_params['form'] ) ? $f_params['form'] : '';
 	$attr = $f_params['attr'] =													isset( $f_params['attr'] ) ? $f_params['attr'] : '';
 	$minify = $f_params['minify'] =												isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
@@ -306,6 +309,7 @@ function vui_el_textarea( $f_params = NULL ){
 	$f_params['id'] =													isset( $f_params['id'] ) ? $f_params['id'] : '';
 	$f_params['value'] =												isset( $f_params['value'] ) ? $f_params['value'] : '';
 	$f_params['name'] =													isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$f_params['label'] =												isset( $f_params['label'] ) ? $f_params['label'] : NULL;
 	$f_params['form'] =													isset( $f_params['form'] ) ? $f_params['form'] : '';
 	$f_params['attr'] =													isset( $f_params['attr'] ) ? $f_params['attr'] : '';
 	$f_params['minify'] =												isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
@@ -360,6 +364,7 @@ function vui_el_input_number( $f_params = NULL ){
 	$id = $f_params['id'] =														isset( $f_params['id'] ) ? $f_params['id'] : '';
 	$value = $f_params['value'] =												isset( $f_params['value'] ) ? $f_params['value'] : '';
 	$name = $f_params['name'] =													isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$label = $f_params['label'] =												isset( $f_params['label'] ) ? $f_params['label'] : NULL;
 	$form = $f_params['form'] =													isset( $f_params['form'] ) ? $f_params['form'] : '';
 	$attr = $f_params['attr'] =													isset( $f_params['attr'] ) ? $f_params['attr'] : '';
 	$minify = $f_params['minify'] =												isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
@@ -411,21 +416,22 @@ function vui_el_dropdown( $f_params = NULL ){
 	// -------------------------------------------------
 	// Parsing vars ------------------------------------
 	
-	$text = $f_params['text'] =									isset( $f_params['text'] ) ? $f_params['text'] : '';
-	$icon = $f_params['icon'] =									isset( $f_params['icon'] ) ? $f_params['icon'] : '';
-	$title = $f_params['title'] =								isset( $f_params['title'] ) ? $f_params['title'] : '';
-	$wrapper_class = $f_params['wrapper_class'] =				isset( $f_params['wrapper_class'] ) ? $f_params['wrapper_class'] : '';
-	$class = $f_params['class'] =								isset( $f_params['class'] ) ? $f_params['class'] : '';
-	$id = $f_params['id'] =										isset( $f_params['id'] ) ? $f_params['id'] : '';
-	$value = $f_params['value'] =								isset( $f_params['value'] ) ? $f_params['value'] : '';
-	$name = $f_params['name'] =									isset( $f_params['name'] ) ? $f_params['name'] : '';
-	$form = $f_params['form'] =									isset( $f_params['form'] ) ? $f_params['form'] : '';
-	$attr = $f_params['attr'] =									isset( $f_params['attr'] ) ? $f_params['attr'] : '';
-	$size = $f_params['size'] =									isset( $f_params['size'] ) ? $f_params['size'] : NULL;
-	$options = $f_params['options'] =							isset( $f_params['options'] ) ? $f_params['options'] : NULL;
-	$minify = $f_params['minify'] =								isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
-	$multiselect = $f_params['multiselect'] =					isset( $f_params[ 'multiselect' ] ) ? $f_params[ 'multiselect' ] : FALSE;
-	$layout = $f_params[ 'layout' ] =							isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : 'default';
+	$f_params['text'] =									isset( $f_params['text'] ) ? $f_params['text'] : '';
+	$f_params['icon'] =									isset( $f_params['icon'] ) ? $f_params['icon'] : '';
+	$f_params['title'] =								isset( $f_params['title'] ) ? $f_params['title'] : '';
+	$f_params['wrapper_class'] =						isset( $f_params['wrapper_class'] ) ? $f_params['wrapper_class'] : '';
+	$f_params['class'] =								isset( $f_params['class'] ) ? $f_params['class'] : '';
+	$f_params['id'] =									isset( $f_params['id'] ) ? $f_params['id'] : '';
+	$f_params['value'] =								isset( $f_params['value'] ) ? $f_params['value'] : '';
+	$f_params['name'] =									isset( $f_params['name'] ) ? $f_params['name'] : '';
+	$f_params['label'] =								isset( $f_params['label'] ) ? $f_params['label'] : NULL;
+	$f_params['form'] =									isset( $f_params['form'] ) ? $f_params['form'] : '';
+	$f_params['attr'] =									isset( $f_params['attr'] ) ? $f_params['attr'] : '';
+	$f_params['size'] =									isset( $f_params['size'] ) ? $f_params['size'] : NULL;
+	$f_params['options'] =								isset( $f_params['options'] ) ? $f_params['options'] : NULL;
+	$f_params['minify'] =								isset( $f_params[ 'minify' ] ) ? $f_params[ 'minify' ] : TRUE;
+	$f_params['multiselect'] =							isset( $f_params[ 'multiselect' ] ) ? $f_params[ 'multiselect' ] : FALSE;
+	$f_params[ 'layout' ] =								isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : 'default';
 
 	// Parsing vars ------------------------------------
 	// -------------------------------------------------
@@ -433,19 +439,19 @@ function vui_el_dropdown( $f_params = NULL ){
 	$CI =& get_instance();
 	
 	// verificando se o tema atual possui a view
-	if ( file_exists( THEMES_PATH . theme_helpers_views_path() . 'vui_el' . DS . $layout . DS . 'dropdown.php' ) ){
+	if ( file_exists( THEMES_PATH . theme_helpers_views_path() . 'vui_el' . DS . $f_params[ 'layout' ] . DS . 'dropdown.php' ) ){
 		
-		$view = $CI->load->view( theme_helpers_views_path() . 'vui_el' . DS . $layout . DS . 'dropdown', $f_params, TRUE );
+		$view = $CI->load->view( theme_helpers_views_path() . 'vui_el' . DS . $f_params[ 'layout' ] . DS . 'dropdown', $f_params, TRUE );
 		
 	}
 	// verificando se a view existe no diretório de views padrão
-	else if ( file_exists( VIEWS_PATH . HELPERS_DIR_NAME . DS . 'vui_el' . DS . $layout . DS . 'dropdown.php' ) ){
+	else if ( file_exists( VIEWS_PATH . HELPERS_DIR_NAME . DS . 'vui_el' . DS . $f_params[ 'layout' ] . DS . 'dropdown.php' ) ){
 		
-		$view = $CI->load->view( HELPERS_DIR_NAME . DS . 'vui_el' . DS . $layout . DS . 'dropdown', $f_params, TRUE);
+		$view = $CI->load->view( HELPERS_DIR_NAME . DS . 'vui_el' . DS . $f_params[ 'layout' ] . DS . 'dropdown', $f_params, TRUE);
 		
 	}
 	
-	return $minify ? minify_html( $view ) : $view;
+	return $f_params['minify'] ? minify_html( $view ) : $view;
 	
 }
 

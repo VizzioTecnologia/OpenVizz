@@ -1048,6 +1048,63 @@
 }
 
 
+.data-list .col-adm .ud-data-value-wrapper:before {
+	
+	min-height: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	min-width: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	
+	background-size: <?= VUI_DEFAULT_LINE_HEIGHT; ?> <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	background-position: left center;
+	background-repeat: no-repeat;
+	
+	padding-left: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	margin-right: <?= VUI_DEFAULT_FONT_SIZE; ?>;
+	
+	content: '';
+	
+}
+.data-list .ud-data-prop-value-adm-qnjhzgvzy28 .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-bradesco' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-sxrhw7o .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-itau' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-q2fpege .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-caixa' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-ugfuyw1lcmljyw5v .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-banco-panamericano' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-ug9ydg8gc2vndxjv .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-porto-seguro' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-vlc .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-vw' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-qmfuy28gzg8gqnjhc2ls .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-bb' ); ?>');
+	
+}
+.data-list .ud-data-prop-value-adm-um9kb2ldqw5z .ud-data-value-wrapper:before {
+	
+	background-image: url('<?= $vui->svg_file( 'icon-1x1-rodobens-consorcio' ); ?>');
+	
+}
+
+
 
 .data-list .ud-data-edit-value-wrapper {
 	

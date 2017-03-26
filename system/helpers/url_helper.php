@@ -42,6 +42,7 @@ if ( ! function_exists('site_url'))
 	function site_url($uri = '')
 	{
 		$CI =& get_instance();
+		
 		return $CI->config->site_url($uri);
 	}
 }

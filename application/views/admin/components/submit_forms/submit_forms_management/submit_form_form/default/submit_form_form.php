@@ -15,7 +15,7 @@
 		
 	}
 	
-	
+	$this->plugins->load( 'jquery_maskedinput' );
 	
 ?>
 
@@ -161,26 +161,6 @@
 							
 						?>
 						
-						<?php if ( isset( $submit_form[ 'fields' ] ) AND is_array( $submit_form[ 'fields' ] ) AND count( $submit_form[ 'fields' ] ) > 0 ) { ?>
-						
-						<?php
-							
-							$conditional_fields_targets = array();
-							
-							foreach( $submit_form[ 'fields' ] as $target_field_key => $target_field ) {
-								
-								// se o tipo de campo não for HTML ou button...
-								// Objetivo: não queremos aplicar condições para os campos do tipo HTML nem button
-								if ( ! in_array( $target_field[ 'field_type' ], array( 'html', 'button' ) ) ){
-									
-									$conditional_fields_targets[ $target_field_key ] = $target_field;
-									
-								}
-								
-							}
-							
-						?>
-						
 						<div id="fields-layout-preference-wrapper" class="vui-field-wrapper-auto"><?php
 							
 							$current_field = 'fields_layout_preference';
@@ -288,7 +268,23 @@
 							
 						?></div>
 						
-						<div id="fields-wrapper" class="fields-layout-<?= ( isset( $submit_form[ 'params' ][ 'fields_layout_preference' ] ) ) ? $submit_form[ 'params' ][ 'fields_layout_preference' ] : 'default'; ?>"><?php
+						<div id="fields-wrapper" class="fields-layout-<?= ( isset( $submit_form[ 'params' ][ 'fields_layout_preference' ] ) ) ? $submit_form[ 'params' ][ 'fields_layout_preference' ] : 'default'; ?>">
+						
+						<?php if ( isset( $submit_form[ 'fields' ] ) AND is_array( $submit_form[ 'fields' ] ) AND count( $submit_form[ 'fields' ] ) > 0 ) {
+						
+						$conditional_fields_targets = array();
+						
+						foreach( $submit_form[ 'fields' ] as $target_field_key => $target_field ) {
+							
+							// se o tipo de campo não for HTML ou button...
+							// Objetivo: não queremos aplicar condições para os campos do tipo HTML nem button
+							if ( ! in_array( $target_field[ 'field_type' ], array( 'html', 'button' ) ) ){
+								
+								$conditional_fields_targets[ $target_field_key ] = $target_field;
+								
+							}
+							
+						}
 						
 						foreach( $submit_form[ 'fields' ] as $key => $field ) {
 							
@@ -1829,6 +1825,7 @@
 													'custom_mask' => lang( 'ud_validation_rule_parameter_mask_type_custom_mask' ),
 													'zip_brazil' => lang( 'ud_validation_rule_parameter_mask_type_zip_brazil' ),
 													'phone_brazil' => lang( 'ud_validation_rule_parameter_mask_type_phone_brazil' ),
+													'money' => lang( 'ud_validation_rule_parameter_mask_type_money' ),
 													
 												);
 												
@@ -1838,7 +1835,7 @@
 														
 														'name' => 'fields[' . $key . '][' . $__current_field . ']',
 														'options' => $options,
-														'value' => isset( $field[ 'field_' . $__current_field ] ) ? $field[ $__current_field ] : 'custom_mask',
+														'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : 'custom_mask',
 														'class' => 'ud-field-' . $__current_field,
 														'id' => $__current_field . '-' . $key,
 														'title' => lang( 'tip_' . $__current_field ),
@@ -1849,8 +1846,6 @@
 												
 												$__current_field = 'ud_validation_rule_parameter_mask_custom_mask';
 												
-												echo form_label( lang( $__current_field ) );
-												
 												// ------------------------------------
 												// Custom mask
 												
@@ -1859,18 +1854,101 @@
 													array(
 														
 														'name' => 'fields[' . $key . '][' . $__current_field . ']',
-														'value' => isset( $field[ 'field_' . $__current_field ] ) ? $field[ 'field_' . $__current_field ] : '(99) 9999-9999',
+														'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : '(99) 9999-9999',
 														'class' => 'ud-field-' . $__current_field,
 														'id' => $__current_field . '-' . $key,
 														'title' => lang( 'tip_field_' . $__current_field ),
+														'label' => lang( $__current_field ),
+														'wrapper_class' => 'ud-validation-rule-parameter-mask custom_mask_field_wrapper',
+														'attr' => array(
+															
+															'placeholder' => lang( $__current_field ),
+															
+														),
+														
+													)
+													
+												);
+												
+												$__current_field = 'ud_validation_rule_parameter_mask_money_currency_symbol';
+												
+												// ------------------------------------
+												// currency symbol
+												
+												echo vui_el_input_text(
+													
+													array(
+														
+														'name' => 'fields[' . $key . '][' . $__current_field . ']',
+														'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : '$',
+														'class' => 'ud-field-' . $__current_field,
+														'id' => $__current_field . '-' . $key,
+														'title' => lang( 'tip_field_' . $__current_field ),
+														'label' => lang( $__current_field ),
+														'wrapper_class' => 'ud-validation-rule-parameter-mask currency_symbol_field_wrapper',
+														'attr' => array(
+															
+															'placeholder' => lang( $__current_field ),
+															
+														),
+														
+													)
+													
+												);
+												
+												$__current_field = 'ud_validation_rule_parameter_mask_money_dec_point';
+												
+												// ------------------------------------
+												// decimal point
+												
+												echo vui_el_input_text(
+													
+													array(
+														
+														'name' => 'fields[' . $key . '][' . $__current_field . ']',
+														'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : ',',
+														'class' => 'ud-field-' . $__current_field,
+														'id' => $__current_field . '-' . $key,
+														'title' => lang( 'tip_field_' . $__current_field ),
+														'label' => lang( $__current_field ),
+														'wrapper_class' => 'ud-validation-rule-parameter-mask dec_point_field_wrapper',
+														'attr' => array(
+															
+															'placeholder' => lang( $__current_field ),
+															
+														),
+														
+													)
+													
+												);
+												
+												$__current_field = 'ud_validation_rule_parameter_mask_money_thous_sep';
+												
+												// ------------------------------------
+												// thousands separator
+												
+												echo vui_el_input_text(
+													
+													array(
+														
+														'name' => 'fields[' . $key . '][' . $__current_field . ']',
+														'value' => isset( $field[ $__current_field ] ) ? $field[ $__current_field ] : '.',
+														'class' => 'ud-field-' . $__current_field,
+														'id' => $__current_field . '-' . $key,
+														'title' => lang( 'tip_field_' . $__current_field ),
+														'label' => lang( $__current_field ),
+														'wrapper_class' => 'ud-validation-rule-parameter-mask thous_sep_field_wrapper',
+														'attr' => array(
+															
+															'placeholder' => lang( $__current_field ),
+															
+														),
 														
 													)
 													
 												);
 												
 												$__current_field = 'ud_validation_rule_parameter_mask_test';
-												
-												echo form_label( lang( $__current_field ) );
 												
 												echo vui_el_input_text(
 													
@@ -1880,51 +1958,12 @@
 														'class' => 'ud-field-' . $__current_field,
 														'id' => $__current_field . '-' . $key,
 														'title' => lang( 'tip_field_' . $__current_field ),
+														'label' => lang( $__current_field ),
 														'attr' => array( 'data-input-mask-el-id' => $__current_field . '-' . $key, )
 														
 													)
 													
 												);
-												
-												$this->plugins->load( 'jquery_maskedinput' );
-												
-												?>
-												
-												<script type="text/javascript">
-													
-													$( document ).on( 'keypress', '#ud_validation_rule_parameter_mask_test-<?= $key; ?>', function(){
-														
-														if ( $( this ).attr( 'data-masked' ) != '1' ) {
-															
-															$( this ).attr( 'data-masked', '1' );
-															
-															$mask = $( '#ud_validation_rule_parameter_mask_custom_mask-<?= $key; ?>' ).val();
-															
-															$( this ).mask( '(99) 9999-9999x9' );
-															
-														}
-														
-													});
-													
-													$( document ).on( 'blur', '#ud_validation_rule_parameter_mask_test-<?= $key; ?>', function(){
-														
-														if ( $( this ).attr( 'data-masked' ) == '1' ) {
-															
-															$( this ).attr( 'data-masked', null );
-															
-															if($(this).val().length == 16){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
-																$(this).mask('(99) 99999-9999');
-															} else {
-																$(this).mask('(99) 9999-9999');
-															}
-															
-														}
-														
-													});
-													
-												</script>
-												
-												<?php
 												
 												echo '</div>';
 												
@@ -2758,11 +2797,11 @@
 						
 						?>
 						
+						<?php } ?>
+						
 						</div>
 						
 						<hr/>
-						
-						<?php } ?>
 						
 						<h5><?= lang('add_field'); ?></h5>
 						
@@ -3200,25 +3239,29 @@
 	
 	function _check_global_availability(){
 		
-		if ( $( '#fields-wrapper .sf-field-availability_site:checked' ).length < $( '#fields-wrapper .sf-field-availability_site' ).length ) {
+		if ( $( '#submit-check-all-fields-available-on-site' ).length > 0 ) {
 			
-			$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = false;
+			if ( $( '#fields-wrapper .sf-field-availability_site:checked' ).length < $( '#fields-wrapper .sf-field-availability_site' ).length ) {
+				
+				$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = false;
+				
+			}
+			else {
+				
+				$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = true;
+				
+			}
 			
-		}
-		else {
-			
-			$( '#submit-check-all-fields-available-on-site' )[ 0 ].checked = true;
-			
-		}
-		
-		if ( $( '#fields-wrapper .sf-field-availability_admin:checked' ).length < $( '#fields-wrapper .sf-field-availability_admin' ).length ) {
-			
-			$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = false;
-			
-		}
-		else {
-			
-			$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = true;
+			if ( $( '#fields-wrapper .sf-field-availability_admin:checked' ).length < $( '#fields-wrapper .sf-field-availability_admin' ).length ) {
+				
+				$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = false;
+				
+			}
+			else {
+				
+				$( '#submit-check-all-fields-available-on-admin' )[ 0 ].checked = true;
+				
+			}
 			
 		}
 		
@@ -3226,14 +3269,18 @@
 	
 	function _check_visibility_site_list(){
 		
-		if ( $( '#fields-wrapper .sf-field-visibility_site_list:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_list' ).length ) {
+		if ( $( '#submit-check-all-fields-visible-on-site-list' ).length > 0 ) {
 			
-			$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = false;
-			
-		}
-		else {
-			
-			$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = true;
+			if ( $( '#fields-wrapper .sf-field-visibility_site_list:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_list' ).length ) {
+				
+				$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = false;
+				
+			}
+			else {
+				
+				$( '#submit-check-all-fields-visible-on-site-list' )[ 0 ].checked = true;
+				
+			}
 			
 		}
 		
@@ -3241,14 +3288,18 @@
 	
 	function _check_visibility_site_detail(){
 		
-		if ( $( '#fields-wrapper .sf-field-visibility_site_detail:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_detail' ).length ) {
+		if ( $( '#submit-check-all-fields-visible-on-site-detail' ).length > 0 ) {
 			
-			$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = false;
-			
-		}
-		else {
-			
-			$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = true;
+			if ( $( '#fields-wrapper .sf-field-visibility_site_detail:checked' ).length < $( '#fields-wrapper .sf-field-visibility_site_detail' ).length ) {
+				
+				$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = false;
+				
+			}
+			else {
+				
+				$( '#submit-check-all-fields-visible-on-site-detail' )[ 0 ].checked = true;
+				
+			}
 			
 		}
 		
@@ -3684,49 +3735,154 @@
 			.attr( 'name', 'fields[' + fieldKey + '][ud_validation_rule_parameter_mask_test]' )
 			.attr( 'id', 'ud_validation_rule_parameter_mask_test-' + fieldKey );
 		
-		check_validation_rule_mask_type( $field_wrapper );
+		$content.find( '.ud-field-ud_validation_rule_parameter_mask_money_currency_symbol' )
+			.attr( 'name', 'fields[' + fieldKey + '][ud_validation_rule_parameter_mask_money_currency_symbol]' )
+			.attr( 'id', 'ud_validation_rule_parameter_mask_money_currency_symbol-' + fieldKey );
+		
+		$content.find( '.ud-field-ud_validation_rule_parameter_mask_money_dec_point' )
+			.attr( 'name', 'fields[' + fieldKey + '][ud_validation_rule_parameter_mask_money_dec_point]' )
+			.attr( 'id', 'ud_validation_rule_parameter_mask_money_dec_point-' + fieldKey );
+		
+		$content.find( '.ud-field-ud_validation_rule_parameter_mask_money_thous_sep' )
+			.attr( 'name', 'fields[' + fieldKey + '][ud_validation_rule_parameter_mask_money_thous_sep]' )
+			.attr( 'id', 'ud_validation_rule_parameter_mask_money_thous_sep-' + fieldKey );
+		
+		check_mask( $field_wrapper );
 		
 	}
 	
-	$( '.ud_validation_rule_parameter_mask_elements_wrapper' ).on( 'change', '.ud-field-ud_validation_rule_parameter_mask_type', function(){
+	$( document ).on( 'change', '.sf-field-validation_rule', function(){
+		
+		check_mask( $( this ).closest( '.field-wrapper' ) );
+		
+	});
+	
+	check_mask = function( $field_wrapper ){
+		
+		var jthis = $field_wrapper.find( '.sf-field-validation_rule' );
+		
+		if ( jthis.is( ':checked' ) ) {
+			
+			check_validation_rule_mask_type( $field_wrapper );
+			jthis.closest( '.field-wrapper' ).find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).show();
+			
+		}
+		else {
+			
+			jthis.closest( '.field-wrapper' ).find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).hide();
+			
+		}
+		
+	};
+	
+	check_custom_mask = function( $field_wrapper ){
+		
+		var $mask_type_val = $field_wrapper.find( '.ud-field-ud_validation_rule_parameter_mask_type' ).val();
+		var $custom_mask_wrapper = $field_wrapper.find( '.custom_mask_field_wrapper' );
+		
+		$field_wrapper.find( '.ud-validation-rule-parameter-mask' ).addClass( 'hidden' );
+		
+		if ( $mask_type_val == 'custom_mask' ) {
+			
+			$custom_mask_wrapper.removeClass( 'hidden' );
+			
+		}
+		else if ( $mask_type_val == 'money' ) {
+			
+			$field_wrapper.find( '.currency_symbol_field_wrapper, .dec_point_field_wrapper, .thous_sep_field_wrapper' ).removeClass( 'hidden' );
+			
+		}
+		
+	};
+	
+	$( document ).on( 'focus.test_mask', '.ud-field-ud_validation_rule_parameter_mask_test', function(){
 		
 		check_validation_rule_mask_type( $( this ).closest( '.field-wrapper' ) );
 		
 	});
 	
-	function check_validation_rule_mask_type( $field_wrapper ){
-		/*
-		var $summary = _get_summary( $field_wrapper );
-		var $content = _get_content( $field_wrapper );
-		var fieldKey = _get_key( $field_wrapper );
+	$( document ).on( 'change', '.ud-field-ud_validation_rule_parameter_mask_type', function(){
 		
-		var $mask_type_el = $field_wrapper.find( '.ud-field-ud_validation_rule_parameter_mask_type' );
-		var $mask_test_el = $field_wrapper.find( '.ud-field-ud_validation_rule_parameter_mask_test' );
+		check_validation_rule_mask_type( $( this ).closest( '.field-wrapper' ) );
 		
-		console.log( $mask_type_el.val() );
+	});
+	
+	check_validation_rule_mask_type = function( el ){
 		
-		switch( $mask_type_el.val() ) {
+		var $key = _get_key( el );
+		var $mask_test_input = $( '#ud_validation_rule_parameter_mask_test-' + $key );
+		var $option = $( '#ud_validation_rule_parameter_mask_type-' + $key ).val();
+		
+		check_custom_mask( el );
+		
+		$mask_test_input.unmask();
+		
+		$mask_test_input.off( 'focus.test_mask' );
+		$( '#ud_validation_rule_parameter_mask_custom_mask-' + $key ).off( 'change.custom_mask' );
+		$( '#ud_validation_rule_parameter_mask_custom_mask-' + $key ).off( 'focus.test_mask' );
+		
+		if ( $option == 'phone_brazil' ) {
 			
-			case 'custom_mask':
+			var $pb_mask_behavior = function (val) {
 				
-				$mask_test_el.attr( 'data-input-mask-el-id', 'ud_validation_rule_parameter_mask_custom_mask-' + fieldKey );
-				break;
+				return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 				
-			case 'zip_brazil':
+			},
+			$pb_options = {
 				
-				$zip_brazil = true;
-				$mask = '99999-999';
-				break;
+				onKeyPress: function( val, e, field, options ) {
+					
+					field.mask( $pb_mask_behavior.apply( {}, arguments ), options );
+					
+				}
 				
-			default:
+			};
+			
+			$mask_test_input.on( 'focus.test_mask', function(){
 				
+				$( this ).mask( $pb_mask_behavior, $pb_options );
 				
-				
-				;
-				
+			});
+			
+			$mask_test_input.mask( $pb_mask_behavior, $pb_options );
+			
 		}
-		*/
-	}
+		else if ( $option == 'zip_brazil' ) {
+			
+			$mask_test_input.mask( '00000-000' );
+			
+		}
+		else if ( $option == 'custom_mask' ) {
+			
+			var $mask = $( '#ud_validation_rule_parameter_mask_custom_mask-' + $key ).val();
+			
+			$mask_test_input.mask( $mask );
+			
+			$( document ).on( 'focus.test_mask change.custom_mask', '#ud_validation_rule_parameter_mask_custom_mask-' + $key, function(){
+				
+				if ( $( '#ud_validation_rule_parameter_mask_type-' + $key ).val() == 'custom_mask' ) {
+					
+					var $sub_el = $( this );
+					
+					var $_mask = $sub_el.val();
+					
+					$mask_test_input.mask( $_mask );
+					
+				}
+				
+			});
+			
+		}
+		else if ( $option == 'money' ) {
+			
+			var $dp = $( '#ud_validation_rule_parameter_mask_money_dec_point-' + $key ).val();
+			var $ts = $( '#ud_validation_rule_parameter_mask_money_thous_sep-' + $key ).val();
+			
+			$mask_test_input.mask( '#' + $ts + '##0' + $dp + '00', { reverse: true } );
+			
+		}
+		
+	};
 	
 	function update_validation_rule_parameter_min_length( $field_wrapper ){
 		
@@ -4819,6 +4975,11 @@ $( document ).on( 'ready', function(){
 		checkFieldsEditors( field_wrapper );
 		
 	});
+	
+	
+	
+	
+	
 	
 	
 	

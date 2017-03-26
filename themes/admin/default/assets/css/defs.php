@@ -10,10 +10,12 @@ if ( ! defined( 'VUI_MONO_FONT_FAMILY' ) ) define( 'VUI_MONO_FONT_FAMILY', '\'Dr
 if ( ! defined( 'VUI_DEFAULT_FONT_COLOR' ) ) define( 'VUI_DEFAULT_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
 if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_base_title_fg->rgba_s() );
 
-if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', ( 1 * VUI_SCALE ) . 'em' );
+if ( ! defined( 'VUI_DEFAULT_FONT_SIZE_NUM' ) ) define( 'VUI_DEFAULT_FONT_SIZE_NUM', ( 1 * VUI_SCALE ) );
+if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', VUI_DEFAULT_FONT_SIZE_NUM . 'em' );
 if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', 'normal' );
 if ( ! defined( 'VUI_SEC_FONT_WEIGHT' ) ) define( 'VUI_SEC_FONT_WEIGHT', 'normal' );
-if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', ( 1.7 * VUI_SCALE ) . 'em' );
+if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT_NUM' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT_NUM', ( 1.7 * VUI_SCALE ) );
+if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', VUI_DEFAULT_LINE_HEIGHT_NUM . 'em' );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', '1px solid ' . $vui->colors->vui_extra_3->rgba_s( 40 ) );
 if ( ! defined( 'VUI_SEC_BORDER' ) ) define( 'VUI_SEC_BORDER', '1px solid ' . $vui->colors->vui_lighter->rgba_s( 200 ) );

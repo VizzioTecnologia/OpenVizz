@@ -150,24 +150,9 @@ class Users_mdl extends CI_Model{
 			
 // 			echo '<h1>Params atuais do usuário:</h1><pre>' . print_r( $user_params, TRUE ) . '</pre>';
 			
-			if ( $override_per_key ) {
-				
-				foreach( $data as $k => $param ) {
-					
-					$params[ $k ] = $param;
-					
-				}
-				
-				$params = array_merge_recursive_distinct( $user_params, $params );
-				
-			}
-			else {
-				
-				$params = array_merge_recursive_distinct( $user_params, $data );
-				
-			}
+			$params = array_merge( $user_params, $data );
 			
-// 			echo '<h1>Params finaiso:</h1><pre>' . print_r( $params, TRUE ) . '</pre>'; exit;
+// 			echo '<h1>Params final:</h1><pre>' . print_r( $params, TRUE ) . '</pre>'; exit;
 			
 			// se o usuário for o atual, atualizamos a variável com os dados do usuário
 			if ( $current_user )
@@ -1491,11 +1476,11 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_link_recover_username_page( $menu_item_id = 0 ){
+	public function get_link_recover_username_page( $menu_item_id = '0' ){
 		
 		if ( trim( $menu_item_id ) == '' ) {
 			
-			$menu_item_id = 0;
+			$menu_item_id = '0';
 			
 		}
 		
@@ -1505,11 +1490,11 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_link_email_recover_page( $menu_item_id = 0 ){
+	public function get_link_email_recover_page( $menu_item_id = '0' ){
 		
 		if ( trim( $menu_item_id ) == '' ) {
 			
-			$menu_item_id = 0;
+			$menu_item_id = '0';
 			
 		}
 		
@@ -1519,11 +1504,11 @@ class Users_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_link_activate_account_page( $menu_item_id = 0, $acode = NULL ){
+	public function get_link_activate_account_page( $menu_item_id = '0', $acode = NULL ){
 		
 		if ( trim( $menu_item_id ) == '' ) {
 			
-			$menu_item_id = 0;
+			$menu_item_id = '0';
 			
 		}
 		
@@ -1768,6 +1753,8 @@ class Users_mdl extends CI_Model{
 					
 				}
 				
+				log_message( 'error', "[Users] " . lang( 'notif_c_users_send_acode_invalid_user_error' ) );
+				
 				return FALSE;
 				
 			}
@@ -1779,6 +1766,8 @@ class Users_mdl extends CI_Model{
 					msg( ( 'notif_c_users_account_already_active_error' ), 'error' );
 					
 				}
+				
+				log_message( 'error', "[Users] " . lang( 'notif_c_users_account_already_active_error' ) );
 				
 				return FALSE;
 				
@@ -1808,6 +1797,8 @@ class Users_mdl extends CI_Model{
 					msg( ( 'notif_c_users_insert_tmp_code_error' ), 'error' );
 					
 				}
+				
+				log_message( 'error', "[Users] " . lang( 'notif_c_users_insert_tmp_code_error' ) );
 				
 				return FALSE;
 				
@@ -1857,27 +1848,27 @@ class Users_mdl extends CI_Model{
 			
 			// -------------------------
 			
-			$theme_load_views_path = call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . 'users' . DS . 'email' . DS . 'send_acode' . DS . $layout . DS;
+			$theme_load_views_path = call_user_func( $this->mcm->environment . '_theme_components_views_path' ) . 'users' . DS . 'email' . DS . 'send_acode' . DS . 'default' . DS;
 			$theme_views_path = THEMES_PATH . $theme_load_views_path;
 			
-			$default_load_views_path = get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . 'users' . DS . 'email' . DS . 'send_acode' . DS . $layout . DS;
+			$default_load_views_path = get_constant_name( $this->mcm->environment . '_COMPONENTS_VIEWS_PATH' ) . 'users' . DS . 'email' . DS . 'send_acode' . DS . 'default' . DS;
 			$default_views_path = VIEWS_PATH . $default_load_views_path;
 			
 			$data[ 'user' ] = $user;
 			$data[ 'code' ] = $db_data[ 'code' ];
 			
-			if ( file_exists( $theme_views_path . 'send_acode.php' ) ){
+			if ( file_exists( $theme_views_path . 'email.php' ) ){
 				
-				$email_body = $this->load->view( $theme_load_views_path . 'send_acode', $data, TRUE );
+				$email_body = $this->load->view( $theme_load_views_path . 'email', $data, TRUE );
 				
 			}
-			else if ( file_exists( $default_views_path . 'send_acode.php') ){
+			else if ( file_exists( $default_views_path . 'email.php') ){
 				
-				$email_body = $this->load->view( $default_load_views_path . 'send_acode', $data, TRUE );
+				$email_body = $this->load->view( $default_load_views_path . 'email', $data, TRUE );
 				
 			}
 			
-			$this->email->message( sprintf(
+			$email_body = sprintf(
 				
 				$email_body,
 				/*
@@ -1912,7 +1903,11 @@ class Users_mdl extends CI_Model{
 				base_url(),
 				$db_data[ 'code' ]
 				
-			));
+			);
+			
+			$this->email->message( $email_body );
+			
+// 			echo print_r( $email_body, TRUE ); exit;
 			
 			// -------------------------
 			
@@ -1934,6 +1929,8 @@ class Users_mdl extends CI_Model{
 					msg( ( 'notif_c_users_acode_sent_error' ), 'error' );
 					
 				}
+				
+				log_message( 'error', "[Users] " . lang( 'notif_c_users_acode_sent_error' ) );
 				
 				return FALSE;
 				

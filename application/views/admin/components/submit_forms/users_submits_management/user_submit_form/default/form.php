@@ -886,6 +886,88 @@
 			
 			}
 			
+			if ( check_var( $field[ 'validation_rule' ] ) AND in_array( 'mask', $field[ 'validation_rule' ] ) ) {
+				
+				$this->plugins->load( 'jquery_maskedinput' );
+				
+				if ( check_var( $field[ 'ud_validation_rule_parameter_mask_type' ] ) ) {
+					
+					echo '<script type="text/javascript">';
+					
+					if ( $field[ 'ud_validation_rule_parameter_mask_type' ] == 'custom_mask' AND check_var( $field[ 'ud_validation_rule_parameter_mask_custom_mask' ] ) ) {
+						
+						?>
+							
+							$( document ).bind( 'ready', function(){
+								
+								$( '#submit-form-<?= $field_name; ?>' ).mask( '<?= $field[ 'ud_validation_rule_parameter_mask_custom_mask' ]; ?>' );
+								
+							});
+							
+						<?php
+						
+					}
+					else if ( $field[ 'ud_validation_rule_parameter_mask_type' ] == 'zip_brazil' ) {
+						
+						?>
+							
+							$( document ).bind( 'ready', function(){
+								
+								$( '#submit-form-<?= $field_name; ?>' ).mask( '00000-000' );
+								
+							});
+							
+						<?php
+						
+					}
+					else if ( $field[ 'ud_validation_rule_parameter_mask_type' ] == 'phone_brazil' ) {
+						
+						?>
+							
+							$( document ).bind( 'ready', function(){
+								
+								var $pb_mask_behavior = function (val) {
+									
+									return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+									
+								},
+								$pb_options = {
+									
+									onKeyPress: function( val, e, field, options ) {
+										
+										field.mask( $pb_mask_behavior.apply( {}, arguments ), options );
+										
+									}
+									
+								};
+								
+								$( '#submit-form-<?= $field_name; ?>' ).mask( $pb_mask_behavior, $pb_options );
+								
+							});
+							
+						<?php
+						
+					}
+					else if ( $field[ 'ud_validation_rule_parameter_mask_type' ] == 'money' ) {
+						
+						?>
+							
+							$( document ).bind( 'ready', function(){
+								
+								$( '#submit-form-<?= $field_name; ?>' ).mask( '#.##0,00', { reverse: true } );
+								
+							});
+							
+						<?php
+						
+					}
+					
+					echo '</script>';
+					
+				}
+				
+			}
+			
 			if ( check_var( $field[ 'conditional_field' ] ) ) {
 				
 				$target_field_name = $this->sfcm->make_field_name( $field[ 'conditional_target_field' ] );

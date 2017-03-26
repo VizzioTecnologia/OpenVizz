@@ -2154,7 +2154,7 @@ class Submit_forms extends Main {
 				// verificamos se existe o array com as colunas nos parâmetros filtrados
 				// se não existir, é aqui que devemos criar
 				
-				$cols_equals = FALSE;
+				$cols_equals = TRUE;
 				
 				$__filtered_params = check_var( $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ] ) ? $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ] : NULL;
 				
@@ -2164,6 +2164,8 @@ class Submit_forms extends Main {
 					
 					$this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] = $__sf_params;
 					$user_sf_us_columns = & $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ];
+					
+// 					echo '<pre>' . print_r( $__sf_params, TRUE ) . '</pre>'; exit;
 					
 					// comparando as colunas salvas nas preferências do usuário, com as atuais
 					// esta comparação deve ser rápida e simples, pois será executada sempre
@@ -2197,7 +2199,9 @@ class Submit_forms extends Main {
 						
 					);
 					
-					foreach( $data_scheme[ 'fields' ] as $key => $field ){
+					reset( $data_scheme[ 'fields' ] );
+					
+					while ( list( $key, $field ) = each( $data_scheme[ 'fields' ] ) ) {
 						
 						if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ){
 							
@@ -2212,30 +2216,42 @@ class Submit_forms extends Main {
 						
 					}
 					
-					foreach( $columns as $key => $column ){
+					if ( count( $columns ) != count( $user_sf_us_columns ) ) {
 						
-						//echo 'comparando ' . $user_sf_us_columns[ $key ][ 'alias' ] . ': ' . $user_sf_us_columns[ $key ][ 'alias' ] . ' === ' . $column[ 'alias' ] . '?';
-						//echo 'comparando ' . $user_sf_us_columns[ $key ][ 'title' ] . ': ' . $user_sf_us_columns[ $key ][ 'title' ] . ' === ' . $column[ 'title' ] . '?';
+						$cols_equals = FALSE;
 						
-						if ( ! (
-								isset( $user_sf_us_columns[ $key ][ 'alias' ] ) AND
-								isset( $user_sf_us_columns[ $key ][ 'title' ] ) AND
-								isset( $user_sf_us_columns[ $key ][ 'type' ] ) AND
-								$user_sf_us_columns[ $key ][ 'alias' ] == $column[ 'alias' ] AND
-								$user_sf_us_columns[ $key ][ 'title' ] == $column[ 'title' ] AND
-								$user_sf_us_columns[ $key ][ 'type' ] == $column[ 'type' ]
-							)
-						) {
+					}
+					
+					reset( $columns );
+					
+					if ( $cols_equals ) {
+					
+						while ( list( $key, $column ) = each( $columns ) ) {
 							
-							//echo 'diferente!, parando!</br>';
-							$cols_equals = FALSE;
-							break;
+							//echo 'comparando ' . $user_sf_us_columns[ $key ][ 'alias' ] . ': ' . $user_sf_us_columns[ $key ][ 'alias' ] . ' === ' . $column[ 'alias' ] . '?';
+							//echo 'comparando ' . $user_sf_us_columns[ $key ][ 'title' ] . ': ' . $user_sf_us_columns[ $key ][ 'title' ] . ' === ' . $column[ 'title' ] . '?';
 							
-						}
-						else {
-							
-							//echo 'ok!</br>';
-							$cols_equals = TRUE;
+							if ( ! (
+									isset( $user_sf_us_columns[ $key ][ 'alias' ] ) AND
+									isset( $user_sf_us_columns[ $key ][ 'title' ] ) AND
+									isset( $user_sf_us_columns[ $key ][ 'type' ] ) AND
+									$user_sf_us_columns[ $key ][ 'alias' ] == $column[ 'alias' ] AND
+									$user_sf_us_columns[ $key ][ 'title' ] == $column[ 'title' ] AND
+									$user_sf_us_columns[ $key ][ 'type' ] == $column[ 'type' ]
+								)
+							) {
+								
+								//echo 'diferente!, parando!</br>';
+								$cols_equals = FALSE;
+								break;
+								
+							}
+							else {
+								
+								//echo 'ok!</br>';
+								$cols_equals = TRUE;
+								
+							}
 							
 						}
 						
@@ -2313,9 +2329,13 @@ class Submit_forms extends Main {
 						
 						$user_preference[ 'admin_submit_form_users_submits_columns' ] = get_params( isset( $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] ) ? $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ] : NULL );
 						
+// 						echo '<pre>' . print_r( $columns, TRUE ) . '</pre>';
+						
 						$user_preference[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ] = $columns;
 						
 						$this->users->set_user_preferences( $user_preference, NULL, TRUE, TRUE );
+						
+// 						echo '<pre>' . print_r( $this->users->user_data[ 'params' ][ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ], TRUE ) . '</pre>'; exit;
 						
 					}
 					else {
@@ -2444,7 +2464,7 @@ class Submit_forms extends Main {
 					$columns = $this->mcm->filtered_system_params[ 'admin_submit_form_users_submits_columns' ][ 'submit_form_' . $ds_id ];
 					
 				}
-				//echo '<pre>' . print_r( $columns, TRUE ) . '</pre>';
+				
 				$columns = is_array( $columns ) ? array_filter( $columns ) : array();
 				
 				$data[ 'columns' ] = $columns;
@@ -2654,7 +2674,8 @@ class Submit_forms extends Main {
 				$ipp = $this->users->get_user_preference( $this->mcm->environment . '_users_submits_list_items_per_page' );
 				
 			}
-			else if ( ! isset( $ipp ) OR $ipp == -1 ){
+			
+			if ( ! isset( $ipp ) OR $ipp == -1 ){
 				
 				$ipp = $this->mcm->filtered_system_params[ $this->mcm->environment . '_items_per_page' ];
 				
@@ -2683,7 +2704,7 @@ class Submit_forms extends Main {
 				
 			}
 			
-			if ( ! $ipp ){
+			if ( $ipp == '' ){
 				
 				$ipp = NULL;
 				
@@ -3373,6 +3394,7 @@ class Submit_forms extends Main {
 							foreach ( $prop[ 'validation_rule' ] as $key => $rule ) {
 								
 								$comp = '';
+								$skip = FALSE;
 								
 								switch ( $rule ) {
 									
@@ -3401,18 +3423,34 @@ class Submit_forms extends Main {
 										$comp .= '[' . $prop[ 'validation_rule_parameter_less_than'] . ']';
 										break;
 										
+									case 'less_than':
+										
+										$comp .= '[' . $prop[ 'validation_rule_parameter_less_than'] . ']';
+										break;
+										
+									case 'valid_email':
+										
+										if ( ! isset( $data[ 'post' ][ 'form' ][ $prop_name ] ) OR $data[ 'post' ][ 'form' ][ $prop_name ] != '' ) {
+											
+											$rules[] = $rule . $comp;
+											
+										}
+										
+									case 'mask':
+										
+										if ( $data[ 'post' ][ 'form' ][ $prop[ 'alias' ] ] AND isset( $prop[ 'ud_validation_rule_parameter_mask_type' ] ) ) {
+											
+											$_POST[ 'form' ][ $prop[ 'alias' ] ] = $data[ 'post' ][ 'form' ][ $prop[ 'alias' ] ] = unmask( $data[ 'post' ][ 'form' ][ $prop[ 'alias' ] ], $prop[ 'ud_validation_rule_parameter_mask_type' ], isset( $prop[ 'ud_validation_rule_parameter_mask_custom_mask' ] ) ? $prop[ 'ud_validation_rule_parameter_mask_custom_mask' ] : '' );
+											
+										}
+										
+										$skip = TRUE;
+										unset( $prop[ 'validation_rule' ][ $key ] );
+										break;
+										
 								}
 								
-								if ( $rule == 'valid_email') {
-									
-									if ( ! isset( $data[ 'post' ][ 'form' ][ $prop_name ] ) OR $data[ 'post' ][ 'form' ][ $prop_name ] != '' ) {
-										
-										$rules[] = $rule . $comp;
-										
-									}
-									
-								}
-								else {
+								if ( ! $skip ) {
 									
 									$rules[] = $rule . $comp;
 									

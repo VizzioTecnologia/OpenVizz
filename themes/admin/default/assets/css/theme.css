@@ -935,25 +935,77 @@ input.field-label{
 
 
 
-
-
-
-
-.vui .data-list tr.status-active td.field-is-status {
+.vui .data-list .field-is-status.status-active {
 	
 	color: <?= $vui->colors->vui_status_active_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_active_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list tr.status-disabled td.field-is-status {
+.vui .data-list .field-is-status.status-inactive {
+	
+	color: <?= $vui->colors->vui_status_inactive_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_inactive_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-enabled {
+	
+	color: <?= $vui->colors->vui_status_enabled_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_enabled_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-postponed {
+	
+	color: <?= $vui->colors->vui_status_postponed_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_postponed_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-archived {
+	
+	color: <?= $vui->colors->vui_status_archived_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_archived_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-published {
+	
+	color: <?= $vui->colors->vui_status_published_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_published_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-unpublished {
+	
+	color: <?= $vui->colors->vui_status_unpublished_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_unpublished_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-scheduled {
+	
+	color: <?= $vui->colors->vui_status_scheduled_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_scheduled_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-canceled {
+	
+	color: <?= $vui->colors->vui_status_canceled_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_status_canceled_bg->rgba_s(); ?>;
+	
+}
+.vui .data-list .field-is-status.status-disabled {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_disabled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list tr.status-disabled:hover {
+.vui .data-list .field-is-status.status-disabled:hover {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s( 255 ); ?>;
 	

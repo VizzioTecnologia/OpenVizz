@@ -474,7 +474,7 @@ function urlencode_RFC_3986( $str ){
 }
 
 function redirect( $uri = '', $method = 'location', $http_response_code = 302, $msg = NULL ){
-
+	
 	$CI =& get_instance();
 
 	if ( ! $CI->input->get( 'ajax' ) ){

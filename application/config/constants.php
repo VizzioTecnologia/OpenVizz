@@ -64,7 +64,8 @@ $_rel = $_SERVER[ 'REQUEST_URI' ];
 
 $_rel = explode( '?', $_rel );
 
-$_rel = $_rel[ 0 ];
+$_rel = rtrim( $_rel[ 0 ], '/' );
+// echo '<pre>' . print_r( $_rel, TRUE ) . '</pre><br>';
 
 // echo '<pre>' . print_r( $_tmp, TRUE ) . '</pre><br>';
 // echo '<pre>' . print_r( $_rel, TRUE ) . '</pre><br>';

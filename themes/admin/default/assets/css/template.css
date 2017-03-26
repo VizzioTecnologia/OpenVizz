@@ -942,21 +942,21 @@ input.field-label{
 
 
 
-.vui .data-list tr.status-active td.field-is-status {
+.vui .data-list .field-is-status.status-active {
 	
 	color: <?= $vui->colors->vui_status_active_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_active_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list tr.status-disabled td.field-is-status {
+.vui .data-list .field-is-status.status-disabled {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_disabled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list tr.status-disabled:hover {
+.vui .data-list .field-is-status.status-disabled:hover {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s( 255 ); ?>;
 	

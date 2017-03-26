@@ -432,6 +432,12 @@ class Users extends Main {
 							msg( ( 'notif_c_users_account_created_success_no_active_site' ), 'success' );
 							
 						}
+						else {
+							
+							msg( ( 'notif_c_users_account_created_success_no_active_site_no_send_acode' ), 'success' );
+							msg( ( 'err_c_users_cant_send_acode' ), 'error' );
+							
+						}
 						
 					}
 					else {
@@ -440,35 +446,10 @@ class Users extends Main {
 						
 					}
 					
-					redirect();
-					
 					// -------------------------------------------------
 					// E-nail stuff
 					
-					redirect_last_url();
-					
 				}
-				
-				// do login params
-				$dlp = array(
-					
-					'user_data' => array(
-						
-						'username' => $this->input->post( 'username', TRUE ),
-						'email' => $this->input->post( 'username', TRUE ),
-						'password' => $this->input->post( 'password', TRUE ),
-						
-					)
-					
-				);
-				
-				if ( $this->input->post( 'keep_me_logged_in', TRUE ) ){
-					
-					$dlp[ 'session_mode' ] = 'persistent';
-					
-				}
-				
-				$this->users->do_login( $dlp );
 				
 			}
 			// caso contrário se a validação dos campos falhar e existir mensagens de erro

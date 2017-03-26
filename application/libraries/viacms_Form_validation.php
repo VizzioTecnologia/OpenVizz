@@ -223,6 +223,7 @@ class Viacms_Form_validation extends CI_Form_validation {
 					// Users can use any native PHP function call that has one param.
 					if (function_exists($rule))
 					{
+// 						print_r( $postdata ); exit;
 						$result = $rule($postdata);
 
 						if ($_in_array == TRUE)

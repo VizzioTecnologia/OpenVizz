@@ -821,28 +821,7 @@
 		/* General params */
 		public function get_general_params(){
 			
-			$params = get_params_spec_from_xml(APPPATH.'controllers/admin/com_articles/general_params.xml');
-			
-			$layouts_articles_list = dir_list_to_array('application/views/site/'.$this->mcm->filtered_system_params[ 'site_name' ].'/components/articles/articles_list');
-			$params['params']['articles_list']['layout_articles_list'] = array(
-				'title' => 'layout',
-				'name' => 'layout_articles_list',
-				'description' => 'tip_layout_articles_list',
-				'type' => 'combobox',
-				'default' => 'default',
-				'options' => $layouts_articles_list,
-			);
-			$layouts_article_detail = dir_list_to_array('application/views/site/'.$this->mcm->filtered_system_params[ 'site_name' ].'/components/articles/article_detail');
-			$params['params']['detail_view']['layout_article_detail'] = array(
-				'title' => 'layout',
-				'name' => 'layout_article_detail',
-				'description' => 'tip_layout_article_detail',
-				'type' => 'combobox',
-				'default' => 'default',
-				'options' => $layouts_article_detail,
-			);
-			
-			// print_r($params);
+			$params = get_params_spec_from_xml(APPPATH.'controllers/admin/com_users/global_config_params.xml');
 			
 			return $params;
 		}

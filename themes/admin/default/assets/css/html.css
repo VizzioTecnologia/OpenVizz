@@ -639,14 +639,20 @@ body.vui{
  */
 
 .vui table{
-
+	
+	display: table;
+	
 	border-collapse: collapse;
 	border: none;
 	text-align: center;
 	width: 100%;
-	margin-top: <?= VUI_SPACING; ?>em;
-	margin-bottom: <?= VUI_SPACING; ?>em;
-
+	margin-top: <?= VUI_SPACING * 2; ?>em;
+	margin-bottom: <?= VUI_SPACING * 2; ?>em;
+	
+	overflow-x: auto;
+	
+	background-color: <?= $vui->colors->vui_table_bg->rgba_s(); ?>;
+	
 }
 .vui tr{
 
@@ -656,10 +662,11 @@ body.vui{
 
 }
 .vui td,
+.vui thead td,
 .vui th,
 .vui table caption{
 
-	border: 1px solid <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
+	border: 1px solid <?= $vui->colors->vui_table_border->rgba_s(); ?>;
 	border-top: none;
 	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING; ?>em;
 	vertical-align: middle;
@@ -684,10 +691,10 @@ body.vui{
 	border-left: none;
 
 }
-.vui td:first-child,
-.vui th:first-child{
+.vui td:last-child,
+.vui th:last-child{
 
-	border-left: none;
+	border-right: none;
 
 }
 .vui tr:last-of-type td,
@@ -706,9 +713,32 @@ body.vui{
 	
 	position:relative;
 	text-align: left;
-	<?= $vui->css->word_break(); ?>
+	
+	color: <?= $vui->colors->vui_table_cell_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_cell_bg->rgba_s(); ?>;
 	
 }
+
+
+.vui thead td,
+.vui th,
+.vui table caption {
+	
+	text-align: center;
+	
+	color: <?= $vui->colors->vui_table_header_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_header_bg->rgba_s(); ?>;
+	
+}
+.vui tr:hover td {
+	
+}
+.vui tr.selected{
+	
+}
+
+
+
 .vui th a{
 
 }
@@ -721,6 +751,9 @@ body.vui{
 }
 .vui tr:nth-child(odd) td{
 
+	color: <?= $vui->colors->vui_table_cell_alt_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_cell_alt_bg->rgba_s(); ?>;
+	
 }
 .vui tr:nth-child(even) td{
 
@@ -731,29 +764,43 @@ body.vui{
 .vui tr.even{
 
 }
-.vui tr:hover{
-
-}
-.vui th,
-.vui table caption,
-.vui thead td,
-.vui tfoot td{
-
-	background: <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
-
-}
-.vui tr:hover{
-
-	background: <?= $vui->colors->vui_extra_3->rgba_s( 10 ); ?>;
-
-}
-.vui tr.selected{
-
-	background: <?= $vui->colors->vui_base->rgba_s( 30 ); ?>;
-
+.vui tr:hover,
+.vui tr.selected {
+	
+	color: <?= $vui->colors->vui_table_row_selected_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_row_selected_bg->rgba_s(); ?>;
+	
 }
 
 
+.vui tfoot tr td,
+.vui tfoot tr:nth-child(odd) td,
+.vui tfoot tr:nth-child(even) td {
+	
+	text-align: center;
+	
+	color: <?= $vui->colors->vui_table_footer_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_footer_bg->rgba_s(); ?>;
+	
+}
+
+
+.vui table.no-bg tr td,
+.vui table.no-bg tr:nth-child(odd) td,
+.vui table.no-bg tr:nth-child(even) td,
+.vui table.no-bg tr.odd td,
+.vui table.no-bg tr.even td{
+
+	background: none;
+
+}
+
+tr th.col-hidden,
+tr td.col-hidden{
+
+	display: none;
+
+}
 
 /*
  ---------------------------------------------------------

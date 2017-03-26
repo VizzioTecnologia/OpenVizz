@@ -237,7 +237,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			// -------------------------------------------------
 			
 			$order_by_allowed = FALSE;
-			$order_by_is_int = FALSE;
+			$order_by_is_number = FALSE;
 			$order_by_is_date = FALSE;
 			
 			if ( $sf_id ) {
@@ -272,9 +272,9 @@ class Sf_us_search_plugin extends Plugins_mdl{
 								
 								foreach( $field[ 'validation_rule' ] as $rule ) {
 									
-									if ( $rule == 'integer' ) {
+									if ( in_array( $rule, array( 'integer', 'numeric', 'greater_than', 'less_than', 'decimal', 'is_natural_no_zero', 'is_natural', ) ) ) {
 										
-										$order_by_is_int = TRUE;
+										$order_by_is_number = TRUE;
 										
 									}
 									
@@ -292,6 +292,8 @@ class Sf_us_search_plugin extends Plugins_mdl{
 						
 					}
 					
+					// Como os campos referenciados jã não são salvos com seus Id's, não precisamos mais efetuar junções
+					/*
 					if ( in_array( $field[ 'field_type' ], array( 'combo_box', 'radiobox', 'checkbox', ) ) AND check_var( $field[ 'options_from_users_submits' ] ) ) {
 						
 						$dsp[ 'select_columns' ] .= ', EXTRACTVALUE( `__us' . $i . 'sf' . $field[ 'options_from_users_submits' ] . '__`.`xml_data`,  \'//' . $field[ 'options_title_field' ] . '\' ) AS `' . $field[ 'alias' ] . '`';
@@ -305,6 +307,9 @@ class Sf_us_search_plugin extends Plugins_mdl{
 						$dsp[ 'select_columns' ] .= ', EXTRACTVALUE( `t1`.`xml_data`,  \'//' . $field[ 'alias' ] . '\' ) AS `' . $field[ 'alias' ] . '`';
 						
 					}
+					*/
+					
+					$dsp[ 'select_columns' ] .= ', EXTRACTVALUE( `t1`.`xml_data`,  \'//' . $field[ 'alias' ] . '\' ) AS `' . $field[ 'alias' ] . '`';
 					
 				}
 				
@@ -350,9 +355,9 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					//echo '<pre>' . print_r( $submit_form[ 'fields' ], TRUE ) . '</pre>'; exit;
 					
-					if ( $order_by_is_int ) {
+					if ( $order_by_is_number ) {
 						
-						$order_by = 'CAST( `' . $order_by . '` as SIGNED INTEGER )';
+						$order_by = 'CAST( `' . $order_by . '` as UNSIGNED )';
 						$search_config[ 'order_by' ][ 'sf_us_search' ] = array( $order_by, $order_by_direction, FALSE );
 						
 					}
@@ -413,15 +418,15 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					}
 					else if ( ! in_array( $ob_alias, array( 'id', 'submit_datetime', 'mod_datetime',  ) ) AND $sf_id ) {
 						
-						$ob_is_int = FALSE;
+						$ob_is_number = FALSE;
 						
 						if ( isset( $submit_form[ 'fields' ][ $ob_alias ][ 'validation_rule' ] ) ) {
 							
 							foreach( $submit_form[ 'fields' ][ $ob_alias ][ 'validation_rule' ] as $rule ) {
 								
-								if ( $rule == 'integer' ) {
+								if ( in_array( $rule, array( 'integer', 'numeric', 'greater_than', 'less_than', 'decimal', 'is_natural_no_zero', 'is_natural', ) ) ) {
 									
-									$ob_is_int = TRUE;
+									$ob_is_number = TRUE;
 									
 								}
 								
@@ -429,9 +434,9 @@ class Sf_us_search_plugin extends Plugins_mdl{
 							
 						}
 						
-						if ( $ob_is_int ) {
+						if ( $ob_is_number ) {
 							
-							$final_ob[] = array( 'CAST( `' . $ob_alias . '` as SIGNED INTEGER ) ', $dir, FALSE );
+							$final_ob[] = array( 'CAST( `' . $ob_alias . '` as UNSIGNED ) ', $dir, FALSE );
 							
 						}
 						else if ( $order_by_is_date ) {

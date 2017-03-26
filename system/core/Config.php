@@ -227,6 +227,7 @@ class CI_Config {
 	 */
 	function slash_item($item)
 	{
+		
 		if ( ! isset($this->config[$item]))
 		{
 			return FALSE;
@@ -258,7 +259,9 @@ class CI_Config {
 
 		if ($this->item('enable_query_strings') == FALSE)
 		{
+			
 			$suffix = ($this->item('url_suffix') == FALSE) ? '' : $this->item('url_suffix');
+			
 			return $this->slash_item('base_url').$this->slash_item('index_page').$this->_uri_string($uri).$suffix;
 		}
 		else

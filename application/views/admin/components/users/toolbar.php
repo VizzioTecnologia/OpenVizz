@@ -11,6 +11,8 @@ echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/users_groups_
 
 echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/users_groups_management/add_users_group', 'text' => lang( 'new_users_group' ), 'icon' => 'add-category', 'only_icon' => TRUE, ) );
 
+echo vui_el_button( array( 'url' => 'admin/' . $component_name . '/component_config/edit_config', 'text' => lang( 'global_config' ), 'icon' => 'config', 'only_icon' => TRUE, ) );
+
 ?>
 
 <?php //echo anchor('admin/'.$component_name.'/preferences/edit/'.$layout,lang('preferences'),'class="tb-btn tb-btn-preferences" title="'.lang('preferences').'"'); ?>

@@ -21,6 +21,12 @@
 
 <span class="vui-interactive-el-wrapper <?= ( ! $multiselect ? 'vui-btn-wrapper' : '' ); ?> vui-dropdown<?= ( $multiselect ? '-multi' : '' ); ?>-wrapper<?= $wrapper_class ? ' ' . $wrapper_class : ''; ?><?= $icon ? ' with-icon' : ''; ?>" <?= $_title ? $_title : ''; ?>><?php
 	
+	if ( $label ) {
+		
+		echo form_label( $label );
+		
+	}
+	
 	$input_params = array(
 		
 		'class' => 'el dropdown btn' . ( $class ? ' ' . $class : '' ),

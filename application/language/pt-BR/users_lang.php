@@ -129,6 +129,8 @@ $lang['c_users_recover_username_invalid_data_error'] = 												"Erro ao proc
 $lang['c_users_register_page_title'] = 																"Criar conta";
 $lang['c_users_user_register_success'] = 															"Sua conta foi criada com sucesso";
 $lang['notif_c_users_account_created_success_no_active_site'] = 									"Sua conta foi criada com sucesso, mas está desativada. Um e-mail contendo o link de ativação foi enviado para o e-mail que você informou, verifique sua caixa de entrada.";
+$lang['notif_c_users_account_created_success_no_active_site_no_send_acode'] = 						"Sua conta foi criada com sucesso, mas está desativada.";
+$lang['err_c_users_cant_send_acode'] = 																"Não foi possível enviar o e-mail contendo o código de ativação.";
 
 // ------------------------
 

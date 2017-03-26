@@ -1,25 +1,39 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-function mask( $val, $mask ) {
+function unmask( $val, $mask_type, $mask = '' ) {
 	
 	$maskared = '';
 	$k = 0;
 	
-	for ( $i = 0; $i <= strlen( $mask )-1; $i++ ) {
-	
-	if ( $mask[ $i ] == '#' ) {
+	if ( $mask_type == 'money' ) {
 		
-		if ( isset( $val[ $k ] ) )
-		$maskared .= $val[ $k++ ];
+		$maskared = str_replace( ',', '.', preg_replace( "/([^0-9\\,])/i", "", $val ) );
+		
+	}
+	else if ( $mask_type == 'custom_mask' ) {
+		
+		$mask = str_replace( '9', '#', $mask );
+		
+		for ( $i = 0; $i <= strlen( $mask ) - 1; $i++ ) {
+			
+			if ( $mask[ $i ] == '#' ) {
+				
+				if ( isset( $val[ $i ] ) ) $maskared .= $val[ $i ];
+				
+			}
+			
+		}
+		
+	}
+	else if ( $mask_type == 'zip_brazil' ) {
+		
+		$maskared = str_replace( ',', '.', preg_replace( "/([^0-9])/i", "", $val ) );
 		
 	}
 	else {
 		
-		if ( isset( $mask[ $i ] ) )
-			
-			$maskared .= $mask[ $i ];
-			
-		}
+		$maskared = $val;
+		
 	}
 	
 	return $maskared;
@@ -27,19 +41,23 @@ function mask( $val, $mask ) {
 }
 
 function remove_accents($str) {
+	
 	$from = array(
 		"á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï",
 		"ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç", "Á", "À", "Â",
 		"Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô",
 		"Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç"
 	);
+	
 	$to = array(
 		"a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i",
 		"o", "o", "o", "o", "o", "u", "u", "u", "u", "c", "A", "A", "A",
 		"A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O",
 		"O", "O", "U", "U", "U", "U", "C"
 	);
-	return	str_replace($from, $to, $str);
+	
+	return	str_replace( $from, $to, $str );
+	
 }
 
 // ------------------------------------------------------------------------

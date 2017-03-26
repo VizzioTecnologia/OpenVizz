@@ -58,7 +58,7 @@ $lang['ud_ds_default_data_id_site_detail_show'] = 												"Exibir em página
 $lang['tip_ud_ds_default_data_id_site_detail_show'] = 											"Defina se este campo será exibido por padrão em páginas de detalhamento no site.";
 $lang['ud_ds_default_data_id_pres_title'] = 													"Título de apresentação";
 
-$lang['ud_ds_default_data_sdt'] = 																"Data e hora do Dado UniD";
+$lang['ud_ds_default_data_sdt'] = 																"Data e hora da criação";
 $lang['ud_ds_default_data_sdt_site_list_show'] = 												$lang['ud_ds_default_data_id_site_list_show'];
 $lang['tip_ud_ds_default_data_sdt_site_list_show'] = 											$lang['tip_ud_ds_default_data_id_site_list_show'];
 $lang['ud_ds_default_data_sdt_site_detail_show'] = 												$lang['ud_ds_default_data_id_site_detail_show'];
@@ -449,7 +449,7 @@ $lang['fields_to_show'] = 																		"Campos visíveis";
 $lang['users_submits_search'] = 																"Pesquisa dos Dados UniD";
 $lang['use_search'] = 																			"Usar pesquisa";
 $lang['search_terms_string'] = 																	"Título do campo \"<strong>Termos de pesquisa</strong>\"";
-$lang['submit_datetime'] = 																		"Data e hora do Dado UniD";
+$lang['submit_datetime'] = 																		"Data e hora da criação";
 $lang['mod_datetime'] = 																		"Última modificação";
 $lang['user_submit_id'] = 																		"Id do Dado UniD";
 $lang['no_users_submits'] = 																	"Não há Dados UniD";
@@ -1159,7 +1159,7 @@ $lang['submit_form_id_sprintf'] = 																"Id: %s";
 $lang['submit_form_records_sprintf'] = 															"Registros: %s";
 
 $lang['submit_form_user_submit_id_sprintf'] = 													"Submissão: %s";
-$lang['submit_form_user_submit_datetime_sprintf'] = 											"Data e hora do Dado UniD: %s";
+$lang['submit_form_user_submit_datetime_sprintf'] = 											"Data e hora da criação: %s";
 
 
 
