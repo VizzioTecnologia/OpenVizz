@@ -11,8 +11,7 @@
 	$show_title = ! check_var( $params[ 'ud_ds_submitters_layout_show_title' ] ) ? TRUE : ( bool ) $params[ 'ud_ds_submitters_layout_show_title' ];
 	$title = check_var( $params[ 'ud_ds_submitters_layout_custom_title' ] ) ? $params[ 'ud_ds_submitters_layout_custom_title' ] : lang( 'ud_ds_submitters_layout_default_title' );
 	
-	$ud_data_submit_datetime = strtotime( $ud_data[ 'submit_datetime' ] );
-	$ud_data_submit_datetime = strftime( lang( 'ud_data_datetime' ), $ud_data_submit_datetime );
+	$ud_data_submit_datetime = $ud_data[ 'submit_datetime' ];
 	
 	$show_pre_text = ! check_var( $params[ 'ud_ds_submitters_layout_show_pre_text' ] ) ? TRUE : ( bool ) $params[ 'ud_ds_submitters_layout_show_pre_text' ];
 	$pre_text = check_var( $params[ 'ud_ds_submitters_layout_custom_pre_text' ] ) ? $params[ 'ud_ds_submitters_layout_custom_pre_text' ] : lang( 'ud_ds_submitters_layout_default_pre_text', NULL, $submit_form[ 'url' ], $submit_form[ 'title' ], $ud_data_submit_datetime );

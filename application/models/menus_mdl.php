@@ -82,6 +82,7 @@ class Menus_mdl extends CI_Model{
 		if ( $return->num_rows() > 0 ) {
 
 			$return = $return->row_array();
+			$return[ 'params' ] = get_params( $return[ 'params' ] );
 
 		}
 		else {
@@ -96,6 +97,42 @@ class Menus_mdl extends CI_Model{
 
 	}
 
+	// --------------------------------------------------------------------
+
+	public function get_path( $id, $parent_limit = 0, $query = NULL ){
+
+		// Caso a query não tenha sido informada, executa isto
+		if (!$query){
+			$this->db->select( 't1.*, t2.title as parent_title, t2.alias as parent_alias' );
+			$this->db->from('tb_menus t1');
+			$this->db->join('tb_menus t2', 't1.parent = t2.id', 'left');
+
+			$this->db->order_by('t1.ordering asc, t1.title asc, t1.id asc');
+			$query = $this->db->get();
+			$query = $query->result_array();
+
+		}
+
+		$path = array();
+
+		foreach($query as $row) {
+			if ($row['id'] == $id AND $row['parent'] != $parent_limit) {
+
+				$path[] = array(
+					'id' => $row['parent'],
+					'title' => $row['parent_title'],
+					'alias' => $row['parent_alias'],
+				);
+
+				$path = array_merge($this->get_path($row['parent'], $parent_limit, $query), $path);
+			}
+		}
+
+		// return the path
+		return $path;
+
+	}
+	
 	// --------------------------------------------------------------------
 
 	/**

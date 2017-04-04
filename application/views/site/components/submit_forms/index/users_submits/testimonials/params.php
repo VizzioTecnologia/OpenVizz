@@ -70,7 +70,7 @@ foreach ( $params[ 'params_spec' ][ 'users_submits_config' ] as $k => $p ) {
 
 foreach ( $params[ 'params_spec' ][ 'users_submits_config' ] as $k => $p ) {
 	
-	if ( check_var( $p[ 'name' ] ) AND $p[ 'name' ] == 'users_submits_layout' ) {
+	if ( check_var( $p[ 'name' ] ) AND $p[ 'name' ] == 'ud_d_list_layout_site' ) {
 		
 		array_push_pos( $params[ 'params_spec' ][ 'users_submits_config' ], $new_params, $k + 1  );
 		

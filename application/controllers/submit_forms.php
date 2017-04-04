@@ -14,6 +14,15 @@ class Submit_forms extends Main {
 			
 		}
 		
+		// -------------------------
+		// Loading UniD API model
+		
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
+			
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
+			
+		}
+		
 		$this->load->language( 'submit_forms' );
 		
 		$this->load->language( array( 'admin/submit_forms', 'admin/unid' ) );
@@ -37,14 +46,14 @@ class Submit_forms extends Main {
 		$download =								$this->input->get( 'dl' ) ? ( bool ) $this->input->get( 'dl' ) : FALSE; // download
 		$filename =								$this->input->get( 'fn' ) ? $this->input->get( 'fn' ) : FALSE; // File name without extension
 		$include_us =							$this->input->get( 'ius' ) ? ( bool ) $this->input->get( 'ius' ) : FALSE; // include users submits
-		$submit_form_id =						$this->input->get( 'sfid' ) ? $this->input->get( 'sfid' ) : NULL; // submit form id
+		$data_scheme_id =						$this->input->get( 'sfid' ) ? $this->input->get( 'sfid' ) : NULL; // submit form id
 		$user_submit_id =						$this->input->get( 'usid' ) ? $this->input->get( 'usid' ) : NULL; // user submit id
 		$cp =									$this->input->get( 'cp' ) ? $this->input->get( 'cp' ) : NULL; // current page
 		$ipp =									$this->input->get( 'ipp' ) ? $this->input->get( 'ipp' ) : NULL; // items per page
 		$ob =									$this->input->get( 'ob' ) ? $this->input->get( 'ob' ) : NULL; // order by
 		$obd =									$this->input->get( 'obd' ) ? $this->input->get( 'obd' ) : NULL; // order by direction
 		$s =									$this->input->get( 's' ) ? ( int )( ( bool ) $this->input->get( 's' ) ) : NULL; // search flag
-		$f =									$this->input->get( 'f' ) ? json_decode( base64_decode( urldecode( $this->input->get( 'f' ) ) ), TRUE ) : array(); // filters
+		$f =									$this->input->get( 'f' ) ? $this->unid->url_decode_ud_filters( $this->input->get( 'f' ) ) : array(); // filters
 		$content_type =							$this->input->get( 'ct' ) ? $this->input->get( 'ct' ) : 'json'; // content type: json (default), xml
 		$get_mode =								$this->input->get( 'gm' ) ? $this->input->get( 'gm' ) : 'compact'; // Get mode: full or compact
 		$csv_delimiter =						$this->input->get( 'csvd' ) ? $this->input->get( 'csvd' ) : NULL; // csv delimiter
@@ -71,7 +80,7 @@ class Submit_forms extends Main {
 		$component_params = $this->current_component[ 'params' ];
 		
 		$data[ 'params' ] = $component_params;
-		$data[ 'config' ][ 'sfid' ] = & $submit_form_id;
+		$data[ 'config' ][ 'sfid' ] = & $data_scheme_id;
 		$data[ 'config' ][ 'usid' ] = & $user_submit_id;
 		$data[ 'config' ][ 'download' ] = & $download;
 		$data[ 'config' ][ 'filename' ] = & $filename;
@@ -88,22 +97,22 @@ class Submit_forms extends Main {
 		$data[ 'username' ] = & $username;
 		$data[ 'password' ] = & $password;
 		
-		if ( strpos( $submit_form_id, ',' ) ) {
+		if ( strpos( $data_scheme_id, ',' ) ) {
 			
-			$submit_form_id = explode( ',', $submit_form_id );
+			$data_scheme_id = explode( ',', $data_scheme_id );
 			
 		}
 		else {
 			
-			$submit_form_id = array( $submit_form_id );
+			$data_scheme_id = array( $data_scheme_id );
 			
 		}
 		
-		foreach( $submit_form_id as $k => $sfpid ) {
+		foreach( $data_scheme_id as $k => $sfpid ) {
 			
 			if ( ! ( $sfpid AND is_numeric( $sfpid ) AND is_int( $sfpid + 0 ) ) ) {
 				
-				unset( $submit_form_id[ $k ] );
+				unset( $data_scheme_id[ $k ] );
 				
 			}
 			
@@ -131,11 +140,11 @@ class Submit_forms extends Main {
 		}
 		
 		
-		if ( $action === 'getsf' AND $submit_form_id ){
+		if ( $action === 'getsf' AND $data_scheme_id ){
 			
 			$data[ 'submit_forms' ] = array();
 			
-			foreach( $submit_form_id as $k => $sfpid ) {
+			foreach( $data_scheme_id as $k => $sfpid ) {
 				
 				// get submit form params
 				$gsfp = array(
@@ -145,22 +154,22 @@ class Submit_forms extends Main {
 					
 				);
 				
-				$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+				$data_scheme = $this->ud_api->get_data_schemes( $gsfp )->row_array();
 				
-				if ( $submit_form ){
+				if ( $data_scheme ){
 					
-					$this->sfcm->parse_sf( $submit_form );
+					$this->ud_api->parse_ds( $data_scheme );
 					
-					if ( ! check_var( $submit_form[ 'params' ][ 'ud_ds_api_access_active' ] ) ) {
+					if ( ! check_var( $data_scheme[ 'params' ][ 'ud_ds_api_access_active' ] ) ) {
 						
-						$submit_form = array(
+						$data_scheme = array(
 							
 							'id' => $sfpid,
 							'error' => ( lang( 'api_disabled' ) ),
 							
 						);
 						
-						$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+						$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 						continue;
 						
 					}
@@ -168,13 +177,13 @@ class Submit_forms extends Main {
 					$api_access = FALSE;
 					
 					// Public
-					if ( $submit_form[ 'params' ][ 'ud_ds_api_access_type' ] == 3 ) {
+					if ( $data_scheme[ 'params' ][ 'ud_ds_api_access_type' ] == 3 ) {
 						
 						$api_access = TRUE;
 						
 					}
 					// Users
-					else if ( $submit_form[ 'params' ][ 'ud_ds_api_access_type' ] == 1 OR $submit_form[ 'params' ][ 'ud_ds_api_access_type' ] == 2 ) {
+					else if ( $data_scheme[ 'params' ][ 'ud_ds_api_access_type' ] == 1 OR $data_scheme[ 'params' ][ 'ud_ds_api_access_type' ] == 2 ) {
 						
 						if ( check_var( $username ) AND check_var( $password ) ) {
 							
@@ -182,14 +191,14 @@ class Submit_forms extends Main {
 								
 								if ( $user[ 'password' ] != $this->users->encode_password( $password ) ) {
 									
-									$submit_form = array(
+									$data_scheme = array(
 										
 										'id' => $sfpid,
 										'error' => ( lang( 'api_login_wrong_password' ) ),
 										
 									);
 									
-									$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+									$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 									continue;
 									
 								}
@@ -202,28 +211,28 @@ class Submit_forms extends Main {
 								
 								if ( ! $this->users->_check_privileges( 'priv_ds_api', $user ) ){
 									
-									$submit_form = array(
+									$data_scheme = array(
 										
 										'id' => $sfpid,
 										'error' => ( lang( 'access_denied_priv_ds_api' ) ),
 										
 									);
 									
-									$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+									$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 									continue;
 									
 								};
 								
-								if ( ( $submit_form[ 'params' ][ 'ud_ds_api_access_type' ] == 1 AND ( ! check_var( $submit_form[ 'params' ][ 'ud_ds_api_access_type_user_group' ] ) OR ! in_array( $user[ 'group_id' ], $submit_form[ 'params' ][ 'ud_ds_api_access_type_user_group' ] ) ) ) OR ( $submit_form[ 'params' ][ 'ud_ds_api_access_type' ] == 2 AND ( ! check_var( $submit_form[ 'params' ][ 'ud_ds_api_access_type_users' ] ) OR ! in_array( $user[ 'id' ], $submit_form[ 'params' ][ 'ud_ds_api_access_type_users' ] ) ) ) ) {
+								if ( ( $data_scheme[ 'params' ][ 'ud_ds_api_access_type' ] == 1 AND ( ! check_var( $data_scheme[ 'params' ][ 'ud_ds_api_access_type_user_group' ] ) OR ! in_array( $user[ 'group_id' ], $data_scheme[ 'params' ][ 'ud_ds_api_access_type_user_group' ] ) ) ) OR ( $data_scheme[ 'params' ][ 'ud_ds_api_access_type' ] == 2 AND ( ! check_var( $data_scheme[ 'params' ][ 'ud_ds_api_access_type_users' ] ) OR ! in_array( $user[ 'id' ], $data_scheme[ 'params' ][ 'ud_ds_api_access_type_users' ] ) ) ) ) {
 									
-									$submit_form = array(
+									$data_scheme = array(
 										
 										'id' => $sfpid,
 										'error' => ( lang( 'api_cant_access_this_submit_form' ) ),
 										
 									);
 									
-									$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+									$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 									continue;
 									
 								}
@@ -231,14 +240,14 @@ class Submit_forms extends Main {
 							}
 							else {
 								
-								$submit_form = array(
+								$data_scheme = array(
 									
 									'id' => $sfpid,
 									'error' => ( lang( 'api_login_username_not_found' ) ),
 									
 								);
 								
-								$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+								$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 								continue;
 								
 							}
@@ -246,14 +255,14 @@ class Submit_forms extends Main {
 						}
 						else {
 							
-							$submit_form = array(
+							$data_scheme = array(
 								
 								'id' => $sfpid,
 								'error' => ( lang( 'api_require_user_login' ) ),
 								
 							);
 							
-							$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+							$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 							continue;
 							
 						}
@@ -265,14 +274,14 @@ class Submit_forms extends Main {
 					
 					if ( ! $api_access ) {
 						
-						$submit_form = array(
+						$data_scheme = array(
 							
 							'id' => $sfpid,
 							'error' => ( lang( 'access_denied' ) ),
 							
 						);
 						
-						$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+						$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 						continue;
 						
 					}
@@ -287,11 +296,11 @@ class Submit_forms extends Main {
 							
 						);
 						
-						$submit_form[ 'users_submits' ] = $this->sfcm->get_users_submits( $gus_params );
+						$data_scheme[ 'users_submits' ] = $this->sfcm->get_users_submits( $gus_params );
 						
 					}
 					
-					$data[ 'submit_forms' ][ $sfpid ] = $submit_form;
+					$data[ 'submit_forms' ][ $sfpid ] = $data_scheme;
 					
 				}
 				
@@ -421,16 +430,37 @@ class Submit_forms extends Main {
 		
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : 'ul'; // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : NULL; // sub action
-		$submit_form_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : NULL; // submit form id
-		$ud_d_id =								isset( $f_params[ 'usid' ] ) ? $f_params[ 'usid' ] : NULL; // submit form id
-		$ud_data_id =							isset( $f_params[ 'did' ] ) ? $f_params[ 'did' ] : NULL; // UniD data id
+		$data_scheme_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : NULL; // submit form id
+		$ud_data_id =							isset( $f_params[ 'did' ] ) ? ( int ) $f_params[ 'did' ] : NULL; // UniD data id
 		$cp =									isset( $f_params[ 'cp' ] ) ? $f_params[ 'cp' ] : NULL; // current page
 		$ipp =									isset( $f_params[ 'ipp' ] ) ? $f_params[ 'ipp' ] : NULL; // items per page
 		$ob =									isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
 		$obd =									isset( $f_params[ 'obd' ] ) ? $f_params[ 'obd' ] : NULL; // order by direction
 		$s =									isset( $f_params[ 's' ] ) ? ( int )( ( bool ) $f_params[ 's' ] ) : NULL; // search flag
-		$f =									isset( $f_params[ 'f' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'f' ] ) ), TRUE ) : array(); // filters
-		$sfsp =									isset( $f_params[ 'sfsp' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'sfsp' ] ) ), TRUE ) : array(); // search filters
+		$f =									isset( $f_params[ 'f' ] ) ? $f_params[ 'f' ] : array(); // filters
+		$sfsp =									isset( $f_params[ 'sfsp' ] ) ? $f_params[ 'sfsp' ] : array(); // search filters
+		
+		if ( $this->input->post() ){
+			
+			$data[ 'post' ] = $this->input->post( NULL, TRUE);
+			
+		}
+		else {
+			
+			$data[ 'post' ] = NULL;
+			
+		}
+		
+		if ( $this->input->get() ){
+			
+			$data[ 'get' ] = $this->input->get();
+			
+		}
+		else {
+			
+			$data[ 'get' ] = NULL;
+			
+		}
 		
 		// Parsing vars
 		// -------------------------------------------------
@@ -440,7 +470,7 @@ class Submit_forms extends Main {
 		
 		
 		// -------------------------------------------------
-		// Params filtering
+		// Params
 		
 		// obtendo os parâmetros globais do componente
 		$component_params = $this->current_component[ 'params' ];
@@ -449,17 +479,15 @@ class Submit_forms extends Main {
 		if ( $this->mcm->current_menu_item ){
 			
 			$menu_item_params = get_params( $this->mcm->current_menu_item[ 'params' ] );
-			$data[ 'params' ] = filter_params( $component_params, $menu_item_params );
 			
 		}
 		else{
 			
 			$menu_item_params = array();
-			$data[ 'params' ] = $component_params;
 			
 		}
 		
-		// Params filtering
+		// Params
 		// -------------------------------------------------
 		
 		/**************************************************/
@@ -468,16 +496,15 @@ class Submit_forms extends Main {
 		if (
 			
 			$action === 'sf'
-			AND ( $submit_form_id AND is_numeric( $submit_form_id )
-			AND is_int( $submit_form_id + 0 ) )
-			AND check_var( $this->mcm->current_menu_item )
+			AND ( $data_scheme_id AND is_numeric( $data_scheme_id )
+			AND is_int( $data_scheme_id + 0 ) )
 			AND (
 				
-				$data[ 'submit_form' ] = $this->sfcm->get_submit_forms(
+				$data[ 'submit_form' ] = $this->ud_api->get_data_schemes(
 					
 					array(
 						
-						'where_condition' => 't1.id = ' . $submit_form_id,
+						'where_condition' => 't1.id = ' . $data_scheme_id,
 						'limit' => 1,
 						
 					)
@@ -491,20 +518,32 @@ class Submit_forms extends Main {
 			$url = get_url( $this->uri->ruri_string() );
 			set_last_url( $url );
 			
-			$submit_form = & $data[ 'submit_form' ];
+			$data_scheme = & $data[ 'submit_form' ];
 			
-			$this->sfcm->parse_sf( $submit_form, TRUE );
+			$this->ud_api->parse_ds( $data_scheme, TRUE );
+			
+			// if not:
+			// page data scheme id = current data scheme id
+			// or no page and allow ds on no page
+			
+			// allow anonymous page
+			
+			if ( ( ( $this->mcm->current_menu_item AND ! isset( $this->mcm->current_menu_item[ 'params' ][ 'submit_form_id' ] ) ) OR ( isset( $this->mcm->current_menu_item[ 'params' ][ 'submit_form_id' ] ) AND $this->mcm->current_menu_item[ 'params' ][ 'submit_form_id' ] != $data_scheme[ 'id' ] ) ) OR ( ! $this->mcm->current_menu_item AND check_var( $data_scheme[ 'params' ][ 'ud_ds_disallow_anon_page' ] ) ) ) {
+				
+				show_404();
+				
+			}
 			
 			// -------------------------------------------------
 			// Access stuffs
 			
-			if ( check_var( $submit_form[ 'params' ][ 'ud_ds_access_type' ] ) AND $submit_form[ 'params' ][ 'ud_ds_access_type' ] != 3 ) {
+			else if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_access_type' ] ) AND $data_scheme[ 'params' ][ 'ud_ds_access_type' ] != 3 ) {
 				
 				if ( ! $this->users->is_logged_in() ){
 					
-					if ( check_var( $submit_form[ 'params' ][ 'ud_ds_login_required_custom_msg' ] ) ) {
+					if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_login_required_custom_msg' ] ) ) {
 						
-						msg( lang( $submit_form[ 'params' ][ 'ud_ds_login_required_custom_msg' ] ), 'warning' );
+						msg( lang( $data_scheme[ 'params' ][ 'ud_ds_login_required_custom_msg' ] ), 'warning' );
 						
 					}
 					
@@ -513,16 +552,16 @@ class Submit_forms extends Main {
 				}
 				
 				// Have a account
-				if ( $submit_form[ 'params' ][ 'ud_ds_access_type' ] == 4 ) {
+				if ( $data_scheme[ 'params' ][ 'ud_ds_access_type' ] == 4 ) {
 					
 					// some stuff
 					
 				}
 				
 				// Users
-				else if ( $submit_form[ 'params' ][ 'ud_ds_access_type' ] == 2 ) {
+				else if ( $data_scheme[ 'params' ][ 'ud_ds_access_type' ] == 2 ) {
 					
-					if ( ! ( check_var( $submit_form[ 'params' ][ 'ud_ds_access_type_users' ] ) AND in_array( $this->users->user_data[ 'id' ], $submit_form[ 'params' ][ 'ud_ds_access_type_users' ] ) ) ) {
+					if ( ! ( check_var( $data_scheme[ 'params' ][ 'ud_ds_access_type_users' ] ) AND in_array( $this->users->user_data[ 'id' ], $data_scheme[ 'params' ][ 'ud_ds_access_type_users' ] ) ) ) {
 						
 						msg( lang( 'notif_ud_ds_no_access_to_current_user' ), 'warning' );
 						
@@ -533,9 +572,9 @@ class Submit_forms extends Main {
 				}
 				
 				// Users groups
-				else if ( $submit_form[ 'params' ][ 'ud_ds_access_type' ] == 1 ) {
+				else if ( $data_scheme[ 'params' ][ 'ud_ds_access_type' ] == 1 ) {
 					
-					if ( ! ( check_var( $submit_form[ 'params' ][ 'ud_ds_access_type_users_groups' ] ) AND in_array( $this->users->user_data[ 'group_id' ], $submit_form[ 'params' ][ 'ud_ds_access_type_users_groups' ] ) ) ) {
+					if ( ! ( check_var( $data_scheme[ 'params' ][ 'ud_ds_access_type_users_groups' ] ) AND in_array( $this->users->user_data[ 'group_id' ], $data_scheme[ 'params' ][ 'ud_ds_access_type_users_groups' ] ) ) ) {
 						
 						msg( lang( 'notif_ud_ds_no_access_to_current_user' ), 'warning' );
 						
@@ -554,9 +593,9 @@ class Submit_forms extends Main {
 			
 			$xss_filtering = TRUE;
 			
-			if ( isset( $submit_form[ 'params' ][ 'ud_data_props_enable_xss_filtering_site' ] ) ) {
+			if ( isset( $data_scheme[ 'params' ][ 'ud_data_props_enable_xss_filtering_site' ] ) ) {
 				
-				if ( ! check_var( $submit_form[ 'params' ][ 'ud_data_props_enable_xss_filtering_site' ] ) ) {
+				if ( ! check_var( $data_scheme[ 'params' ][ 'ud_data_props_enable_xss_filtering_site' ] ) ) {
 					
 					$xss_filtering = FALSE;
 					
@@ -578,15 +617,13 @@ class Submit_forms extends Main {
 			// -------------------------------------------------
 			// Params filtering
 			
-			$submit_form[ 'params' ] = filter_params( $menu_item_params, $submit_form[ 'params' ] );
-			$submit_form[ 'params' ] = filter_params( $component_params, $submit_form[ 'params' ] );
-			$data[ 'params' ] = array_merge_recursive_distinct( $data[ 'params' ], $submit_form[ 'params' ] );
-			$data[ 'params' ] = filter_params( $component_params, $data[ 'params' ] );
+			$data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ] );
+			$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params );
 			
 			// Params filtering
 			// -------------------------------------------------
 			
-			$submit_form[ 'url' ] = $url;
+			$data_scheme[ 'url' ] = $url;
 			
 			// -------------------------------------------------
 			// User registration stuff
@@ -678,7 +715,7 @@ class Submit_forms extends Main {
 			
 			
 			// checa se existem campos de usuários e o grupo de usuários padrão para novos registros
-			if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) AND check_var( $submit_form[ 'params' ][ 'ud_ds_default_user_group_registered_from_form' ] ) ) {
+			if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_user_group_registered_from_form' ] ) ) {
 				
 				$users_fields = $this->current_component[ 'params' ][ 'users_fields' ];
 				
@@ -723,7 +760,7 @@ class Submit_forms extends Main {
 				
 			}
 			
-			foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+			foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 				
 				if ( check_var( $field[ 'advanced_options' ][ 'prop_is_ud_file' ] ) ) {
 					
@@ -887,7 +924,7 @@ class Submit_forms extends Main {
 					
 					$articles = $this->search->get_full_results( 'articles_search', TRUE );
 					
-					$submit_form[ 'fields' ][ $key ][ 'articles' ] = check_var( $articles ) ? $articles : array();
+					$data_scheme[ 'fields' ][ $key ][ 'articles' ] = check_var( $articles ) ? $articles : array();
 					
 				}
 				
@@ -984,9 +1021,9 @@ class Submit_forms extends Main {
 					
 					foreach( $_FILES[ 'form' ][ 'name' ] as $alias => $file_name ) {
 						
-						if ( check_var( $submit_form[ 'fields' ][ $alias ] ) ) {
+						if ( check_var( $data_scheme[ 'fields' ][ $alias ] ) ) {
 							
-							$file_field = $submit_form[ 'fields' ][ $alias ];
+							$file_field = $data_scheme[ 'fields' ][ $alias ];
 							
 							if ( check_var( $_FILES[ 'form' ][ 'error' ][ $alias ] ) AND $_FILES[ 'form' ][ 'error' ][ $alias ] == 4 AND check_var( $file_field[ 'field_is_required' ] ) ) {
 								
@@ -1131,7 +1168,7 @@ class Submit_forms extends Main {
 				
 // 				echo '<pre>' . print_r( $_FILES[ 'form' ], TRUE ) . '</pre>'; exit;
 				
-// 				echo '<pre>' . print_r( $submit_form[ 'fields' ], TRUE ) . '</pre>'; exit;
+// 				echo '<pre>' . print_r( $data_scheme[ 'fields' ], TRUE ) . '</pre>'; exit;
 				
 			}
 			
@@ -1187,7 +1224,7 @@ class Submit_forms extends Main {
 							
 							foreach( $uf_unique as $unique_field_alias => $unique_field ) {
 								
-								foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+								foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 									
 									if ( check_var( $field[ 'is_user_field' ] ) AND check_var( $field[ 'user_field' ] ) AND $field[ 'user_field' ] == $unique_field_alias AND isset( $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ] ) ) {
 										
@@ -1231,7 +1268,7 @@ class Submit_forms extends Main {
 							foreach( $user[ 'params' ][ 'forms_submitted' ][ 'ids' ] as $id ) {
 								
 								// user already submitted the current form
-								if ( $id == $submit_form_id ) {
+								if ( $id == $data_scheme_id ) {
 									
 									$user_new_form = FALSE;
 									
@@ -1258,7 +1295,7 @@ class Submit_forms extends Main {
 						// user has not yet submitted the current form
 						if ( $user_new_form ) {
 							
-							$user[ 'params' ][ 'forms_submitted' ][ 'ids' ][] = $submit_form_id;
+							$user[ 'params' ][ 'forms_submitted' ][ 'ids' ][] = $data_scheme_id;
 							
 						}
 						
@@ -1273,7 +1310,7 @@ class Submit_forms extends Main {
 						
 						foreach( $users_fields as $uf_alias => $user_field ) {
 							
-							foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+							foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 								
 								if ( check_var( $field[ 'is_user_field' ] ) AND check_var( $field[ 'user_field' ] ) AND $field[ 'user_field' ] == $uf_alias AND isset( $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ] ) ) {
 									
@@ -1299,14 +1336,14 @@ class Submit_forms extends Main {
 							
 						}
 						
-						$user[ 'params' ][ 'forms_submitted' ][ 'ids' ][] = $submit_form_id;
+						$user[ 'params' ][ 'forms_submitted' ][ 'ids' ][] = $data_scheme_id;
 						
 						$db_user[ "params" ] = $user[ 'params' ];
 						$db_user[ "username" ] = $user_username;
 						$db_user[ "password" ] = $user_password;
 						$db_user[ "email" ] = $user_email;
 						$db_user[ "name" ] = $user_name;
-						$db_user[ "group_id" ] = $submit_form[ 'params' ][ 'ud_ds_default_user_group_registered_from_form' ];
+						$db_user[ "group_id" ] = $data_scheme[ 'params' ][ 'ud_ds_default_user_group_registered_from_form' ];
 						
 						$data[ 'user_data' ] = $db_user;
 						
@@ -1372,16 +1409,45 @@ class Submit_forms extends Main {
 					$find[] = '{submit_form_id}';
 					$find[] = '{submit_form_url}';
 					$find[] = '{submit_form_title}';
-					$replace[] = $submit_form[ 'id' ];
-					$replace[] = $submit_form[ 'url' ];
-					$replace[] = $submit_form[ 'title' ];
+					$replace[] = $data_scheme[ 'id' ];
+					$replace[] = $data_scheme[ 'url' ];
+					$replace[] = $data_scheme[ 'title' ];
+					
+					// ------------------
+					// Adjusting not showed fields
+					// Add the fields unavailable on site environment, but have a default value
+					
+					$_tmp = array();
+					
+// 					echo '<pre>' . print_r( $data[ 'post' ], TRUE ) . '</pre>';
+					
+					foreach ( $data_scheme[ 'fields' ] as $k => $field ) {
+						
+						if ( ! check_var( $field[ 'availability' ][ 'site' ] ) AND check_var( $field[ 'default_value' ] ) ) {
+							
+							$_tmp[ $field[ 'alias' ] ] = $field[ 'default_value' ];
+							
+						}
+						
+					}
+					
+					if ( $_tmp ) {
+						
+						$data[ 'post' ][ 'form' ] = array_merge_recursive_distinct( $data[ 'post' ][ 'form' ], $_tmp );
+						
+					}
+					
+// 					echo '<pre>' . print_r( $data[ 'post' ], TRUE ) . '</pre>'; exit;
+					
+					// Adjusting not showed fields
+					// ------------------
 					
 					// -----------------------------------------------
 					// parsing unid_data data and creating field values replacement array
 					
 					$ud_d_data = $data[ 'post' ][ 'form' ];
 					
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 						
 						if ( ! in_array( $field[ 'field_type' ], array( 'html' ) ) ){
 							
@@ -1483,31 +1549,6 @@ class Submit_forms extends Main {
 					
 					// -----------------------------------------------
 					// Inserting user submit into DB
-					
-					// ------------------
-					// Adjusting not showed fields
-					// Add the fields unavailable on site environment, but have a default value
-					
-					$_tmp = array();
-					
-					foreach ( $submit_form[ 'fields' ] as $k => $field ) {
-						
-						if ( ! check_var( $field[ 'availability' ][ 'site' ] ) AND check_var( $field[ 'default_value' ] ) ) {
-							
-							$_tmp[ $field[ 'alias' ] ] = $field[ 'default_value' ];
-							
-						}
-						
-					}
-					
-					if ( $_tmp ) {
-						
-						$post[ 'form' ] = array_merge_recursive_distinct( $post[ 'form' ], $_tmp );
-						
-					}
-					
-					// Adjusting not showed fields
-					// ------------------
 					
 					$ud_d_db_insert_data = array();
 					
@@ -1656,7 +1697,7 @@ class Submit_forms extends Main {
 					
 // 					echo '<pre>' . print_r( $ud_d_data, TRUE ) . '</pre>'; exit;
 				
-					$ud_d_db_insert_data[ 'submit_form_id' ] = $submit_form_id;
+					$ud_d_db_insert_data[ 'submit_form_id' ] = $data_scheme_id;
 					$ud_d_db_insert_data[ 'submit_datetime' ] = $submit_datetime;
 					$ud_d_db_insert_data[ 'mod_datetime' ] = $submit_datetime;
 					$ud_d_db_insert_data[ 'data' ] = json_encode( $ud_d_data );
@@ -1677,17 +1718,17 @@ class Submit_forms extends Main {
 					
 					$user_submit_inserted = FALSE;
 					
-					if ( $ud_d_id = $this->sfcm->insert_user_submit( $ud_d_db_insert_data ) ){
+					if ( $ud_data_id = $this->sfcm->insert_user_submit( $ud_d_db_insert_data ) ){
 						
 						$user_submit_inserted = TRUE;
 						
 						$data[ 'ud_data' ] = $ud_d_db_insert_data;
-						$data[ 'ud_data' ][ 'id' ] = $ud_d_id;
+						$data[ 'ud_data' ][ 'id' ] = $ud_data_id;
 						
 						$find[] = '{user_submit_id}';
 						$find[] = '{ud_data_submit_datetime}';
 						$find[] = '{ud_data_mod_datetime}';
-						$replace[] = $ud_d_id;
+						$replace[] = $ud_data_id;
 						$replace[] = $data[ 'ud_data' ][ 'submit_datetime' ];
 						$replace[] = $data[ 'ud_data' ][ 'mod_datetime' ];
 						
@@ -1722,7 +1763,7 @@ class Submit_forms extends Main {
 						
 					}
 					
-					$data[ 'ud_data' ] = $this->sfcm->parse_ud_d_data( $data[ 'ud_data' ] );
+					$this->ud_api->parse_ud_data( $data[ 'ud_data' ] );
 					
 					// Inserting user submit into DB
 					// -----------------------------------------------
@@ -2054,9 +2095,9 @@ class Submit_forms extends Main {
 					
 					if ( check_var( $ud_d_db_update_data ) ){
 						
-						if ( $this->sfcm->update_user_submit( $ud_d_db_update_data, array( 'id' => $ud_d_id ) ) ) {
+						if ( $this->sfcm->update_user_submit( $ud_d_db_update_data, array( 'id' => $ud_data_id ) ) ) {
 							
-							log_message( 'debug', '[Submit forms] User submit (' . $ud_d_id . ') updated successfully' );
+							log_message( 'debug', '[Submit forms] User submit (' . $ud_data_id . ') updated successfully' );
 							
 						}
 						
@@ -2342,7 +2383,7 @@ class Submit_forms extends Main {
 					'component_view_folder' => $this->component_view_folder,
 					'function' => __FUNCTION__,
 					'action' => 'submit_form',
-					'layout' => ( ( isset( $data[ 'params' ][ 'submit_form_layout' ] ) AND $data[ 'params' ][ 'submit_form_layout' ] ) ? $data[ 'params' ][ 'submit_form_layout' ] : 'default' ),
+					'layout' => ( ( isset( $data[ 'params' ][ 'ud_ds_form_layout_site' ] ) AND $data[ 'params' ][ 'ud_ds_form_layout_site' ] ) ? $data[ 'params' ][ 'ud_ds_form_layout_site' ] : 'default' ),
 					'view' => 'submit_form',
 					'data' => $data,
 					
@@ -2369,32 +2410,46 @@ class Submit_forms extends Main {
 		
 		
 		
-		else if ( $action === 'us' AND ( $submit_form_id AND is_numeric( $submit_form_id ) AND is_int( $submit_form_id + 0 ) ) ){
+		else if ( $action === 'us' AND ( $data_scheme_id AND is_numeric( $data_scheme_id ) AND is_int( $data_scheme_id + 0 ) ) ){
 			
-			$layout = isset( $menu_item_params[ 'users_submits_layout' ] ) ? $menu_item_params[ 'users_submits_layout' ] : 'default';
+			$layout = isset( $menu_item_params[ 'ud_d_list_layout_site' ] ) ? $menu_item_params[ 'ud_d_list_layout_site' ] : 'default';
 			
-			// get submit form params
-			$gsfp = array(
+			// get data scheme params
+			$gdsp = array(
 				
-				'where_condition' => 't1.id = ' . $submit_form_id,
+				'where_condition' => 't1.id = ' . $data_scheme_id,
 				'limit' => 1,
 				
 			);
 			
-			if ( ( $submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array() ) ){
+			if ( ! ( $data_scheme = $this->ud_api->get_data_schemes( $gdsp )->row_array() ) ) {
 				
-				// -------------------------------------------------
-				// Params filtering
+				msg( $this->ud_api->get_api_return_status( 'e_10001', $data_scheme_id ), 'error' );
 				
-				// Params filtering
-				// -------------------------------------------------
+				redirect();
+				
+			}
+			else {
 				
 				$this->load->helper( array( 'pagination' ) );
 				$this->load->library( 'search' );
 				
-				$this->sfcm->parse_sf( $submit_form, TRUE );
+				$this->ud_api->parse_ds( $data_scheme );
 				
-				$data[ 'submit_form' ] = & $submit_form;
+				$data[ 'submit_form' ] = & $data_scheme;
+				
+				// -------------------------------------------------
+				// Params filtering
+				
+// 				echo '<pre>' . print_r( $data_scheme[ 'params' ][ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';
+				
+				$data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ], TRUE );
+				$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params, TRUE );
+				
+// 				echo '<pre>' . print_r( $data[ 'params' ][ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';exit;
+				
+				// Params filtering
+				// -------------------------------------------------
 				
 				$search_config = array(
 					
@@ -2404,7 +2459,7 @@ class Submit_forms extends Main {
 						
 						'sf_us_search' => array(
 							
-							'sf_id' => $submit_form_id,
+							'sf_id' => $data_scheme_id,
 							'menu_item_id' => $this->mcm->current_menu_item[ 'id' ],
 							
 						),
@@ -2412,28 +2467,6 @@ class Submit_forms extends Main {
 					),
 					
 				);
-				
-				if ( $this->input->post() ){
-					
-					$data[ 'post' ] = $this->input->post( NULL, TRUE);
-					
-				}
-				else {
-					
-					$data[ 'post' ] = NULL;
-					
-				}
-				
-				if ( $this->input->get() ){
-					
-					$data[ 'get' ] = $this->input->get();
-					
-				}
-				else {
-					
-					$data[ 'get' ] = NULL;
-					
-				}
 				
 				$get_query = array();
 				$ob_fields = array(
@@ -2455,6 +2488,37 @@ class Submit_forms extends Main {
 					
 				}
 				
+				if ( isset( $data[ 'get' ][ 'f' ] ) ) {
+					
+					$f = $this->unid->url_decode_ud_filters( $data[ 'get' ][ 'f' ] );
+					
+				}
+				else if ( isset( $f_params[ 'f' ] ) ) {
+					
+					$f = $this->unid->url_decode_ud_filters( $f_params[ 'f' ] );
+					
+				}
+				
+				if ( isset( $data[ 'post' ][ 'users_submits_search' ] ) ) {
+					
+					$sfsp = $data[ 'post' ][ 'users_submits_search' ];
+					
+				}
+				else if ( isset( $data[ 'get' ][ 'sfsp' ] ) ) {
+					
+					$sfsp = $this->unid->url_decode_ud_filters( $data[ 'get' ][ 'sfsp' ] );
+					
+				}
+				else if ( isset( $f_params[ 'sfsp' ] ) ) {
+					
+					$sfsp = $this->unid->url_decode_ud_filters( $f_params[ 'sfsp' ] );
+					
+				}
+				
+// 				echo '<strong>f:</strong><pre>' . print_r( $f, TRUE ) . '</pre>';
+				
+// 				echo '<strong>sfsp:</strong><pre>' . print_r( $sfsp, TRUE ) . '</pre>';
+				
 				/*
 				********************************************************
 				--------------------------------------------------------
@@ -2462,9 +2526,9 @@ class Submit_forms extends Main {
 				--------------------------------------------------------
 				*/
 				
-				if ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'order_by' ] ) ) {
+				if ( isset( $sfsp[ 'order_by' ] ) ) {
 					
-					$ob = $data[ 'post' ][ 'users_submits_search' ][ 'order_by' ];
+					$ob = $sfsp[ 'order_by' ];
 					
 				}
 				else if ( isset( $data[ 'get' ][ 'ob' ] ) ) {
@@ -2483,9 +2547,9 @@ class Submit_forms extends Main {
 					
 				}
 				
-				if ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'order_by_direction' ] ) ) {
+				if ( isset( $sfsp[ 'order_by_direction' ] ) ) {
 					
-					$obd = $data[ 'post' ][ 'users_submits_search' ][ 'order_by_direction' ];
+					$obd = $sfsp[ 'order_by_direction' ];
 					
 				}
 				else if ( isset( $data[ 'get' ][ 'obd' ] ) ) {
@@ -2532,8 +2596,7 @@ class Submit_forms extends Main {
 				--------------------------------------------------------
 				*/
 				
-				if ( ! check_var( $s ) AND ( isset( $data[ 'post' ][ 'users_submits_search' ] ) OR
-					( isset( $data[ 'get' ][ 's' ] ) AND $data[ 'get' ][ 's' ] ) ) ) {
+				if ( ! check_var( $s ) AND ( $sfsp OR ( isset( $data[ 'get' ][ 's' ] ) AND $data[ 'get' ][ 's' ] ) ) ) {
 					
 					$s = 1;
 					
@@ -2589,7 +2652,7 @@ class Submit_forms extends Main {
 				--------------------------------------------------------
 				*/
 				
-				$_default_results_filters = check_var( $data[ 'params' ][ 'us_default_results_filters' ] ) ? json_decode( $data[ 'params' ][ 'us_default_results_filters' ], TRUE ) : array();
+				$_default_results_filters = check_var( $data[ 'params' ][ 'us_default_results_filters' ] ) ? get_params( $data[ 'params' ][ 'us_default_results_filters' ] ) : array();
 				$_default_results_filters = is_array( $_default_results_filters ) ? $_default_results_filters : array();
 				
 				if ( $_default_results_filters AND empty( $f ) ){
@@ -2604,18 +2667,15 @@ class Submit_forms extends Main {
 					
 				}
 				
-			//echo '<pre>' . print_r( $sfsp, TRUE ) . '</pre>'; exit;
-				
-				if ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'submit_search' ] ) ){
+				if ( $sfsp ){
 					
 					$f = array();
 					
-					$sfsp = $data[ 'post' ][ 'users_submits_search' ];
 					unset( $sfsp[ 'submit_search' ] );
 					
-					if ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'dinamic_filter_fields' ] ) ) {
+					if ( isset( $sfsp[ 'dinamic_filter_fields' ] ) ) {
 						
-						foreach ( $data[ 'post' ][ 'users_submits_search' ][ 'dinamic_filter_fields' ] as $key => $value ) {
+						foreach ( $sfsp[ 'dinamic_filter_fields' ] as $key => $value ) {
 							
 							if ( trim( $value ) !== '' ) {
 								
@@ -2639,11 +2699,13 @@ class Submit_forms extends Main {
 					
 				}
 				
-				//echo '<pre>' . print_r( $f, TRUE ) . '</pre>'; exit;
+// 				echo '<strong>$data[ \'params\' ]:</strong><pre>' . print_r( $data[ 'params' ], TRUE ) . '</pre>';
+				
+// 				echo '<strong>f:</strong><pre>' . print_r( $f, TRUE ) . '</pre>';
 				
 				$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'filters' ] = $f;
 				
-				$filters_url = urlencode( base64_encode( json_encode( $f ) ) );
+				$filters_url = $this->unid->url_encode_ud_filters( $f );
 				
 				/*
 				--------------------------------------------------------
@@ -2651,15 +2713,6 @@ class Submit_forms extends Main {
 				--------------------------------------------------------
 				********************************************************
 				*/
-				
-				foreach ( $data[ 'submit_form' ][ 'fields' ] as $key => $field ) {
-					
-					$alias = isset( $field[ 'alias' ] ) ? $field[ 'alias' ] : $this->sfcm->make_field_name( $field[ 'label' ] );
-					
-					$data[ 'fields' ][ $alias ] = $field;
-					$data[ 'fields' ][ $alias ][ 'alias' ] = $alias;
-					
-				}
 				
 				/*
 				********************************************************
@@ -2734,11 +2787,11 @@ class Submit_forms extends Main {
 				$get_query = ! empty( $get_query ) ? '?' . join( '&', $get_query ) : '';
 				$s = $s ? '/s/1' : '';
 				
-				$sfsp = urlencode( base64_encode( json_encode( $sfsp ) ) );
+				$sfsp = $this->unid->url_encode_ud_filters( $sfsp );
 				
-				$pagination_url = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $submit_form_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $get_query;
+				$pagination_url = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $get_query;
 				
-				$data[ 'page_url' ] = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $submit_form_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . $get_query;
+				$data[ 'page_url' ] = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . $get_query;
 // 				echo $data[ 'page_url' ];
 				$data[ 'users_submits_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
 				
@@ -2751,22 +2804,6 @@ class Submit_forms extends Main {
 				********************************************************
 				*/
 				
-				//print_r( $data[ 'params' ] );
-				
-				if ( check_var( $data[ 'params' ][ 'fields_to_show' ] ) ) {
-					
-					foreach ( $data[ 'params' ][ 'fields_to_show' ] as $key => $value ) {
-						
-						if ( $value == '0' ) {
-							
-							unset( $data[ 'params' ][ 'fields_to_show' ][ $key ] );
-							
-						}
-						
-					}
-					
-				}
-				
 				$data[ 'users_submits' ] = $users_submits;
 				
 				$this->_page(
@@ -2776,7 +2813,7 @@ class Submit_forms extends Main {
 						'component_view_folder' => $this->component_view_folder,
 						'function' => __FUNCTION__,
 						'action' => 'users_submits',
-						'layout' => ( ( check_var( $data[ 'params' ][ 'users_submits_layout' ] ) ) ? $data[ 'params' ][ 'users_submits_layout' ] : 'default' ),
+						'layout' => ( ( check_var( $data[ 'params' ][ 'ud_d_list_layout_site' ] ) ) ? $data[ 'params' ][ 'ud_d_list_layout_site' ] : 'default' ),
 						'view' => 'users_submits',
 						'data' => $data,
 						
@@ -2789,7 +2826,7 @@ class Submit_forms extends Main {
 			
 		}
 		
-		else if ( $action === 'dd' AND ( $ud_data_id AND is_numeric( $ud_data_id ) AND $ud_data_id > 0 ) ){
+		else if ( $action === 'dd' AND $ud_data_id ){
 			
 			$layout = isset( $menu_item_params[ 'user_submit_layout' ] ) ? $menu_item_params[ 'user_submit_layout' ] : 'default';
 			
@@ -2817,23 +2854,28 @@ class Submit_forms extends Main {
 			
 			$user_submit = $user_submit[ 0 ];
 			
-			$submit_form_id = $user_submit[ 'submit_form_id' ];
+			$data_scheme_id = $user_submit[ 'submit_form_id' ];
 			
-			// get submit form params
-			$gsfp = array(
+			// get data scheme params
+			$gdsp = array(
 				
-				'where_condition' => 't1.id = ' . $submit_form_id,
+				'where_condition' => 't1.id = ' . $data_scheme_id,
 				'limit' => 1,
 				
 			);
 			
-			$submit_form = $this->sfcm->get_submit_forms( $gsfp )->row_array();
+			if ( ! ( $data_scheme = $this->ud_api->get_data_schemes( $gdsp )->row_array() ) ) {
 				
-			if ( $user_submit AND $submit_form ) {
+				msg( $this->ud_api->get_api_return_status( 'e_10001', $data_scheme_id ), 'error' );
 				
-				$this->sfcm->parse_sf( $submit_form, TRUE );
+				redirect();
 				
-				$data[ 'submit_form' ] = & $submit_form;
+			}
+			else if ( $user_submit ) {
+				
+				$this->ud_api->parse_ds( $data_scheme );
+				
+				$data[ 'submit_form' ] = & $data_scheme;
 				
 				$data[ 'user_submit' ] = & $user_submit;
 				
@@ -2844,7 +2886,7 @@ class Submit_forms extends Main {
 				}
 				else {
 					
-					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $submit_form, $user_submit );
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data_scheme, $user_submit );
 					
 				}
 				

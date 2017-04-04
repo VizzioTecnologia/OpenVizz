@@ -66,7 +66,7 @@ if ( $component_function_action != 'sfl' ) {
 							
 							'id' => 'sf_site_link_' . $_sf[ 'id' ],
 							'title' => lang( 'view_submit_form_on_site' ),
-							'link' => get_url( $_sf[ 'site_link' ] ),
+							'link' => $_sf[ 'site_link' ],
 							'icon' => 'view',
 							'parent_id' => $_sf[ 'id' ],
 							'target' => '_blank',
@@ -75,13 +75,13 @@ if ( $component_function_action != 'sfl' ) {
 						
 					}
 					
-					if ( isset( $_sf[ 'users_submits_site_link' ] ) ) {
+					if ( isset( $_sf[ 'data_list_site_link' ] ) ) {
 						
 						$menu_items[] = array(
 							
 							'id' => 'sf_users_submits_site_link_' . $_sf[ 'id' ],
 							'title' => lang( 'view_users_submits_on_site' ),
-							'link' => get_url( $_sf[ 'users_submits_site_link' ] ),
+							'link' => $_sf[ 'data_list_site_link' ],
 							'icon' => 'view',
 							'parent_id' => $_sf[ 'id' ],
 							'target' => '_blank',

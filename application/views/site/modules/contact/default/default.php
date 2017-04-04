@@ -109,53 +109,57 @@
 				
 			} ?>
 			
-			<p class="contact-emails contact-info-item">
+			<?php if ( check_var( $emails ) ) { ?>
 				
-				<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_emails_title' ] ) ) {?>
+				<p class="contact-emails contact-info-item">
 					
-					<?php if ( count( $emails ) > 1 ) { ?>
+					<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_emails_title' ] ) ) {?>
 						
-						<span class="contact-info-title"><?= lang( 'emails' ); ?></span>
-						
-					<?php } else if ( count( $emails ) == 1 ) { ?>
-						
-						<span class="contact-info-title"><?= lang( 'email' ); ?></span>
+						<?php if ( count( $emails ) > 1 ) { ?>
+							
+							<span class="contact-info-title"><?= lang( 'emails' ); ?></span>
+							
+						<?php } else if ( count( $emails ) == 1 ) { ?>
+							
+							<span class="contact-info-title"><?= lang( 'email' ); ?></span>
+							
+						<?php } ?>
 						
 					<?php } ?>
 					
-				<?php } ?>
-				
-				<?php foreach ( $emails as $key => $email ) { ?>
-					
-					<?php if ( in_array( $email[ 'key' ], $module_data[ 'params' ][ 'contact_module_emails_to_show' ] ) ) { ?>
+					<?php foreach ( $emails as $key => $email ) { ?>
 						
-						<?php $show_email_title = ( ( check_var( $module_data[ 'params' ][ 'contact_module_show_emails_titles' ] ) AND check_var( $email[ 'title' ] ) ) ? TRUE : FALSE ); ?>
-						
-						<span class="contact-module-email">
+						<?php if ( in_array( $email[ 'key' ], $module_data[ 'params' ][ 'contact_module_emails_to_show' ] ) ) { ?>
 							
-							<a href="mailto:<?= $contact[ 'name' ]; ?><<?= $email[ 'email' ]; ?>>" class="contact-module-email-value" itemprop="email">
-								
-								<?= $email[ 'email' ]; ?>
-								
-							</a>
+							<?php $show_email_title = ( ( check_var( $module_data[ 'params' ][ 'contact_module_show_emails_titles' ] ) AND check_var( $email[ 'title' ] ) ) ? TRUE : FALSE ); ?>
 							
-							<?php if ( $show_email_title ){ ?>
+							<span class="contact-module-email">
 								
-								<span class="contact-item-title">
+								<a href="mailto:<?= $contact[ 'name' ]; ?><<?= $email[ 'email' ]; ?>>" class="contact-module-email-value" itemprop="email">
 									
-									<?= $email[ 'title' ]; ?>
+									<?= $email[ 'email' ]; ?>
 									
-								</span>
+								</a>
 								
-							<?php } ?>
+								<?php if ( $show_email_title ){ ?>
+									
+									<span class="contact-item-title">
+										
+										<?= $email[ 'title' ]; ?>
+										
+									</span>
+									
+								<?php } ?>
+								
+							</span>
 							
-						</span>
+						<?php } ?>
 						
 					<?php } ?>
 					
-				<?php } ?>
+				</p>
 				
-			</p>
+			<?php } ?>
 			
 		<?php } ?>
 

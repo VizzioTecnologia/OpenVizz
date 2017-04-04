@@ -27,7 +27,7 @@ $unique_hash = md5( uniqid( rand(), true ) );
 	
 	}
 	
-	?><div class="module-content users-submits-module-content layout-<?= url_title( $params[ 'users_submits_layout' ] ); ?>">
+	?><div class="module-content users-submits-module-content layout-<?= url_title( $params[ 'ud_d_list_layout_site' ] ); ?>">
 		
 		<div class="users-submits-wrapper results">
 			

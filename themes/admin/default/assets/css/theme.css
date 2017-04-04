@@ -54,17 +54,37 @@ hr{
 	float: right;
 	
 }
-.ta-left{
+*.min-width,
+.vui *.min-width,
+.vui td.col-id {
+	
+	width: 0;
+	
+}
+td.min-width,
+.vui caption.min-width,
+.vui th.min-width,
+.vui td.col-id {
+	
+	width: auto;
+	
+	white-space: nowrap;
+	
+}
+*.ta-left,
+.vui *.ta-left {
 	
 	text-align: left;
 	
 }
-.ta-right{
+*.ta-right,
+.vui *.ta-right {
 	
 	text-align: right;
 	
 }
-.ta-center{
+*.ta-center,
+.vui *.ta-center {
 	
 	text-align: center;
 	
@@ -177,8 +197,6 @@ hr{
 
 /* Login */
 /* ---------------------------------------------------- */
-
-
 
 
 
@@ -935,99 +953,99 @@ input.field-label{
 
 
 
-.vui .data-list .field-is-status.status-active {
+.vui .field-is-status.status-active {
 	
 	color: <?= $vui->colors->vui_status_active_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_active_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-inactive {
+.vui .field-is-status.status-inactive {
 	
 	color: <?= $vui->colors->vui_status_inactive_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_inactive_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-enabled {
+.vui .field-is-status.status-enabled {
 	
 	color: <?= $vui->colors->vui_status_enabled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_enabled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-postponed {
+.vui .field-is-status.status-postponed {
 	
 	color: <?= $vui->colors->vui_status_postponed_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_postponed_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-archived {
+.vui .field-is-status.status-archived {
 	
 	color: <?= $vui->colors->vui_status_archived_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_archived_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-published {
+.vui .field-is-status.status-published {
 	
 	color: <?= $vui->colors->vui_status_published_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_published_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-unpublished {
+.vui .field-is-status.status-unpublished {
 	
 	color: <?= $vui->colors->vui_status_unpublished_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_unpublished_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-scheduled {
+.vui .field-is-status.status-scheduled {
 	
 	color: <?= $vui->colors->vui_status_scheduled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_scheduled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-canceled {
+.vui .field-is-status.status-canceled {
 	
 	color: <?= $vui->colors->vui_status_canceled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_canceled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-disabled {
+.vui .field-is-status.status-disabled {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s(); ?>;
 	
 	background-color: <?= $vui->colors->vui_status_disabled_bg->rgba_s(); ?>;
 	
 }
-.vui .data-list .field-is-status.status-disabled:hover {
+.vui .ud-d-list .field-is-status.status-disabled:hover {
 	
 	color: <?= $vui->colors->vui_status_disabled_fg->rgba_s( 255 ); ?>;
 	
 }
-.vui .data-list td.field-is-image .thumb{
+.vui .ud-d-list td.field-is-image .thumb{
 	
 	margin: 0;
 	
 }
-.vui .data-list td.field-is-image .thumb .s2 img{
+.vui .ud-d-list td.field-is-image .thumb .s2 img{
 	
 	
 	
 }
 
 
-.vui .data-list .operations,
-.vui .data-list .col-operations,
-.vui .data-list .col-create_datetime,
-.vui .data-list .col-submit_datetime,
-.vui .data-list .col-mod_datetime,
-.vui .data-list td.sf-field-type-date-wrapper {
+.vui .ud-d-list .operations,
+.vui .ud-d-list .col-operations,
+.vui .ud-d-list .col-create_datetime,
+.vui .ud-d-list .col-submit_datetime,
+.vui .ud-d-list .col-mod_datetime,
+.vui .ud-d-list td.sf-field-type-date-wrapper {
 	
 	white-space: nowrap;
 	
@@ -1036,3 +1054,51 @@ input.field-label{
 	
 }
 
+
+
+.vui .sys-translatable-term-source {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	color: <?= $vui->colors->vui_translatable_term_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_translatable_term_bg->rgba_s(); ?>;
+	
+	padding: <?= VUI_SPACING / 4; ?>em <?= VUI_SPACING / 2; ?>em;
+	margin: <?= VUI_SPACING / 4; ?>em;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>;
+	
+}
+
+
+
+.vui .dashboard-item {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	color: <?= $vui->colors->vui_dashboard_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_dashboard_bg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 2px ' . $vui->colors->vui_dashboard_fg->rgba_s( 200 ) ); ?>;
+	
+	padding: <?= VUI_SPACING * 2; ?>em;
+	margin: <?= VUI_SPACING / 2; ?>em;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>;
+	
+	text-align: center;
+	
+}
+.vui .dashboard-item:hover,
+.vui .dashboard-item:focus,
+.vui .dashboard-item:active {
+	
+	color: <?= $vui->colors->vui_dashboard_active_fg->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->vui_dashboard_active_bg->rgba_s(); ?>;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>;
+	
+}

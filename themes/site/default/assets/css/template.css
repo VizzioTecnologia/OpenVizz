@@ -25,7 +25,7 @@
 
 
 
-#site-block{
+#site-block {
 
 	position: relative;
 	display:block;
@@ -33,7 +33,7 @@
 
 }
 
-.clear{
+.clear {
 
 	position: relative;
 	display: block;
@@ -43,6 +43,58 @@
 
 }
 
+*.min-width,
+.vui *.min-width,
+.vui *.col-min,
+.vui td.col-id {
+	
+	min-width: 0;
+	
+}
+.vui *.col-med {
+	
+	min-width: 0;
+	
+}
+.vui *.col-larg {
+	
+	min-width: 0;
+	
+}
+td.min-width,
+.vui table caption.min-width,
+.vui th.min-width,
+.vui td.col-id,
+.vui th.col-id {
+	
+	white-space: nowrap;
+	
+}
+.vui td.col-id,
+.vui th.col-id,
+.vui table caption.col-id {
+	
+	text-align: center;
+	
+}
+*.ta-left,
+.vui *.ta-left {
+	
+	text-align: left;
+	
+}
+*.ta-right,
+.vui *.ta-right {
+	
+	text-align: right;
+	
+}
+*.ta-center,
+.vui *.ta-center {
+	
+	text-align: center;
+	
+}
 
 
 /* ---------------------------------------------------- */

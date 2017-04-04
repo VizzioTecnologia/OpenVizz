@@ -16,15 +16,15 @@
 	
 	<div class="form-wrapper-sub tabs-children">
 		
-		<?= form_open_multipart( get_url( 'admin' . $this->uri->ruri_string() ), array( 'id' => 'submit-form-form', ) ); ?>
+		<?= form_open_multipart( get_url( 'admin' . $this->uri->ruri_string() ), array( 'id' => 'plugin-form', ) ); ?>
 			
 			<div class="form-actions to-toolbar">
 				
-				<?= vui_el_button( array( 'text' => lang( 'action_save' ), 'icon' => 'save', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit', 'id' => 'submit', 'only_icon' => TRUE, 'form' => 'submit-form-form', ) ); ?>
+				<?= vui_el_button( array( 'text' => lang( 'action_save' ), 'icon' => 'save', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit', 'id' => 'submit', 'only_icon' => TRUE, 'form' => 'plugin-form', ) ); ?>
 				
-				<?= vui_el_button( array( 'text' => lang( 'action_apply' ), 'icon' => 'apply', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit_apply', 'id' => 'submit-apply', 'only_icon' => TRUE, 'form' => 'submit-form-form', ) ); ?>
+				<?= vui_el_button( array( 'text' => lang( 'action_apply' ), 'icon' => 'apply', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit_apply', 'id' => 'submit-apply', 'only_icon' => TRUE, 'form' => 'plugin-form', ) ); ?>
 				
-				<?= vui_el_button( array( 'text' => lang( 'action_cancel' ), 'icon' => 'cancel', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit_cancel', 'id' => 'submit-cancel', 'only_icon' => TRUE, 'form' => 'submit-form-form', ) ); ?>
+				<?= vui_el_button( array( 'text' => lang( 'action_cancel' ), 'icon' => 'cancel', 'button_type' => 'button', 'type' => 'submit', 'name' => 'submit_cancel', 'id' => 'submit-cancel', 'only_icon' => TRUE, 'form' => 'plugin-form', ) ); ?>
 				
 			</div>
 			
@@ -50,7 +50,7 @@
 					
 				<div class="form-item">
 					
-					<fieldset id="submit-form-basic-details">
+					<fieldset id="plugin-basic-details">
 						
 						<legend><?= lang( 'basic_form_details' ); ?></legend>
 						
@@ -78,7 +78,7 @@
 				
 				<div class="form-item">
 					
-					<fieldset id="submit-form-fields">
+					<fieldset id="plugin-fields">
 						
 						<legend><?= lang( 'fields' ); ?></legend>
 						
@@ -289,7 +289,7 @@
 				
 				<div class="form-item">
 					
-					<fieldset id="submit-form-params">
+					<fieldset id="plugin-params">
 						
 						<?php $current_field = 'type'; ?>
 						
@@ -327,7 +327,7 @@ $( document ).ready(function(){
 	/*************************************************/
 	/**************** Criando as tabs ****************/
 	
-	makeTabs( $( '.tabs-wrapper' ), '#submit-form-basic-details, #submit-form-fields, .params-set-wrapper', 'legend, .params-set-title' );
+	makeTabs( $( '.tabs-wrapper' ), '#plugin-basic-details, #plugin-fields, .params-set-wrapper', 'legend, .params-set-title' );
 	
 	/**************** Criando as tabs ****************/
 	/*************************************************/

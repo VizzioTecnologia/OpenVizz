@@ -12,7 +12,7 @@
 		$( document ).on( 'dblclick', '.ile', function(){
 			
 			console.log( 'Inline Edit called' );
-						
+			
 			if ( $( this ).data( 'ile-el-id' ) != null ) {
 				
 				var $ile_el = $( '#' + $( this ).data( 'ile-el-id' ) );

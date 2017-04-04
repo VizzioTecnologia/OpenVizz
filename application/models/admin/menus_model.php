@@ -128,42 +128,6 @@ class Menus_model extends CI_Model{
 	
 	
 	
-	public function get_path($menu_id){
-		
-		// look up the parent of this node
-		$this->db->select('t1.*, t2.id as parent_menu_id, t2.title as parent_menu_title');
-		$this->db->from('categories t1');
-		$this->db->join('categories t2', 't1.parent_menu = t2.id', 'left');
-		$this->db->where('t1.id = '.$menu_id);
-		$query = $this->db->get('categories');
-		
-		$row = $query->row();
-		
-		// save the path in this array
-		$path = array();
-		
-		// only continue if this $node isn't the root node
-		// (that's the node with no parent)
-		if ($row->parent_menu) {
-			
-			// the last part of the path to $node, is the name of the parent of $node
-			$path[] = array(
-				'id' => $row->parent_menu_id,
-				'title' => $row->parent_menu_title,
-			);
-			
-			// we should add the path to the parent of this node to the path
-			$path = array_merge($this->get_path($row->parent_menu), $path);
-			
-		}
-		
-		// return the path
-		return $path;
-		
-	}
-	
-	
-	
 	
 	public function get_menu_types(){
 		$this->db->from('tb_menu_types');
@@ -353,7 +317,7 @@ class Menus_model extends CI_Model{
 	
 	public function get_menu_item_params(){
 		
-		$params = get_params_spec_from_xml(APPPATH.'controllers/admin/com_menus/menu_item_params.xml');
+		$params = get_params_spec_from_xml( APPPATH . 'controllers/admin/com_menus/menu_item_params.xml' );
 		
 		return $params;
 		

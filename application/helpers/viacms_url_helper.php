@@ -50,114 +50,478 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 	
 	if ( ( isset( $reverse_urls ) AND is_array( $reverse_urls ) ) ) {
 		
-		if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND array_key_exists( $original_url, $reverse_urls ) ){
-		
-			//echo 'array_key_exists é: ' . $reverse_urls[ $original_url ] . ' : ' . $original_url . '<br />';
-			return site_url( $reverse_urls[ $original_url ] );
+		if ( 0 === strpos( $original_url, 'submit_forms' ) ) {
 			
-		}
-		else if ( 0 === strpos( $original_url, 'submit_forms' ) ) {
+			// -------------------------
+			// Loading UniD model
+			
+			if ( ! $CI->load->is_model_loaded( 'unid' ) ) {
+				
+				$CI->load->model( 'unid_mdl', 'unid' );
+				
+			}
+			
+			// -------------------------
+			// Loading UniD API model
+			
+			if ( ! $CI->load->is_model_loaded( 'ud_api' ) ) {
+				
+				$CI->load->model( 'unid_api_mdl', 'ud_api' );
+				
+			}
+			
+			// -------------------------
+			// Getting Queries
+			
+			$query = array();
+			
+			$tmp = parse_url( $original_url );
+			
+			if ( isset( $tmp[ 'query' ] ) ) {
+				
+				parse_str( $tmp[ 'query' ], $query );
+				
+			}
+			
+			// -------------------------
+			// Getting URI segments
 			
 			$segments = explode( '/', $original_url );
 			
 			if ( in_array( 'index', $segments ) ) {
 				
-				$action = NULL;
-				$submit_form_id = NULL;
-				$filters_on = NULL;
+				$final_url = $original_url;
+				$friendly_url = check_var( $CI->mcm->filtered_system_params[ 'friendly_urls' ] );
+				$sef_url = FALSE;
+				$cp = FALSE;
+				$filters = FALSE;
+				
+				$tmp = parse_url( $original_url );
+				$query = array();
+				
+				if ( isset( $tmp[ 'query' ] ) ) {
+					
+					parse_str( $tmp[ 'query' ], $query );
+					
+				}
+				
+				$uri_segments = array(
+					
+					'submit_forms' => 'index',
+					'miid' => 0,
+					
+					'a' => '',
+					'sa' => '',
+					'sfid' => '',
+					'did' => '',
+					's' => '',
+					'sfsp' => '',
+					'f' => '',
+					'ipp' => '',
+					'cp' => '',
+					'ob' => '',
+					'obd' => '',
+					
+				);
 				
 				foreach( $segments as $k => $v ) {
 					
 					if (
 						
-						$v == 'a'
+						isset( $uri_segments[ $v ] )
+						
 						AND isset( $segments[ $k + 1 ] )
 						
 					) {
 						
-						$action = $segments[ $k + 1 ];
+						// -------------------------
+						// Move these params to query string
 						
-					}
-					
-					if (
-						
-						$v == 'sfid'
-						AND isset( $segments[ $k + 1 ] )
-						
-					) {
-						
-						$submit_form_id = $segments[ $k + 1 ];
-						
-					}
-					
-					if (
-						
-						(
+						if ( $friendly_url AND in_array( $v, array( 'ipp', 'sfsp', 's', 'ob', 'obd' ) ) ) {
 							
-							$v == 'sfsp'
-							AND isset( $segments[ $k + 1 ] )
+							$query[ $v ] = $segments[ $k + 1 ];
 							
-						)
-						
-						OR (
+						}
+						else {
 							
-							$v == 'f'
-							AND isset( $segments[ $k + 1 ] )
+							$uri_segments[ $v ] = $segments[ $k + 1 ];
 							
-						)
-						
-						OR (
-							
-							$v == 's'
-							AND isset( $segments[ $k + 1 ] )
-							
-						)
-						
-					) {
-						
-						$filters_on = TRUE;
+						}
 						
 					}
 					
 				}
 				
+				// -------------------------
+				// -------------------------
+				// Data List
 				
-				if ( $action == 'sf' AND $submit_form_id ) {
+				if ( isset( $uri_segments[ 'a' ] ) AND $uri_segments[ 'a' ] == 'us' AND check_var( $uri_segments[ 'sfid' ] ) ) {
 					
-					$CI->db->from( 'tb_menus' );
-					$CI->db->where( 'component_item', 'submit_form' );
-					$CI->db->like( 'params', '"submit_form_id":"' . $submit_form_id . '"' );
-					$CI->db->limit( 1 );
+					// -------------------------
+					// Cleaning up the URI segments
 					
-					$menu_item = $CI->db->get();
-					
-					if ( $menu_item->num_rows() > 0 ) {
+					foreach( $uri_segments as $k => & $uri_segment ) {
 						
-						$menu_item = $menu_item->row_array();
+						if ( ! check_var( $uri_segment, TRUE ) OR ( in_array( $k, array( 'f', 'sfsp' ) ) AND $uri_segment == 'W10%3D' ) ) {
+							
+							$uri_segments[ $k ] = NULL;
+							unset( $uri_segments[ $k ] );
+							
+						}
+						else if ( in_array( $k, array( 'f' ) ) ) {
+							
+							// -------------------------
+							// Decoding filters
+							
+							$uri_segments[ $k ] = $CI->unid->url_decode_ud_filters( $uri_segments[ $k ] );
+							
+							$filters = $uri_segments[ $k ];
+							
+							// -------------------------
+							// Cleaning up the URL filters
+							// Removing items that should be ignored when comparing with menu filters
+							
+							foreach( $uri_segments[ $k ] as $k2 => $url_filter ) {
+								
+								if ( isset( $url_filter[ 'ignore_menu' ] ) ) {
+									
+									$uri_segments[ $k ][ $k2 ] = NULL;
+									unset( $uri_segments[ $k ][ $k2 ] );
+									
+								}
+								
+							}
+							
+							$uri_segments[ $k ] = $CI->unid->url_encode_ud_filters( $uri_segments[ $k ] );
+							
+						}
+						else if ( in_array( $k, array( 'cp' ) ) ) {
+							
+							$cp = ( int ) $uri_segment;
+							
+						}
 						
-						return site_url( $menu_item[ 'link' ] );
+					}
+					
+					// -------------------------
+					// Cleaning up the query strings
+					
+					foreach( $query as $k => & $q ) {
+						
+						if ( ! check_var( $q, TRUE ) OR $q == $CI->unid->url_encode_ud_filters( array() ) ) {
+							
+							$query[ $k ] = NULL;
+							unset( $query[ $k ] );
+							
+						}
+						
+					}
+					
+					// -------------------------
+					// -------------------------
+					// Now that we have the all final URL params, we search it on DB
+					
+// 						echo '<pre>' . print_r( $db_search_url, TRUE ) . '</pre>';
+						
+					if ( $friendly_url ) {
+						
+						$db_search_url = $uri_segments;
+						
+						// -------------------------
+						// If we have the menu, remove filters from search query
+						
+						if ( check_var( $uri_segments[ 'miid' ] ) ) {
+							
+							$db_search_url[ 'f' ] = NULL;
+							unset( $db_search_url[ 'f' ] );
+							
+						}
+						else {
+							
+							$db_search_url[ 'miid' ] = '([0-9]*)';
+							
+						}
+						
+						if ( $cp ) {
+							
+							$db_search_url[ 'cp' ] = '([$])1';
+							
+						}
+						
+						$db_search_url = $CI->uri->assoc_to_uri( $db_search_url );
+						
+						$db_search_query = 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $db_search_url . '$\' LIMIT 1';
+						
+// 						echo 'searching for: <pre>' . print_r( $db_search_query, TRUE ) . '</pre>';
+						
+						// retrieving url
+						$db_query = $CI->db->query( $db_search_query );
+// 						echo '<pre>' . print_r( $CI->db->_compile_select(), TRUE ) . '</pre>';
+						
+						$db_url = $db_query->row_array();
+						
+						if ( isset( $db_url[ 'sef_url' ] ) ) {
+							
+// 							echo 'we\'ve found: <pre>' . print_r( $db_search_query, TRUE ) . '</pre>';
+							
+							return ( $cp ? site_url( str_replace( '(:num)', $cp, $db_url[ 'sef_url' ] ) ) : site_url( $db_url[ 'sef_url' ] ) ) . assoc_array_to_qs( $query );
+							
+						}
+						else {
+						
+// 							echo '<strong>NOT FOUND</strong>: <pre>' . print_r( $db_search_query, TRUE ) . '</pre>';
+							
+						}
+						
+// 						echo '<pre>' . print_r( $db_search_url, TRUE ) . '</pre>';
+// 						echo '<pre>' . print_r( $uri_segments, TRUE ) . '</pre>';
+						
+					}
+					
+// 					echo '<pre>' . print_r( $original_url, TRUE ) . '</pre>';
+					
+					// -------------------------
+					// -------------------------
+					// If we have not found the URL on DB, we need to build and insert a new one
+					
+					// -------------------------
+					// Loading UniD API model
+					
+					if ( ! $CI->load->is_model_loaded( 'menus' ) ) {
+						
+						$CI->load->model( 'menus_mdl', 'menus' );
+						
+					}
+					
+					$menu_item = FALSE;
+					
+					// -------------------------
+					// We have menu ID? Let's get the own's menu
+					// Otherwise, let's find it
+					
+					if ( ! ( check_var( $uri_segments[ 'miid' ] ) AND $menu_item = $CI->menus->get_menu_item( $uri_segments[ 'miid' ] ) ) ) {
+						
+						$CI->db->from( 'tb_menus' );
+						$CI->db->where( 'component_item', 'users_submits' );
+						$CI->db->like( 'params', '"submit_form_id":"' . $uri_segments[ 'sfid' ] . '"' );
+						
+						if ( check_var( $uri_segments[ 'f' ] ) ) {
+							
+							$uri_segments[ 'f' ] = $CI->unid->url_decode_ud_filters( $uri_segments[ 'f' ] );
+							$f_query = '`params` NOT LIKE \'%' . $CI->db->escape_str( '"us_default_results_filters":""', TRUE ) . '%\'';
+							
+							$CI->db->where( $f_query, NULL, FALSE );
+							
+						}
+						
+						$menu_items = $CI->db->get()->result_array();
+						
+						// -------------------------
+						// We've got the menus array? Let's get the "right" menu item
+						
+						if ( check_var( $menu_items ) ) {
+							
+							foreach( $menu_items as $_menu_item ) {
+								
+								if ( check_var( $uri_segments[ 'f' ] ) AND $uri_segments[ 'f' ] AND ( $_menu_item[ 'params' ] = get_params( $_menu_item[ 'params' ] ) ) AND check_var( $_menu_item[ 'params' ][ 'us_default_results_filters' ] ) ) {
+									
+									$default_filters = get_params( $_menu_item[ 'params' ][ 'us_default_results_filters' ] );
+									
+									foreach( $default_filters as $k => $default_filter ) {
+										
+										if ( isset( $default_filter[ 'ignore_menu' ] ) ) {
+											
+											$default_filters[ $k ] = NULL;
+											unset( $default_filters[ $k ] );
+											
+										}
+										
+									}
+									
+// 									echo '<pre>' . print_r( $uri_segments[ 'f' ], TRUE ) . '</pre>';
+									
+									if ( $uri_segments[ 'f' ] === $default_filters ) {
+										
+										$uri_segments[ 'miid' ] = $_menu_item[ 'id' ];
+										
+										$filters = $default_filters;
+										
+										// -------------------------
+										// The "right" menu item
+										
+										$menu_item = $_menu_item;
+										
+										break;
+										
+									}
+									
+								}
+								
+							}
+							
+						}
+						
+					}
+					
+					if ( $menu_item ) {
+						
+						$url_path = $sef_url = array();
+						$_url_path = $CI->menus->get_path( $uri_segments[ 'miid' ] );
+						
+						foreach( $_url_path as $k => $seg ) {
+							
+							$sef_url[ $k ] = $seg[ 'alias' ];
+							
+						}
+						
+						$sef_url[] = url_title( $menu_item[ 'alias' ] );
+						
+						$_url_path = NULL;
+						unset( $_url_path );
+						
+						$final_url = $CI->uri->assoc_to_uri( $uri_segments );
+						
+					}
+					
+					if ( $friendly_url AND $sef_url ) {
+						
+						// -------------------------
+						// UniD Data List will have 4 url types:
+						// 1: -cp -f
+						// 2: -cp +f
+						// 3: +cp -f
+						// 4: +cp +f
+						
+						$final_url = $sef_url;
+						
+						$tb_urls_data[ 'sef_url' ] = join( '/', $sef_url );
+						$tb_urls_data[ 'target' ] = $uri_segments;
+						
+						$tb_urls_data[ 'target' ][ 'cp' ] = NULL;
+						unset( $tb_urls_data[ 'target' ][ 'cp' ] );
+						
+						$tb_urls_data[ 'target' ][ 'f' ] = NULL;
+						unset( $tb_urls_data[ 'target' ][ 'f' ] );
+						
+						
+						
+						$tb_urls_data[ 'target' ] = $CI->uri->assoc_to_uri( $tb_urls_data[ 'target' ] );
+						
+						$db_url = $CI->db->query( 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $tb_urls_data[ 'target' ] . '$\' LIMIT 1' );
+						$db_url = $db_url->row_array();
+						
+						if ( ! ( isset( $db_url[ 'target' ] ) AND $db_url[ 'target' ] == $tb_urls_data[ 'target' ] ) ) {
+							
+							if ( ! $CI->urls_common_model->insert( $tb_urls_data ) ){
+								
+								msg( ( 'error_trying_insert_submit_forms_url' ), 'title' );
+								log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_submit_forms_url' ) );
+								
+							}
+							
+// 							echo '<h1>1</h1><pre>' . print_r( $tb_urls_data, TRUE ) . '</pre>';
+							
+						}
+						
+						
+						
+						
+						if ( $filters ) {
+							
+							$tb_urls_data[ 'target' ] = $uri_segments;
+							
+							$tb_urls_data[ 'target' ][ 'cp' ] = NULL;
+							unset( $tb_urls_data[ 'target' ][ 'cp' ] );
+							
+							$tb_urls_data[ 'target' ][ 'f' ] = $CI->unid->url_encode_ud_filters( $filters );
+							$tb_urls_data[ 'target' ] = $CI->uri->assoc_to_uri( $tb_urls_data[ 'target' ] );
+							
+							$db_url = $CI->db->query( 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $tb_urls_data[ 'target' ] . '$\' LIMIT 1' );
+							$db_url = $db_url->row_array();
+							
+							if ( ! ( isset( $db_url[ 'target' ] ) AND $db_url[ 'target' ] == $tb_urls_data[ 'target' ] ) ) {
+								
+								if ( ! $CI->urls_common_model->insert( $tb_urls_data ) ){
+									
+									msg( ( 'error_trying_insert_submit_forms_url' ), 'title' );
+									log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_submit_forms_url' ) );
+									
+								}
+								
+// 								echo '<h1>2</h1><pre>' . print_r( $tb_urls_data, TRUE ) . '</pre>';
+								
+							}
+							
+						}
+						
+						if ( $cp ) {
+							
+							$tb_urls_data[ 'sef_url' ] = $sef_url;
+							$tb_urls_data[ 'sef_url' ][] = '(:num)';
+							$tb_urls_data[ 'sef_url' ] = join( '/', $tb_urls_data[ 'sef_url' ] );
+							
+							$tb_urls_data[ 'target' ] = $uri_segments;
+							$tb_urls_data[ 'target' ][ 'cp' ] = '$1';
+							
+							$tb_urls_data[ 'target' ][ 'f' ] = NULL;
+							unset( $tb_urls_data[ 'target' ][ 'f' ] );
+							
+							$db_search_url = $tb_urls_data[ 'target' ];
+							
+							$tb_urls_data[ 'target' ] = $CI->uri->assoc_to_uri( $tb_urls_data[ 'target' ] );
+							
+							$db_search_url[ 'cp' ] = '([$])1';
+							
+							$db_search_url = $CI->uri->assoc_to_uri( $db_search_url );
+							
+							$db_url = $CI->db->query( 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $db_search_url . '$\' LIMIT 1' );
+							$db_url = $db_url->row_array();
+							
+							if ( ! ( isset( $db_url[ 'target' ] ) AND $db_url[ 'target' ] == $tb_urls_data[ 'target' ] ) ) {
+								
+								if ( ! $CI->urls_common_model->insert( $tb_urls_data ) ){
+									
+									msg( ( 'error_trying_insert_submit_forms_url' ), 'title' );
+									log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_submit_forms_url' ) );
+									
+								}
+								
+// 								echo '<h1>3</h1><pre>' . print_r( $tb_urls_data, TRUE ) . '</pre>';
+								
+							}
+							
+							$sef_url[] = $cp;
+							
+							$final_url = $sef_url;
+							
+							if ( $filters ) {
+								
+								$tb_urls_data[ 'target' ] = $uri_segments;
+								$tb_urls_data[ 'target' ][ 'f' ] = $CI->unid->url_encode_ud_filters( $filters );
+								$tb_urls_data[ 'target' ][ 'cp' ] = '$1';
+								$tb_urls_data[ 'target' ] = $CI->uri->assoc_to_uri( $tb_urls_data[ 'target' ] );
+								
+								if ( ! $CI->urls_common_model->insert( $tb_urls_data ) ){
+									
+									msg( ( 'error_trying_insert_submit_forms_url' ), 'title' );
+									log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_submit_forms_url' ) );
+									
+								}
+								
+// 								echo '<h1>4</h1><pre>' . print_r( $tb_urls_data, TRUE ) . '</pre>';
+								
+							}
+							
+						}
+						
+						$final_url = join( '/', $final_url );
 						
 					}
 					
 				}
-				else if ( $action == 'us' AND $submit_form_id AND ! $filters_on ) {
-					
-					$CI->db->from( 'tb_menus' );
-					$CI->db->where( 'component_item', 'users_submits' );
-					$CI->db->like( 'params', '"submit_form_id":"' . $submit_form_id . '"' );
-					$CI->db->limit( 1 );
-					
-					$menu_item = $CI->db->get();
-					
-					if ( $menu_item->num_rows() > 0 ) {
-						
-						$menu_item = $menu_item->row_array();
-						
-						return site_url( $menu_item[ 'link' ] );
-						
-					}
-					
-				}
+				
+				return site_url( $final_url ) . assoc_array_to_qs( $query );
 				
 			}
 			
@@ -179,7 +543,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 			$segments = explode( '/', $original_url );
 			
 			$component_item = $segments[ 2 ];
-			
+			/*
 			if ( $component_item == 'article_detail' ){
 
 				$article_id = $segments[ 4 ];
@@ -227,7 +591,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 					);
 
-					if ( $CI->users->insert( $tb_urls_data ) === FALSE ){
+					if ( $CI->urls_common_model->insert( $tb_urls_data ) === FALSE ){
 
 						msg( ( 'error_trying_insert_' . $component_item . '_url' ), 'title' );
 						log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_' . $component_item . '_url' ) );
@@ -308,7 +672,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 						//echo 'target = ' . $tb_urls_data[ 'target' ] . '<br />';
 
-						if ( $CI->users->insert( $tb_urls_data ) === FALSE ){
+						if ( $CI->urls_common_model->insert( $tb_urls_data ) === FALSE ){
 
 							msg( ( 'error_trying_insert_' . $component_item . '_url' ), 'title' );
 							log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_' . $component_item . '_url' ) );
@@ -336,7 +700,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 				}
 
-			}
+			}*/
 
 		}
 		else if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND 0 === strpos( $original_url, 'contacts' ) AND environment() != ADMIN_ALIAS ) {
@@ -396,7 +760,7 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 
 						);
 
-						if ( $CI->users->insert( $tb_urls_data ) === FALSE ){
+						if ( $CI->urls_common_model->insert( $tb_urls_data ) === FALSE ){
 
 							msg( ( 'error_trying_insert_' . $component_item . '_url' ), 'title' );
 							log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_' . $component_item . '_url' ) );
@@ -420,7 +784,12 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 			}
 
 		}
-
+		if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND array_key_exists( $original_url, $reverse_urls ) ){
+		
+			//echo 'array_key_exists é: ' . $reverse_urls[ $original_url ] . ' : ' . $original_url . '<br />';
+			return site_url( $reverse_urls[ $original_url ] );
+			
+		}
 	}
 	
 	return site_url( $original_url );
@@ -476,42 +845,47 @@ function urlencode_RFC_3986( $str ){
 function redirect( $uri = '', $method = 'location', $http_response_code = 302, $msg = NULL ){
 	
 	$CI =& get_instance();
-
-	if ( ! $CI->input->get( 'ajax' ) ){
-
+	
+	if ( ! $CI->input->get( 'ajax' ) AND ! $CI->input->post( 'ajax', TRUE ) ){
+		
 		if ( ! preg_match( '#^https?://#i', $uri ) ){
-
+			
 			$uri = site_url( $uri );
-
+			
 		}
-
+		
 		switch( $method ){
-
+			
 			case 'refresh' :
-
+				
 				header( "Refresh:0;url=" . $uri );
-
+				
 				break;
-
+				
 			default :
-
+				
 				if ( $msg AND gettype( $msg ) === 'array'){
-
+					
 					msg( ( $msg[ 'title' ] ), 'title' );
 					msg( ( $msg[ 'msg' ] ), $msg[ 'type' ] );
-
+					
 				}
-
+				
 				header( "Location: " . $uri, TRUE, $http_response_code );
-
+				
 				break;
-
+				
 		}
-
+		
 		exit;
-
+		
 	}
-
+	else {
+		
+		echo 'Redirect: ' . $uri;
+		
+	}
+	
 }
 
 function redirect_last_url( $msg = NULL ){
@@ -639,7 +1013,7 @@ function url_title($str, $separator = '-', $lowercase = TRUE){
  * @return array
  * @author Frank Souza
  */
-
+/*
 function url_string_to_assoc_array( $url_string = NULL ) {
 	
 	if ( ! isset( $url_string ) ) {
@@ -659,7 +1033,7 @@ function url_string_to_assoc_array( $url_string = NULL ) {
 	
 	return array();
 	
-}
+}*/
 
 // --------------------------------------------------------------------
 

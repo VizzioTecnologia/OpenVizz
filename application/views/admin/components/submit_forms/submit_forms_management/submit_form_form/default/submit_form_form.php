@@ -816,7 +816,7 @@
 										
 									</div><?php
 									
-									$current_field = 'view_css_class';
+									$current_field = 'ud_data_list_css_class';
 									echo form_error( $current_field . '_' . $key, '<div class="msg-inline-error">', '</div>' );
 									?><div class="vui-field-wrapper-inline">
 										
@@ -828,9 +828,32 @@
 												
 												'text' => lang( $current_field ),
 												'value' => isset( $field[ $current_field ] ) ? $field[ $current_field ] : '',
-												'id' => 'field-' . $current_field . '-' . $key,
+												'id' => 'prop-' . $current_field . '-' . $key,
 												'name' => 'fields[' . $key . '][' . $current_field . ']',
-												'class' => 'sf-field-' . $current_field,
+												'class' => 'ud-ds-prop-' . $current_field,
+												'title' => lang( 'tip_field_' . $current_field )
+												
+											)
+											
+										);
+										
+									?></div><?php
+									
+									$current_field = 'update_ud_data_out_format';
+									echo form_error( $current_field . '_' . $key, '<div class="msg-inline-error">', '</div>' );
+									?><div class="vui-field-wrapper-inline">
+										
+										<?= form_label( lang( $current_field ) ); ?>
+										
+										<?= vui_el_input_text(
+												
+											array(
+												
+												'text' => lang( $current_field ),
+												'value' => isset( $field[ $current_field ] ) ? $field[ $current_field ] : '',
+												'id' => 'prop-' . $current_field . '-' . $key,
+												'name' => 'fields[' . $key . '][' . $current_field . ']',
+												'class' => 'ud-ds-prop-' . $current_field,
 												'title' => lang( 'tip_field_' . $current_field )
 												
 											)
@@ -2275,7 +2298,7 @@
 												//------------------------------------------------------
 												// prop_is_ud_status
 												
-												if ( $k == 'prop_is_ud_status' AND isset( $field[ $current_field ][ $k ] ) ) {
+												if ( $k == 'prop_is_ud_status' AND isset( $field[ $current_field ][ $k ] ) AND in_array( $field[ 'field_type' ], array( 'combo_box', 'checkbox', 'radiobox' ) ) ) {
 													
 													if ( check_var( $field[ 'options_from_users_submits' ] ) AND ( check_var( $field[ 'options_title_field' ] ) OR check_var( $field[ 'options_title_field_custom' ] ) ) ) {
 														
@@ -2369,27 +2392,23 @@
 															
 															$current_field_sub = $_item;
 															
-															if ( $field[ 'field_type' ] == 'combo_box' ) {
+															echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
+															
+															echo vui_el_dropdown(
 																
-																echo form_label( lang( 'ud_' . $current_field . '_' . $current_field_sub ) );
-																
-																echo vui_el_dropdown(
-																		
-																	array(
-																		
-																		'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
-																		'options' => $_us_options,
-																		'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : '',
-																		'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
-																		'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
-																		'text' => lang( 'sf_' . $current_field . '_' . $current_field_sub ),
-																		'title' => lang( 'tip_sf_' . $current_field . '_' . $current_field_sub ),
-																		
-																	)
+																array(
 																	
-																);
+																	'name' => 'fields[' . $key . '][' . $current_field . '][' . $current_field_sub . ']',
+																	'options' => $_us_options,
+																	'value' => isset( $field[ $current_field ][ $current_field_sub ] ) ? $field[ $current_field ][ $current_field_sub ] : '',
+																	'class' => 'sf-field-' . $current_field . '_' . $current_field_sub,
+																	'id' => 'field-' . $current_field . '_' . $current_field_sub . '-' . $key,
+																	'text' => lang( 'sf_' . $current_field . '_' . $current_field_sub ),
+																	'title' => lang( 'tip_sf_' . $current_field . '_' . $current_field_sub ),
+																	
+																)
 																
-															}
+															);
 															
 														};
 														
@@ -2986,6 +3005,8 @@
 						 * após a chamada da função $this->form_validation->run()
 						 */
 						
+// 						echo '<strong>$final_params_values:</strong><pre>' . print_r( $final_params_values, TRUE ) . '</pre>'; exit;
+						
 						echo params_to_html( $params_spec, $final_params_values );
 						
 						?>
@@ -3451,14 +3472,25 @@
 		
 	}
 	
-	function update_view_css_class( $field_wrapper ){
+	function update_ud_data_list_css_class( $field_wrapper ){
 		
 		var $summary = _get_summary( $field_wrapper );
 		var $content = _get_content( $field_wrapper );
 		var fieldKey = _get_key( $field_wrapper );
 		
-		$content.find( '.sf-field-view_css_class' ).attr( 'name', 'fields[' + fieldKey + '][view_css_class]' );
-		$content.find( '.sf-field-view_css_class' ).attr( 'id', 'field-view_css_class-' + fieldKey );
+		$content.find( '.ud-ds-prop-ud_data_list_css_class' ).attr( 'name', 'fields[' + fieldKey + '][ud_data_list_css_class]' );
+		$content.find( '.ud-ds-prop-ud_data_list_css_class' ).attr( 'id', 'prop-ud_data_list_css_class-' + fieldKey );
+		
+	}
+	
+	function update_ud_data_out_format( $field_wrapper ){
+		
+		var $summary = _get_summary( $field_wrapper );
+		var $content = _get_content( $field_wrapper );
+		var fieldKey = _get_key( $field_wrapper );
+		
+		$content.find( '.ud-ds-prop-update_ud_data_out_format' ).attr( 'name', 'fields[' + fieldKey + '][update_ud_data_out_format]' );
+		$content.find( '.ud-ds-prop-update_ud_data_out_format' ).attr( 'id', 'prop-update_ud_data_out_format-' + fieldKey );
 		
 	}
 	
@@ -4323,7 +4355,9 @@
 				update_form_css_class( $field_wrapper );
 				
 				// view css class
-				update_view_css_class( $field_wrapper );
+				update_ud_data_list_css_class( $field_wrapper );
+				
+				update_ud_data_out_format( $field_wrapper );
 				
 				// type
 				update_field_type( $field_wrapper );

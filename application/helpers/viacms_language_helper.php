@@ -67,6 +67,12 @@ function lang(){
 			
 		}
 		
+		if ( isset( $CI->mcm->filtered_system_params[ $CI->mcm->environment . '_enable_translatable_terms_source' ] ) AND $CI->mcm->filtered_system_params[ $CI->mcm->environment . '_enable_translatable_terms_source' ] ) {
+			
+			$line = '<span class="sys-translatable-term-source">' . $arg_list[ 0 ] . '</span>' . $line;
+			
+		}
+		
 		return $line;
 		
 	}

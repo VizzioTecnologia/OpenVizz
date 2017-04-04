@@ -16,6 +16,15 @@ class Submit_forms extends Main {
 			
 		}
 		
+		// -------------------------
+		// Loading UniD API model
+		
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
+			
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
+			
+		}
+		
 		$this->load->language( array( 'admin/submit_forms', 'admin/unid' ) );
 		
 		set_current_component();
@@ -493,7 +502,7 @@ class Submit_forms extends Main {
 
 		$action =								isset( $f_params[ 'a' ] ) ? $f_params[ 'a' ] : 'sfl'; // action
 		$sub_action =							isset( $f_params[ 'sa' ] ) ? $f_params[ 'sa' ] : NULL; // sub action
-		$ds_id =						isset( $f_params[ 'sfid' ] ) ? $f_params[ 'sfid' ] : NULL; // submit form id
+		$ds_id =								isset( $f_params[ 'sfid' ] ) ? ( int ) $f_params[ 'sfid' ] : NULL; // submit form id
 		$cp =									isset( $f_params[ 'cp' ] ) ? $f_params[ 'cp' ] : NULL; // current page
 		$ipp =									isset( $f_params[ 'ipp' ] ) ? $f_params[ 'ipp' ] : NULL; // items per page
 		$ob =									isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
@@ -885,11 +894,6 @@ class Submit_forms extends Main {
 			if ( $action == 'esf' ){
 				
 				// -------------------------
-				// Loading UniD API model
-				
-				$this->load->model( 'common/unid_api_common_model', 'ud_api' );
-				
-				// -------------------------
 				// Obtenção do formulário
 				/*
 				$data_scheme = $this->ud_api->get_submit_form( $ds_id )->row_array();
@@ -1086,8 +1090,6 @@ class Submit_forms extends Main {
 				
 				while ( list( $key, $field ) = each( $data_scheme[ 'fields' ] ) ) {
 					
-					if ( ! isset( $field[ 'key' ] ) ) { echo '<pre>' . print_r( $field, TRUE ) . '</pre>'; exit; }
-					
 					$temp_array[ $field[ 'key' ] ] = $field;
 					
 					// articles categories
@@ -1177,22 +1179,6 @@ class Submit_forms extends Main {
 					$data[ 'current_params_values' ] = $data[ 'current_params_values' ] + $new_values;
 					
 				}
-				
-				/*
-				foreach( $data[ 'current_params_values' ] as $k => $item ) {
-					
-					if ( is_array( $item ) ) {
-						
-						$new_values = _resolve_array_param_value( $k, $item );
-						
-						unset( $data[ 'current_params_values' ][ $k ] );
-						
-					}
-					
-					$data[ 'current_params_values' ] = $data[ 'current_params_values' ] + $new_values;
-					
-				}
-				*/
 				
 			}
 			else{
@@ -1403,25 +1389,20 @@ class Submit_forms extends Main {
 		}
 
 		/*
-			--------------------------------------------------------
-			Add / edit submit form
-			--------------------------------------------------------
-			********************************************************
-			*/
+		--------------------------------------------------------
+		Add / edit submit form
+		--------------------------------------------------------
+		********************************************************
+		*/
 
 		/*
-			********************************************************
-			--------------------------------------------------------
-			Remove submit form
-			--------------------------------------------------------
-			*/
+		********************************************************
+		--------------------------------------------------------
+		Remove submit form
+		--------------------------------------------------------
+		*/
 
 		else if ( $action == 'rds' ){
-			
-			// -------------------------
-			// Loading UniD API model
-			
-			$this->load->model( 'common/unid_api_common_model', 'ud_api' );
 			
 			// -------------------------
 			// Obtenção do formulário
@@ -1499,19 +1480,19 @@ class Submit_forms extends Main {
 		}
 
 		/*
-			--------------------------------------------------------
-			Remove submit form
-			--------------------------------------------------------
-			********************************************************
-			*/
+		--------------------------------------------------------
+		Remove submit form
+		--------------------------------------------------------
+		********************************************************
+		*/
 
 		/*
-			********************************************************
-			--------------------------------------------------------
-			Remove all
-			--------------------------------------------------------
-			*/
-
+		********************************************************
+		--------------------------------------------------------
+		Remove all
+		--------------------------------------------------------
+		*/
+		
 		else if ( $action == 'ra' ){
 
 
@@ -1529,20 +1510,54 @@ class Submit_forms extends Main {
 			}
 
 		}
-
+		
 		/*
-			--------------------------------------------------------
-			Remove all
-			--------------------------------------------------------
-			********************************************************
-			*/
+		--------------------------------------------------------
+		Remove all
+		--------------------------------------------------------
+		********************************************************
+		*/
+		
+		/*
+		********************************************************
+		--------------------------------------------------------
+		Filters list
+		--------------------------------------------------------
+		*/
+		
+		else if ( $action == 'fl' AND $ds_id ){
 
-		else{
-			show_404();
+
+			if ( $this->sfcm->delete_all() ){
+
+				msg( 'all_submit_forms_deleted', 'success');
+				redirect_last_url();
+
+			}
+			else{
+
+				msg($this->lang->line( 'all_submit_forms_deleted_fail' ), 'error' );
+				redirect_last_url();
+
+			}
+
 		}
-
+		
+		/*
+		--------------------------------------------------------
+		Filters list
+		--------------------------------------------------------
+		********************************************************
+		*/
+		
+		else{
+			
+			show_404();
+			
+		}
+		
 	}
-
+	
 	/*
 	 --------------------------------------------------------------------------------------------------
 	 Submit_forms management
@@ -1865,8 +1880,8 @@ class Submit_forms extends Main {
 		$ds_id =						( isset( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] AND is_numeric( $f_params[ 'sfid' ] ) AND $f_params[ 'sfid' ] > 0 ) ? $f_params[ 'sfid' ] : NULL; // submit form id
 		$user_submit_id =						( isset( $f_params[ 'usid' ] ) AND $f_params[ 'usid' ] AND is_numeric( $f_params[ 'usid' ] ) AND $f_params[ 'usid' ] > 0 ) ? $f_params[ 'usid' ] : NULL; // user submit id
 		$ob =									isset( $f_params[ 'ob' ] ) ? $f_params[ 'ob' ] : NULL; // order by
-		$f =									isset( $f_params[ 'f' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'f' ] ) ), TRUE ) : array(); // filters
-		$sfsp =									isset( $f_params[ 'sfsp' ] ) ? json_decode( base64_decode( urldecode( $f_params[ 'sfsp' ] ) ), TRUE ) : array(); // search filters
+		$f =									isset( $f_params[ 'f' ] ) ? $this->unid->url_decode_ud_filters( $f_params[ 'f' ] ) : array(); // filters
+		$sfsp =									isset( $f_params[ 'sfsp' ] ) ? $this->unid->url_decode_ud_filters( $f_params[ 'sfsp' ] ) : array(); // search filters
 		
 		$cp =									isset( $f_params[ 'cp' ] ) ? ( int ) $f_params[ 'cp' ] : NULL; // current page
 			$cp =								( $cp < 1 ) ? 1 : $cp;
@@ -2175,7 +2190,7 @@ class Submit_forms extends Main {
 						array(
 							
 							'alias' => 'id',
-							'title' => lang( 'id' ),
+							'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) ),
 							'visible' => TRUE,
 							'type' => 'built_in',
 							
@@ -2183,7 +2198,7 @@ class Submit_forms extends Main {
 						array(
 							
 							'alias' => 'submit_datetime',
-							'title' => lang( 'submit_datetime' ),
+							'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) ),
 							'visible' => TRUE,
 							'type' => 'built_in',
 							
@@ -2191,7 +2206,7 @@ class Submit_forms extends Main {
 						array(
 							
 							'alias' => 'mod_datetime',
-							'title' => lang( 'mod_datetime' ),
+							'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) ),
 							'visible' => TRUE,
 							'type' => 'built_in',
 							
@@ -2288,7 +2303,7 @@ class Submit_forms extends Main {
 							array(
 								
 								'alias' => 'id',
-								'title' => lang( 'id' ),
+								'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) ),
 								'visible' => in_array( 'id', $post[ 'columns_to_show' ] ) ? TRUE : FALSE,
 								'type' => 'built_in',
 								
@@ -2296,7 +2311,7 @@ class Submit_forms extends Main {
 							array(
 								
 								'alias' => 'submit_datetime',
-								'title' => lang( 'submit_datetime' ),
+								'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) ),
 								'visible' => in_array( 'submit_datetime', $post[ 'columns_to_show' ] ) ? TRUE : FALSE,
 								'type' => 'built_in',
 								
@@ -2304,7 +2319,7 @@ class Submit_forms extends Main {
 							array(
 								
 								'alias' => 'mod_datetime',
-								'title' => lang( 'mod_datetime' ),
+								'title' => ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) ),
 								'visible' => in_array( 'mod_datetime', $post[ 'columns_to_show' ] ) ? TRUE : FALSE,
 								'type' => 'built_in',
 								
@@ -2571,11 +2586,9 @@ class Submit_forms extends Main {
 				
 			}
 			
-		//echo '<pre>' . print_r( $sfsp, TRUE ) . '</pre>'; exit;
-		
+			$f = ( isset( $data[ 'post' ][ 'ajax' ] ) AND isset( $data[ 'post' ][ 'f' ] ) ) ? $data[ 'post' ][ 'f' ] : $f;
+			
 			if ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'submit_search' ] ) ){
-				
-				$f = array();
 				
 				$sfsp = $data[ 'post' ][ 'users_submits_search' ];
 				unset( $sfsp[ 'submit_search' ] );
@@ -2600,13 +2613,10 @@ class Submit_forms extends Main {
 				
 			}
 			
-			//echo '<pre>' . print_r( $f, TRUE ) . '</pre>'; exit;
-			
+		
 			$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'filters' ] = $f;
 			
-			$filters_url = urlencode( base64_encode( json_encode( $f ) ) );
-			
-			$data[ 'filters_url' ] = $filters_url;
+			$data[ 'filters_url' ] = $this->unid->url_encode_ud_filters( $f );
 			
 			/*
 			--------------------------------------------------------
@@ -2794,9 +2804,11 @@ class Submit_forms extends Main {
 			
 			$data[ 'users_submits' ] = $users_submits;
 			
-			$sfsp = urlencode( base64_encode( json_encode( $sfsp ) ) );
+// 		echo '<pre>' . print_r( $sfsp, TRUE ) . '</pre>';
+// 		echo '<pre>' . print_r( $f, TRUE ) . '</pre>'; exit;
+			$sfsp = $this->unid->url_encode_ud_filters( $sfsp );
 			$data[ 'search_filters_url' ] = $sfsp;
-			$pagination_url = ( ( ! empty( $terms ) ) ? $data[ 'c_urls' ][ 'us_search_link' ] : $data[ 'c_urls' ][ 'us_list_link' ] ) . '/' . $this->uri->assoc_to_uri( $sfbla ) . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $get_query;
+			$pagination_url = ( ( ! empty( $terms ) ) ? $data[ 'c_urls' ][ 'us_search_link' ] : $data[ 'c_urls' ][ 'us_list_link' ] ) . '/' . $this->uri->assoc_to_uri( $sfbla ) . '/sfsp/' . $sfsp . '/f/' . $data[ 'filters_url' ] . '/cp/%p%/ipp/%ipp%' . $get_query;
 			
 			
 			$data[ 'users_submits_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
@@ -4441,7 +4453,7 @@ class Submit_forms extends Main {
 					
 					foreach ( $users_submits as $key => & $user_submit ) {
 						
-						$user_submit = $this->sfcm->parse_ud_d_data( $user_submit );
+						$this->ud_api->parse_ud_data( $user_submit );
 						
 						// get submit form params
 						$gsfp = array(
@@ -4478,7 +4490,7 @@ class Submit_forms extends Main {
 				}
 				else if ( $user_submit ){
 					
-					$user_submit = $this->sfcm->parse_ud_d_data( $user_submit );
+					$this->ud_api->parse_ud_data( $user_submit );
 					
 					// get submit form params
 					$gsfp = array(
@@ -4553,7 +4565,7 @@ class Submit_forms extends Main {
 					
 					foreach ( $users_submits as $key => $user_submit ) {
 						
-						$user_submit = $this->sfcm->parse_ud_d_data( $user_submit );
+						$this->ud_api->parse_ud_data( $user_submit );
 						
 						$data_scheme[ 'users_submits' ][ $user_submit[ 'id' ] ] = $user_submit;
 						

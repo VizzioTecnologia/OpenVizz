@@ -670,9 +670,11 @@ body.vui{
 	border-top: none;
 	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING; ?>em;
 	vertical-align: middle;
-
+	
 	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
-
+	
+	width: auto;
+	
 }
 .vui tr:hover,
 .vui td:hover,

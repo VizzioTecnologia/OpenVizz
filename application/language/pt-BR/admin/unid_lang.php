@@ -74,6 +74,14 @@ $lang['sfsmr_message_suffix_custom'] = 															"Pós-texto personalizado"
 $lang['sfsmr_show_empty_fields'] = 																"Exibir campos com valores vazios";
 
 // ----------------------------
+// Look and Feel
+
+$lang['ud_ds_look_and_feel'] = 																	"Aparência";
+$lang['ud_ds_form_layout_site'] = 																"Layout do formulário no site";
+$lang['ud_ds_disallow_anon_page'] = 															"Restringir página anônima";
+$lang['tip_ud_ds_disallow_anon_page'] = 														"Se marcado, qualquer tentativa de acesso ao formulário através de uma página anônima (onde o id da página é 0) resultará numa página de erro 404.";
+
+// ----------------------------
 // Export
 
 $lang[ 'ud_data_export_layout_specific_params_label' ] = 										"Parâmetros específicos do layout";
@@ -150,6 +158,17 @@ $lang[ 'privilege_access_denied_ud_unified_data_management' ] = 								"Você n
 
 $lang[ 'ud_inserting_ud_data_for_get_id_fail' ] = 												"Falha ao tentar criar dado para obter seu ID";
 $lang[ 'ud_data_update_fail_referenced_data' ] = 												"Não foi possível atualizar o valor referenciado no dado de id <strong><i>%s</i></strong>";
+
+
+
+
+$lang[ 'ud_js_dbg_ef_udpt_input_text' ] = 														"Tipo de campo Inline Edit: Input Text";
+$lang[ 'ud_js_dbg_ef_udpt_combo_box' ] = 														"Tipo de campo Inline Edit: Combobox";
+$lang[ 'ud_js_dbg_ef_udpt_textarea' ] = 														"Tipo de campo Inline Edit: Textarea";
+
+$lang[ 'ud_js_dbg_ef_ue' ] = 																	"<p>Não é possível editar esta propriedade no momento: Não foi possível obter Esquema de dados.</p><p>Certifique-se que está logado e possui uma conexão com o servidor.</p>";
+$lang[ 'ud_js_dbg_ef_nli' ] = 																	"<p>Requer login</p>";
+
 
 /* End of file unified_data_lang.php */
 /* Location: ./application/language/pt-BR/admin/unified_data_lang.php */

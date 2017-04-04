@@ -1,5 +1,62 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+function str_replace_first($from, $to, $subject)
+{
+    $from = '/'.preg_quote($from, '/').'/';
+
+    return preg_replace($from, $to, $subject, 1);
+}
+
+function mask( $val, $config ) {
+	
+	$maskared = '';
+	$k = 0;
+	
+	$config[ 'mask_type' ] = isset( $config[ 'mask_type' ] ) ? $config[ 'mask_type' ] : 'custom_mask';
+	
+	if ( $config[ 'mask_type' ] == 'money' ) {
+		
+		$cs = isset( $config[ 'currency_symbol' ] ) ? $config[ 'currency_symbol' ] : '';
+		$dp = isset( $config[ 'decimal_point' ] ) ? $config[ 'decimal_point' ] : ',';
+		$ts = isset( $config[ 'thousands_separator' ] ) ? $config[ 'thousands_separator' ] : '.';
+		
+		$maskared = $cs . ' ' . number_format( $val, 2, $dp, $ts );
+		
+	}
+	else if ( $config[ 'mask_type' ] == 'custom_mask' AND isset( $config[ 'mask' ] ) ) {
+		
+		$config[ 'mask' ] = str_replace( '9', '#', $config[ 'mask' ] );
+		
+		for ( $i = 0; $i <= strlen( $config[ 'mask' ] ) - 1; $i++ ) {
+			
+			if ( $config[ 'mask' ][ $i ] == '#' ) {
+				
+				if ( isset( $val[ $i ] ) ) $maskared .= $val[ $i ];
+				
+			}
+			else {
+			
+				if ( isset( $config[ 'mask' ][ $i ] ) ) $maskared .= $config[ 'mask' ][ $i ];
+				
+			}
+			
+		}
+		
+	}
+	else if ( $config[ 'mask_type' ] == 'zip_brazil' ) {
+		
+		$maskared = str_replace( ',', '.', preg_replace( "/([^0-9])/i", "", $val ) );
+		
+	}
+	else {
+		
+		$maskared = $val;
+		
+	}
+	
+	return $maskared;
+	
+}
 function unmask( $val, $mask_type, $mask = '' ) {
 	
 	$maskared = '';

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require(APPPATH.'controllers/main.php');
+require( APPPATH . 'controllers/admin/main.php' );
 
 class Unid extends Main {
 
@@ -10,9 +10,9 @@ class Unid extends Main {
 		
 		parent::__construct();
 		
-		if ( ! $this->load->is_model_loaded( 'udacm' ) ) {
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
 			
-			$this->load->model( 'common/unid_api_common_model', 'udacm' );
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
 			
 		}
 		
@@ -22,25 +22,11 @@ class Unid extends Main {
 		
 	}
 
-	public function api(){
+	public function api() {
 		
 		$f_params = $this->uri->ruri_to_assoc();
 		
-		if ( isset( $f_params[ 'im' ] ) ) {
-			
-			$f_params[ 'im' ] = NULL;
-			unset( $f_params[ 'im' ] );
-			
-			$this->load->language( 'admin/unid_ee' );
-			
-			echo lang( '_' . rand( 0, 3 ) );
-			
-		}
-		else {
-			
-			echo $this->udacm->api( $f_params );
-			
-		}
+		echo $this->ud_api->api( $f_params );
 		
 	}
 	

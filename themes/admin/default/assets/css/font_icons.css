@@ -546,6 +546,7 @@
 .icon-user-messages:before {
 	content: "\e644";
 }
+.icon-unid:before,
 .icon-unified-data:before,
 .icon-unified_data:before {
 	content: "\e645";

@@ -647,6 +647,11 @@ body.vui {
  ---------------------------------------------------------
  */
 
+.vui .table-wrapper {
+	
+	overflow-x: auto;
+	
+}
 .vui table{
 	
 	display: table;
@@ -654,11 +659,9 @@ body.vui {
 	border-collapse: collapse;
 	border: none;
 	text-align: center;
-	width: 100%;
+	min-width: 100%;
 	margin-top: <?= VUI_SPACING; ?>em;
 	margin-bottom: <?= VUI_SPACING; ?>em;
-	
-	overflow-x: auto;
 	
 	background-color: <?= $vui->colors->vui_table_bg->rgba_s(); ?>;
 	
@@ -737,6 +740,8 @@ body.vui {
 	
 	color: <?= $vui->colors->vui_table_header_fg->rgba_s(); ?>;
 	background-color: <?= $vui->colors->vui_table_header_bg->rgba_s(); ?>;
+	
+	white-space: nowrap;
 	
 }
 .vui tr:hover td {

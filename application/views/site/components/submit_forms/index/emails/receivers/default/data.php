@@ -68,13 +68,6 @@
 						
 						echo '<span>';
 						
-						if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-							
-							$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-							$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-							
-						}
-						
 						echo $pd[ 'value' ];
 						
 						echo '</span>';

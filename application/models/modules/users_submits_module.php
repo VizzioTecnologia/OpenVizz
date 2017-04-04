@@ -31,7 +31,7 @@ class Users_submits_module extends CI_Model{
 		 * -------------------------------------------------------------------------------------------------
 		 */
 		 
-		$layout = $module_data[ 'params' ][ 'users_submits_layout' ];
+		$layout = $module_data[ 'params' ][ 'ud_d_list_layout_site' ];
 		
 		//print_r( $module_data[ 'params' ] );
 		
@@ -373,7 +373,7 @@ class Users_submits_module extends CI_Model{
 					
 				}
 				
-				if ( $element[ 'name' ] == 'users_submits_layout' ){
+				if ( $element[ 'name' ] == 'ud_d_list_layout_site' ){
 					
 					$spec_options = array();
 					
@@ -1203,14 +1203,14 @@ class Users_submits_module extends CI_Model{
 				
 				array_push_pos( $params[ 'params_spec' ][ 'users_submits_module_config' ], $new_params, 10  );
 				
-				if ( isset( $current_params_values[ 'users_submits_layout' ] ) AND $current_params_values[ 'users_submits_layout' ] != 'global' ) {
+				if ( isset( $current_params_values[ 'ud_d_list_layout_site' ] ) AND $current_params_values[ 'ud_d_list_layout_site' ] != 'global' ) {
 					
 					$system_views_path = MODULES_VIEWS_PATH . 'users_submits' . DS;
 					$theme_views_path = THEMES_PATH . site_theme_modules_views_path() . 'users_submits' . DS;
 					
-					if ( file_exists( $system_views_path . $current_params_values[ 'users_submits_layout' ] . DS . 'params.php' ) ) {
+					if ( file_exists( $system_views_path . $current_params_values[ 'ud_d_list_layout_site' ] . DS . 'params.php' ) ) {
 						
-						include_once $system_views_path . $current_params_values[ 'users_submits_layout' ] . DS . 'params.php';
+						include_once $system_views_path . $current_params_values[ 'ud_d_list_layout_site' ] . DS . 'params.php';
 						
 					}
 					

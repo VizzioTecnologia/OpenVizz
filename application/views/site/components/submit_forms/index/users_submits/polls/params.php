@@ -14,7 +14,7 @@ $new_params = array();
 $_keys_to_keep = array(
 	
 	'submit_form_id',
-	'users_submits_layout',
+	'ud_d_list_layout_site',
 	'show_readmore_link',
 	'readmore_text',
 	'readmore_url',

@@ -1,7 +1,5 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-//echo print_r( $fields, true ) . '<br/><br/><br/>-----------<br/><br/><br/>';
-
 $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
 
 $filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
@@ -9,6 +7,8 @@ $filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
 $pre_text_pos = 'before_search_fields';
 
 $unique_hash = md5( uniqid( rand(), true ) );
+
+$props = & $submit_form[ 'fields' ];
 
 if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 	

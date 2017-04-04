@@ -3,9 +3,8 @@
 $unique_hash = md5( uniqid( rand(), true ) );
 $users_submits = $submit_form[ 'users_submits' ];
 $users_submits_total_results = count( $users_submits );
-$fields = $submit_form[ 'fields' ];
 
-$params = $submit_form[ 'plugin_params' ];
+$props = & $submit_form[ 'fields' ];
 
 $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
 

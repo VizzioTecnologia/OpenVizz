@@ -1,23 +1,23 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 	
-	$_show_terms_field = ( check_var( $params[ 'ud_data_list_visible_prop_search_fields' ] ) AND in_array( '__terms', $params[ 'ud_data_list_visible_prop_search_fields' ] ) ) ? TRUE : FALSE;
+	$_show_terms_field = ( check_var( $params[ 'ud_data_availability_site_search' ] ) AND in_array( '__terms', $params[ 'ud_data_availability_site_search' ] ) ) ? TRUE : FALSE;
 	
 ?>
 
-<div id="users-submits-search-wrapper" class="users-submits-search-wrapper">
+<div id="users-submits-search-wrapper" class="ud-data-list-search-box users-submits-search-wrapper">
 	
 	<?php
 		
-		if ( check_var( $submit_form[ 'params' ][ 'us_search_pre_text' ] ) AND $pre_text_pos == 'before_search_fields' ) {
+		if ( check_var( $params[ 'us_search_pre_text' ] ) AND $pre_text_pos == 'before_search_fields' ) {
 			
-			if ( check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_search' ] ) ) {
+			if ( check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_search' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
-			else if ( ! check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_normal' ] ) ) {
+			else if ( ! check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_normal' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
 			
@@ -74,15 +74,17 @@
 			
 		}
 		
-		foreach ( $fields as $key_2 => $field ) {
+		foreach ( $props as $key_2 => $field ) {
 			
 			$field_name = url_title( $field[ 'alias' ], '-', TRUE );
 			$formatted_field_name = 'form[' . $field_name . ']';
 			$field_value = ( isset( $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] ) ) ? $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] : '';
 			
-			//print_r( $params[ 'ud_data_list_visible_prop_search_fields' ] ); exit;
+			//print_r( $params[ 'ud_data_availability_site_search' ] ); exit;
 			
-			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_list_visible_prop_search_fields' ] ) AND in_array( $field[ 'alias' ], $params[ 'ud_data_list_visible_prop_search_fields' ] ) ) {
+// 			echo '<pre>' . print_r( $params[ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';
+			
+			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_availability_site_search' ][ $field[ 'alias' ] ] ) ) {
 				
 				$options = array(
 					
@@ -228,16 +230,16 @@
 	
 	<?php
 		
-		if ( check_var( $submit_form[ 'params' ][ 'us_search_pre_text' ] ) AND $pre_text_pos == 'after_search_fields' ) {
+		if ( check_var( $params[ 'us_search_pre_text' ] ) AND $pre_text_pos == 'after_search_fields' ) {
 			
-			if ( check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_search' ] ) ) {
+			if ( check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_search' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
-			else if ( ! check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_normal' ] ) ) {
+			else if ( ! check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_normal' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
 			

@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 	
-	$_show_terms_field = ( check_var( $params[ 'ud_data_list_visible_prop_search_fields' ] ) AND in_array( '__terms', $params[ 'ud_data_list_visible_prop_search_fields' ] ) ) ? TRUE : FALSE;
+	$_show_terms_field = ( check_var( $params[ 'ud_data_availability_site_search' ] ) AND in_array( '__terms', $params[ 'ud_data_availability_site_search' ] ) ) ? TRUE : FALSE;
 	
 ?>
 
@@ -74,15 +74,15 @@
 			
 		}
 		
-		foreach ( $fields as $key_2 => $field ) {
+		foreach ( $props as $key_2 => $field ) {
 			
 			$field_name = url_title( $field[ 'alias' ], '-', TRUE );
 			$formatted_field_name = 'form[' . $field_name . ']';
 			$field_value = ( isset( $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] ) ) ? $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] : '';
 			
-			//print_r( $params[ 'ud_data_list_visible_prop_search_fields' ] ); exit;
+			//print_r( $params[ 'ud_data_availability_site_search' ] ); exit;
 			
-			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_list_visible_prop_search_fields' ] ) AND in_array( $field[ 'alias' ], $params[ 'ud_data_list_visible_prop_search_fields' ] ) ) {
+			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_availability_site_search' ] ) AND in_array( $field[ 'alias' ], $params[ 'ud_data_availability_site_search' ] ) ) {
 				
 				$options = array(
 					

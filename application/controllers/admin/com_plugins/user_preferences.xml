@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <params>
 	
-	<section name="submit_forms">
-		
-		<param name="submit_forms" type="spacer" label="submit_forms"/>
-		
-		<param name="submit_forms_list_order_by" type="select" default="title" label="submit_forms_list_order_by" tip="tip_submit_forms_list_order_by">
-			
-			<option value="title">title</option>
-			<option value="alias">alias</option>
-			<option value="create_datetime">create_datetime</option>
-			<option value="mod_datetime">mod_datetime</option>
-			
-		</param>
-		
-		<param name="submit_forms_list_order_by_direction" type="select" default="ASC" label="submit_forms_list_order_by_direction" tip="tip_submit_forms_list_order_by_direction">
-			
-			<option value="ASC">ascendant</option>
-			<option value="DESC">decrescent</option>
-			
-		</param>
-		
-	</section>
-	
 </params>

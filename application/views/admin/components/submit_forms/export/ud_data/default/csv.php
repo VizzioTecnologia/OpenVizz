@@ -53,13 +53,6 @@
 						
 						$pd = $ud_data[ 'parsed_data' ][ 'full' ][ $alias ];
 						
-						if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-							
-							$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-							$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-							
-						}
-						
 						$ud_data_out[] = htmlspecialchars_decode( str_replace( array( '“', "”" ), array( '"', '"', ), strip_tags( $pd[ 'value' ] ) ) );
 						
 					}

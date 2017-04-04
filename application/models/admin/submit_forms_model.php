@@ -46,7 +46,7 @@ class Submit_forms_model extends CI_Model{
 					$params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ] = is_array( $spec_options ) ? $spec_options + $submit_forms_options : $submit_forms_options;
 					
 				}
-				else if ( $element[ 'name' ] == 'submit_form_layout' ){
+				else if ( $element[ 'name' ] == 'ud_ds_form_layout_site' ){
 					
 					$spec_options = array();
 					
@@ -813,6 +813,12 @@ class Submit_forms_model extends CI_Model{
 			
 		}
 		
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
+			
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
+			
+		}
+		
 		$this->load->language( 'submit_forms' );
 		
 		$this->load->helper(
@@ -850,7 +856,7 @@ class Submit_forms_model extends CI_Model{
 			$current_params_values = isset( $menu_item[ 'params' ] ) ? $menu_item[ 'params' ] : array();
 			
 			// merging with post data
-			$current_params_values = isset( $post[ 'params' ] ) ? array_merge_recursive( $current_params_values, $post[ 'params' ] ) : $current_params_values;
+			$current_params_values = isset( $post[ 'params' ] ) ? array_merge( $current_params_values, $post[ 'params' ] ) : $current_params_values;
 			
 			if ( check_var( $params[ 'params_spec_values' ] ) ) {
 				
@@ -881,13 +887,6 @@ class Submit_forms_model extends CI_Model{
 					
 				}
 				
-				if ( check_var( $current_params_values[ 'submit_form_id' ] ) AND $_submit_form[ 'id' ] == $current_params_values[ 'submit_form_id' ] ) {
-					
-					$submit_form[ 'fields' ] = get_params( $_submit_form[ 'fields' ] );
-					$submit_form[ 'params' ] = get_params( $_submit_form[ 'params' ] );
-					
-				}
-				
 				$_options_sf[ $_submit_form[ 'id' ] ] = $_submit_form[ 'title' ];
 				
 			}
@@ -907,7 +906,7 @@ class Submit_forms_model extends CI_Model{
 					
 				}
 				
-				if ( $element[ 'name' ] == 'users_submits_layout' ){
+				if ( $element[ 'name' ] == 'ud_d_list_layout_site' ){
 					
 					$spec_options = array();
 					
@@ -924,7 +923,51 @@ class Submit_forms_model extends CI_Model{
 			* -------------------------------------------------------------------------------------------------
 			*/
 			
-			if ( check_var( $submit_form ) ) {
+			$submit_form = FALSE;
+			
+			if ( check_var( $current_params_values[ 'submit_form_id' ] ) ) {
+				
+				// get data scheme params
+				$gdsp = array(
+					
+					'where_condition' => 't1.id = ' . $current_params_values[ 'submit_form_id' ],
+					'limit' => 1,
+					
+				);
+				
+				$submit_form = $this->ud_api->get_data_schemes( $gdsp )->row_array();
+				
+			}
+			
+			if ( $submit_form ) {
+				
+				$this->ud_api->parse_ds( $submit_form );
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'select',
+					'name' => 'ud_d_list_site_override_presentation_props',
+					'label' => 'ud_d_list_site_override_presentation_props',
+					'tip' => 'tip_ud_d_list_site_override_presentation_props',
+					'validation' => array(
+						
+						'rules' => 'trim|required',
+						
+					),
+					'options' => array(
+						
+						'1' => 'yes',
+						'0' => 'no',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'ud_d_list_site_override_presentation_props' ] = 0;
+				
+				$new_params[] = $_tmp;
 				
 				//------------------------------------------------------
 				
@@ -941,6 +984,7 @@ class Submit_forms_model extends CI_Model{
 				$_tmp = array(
 					
 					'type' => 'checkbox',
+					'inline' => TRUE,
 					'name' => 'ud_data_list_d_titles_as_link',
 					'label' => 'ud_data_list_d_titles_as_link',
 					'tip' => 'tip_ud_data_list_d_titles_as_link',
@@ -949,109 +993,15 @@ class Submit_forms_model extends CI_Model{
 						'rules' => 'trim',
 						
 					),
-					'value' => 1,
 					
 				);
 				
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_data_list_d_titles_as_link' ] = 1;
-					
-				}
+				$params[ 'params_spec_values' ][ 'ud_data_list_d_titles_as_link' ] = 1;
 				
 				$new_params[] = $_tmp;
 				
 				//------------------------------------------------------
 				
-				$new_params[] = array(
-					
-					'type' => 'spacer',
-					
-				);
-				
-				//------------------------------------------------------
-				
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_title_prop[id]',
-					'label' => 'id',
-					'value' => 'id',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_title_prop[id]' ] = 'id';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_title_prop[submit_datetime]',
-					'label' => 'submit_datetime',
-					'value' => 'submit_datetime',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_title_prop[submit_datetime]' ] = 'submit_datetime';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_title_prop[mod_datetime]',
-					'label' => 'mod_datetime',
-					'value' => 'mod_datetime',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_title_prop[mod_datetime]' ] = 'mod_datetime';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
 				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
 					
 					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
@@ -1060,12 +1010,111 @@ class Submit_forms_model extends CI_Model{
 						
 						$fields_options[ $alias ] = $field[ 'label' ];
 						
+					}
+					
+				}
+				
+				if ( check_var( $current_params_values[ 'ud_d_list_site_override_presentation_props' ] ) ) {
+					
+					//------------------------------------------------------
+					
+					$new_params[] = array(
+						
+						'type' => 'spacer',
+						
+					);
+					
+					//------------------------------------------------------
+					
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_title_prop[id]',
+						'label' => 'id',
+						'value' => 'id',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[id]' ] = 'id';
+						
+					}
+					
+					$new_params[] = $_tmp;
+					
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_title_prop[submit_datetime]',
+						'label' => 'submit_datetime',
+						'value' => 'submit_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[submit_datetime]' ] = 'submit_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_title_prop[mod_datetime]',
+						'label' => 'mod_datetime',
+						'value' => 'mod_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[mod_datetime]' ] = 'mod_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					foreach ( $fields_options as $alias => $label ) {
+						
 						$_tmp = array(
 							
 							'type' => 'checkbox',
 							'inline' => TRUE,
 							'name' => 'ud_title_prop[' . $alias . ']',
-							'label' => $field[ 'label' ],
+							'label' => $label,
 							'value' => $alias,
 							'validation' => array(
 								
@@ -1095,346 +1144,344 @@ class Submit_forms_model extends CI_Model{
 						
 					}
 					
-				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				/*
-				* ------------------------------------
-				*/
-
-				$new_params[] = array(
 					
-					'type' => 'spacer',
-					'label' => 'ud_content_prop',
-					'tip' => 'tip_ud_content_prop',
 					
-				);
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
 					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_content_prop[id]',
-					'label' => 'id',
-					'value' => 'id',
-					'validation' => array(
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*
+					* ------------------------------------
+					*/
+
+					$new_params[] = array(
 						
-						'rules' => 'trim',
+						'type' => 'spacer',
+						'label' => 'ud_content_prop',
+						'tip' => 'tip_ud_content_prop',
 						
-					),
-					
-				);
+					);
 
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_content_prop[id]' ] = 'id';
-					
-				}
+					/*
+					* ------------------------------------
+					*/
 
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_content_prop[submit_datetime]',
-					'label' => 'submit_datetime',
-					'value' => 'submit_datetime',
-					'validation' => array(
+					$_tmp = array(
 						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_content_prop[submit_datetime]' ] = 'submit_datetime';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_content_prop[mod_datetime]',
-					'label' => 'mod_datetime',
-					'value' => 'mod_datetime',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-				
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_content_prop[mod_datetime]' ] = 'mod_datetime';
-					
-				}
-				
-				$new_params[] = $_tmp;
-				
-				/*
-				* ------------------------------------
-				*/
-				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
-					
-					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
-					
-					if ( $alias ) {
-						
-						$fields_options[ $alias ] = $field[ 'label' ];
-						
-						$_tmp = array(
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_content_prop[id]',
+						'label' => 'id',
+						'value' => 'id',
+						'validation' => array(
 							
-							'type' => 'checkbox',
-							'inline' => TRUE,
-							'name' => 'ud_content_prop[' . $alias . ']',
-							'label' => $field[ 'label' ],
-							'value' => $alias,
-							'validation' => array(
-								
-								'rules' => 'trim',
-								
-							),
+							'rules' => 'trim',
 							
-						);
+						),
 						
-						if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_content_prop[id]' ] = 'id';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_content_prop[submit_datetime]',
+						'label' => 'submit_datetime',
+						'value' => 'submit_datetime',
+						'validation' => array(
 							
-							if ( $new_flag ) {
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_content_prop[submit_datetime]' ] = 'submit_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_content_prop[mod_datetime]',
+						'label' => 'mod_datetime',
+						'value' => 'mod_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+					
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_content_prop[mod_datetime]' ] = 'mod_datetime';
+						
+					}
+					
+					$new_params[] = $_tmp;
+					
+					/*
+					* ------------------------------------
+					*/
+					
+					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+						
+						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+						
+						if ( $alias ) {
+							
+							$fields_options[ $alias ] = $field[ 'label' ];
+							
+							$_tmp = array(
 								
-								// $params[ 'params_spec_values' ][ 'ud_content_prop[' . $alias . ']' ] = $alias;
+								'type' => 'checkbox',
+								'inline' => TRUE,
+								'name' => 'ud_content_prop[' . $alias . ']',
+								'label' => $field[ 'label' ],
+								'value' => $alias,
+								'validation' => array(
+									
+									'rules' => 'trim',
+									
+								),
+								
+							);
+							
+							if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+								
+								if ( $new_flag ) {
+									
+									// $params[ 'params_spec_values' ][ 'ud_content_prop[' . $alias . ']' ] = $alias;
+									
+								}
 								
 							}
 							
+							if ( $field[ 'field_type' ] == 'combo_box' ) {
+								
+								$select_fields[] = $field;
+								
+							}
+							
+							$new_params[] = $_tmp;
+							
 						}
 						
-						if ( $field[ 'field_type' ] == 'combo_box' ) {
+					}
+					
+					/*
+					* ------------------------------------
+					*/
+					
+					$_tmp = array(
+						
+						'type' => 'number',
+						'name' => 'users_submit_content_word_limit',
+						'min' => 1,
+						'label' => 'users_submit_content_word_limit',
+						'validation' => array(
 							
-							$select_fields[] = $field;
+							'rules' => 'trim|integer',
+							
+						),
+						
+					);
+					
+					if ( ! check_var( $current_params_values[ 'users_submit_content_word_limit' ] ) ) {
+						
+						$params[ 'params_spec_values' ][ 'users_submit_content_word_limit' ] = 120;
+						
+					}
+					
+					$new_params[] = $_tmp;
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					/*
+					* ------------------------------------
+					*/
+
+					$new_params[] = array(
+						
+						'type' => 'spacer',
+						'label' => 'ud_other_info_prop',
+						'tip' => 'tip_ud_other_info_prop',
+						
+					);
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_other_info_prop[id]',
+						'label' => 'id',
+						'value' => 'id',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_other_info_prop[id]' ] = 'id';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_other_info_prop[submit_datetime]',
+						'label' => 'submit_datetime',
+						'value' => 'submit_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_other_info_prop[submit_datetime]' ] = 'submit_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'ud_other_info_prop[mod_datetime]',
+						'label' => 'mod_datetime',
+						'value' => 'mod_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_other_info_prop[mod_datetime]' ] = 'mod_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+						
+						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+						
+						if ( $alias ) {
+							
+							$fields_options[ $alias ] = $field[ 'label' ];
+							
+							$_tmp = array(
+								
+								'type' => 'checkbox',
+								'inline' => TRUE,
+								'name' => 'ud_other_info_prop[' . $alias . ']',
+								'label' => $field[ 'label' ],
+								'value' => $alias,
+								'validation' => array(
+									
+									'rules' => 'trim',
+									
+								),
+								
+							);
+							
+							if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+								
+								if ( $new_flag ) {
+									
+									// $params[ 'params_spec_values' ][ 'ud_other_info_prop[' . $alias . ']' ] = $alias;
+									
+								}
+								
+							}
+							
+							if ( $field[ 'field_type' ] == 'combo_box' ) {
+								
+								$select_fields[] = $field;
+								
+							}
+							
+							$new_params[] = $_tmp;
 							
 						}
-						
-						$new_params[] = $_tmp;
 						
 					}
 					
 				}
-				
-				/*
-				* ------------------------------------
-				*/
-				
-				$_tmp = array(
-					
-					'type' => 'number',
-					'name' => 'users_submit_content_word_limit',
-					'min' => 1,
-					'label' => 'users_submit_content_word_limit',
-					'validation' => array(
-						
-						'rules' => 'trim|integer',
-						
-					),
-					
-				);
-				
-				if ( ! check_var( $current_params_values[ 'users_submit_content_word_limit' ] ) ) {
-					
-					$params[ 'params_spec_values' ][ 'users_submit_content_word_limit' ] = 120;
-					
-				}
-				
-				$new_params[] = $_tmp;
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				/*
-				* ------------------------------------
-				*/
-
-				$new_params[] = array(
-					
-					'type' => 'spacer',
-					'label' => 'ud_other_info_prop',
-					'tip' => 'tip_ud_other_info_prop',
-					
-				);
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_other_info_prop[id]',
-					'label' => 'id',
-					'value' => 'id',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_other_info_prop[id]' ] = 'id';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_other_info_prop[submit_datetime]',
-					'label' => 'submit_datetime',
-					'value' => 'submit_datetime',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_other_info_prop[submit_datetime]' ] = 'submit_datetime';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				$_tmp = array(
-					
-					'type' => 'checkbox',
-					'inline' => TRUE,
-					'name' => 'ud_other_info_prop[mod_datetime]',
-					'label' => 'mod_datetime',
-					'value' => 'mod_datetime',
-					'validation' => array(
-						
-						'rules' => 'trim',
-						
-					),
-					
-				);
-
-				if ( $new_flag ) {
-					
-					// $params[ 'params_spec_values' ][ 'ud_other_info_prop[mod_datetime]' ] = 'mod_datetime';
-					
-				}
-
-				$new_params[] = $_tmp;
-
-				/*
-				* ------------------------------------
-				*/
-
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
-					
-					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
-					
-					if ( $alias ) {
-						
-						$fields_options[ $alias ] = $field[ 'label' ];
-						
-						$_tmp = array(
-							
-							'type' => 'checkbox',
-							'inline' => TRUE,
-							'name' => 'ud_other_info_prop[' . $alias . ']',
-							'label' => $field[ 'label' ],
-							'value' => $alias,
-							'validation' => array(
-								
-								'rules' => 'trim',
-								
-							),
-							
-						);
-						
-						if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
-							
-							if ( $new_flag ) {
-								
-								// $params[ 'params_spec_values' ][ 'ud_other_info_prop[' . $alias . ']' ] = $alias;
-								
-							}
-							
-						}
-						
-						if ( $field[ 'field_type' ] == 'combo_box' ) {
-							
-							$select_fields[] = $field;
-							
-						}
-						
-						$new_params[] = $_tmp;
-						
-					}
-					
-				}
-				
-				
 				
 				
 				
@@ -1475,20 +1522,13 @@ class Submit_forms_model extends CI_Model{
 					),
 					'options' => array(
 						
+						'global' => 'global',
 						'1' => 'yes',
 						'0' => 'no',
 						
 					),
 					
 				);
-				
-				$use_search = TRUE;
-				
-				if ( ! $new_flag AND ! check_var( $current_params_values[ 'use_search' ] ) ) {
-					
-					$use_search = FALSE;
-					
-				}
 				
 				$params[ 'params_spec_values' ][ 'use_search' ] = 0;
 				
@@ -1510,239 +1550,251 @@ class Submit_forms_model extends CI_Model{
 				
 				
 				
+				//------------------------------------------------------
 				
-				if ( $use_search ) {
+				$new_params[] = array(
 					
-					//------------------------------------------------------
+					'type' => 'spacer',
+					'label' => 'ud_data_list_search_results_specific_config',
+					'name' => 'ud_data_list_search_results_specific_config',
+					'level' => '4',
 					
-					$new_params[] = array(
+				);
+				
+				//------------------------------------------------------
+				
+				$new_params[] = array(
+					
+					'type' => 'spacer',
+					'label' => 'ud_data_availability_site_search_lbl',
+					'name' => 'ud_data_availability_site_search_lbl',
+					
+				);
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'select',
+					'name' => 'ud_data_availability_site_search[__terms]',
+					'label' => 'ud_data_list_prop_search_field_terms',
+					'validation' => array(
 						
-						'type' => 'spacer',
-						'label' => 'ud_data_list_search_results_specific_config',
-						'name' => 'ud_data_list_search_results_specific_config',
-						'level' => '4',
+						'rules' => 'trim',
 						
-					);
-					
-					//------------------------------------------------------
-					
-					$new_params[] = array(
+					),
+					'options' => array(
 						
-						'type' => 'spacer',
-						'label' => 'ud_data_list_visible_prop_search_fields_lbl',
-						'name' => 'ud_data_list_visible_prop_search_fields_lbl',
+						'global' => 'global',
+						'__terms' => 'yes',
+						'0' => 'no',
 						
-					);
+					),
 					
-					//------------------------------------------------------
+				);
+				
+				$params[ 'params_spec_values' ][ 'ud_data_availability_site_search[__terms]' ] = '__terms';
+				
+				$select_fields[] = $field;
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
 					
-					$_tmp = array(
+					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+					
+					if ( $alias ) {
 						
-						'type' => 'checkbox',
-						'inline' => TRUE,
-						'name' => 'ud_data_list_visible_prop_search_fields[__terms]',
-						'label' => 'ud_data_list_prop_search_field_terms',
-						'value' => '__terms',
-						'validation' => array(
+						if ( in_array( $field[ 'field_type' ], array( 'combo_box', ) ) ) {
 							
-							'rules' => 'trim',
+							$fields_options[ $alias ] = $field[ 'label' ];
 							
-						),
-						
-					);
-					
-					if ( $new_flag ) {
-						
-						$params[ 'params_spec_values' ][ 'ud_data_list_visible_prop_search_fields[__terms]' ] = '__terms';
-						
-					}
-					
-					$select_fields[] = $field;
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
-						
-						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
-						
-						if ( $alias ) {
+							$_tmp = array(
+								
+								'type' => 'checkbox',
+								'inline' => TRUE,
+								'name' => 'ud_data_availability_site_search[' . $alias . ']',
+								'label' => $field[ 'label' ],
+								'value' => $alias,
+								'validation' => array(
+									
+									'rules' => 'trim',
+									
+								),
+								
+							);
 							
-							if ( in_array( $field[ 'field_type' ], array( 'combo_box', ) ) ) {
+							$_tmp = array(
 								
-								$fields_options[ $alias ] = $field[ 'label' ];
-								
-								$_tmp = array(
+								'type' => 'select',
+								'name' => 'ud_data_availability_site_search[' . $alias . ']',
+								'label' => $field[ 'label' ],
+								'validation' => array(
 									
-									'type' => 'checkbox',
-									'inline' => TRUE,
-									'name' => 'ud_data_list_visible_prop_search_fields[' . $alias . ']',
-									'label' => $field[ 'label' ],
-									'value' => $alias,
-									'validation' => array(
-										
-										'rules' => 'trim',
-										
-									),
+									'rules' => 'trim',
 									
-								);
-								
-								if ( $new_flag ) {
+								),
+								'options' => array(
 									
-									$params[ 'params_spec_values' ][ 'ud_data_list_visible_prop_search_fields[' . $alias . ']' ] = $alias;
+									'global' => 'global',
+									$alias => 'yes',
+									'0' => 'no',
 									
-								}
+								),
 								
-								$select_fields[] = $field;
-								
-								$new_params[] = $_tmp;
-								
-							}
+							);
+							
+							$params[ 'params_spec_values' ][ 'ud_data_availability_site_search[' . $alias . ']' ] = $alias;
+							
+							$select_fields[] = $field;
+							
+							$new_params[] = $_tmp;
 							
 						}
 						
 					}
 					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'text',
-						'inline' => TRUE,
-						'name' => 'search_terms_string',
-						'label' => 'search_terms_string',
-						'tip' => 'tip_search_terms_string',
-						'validation' => array(
-							
-							'rules' => 'trim',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'search_terms_string' ] = lang( 'search_terms' );
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'select',
-						'inline' => TRUE,
-						'name' => 'show_default_results',
-						'label' => 'show_default_results',
-						'tip' => 'tip_show_default_results',
-						'validation' => array(
-							
-							'rules' => 'trim|required',
-							
-						),
-						'options' => array(
-							
-							'1' => 'yes',
-							'0' => 'no',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'show_default_results' ] = 1;
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'select',
-						'inline' => TRUE,
-						'name' => 'show_results_count',
-						'label' => 'show_results_count',
-						'tip' => 'tip_show_results_count',
-						'validation' => array(
-							
-							'rules' => 'trim|required',
-							
-						),
-						'options' => array(
-							
-							'1' => 'yes',
-							'0' => 'no',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'show_results_count' ] = 1;
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'text',
-						'inline' => TRUE,
-						'name' => 'users_submits_search_results_string',
-						'label' => 'users_submits_search_results_string_config_label',
-						'tip' => 'tip_users_submits_search_results_string_config_label',
-						'validation' => array(
-							
-							'rules' => 'trim',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'users_submits_search_results_string' ] = lang( 'users_submits_search_results_string' );
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'text',
-						'inline' => TRUE,
-						'name' => 'users_submits_search_single_result_string',
-						'label' => 'users_submits_search_single_result_string_config_label',
-						'tip' => 'tip_users_submits_search_single_result_string_config_label',
-						'validation' => array(
-							
-							'rules' => 'trim',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'users_submits_search_single_result_string' ] = lang( 'users_submits_search_single_result_string' );
-					
-					$new_params[] = $_tmp;
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'text',
-						'inline' => TRUE,
-						'name' => 'ud_data_no_search_result_str',
-						'label' => 'ud_data_no_search_result_str',
-						'tip' => 'tip_ud_data_no_search_result_str',
-						'validation' => array(
-							
-							'rules' => 'trim',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'ud_data_no_search_result_str' ] = lang( 'ud_data_no_search_result_str_value' );
-					
-					$new_params[] = $_tmp;
-					
 				}
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'text',
+					'inline' => TRUE,
+					'name' => 'search_terms_string',
+					'label' => 'search_terms_string',
+					'tip' => 'tip_search_terms_string',
+					'validation' => array(
+						
+						'rules' => 'trim',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'search_terms_string' ] = lang( 'search_terms' );
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'select',
+					'inline' => TRUE,
+					'name' => 'show_default_results',
+					'label' => 'show_default_results',
+					'tip' => 'tip_show_default_results',
+					'validation' => array(
+						
+						'rules' => 'trim|required',
+						
+					),
+					'options' => array(
+						
+						'1' => 'yes',
+						'0' => 'no',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'show_default_results' ] = 1;
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'select',
+					'inline' => TRUE,
+					'name' => 'show_results_count',
+					'label' => 'show_results_count',
+					'tip' => 'tip_show_results_count',
+					'validation' => array(
+						
+						'rules' => 'trim|required',
+						
+					),
+					'options' => array(
+						
+						'1' => 'yes',
+						'0' => 'no',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'show_results_count' ] = 1;
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'text',
+					'inline' => TRUE,
+					'name' => 'users_submits_search_results_string',
+					'label' => 'users_submits_search_results_string_config_label',
+					'tip' => 'tip_users_submits_search_results_string_config_label',
+					'validation' => array(
+						
+						'rules' => 'trim',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'users_submits_search_results_string' ] = lang( 'users_submits_search_results_string' );
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'text',
+					'inline' => TRUE,
+					'name' => 'users_submits_search_single_result_string',
+					'label' => 'users_submits_search_single_result_string_config_label',
+					'tip' => 'tip_users_submits_search_single_result_string_config_label',
+					'validation' => array(
+						
+						'rules' => 'trim',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'users_submits_search_single_result_string' ] = lang( 'users_submits_search_single_result_string' );
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'text',
+					'inline' => TRUE,
+					'name' => 'ud_data_no_search_result_str',
+					'label' => 'ud_data_no_search_result_str',
+					'tip' => 'tip_ud_data_no_search_result_str',
+					'validation' => array(
+						
+						'rules' => 'trim',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'ud_data_no_search_result_str' ] = lang( 'ud_data_no_search_result_str_value' );
+				
+				$new_params[] = $_tmp;
 				
 				//------------------------------------------------------
 				
@@ -1786,7 +1838,7 @@ class Submit_forms_model extends CI_Model{
 					'name' => 'us_default_results_filters',
 					'label' => 'us_default_results_filters',
 					'default' => '',
-					'tip' => 'us_default_results_filters',
+					'tip' => 'tip_us_default_results_filters',
 					'validation' => array(
 						
 						'rules' => 'trim',
@@ -1930,11 +1982,7 @@ class Submit_forms_model extends CI_Model{
 					
 				);
 				
-				if ( $new_flag ) {
-					
-					$params[ 'params_spec_values' ][ 'ud_data_list_d_readmore_link' ] = 1;
-					
-				}
+				$params[ 'params_spec_values' ][ 'ud_data_list_d_readmore_link' ] = 1;
 				
 				$new_params[] = $_tmp;
 				
@@ -2012,14 +2060,14 @@ class Submit_forms_model extends CI_Model{
 				array_push_pos( $params[ 'params_spec' ][ 'users_submits_config' ], $new_params, 10  );
 				
 				
-				if ( isset( $current_params_values[ 'users_submits_layout' ] ) AND $current_params_values[ 'users_submits_layout' ] != 'global' ) {
+				if ( isset( $current_params_values[ 'ud_d_list_layout_site' ] ) AND $current_params_values[ 'ud_d_list_layout_site' ] != 'global' ) {
 					
 					$system_views_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . get_class_name( get_class() ) . DS . 'index' . DS . 'users_submits' . DS;
 					$theme_views_path = THEMES_PATH . site_theme_components_views_path() . get_class_name( get_class() ) . DS . 'index' . DS . 'users_submits' . DS;
 					
-					if ( file_exists( $system_views_path . $current_params_values[ 'users_submits_layout' ] . DS . 'params.php' ) ) {
+					if ( file_exists( $system_views_path . $current_params_values[ 'ud_d_list_layout_site' ] . DS . 'params.php' ) ) {
 						
-						include_once $system_views_path . $current_params_values[ 'users_submits_layout' ] . DS . 'params.php';
+						include_once $system_views_path . $current_params_values[ 'ud_d_list_layout_site' ] . DS . 'params.php';
 						
 					}
 					
@@ -2044,6 +2092,7 @@ class Submit_forms_model extends CI_Model{
 			
 		}
 		
+// 		echo '<pre>' . print_r( $params, TRUE ) . '</pre>'; exit;
 		return $params;
 		
 	}

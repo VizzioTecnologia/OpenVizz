@@ -65,6 +65,7 @@ if ( isset( $_GET[ 'tmm' ] ) AND $_GET[ 'tmm' ] == 1 ) {
 
 include( 'articles.css' );
 include( 'submit-forms.css' );
+include( 'companies-trademarks.css' );
 
 if ( isset( $_GET[ 'ct' ] ) AND $_GET[ 'ct' ] == 1 ) {
 	

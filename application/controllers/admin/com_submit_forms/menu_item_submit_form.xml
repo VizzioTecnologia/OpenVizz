@@ -10,17 +10,20 @@
 			
 		</param>
 		
-		<param name="submit_form_show_title" type="select" default="1" label="submit_form_show_title" tip="tip_submit_form_show_title">
+		<param name="submit_form_show_title" type="select" default="global" label="submit_form_show_title" tip="tip_submit_form_show_title">
 			
 			<option value="1">yes</option>
 			<option value="0">no</option>
+			<option value="global">Global</option>
 			
 		</param>
 		
 		<!-- as options deste campo são criadas via php -->
-		<param name="submit_form_layout" type="select" default="default" label="submit_form_layout" tip="tip_submit_form_layout">
+		<param name="ud_ds_form_layout_site" type="select" default="global" label="ud_ds_form_layout_site" tip="tip_ud_ds_form_layout_site">
 			
 			<validation rules="trim|required" />
+			
+			<option value="global">Global</option>
 			
 		</param>
 		

@@ -329,7 +329,7 @@ class Unid extends Main {
 				
 				$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'filters' ] = $f;
 				
-				$filters_url = urlencode( base64_encode( json_encode( $f ) ) );
+				$filters_url = url_encode_ud_filters( $f );
 				
 				/*
 				--------------------------------------------------------
@@ -420,7 +420,7 @@ class Unid extends Main {
 				$get_query = ! empty( $get_query ) ? '?' . join( '&', $get_query ) : '';
 				$s = $s ? '/s/1' : '';
 				
-				$sfsp = urlencode( base64_encode( json_encode( $sfsp ) ) );
+				$sfsp = url_encode_ud_filters( $sfsp );
 				
 				$pagination_url = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $submit_form_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $get_query;
 				
@@ -462,7 +462,7 @@ class Unid extends Main {
 						'component_view_folder' => $this->component_view_folder,
 						'function' => __FUNCTION__,
 						'action' => 'users_submits',
-						'layout' => ( ( check_var( $data[ 'params' ][ 'users_submits_layout' ] ) ) ? $data[ 'params' ][ 'users_submits_layout' ] : 'default' ),
+						'layout' => ( ( check_var( $data[ 'params' ][ 'ud_d_list_layout_site' ] ) ) ? $data[ 'params' ][ 'ud_d_list_layout_site' ] : 'default' ),
 						'view' => 'users_submits',
 						'data' => $data,
 						

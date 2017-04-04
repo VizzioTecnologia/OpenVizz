@@ -428,11 +428,11 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="1854.9438"
-     inkscape:cy="-2278.526"
+     inkscape:zoom="0.90509668"
+     inkscape:cx="1968.4926"
+     inkscape:cy="-2418.0198"
      inkscape:document-units="px"
-     inkscape:current-layer="svg2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1013"
@@ -688,14 +688,6 @@
        y="142.36215"
        inkscape:label="vui_color" />
     <rect
-       inkscape:label="vui_color"
-       y="1022.6122"
-       x="2058.5405"
-       height="103.50293"
-       width="277.91882"
-       id="vui_highlight_bg"
-       style="color:#000000;fill:#2492f1;fill-opacity:0.18848167;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <rect
        y="819.27924"
        x="2636.1077"
        height="60"
@@ -728,50 +720,6 @@
        id="path4227"
        style="color:#000000;fill:#ffffff;fill-opacity:0.40648726;fill-rule:nonzero;stroke:#525960;stroke-width:1;stroke-opacity:0.40784314;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="arc" />
-    <text
-       inkscape:label="vui_color"
-       id="vui_site_fg"
-       y="809.69073"
-       x="2077.5105"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#2d4960;fill-opacity:1;stroke:none"
-       xml:space="preserve"><tspan
-         y="809.69073"
-         x="2077.5105"
-         id="tspan3083"
-         sodipodi:role="line"
-         style="font-size:21.98784256px;line-height:1.25">Default text color</tspan><tspan
-         id="tspan3085"
-         y="837.17554"
-         x="2077.5105"
-         sodipodi:role="line"
-         style="font-size:21.98784256px;line-height:1.25"> </tspan><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#2d4960;fill-opacity:1"
-         id="tspan3087"
-         y="859.3548"
-         x="2077.5105"
-         sodipodi:role="line">Change the color of this text</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#223749;fill-opacity:1;stroke:none"
-       x="2077.5105"
-       y="926.86847"
-       id="vui_base_title_fg"
-       inkscape:label="vui_color"><tspan
-         sodipodi:role="line"
-         id="tspan3075"
-         x="2077.5105"
-         y="926.86847"
-         style="font-size:21.98784256px;line-height:1.25">Titles color base</tspan><tspan
-         sodipodi:role="line"
-         x="2077.5105"
-         y="954.35327"
-         id="tspan3077"
-         style="font-size:21.98784256px;line-height:1.25"> </tspan><tspan
-         sodipodi:role="line"
-         x="2077.5105"
-         y="976.53253"
-         id="tspan3079"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#223749;fill-opacity:1">Change the color of this text</tspan></text>
     <rect
        style="color:#000000;fill:#ff6600;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="vui_menu_item_level_1_bg"
@@ -1339,7 +1287,7 @@
          height="40"
          width="190.00006"
          id="vui_button_active_bg"
-         style="color:#000000;fill:#2492f1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#1693ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          inkscape:label="vui_color" />
       <text
          transform="scale(1.0033763,0.99663506)"
@@ -1360,26 +1308,26 @@
          inkscape:label="vui_color">
         <path
            inkscape:label="vui_color"
-           style="color:#000000;fill:#2492f1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           style="color:#000000;fill:#1693ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            d="m 1940,772.36218 1,-1 0,42 -1,-1 z"
            id="vui_button_border_active_right"
            inkscape:connector-curvature="0" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;fill:#2492f1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           style="color:#000000;fill:#1693ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            d="m 1750,772.36218 -1,-1 0,42 1,-1 z"
            id="vui_button_border_active_left"
            inkscape:connector-curvature="0" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;fill:#2492f1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           style="color:#000000;fill:#27bfff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            d="m 1940,772.36218 1,-1 -192,0 1,1 z"
            id="vui_button_border_active_top"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;fill:#2492f1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           style="color:#000000;fill:#007be6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            d="m 1940,812.36218 1,1 -192,0 1,-1 z"
            id="vui_button_border_active_bottom"
            inkscape:connector-curvature="0"
@@ -3426,6 +3374,58 @@
          id="tspan3891-8-02-3-4-4-6-5"
          sodipodi:role="line"
          style="font-size:15.47227192px;line-height:1.25">Info</tspan></text>
+    <rect
+       inkscape:label="vui_color"
+       y="1022.6122"
+       x="2058.5405"
+       height="103.50293"
+       width="277.91882"
+       id="vui_highlight_bg"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#2492f1;fill-opacity:0.18848171;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;enable-background:accumulate" />
+    <text
+       inkscape:label="vui_color"
+       id="vui_site_fg"
+       y="809.69073"
+       x="2077.5105"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#2d4960;fill-opacity:1;stroke:none"
+       xml:space="preserve"><tspan
+         y="809.69073"
+         x="2077.5105"
+         id="tspan3083"
+         sodipodi:role="line"
+         style="font-size:21.98784256px;line-height:1.25">Default text color</tspan><tspan
+         id="tspan3085"
+         y="837.17554"
+         x="2077.5105"
+         sodipodi:role="line"
+         style="font-size:21.98784256px;line-height:1.25"> </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#2d4960;fill-opacity:1"
+         id="tspan3087"
+         y="859.3548"
+         x="2077.5105"
+         sodipodi:role="line">Change the color of this text</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#223749;fill-opacity:1;stroke:none"
+       x="2077.5105"
+       y="926.86847"
+       id="vui_base_title_fg"
+       inkscape:label="vui_color"><tspan
+         sodipodi:role="line"
+         id="tspan3075"
+         x="2077.5105"
+         y="926.86847"
+         style="font-size:21.98784256px;line-height:1.25">Titles color base</tspan><tspan
+         sodipodi:role="line"
+         x="2077.5105"
+         y="954.35327"
+         id="tspan3077"
+         style="font-size:21.98784256px;line-height:1.25"> </tspan><tspan
+         sodipodi:role="line"
+         x="2077.5105"
+         y="976.53253"
+         id="tspan3079"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#223749;fill-opacity:1">Change the color of this text</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#2d4960;fill-opacity:1;stroke:none"
@@ -3966,7 +3966,7 @@
        height="51.389828"
        width="150.97058"
        id="vui_status_enabled_bg"
-       style="fill:#07fd3d;fill-opacity:0.21862069;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-opacity:0.17353198"
+       style="fill:#05ff3c;fill-opacity:0.1875862;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-opacity:0.17353198"
        inkscape:label="vui_color" />
     <text
        xml:space="preserve"
@@ -4099,6 +4099,102 @@
          x="33.204647"
          y="1416.2551"
          id="tspan5478">Archived</tspan></text>
+    <rect
+       rx="8.4287119"
+       ry="8.4287119"
+       y="2085.5198"
+       x="347"
+       height="165"
+       width="165"
+       id="vui_dashboard_bg"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#004d8d;fill-opacity:0.06896552;fill-rule:nonzero;stroke:#0e4c7f;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.26896551;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal"
+       inkscape:label="vui_color" />
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#0e7ede;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal"
+       id="vui_dashboard_active_bg"
+       width="165"
+       height="165"
+       x="549"
+       y="2085.5198"
+       ry="8.4287119"
+       rx="8.4287119"
+       inkscape:label="vui_color" />
+    <g
+       style="fill:#2d4960;font-variant-east_asian:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none"
+       transform="translate(1.3820827e-6,3.367779)"
+       id="vui_dashboard_fg"
+       inkscape:label="vui_color">
+      <path
+         sodipodi:nodetypes="ssccccccccccccccccsscccsssssccscssssccssssccccccccccccccccccccccccccccsccccccccccccccccccccccccccccccc"
+         inkscape:connector-curvature="0"
+         id="path5475"
+         d="m 450.90072,2111.6924 c -1.3029,0 -2.37964,1.0765 -2.37964,2.3796 v 14.4263 c -3.11952,-2.8137 -6.8669,-5.0229 -11.15457,-6.2466 -0.0494,0 -0.0994,0 -0.14849,0 -0.0494,0 -0.0994,0 -0.1485,0 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1477 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1475 -0.058,0.047 -0.10846,0.09 -0.14849,0.1474 l -2.37964,8.0314 c -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1475 0.038,0.057 0.091,0.1097 0.14849,0.1477 -0.004,0.047 -0.004,0.1 0,0.1474 0.0494,0 0.0994,0 0.14848,0 0.0381,0.057 0.091,0.1098 0.14851,0.1475 10.16887,2.9019 15.98905,13.3328 13.08803,23.499 -2.90174,10.1691 -13.33253,15.9894 -23.49897,13.0881 -8.19782,-2.3393 -13.83168,-9.7699 -13.83168,-18.2933 0.019,-0.1 -0.004,-0.1952 0,-0.295 0.004,-0.047 0.004,-0.1 0,-0.1476 v -11.4519 c 0,-1.303 -1.07674,-2.3795 -2.37965,-2.3795 h -4.75927 c -1.30291,0 -2.37965,1.0765 -2.37965,2.3795 v 11.4519 c 0,0.1041 -0.0143,0.1951 0,0.2951 -0.004,0.047 -0.004,0.1 0,0.1475 0,12.7301 8.42798,24.0201 20.67314,27.5144 9.73655,2.7784 19.81781,0.053 26.91971,-6.2465 v 4.9082 c 0,1.3026 1.07674,2.3796 2.37964,2.3796 h 4.7593 c 1.30289,0 2.37963,-1.077 2.37963,-2.3796 v -23.9454 c 0.071,-0.9457 0.0238,-1.8886 0,-2.8256 v -35.0998 c 0,-1.303 -1.07674,-2.3796 -2.37963,-2.3796 z m -23.64769,9.5185 c -1.09141,0.071 -2.18853,0.238 -3.27202,0.4474 -0.0494,0 -0.0994,0 -0.14848,0 -0.058,0.047 -0.10847,0.09 -0.14849,0.1475 -0.058,0.047 -0.10846,0.09 -0.1485,0.1476 -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1476 l 1.63601,8.1798 c -0.004,0.047 -0.004,0.1 0,0.1474 0.038,0.057 0.0908,0.1098 0.14849,0.1477 0.0494,0 0.0994,0 0.14849,0 0.038,0.057 0.091,0.1097 0.14848,0.1475 0.0494,0 0.0994,0 0.14849,0 0.0494,0 0.0994,0 0.1485,0 1.43002,-0.2761 2.83435,-0.357 4.3131,-0.2952 0.0494,0 0.0994,0 0.14848,0 0.058,-0.047 0.10847,-0.09 0.1485,-0.1474 0.0494,0 0.0994,0 0.14849,0 0.004,-0.047 0.004,-0.1 0,-0.1475 0.058,-0.047 0.10847,-0.09 0.14849,-0.1477 0.004,-0.047 0.004,-0.1 0,-0.1474 l 0.29745,-8.3288 c 0.004,-0.047 0.004,-0.1 0,-0.1475 -0.0381,-0.057 -0.0908,-0.1097 -0.14849,-0.1476 0.004,-0.047 0.004,-0.1 0,-0.1475 -0.0494,0 -0.0994,0 -0.14849,0 -0.038,-0.057 -0.0908,-0.1097 -0.14849,-0.1476 -0.0494,0 -0.0994,0 -0.14848,0 -1.09492,-0.047 -2.18061,-0.071 -3.27202,0 z m -9.22112,2.3796 c -0.95562,0.4189 -1.8683,0.9315 -2.82583,1.4874 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1475 -0.0581,0.047 -0.10847,0.09 -0.14849,0.1475 -0.004,0.047 -0.004,0.1 0,0.1476 -0.004,0.047 -0.004,0.1 0,0.1475 0.038,0.057 0.091,0.1097 0.14849,0.1475 l 4.16438,7.288 c -0.004,0.047 -0.004,0.1 0,0.1475 0.0494,0 0.0994,0 0.14849,0 0.038,0.057 0.0908,0.1097 0.14849,0.1474 0.0494,0 0.0994,0 0.14848,0 0.0494,0 0.0994,0 0.14849,0 0.058,-0.047 0.10846,-0.09 0.14849,-0.1474 0.64575,-0.376 1.30214,-0.6158 1.93346,-0.8925 0.004,-0.047 0.004,-0.1 0,-0.1475 0.0494,0 0.0994,0 0.14849,0 0.004,-0.047 0.004,-0.1 0,-0.1474 0.058,-0.047 0.10846,-0.09 0.1485,-0.1477 0.004,-0.047 0.004,-0.1 0,-0.1475 0.004,-0.047 0.004,-0.1 0,-0.1474 0.004,-0.047 0.004,-0.1 0,-0.1477 l -3.27202,-7.5848 c -0.0494,0 -0.0994,0 -0.14848,0 0.004,-0.047 0.004,-0.1 0,-0.1476 -0.0494,0 -0.0994,0 -0.14849,0 -0.038,-0.057 -0.091,-0.1097 -0.14849,-0.1475 -0.0494,0 -0.0994,0 -0.1485,0 -0.0494,0 -0.0994,0 -0.14849,0 -0.0494,0 -0.0994,0 -0.14848,0 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1;marker:none;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.23514557px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         x="390.37405"
+         y="2217.2966"
+         id="text5479"><tspan
+           sodipodi:role="line"
+           id="tspan5477"
+           x="390.37405"
+           y="2217.2966"
+           style="fill:#2d4960;stroke-width:1;font-variant-east_asian:normal;vector-effect:none;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none">UniD</tspan></text>
+    </g>
+    <g
+       id="vui_dashboard_active_fg"
+       transform="translate(202,3.367779)"
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:label="vui_color">
+      <path
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.75000012;marker:none;enable-background:accumulate"
+         d="m 450.90072,2111.6924 c -1.3029,0 -2.37964,1.0765 -2.37964,2.3796 v 14.4263 c -3.11952,-2.8137 -6.8669,-5.0229 -11.15457,-6.2466 -0.0494,0 -0.0994,0 -0.14849,0 -0.0494,0 -0.0994,0 -0.1485,0 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1477 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1475 -0.058,0.047 -0.10846,0.09 -0.14849,0.1474 l -2.37964,8.0314 c -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1475 0.038,0.057 0.091,0.1097 0.14849,0.1477 -0.004,0.047 -0.004,0.1 0,0.1474 0.0494,0 0.0994,0 0.14848,0 0.0381,0.057 0.091,0.1098 0.14851,0.1475 10.16887,2.9019 15.98905,13.3328 13.08803,23.499 -2.90174,10.1691 -13.33253,15.9894 -23.49897,13.0881 -8.19782,-2.3393 -13.83168,-9.7699 -13.83168,-18.2933 0.019,-0.1 -0.004,-0.1952 0,-0.295 0.004,-0.047 0.004,-0.1 0,-0.1476 v -11.4519 c 0,-1.303 -1.07674,-2.3795 -2.37965,-2.3795 h -4.75927 c -1.30291,0 -2.37965,1.0765 -2.37965,2.3795 v 11.4519 c 0,0.1041 -0.0143,0.1951 0,0.2951 -0.004,0.047 -0.004,0.1 0,0.1475 0,12.7301 8.42798,24.0201 20.67314,27.5144 9.73655,2.7784 19.81781,0.053 26.91971,-6.2465 v 4.9082 c 0,1.3026 1.07674,2.3796 2.37964,2.3796 h 4.7593 c 1.30289,0 2.37963,-1.077 2.37963,-2.3796 v -23.9454 c 0.071,-0.9457 0.0238,-1.8886 0,-2.8256 v -35.0998 c 0,-1.303 -1.07674,-2.3796 -2.37963,-2.3796 z m -23.64769,9.5185 c -1.09141,0.071 -2.18853,0.238 -3.27202,0.4474 -0.0494,0 -0.0994,0 -0.14848,0 -0.058,0.047 -0.10847,0.09 -0.14849,0.1475 -0.058,0.047 -0.10846,0.09 -0.1485,0.1476 -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1475 -0.004,0.047 -0.004,0.1 0,0.1476 l 1.63601,8.1798 c -0.004,0.047 -0.004,0.1 0,0.1474 0.038,0.057 0.0908,0.1098 0.14849,0.1477 0.0494,0 0.0994,0 0.14849,0 0.038,0.057 0.091,0.1097 0.14848,0.1475 0.0494,0 0.0994,0 0.14849,0 0.0494,0 0.0994,0 0.1485,0 1.43002,-0.2761 2.83435,-0.357 4.3131,-0.2952 0.0494,0 0.0994,0 0.14848,0 0.058,-0.047 0.10847,-0.09 0.1485,-0.1474 0.0494,0 0.0994,0 0.14849,0 0.004,-0.047 0.004,-0.1 0,-0.1475 0.058,-0.047 0.10847,-0.09 0.14849,-0.1477 0.004,-0.047 0.004,-0.1 0,-0.1474 l 0.29745,-8.3288 c 0.004,-0.047 0.004,-0.1 0,-0.1475 -0.0381,-0.057 -0.0908,-0.1097 -0.14849,-0.1476 0.004,-0.047 0.004,-0.1 0,-0.1475 -0.0494,0 -0.0994,0 -0.14849,0 -0.038,-0.057 -0.0908,-0.1097 -0.14849,-0.1476 -0.0494,0 -0.0994,0 -0.14848,0 -1.09492,-0.047 -2.18061,-0.071 -3.27202,0 z m -9.22112,2.3796 c -0.95562,0.4189 -1.8683,0.9315 -2.82583,1.4874 -0.0494,0 -0.0994,0 -0.14849,0 -0.004,0.047 -0.004,0.1 0,0.1475 -0.0581,0.047 -0.10847,0.09 -0.14849,0.1475 -0.004,0.047 -0.004,0.1 0,0.1476 -0.004,0.047 -0.004,0.1 0,0.1475 0.038,0.057 0.091,0.1097 0.14849,0.1475 l 4.16438,7.288 c -0.004,0.047 -0.004,0.1 0,0.1475 0.0494,0 0.0994,0 0.14849,0 0.038,0.057 0.0908,0.1097 0.14849,0.1474 0.0494,0 0.0994,0 0.14848,0 0.0494,0 0.0994,0 0.14849,0 0.058,-0.047 0.10846,-0.09 0.14849,-0.1474 0.64575,-0.376 1.30214,-0.6158 1.93346,-0.8925 0.004,-0.047 0.004,-0.1 0,-0.1475 0.0494,0 0.0994,0 0.14849,0 0.004,-0.047 0.004,-0.1 0,-0.1474 0.058,-0.047 0.10846,-0.09 0.1485,-0.1477 0.004,-0.047 0.004,-0.1 0,-0.1475 0.004,-0.047 0.004,-0.1 0,-0.1474 0.004,-0.047 0.004,-0.1 0,-0.1477 l -3.27202,-7.5848 c -0.0494,0 -0.0994,0 -0.14848,0 0.004,-0.047 0.004,-0.1 0,-0.1476 -0.0494,0 -0.0994,0 -0.14849,0 -0.038,-0.057 -0.091,-0.1097 -0.14849,-0.1475 -0.0494,0 -0.0994,0 -0.1485,0 -0.0494,0 -0.0994,0 -0.14849,0 -0.0494,0 -0.0994,0 -0.14848,0 z"
+         id="path3915"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ssccccccccccccccccsscccsssssccscssssccssssccccccccccccccccccccccccccccsccccccccccccccccccccccccccccccc" />
+      <text
+         id="text5466"
+         y="2217.2966"
+         x="390.37405"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:33.23514557px;line-height:125%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="fill:#ffffff;stroke-width:1px;fill-opacity:1"
+           y="2217.2966"
+           x="390.37405"
+           id="tspan5464"
+           sodipodi:role="line">UniD</tspan></text>
+    </g>
+    <rect
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#b15abb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;enable-background:accumulate"
+       id="vui_translatable_term_bg"
+       width="277.91882"
+       height="103.50293"
+       x="1770.726"
+       y="1279.4908"
+       inkscape:label="vui_color" />
+    <text
+       inkscape:label="vui_color"
+       id="vui_translatable_term_fg"
+       y="1312.7472"
+       x="1789.6959"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       xml:space="preserve"><tspan
+         style="font-size:21.98784256px;line-height:1.25;fill:#ffffff;fill-opacity:1;"
+         y="1312.7472"
+         x="1789.6959"
+         id="tspan5567"
+         sodipodi:role="line">Translatable term</tspan><tspan
+         style="font-size:21.98784256px;line-height:1.25;fill:#ffffff;fill-opacity:1;"
+         id="tspan5569"
+         y="1340.2321"
+         x="1789.6959"
+         sodipodi:role="line"> </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';fill:#ffffff;fill-opacity:1;"
+         id="tspan5571"
+         y="1362.4113"
+         x="1789.6959"
+         sodipodi:role="line">Change the color of this text</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -4109,14 +4205,6 @@
        inkscape:groupmode="layer"
        id="layer7"
        inkscape:label="other">
-      <rect
-         y="282.86221"
-         x="1700"
-         height="370.5"
-         width="1412.0098"
-         id="vui_toolbar_bg-6"
-         style="color:#000000;fill:#0e7ede;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         inkscape:label="vui_color" />
       <rect
          transform="translate(-82.869929,-1917.2964)"
          style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -4149,12 +4237,12 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/frank/Downloads/toolbar.png"
          inkscape:label="vui_color"
-         style="color:#000000;fill:#0e7ede;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#0e7ede;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
          id="vui_toolbar_bg"
-         width="1412.0098"
-         height="48.5"
+         width="1414.838"
+         height="427.50922"
          x="1700"
-         y="232.86218" />
+         y="232.8622" />
       <rect
          y="232.86218"
          x="1700.0001"
@@ -4731,22 +4819,22 @@
            x="1749"
            height="41.999996"
            width="192"
-           id="vui_toolbar_action_button_bg"
+           id="vui_toolbar_sub_action_button_bg"
            style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            inkscape:label="vui_color" />
         <text
            transform="scale(1.0033763,0.99663506)"
            inkscape:label="vui_color"
-           id="vui_toolbar_action_button_fg"
+           id="vui_toolbar_sub_action_button_fg"
            y="800.83954"
            x="1762.3445"
-           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#693f24;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;enable-background:accumulate"
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#914210;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;enable-background:accumulate;"
            xml:space="preserve"><tspan
              y="800.83954"
              x="1762.3445"
              id="tspan3891-8-7-9"
              sodipodi:role="line"
-             style="font-size:15.47227192px;line-height:1.25">Action button normal</tspan></text>
+             style="font-size:15.47227192px;line-height:1.25;fill:#914210;fill-opacity:1;">Action button normal</tspan></text>
         <g
            style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            id="g5627-2-0">
@@ -4754,26 +4842,26 @@
              inkscape:label="vui_color"
              style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
              d="m 1940,772.36218 1,-1 0,42 -1,-1 z"
-             id="vui_toolbar_action_button_border_right"
+             id="vui_toolbar_sub_action_button_border_right"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="vui_color"
              style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
              d="m 1750,772.36218 -1,-1 0,42 1,-1 z"
-             id="vui_toolbar_action_button_border_left"
+             id="vui_toolbar_sub_action_button_border_left"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
              d="m 1940,772.36218 1,-1 -192,0 1,1 z"
-             id="vui_toolbar_action_button_border_top"
+             id="vui_toolbar_sub_action_button_border_top"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="ccccc" />
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#ffd03f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
              d="m 1940,812.36218 1,1 -192,0 1,-1 z"
-             id="vui_toolbar_action_button_border_bottom"
+             id="vui_toolbar_sub_action_button_border_bottom"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="ccccc" />
         </g>
@@ -4789,53 +4877,73 @@
            x="1750"
            height="40"
            width="190.00006"
-           id="vui_toolbar_action_button_active_bg"
-           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="vui_toolbar_sub_action_button_active_bg"
+           style="color:#000000;fill:#ffdf3f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            inkscape:label="vui_color" />
         <text
            transform="scale(1.0033763,0.99663506)"
            inkscape:label="vui_color"
-           id="vui_toolbar_action_button_active_fg"
+           id="vui_toolbar_sub_action_button_active_fg"
            y="800.83954"
            x="1767.1947"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#0e7ede;fill-opacity:1;stroke:none"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#c8550b;fill-opacity:1;stroke:none;font-size:15.47227192px;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east_asian:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;"
            xml:space="preserve"><tspan
              y="800.83954"
              x="1767.1947"
              id="tspan3891-8-7-0-6"
              sodipodi:role="line"
-             style="font-size:15.47227192px;line-height:1.25">Action button active</tspan></text>
+             style="font-size:15.47227192px;line-height:1.25;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east_asian:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;vector-effect:none;fill:#c8550b;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;">Action button active</tspan></text>
         <g
            style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            id="g5627-2-4-2">
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#ffdf3f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
              d="m 1940,772.36218 1,-1 0,42 -1,-1 z"
-             id="vui_toolbar_action_button_border_active_right"
+             id="vui_toolbar_sub_action_button_border_active_right"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#ffdf3f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
              d="m 1750,772.36218 -1,-1 0,42 1,-1 z"
-             id="vui_toolbar_action_button_border_active_left"
+             id="vui_toolbar_sub_action_button_border_active_left"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#fffc60;fill-opacity:0.50068964;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
              d="m 1940,772.36218 1,-1 -192,0 1,1 z"
-             id="vui_toolbar_action_button_border_active_top"
+             id="vui_toolbar_sub_action_button_border_active_top"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="ccccc" />
           <path
              inkscape:label="vui_color"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             style="color:#000000;fill:#ff931e;fill-opacity:0.46620693;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
              d="m 1940,812.36218 1,1 -192,0 1,-1 z"
-             id="vui_toolbar_action_button_border_active_bottom"
+             id="vui_toolbar_sub_action_button_border_active_bottom"
              inkscape:connector-curvature="0"
              sodipodi:nodetypes="ccccc" />
         </g>
       </g>
+      <rect
+         y="302.66119"
+         x="2675.8074"
+         height="370.5"
+         width="1412.0098"
+         id="vui_toolbar_sub_bg"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f0f2f4;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+         inkscape:label="vui_color" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.22484016px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;display:inline;opacity:1;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         x="3857.1943"
+         y="352.20837"
+         id="vui_toolbar_sub_fg"
+         inkscape:label="vui_color"><tspan
+           id="tspan5437"
+           sodipodi:role="line"
+           x="3857.1943"
+           y="352.20837"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.22484016px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">vui_toolbar_sub_fg</tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
@@ -5836,36 +5944,36 @@
     <g
        inkscape:label="vui_color"
        id="vui_table_cell_fg"
-       style="fill:#47616d;fill-opacity:1">
+       style="fill:#2d4960;fill-opacity:1;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
       <text
          inkscape:label="vui_color"
          id="text4720"
          y="637.7121"
          x="1816.0466"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          xml:space="preserve"
          transform="scale(0.9797959,1.0206207)"><tspan
            y="637.7121"
            x="1816.0466"
            id="tspan4722"
            sodipodi:role="line"
-           style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Normal cell</tspan></text>
       <text
          inkscape:label="vui_color"
          id="text4724"
          y="637.7121"
          x="2061.5659"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          xml:space="preserve"
          transform="scale(0.97979591,1.0206207)"><tspan
            y="637.7121"
            x="2061.5659"
            id="tspan4726"
            sodipodi:role="line"
-           style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Normal cell</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          x="2306.5149"
          y="637.7121"
          id="vui_table_header_fg-5"
@@ -5875,7 +5983,7 @@
            id="tspan4662-1"
            x="2306.5149"
            y="637.7121"
-           style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Normal cell</tspan></text>
     </g>
   </g>
   <use
@@ -5898,7 +6006,7 @@
      id="use4753"
      transform="translate(-119.65059,2624.6149)">
     <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.03485257;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.06482758;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        id="vui_table_cell_alt_bg"
        width="720"
        height="35.000023"
@@ -5908,11 +6016,11 @@
     <g
        id="vui_table_cell_alt_fg"
        inkscape:label="vui_color"
-       style="fill:#47616d;fill-opacity:1">
+       style="fill:#2d4960;fill-opacity:1;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
       <text
          transform="scale(0.9797959,1.0206207)"
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          x="1816.0466"
          y="637.7121"
          id="text4765"
@@ -5921,11 +6029,11 @@
            id="tspan4767"
            x="1816.0466"
            y="637.7121"
-           style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Alternate cell</tspan></text>
       <text
          transform="scale(0.97979591,1.0206207)"
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          x="2061.5659"
          y="637.7121"
          id="text4769"
@@ -5934,20 +6042,20 @@
            id="tspan4771"
            x="2061.5659"
            y="637.7121"
-           style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Alternate cell</tspan></text>
       <text
          transform="scale(0.97979591,1.0206207)"
          inkscape:label="vui_color"
          id="text4773"
          y="637.7121"
          x="2306.5149"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
          xml:space="preserve"><tspan
            y="637.7121"
            x="2306.5149"
            id="tspan4775"
            sodipodi:role="line"
-           style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+           style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#2d4960;fill-opacity:1;stroke:none;stroke-width:1.00000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Alternate cell</tspan></text>
     </g>
   </g>
   <use
@@ -5967,7 +6075,7 @@
      width="100%"
      height="100%" />
   <rect
-     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.20576405;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#294964;fill-opacity:0.16344827;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none"
      id="vui_table_border"
      width="1"
      height="350.00003"
@@ -6077,7 +6185,7 @@
      height="69.999802"
      width="798.48883"
      id="vui_table_row_selected_bg"
-     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#0e7ede;fill-opacity:0.20965517;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#2492f1;fill-opacity:0.18848171;fill-rule:nonzero;stroke:none;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none" />
   <use
      height="100%"
      width="100%"
@@ -6096,7 +6204,7 @@
      height="100%" />
   <rect
      transform="translate(-119.65059,2589.6149)"
-     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#212d33;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#2d4960;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none"
      id="vui_table_row_selected_fg"
      width="675.28699"
      height="69.999878"

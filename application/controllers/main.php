@@ -20,6 +20,20 @@ class Main extends CI_controller {
 
 		$this->load->database();
 
+		$this->load->model( 'common/main_common_model', 'mcm' );
+		$this->load->model( 'users_mdl', 'users' );
+
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 * Definindo o ambiente
+		 */
+
+		$this->mcm->environment = SITE_ALIAS;
+
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 */
+
 		$this->load->helper(
 
 			array(
@@ -35,26 +49,13 @@ class Main extends CI_controller {
 				'html',
 				'vui_elements',
 				'directory',
+				'language', 
 
 			)
 
 		);
 
-		$this->load->model( 'common/main_common_model', 'mcm' );
-		$this->load->model( 'users_mdl', 'users' );
 
-
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 * Definindo o ambiente
-		 */
-
-		$this->mcm->environment = SITE_ALIAS;
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 */
 
 
 
@@ -292,9 +293,9 @@ class Main extends CI_controller {
 		$this->mcm->current_menu_item = get_current_menu_item();
 		//var_dump($this->mcm->current_menu_item);
 		if ( $this->mcm->current_menu_item AND $this->mcm->current_menu_item[ 'status' ] ){
-
+			
 			$current_menu_item_params = $this->mcm->current_menu_item[ 'params' ] = get_params( $this->mcm->current_menu_item[ 'params' ] );
-
+			
 		}
 		// se o item de menu atual estiver desativado, exibimos a tela 404
 		else if ( ( $this->mcm->current_menu_item !== 0 AND $this->mcm->current_menu_item !== FALSE ) AND ( ! $this->mcm->current_menu_item[ 'status' ] ) ){
@@ -302,7 +303,7 @@ class Main extends CI_controller {
 			show_404();
 
 		}
-
+		
 		$this->mcm->filtered_system_params = $this->mcm->parse_params( filter_params( $this->mcm->filtered_system_params, $current_menu_item_params ) );
 
 		// descomente para ver os dados

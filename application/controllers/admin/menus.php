@@ -537,6 +537,8 @@ class Menus extends Main {
 				
 				$this->load->helper( 'menus' );
 				
+				$menu_item = array();
+				
 				// verificamos se a ação é de edição ou adição
 				// se for adição, desatribuímos a variável $menu_item_id ( se esta estiver definida ), pois esta não é necessária nesta ação
 				if ( $menu_item_id ){
@@ -544,7 +546,8 @@ class Menus extends Main {
 					if ( $menu_item = $this->menus->get_menu_item( $menu_item_id ) ){
 						
 						$data[ 'menu_item' ] = & $menu_item;
-						$data[ 'params' ] = $menu_item[ 'params' ] = get_params( $menu_item[ 'params' ] );
+						$data[ 'params' ] = & $menu_item[ 'params' ];
+						$menu_item[ 'params' ] = get_params( $menu_item[ 'params' ] );
 						
 					}
 					else {
@@ -687,60 +690,24 @@ class Menus extends Main {
 				// se o tipo do item de menu estiver definido, quer dizer que o tipo de item de menu foi escolhido, logo, podemos prosseguir para o formulário
 				else if ( $type ){
 					
+					$params_values = array();
+					
+					if ( $action == 'e' ){
+						
+						$db_params_values = get_params( $menu_item[ 'params' ] );
+						
+					}
+					
+					$get_params_values = $this->input->get( 'params' );
+					$post_params_values = $this->input->post( 'params' );
+					
+					$params_values = array_merge_recursive_distinct( $db_params_values, $get_params_values );
+					$params_values = array_merge_recursive_distinct( $params_values, $post_params_values );
+					
 					$data[ 'menu_items' ] = $this->menus->get_menu_items_tree();
 					$data[ 'users' ] = $this->users->get_users_checking_privileges()->result_array();
 					//$data[ 'users_groups' ] = $this->users->get_accessible_users_groups( $this->users->user_data[ 'id' ] );
 					$data[ 'users_groups' ] = $this->users->get_users_groups_tree( 0, 0, 'list' );
-					
-					/******************************/
-					/********* Parâmetros *********/
-					
-					/******** Item de menu ********/
-					
-					// obtendo as especificações dos parâmetros
-					$data['menu_item_params_spec'] = $this->menus_model->get_menu_item_params();
-					
-					if ( $action == 'e' ){
-						
-						// obtendo os valores atuais dos parâmetros
-						$data[ 'current_params_values' ] = get_params( $menu_item[ 'params' ] );
-						
-						//-------------------
-						// Adjusting params array values
-						$new_values = array();
-						
-						foreach( $data[ 'current_params_values' ] as $k => $item ) {
-							
-							if ( is_array( $item ) ) {
-								
-								$new_values = _resolve_array_param_value( $k, $item );
-								
-								unset( $data[ 'current_params_values' ][ $k ] );
-								
-							}
-							
-							$data[ 'current_params_values' ] = $data[ 'current_params_values' ] + $new_values;
-							
-						}
-						
-						// cruzando os valores padrões das especificações com os atuais
-						$data[ 'menu_item_final_params_values' ] = $data[ 'current_params_values' ];
-					
-					}
-					else {
-						
-						// cruzando os valores padrões das especificações com os atuais
-						$data['menu_item_final_params_values'] = $data['menu_item_params_spec']['params_spec_values'];
-						
-					}
-					
-					// definindo as regras de validação
-					set_params_validations( $data['menu_item_params_spec']['params_spec'] );
-					
-					/******** Item de menu ********/
-					
-					/********* Parâmetros *********/
-					/******************************/
 					
 					// se o tipo for component, então preparamos / obtemos os parâmetros necessários
 					if ( $type == 'component' AND $component_id ){
@@ -772,45 +739,61 @@ class Menus extends Main {
 						// Registrando o item do componente para identificação
 						$this->menu_item_component_item = 'menu_item_' . $component_item;
 						
+						// Aplicando um array padrão para as especificações dos parâmetros do menu
+						$menu_params_spec = array();
+						
 						if ( $action == 'e' ){
 							
-							$params_values = array();
+							$menu_item[ 'params' ] = & $params_values;
 							
-							if ( $this->input->post() ) {
-								
-								$params_values = array_merge_recursive_distinct( $data[ 'current_params_values' ], $this->input->post( 'params' ) );
-								
-							}
-							else {
-								
-								$params_values = $data[ 'current_params_values' ];
-								
-							}
-							
-							$menu_item[ 'params' ] = $params_values;
-							
-							// obtendo as especificações dos parâmetros
-							$data['component_params_spec'] = $this->{ $target_component[ 'unique_name' ] . '_model' }->{ 'menu_item_' . $component_item }( $menu_item );
-							// cruzando os valores padrões das especificações com os atuais
-							$data['component_final_params_values'] = array_merge( $data['component_params_spec']['params_spec_values'], $data['current_params_values'] );
-							
-						}
-						else {
-							
-							// obtendo as especificações dos parâmetros
-							$data['component_params_spec'] = $this->{ $target_component[ 'unique_name' ] . '_model' }->{ 'menu_item_' . $component_item }();
-							// cruzando os valores padrões das especificações com os atuais
-							$data['component_final_params_values'] = $data['component_params_spec']['params_spec_values'];
+							// obtendo as especificações dos parâmetros do menu
+							$menu_params_spec = $this->menus_model->get_menu_item_params( $menu_item );
 							
 						}
 						
+						// obtendo as especificações dos parâmetros do componente
+						$comp_params_spec = $this->{ $target_component[ 'unique_name' ] . '_model' }->{ 'menu_item_' . $component_item }( $menu_item );
+						
+						$params_spec = array_merge_recursive_distinct( $menu_params_spec, $comp_params_spec );
+						
+						if ( $action == 'a' ){
+							
+							$params_values = $params_spec[ 'params_spec_values' ];
+							
+						}
+						
+// 						echo '<strong>$params_values:</strong><pre>' . print_r( $params_values, TRUE ) . '</pre>';EXIT;
+						
+						foreach( $params_values as $k => $item ) {
+							
+							$new_values = array();
+							
+							if ( is_array( $item ) ) {
+								
+								$new_values = _resolve_array_param_value( $k, $item );
+								
+								unset( $params_values[ $k ] );
+								
+							}
+							
+							$params_values = $params_values + $new_values;
+							
+						}
+						
+// 						echo '<strong>$params_values:</strong><pre>' . print_r( $params_values, TRUE ) . '</pre>';EXIT;
+						
+						$data[ 'params_spec' ] = & $params_spec;
+						$data[ 'params_values' ] = & $params_values;
+						
 						// definindo as regras de validação
-						set_params_validations( $data['component_params_spec']['params_spec'] );
+						set_params_validations( $params_spec[ 'params_spec' ] );
 						
 						/********* Componente *********/
 						
 						/********* Parâmetros *********/
 						/******************************/
+						
+// 						echo '<strong>$post:</strong><pre>' . print_r( $this->input->post( 'params' ), TRUE ) . '</pre>';EXIT;
 						
 						$data[ 'menu_item_link_disabled' ] = TRUE;
 						
@@ -876,7 +859,9 @@ class Menus extends Main {
 					}
 					
 					if($this->input->post('submit_cancel')){
+						
 						redirect_last_url();
+						
 					}
 					// se a validação dos campos for positiva
 					else if ( $this->form_validation->run() AND ( $this->input->post( 'submit' ) OR $this->input->post( 'submit_apply' ) ) ){
@@ -900,7 +885,7 @@ class Menus extends Main {
 							'access_type',
 							'params',
 							
-						), $this->input->post() );
+						), $this->input->post( NULL, TRUE ) );
 						
 						if ( $type == 'component' ){
 							

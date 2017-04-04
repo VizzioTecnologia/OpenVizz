@@ -18,7 +18,6 @@ $lang['submit_form_title'] = 																	"Titulo do Esquema de Dados";
 $lang['tip_submit_form_title'] = 																"Informe um título para este Esquema de Dados";
 $lang['submit_form_alias'] = 																	"Apelido do Esquema de Dados";
 $lang['tip_submit_form_alias'] = 																"Informe um apelido para este Esquema de Dados. Deixe em branco para ser automaticamente preenchido";
-$lang['submit_form_layout_view'] = 																"Layout do Esquema de Dados";
 $lang['submit_forms_allow_html_tags'] = 														"Permitir tags HTML";
 $lang['tip_submit_forms_allow_html_tags'] = 													"Permite tags HTML em campos de entrada de texto";
 $lang['ud_data_props_enable_xss_filtering_admin'] = 											"Ativar filtro XSS na administração";
@@ -444,7 +443,7 @@ $lang['submit_form_user_submit_updated'] = 														"Envio atualizado com s
 
 $lang['users_submits_config'] = 																"Configurações dos Dados UniD";
 $lang['select_submit_form'] = 																	"Selecione o Esquema de Dados";
-$lang['users_submits_layout'] = 																"Layout dos Dados UniD";
+$lang['ud_d_list_layout_site'] = 																"Layout da listagem de Dados UniD no site";
 $lang['fields_to_show'] = 																		"Campos visíveis";
 $lang['users_submits_search'] = 																"Pesquisa dos Dados UniD";
 $lang['use_search'] = 																			"Usar pesquisa";
@@ -472,7 +471,7 @@ $lang['ud_data_no_result_str_value'] = 															"Sem resultados";
 $lang['ud_data_no_search_result_str'] = 														"Texto para \"sem resultados\" ao efetuar busca";
 $lang['tip_ud_data_no_search_result_str'] = 													"Frase padrão para quando não existirem Dados UniD a serem mostrados, exibido somente ao efetuar uma pesquisa";
 $lang['ud_data_no_search_result_str_value'] = 													"Sem resultados";
-$lang['ud_data_list_init_search_str'] = 														"Inicie uma pesquisa preenchendo o Esquema de Dados de busca";
+$lang['ud_data_list_init_search_str'] = 														"Inicie uma pesquisa preenchendo o formulário de pesquisa.";
 $lang['users_submits_search_results_string_config_label'] = 									"String para vários resultados";
 $lang['tip_users_submits_search_results_string_config_label'] = 								"Frase padrão para resultados encontrados (plural). %s será substituído pelo número de resultados";
 $lang['results_title_field'] = 																	"Título dos resultados";
@@ -482,13 +481,14 @@ $lang['users_submits_order_by_direction'] = 													"Direção da ordenaç�
 $lang['users_submits_items_per_page'] = 														"Itens por página";
 $lang['show_default_results'] = 																"Exibir resultados iniciais";
 $lang['us_default_results_filters'] = 															"Filtros padrões";
+$lang['tip_us_default_results_filters'] = 														"Estes filtros serão aplicados a todos os resultados gerados através desta página no site. Se novos filtros forem gerados (ex.: através de uma pesquisa), o mesmos serão adicionados aos fitros aqui especificados.";
 $lang['us_results'] = 																			"Envios";
 $lang['users_submits_num_items_to_show'] = 														"Número de Dados UniD a mostrar";
 
 $lang['ud_data_list_search_results'] = 															"Resultados de pesquisa";
 $lang['ud_data_list_search_results_specific_config'] = 											"Configurações específicas para as pesquisas";
-$lang['ud_data_list_visible_prop_search_fields_lbl'] = 											"Campos de pesquisa visíveis";
-$lang['ud_data_list_visible_prop_search_fields'] = 												"Campos de pesquisa visíveis";
+$lang['ud_data_availability_site_search_lbl'] = 											"Campos de pesquisa visíveis";
+$lang['ud_data_availability_site_search'] = 												"Campos de pesquisa visíveis";
 $lang['ud_data_list_prop_search_field_terms'] = 												"Campos de termos de pesquisa";
 
 $lang['ud_title_prop'] = 																		"Titulos";
@@ -502,7 +502,7 @@ $lang['ud_data_list_ds_readmore_link'] = 														"Link \"<strong>Leia mais
 $lang['ud_data_list_ds_readmore_link_custom_str'] = 											"Texto personalizado";
 $lang['ud_data_list_ds_readmore_link_url'] = 													"Endereço URL";
 $lang['ud_data_list_ds_readmore_link_target'] = 												"Alvo";
-$lang['ud_data_list_d_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada dado";
+$lang['ud_data_list_d_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada Dado UniD";
 $lang['ud_data_list_d_readmore_link_custom_str'] = 												"Texto personalizado";
 $lang['ud_data_list_d_readmore_link_url'] = 													"Endereço URL";
 $lang['ud_data_list_d_readmore_link_target'] = 													"Alvo";
@@ -562,11 +562,11 @@ $lang['ud_psm_uar_t_default'] = 																"Conta de usuário já existente
 $lang['ud_psm_uar_m'] = 																		"Mensagem";
 $lang['ud_psm_uar_m_default'] = 																"Parece que já existe uma conta usando alguns dos dados informados";
 
-$lang['ud_psm_user_already_sent_form'] = 														"Usuário já Dado UniDu o Esquema de Dados";
+$lang['ud_psm_user_already_sent_form'] = 														"Usuário já enviou o formulário";
 $lang['ud_psm_uasf_t'] = 																		"Título";
-$lang['ud_psm_uasf_t_default'] = 																"Você já Dado UniD este Esquema de Dados";
+$lang['ud_psm_uasf_t_default'] = 																"Você já enviou este formulário";
 $lang['ud_psm_uasf_m'] = 																		"Mensagem";
-$lang['ud_psm_uasf_m_default'] = 																"Parece que você já Dado UniDu este Esquema de Dados anteriormente com sucesso";
+$lang['ud_psm_uasf_m_default'] = 																"Parece que você já enviou este formulário anteriormente com sucesso";
 
 
 $lang[ 'ud_dl_filters_profiles' ] = 															"Perfis de filtros";
@@ -1021,7 +1021,6 @@ $lang['us_pre_text_position'] = 																"Disposição do pré-texto";
 
 
 
-$lang['look_and_feel'] = 																		"Aparência";
 $lang['edit_submit_form'] = 																	"Editar Esquema de Dados";
 
 // fields

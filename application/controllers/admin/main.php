@@ -42,6 +42,21 @@ class Main extends CI_controller {
 		// loading helpers, libraries and models
 		$this->load->database();
 
+		$this->load->model( 'common/main_common_model', 'mcm' );
+		$this->load->model( 'users_mdl', 'users' );
+
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 * Definindo o ambiente
+		 */
+
+		$this->mcm->environment = ADMIN_ALIAS;
+		$env = $this->mcm->environment; // local environment var
+
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 */
+		
 		$this->load->helper(
 
 			array(
@@ -58,25 +73,11 @@ class Main extends CI_controller {
 				'vui_elements',
 				'string',
 				'directory',
+				'language', 
 
 			)
 
 		);
-
-		$this->load->model( 'common/main_common_model', 'mcm' );
-		$this->load->model( 'users_mdl', 'users' );
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 * Definindo o ambiente
-		 */
-
-		$this->mcm->environment = ADMIN_ALIAS;
-		$env = $this->mcm->environment; // local environment var
-
-		/*
-		 * -------------------------------------------------------------------------------------------------
-		 */
 
 
 
@@ -341,25 +342,24 @@ class Main extends CI_controller {
 		
 		if ( ! $this->users->is_logged_in() AND ( ! in_array( $this->uri->ruri_string(), array( '/main/index/logout', '/main/index/login', ) ) ) ){
 			
-			// define a url que o usuário tentou acessar
-			// assim, após o login o usuário será redirecionado para esta url
-			$this->session->set_envdata( 'uri_after_login_' . $env, $env . $this->uri->ruri_string() );
-			
 			$this->load->language( 'admin/users' );
 			msg( lang( 'authentication_failure' ),'title' );
 			msg( lang( 'you_must_be_logged_in' ), 'error' );
 			
-			if ( $this->input->post( 'ajax' ) ) {
+			if ( $this->input->post( 'ajax', TRUE ) ) {
 				
-				// as linhas a seguir são para a resposta em ajax
 				$msg = loadMsg();
 				
-				$this->output->set_status_header( '401', $msg );
+				$this->output->set_status_header( '450', $msg );
 				
 				exit ( $msg );
 				
 			}
 			else {
+				
+				// define a url que o usuário tentou acessar
+				// assim, após o login o usuário será redirecionado para esta url
+				$this->session->set_envdata( 'uri_after_login_' . $env, $env . $this->uri->ruri_string() );
 				
 				redirect( 'admin/main/index/login' );
 				

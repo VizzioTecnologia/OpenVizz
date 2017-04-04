@@ -564,23 +564,78 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			
 			$i = 0;
 			
+			$group_open = FALSE;
+			
 			//print_r( $filters ); exit;
 			
 			foreach( $filters as $k => $filter ) {
 				
-				if ( isset( $filter[ 'alias' ] ) AND isset( $filter[ 'comp_op' ] ) AND isset( $filter[ 'value' ] ) ) {
+				if ( isset( $filter[ 'alias' ] ) AND ( in_array( $filter[ 'alias' ], array( 'group_open', 'group_close' ) ) ) ) {
 					
-					if ( $i > 0 ) {
+					switch ( $filter[ 'alias' ] ) {
 						
-						// logical operator
-						if ( isset( $filter[ 'log_op' ] ) ) {
+						case 'group_open':
 							
-							$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
+							if ( $i > 0 ) { 
+								
+								if ( ! $group_open ) {
+									
+									// logical operator
+									if ( isset( $filter[ 'log_op' ] ) ) {
+										
+										$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
+										
+									}
+									else {
+										
+										$out .= ' AND ';
+										
+									}
+									
+								}
+								else {
+									
+									$group_open = FALSE;
+									
+								}
+								
+							}
+							
+							$group_open = TRUE;
+							$out .= ' ( ';
+							break;
+							
+						case 'group_close':
+							
+							$out .= ' ) ';
+							break;
+							
+						
+					}
+					
+				}
+				else if ( isset( $filter[ 'alias' ] ) AND isset( $filter[ 'comp_op' ] ) AND isset( $filter[ 'value' ] ) ) {
+					
+					if ( $i > 0 ) { 
+						
+						if ( ! $group_open ) {
+							
+							// logical operator
+							if ( isset( $filter[ 'log_op' ] ) ) {
+								
+								$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
+								
+							}
+							else {
+								
+								$out .= ' AND ';
+								
+							}
 							
 						}
 						else {
 							
-							$out .= ' AND ';
+							$group_open = FALSE;
 							
 						}
 						
@@ -622,7 +677,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 						
 						if ( in_array( $filter[ 'comp_op' ], array( '=', '!=' ) ) ) {
 							
-							$out .= '( ' . $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\' ' . ( ! $_column_is_native ? ( ( $filter[ 'comp_op' ] == '=' ? 'OR' : 'AND' ) . ' `t1`.`data` ' . ( $filter[ 'comp_op' ] == '=' ? 'LIKE' : 'NOT LIKE' ) . ' \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $filter[ 'value' ] . '"%\'' . ( $filter[ 'comp_op' ] == '!=' ? ' AND `t1`.`data` LIKE \'%"' . trim( $filter[ 'alias' ] ) . '":"%"%\'' : '' ) ) : '' ) . ' )';
+							$out .= '( ' . $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\' ' . ( ! $_column_is_native ? ( ( $filter[ 'comp_op' ] == '=' ? 'OR' : 'AND' ) . ' `t1`.`data` ' . ( $filter[ 'comp_op' ] == '=' ? 'LIKE' : 'NOT LIKE' ) . ' \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $filter[ 'value' ] . '"%\'' . ( $filter[ 'comp_op' ] == '!=' ? ' AND `t1`.`data` NOT LIKE \'%"' . trim( $filter[ 'alias' ] ) . '":"%"%\'' : '' ) ) : '' ) . ' )';
 							
 						}
 						else {
@@ -657,14 +712,23 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					if ( $i > 0) {
 						
-						if ( isset( $filter[ 'log_op' ] ) ) {
+						if ( ! $group_open ) {
 							
-							$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
+							if ( isset( $filter[ 'log_op' ] ) ) {
+								
+								$out .= ' ' . strtoupper( $filter[ 'log_op' ] ) . ' ';
+								
+							}
+							else {
+								
+								$out .= ' OIOI ';
+								
+							}
 							
 						}
 						else {
 							
-							$out .= ' AND ';
+							$group_open = FALSE;
 							
 						}
 						

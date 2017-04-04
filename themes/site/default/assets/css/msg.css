@@ -6,49 +6,71 @@
  ---------------------------------------------------------
  */
 
- #msg-block{
+ #msg-block {
 
 	position: relative;
 	z-index: 2;
 
  }
-	#msg-block > .s1{
+	#msg-block > .s1 {
 
 		position: relative;
 		display: block;
+		
 	}
+	
+		#msg-block > .s1 > .s2 {
+			
+			position: relative;
+			display: block;
+			
+		}
 
-
-.msg{
-
+.msg {
+	
 	position: relative;
 	display: block;
-	margin: <?= VUI_SPACING; ?>em auto;
-
+	
+	padding: <?= VUI_SPACING; ?>em;
+	margin: <?= VUI_SPACING / 2; ?>em auto;
+	
 	background: <?= $vui->colors->vui_msg_main_bg->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
-
+	color: <?= $vui->colors->vui_msg_main_fg->rgba_s(); ?>;
+	
 	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
-
+	
 }
+
 .width-640-960 .msg,
 .width-480-640 .msg,
 .width-480-lower .msg{
 	
 }
-.msg-type-title{
-
-	position: relative;
-	display: block;
+.msg-item {
+	
 	padding: <?= VUI_SPACING; ?>em;
-	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
-	font-size: 120%;
-
+	margin-bottom: <?= VUI_SPACING / 2; ?>em !important;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+	
+	border: thin solid transparent;
+	
 }
-.msg-item{
-
-	padding: <?= VUI_SPACING; ?>em;
-
+.msg-item > * {
+	
+	margin: 0 !important;
+	margin-bottom: <?= VUI_SPACING / 2; ?>em !important;
+	
+}
+.msg-item > *:last-child {
+	
+	margin-bottom: 0 !important;
+	
+}
+.msg-item:last-child {
+	
+	margin-bottom: 0 !important;
+	
 }
 .msg-item a {
 	
@@ -56,92 +78,129 @@
 	text-decoration: none;
 	font-style: italic;
 	display: inline;
-	border-bottom: thin dashed <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_msg_main_fg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_msg_main_fg->rgba_s(); ?>;
 	
 }
 .msg-item a:hover {
 	
-	border-bottom: thin dashed <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_msg_main_bg->get_ro_color( 100 )->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_msg_main_fg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_msg_main_fg->rgba_s(); ?>;
 	
 }
 .msg-item:last-child{
 
-	<?= $vui->css->border_radius( '0 0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS ); ?>
+/* 	<?= $vui->css->border_radius( '0 0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS ); ?> */
 
+}
+
+
+.msg-type-title{
+	
+	position: relative;
+	display: block;
+	padding: 0;
+	margin: 0;
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	font-size: 120%;
+	
+	border: none;
+	
 }
 .msg-type-info{
 
 }
 .msg-type-success{
-
-	background: <?= $vui->colors->vui_success->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_success->get_ro_color( 100 )->rgba_s(); ?>;
-
+	
+	background: <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 1px ' . $vui->colors->vui_success_bg->darken( 50, true )->rgba_s( 40 ) ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_success_fg->rgba_s( 40 ); ?>;
+	
 }
 .msg-type-success a,
 .msg-type-success a:hover {
 
-	color: <?= $vui->colors->vui_success->get_ro_color( 100 )->rgba_s(); ?>;
-	border-bottom: thin dashed <?= $vui->colors->vui_success->get_ro_color( 100 )->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
 
 }
 .msg-type-error{
 
-	background: <?= $vui->colors->vui_error->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_error->get_ro_color( 100 )->rgba_s(); ?>;
-
+	background: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 1px ' . $vui->colors->vui_error_bg->darken( 50, true )->rgba_s( 40 ) ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_error_fg->rgba_s( 40 ); ?>;
+	
 }
 .msg-type-error a,
 .msg-type-error a:hover {
 
-	color: <?= $vui->colors->vui_error->get_ro_color( 100 )->rgba_s(); ?>;
-	border-bottom: thin dashed <?= $vui->colors->vui_error->get_ro_color( 100 )->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
 
 }
 .msg-type-warning{
 
-	background: <?= $vui->colors->vui_warning->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_warning->get_ro_color( 100 )->rgba_s(); ?>;
-
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 1px ' . $vui->colors->vui_warning_bg->darken( 50, true )->rgba_s( 40 ) ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_warning_fg->rgba_s( 40 ); ?>;
+	
 }
 .msg-type-warning a,
 .msg-type-warning a:hover {
 
-	color: <?= $vui->colors->vui_warning->get_ro_color( 100 )->rgba_s(); ?>;
-	border-bottom: thin dashed <?= $vui->colors->vui_warning->get_ro_color( 100 )->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
 
 }
 .msg-type-info{
 
-	background: <?= $vui->colors->vui_info->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_info->get_ro_color( 100 )->rgba_s(); ?>;
-
+	background: <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 1px ' . $vui->colors->vui_info_bg->darken( 50, true )->rgba_s( 40 ) ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_info_fg->rgba_s( 40 ); ?>;
+	
 }
 .msg-type-info a,
 .msg-type-info a:hover {
 
-	color: <?= $vui->colors->vui_info->get_ro_color( 100 )->rgba_s(); ?>;
-	border-bottom: thin dashed <?= $vui->colors->vui_info->get_ro_color( 100 )->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	border-bottom: thin dashed <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
 
 }
 .msg-inline-error{
 	
 	display: block;
 	
-	color: <?= $vui->colors->vui_error->rgba_s(); ?>;
-	
 	font-size: 90%;
 	
 	font-style: italic;
+	
+	padding: <?= VUI_SPACING / 3; ?>em <?= VUI_SPACING; ?>em;
+	
+	background: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->box_shadow( '0 1px 1px ' . $vui->colors->vui_error_bg->darken( 50, true )->rgba_s( 40 ) ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_error_fg->rgba_s( 40 ); ?>;
 	
 }
 .important,
 .text-warning{
 
-	background: <?= $vui->colors->vui_warning->rgba_s(); ?>;
-	color: <?= $vui->colors->vui_warning->get_ro_color( 100 )->rgba_s(); ?>;
+	background: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
 
 	font-weight: bold;
 

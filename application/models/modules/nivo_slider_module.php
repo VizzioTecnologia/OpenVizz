@@ -556,6 +556,7 @@ class Nivo_slider_module extends CI_Model{
 							'value' => pathinfo( $item, PATHINFO_BASENAME ),
 							
 						);
+						
 						$images_params[] = array(
 							
 							'type' => 'select',

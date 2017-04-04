@@ -440,7 +440,7 @@ function move_elements_to_toolbar() {
 			tagName = jthis.get(0).tagName;
 			
 			// se o elemento for uma div
-			if ( tagName == 'DIV' ){
+			if ( tagName == 'DIV' || tagName == 'FIELDSET' ){
 				
 				__append = true;
 				

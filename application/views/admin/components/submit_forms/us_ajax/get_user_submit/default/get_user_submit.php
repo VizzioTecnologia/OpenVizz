@@ -2,7 +2,9 @@
 	
 	$unique_hash_id = md5( rand( 100, 1000 ) ) . uniqid();
 	
-	$ud_data = $this->sfcm->parse_ud_d_data( $user_submit );
+	$this->ud_api->parse_ud_data( $user_submit );
+	
+	$ud_data = & $user_submit;
 	
 ?>
 
@@ -152,7 +154,7 @@
 							
 							echo '<span class="filter-me">';
 							
-							echo lang( $alias );
+							echo lang( $pd[ 'label' ] );
 							
 							echo '</span>';
 							
@@ -161,13 +163,6 @@
 							echo '<td class="value user-submit-info-item-value info-item-content">';
 							
 							echo '<span class="filter-me">';
-							
-							if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-								
-								$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-								$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-								
-							}
 							
 							echo $pd[ 'value' ];
 							
@@ -195,51 +190,87 @@
 					
 					echo '</td>';
 					
-					echo '<td class="value user-submit-info-item-value info-item-content">';
-					
-					echo '<span class="filter-me">';
-					
 					$advanced_options = check_var( $existing_fields[ $alias ][ 'advanced_options' ] ) ? $existing_fields[ $alias ][ 'advanced_options' ] : FALSE;
 					
-					if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
+					echo '<td class="
+					
+					ud-data-prop-wrapper
+					ud-data-prop-' . $alias
+					. ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) ? ' field-is-image' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) ? ' field-is-presentation-title' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_content' ] ) ? ' field-is-presentation-content' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_other_info' ] ) ? ' field-is-presentation-other-info' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) ? ' field-is-email' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) ? ' field-is-url' : '' )
+					. ( check_var( $advanced_options[ 'prop_is_ud_status' ] ) ? ' field-is-status' : '' )
+					. ( $pd[ 'value' ] ? ' ud-data-prop-value-' . $alias . '-' . url_title( base64_encode( $pd[ 'value' ] ), '-', TRUE ) : '' );
+					
+					if ( ! check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ! check_var( $fields[ $alias ][ 'options' ] ) ) {
 						
-						$thumb_params = array(
-							
-							'wrapper_class' => 'us-image-wrapper',
-							'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
-							'href' => get_url( $pd[ 'value' ] ),
-							'rel' => 'gus-thumb',
-							'title' => $pd[ 'value' ],
-							'modal' => TRUE,
-							'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
-							
-						);
-						
-						echo vui_el_thumb( $thumb_params );
-						
-					}
-					else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
-						
-						echo '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
-						
-					}
-					else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
-						
-						echo $pd[ 'value' ];
-						
-					}
-					else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
-						
-						echo '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
-						
-					}
-					else if ( isset( $pd[ 'value' ] ) ) {
-						
-						echo htmlspecialchars_decode( $pd[ 'value' ] );
+						echo ' ud-data-value-bit';
 						
 					}
 					
+					if ( isset( $submit_form[ 'ud_status_prop' ][ $alias ] ) ) {
+						
+						if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] )
+						AND ( check_var( $fields[ $alias ][ 'options_title_field' ] )
+						OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) ) {
+							
+							$_current_field_array = array(
+								
+								'prop_is_ud_status_active',
+								'prop_is_ud_status_inactive',
+								'prop_is_ud_status_enabled',
+								'prop_is_ud_status_disabled',
+								'prop_is_ud_status_canceled',
+								'prop_is_ud_status_postponed',
+								'prop_is_ud_status_archived',
+								'prop_is_ud_status_published',
+								'prop_is_ud_status_unpublished',
+								'prop_is_ud_status_scheduled',
+								
+							);
+							
+							foreach( $_current_field_array as $_item ) {
+								
+								// Se o valor do dado unid for igual
+								
+								if ( check_var( $fields[ $alias ][ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] ) AND $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] == $fields[ $alias ][ 'advanced_options' ][ $_item ] ) {
+									
+									echo ' ' . $_item;
+									echo ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+									
+								}
+								
+							}
+							
+						}
+						
+					}
+					
+					echo ' value'
+					. ' user-submit-info-item-value'
+					. ' info-item-content'
+					. '">';
+					
+					
+					
+					
+					
+					echo '<span id="filter-me" class="ud-data-value-wrapper">';
+					
+					echo $pd[ 'value' ];
+					
 					echo '</span>';
+						
+					
+					
+					
+					
+					
+					
+					
 					
 					echo '</td>';
 					

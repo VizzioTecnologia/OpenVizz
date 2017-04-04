@@ -94,7 +94,9 @@
 			}
 			else {
 				
-				$checked = ( $params_values[ $name ] AND $params_values[ $name ] == $value ) ? TRUE : FALSE;
+// 				echo '<pre>' . print_r( $params_values, TRUE ) . '</pre>';
+				
+				$checked = ( isset( $params_values[ $name ] ) AND $params_values[ $name ] != '' ) ? TRUE : FALSE;
 				
 			}
 			

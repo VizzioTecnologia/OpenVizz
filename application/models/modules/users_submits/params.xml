@@ -11,7 +11,7 @@
 		</param>
 		
 		<!-- as options deste campo são criadas via php -->
-		<param name="users_submits_layout" type="select" default="default" label="users_submits_layout" tip="tip_users_submits_layout" inline="1">
+		<param name="ud_d_list_layout_site" type="select" default="default" label="ud_d_list_layout_site" tip="tip_ud_d_list_layout_site" inline="1">
 			
 			<validation rules="trim|required" />
 			

@@ -10,9 +10,9 @@ class Unid extends Main {
 		
 		parent::__construct();
 		
-		if ( ! $this->load->is_model_loaded( 'udacm' ) ) {
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
 			
-			$this->load->model( 'common/unid_api_common_model', 'udacm' );
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
 			
 		}
 		
@@ -26,7 +26,7 @@ class Unid extends Main {
 		
 		$f_params = $this->uri->ruri_to_assoc();
 		
-		echo $this->udacm->api( $f_params, TRUE );
+		echo $this->ud_api->api( $f_params, TRUE );
 		
 	}
 	

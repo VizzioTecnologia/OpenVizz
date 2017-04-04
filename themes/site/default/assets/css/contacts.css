@@ -71,7 +71,7 @@
 /* ---------------------------------------------------- */
 /* Contact Info */
 
-.contact-details .contact-info-item {
+.contact-info-item .contact-phone {
 	
 	margin-bottom: <?= VUI_SPACING; ?>em;
 	

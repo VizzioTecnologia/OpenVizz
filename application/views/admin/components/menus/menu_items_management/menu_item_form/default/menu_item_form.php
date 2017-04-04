@@ -362,33 +362,16 @@
 					
 				</div>
 				
-				<?php } ?>
+				<?php }
 				
-				<?php
-				
-				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
+					/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
 					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
 					* após a chamada da função $this->form_validation->run()
 					*/
-				
-				echo params_to_html( $menu_item_params_spec, $menu_item_final_params_values );
-				
+					
+					echo params_to_html( $params_spec, $params_values );
+					
 				?>
-				
-				<?php if ( $type == 'component' ) { ?>
-				
-				<?php
-				
-				/* gerando o html dos parâmetros, ele deve ser chamado na view, não no controller,
-					* pois os erros de validação dos elementos dos parâmetros devem ser expostos
-					* após a chamada da função $this->form_validation->run()
-					*/
-				
-				echo params_to_html( $component_params_spec, $component_final_params_values );
-				
-				?>
-				
-				<?php } ?>
 				
 			</div>
 			

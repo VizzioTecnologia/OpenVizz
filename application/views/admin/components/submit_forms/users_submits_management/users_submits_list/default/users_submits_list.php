@@ -80,13 +80,9 @@
 <?php } ?>
 
 <?php if ( ! $this->input->post( 'ajax' ) ) { ?>
-<div id="users-submits-search-wrapper" class="users-submits-search-wrapper to-toolbar">
+<fieldset id="ud-data-search-wrapper" class="ud-data-search-wrapper to-toolbar">
 	
-	<?= form_open_multipart( 'admin' . $this->uri->ruri_string() . assoc_array_to_qs(), array( 'id' => 'us-search-form', ) );
-		
-		$combo_box_fields_to_search = array();
-		
-		?>
+	<legend class="fieldset-title">
 		
 		<?= vui_el_button(
 			
@@ -100,6 +96,14 @@
 			)
 			
 		); ?>
+		
+	</legend>
+	
+	<?= form_open_multipart( 'admin' . $this->uri->ruri_string() . assoc_array_to_qs(), array( 'id' => 'us-search-form', ) );
+		
+		$combo_box_fields_to_search = array();
+		
+		?>
 		
 		<div class="submit-form-field-wrapper submit-form-field-wrapper-terms submit-form-field-wrapper-terms ">
 			
@@ -299,7 +303,7 @@
 		
 	?>
 	
-</div>
+</fieldset>
 <?php } ?>
 
 <?php if ( ! $this->input->post( 'ajax' ) ) { ?>
@@ -566,124 +570,128 @@
 		</div>
 		<?php } ?>
 		
-		<table id="ud-data-list-main-table" class="arrow-nav data-list responsive multi-selection-table">
+		<div class="table-wrapper">
 			
-			<tr>
+			<table id="ud-data-list-main-table" class="arrow-nav data-list responsive multi-selection-table">
 				
-				<th class="col-checkbox">
+				<tr>
 					
-					<?= vui_el_checkbox( array( 'title' => lang( 'select_all' ), 'value' => 'select_all', 'name' => 'select_all_items', 'id' => 'select-all-items', ) ); ?>
-					
-				</th>
-				
-				<?php if ( ! check_var( $submit_form_id ) AND ! check_var( $columns ) ) { ?>
-					
-					<?php $current_column = 'id'; ?>
-					
-					<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
+					<th class="col-checkbox">
 						
-						<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+						<?= vui_el_checkbox( array( 'title' => lang( 'select_all' ), 'value' => 'select_all', 'name' => 'select_all_items', 'id' => 'select-all-items', ) ); ?>
 						
 					</th>
 					
-					<?php $current_column = 'submit_datetime'; ?>
-					
-					<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
+					<?php if ( ! check_var( $submit_form_id ) AND ! check_var( $columns ) ) { ?>
 						
-						<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+						<?php $current_column = 'id'; ?>
 						
-					</th>
-					
-					<?php $current_column = 'submit_form_title'; ?>
-					
-					<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
-						
-						<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) .  '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
-						
-					</th>
-					
-					<?php $current_column = 'output'; ?>
-					
-					<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
-						
-						<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
-						
-					</th>
-					
-				<?php } else { ?>
-					
-					<?php foreach ( $columns as $key => $column ) { ?>
-						
-						<?php $current_column = $column[ 'alias' ]; ?>
-						
-						<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?> col-<?= $column[ 'visible' ] ? 'visible' : 'hidden'; ?>">
+						<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
 							
-							<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $column[ 'title' ] ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang( 'ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+							<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , ( isset( $submit_form[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $submit_form[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( $current_column ) ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
 							
 						</th>
 						
+						<?php $current_column = 'submit_datetime'; ?>
+						
+						<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
+							
+							<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , ( isset( $submit_form[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $submit_form[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( $current_column ) ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+							
+						</th>
+						
+						<?php $current_column = 'submit_form_title'; ?>
+						
+						<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
+							
+							<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) .  '/a/cob/ob/' . $current_column) , ( isset( $submit_form[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $submit_form[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( $current_column ) ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+							
+						</th>
+						
+						<?php $current_column = 'output'; ?>
+						
+						<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?>">
+							
+							<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $current_column ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+							
+						</th>
+						
+					<?php } else { ?>
+						
+						<?php foreach ( $columns as $key => $column ) { ?>
+							
+							<?php $current_column = $column[ 'alias' ]; ?>
+							
+							<th class="col-<?= $current_column; ?>  order-by <?= ( $order_by == $current_column ) ? 'order-by-column ' . 'order-by-' . $order_by_direction : '' ?> col-<?= $column[ 'visible' ] ? 'visible' : 'hidden'; ?>">
+								
+								<?= anchor( get_url( 'admin' . '/' . $component_name.'/' . $component_function . ( check_var( $submit_form[ 'id' ] ) ? '/sfid/' . $submit_form[ 'id' ] : '' ) . '/a/cob/ob/' . $current_column) , lang( $column[ 'title' ] ), 'class="" title="'. ( ( $order_by == $current_column ) ? lang( 'ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) :  ( ( $order_by == $current_column ) ? lang('ordering_by_this_column_' . $order_by_direction . '_click_to_' . ( $order_by_direction == 'ASC' ? 'DESC' : 'ASC' ) ) : lang('click_to_order_by_this_column') )  ) .'"' ); ?>
+								
+							</th>
+							
+						<?php } ?>
+						
 					<?php } ?>
 					
-				<?php } ?>
-				
-				<?php $current_column = 'operations'; ?>
-				
-				<th class="col-<?= $current_column; ?> op-column">
+					<?php $current_column = 'operations'; ?>
 					
-					<?= lang( $current_column ); ?>
-					
-				</th>
-				
-			</tr>
-			
-			<?php foreach( $users_submits as & $ud_data ) {
-				
-				$ud_data = $this->sfcm->parse_ud_d_data( $ud_data, $fields_to_show, $submit_form );
-				
-				$_us_status = array();
-				$_us_status_classes = '';
-				$_us_has_status = FALSE;
-				
-				if ( check_var( $submit_form[ 'ud_status_prop' ] ) ) {
-					
-					foreach( $submit_form[ 'fields' ] as $status_field ) {
+					<th class="col-<?= $current_column; ?> op-column">
 						
-						if ( ! isset( $submit_form[ 'ud_status_prop' ][ $status_field[ 'alias' ] ] ) ) {
+						<?= lang( $current_column ); ?>
+						
+					</th>
+					
+				</tr>
+				
+				<?php foreach( $users_submits as & $ud_data ) {
+					
+					$this->ud_api->parse_ud_data( $ud_data, $fields_to_show, TRUE );
+					
+					$_us_status = array();
+					$_us_status_classes = '';
+					$_us_has_status = FALSE;
+					
+					if ( check_var( $submit_form[ 'ud_status_prop' ] ) ) {
+						
+						foreach( $submit_form[ 'fields' ] as $status_field ) {
 							
-							continue;
-							
-						}
-						else {
-							
-							if ( check_var( $status_field[ 'options_from_users_submits' ] )
-							AND ( check_var( $status_field[ 'options_title_field' ] )
-							OR check_var( $status_field[ 'options_title_field_custom' ] ) ) ) {
+							if ( ! isset( $submit_form[ 'ud_status_prop' ][ $status_field[ 'alias' ] ] ) ) {
 								
-								$_current_field_array = array(
-									
-									'prop_is_ud_status_active',
-									'prop_is_ud_status_inactive',
-									'prop_is_ud_status_enabled',
-									'prop_is_ud_status_disabled',
-									'prop_is_ud_status_canceled',
-									'prop_is_ud_status_postponed',
-									'prop_is_ud_status_archived',
-									'prop_is_ud_status_published',
-									'prop_is_ud_status_unpublished',
-									'prop_is_ud_status_scheduled',
-									
-								);
+								continue;
 								
-								foreach( $_current_field_array as $_item ) {
+							}
+							else {
+								
+								if ( check_var( $status_field[ 'options_from_users_submits' ] )
+								AND ( check_var( $status_field[ 'options_title_field' ] )
+								OR check_var( $status_field[ 'options_title_field_custom' ] ) ) ) {
 									
-									// Se o valor do dado unid for igual
+									$_current_field_array = array(
+										
+										'prop_is_ud_status_active',
+										'prop_is_ud_status_inactive',
+										'prop_is_ud_status_enabled',
+										'prop_is_ud_status_disabled',
+										'prop_is_ud_status_canceled',
+										'prop_is_ud_status_postponed',
+										'prop_is_ud_status_archived',
+										'prop_is_ud_status_published',
+										'prop_is_ud_status_unpublished',
+										'prop_is_ud_status_scheduled',
+										
+									);
 									
-									if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND $ud_data[ 'data' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
+									foreach( $_current_field_array as $_item ) {
 										
-										$_us_status[] = $_item;
-										$_us_status[] = 'status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+										// Se o valor do dado unid for igual
 										
-										$_us_has_status = TRUE;
+										if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'data' ][ $status_field[ 'alias' ] ] ) AND $ud_data[ 'data' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
+											
+											$_us_status[] = $_item;
+											$_us_status[] = 'status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+											
+											$_us_has_status = TRUE;
+											
+										}
 										
 									}
 									
@@ -695,15 +703,13 @@
 						
 					}
 					
-				}
-				
-				if ( $_us_has_status ) {
+					if ( $_us_has_status ) {
+						
+						$_us_status_classes = join( $_us_status, ' ' );
+						
+					}
 					
-					$_us_status_classes = join( $_us_status, ' ' );
-					
-				}
-				
-			?>
+				?>
 				
 				<tr id="ud-data-list-main-table-row-<?= $ud_data[ 'id' ]; ?>" class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?>">
 					
@@ -758,38 +764,6 @@
 							
 							$cel_ile_class .= ' ud-data-edit-value-wrapper ile';
 							
-							/*
-							echo vui_el_button(
-								
-								array(
-									
-									'wrapper_id' => 'ile-cfg-el-' . $ile_id,
-									'url' => '',
-									'text' => lang( 'ud_edit_prop_click' ),
-									'icon' => 'edit',
-									'only_icon' => TRUE,
-									'wrapper_class' => 'ud-data-edit-value-wrapper ile',
-									'class' => '',
-									'wrapper_attr' => array(
-										
-										'data-ile-type' => $ile_type,
-										'data-ile-el-id' => $ile_id,
-										'data-ile-ef' => 'ud_data_ile_ef',
-										'data-ile-ef-arg1' => $ile_id,
-										'data-ile-cf' => 'ud_data_ile_cf',
-										'data-ile-cf-arg1' => $ile_id,
-										'data-ile-wnvf' => 'ud_data_ile_wnvf',
-										'data-ile-wnvf-arg1' => $ile_id,
-										'data-udapi-dsi' => $submit_form_id,
-										'data-udapi-di' => $ud_data[ 'id' ],
-										'data-udapi-pa' => $column[ 'alias' ],
-										
-									),
-									
-								)
-								
-							);
-							*/
 						}
 						
 						$_prop_is_ud_status = FALSE;
@@ -827,64 +801,6 @@
 							
 						}
 						
-						if ( $pd ) {
-							
-							if ( $alias == 'submit_datetime' OR $alias == 'mod_datetime' ) {
-								
-								$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-								$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-								
-							}
-							
-							if ( check_var( $advanced_options[ 'prop_is_ud_image' ] ) AND check_var( $pd[ 'value' ] ) ) {
-								
-								$thumb_params = array(
-									
-									'wrapper_class' => 'us-image-wrapper',
-									'src' => url_is_absolute( $pd[ 'value' ] ) ? $pd[ 'value' ] : get_url( 'thumbs/' . $pd[ 'value' ] ),
-									'href' => get_url( $pd[ 'value' ] ),
-									'rel' => 'us-thumb',
-									'title' => $pd[ 'value' ],
-									'modal' => TRUE,
-									'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
-									
-								);
-								
-								$pd[ 'value' ] = vui_el_thumb( $thumb_params );
-								
-							}
-							else if ( check_var( $advanced_options[ 'prop_is_ud_url' ] ) AND check_var( $pd[ 'value' ] ) ) {
-								
-								$pd[ 'value' ] = '<a target="_blank" href="' . get_url( $pd[ 'value' ] ) . '">' . $pd[ 'value' ] . '</a>';
-								
-							}
-							else if ( check_var( $advanced_options[ 'prop_is_ud_title' ] ) AND check_var( $pd[ 'value' ] ) ) {
-								
-								$pd[ 'value' ] = '<a href="' . $ud_data[ 'edit_link' ] . '">' . $pd[ 'value' ] . '</a>';
-								
-							}
-							else if ( check_var( $advanced_options[ 'prop_is_ud_email' ] ) AND check_var( $pd[ 'value' ] ) ) {
-								
-								$pd[ 'value' ] = '<a href="mailto:' . $pd[ 'value' ] . '">' . $pd[ 'value' ] . '</a>';
-								
-							}
-							else if ( isset( $pd[ 'value' ] ) ) {
-								
-								if ( check_var( $fields[ $alias ][ 'field_type' ] ) AND $fields[ $alias ][ 'field_type' ] == 'textarea' AND ( ! isset( $ud_data[ 'data' ][ $alias ] ) OR ! is_array( $ud_data[ 'data' ][ $alias ] ) ) ) {
-									
-									$pd[ 'value' ] = word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
-									
-								}
-								else {
-									
-									$pd[ 'value' ] = word_limiter( $pd[ 'value' ] );
-									
-								}
-								
-							}
-							
-						}
-						
 						?>
 						
 						<td
@@ -896,6 +812,7 @@
 								ud-data-prop-wrapper
 								col-<?= $alias; ?>
 								col-<?= $column[ 'visible' ] ? 'visible' : 'hidden'; ?>
+								<?= check_var( $fields[ $alias ][ 'ud_data_list_css_class' ] ) ? ' ' . $fields[ $alias ][ 'ud_data_list_css_class' ] : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_image' ] ) ? ' field-is-image' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_title' ] ) ? ' field-is-presentation-title' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_content' ] ) ? ' field-is-presentation-content' : ''; ?>
@@ -903,7 +820,7 @@
 								<?= check_var( $advanced_options[ 'prop_is_ud_email' ] ) ? ' field-is-email' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_url' ] ) ? ' field-is-url' : ''; ?>
 								<?= check_var( $advanced_options[ 'prop_is_ud_status' ] ) ? ' field-is-status' : ''; ?>
-								<?= $pd[ 'value' ] ? ' ud-data-prop-value-' . $alias . '-' . url_title( base64_encode( $pd[ 'value' ] ), '-', TRUE ) : ' oia'; ?>
+								<?= $pd[ 'value' ] ? ' ud-data-prop-value-' . $alias . '-' . url_title( base64_encode( $pd[ 'value' ] ), '-', TRUE ) : ''; ?>
 								<?php
 									
 									if ( ! check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ! check_var( $fields[ $alias ][ 'options' ] ) ) {
@@ -937,7 +854,7 @@
 												
 												// Se o valor do dado unid for igual
 												
-												if ( check_var( $fields[ $alias ][ 'advanced_options' ][ $_item ] ) AND $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] == $fields[ $alias ][ 'advanced_options' ][ $_item ] ) {
+												if ( check_var( $fields[ $alias ][ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] ) AND $ud_data[ 'data' ][ $fields[ $alias ][ 'alias' ] ] == $fields[ $alias ][ 'advanced_options' ][ $_item ] ) {
 													
 													echo ' ' . $_item;
 													echo ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
@@ -960,6 +877,21 @@
 							<?php
 								
 								echo '<span id="' . $ile_id . '" class="ud-data-value-wrapper">';
+								
+								if ( $pd ) {
+									
+									if ( check_var( $fields[ $alias ][ 'field_type' ] ) AND $fields[ $alias ][ 'field_type' ] == 'textarea' AND ( ! isset( $ud_data[ 'data' ][ $alias ] ) OR ! is_array( $ud_data[ 'data' ][ $alias ] ) ) ) {
+										
+										$pd[ 'value' ] = word_limiter( htmlspecialchars_decode( $pd[ 'value' ] ) );
+										
+									}
+									else {
+										
+										$pd[ 'value' ] = word_limiter( $pd[ 'value' ] );
+										
+									}
+									
+								}
 								
 								echo $pd[ 'value' ];
 								
@@ -1010,37 +942,43 @@
 					
 				</tr>
 				
-			<?php
-			
-				$ud_data = NULL;
-				unset( $user_submit );
+				<?php
 				
-			} ?>
+					$ud_data = NULL;
+					unset( $user_submit );
+					
+				} ?>
+				
+			</table>
 			
-		</table>
+		</div>
 		
 		<?= form_close(); ?>
 		
 		<?php if ( ! $this->input->post( 'ajax' ) ) { ?>
-		<div class="form-actions to-toolbar">
+		<fieldset id="ud-data-columns-to-show-wrapper" class="form-actions to-toolbar">
+			
+			<legend class="fieldset-title">
+				
+				<?= vui_el_button(
+					
+					array(
+						
+						'text' => lang( 'columns_to_show' ),
+						'icon' => 'columns',
+						'only_icon' => FALSE,
+						'wrapper_class' => 'columns-to-show title',
+						
+					)
+					
+				); ?>
+				
+			</legend>
 			
 			<?= form_open( current_url(), array( 'id' => 'columns-to-show-form', ) ); ?>
 			<ul class="controls-menu menu" id="columns-to-show">
 				
 				<li class="parent columns-to-show">
-					
-					<?= vui_el_button(
-						
-						array(
-							
-							'text' => lang( 'columns_to_show' ),
-							'icon' => 'columns',
-							'only_icon' => FALSE,
-							'wrapper_class' => 'columns-to-show title',
-							
-						)
-						
-					); ?>
 					
 					<ul>
 						
@@ -1129,7 +1067,7 @@
 			
 			<?= form_close(); ?>
 			
-		</div>
+		</fieldset>
 		<?php } ?>
 		
 		<?php if ( $pagination ){ ?>
@@ -1177,6 +1115,7 @@
 				a: "gdsp",
 				dsi: $dsi,
 				pa: $pa,
+				ajax: true,
 				
 			}
 			
@@ -1196,7 +1135,7 @@
 						
 						for( var error in data.errors ) {
 							
-							$( '<span class="error">' + $( data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+							createGrowl( $( data.errors[ error ] ).text(), null, null, 'msg-type-error' );
 							
 						}
 						
@@ -1221,6 +1160,7 @@
 							a: "gdp",
 							di: $di,
 							pa: $pa,
+							ajax: true,
 							
 						}
 						
@@ -1242,7 +1182,7 @@
 									
 									for( var error in gdp_data.errors ) {
 										
-										$( '<span class="error">' + $( gdp_data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+										createGrowl( $( data.errors[ error ] ).text(), null, null, 'msg-type-error' );
 										
 									}
 									
@@ -1287,6 +1227,8 @@
 									
 									if ( $dsp.field_type == 'input_text' ) {
 										
+										console.debug( '<?= lang( 'ud_js_dbg_ef_udpt_input_text' ); ?>' );
+										
 										console.debug( $old_content );
 										
 										<?php
@@ -1311,12 +1253,17 @@
 										$ile_cfg_el.attr( 'data-lp', 100 );
 										$ile_cfg_el.addClass( 'ile-cfg-el-editing' );
 										
-										var length = $dsp.validation_rule.length;
 										var mask = false;
 										
-										for ( var i = 0; i < length; i++ ) {
+										if ( $dsp.validation_rule ) {
 											
-											if ( $dsp.validation_rule[ i ] == 'mask' ) mask = true;
+											var length = $dsp.validation_rule.length;
+											
+											for ( var i = 0; i < length; i++ ) {
+												
+												if ( $dsp.validation_rule[ i ] == 'mask' ) mask = true;
+												
+											}
 											
 										}
 										
@@ -1373,6 +1320,8 @@
 									}
 									else if ( $dsp.field_type == 'textarea' ) {
 										
+										console.debug( '<?= lang( 'ud_js_dbg_ef_udpt_textarea' ); ?>' );
+										
 										console.debug( $old_content );
 										
 										<?php
@@ -1410,6 +1359,7 @@
 											a: "gdspo",
 											dsi: $dsi,
 											pa: $pa,
+											ajax: true
 											
 										}
 										
@@ -1429,7 +1379,7 @@
 													
 													for( var error in gdspo_data.errors ) {
 														
-														$( '<span class="error">' + $( gdspo_data.errors[ error ] ).text() + '</span>').appendTo( $ile_el );
+														createGrowl( $( data.errors[ error ] ).text(), null, null, 'msg-type-error' );
 														
 													}
 													
@@ -1594,7 +1544,7 @@
 					}
 					else {
 						
-						console.debug( data );
+						console.error( data );
 						
 					}
 					
@@ -1605,7 +1555,11 @@
 					
 					if ( e.status === 200 ) {
 						
-					} else if( e.status === 401 ) {
+					} else if( e.status === 450 ) {
+						
+						console.error( $( dataText ).text() );
+						
+						createGrowl( dataText, null, null, 'msg-type-error' );
 						
 					} else {
 						
@@ -1614,7 +1568,13 @@
 				},
 				error: function( jqXHR, textStatus, errorThrown ) {
 					
-					console.debug( textStatus );
+					console.error( '<?= strip_tags( lang( 'ud_js_dbg_ef_ue' ) ); ?>' );
+				
+					createGrowl( '<?= lang( 'ud_js_dbg_ef_ue' ); ?>', null, null, 'msg-type-error' );
+					
+					$ile_el.removeClass( 'ile-editing' );
+					
+					$ile_cfg_el.attr( 'data-lp', 100 );
 					
 				}
 				
@@ -1648,6 +1608,7 @@
 				di: $di,
 				pa: $pa,
 				nv: $nv,
+				ajax: true
 				
 			}
 			
@@ -1672,7 +1633,7 @@
 							
 							data.errors[ error ] = data.errors[ error ].replace(/<(?!\/?b>|\/?strong>)[^>]+>/g, '');
 							
-							$( '<span class="error">' + data.errors[ error ] + '</span>').appendTo( $ile_el );
+							createGrowl( data.errors[ error ], null, null, 'msg-type-error' );
 							
 						}
 						
@@ -1687,22 +1648,40 @@
 						
 						var $data2 = {
 							
-							a: "gdp",
-							di: $di,
-							pa: $pa,
-							pp: 1,
+							f: {
+								
+								0: {
+									
+									'alias': 'id',
+									'value': $di,
+									'comp_op': '=',
+									
+								}
+								
+							},
+							ajax: true
 							
 						}
 						console.log( '<?= current_url(); ?>' );
 						$.ajax({
 						
-							url : '<?= current_url(); ?>',
-							type: "GET",
+							url : 'admin/submit_forms/usm/a/usl/sfid/<?= $submit_form_id; ?>',
+							type: "POST",
+							data : $.param( $data2 ),
 							dataType: "html",
 							success: function( gdp_data, textStatus, jqXHR ) {
 								
 								$ile_el.removeClass( 'ile-editing' );
-								$ile_cfg_el.attr( 'data-lp', 100 ).removeClass( 'ile-cfg-el-editing' ).replaceWith( $( gdp_data ).find( '[data-ud-id=ud-data-list-main-table-cell-' + $di + '-' + $pa + ']' ) );
+								
+								var $new_el = $ile_cfg_el;
+								
+								if ( $( gdp_data ).find( '[data-ud-id=ud-data-list-main-table-cell-' + $di + '-' + $pa + ']' ).length > 0 ) {
+								
+									$new_el = $( gdp_data ).find( '[data-ud-id=ud-data-list-main-table-cell-' + $di + '-' + $pa + ']' );
+									
+								}
+								
+								$ile_cfg_el.attr( 'data-lp', 100 ).removeClass( 'ile-cfg-el-editing' ).replaceWith( $new_el );
 								
 								/*
 								if ( gdp_data.errors != null ) {
@@ -1763,6 +1742,8 @@
 								console.error( textStatus );
 								
 								$( '<span class="error">' + textStatus + '</span>').appendTo( $ile_el );
+								
+								createGrowl( textStatus, null, null, 'msg-type-error' );
 								
 								$ile_cfg_el.attr( 'data-lp', 100 );
 								

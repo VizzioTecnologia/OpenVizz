@@ -1,8 +1,15 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-//echo print_r( $fields, true ) . '<br/><br/><br/>-----------<br/><br/><br/>';
+//echo print_r( $props, true ) . '<br/><br/><br/>-----------<br/><br/><br/>';
 
-$_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
+$_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'table' . DS;
+
+$data_scheme = & $submit_form;
+$props = & $data_scheme[ 'fields' ];
+
+$props_to_show = & $params[ 'props_to_show_site_list' ];
+
+
 
 $filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
 
@@ -10,17 +17,19 @@ $pre_text_pos = 'before_search_fields';
 
 $unique_hash = md5( uniqid( rand(), true ) );
 
-if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
+if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 	
-	$pre_text_pos = $submit_form[ 'params' ][ 'us_pre_text_position' ];
+	$pre_text_pos = $params[ 'us_pre_text_position' ];
 	
 }
 
+// print_r( $params );
+
 ?>
 
-<section id="submit-form-users-submits-<?= $unique_hash; ?>" class="submit-form users-submits <?= @$params['page_class']; ?>">
+<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
 	
-	<?php if ( @$params['show_page_content_title'] ) { ?>
+	<?php if ( check_var( $params['show_page_content_title'] ) ) { ?>
 	<header class="component-heading">
 		
 		<h1>

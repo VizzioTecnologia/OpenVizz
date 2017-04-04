@@ -20,6 +20,15 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 				
 			}
 			
+			// -------------------------
+			// Loading UniD API model
+			
+			if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
+				
+				$this->load->model( 'unid_api_mdl', 'ud_api' );
+				
+			}
+			
 			foreach ( $matches[ 0 ] as $key => $match ) {
 				
 				$json = str_replace( '{sf_us_loader}', '', $match );
@@ -84,7 +93,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 						
 						if ( is_numeric( $_sf_id ) AND $submit_form = $this->sfcm->get_submit_forms( array( 'where_condition' => 't1.id = ' . $_sf_id, 'limit' => 1, ) )->row_array() ) {
 							
-							$this->sfcm->parse_sf( $submit_form );
+							$this->ud_api->parse_ds( $submit_form );
 							
 							// Default params values
 							
@@ -276,10 +285,33 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							
 							$this->load->library( 'search' );
 							
+							$submit_form[ 'data_list_site_link' ] = ( check_var( $us_params[ 'crl' ] ) AND is_string( $us_params[ 'crl' ] ) ) ? get_url( $us_params[ 'crl' ] ) : $this->unid->get_link(
+								
+								array (
+									
+									'url_alias' => 'site_data_list',
+									'ds' => $submit_form,
+									'filters' => $us_params[ 'f' ],
+									
+								)
+								
+							);
+							
 							$view_data[ 'submit_forms' ][ $_sf_id ] = & $submit_form;
 							$us_view_data[ '__index' ] = $__index;
 							$us_view_data[ 'submit_form' ] = & $view_data[ 'submit_forms' ][ $_sf_id ];
 							$submit_form[ 'plugin_params' ] = & $us_params;
+							
+							
+							// -------------------------------------------------
+							// Params filtering
+							
+							$component_params = $this->mcm->components[ 'submit_forms' ][ 'params' ];
+							$us_view_data[ 'params' ] = filter_params( $component_params, $submit_form[ 'params' ] );
+							$us_view_data[ 'params' ] = filter_params( $us_view_data[ 'params' ], $us_params );
+							
+							// Params filtering
+							// -------------------------------------------------
 							
 							
 							//------------------------------------------------------

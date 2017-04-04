@@ -20,7 +20,7 @@
 	
 	<div id="component-content" class="submit-form-wrapper">
 		
-		<?php if ( $submit_form[ 'title' ] OR @$this->mcm->html_data[ 'content' ][ 'title' ] ) { ?>
+		<?php if ( check_var( $submit_form[ 'title' ] ) OR check_var( $this->mcm->html_data[ 'content' ][ 'title' ] ) ) { ?>
 		<header class="component-heading">
 			
 			<?php
@@ -626,7 +626,7 @@
 									
 									$editor = FALSE;
 									
-									if ( ( check_var( $submit_form[ 'params' ][ 'submit_forms_allow_html_tags' ] ) AND check_var( $field[ 'sf_field_type_textarea_us_use_editor' ][ 'site' ] ) ) OR ( check_var( $field[ 'sf_field_type_textarea_allow_html' ] ) AND check_var( $field[ 'sf_field_type_textarea_us_use_editor' ][ 'site' ] ) ) ){
+									if ( ( check_var( $params[ 'submit_forms_allow_html_tags' ] ) AND check_var( $field[ 'sf_field_type_textarea_us_use_editor' ][ 'site' ] ) ) OR ( check_var( $field[ 'sf_field_type_textarea_allow_html' ] ) AND check_var( $field[ 'sf_field_type_textarea_us_use_editor' ][ 'site' ] ) ) ){
 										
 										$editor = TRUE;
 										

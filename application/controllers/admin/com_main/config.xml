@@ -301,9 +301,25 @@
 			<option value="0">no</option>
 		</param>
 		
-		<param type="spacer" label="config_to_developers" />
+	</section>
+	
+	<section name="development">
 		
 		<param name="site_enable_profiler" type="select" default="0" label="site_enable_profiler" tip="tip_site_enable_profiler">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="admin_enable_translatable_terms_source" type="select" default="0" label="admin_enable_translatable_terms_source" tip="tip_admin_enable_translatable_terms_source">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="site_enable_translatable_terms_source" type="select" default="0" label="site_enable_translatable_terms_source" tip="tip_site_enable_translatable_terms_source">
 			
 			<option value="1">yes</option>
 			<option value="0">no</option>

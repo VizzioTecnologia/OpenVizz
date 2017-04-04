@@ -78,6 +78,27 @@ function get_json_params( $attributes = NULL ){
 }
 
 
+// --------------------------------------------------------------------
+
+function update_post_params( $new_params_values ) {
+	
+	if ( ! isset( $CI ) ){
+		
+		$CI =& get_instance();
+		
+	}
+	
+	reset( $new_params_values );
+	
+	while ( list( $key, $value ) = each( $new_params_values ) ) {
+		
+		$_POST[ 'params' ][ $key ] = $value;
+		
+	}
+	
+}
+
+
 // $base_params são os parâmetros que serão usados caso algum parâmetro em $params seja global
 function filter_params( $base_params, $params, $keep_blank = FALSE ){
 	
@@ -117,36 +138,6 @@ function filter_params( $base_params, $params, $keep_blank = FALSE ){
 			
 		}
 		
-		/*
-		foreach ( $params as $key => $param ) {
-			
-			$_final_params[ $key ] = $param;
-			
-			if ( ! isset( $param ) OR $param == '' AND ! $keep_blank AND isset( $base_params[ $key ] ) ) {
-				
-				$_final_params[ $key ] = $param;
-				
-			}
-			
-			if ( is_array( $param ) AND isset( $base_params[ $key ] ) AND is_array( $base_params[ $key ] ) ) {
-				
-				$_final_params[ $key ] = filter_params( $base_params[ $key ], $param, $keep_blank );
-				
-			}
-			else if ( ( ! isset( $param ) OR $param == 'global' OR ( $param == '' AND ! $keep_blank ) ) AND isset( $base_params[ $key ] ) ) {
-				
-				$_final_params[ $key ] = $base_params[ $key ];
-				
-			}
-			else if ( ! isset( $base_params[ $key ] ) ) {
-				
-				$_final_params[ $key ] = $param;
-				
-			}
-			
-		}
-		*/
-		
 	}
 	
 	//echo '<strong>$_final_params</strong> = <pre>' . print_r( $_final_params, TRUE ) . '</pre><br/>';
@@ -185,7 +176,7 @@ function get_params_spec_from_xml( $xml_file = NULL ){
 				$type = ( string )$param_1['type'];
 				$name = ( string )$param_1['name'];
 				$_id = $name ? $name : $i;
-				$value = ( string )$param_1['value'];
+				$value = isset( $param_1[ 'value' ] ) ? ( string ) $param_1[ 'value'] : NULL;
 				$default = ( string )$param_1['default'];
 				$label = ( string )$param_1['label'];
 				$level = ( string )$param_1['level'];
@@ -303,41 +294,53 @@ function get_params_spec_from_xml( $xml_file = NULL ){
 				// definindo o valor padrão, que pode variar conforme o tipo de elemento
 				// por exemplo, campos de textos utilizam o atributo default como valor, radio e checkbox utilizam o value juntamente com o default, o qual indica se o campo estará marcado ou não
 				
-				// iniciando o valor final
-				$final_value = $translate ? lang( $default ) : $default;
-				
-				// se o elemento for do tipo checkbox ou radio
-				if ( $type == 'radio' OR $type == 'checkbox' ){
+				if ( ! in_array( $type, array( 'spacer' ) ) ) {
 					
-					// checkbox e radio inputs utilizam o value como valor, se somente estiverem marcados
-					// portanto atribuimos seus valores se $value possuir conteudo
-					$final_value = $default ? $value : FALSE;
+					// iniciando o valor final
+					$final_value = $translate ? lang( $default ) : $default;
 					
-				}
-				
-				// se já existir uma chave no array com o mesmo name, quer dizer que o campo é um array
-				// ATENÇÃO! até o momento, campos em array são suportados apenas para o tipos checkbox, veja que está incluso checkbox no final da condição abaixo
-				if ( key_exists( $key, $params['params_spec_values'] ) AND $final_value AND ( $type == 'checkbox' ) ){
-					
-					// se a chave possuir conteúdo e não for do tipo array, convertemos este em um
-					// a primeira vez que esta chave possui valor, ela é do tipo string
-					// em uma segunda análise pela chave, vemos que ela já existe, logo a convertemos em array
-					if ( $params['params_spec_values'][$key] AND ! is_array( $params['params_spec_values'][$key] ) ){
-						$params['params_spec_values'][$key] = ( array ) $params['params_spec_values'][$key];
-					}
-					
-					// caso contrário, se for um checkbox, adicionamos ao array seus valores
-					else{
+					// se o elemento for do tipo checkbox ou radio
+					if ( $type == 'radio' OR $type == 'checkbox' ){
 						
-						$params['params_spec_values'][$key][$final_value] = $final_value;
+						// checkbox e radio inputs utilizam o value como valor, se somente estiverem marcados
+						// portanto atribuimos seus valores se $value possuir conteudo
+						$final_value = $default ? $value : FALSE;
 						
 					}
 					
-				}
-				// caso contrário, se não existir a chave, atribui esta
-				// para todos os outros tipos de campos
-				else if ( ! key_exists( $key, $params['params_spec_values'] ) ){
-					$params['params_spec_values'][$key] = $final_value;
+					if ( $type == 'hidden' ){
+						
+						$final_value = isset( $value ) ? $value : FALSE;
+						
+					}
+					
+					// se já existir uma chave no array com o mesmo name, quer dizer que o campo é um array
+					// ATENÇÃO! até o momento, campos em array são suportados apenas para o tipos checkbox, veja que está incluso checkbox no final da condição abaixo
+					if ( key_exists( $key, $params['params_spec_values'] ) AND $final_value AND ( $type == 'checkbox' ) ){
+						
+						// se a chave possuir conteúdo e não for do tipo array, convertemos este em um
+						// a primeira vez que esta chave possui valor, ela é do tipo string
+						// em uma segunda análise pela chave, vemos que ela já existe, logo a convertemos em array
+						if ( $params['params_spec_values'][$key] AND ! is_array( $params['params_spec_values'][$key] ) ){
+							$params['params_spec_values'][$key] = ( array ) $params['params_spec_values'][$key];
+						}
+						
+						// caso contrário, se for um checkbox, adicionamos ao array seus valores
+						else{
+							
+							$params['params_spec_values'][$key][$final_value] = $final_value;
+							
+						}
+						
+					}
+					// caso contrário, se não existir a chave, atribui esta
+					// para todos os outros tipos de campos
+					else if ( ! key_exists( $key, $params['params_spec_values'] ) ){
+						
+						$params['params_spec_values'][$key] = $final_value;
+						
+					}
+					
 				}
 				
 				$i++;
@@ -564,6 +567,10 @@ function _resolve_array_param_value( $prefix, $value ) {
 // converte uma estrutura de array em um elemento de formulário html
 function get_param_element( $element = NULL, $params_values = NULL, $params_spec = NULL, $param_prefix = PARAM_PREFIX, $layout = 'default' ){
 	
+// 	echo '<strong>$element:</strong><pre>' . print_r( $element, TRUE ) . '</pre>';
+// 	echo '<strong>$params_values:</strong><pre>' . print_r( $params_values, TRUE ) . '</pre>';
+// 	echo '<strong>$params_spec:</strong><pre>' . print_r( $params_spec, TRUE ) . '</pre>';
+	
 	if ( $element ){
 		
 		$CI =& get_instance();
@@ -623,13 +630,13 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 		
 		if ( count( $sbrackets[ 0 ] ) ) {
 			
+// 			echo '<pre>' . print_r( $name, TRUE ) . '</prev>';
+			
 			$name_sbrackets = join( '', $sbrackets[ 0 ] );
 			
 		}
 		
 		$name_no_brackets = str_replace( $name_sbrackets, '', $name );
-		
-		//echo '<pre>' . print_r( $out, TRUE ) . '</prev>';
 		
 		$formatted_name = ( isset( $element['name'] ) AND $element['name'] ) ? $param_prefix.'['.$name_no_brackets.']' . $name_sbrackets : '';
 		$data[ 'formatted_name' ] = & $formatted_name;
@@ -641,7 +648,7 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 		$data[ 'content' ] = & $content;
 		$class = ( isset( $element['class'] ) AND $element['class'] ) ? $element['class'] : '';
 		$data[ 'class' ] = & $class;
-		$value = ( isset( $element['value'] ) AND $element['value'] ) ? $element['value'] : '';
+		$value = ( isset( $element['value'] ) AND $element['value'] ) ? $element['value'] : NULL;
 		$data[ 'value' ] = & $value;
 		$inline = ( isset( $element['inline'] ) AND $element['inline'] ) ? $element['inline'] : FALSE;
 		$data[ 'inline' ] = & $inline;
@@ -685,8 +692,22 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 			
 		}
 		
-		$element_value = isset( $params_values[$name] ) ? $params_values[$name] : '';
+		$element_value = isset( $params_values[ $name ] ) ? $params_values[ $name ] : '';
+		
+		if ( in_array( $type, array( 'hidden' ) ) ){
+			
+			$element_value = $value;
+			
+		}
+		
 		$data[ 'element_value' ] = & $element_value;
+		
+		if ( ! in_array( $type, array( 'checkbox', 'radiobox' ) ) ){
+			
+			set_value( $formatted_name, $element_value );
+			
+		}
+		
 		$element_spec_value = isset( $params_spec['params_spec_values'][$name] ) ? $params_spec['params_spec_values'][$name] : '';
 		$data[ 'element_spec_value' ] = & $element_spec_value;
 		
@@ -694,7 +715,7 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 		$options = ( isset( $element['options'] ) AND $element['options'] ) ? ( array ) $element['options'] : '';
 		$data[ 'options' ] = & $options;
 		
-		$params_values[$name] = ( isset( $params_values[$name] ) ) ? $params_values[$name] : '';
+		$params_values[ $name ] = $element_value;
 		$data[ 'params_values' ] = & $params_values;
 		
 		// o código abaixo não mantém o valor 0 ( zero ) nos campos de texto

@@ -574,12 +574,19 @@
 		
 	</section>
 	
-	<section name="look_and_feel">
+	<section name="ud_ds_look_and_feel">
 		
 		<!-- as options deste campo são criadas via php -->
-		<param name="submit_form_layout_view" type="select" default="default" label="submit_form_layout_view" tip="tip_submit_form_layout_view" inline="1" >
+		<param name="ud_ds_form_layout_site" type="select" default="default" label="ud_ds_form_layout_site" tip="tip_ud_ds_form_layout_site" inline="1" >
 			
 			<validation rules="trim" />
+			
+		</param>
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="ud_d_list_layout_site" type="select" default="default" label="ud_d_list_layout_site" tip="tip_ud_d_list_layout_site" inline="1">
+			
+			<validation rules="trim|required" />
 			
 		</param>
 		
@@ -618,6 +625,8 @@
 	<section name="sf_security_and_access">
 		
 		<param type="spacer" default="" label="ud_ds_access_level" />
+		
+		<param name="ud_ds_disallow_anon_page" value="ud_ds_disallow_anon_page" type="checkbox" default="" label="ud_ds_disallow_anon_page" tip="tip_ud_ds_disallow_anon_page" inline="1" />
 		
 		<param name="ud_ds_access_type" type="select" default="3" label="ud_ds_access_type" tip="tip_ud_ds_access_type" inline="1" >
 			

@@ -46,14 +46,14 @@
 			
 // 			echo '<pre>' . print_r( $submit_forms, TRUE ) . '</pre>'; exit;
 			
-			foreach ( $submit_forms as $key => $submit_form ) {
+			foreach ( $submit_forms as $key => $data_scheme ) {
 				
-				if ( check_var( $submit_form[ 'users_submits' ] ) ){
+				if ( check_var( $data_scheme[ 'users_submits' ] ) ){
 					
 					// ----------------------
 					// Columns
 					
-					$props = $submit_form[ 'fields' ];
+					$props = $data_scheme[ 'fields' ];
 					
 					$columns = array(
 						
@@ -79,7 +79,7 @@
 					
 					echo '<td style="' . $cell_general_style . '" colspan="' . ( count( $columns ) ) . '">';
 					
-					echo $submit_form[ 'title' ];
+					echo $data_scheme[ 'title' ];
 					
 					echo '</td>';
 					
@@ -89,19 +89,19 @@
 					
 					echo '<th style="' . $cell_general_style . '" >';
 					
-					echo lang( 'id' );
+					echo lang( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : 'id' ) );
 					
 					echo '</th>';
 					
 					echo '<th style="' . $cell_general_style . '" >';
 					
-					echo lang( 'submit_datetime' );
+					echo lang( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : 'submit_datetime' ) );
 					
 					echo '</th>';
 					
 					echo '<th style="' . $cell_general_style . '" >';
 					
-					echo lang( 'mod_datetime' );
+					echo lang( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : 'mod_datetime' ) );
 					
 					echo '</th>';
 					
@@ -129,7 +129,7 @@
 					
 					$row_alt = FALSE;
 					
-					foreach ( $submit_form[ 'users_submits' ] as $key => $ud_data ) {
+					foreach ( $data_scheme[ 'users_submits' ] as $key => $ud_data ) {
 						
 						echo '<tr style="background-color: ' . ( $row_alt ? $row_alt_bg_color : $row_bg_color ) . ';">';
 						
@@ -140,13 +140,6 @@
 							if ( isset( $ud_data[ 'parsed_data' ][ 'full' ][ $column ] ) ) {
 								
 								$pd = $ud_data[ 'parsed_data' ][ 'full' ][ $column ];
-								
-								if ( $column == 'submit_datetime' OR $column == 'mod_datetime' ) {
-									
-									$pd[ 'value' ] = strtotime( $pd[ 'value' ] );
-									$pd[ 'value' ] = strftime( lang( 'ud_data_datetime' ), $pd[ 'value' ] );
-									
-								}
 								
 								echo $pd[ 'value' ];
 								
@@ -165,7 +158,7 @@
 					// Rows
 					// ----------------------
 					/*
-					foreach ( $submit_form[ 'users_submits' ] as $key => $ud_data ) {
+					foreach ( $data_scheme[ 'users_submits' ] as $key => $ud_data ) {
 						
 						foreach( $ud_data[ 'parsed_data' ][ 'full' ] as $alias => $pd ) {
 							
