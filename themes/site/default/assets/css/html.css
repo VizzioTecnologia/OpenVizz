@@ -678,7 +678,7 @@ body.vui {
 .vui th,
 .vui table caption{
 
-	border: 1px solid <?= $vui->colors->vui_table_border->rgba_s(); ?>;
+	border: thin solid <?= $vui->colors->vui_table_border->rgba_s(); ?>;
 	border-top: none;
 	padding: <?= VUI_SPACING; ?>em <?= VUI_SPACING; ?>em;
 	vertical-align: middle;
@@ -744,9 +744,6 @@ body.vui {
 	white-space: nowrap;
 	
 }
-.vui tr:hover td {
-	
-}
 .vui tr.selected{
 	
 }
@@ -780,6 +777,12 @@ body.vui {
 }
 .vui tr:hover,
 .vui tr.selected {
+	
+	color: <?= $vui->colors->vui_table_row_selected_fg->rgba_s(); ?>;
+	
+}
+.vui tr:hover td,
+.vui tr.selected td {
 	
 	color: <?= $vui->colors->vui_table_row_selected_fg->rgba_s(); ?>;
 	background-color: <?= $vui->colors->vui_table_row_selected_bg->rgba_s(); ?>;

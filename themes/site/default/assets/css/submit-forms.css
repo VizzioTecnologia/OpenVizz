@@ -113,7 +113,11 @@
 	
 }
 
-.submit-form .submit-form-field-wrapper{
+
+
+
+
+.submit-form .submit-form-field-wrapper {
 	
 	display: block;
 	
@@ -122,7 +126,7 @@
 	
 	width: 33.3333333%;
 	
-	padding: 0 <?= VUI_SPACING; ?>em;
+	padding: <?= VUI_SPACING / 2; ?>em;
 	
 	margin-bottom: <?= VUI_SPACING; ?>em;
 	
@@ -213,7 +217,7 @@
 .submit-form .submit-form-field-wrapper-textarea{
 	
 }
-.submit-form .submit-form-field-wrapper-button .submit-form-field-control{
+.submit-form .submit-form-field-wrapper-button .submit-form-field-control {
 	
 	text-align: right;
 	
@@ -244,31 +248,29 @@
 
 
 
+
+
 <?= '@media screen and ( max-width: 1700px ) {'; ?>
 	
-	.content-disp-lcr .submit-form .submit-form-field-wrapper{
+	.content-disp-lcr .submit-form .submit-form-field-wrapper {
 		
 		width: 50%;
 		
 	}
-	.submit-form .submit-form-field-wrapper-button .form-element{
-		
-		width: 100%;
+	.submit-form .submit-form-field-wrapper-button .form-element {
 		
 	}
 	
 	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-html,
-	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-textarea,
-	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button{
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-textarea {
 		
 		width: 100%;
 		
 	}
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button {
+		
+	}
 	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button .vui-interactive-el-wrapper {
-		
-		text-align: right;
-		
-		width: 50%;
 		
 	}
 	
@@ -277,31 +279,31 @@
 
 <?= '@media screen and ( max-width: 960px ) {'; ?>
 	
-	.submit-form .submit-form-field-wrapper{
+	.submit-form .submit-form-field-wrapper {
 		
 		width: 50%;
 		
 	}
-	.content-disp-lcr .submit-form .submit-form-field-wrapper{
+	.content-disp-lcr .submit-form .submit-form-field-wrapper {
 		
 		width: 100%;
 		
 	}
-	.submit-form .submit-form-field-wrapper-button .form-element{
+	.submit-form .submit-form-field-wrapper-button .form-element {
 		
 		width: 100%;
 		
 	}
 	.submit-form .submit-form-field-wrapper-html,
-	.submit-form .submit-form-field-wrapper-textarea,
-	.submit-form .submit-form-field-wrapper-button{
+	.submit-form .submit-form-field-wrapper-textarea {
 		
 		width: 100%;
 		
 	}
-	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button .vui-interactive-el-wrapper {
+	.submit-form .submit-form-field-wrapper-button {
 		
-		width: 100%;
+	}
+	.submit-form .submit-form-field-wrapper.submit-form-field-wrapper-button .vui-interactive-el-wrapper {
 		
 	}
 	
@@ -310,21 +312,166 @@
 
 <?= '@media screen and ( max-width: 640px ) {'; ?>
 	
-	.submit-form .submit-form-field-wrapper{
+	.submit-form .submit-form-field-wrapper {
 		
 		width: 100%;
 		
 	}
 	.submit-form .submit-form-field-wrapper-html,
-	.submit-form .submit-form-field-wrapper-textarea,
-	.submit-form .submit-form-field-wrapper-button{
+	.submit-form .submit-form-field-wrapper-textarea {
 		
 		width: 100%;
+		
+	}
+	.submit-form .submit-form-field-wrapper-button {
 		
 	}
 	
 }
 
+
+/* --------------- Search box ----------------- */
+
+.ud-data-list-search-box {
+	
+	color: <?= $vui->colors->vui_search_box_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_search_box_bg->rgba_s(); ?>;
+	/* 	background-image: url(<?= $vui->svg_file( 'icon-find', $vui->colors->vui_search_box_backimg_bg->rgba_s() ); ?>); */
+	
+	background-size: auto calc( 100% + 2em );
+	background-repeat: no-repeat;
+	background-position: left -2.5em top -2.5em;
+	
+	padding: <?= VUI_SPACING / 2; ?>em;
+	margin: <?= VUI_SPACING; ?>em 0;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+	
+}
+.ud-data-list-search-box:before {
+	
+}
+.ud-data-list-search-box .submit-form-field-wrapper {
+	
+	width: calc( <?= 100 / 4; ?>% - <?= 50 / 4; ?>px );
+	
+}
+
+<?= '@media screen and ( max-width: 1300px ) {'; ?>
+	
+	.ud-data-list-search-box .submit-form-field-wrapper {
+		
+		width: calc( <?= 100 / 2; ?>% - <?= 50 / 2; ?>px );
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 1000px ) {'; ?>
+	
+	.ud-data-list-search-box .submit-form-field-wrapper {
+		
+		width: calc( <?= 100 / 2; ?>% - <?= 50 / 2; ?>px );
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 640px ) {'; ?>
+	
+	.ud-data-list-search-box .submit-form-field-wrapper {
+		
+		width: 100%;
+		
+	}
+	.ud-data-list-search-box .ud-search-box-search-button-wrapper .ud-search-box-search-button {
+		
+		width: 100%;
+		padding: <?= VUI_SPACING / 2; ?>em;
+		
+	}
+	
+}
+<?= '@media screen and ( min-width: 640px ) {'; ?>
+	
+	.ud-data-list-search-box .ud-search-box-search-button-wrapper {
+		
+		position: absolute;
+		
+		padding: 0;
+		width: 50px;
+		height: calc( 100% + <?= VUI_SPACING; ?>em );
+		right: -<?= VUI_SPACING / 2; ?>em;
+		top: -<?= VUI_SPACING / 2; ?>em;
+		
+		<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+		
+	}
+	.ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control,
+	.ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button,
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el {
+		
+		position: absolute;
+		
+		left: 0;
+		top: 0;
+		
+		width: 100%;
+		height: 100%;
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el {
+		
+		padding: 0;
+		
+		<?= $vui->css->border_radius( '0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS . ' 0' ); ?>
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el > .text {
+		
+		display: none;
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el > .icon-wrapper {
+		
+		width: 100%;
+		
+		color: <?= $vui->colors->vui_search_box_search_btn_fg->rgba_s(); ?>;
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el {
+		
+		padding: 0;
+		
+		<?= $vui->css->border_radius( '0 ' . VUI_DEFAULT_BORDER_RADIUS . ' ' . VUI_DEFAULT_BORDER_RADIUS . ' 0' ); ?>
+		
+		color: <?= $vui->colors->vui_search_box_search_btn_fg->rgba_s(); ?>;
+		
+		border: none;
+		
+		background: none;
+		
+		background-color: <?= $vui->colors->vui_search_box_search_btn_bg->rgba_s(); ?>;
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:hover,
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:active
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:focus {
+		
+		color: <?= $vui->colors->vui_search_box_search_btn_active_fg->rgba_s(); ?>;
+		
+		background-color: <?= $vui->colors->vui_search_box_search_btn_active_bg->rgba_s(); ?>;
+		
+	}
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:hover > .icon-wrapper,
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:active > .icon-wrapper,
+	.vui .ud-data-list-search-box .ud-search-box-search-button-wrapper .submit-form-field-control .ud-search-box-search-button > .el:focus > .icon-wrapper {
+		
+		width: 100%;
+		
+		color: <?= $vui->colors->vui_search_box_search_btn_active_fg->rgba_s(); ?>;
+		
+	}
+	
+}
 
 
 /* --------------- Users submits ----------------- */

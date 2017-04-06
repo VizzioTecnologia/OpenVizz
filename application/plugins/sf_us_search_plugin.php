@@ -675,7 +675,27 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					if ( $value_type == 'str' ) {
 						
-						if ( in_array( $filter[ 'comp_op' ], array( '=', '!=' ) ) ) {
+						if ( in_array( strtolower( $filter[ 'comp_op' ] ), array( 'in' ) ) ) {
+							
+							$_tmp = array();
+							
+							$_value = str_replace( array( '(', ')' ), '', $filter[ 'value' ] );
+							$_value = explode( ',', $_value );
+							
+							reset( $_value );
+							
+							while ( list( $k, $v ) = each( $_value ) ) {
+								
+								$_tmp[] = '( ' . $_column . ' = \'' . $v . '\' ' . ( ! $_column_is_native ? ( 'OR `t1`.`data` LIKE \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $v . '"%\'' ) : '' ) . ' )';
+								
+							}
+							
+							$_tmp = join( ' OR ', $_tmp );
+							
+							$out .= '(' . $_tmp . ')';
+							
+						}
+						else if ( in_array( $filter[ 'comp_op' ], array( '=', '!=' ) ) ) {
 							
 							$out .= '( ' . $_column . ' ' . $filter[ 'comp_op' ] . ' \'' . $filter[ 'value' ] . '\' ' . ( ! $_column_is_native ? ( ( $filter[ 'comp_op' ] == '=' ? 'OR' : 'AND' ) . ' `t1`.`data` ' . ( $filter[ 'comp_op' ] == '=' ? 'LIKE' : 'NOT LIKE' ) . ' \'%"' . trim( $filter[ 'alias' ] ) . '":"' . $filter[ 'value' ] . '"%\'' . ( $filter[ 'comp_op' ] == '!=' ? ' AND `t1`.`data` NOT LIKE \'%"' . trim( $filter[ 'alias' ] ) . '":"%"%\'' : '' ) ) : '' ) . ' )';
 							
@@ -721,7 +741,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 							}
 							else {
 								
-								$out .= ' OIOI ';
+								$out .= ' AND ';
 								
 							}
 							

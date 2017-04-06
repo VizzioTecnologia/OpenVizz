@@ -21,7 +21,7 @@ $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index'
 			
 			<?php if ( check_var( $submit_form[ 'data_list_site_link' ] ) ) { ?>
 				
-				<a href="<?= $submit_form[ 'data_list_site_link' ]; ?>">
+				<a href="<?= get_url( $submit_form[ 'data_list_site_link' ] ); ?>">
 				
 			<?php } ?>
 			

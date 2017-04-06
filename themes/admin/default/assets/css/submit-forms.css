@@ -1048,7 +1048,15 @@
 }
 
 
+.ud-d-list .col-adm .ud-data-value-wrapper {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+}
 .data-list .col-adm .ud-data-value-wrapper:before {
+	
+	position: relative;
+	display: inline;
 	
 	min-height: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
 	min-width: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;

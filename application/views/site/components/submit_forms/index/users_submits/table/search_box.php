@@ -4,7 +4,7 @@
 	
 ?>
 
-<div id="users-submits-search-wrapper" class="ud-data-list-search-box users-submits-search-wrapper">
+<div id="users-submits-search-wrapper" class="ud-data-list-search-box ud-search-box users-submits-search-wrapper">
 	
 	<?php
 		
@@ -131,6 +131,7 @@
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -201,7 +202,7 @@
 			
 		} ?>
 		
-		<div class="submit-form-field-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
+		<div class="submit-form-field-wrapper ud-search-box-search-button-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
 			
 			<div class="submit-form-field-control">
 				
@@ -216,7 +217,7 @@
 						'only_icon' => FALSE,
 						'name' => 'users_submits_search[submit_search]',
 						'class' => 'form-element submit-form submit-form-submit_search',
-						'wrapper_class' => 'action',
+						'wrapper_class' => 'action ud-search-box-search-button',
 						
 					)
 					

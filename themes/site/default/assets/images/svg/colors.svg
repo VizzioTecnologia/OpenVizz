@@ -23,11 +23,11 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.91901164"
-     inkscape:cx="2961.9533"
-     inkscape:cy="2018.2222"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="1856.8112"
+     inkscape:cy="143.20531"
      inkscape:document-units="px"
-     inkscape:current-layer="svg2"
+     inkscape:current-layer="g4595-8"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1023"
@@ -215,6 +215,17 @@
              style="font-size:15.67673397px;line-height:1.25">Alternate cell (selected)</tspan></text>
       </g>
     </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4763">
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="rect4765"
+         width="720.12396"
+         height="154.25317"
+         x="1659.9999"
+         y="1348.9349" />
+    </clipPath>
   </defs>
   <metadata
      id="metadata7">
@@ -243,19 +254,19 @@
     <rect
        y="-1061.906"
        x="1325.8823"
-       height="2941.6562"
+       height="5514.5996"
        width="1362.5714"
        id="vui_site_bg"
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#d9dde4;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:0.99999994;stroke-opacity:1;marker:none;enable-background:accumulate"
        inkscape:label="vui_color" />
     <rect
        transform="scale(1,-1)"
-       y="-2471.0962"
+       y="-4797.8252"
        x="1325.8823"
        height="187.37631"
        width="1362.5714"
        id="vui_footer_block_bg"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#d9dde4;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:0.99999994;stroke-opacity:1;marker:none;enable-background:accumulate;clip-rule:nonzero;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;filter-blend-mode:normal;filter-gaussianBlur-deviation:0;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#d9dde4;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        inkscape:label="vui_color" />
     <rect
        y="704.93359"
@@ -339,7 +350,7 @@
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cccccc;stroke-width:0.99999982;stroke-opacity:1;marker:none;enable-background:accumulate"
        id="vui_content_block_bg"
        width="911.38342"
-       height="2615.7292"
+       height="5139.4297"
        x="1551.4763"
        y="-735.979" />
     <text
@@ -379,114 +390,116 @@
        id="vui_content_block_fg"
        y="-713.40668"
        x="2443.9814"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.14080048px;line-height:1.25;font-family:Oxygen;-inkscape-font-specification:Oxygen;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:end;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.14080048px;line-height:1.25;font-family:Oxygen;-inkscape-font-specification:Oxygen;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:end;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-variant-east_asian:normal;"
        xml:space="preserve"
        inkscape:label="vui_color"><tspan
          y="-713.40668"
          x="2443.9814"
          id="tspan3892"
          sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.14080048px;line-height:1.25;font-family:Oxygen;-inkscape-font-specification:Oxygen;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:end;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;shape-padding:0;vector-effect:none;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">vui_content_block_fg</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.14080048px;line-height:1.25;font-family:Oxygen;-inkscape-font-specification:Oxygen;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:end;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:end;white-space:normal;shape-padding:0;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;font-variant-east_asian:normal;">vui_content_block_fg</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Oxygen;-inkscape-font-specification:Oxygen;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;opacity:0.46503499;fill:#000000;fill-opacity:1;stroke:none"
        x="2677.1248"
-       y="2307.3245"
+       y="4634.0532"
        id="text3904"><tspan
          sodipodi:role="line"
          id="tspan3906"
          x="2677.1248"
-         y="2307.3245"
+         y="4634.0532"
          style="font-size:16.14080048px;line-height:1.25">vui_footer_block_bg</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Oxygen;-inkscape-font-specification:Oxygen;letter-spacing:0px;word-spacing:0px;fill:#4b5669;fill-opacity:1;stroke:none"
        x="1354.417"
-       y="2335.3645"
+       y="4662.0933"
        id="vui_footer_block_fg"
        inkscape:label="vui_color"><tspan
          sodipodi:role="line"
          id="tspan3956"
          x="1354.417"
-         y="2335.3645"
+         y="4662.0933"
          style="font-size:27.46636009px;line-height:1.25">vui_footer_block_fg</tspan></text>
     <flowRoot
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;"
        id="vui_site_fg"
        xml:space="preserve"
        inkscape:label="vui_color"
        transform="translate(0,-52.325902)"><flowRegion
-         id="flowRegion4208"><rect
+         id="flowRegion4208"
+         style="font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"><rect
            y="-665.90729"
            x="1340.6744"
            height="368.77667"
            width="185.6123"
            id="rect4210"
-           style="fill:#47616d;fill-opacity:1" /></flowRegion><flowPara
+           style="fill:#34464f;fill-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /></flowRegion><flowPara
          id="flowPara4212"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"> </flowPara><flowPara
          id="flowPara4278"
-         style="font-size:16px;line-height:1.25">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque aliquam, nulla ac scelerisque convallis, nisi ligula sagittis risus, at nonummy arcu urna pulvinar nibh. Vestibulum viverra varius enim. Praesent a lacus vitae turpis consequat semper. Praesent aliquet, neque pretium congue mattis, ipsum augue dignissim ante, ac pretium nisl lectus at magna. Aenean turpis ipsum, rhoncus vitae, posuere vitae, euismod sed, ligula. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean ligula.       </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque aliquam, nulla ac scelerisque convallis, nisi ligula sagittis risus, at nonummy arcu urna pulvinar nibh. Vestibulum viverra varius enim. Praesent a lacus vitae turpis consequat semper. Praesent aliquet, neque pretium congue mattis, ipsum augue dignissim ante, ac pretium nisl lectus at magna. Aenean turpis ipsum, rhoncus vitae, posuere vitae, euismod sed, ligula. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean ligula.       </flowPara><flowPara
          id="flowPara4280"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /><flowPara
          id="flowPara4282"
-         style="font-size:16px;line-height:1.25">Aenean luctus vulputate turpis. Nam sed nisl nec elit suscipit ullamcorper. Sed fringilla. Proin lectus orci, venenatis pharetra, egestas id, tincidunt vel, eros. Etiam fermentum. Nam laoreet dui sed magna. Etiam cursus purus interdum libero. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Aenean luctus vulputate turpis. Nam sed nisl nec elit suscipit ullamcorper. Sed fringilla. Proin lectus orci, venenatis pharetra, egestas id, tincidunt vel, eros. Etiam fermentum. Nam laoreet dui sed magna. Etiam cursus purus interdum libero. </flowPara><flowPara
          id="flowPara4284"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /><flowPara
          id="flowPara4286"
-         style="font-size:16px;line-height:1.25">Pellentesque ac turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus eu orci. Pellentesque condimentum felis a sem. Nulla facilisi. Maecenas rhoncus rhoncus ipsum. Donec at diam a tellus dignissim vestibulum. Mauris tincidunt aliquam ante. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Pellentesque ac turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus eu orci. Pellentesque condimentum felis a sem. Nulla facilisi. Maecenas rhoncus rhoncus ipsum. Donec at diam a tellus dignissim vestibulum. Mauris tincidunt aliquam ante. </flowPara><flowPara
          id="flowPara4288"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /><flowPara
          id="flowPara4290"
-         style="font-size:16px;line-height:1.25">Donec interdum vestibulum libero. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Donec interdum vestibulum libero. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. </flowPara><flowPara
          id="flowPara4292"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /><flowPara
          id="flowPara4294"
-         style="font-size:16px;line-height:1.25">Cras gravida. Proin dolor sapien, adipiscing id, sagittis eu, molestie viverra, mauris. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Cras gravida. Proin dolor sapien, adipiscing id, sagittis eu, molestie viverra, mauris. </flowPara><flowPara
          id="flowPara4296"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /><flowPara
          id="flowPara4298"
-         style="font-size:16px;line-height:1.25">Fusce nonummy commodo dui. Maecenas rhoncus rhoncus ipsum. Mauris et dolor. Suspendisse potenti. Pellentesque viverra dolor non nunc. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Fusce nonummy commodo dui. Maecenas rhoncus rhoncus ipsum. Mauris et dolor. Suspendisse potenti. Pellentesque viverra dolor non nunc. </flowPara><flowPara
          id="flowPara4300"
-         style="font-size:16px;line-height:1.25" /></flowRoot>    <flowRoot
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-size:16px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" /></flowRoot>    <flowRoot
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        id="vui_content_fg"
        xml:space="preserve"
        inkscape:label="vui_color"
        transform="translate(409.17911,750.32601)"><flowRegion
-         id="flowRegion4208-0"><rect
+         id="flowRegion4208-0"
+         style="fill:#34464f;fill-opacity:1;"><rect
            y="-665.90729"
            x="1340.6744"
            height="481.91376"
            width="489.66821"
            id="rect4210-9"
-           style="fill:#47616d;fill-opacity:1" /></flowRegion><flowPara
+           style="fill:#34464f;fill-opacity:1;" /></flowRegion><flowPara
          id="flowPara4212-1"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;"> </flowPara><flowPara
          id="flowPara4278-5"
-         style="font-size:16px;line-height:1.25">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque aliquam, nulla ac scelerisque convallis, nisi ligula sagittis risus, at nonummy arcu urna pulvinar nibh. Vestibulum viverra varius enim. Praesent a lacus vitae turpis consequat semper. Praesent aliquet, neque pretium congue mattis, ipsum augue dignissim ante, ac pretium nisl lectus at magna. Aenean turpis ipsum, rhoncus vitae, posuere vitae, euismod sed, ligula. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean ligula. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque aliquam, nulla ac scelerisque convallis, nisi ligula sagittis risus, at nonummy arcu urna pulvinar nibh. Vestibulum viverra varius enim. Praesent a lacus vitae turpis consequat semper. Praesent aliquet, neque pretium congue mattis, ipsum augue dignissim ante, ac pretium nisl lectus at magna. Aenean turpis ipsum, rhoncus vitae, posuere vitae, euismod sed, ligula. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean ligula. </flowPara><flowPara
          id="flowPara4280-8"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;"> </flowPara><flowPara
          id="flowPara4282-3"
-         style="font-size:16px;line-height:1.25">Aenean luctus vulputate turpis. Nam sed nisl nec elit suscipit ullamcorper. Sed fringilla. Proin lectus orci, venenatis pharetra, egestas id, tincidunt vel, eros. Etiam fermentum. Nam laoreet dui sed magna. Etiam cursus purus interdum libero. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Aenean luctus vulputate turpis. Nam sed nisl nec elit suscipit ullamcorper. Sed fringilla. Proin lectus orci, venenatis pharetra, egestas id, tincidunt vel, eros. Etiam fermentum. Nam laoreet dui sed magna. Etiam cursus purus interdum libero. </flowPara><flowPara
          id="flowPara4284-2"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;"> </flowPara><flowPara
          id="flowPara4286-4"
-         style="font-size:16px;line-height:1.25">Pellentesque ac turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus eu orci. Pellentesque condimentum felis a sem. Nulla facilisi. Maecenas rhoncus rhoncus ipsum. Donec at diam a tellus dignissim vestibulum. Mauris tincidunt aliquam ante. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Pellentesque ac turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus eu orci. Pellentesque condimentum felis a sem. Nulla facilisi. Maecenas rhoncus rhoncus ipsum. Donec at diam a tellus dignissim vestibulum. Mauris tincidunt aliquam ante. </flowPara><flowPara
          id="flowPara4288-2"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;"> </flowPara><flowPara
          id="flowPara4290-5"
-         style="font-size:16px;line-height:1.25">Donec interdum vestibulum libero. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Donec interdum vestibulum libero. Vivamus nisi elit, nonummy id, facilisis non, blandit ac, dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. </flowPara><flowPara
          id="flowPara4292-7"
-         style="font-size:16px;line-height:1.25"> </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;"> </flowPara><flowPara
          id="flowPara4294-6"
-         style="font-size:16px;line-height:1.25">Cras gravida. Proin dolor sapien, adipiscing id, sagittis eu, molestie viverra, mauris.   </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Cras gravida. Proin dolor sapien, adipiscing id, sagittis eu, molestie viverra, mauris.   </flowPara><flowPara
          id="flowPara4296-0"
-         style="font-size:16px;line-height:1.25" /><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;" /><flowPara
          id="flowPara4298-9"
-         style="font-size:16px;line-height:1.25">Fusce nonummy commodo dui. Maecenas rhoncus rhoncus ipsum. Mauris et dolor. Suspendisse potenti. Pellentesque viverra dolor non nunc. </flowPara><flowPara
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;">Fusce nonummy commodo dui. Maecenas rhoncus rhoncus ipsum. Mauris et dolor. Suspendisse potenti. Pellentesque viverra dolor non nunc. </flowPara><flowPara
          id="flowPara4300-6"
-         style="font-size:16px;line-height:1.25" /></flowRoot>    <text
+         style="font-size:16px;line-height:1.25;fill:#34464f;fill-opacity:1;" /></flowRoot>    <text
        id="vui_link"
        y="-289.41232"
        x="1341.2701"
@@ -632,7 +645,7 @@
        id="g5737-66"
        transform="matrix(0.74320532,0,0,0.74320532,615.33286,146.17219)">
       <path
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#6e7a8c;fill-opacity:0.16890079;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#f4f4f6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
          d="M 1750.0778,772.53162 H 1935.76 v 37.67462 h -185.6822 z"
          id="vui_input_bg"
          inkscape:connector-curvature="0"
@@ -652,33 +665,33 @@
            sodipodi:role="line"
            style="font-size:15.47227192px;line-height:1.25">Input normal</tspan></text>
       <g
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00547e;fill-opacity:0.55172414;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
          id="vui_button_border-1"
          inkscape:label="vui_color">
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00547e;fill-opacity:0.55172414;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,772.53159 1.3455,-1.34553 v 40.36571 l -1.3455,-1.34553 z"
            id="vui_input_border_right"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00547e;fill-opacity:0.55172414;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1750.0778,772.53159 -1.3455,-1.34553 v 40.36571 l 1.3455,-1.34553 z"
            id="vui_input_border_left"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00547e;fill-opacity:0.55172414;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,772.53159 1.3455,-1.34553 h -188.3732 l 1.3455,1.34553 z"
            id="vui_input_border_top"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.12801609;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00547e;fill-opacity:0.55172414;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,810.20624 1.3455,1.34553 h -188.3732 l 1.3455,-1.34553 z"
            id="vui_input_border_bottom"
            inkscape:connector-curvature="0"
@@ -710,7 +723,7 @@
        id="g5737-66-1"
        transform="matrix(0.74320532,0,0,0.74320532,615.33287,186.17219)">
       <path
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#c8ccd4;fill-opacity:0.16890079;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
          d="M 1750.0778,772.53162 H 1935.76 v 37.67462 h -185.6822 z"
          id="vui_input_active_bg"
          inkscape:connector-curvature="0"
@@ -730,33 +743,33 @@
            sodipodi:role="line"
            style="font-size:15.47227192px;line-height:1.25">Input active</tspan></text>
       <g
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#009dec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
          id="vui_button_border-1-2"
          inkscape:label="vui_color">
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#009dec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,772.53159 1.3455,-1.34553 v 40.36571 l -1.3455,-1.34553 z"
            id="vui_input_border_active_right"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#009dec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1750.0778,772.53159 -1.3455,-1.34553 v 40.36571 l 1.3455,-1.34553 z"
            id="vui_input_border_active_left"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.23525468;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#009dec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,772.53159 1.3455,-1.34553 h -188.3732 l 1.3455,1.34553 z"
            id="vui_input_border_active_top"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#6e7a8c;fill-opacity:0.12801609;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#009dec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            d="m 1935.76,810.20624 1.3455,1.34553 h -188.3732 l 1.3455,-1.34553 z"
            id="vui_input_border_active_bottom"
            inkscape:connector-curvature="0"
@@ -774,7 +787,7 @@
          height="190"
          width="190"
          id="vui_login_shadow_bg"
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:0.06487552;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;filter:url(#filter4673);enable-background:accumulate"
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#1c4e67;fill-opacity:0.0337931;fill-rule:nonzero;stroke:none;stroke-width:0.64806323px;marker:none;filter:url(#filter4673);enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          inkscape:label="vui_color" />
       <rect
          inkscape:label="vui_color"
@@ -788,31 +801,31 @@
          ry="0" />
       <g
          id="g4677-0"
-         style="fill:#000000;fill-opacity:0.05235602">
+         style="fill:#34464f;fill-opacity:0.24620689;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke:none;stroke-width:0.64806323px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
         <path
            inkscape:label="vui_color"
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#34464f;fill-opacity:0.24620689;fill-rule:nonzero;stroke:none;stroke-width:0.64806323px;marker:none;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            d="m -300,107.36218 1,-1 v 192 l -1,-1 z"
            id="vui_login_border_right"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#34464f;fill-opacity:0.24620689;fill-rule:nonzero;stroke:none;stroke-width:0.64806323px;marker:none;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            d="m -490,107.36218 -1,-1 v 192 l 1,-1 z"
            id="vui_login_border_left"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#34464f;fill-opacity:0.24620689;fill-rule:nonzero;stroke:none;stroke-width:0.64806323px;marker:none;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            d="m -300,107.36218 1,-1 h -192 l 1,1 z"
            id="vui_login_border_top"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccc" />
         <path
            inkscape:label="vui_color"
-           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#000000;fill-opacity:0.05235602;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+           style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#34464f;fill-opacity:0.24620689;fill-rule:nonzero;stroke:none;stroke-width:0.64806323px;marker:none;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
            d="m -300,297.36218 1,1 h -192 l 1,-1 z"
            id="vui_login_border_bottom"
            inkscape:connector-curvature="0"
@@ -823,13 +836,13 @@
          id="vui_login_fg"
          y="155.6748"
          x="-468.57974"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#47616d;fill-opacity:1;stroke:none"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#34464f;fill-opacity:1;stroke:none;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-width:0.64806323px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"
          xml:space="preserve"><tspan
            y="155.6748"
            x="-468.57974"
            id="tspan4593-7"
            sodipodi:role="line"
-           style="font-size:32.09596634px;line-height:1.25">Login</tspan></text>
+           style="font-size:32.09596634px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:0.64806323px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">Login</tspan></text>
     </g>
     <circle
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#008ec9;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0"
@@ -873,28 +886,73 @@
        cy="10.237206"
        r="60"
        inkscape:label="vui_color" />
-    <rect
-       y="1304.3218"
-       x="1660"
-       height="40"
-       width="200"
-       id="rect4576"
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
-    <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="rect4574"
-       width="200"
-       height="40"
-       x="-2061"
-       y="1304.3218"
-       transform="scale(-1,1)" />
+    <g
+       id="g4761"
+       clip-path="url(#clipPath4763)">
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.11126009;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal;vector-effect:none"
+         id="vui_search_box_bg"
+         width="720.12396"
+         height="154.25317"
+         x="1659.9999"
+         y="1348.9349"
+         inkscape:label="vui_color" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.67673397px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:center;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:middle;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;fill:#2c3c44;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none"
+         x="1771.9763"
+         y="1388.7393"
+         id="vui_search_box_fg"
+         inkscape:label="vui_color"><tspan
+           sodipodi:role="line"
+           id="tspan4861"
+           x="1771.9763"
+           y="1388.7393">search box fg</tspan></text>
+      <g
+         id="g4775"
+         transform="translate(56.074201)">
+        <rect
+           transform="scale(-1,1)"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#8bac34;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal"
+           id="vui_search_box_search_btn_active_bg"
+           width="56.074223"
+           height="154.25317"
+           x="-2324.0496"
+           y="1348.9349"
+           inkscape:label="vui_color" />
+        <path
+           inkscape:label="vui_color"
+           id="vui_search_box_search_btn_active_fg"
+           d="m 2298.9944,1419.1043 c -1.5356,0 -3.0784,0.5785 -4.25,1.75 -2.1312,2.1314 -2.3082,5.4612 -0.5625,7.8125 l -4.9687,4.9688 1.3125,1.3125 4.9687,-4.9688 c 2.3472,1.6897 5.6402,1.4849 7.75,-0.625 2.3431,-2.3431 2.3431,-6.1567 0,-8.5 -1.1716,-1.1715 -2.7144,-1.75 -4.25,-1.75 z m 0,2 c 1.0237,0 2.0627,0.3752 2.8438,1.1563 1.5621,1.5622 1.5621,4.1253 0,5.6875 -1.5621,1.5621 -4.1252,1.5621 -5.6875,0 -1.562,-1.5622 -1.562,-4.1253 0,-5.6875 0.7811,-0.7811 1.82,-1.1563 2.8437,-1.1563 z"
+           style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="g4771"
+         transform="translate(-56.074244)">
+        <rect
+           inkscape:label="vui_color"
+           y="1348.9349"
+           x="2324.0496"
+           height="154.25317"
+           width="56.074223"
+           id="vui_search_box_search_btn_bg"
+           style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#97cb0b;fill-opacity:0.30896553;fill-rule:nonzero;stroke:#000000;stroke-width:0.0930715;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;font-variant-east_asian:normal" />
+        <path
+           inkscape:connector-curvature="0"
+           style="opacity:1;fill:#557203;fill-opacity:1;fill-rule:nonzero;stroke:none;font-variant-east_asian:normal;vector-effect:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none"
+           d="m 2354.0311,1419.1043 c -1.5356,0 -3.0784,0.5785 -4.25,1.75 -2.1312,2.1314 -2.3082,5.4612 -0.5625,7.8125 l -4.9687,4.9688 1.3125,1.3125 4.9687,-4.9688 c 2.3472,1.6897 5.6402,1.4849 7.75,-0.625 2.3431,-2.3431 2.3431,-6.1567 0,-8.5 -1.1716,-1.1715 -2.7144,-1.75 -4.25,-1.75 z m 0,2 c 1.0237,0 2.0627,0.3752 2.8438,1.1563 1.5621,1.5622 1.5621,4.1253 0,5.6875 -1.5621,1.5621 -4.1252,1.5621 -5.6875,0 -1.562,-1.5622 -1.562,-4.1253 0,-5.6875 0.7811,-0.7811 1.82,-1.1563 2.8437,-1.1563 z"
+           id="vui_search_box_search_btn_fg"
+           inkscape:label="vui_color" />
+      </g>
+    </g>
     <rect
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.00392157;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        id="vui_table_bg"
        width="720"
        height="350.00003"
        x="1660"
-       y="1384.3218"
+       y="1543.1881"
        inkscape:label="vui_color" />
     <rect
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.11126009;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
@@ -902,13 +960,13 @@
        width="720"
        height="35.000023"
        x="1660"
-       y="1384.3218"
+       y="1543.1881"
        inkscape:label="vui_color" />
     <g
        id="vui_table_header_fg"
        inkscape:label="vui_color"
        style="fill:#2c3c44;fill-opacity:1"
-       transform="translate(0,791.95957)">
+       transform="translate(0,950.82589)">
       <text
          transform="scale(0.9797959,1.0206207)"
          inkscape:label="vui_color"
@@ -951,7 +1009,7 @@
     </g>
     <g
        id="g4743"
-       transform="translate(0,791.95957)">
+       transform="translate(0,950.82589)">
       <rect
          inkscape:label="vui_color"
          y="627.36218"
@@ -963,36 +1021,36 @@
       <g
          inkscape:label="vui_color"
          id="vui_table_cell_fg"
-         style="fill:#47616d;fill-opacity:1">
+         style="fill:#202c31;fill-opacity:1">
         <text
            inkscape:label="vui_color"
            id="text4720"
            y="637.7121"
            x="1816.0466"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#202c31;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            xml:space="preserve"
            transform="scale(0.9797959,1.0206207)"><tspan
              y="637.7121"
              x="1816.0466"
              id="tspan4722"
              sodipodi:role="line"
-             style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;fill:#202c31;fill-opacity:1">Normal cell</tspan></text>
         <text
            inkscape:label="vui_color"
            id="text4724"
            y="637.7121"
            x="2061.5659"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#202c31;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            xml:space="preserve"
            transform="scale(0.97979591,1.0206207)"><tspan
              y="637.7121"
              x="2061.5659"
              id="tspan4726"
              sodipodi:role="line"
-             style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;fill:#202c31;fill-opacity:1">Normal cell</tspan></text>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#202c31;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="2306.5149"
            y="637.7121"
            id="vui_table_header_fg-5"
@@ -1002,7 +1060,7 @@
              id="tspan4662-1"
              x="2306.5149"
              y="637.7121"
-             style="font-size:15.67673397px;line-height:1.25">Normal cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;fill:#202c31;fill-opacity:1">Normal cell</tspan></text>
       </g>
     </g>
     <use
@@ -1023,9 +1081,9 @@
        x="0" />
     <g
        id="use4753"
-       transform="translate(0,826.9596)">
+       transform="translate(0,985.82592)">
       <rect
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.03485257;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.06275862;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
          id="vui_table_cell_alt_bg"
          width="720"
          height="35.000023"
@@ -1035,11 +1093,11 @@
       <g
          id="vui_table_cell_alt_fg"
          inkscape:label="vui_color"
-         style="fill:#47616d;fill-opacity:1">
+         style="fill:#1e282d;fill-opacity:1;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none">
         <text
            transform="scale(0.9797959,1.0206207)"
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#1e282d;fill-opacity:1;stroke:none;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
            x="1816.0466"
            y="637.7121"
            id="text4765"
@@ -1048,11 +1106,11 @@
              id="tspan4767"
              x="1816.0466"
              y="637.7121"
-             style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#1e282d;fill-opacity:1;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none">Alternate cell</tspan></text>
         <text
            transform="scale(0.97979591,1.0206207)"
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#1e282d;fill-opacity:1;stroke:none;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
            x="2061.5659"
            y="637.7121"
            id="text4769"
@@ -1061,20 +1119,20 @@
              id="tspan4771"
              x="2061.5659"
              y="637.7121"
-             style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#1e282d;fill-opacity:1;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none">Alternate cell</tspan></text>
         <text
            transform="scale(0.97979591,1.0206207)"
            inkscape:label="vui_color"
            id="text4773"
            y="637.7121"
            x="2306.5149"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#1e282d;fill-opacity:1;stroke:none;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-east_asian:normal;vector-effect:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
            xml:space="preserve"><tspan
              y="637.7121"
              x="2306.5149"
              id="tspan4775"
              sodipodi:role="line"
-             style="font-size:15.67673397px;line-height:1.25">Alternate cell</tspan></text>
+             style="font-size:15.67673397px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#1e282d;fill-opacity:1;stroke-width:1.00000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stroke:none">Alternate cell</tspan></text>
       </g>
     </g>
     <use
@@ -1094,19 +1152,19 @@
        width="100%"
        height="100%" />
     <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.20576405;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.26689655;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        id="vui_table_border"
        width="1"
        height="350.00003"
        x="1660"
-       y="1384.3218"
+       y="1543.1881"
        inkscape:label="vui_color" />
     <use
        x="0"
        y="0"
        xlink:href="#vui_table_border"
        id="use4604"
-       transform="translate(719,-3.4400016e-6)"
+       transform="translate(719,-2.9553873e-6)"
        width="100%"
        height="100%" />
     <use
@@ -1114,7 +1172,7 @@
        y="0"
        xlink:href="#vui_table_border"
        id="use4604-7"
-       transform="matrix(0,1,-2.0542855,0,5223.7922,-275.67823)"
+       transform="matrix(0,1,-2.0542855,0,5550.149,-116.81191)"
        width="100%"
        height="100%" />
     <use
@@ -1122,7 +1180,7 @@
        y="0"
        xlink:href="#vui_table_border"
        id="use4604-70"
-       transform="translate(479.33325,-3.4400016e-6)"
+       transform="translate(479.33325,-2.9553873e-6)"
        width="100%"
        height="100%" />
     <use
@@ -1130,11 +1188,11 @@
        y="0"
        xlink:href="#vui_table_border"
        id="use4604-6"
-       transform="translate(239.66663,-3.4400016e-6)"
+       transform="translate(239.66663,-2.9553873e-6)"
        width="100%"
        height="100%" />
     <g
-       transform="translate(0,1071.9596)"
+       transform="translate(0,1230.8259)"
        id="g4743-5">
       <rect
          inkscape:label="vui_color"
@@ -1194,17 +1252,17 @@
        y="0"
        xlink:href="#vui_table_border"
        id="use4604-7-9"
-       transform="matrix(0,1,-2.0542855,0,5223.7922,73.321783)"
+       transform="matrix(0,1,-2.0542855,0,5550.149,232.18811)"
        width="100%"
        height="100%" />
     <rect
        inkscape:label="vui_color"
-       y="1629.3219"
+       y="1788.1882"
        x="1581.5112"
        height="69.999802"
        width="798.48883"
        id="vui_table_row_selected_bg"
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00334c;fill-opacity:0.11126009;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#008dd2;fill-opacity:0.26689655;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
     <use
        height="100%"
        width="100%"
@@ -1212,9 +1270,9 @@
        xlink:href="#vui_table_cell_bg"
        y="0"
        x="0"
-       transform="translate(0,1001.9597)" />
+       transform="translate(0,1160.826)" />
     <use
-       transform="translate(0,1036.9597)"
+       transform="translate(0,1195.826)"
        x="0"
        y="0"
        xlink:href="#vui_table_cell_alt_bg"
@@ -1222,7 +1280,7 @@
        width="100%"
        height="100%" />
     <rect
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#212d33;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#0c1113;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        id="vui_table_row_selected_fg"
        width="675.28699"
        height="69.999878"
@@ -1230,7 +1288,7 @@
        y="837.3623"
        clip-path="url(#clipPath5202)"
        inkscape:label="vui_color"
-       transform="translate(0,791.95957)" />
+       transform="translate(0,950.82589)" />
     <rect
        y="947.89563"
        x="-567.29578"
@@ -1355,14 +1413,14 @@
        id="vui_msg_main_fg"
        y="-638.41748"
        x="2393.7236"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Oxygen;-inkscape-font-specification:Oxygen;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;opacity:1;fill:#47616d;fill-opacity:1;stroke:none;font-variant-east_asian:normal;vector-effect:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Oxygen;-inkscape-font-specification:Oxygen;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;opacity:1;fill:#34464f;fill-opacity:1;stroke:none;font-variant-east_asian:normal;vector-effect:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;"
        xml:space="preserve"
        inkscape:label="vui_color"><tspan
          y="-638.41748"
          x="2393.7236"
          id="tspan3892-2"
          sodipodi:role="line"
-         style="font-size:16.14080048px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#47616d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">vui_msg_main_fg</tspan></text>
+         style="font-size:16.14080048px;line-height:1.25;font-variant-east_asian:normal;vector-effect:none;fill:#34464f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;">vui_msg_main_fg</tspan></text>
     <rect
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#db3d21;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
        id="vui_msg_main_bg-8"

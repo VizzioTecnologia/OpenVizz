@@ -102,7 +102,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'st' => TRUE, // Show submit form title
 								'csft' => FALSE, // Custom title: override the submit form title
 								'us_id' => 0, // user(s) submit(s) id(s) can be array
-								'fts' => NULL, // fields to show
+								'pts' => NULL, // props to show
 								't' => NULL, // search terms
 								
 								'if' => NULL, // Images fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
@@ -278,6 +278,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								
 							}
 							
+							$us_params[ 'props_to_show_site_list' ] = $us_params[ 'pts' ];
 							$us_params[ 'ud_data_list_d_titles_as_link' ] = $us_params[ 'tal' ];
 							$us_params[ 'ud_data_list_d_readmore_link' ] = $us_params[ 'srml' ];
 							$us_params[ 'ud_data_list_max_columns' ] = $us_params[ 'mc' ];
@@ -310,6 +311,47 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							$us_view_data[ 'params' ] = filter_params( $component_params, $submit_form[ 'params' ] );
 							$us_view_data[ 'params' ] = filter_params( $us_view_data[ 'params' ], $us_params );
 							
+							if ( isset( $us_params[ 'pts' ] ) ) {
+								
+								$us_params[ 'pts' ] = explode( ',', $us_params[ 'pts' ] );
+								
+								reset( $submit_form[ 'params' ][ 'props_to_show_site_list' ] );
+								
+								$tmp = array();
+								
+								while ( list( $k, $prop_to_show ) = each( $us_params[ 'pts' ] ) ) {
+									
+									if ( in_array( $prop_to_show, array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
+										
+										$tmp[] = array(
+											
+											'alias' => $prop_to_show,
+											'title' => ( check_var( $submit_form[ 'params' ][ 'ud_ds_default_data_' . $prop_to_show . '_pres_title' ] ) ? lang( $submit_form[ 'params' ][ 'ud_ds_default_data_' . $prop_to_show . '_pres_title' ] ) : lang( $prop_to_show ) ),
+											'type' => 'built_in',
+											
+										);
+										
+									}
+									else if ( isset( $submit_form[ 'fields' ][ $prop_to_show ] ) ){
+									
+										$prop = $submit_form[ 'fields' ][ $prop_to_show ];
+										
+										$tmp[] = array(
+											
+											'alias' => $prop_to_show,
+											'title' => ( isset( $prop[ 'presentation_label' ] ) AND $prop[ 'presentation_label' ] ) ? $prop[ 'presentation_label' ] : $prop[ 'label' ],
+											'type' => $prop[ 'field_type' ],
+											
+										);
+										
+									}
+									
+								}
+								
+								$us_view_data[ 'params' ][ 'props_to_show_site_list' ] = $tmp;
+								
+							}
+							
 							// Params filtering
 							// -------------------------------------------------
 							
@@ -334,6 +376,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'ipp' => $us_params[ 'ni' ],
 								'cp' => 1,
 								'allow_empty_terms' => TRUE,
+								'random' => ( is_string( $us_params[ 'ob' ] ) AND strtolower( $us_params[ 'ob' ] ) == 'random' ) ? TRUE : FALSE,
 								'plugins_params' => array(
 									
 									'sf_us_search' => array(

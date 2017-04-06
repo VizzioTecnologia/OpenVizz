@@ -339,8 +339,6 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 										
 									}
 									
-// 									echo '<pre>' . print_r( $uri_segments[ 'f' ], TRUE ) . '</pre>';
-									
 									if ( $uri_segments[ 'f' ] === $default_filters ) {
 										
 										$uri_segments[ 'miid' ] = $_menu_item[ 'id' ];
@@ -934,18 +932,40 @@ function set_last_url( $url ){
 		}
 		
 		$url_qs = assoc_array_to_qs( $url_qs );
+		$url = $url . $url_qs;
 		
-		$CI->session->set_envdata( 'last_url', $url . $url_qs );
+		$env_data = $CI->session->envdata( 'last_url' );
+		
+		if ( ! is_array( $env_data ) ) {
+			
+			$env_data = array();
+			
+		}
+		if ( check_var( $CI->current_component[ 'unique_name' ] ) ) {
+			
+			$env_data[ $CI->current_component[ 'unique_name' ] ] = $url;
+			
+		}
+		
+		$CI->session->set_envdata( 'last_url', $env_data );
 		
 	}
 	
 }
 
 function get_last_url(){
-
+	
 	$CI =& get_instance();
-
-	return $CI->session->envdata( 'last_url' );
+	
+	$env_data = $CI->session->envdata( 'last_url' );
+	
+	if ( is_array( $env_data ) AND check_var( $CI->current_component[ 'unique_name' ] ) AND check_var( $env_data[ $CI->current_component[ 'unique_name' ] ] ) ) {
+		
+		$env_data = $env_data[ $CI->current_component[ 'unique_name' ] ];
+		
+	}
+	
+	return $env_data;
 
 }
 

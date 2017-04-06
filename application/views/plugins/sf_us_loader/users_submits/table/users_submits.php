@@ -26,7 +26,7 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 ?>
 
 <section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="ud-d-list-wrapper <?= @$params['page_class']; ?>">
-	<?= get_url( $submit_form[ 'data_list_site_link' ] ); ?>
+	
 	<?php if ( $params['st'] ) { ?>
 	<header class="heading">
 		
@@ -60,26 +60,6 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 	<?php } ?>
 	
 	<div id="component-content">
-		
-		<?php
-		
-		/* ---------------------------------------------------------------------------
-		* ---------------------------------------------------------------------------
-		* Search box
-		* ---------------------------------------------------------------------------
-		*/
-		
-		if ( check_var( $params[ 'use_search' ] ) ) {
-			
-			if ( file_exists( $_path . 'search_box.php' ) ) {
-				
-				require( $_path . 'search_box.php' );
-				
-			}
-			
-		}
-		
-		?>
 		
 		<?php
 			

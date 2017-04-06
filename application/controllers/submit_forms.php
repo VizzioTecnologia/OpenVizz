@@ -2793,9 +2793,9 @@ class Submit_forms extends Main {
 				
 				$data[ 'page_url' ] = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . $get_query;
 // 				echo $data[ 'page_url' ];
-				$data[ 'users_submits_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
+				$data[ 'ud_data_list_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
 				
-				$data[ 'pagination' ] = get_pagination( $pagination_url, $cp, $ipp, $data[ 'users_submits_total_results' ] );
+				$data[ 'pagination' ] = get_pagination( $pagination_url, $cp, $ipp, $data[ 'ud_data_list_total_results' ] );
 				
 				/*
 				--------------------------------------------------------

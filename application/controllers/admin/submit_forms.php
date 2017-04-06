@@ -1943,7 +1943,19 @@ class Submit_forms extends Main {
 
 		// admin url
 		$a_url = get_url( $this->environment . $this->uri->ruri_string() );
-
+		
+		// -------------------------------------------------
+		// Last url ----------------------------------------
+		
+		if ( ! in_array( $action, array( 'cob', 'cp' ) ) ) {
+			
+			set_last_url( $a_url );
+			
+		}
+		
+		// Last url ----------------------------------------
+		// -------------------------------------------------
+		
 		if ( $ds_id ){
 
 			$data[ 'submit_form_id' ] = $ds_id;
@@ -2761,6 +2773,7 @@ class Submit_forms extends Main {
 				
 			}
 			*/
+			$this->search->reset_config();
 			$this->search->config( $search_config );
 			$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
 			
@@ -2822,15 +2835,6 @@ class Submit_forms extends Main {
 			********************************************************
 			*/
 			
-			// -------------------------------------------------
-			// Last url ----------------------------------------
-			
-			// setting up the last url
-			set_last_url( $a_url );
-			
-			// Last url ----------------------------------------
-			// -------------------------------------------------
-			
 			$this->_page(
 				
 				array(
@@ -2849,11 +2853,11 @@ class Submit_forms extends Main {
 		}
 		
 		/*
-			--------------------------------------------------------
-			Users submits list
-			--------------------------------------------------------
-			********************************************************
-			*/
+		--------------------------------------------------------
+		Users submits list
+		--------------------------------------------------------
+		********************************************************
+		*/
 		
 		
 		
@@ -3064,12 +3068,14 @@ class Submit_forms extends Main {
 				
 				$f_params = $_tmp;
 				
-	// 			echo 'cob: <pre>' . print_r( $f_params, TRUE ) . '</pre>';
+// 				echo 'cob: <pre>' . print_r( $f_params, TRUE ) . '</pre>'; exit;
 				
 				$this->{ $redirect_c_function }( $f_params );
 				
 			}
 			else if ( ! $this->input->post( 'ajax', TRUE ) ) {
+				
+				redirect_last_url();
 				
 			}
 			
@@ -4815,7 +4821,7 @@ class Submit_forms extends Main {
 				// getting current component params
 				$component[ 'params' ] = get_params( $component[ 'params' ] );
 				
-				echo '<pre>' . print_r( $component, TRUE ) . '</pre>'; exit;
+// 				echo '<pre>' . print_r( $component, TRUE ) . '</pre>'; exit;
 				
 				// getting params specifications only for users fields
 				$data[ 'params' ] = $this->sfm->get_ud_users_fields_params();

@@ -4,20 +4,20 @@
 	
 ?>
 
-<div id="users-submits-search-wrapper" class="users-submits-search-wrapper">
+<div id="users-submits-search-wrapper" class="ud-data-list-search-box ud-search-box users-submits-search-wrapper">
 	
 	<?php
 		
-		if ( check_var( $submit_form[ 'params' ][ 'us_search_pre_text' ] ) AND $pre_text_pos == 'before_search_fields' ) {
+		if ( check_var( $params[ 'us_search_pre_text' ] ) AND $pre_text_pos == 'before_search_fields' ) {
 			
-			if ( check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_search' ] ) ) {
+			if ( check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_search' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
-			else if ( ! check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_normal' ] ) ) {
+			else if ( ! check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_normal' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
 			
@@ -82,7 +82,9 @@
 			
 			//print_r( $params[ 'ud_data_availability_site_search' ] ); exit;
 			
-			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_availability_site_search' ] ) AND in_array( $field[ 'alias' ], $params[ 'ud_data_availability_site_search' ] ) ) {
+// 			echo '<pre>' . print_r( $params[ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';
+			
+			if ( $field[ 'field_type' ] == 'combo_box' AND check_var( $params[ 'ud_data_availability_site_search' ][ $field[ 'alias' ] ] ) ) {
 				
 				$options = array(
 					
@@ -129,6 +131,7 @@
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -199,7 +202,7 @@
 			
 		} ?>
 		
-		<div class="submit-form-field-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
+		<div class="submit-form-field-wrapper ud-search-box-search-button-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
 			
 			<div class="submit-form-field-control">
 				
@@ -214,7 +217,7 @@
 						'only_icon' => FALSE,
 						'name' => 'users_submits_search[submit_search]',
 						'class' => 'form-element submit-form submit-form-submit_search',
-						'wrapper_class' => 'action',
+						'wrapper_class' => 'action ud-search-box-search-button',
 						
 					)
 					
@@ -228,16 +231,16 @@
 	
 	<?php
 		
-		if ( check_var( $submit_form[ 'params' ][ 'us_search_pre_text' ] ) AND $pre_text_pos == 'after_search_fields' ) {
+		if ( check_var( $params[ 'us_search_pre_text' ] ) AND $pre_text_pos == 'after_search_fields' ) {
 			
-			if ( check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_search' ] ) ) {
+			if ( check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_search' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
-			else if ( ! check_var( $search_mode ) AND check_var( $submit_form[ 'params' ][ 'us_show_search_pre_text_on_normal' ] ) ) {
+			else if ( ! check_var( $search_mode ) AND check_var( $params[ 'us_show_search_pre_text_on_normal' ] ) ) {
 				
-				echo $submit_form[ 'params' ][ 'us_search_pre_text' ];
+				echo $params[ 'us_search_pre_text' ];
 				
 			}
 			

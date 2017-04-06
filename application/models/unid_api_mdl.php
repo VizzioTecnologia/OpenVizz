@@ -2522,77 +2522,91 @@ class Unid_api_mdl extends CI_Model{
 							}
 							else if ( in_array( $ds_props[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
 								
-								$__tmp = @json_decode( $ds_prop_value, TRUE );
-								
-								if ( is_array( $__tmp ) OR is_array( $ds_prop_value ) ) {
+								if ( check_var( $ud_data[ $key_2 ], TRUE ) ) {
 									
-									if ( is_array( $__tmp ) ) {
-										
-										$ds_prop_value = $__tmp;
-										
-									}
+									$ds_prop_value = $ud_data[ $key_2 ];
 									
-									if ( count( $ds_prop_value ) == 1 ) {
+								}
+								else {
+									
+									$__tmp = @json_decode( $ds_prop_value, TRUE );
+									
+									if ( is_array( $__tmp ) OR is_array( $ds_prop_value ) ) {
 										
-										$ds_prop_value = $ds_prop_value[ 0 ];
-										
-										if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
+										if ( is_array( $__tmp ) ) {
 											
-											$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+											$ds_prop_value = $__tmp;
 											
 										}
-										else {
+										
+										if ( count( $ds_prop_value ) == 1 ) {
 											
-											if ( in_array( $ds_props[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $ds_props[ $key_2 ][ 'options' ] ) AND ( $ds_prop_value == '1' OR $ds_prop_value == '' ) ) {
+											$ds_prop_value = $ds_prop_value[ 0 ];
+											
+											if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
 												
-												if ( check_var( $ds_prop_value ) ) {
+												$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												
+											}
+											else {
+												
+												if ( in_array( $ds_props[ $key_2 ][ 'field_type' ], array( 'checkbox', 'radiobox' ) ) AND ! check_var( $ds_props[ $key_2 ][ 'options' ] ) AND ( $ds_prop_value == '1' OR $ds_prop_value == '' ) ) {
 													
-													$ds_prop_value = lang( 'yes' );
-													
-												}
-												else {
-													
-													$ds_prop_value = lang( 'no' );
+													if ( check_var( $ds_prop_value ) ) {
+														
+														$ds_prop_value = lang( 'yes' );
+														
+													}
+													else {
+														
+														$ds_prop_value = lang( 'no' );
+														
+													}
 													
 												}
 												
 											}
+											
+										}
+										else {
+											
+											$_field_value = array();
+											
+											foreach ( $ds_prop_value as $k => $value ) {
+												
+												if ( is_string( $value ) ) {
+													
+													$value = htmlspecialchars_decode( $value );
+													
+													if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
+														
+														$value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+														
+													}
+													
+													$_field_value[] = $value;
+													
+												}
+												
+											}
+											
+											$ds_prop_value = join( ', ', $_field_value );
 											
 										}
 										
 									}
 									else {
 										
-										$_field_value = array();
-										
-										foreach ( $ds_prop_value as $k => $value ) {
+										if ( check_var( $ud_data[ $key_2 ], TRUE ) ) {
 											
-											if ( is_string( $value ) ) {
-												
-												$value = htmlspecialchars_decode( $value );
-												
-												if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
-													
-													$value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
-													
-												}
-												
-												$_field_value[] = $value;
-												
-											}
+											$ds_prop_value = $ud_data[ $key_2 ];
 											
 										}
-										
-										$ds_prop_value = join( ', ', $_field_value );
-										
-									}
-									
-								}
-								else {
-									
-									if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
-										
-										$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										else if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
+											
+											$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+											
+										}
 										
 									}
 									
@@ -2625,8 +2639,8 @@ class Unid_api_mdl extends CI_Model{
 									
 								}
 								
-												$ds_prop_value = htmlspecialchars_decode( $ds_prop_value );
-												
+								$ds_prop_value = htmlspecialchars_decode( $ds_prop_value );
+								
 								if ( in_array( $ds_props[ $key_2 ][ 'field_type' ], array( 'input_text' ) ) AND check_var( $ds_props[ $key_2 ][ 'validation_rule' ] ) AND in_array( 'mask', $ds_props[ $key_2 ][ 'validation_rule' ] ) AND check_var( $ds_props[ $key_2 ][ 'ud_validation_rule_parameter_mask_type' ] ) ) {
 									
 									$ds_prop_value = mask( $ds_prop_value,
@@ -2758,6 +2772,44 @@ class Unid_api_mdl extends CI_Model{
 						
 					}
 					
+					if ( check_var( $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] ) ) {
+						
+						$regex = '/\{(.*?):value\}/i';
+						
+						$content = $ds_props[ $key_2 ][ 'update_ud_data_out_format' ];
+						
+						preg_match_all( $regex, $content, $matches );
+						
+						if ( count( $matches[ 1 ] ) ){
+							
+							$find = array(
+								
+								$key_2 => '{' . $key_2 . ':value}',
+								
+							);
+							$replace = array(
+								
+								$key_2 => $ds_prop_value,
+								
+							);
+							
+							foreach( $matches[ 1 ] as $match ) {
+								
+								if ( $match != $key_2 AND check_var( $ud_data[ $match ], TRUE ) ) {
+									
+									$find[ $match ] = '{' . $match . ':value}';
+									$replace[ $match ] = $ud_data[ $match ];
+									
+								}
+								
+							}
+							
+							$us_fields[ $key_2 ][ 'value' ] = str_replace( $find, $replace, $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] );
+							
+						}
+			
+					}
+					
 				}
 				
 				$ud_data[ 'parsed_data' ][ 'full' ] = $us_fields;
@@ -2795,6 +2847,7 @@ class Unid_api_mdl extends CI_Model{
 		);
 		
 		$this->load->library( 'search' );
+		$this->search->reset_config();
 		$this->search->config( $search_config );
 		
 		$ud_data = $this->search->get_full_results( 'sf_us_search', TRUE );

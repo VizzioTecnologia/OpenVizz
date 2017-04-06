@@ -11,7 +11,7 @@ if ( ! defined( 'VUI_DEFAULT_FONT_COLOR' ) ) define( 'VUI_DEFAULT_FONT_COLOR', $
 if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', ( 1 * VUI_SCALE ) . 'em' );
-if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', '100' );
+if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', 'normal' );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', ( 1.5 * VUI_SCALE ) . 'em' );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', '1px solid ' . $vui->colors->vui_extra_3->rgba_s( 40 ) );

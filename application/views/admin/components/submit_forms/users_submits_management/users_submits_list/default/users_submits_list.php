@@ -200,6 +200,7 @@
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -770,11 +771,11 @@
 						
 						$advanced_options = check_var( $fields[ $column[ 'alias' ] ][ 'advanced_options' ] ) ? $fields[ $column[ 'alias' ] ][ 'advanced_options' ] : FALSE;
 						
-						reset( $ud_data[ 'parsed_data' ][ 'full' ] );
-						
 						$alias_found = FALSE;
 						$pd = NULL;
 						$alias = $column[ 'alias' ];
+						
+						reset( $ud_data[ 'parsed_data' ][ 'full' ] );
 						
 						while( list( $_alias, $_pd ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
 							
