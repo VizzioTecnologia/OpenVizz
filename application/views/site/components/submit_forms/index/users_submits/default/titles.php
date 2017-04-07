@@ -10,9 +10,9 @@
 		
 		<h4 class="value">
 			
-			<?php if ( check_var( $params[ 'ud_data_list_d_titles_as_link' ] ) AND isset( $user_submit[ 'site_link' ] ) ) { ?>
+			<?php if ( check_var( $params[ 'ud_data_list_d_titles_as_link' ] ) AND isset( $ud_data[ 'site_link' ] ) ) { ?>
 			
-			<a href="<?= $user_submit[ 'site_link' ]; ?>">
+			<a href="<?= $ud_data[ 'site_link' ]; ?>">
 
 				<?= $_field[ 'value' ]; ?>
 

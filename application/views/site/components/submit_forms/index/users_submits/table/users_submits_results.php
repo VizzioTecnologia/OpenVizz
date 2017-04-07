@@ -1,6 +1,7 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
 $ud_data_list = & $users_submits;
+// echo '<pre>' . print_r( $props_to_show, TRUE ) . '</pre>';
 
 ?>
 
@@ -225,7 +226,20 @@ $ud_data_list = & $users_submits;
 						
 							echo '<span class="ud-data-value-wrapper">';
 							
-							echo $pd[ 'value' ];
+							if ( check_var( $data_scheme[ 'ud_title_prop' ][ $alias ] ) AND check_var( $params[ 'ud_data_list_d_readmore_link' ] ) ) {
+								
+								echo '<a href="' . $ud_data[ 'site_link' ] . '">';
+								
+								echo $pd[ 'value' ];
+								
+								echo '</a>';
+								
+							}
+							else {
+								
+								echo $pd[ 'value' ];
+								
+							}
 							
 							echo '</span>';
 							

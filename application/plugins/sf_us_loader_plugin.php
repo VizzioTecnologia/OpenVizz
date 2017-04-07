@@ -278,10 +278,11 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								
 							}
 							
-							$us_params[ 'props_to_show_site_list' ] = $us_params[ 'pts' ];
-							$us_params[ 'ud_data_list_d_titles_as_link' ] = $us_params[ 'tal' ];
-							$us_params[ 'ud_data_list_d_readmore_link' ] = $us_params[ 'srml' ];
-							$us_params[ 'ud_data_list_max_columns' ] = $us_params[ 'mc' ];
+							$us_params[ 'props_to_show_site_list' ] = & $us_params[ 'pts' ];
+							$us_params[ 'ud_data_list_d_titles_as_link' ] = & $us_params[ 'tal' ];
+							$us_params[ 'ud_data_list_d_readmore_link' ] = & $us_params[ 'srml' ];
+							$us_params[ 'ud_data_list_max_columns' ] = & $us_params[ 'mc' ];
+							$us_params[ 'ud_d_list_layout_site' ] = & $us_params[ 'l' ];
 							$us_params[ 'show_default_results' ] = TRUE;
 							
 							$this->load->library( 'search' );
@@ -301,6 +302,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							$view_data[ 'submit_forms' ][ $_sf_id ] = & $submit_form;
 							$us_view_data[ '__index' ] = $__index;
 							$us_view_data[ 'submit_form' ] = & $view_data[ 'submit_forms' ][ $_sf_id ];
+							$us_view_data[ 'data_scheme' ] = & $us_view_data[ 'submit_form' ];
 							$submit_form[ 'plugin_params' ] = & $us_params;
 							
 							

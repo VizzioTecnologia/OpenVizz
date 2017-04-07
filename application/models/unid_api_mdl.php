@@ -2338,7 +2338,7 @@ class Unid_api_mdl extends CI_Model{
 				
 				if ( ! $ds_props_to_show AND isset( $data_scheme[ 'params' ][ 'props_to_show_site' ] ) ) {
 					
-					$ds_props_to_show = & $data_scheme[ 'params' ][ 'props_to_show' ];
+					$ds_props_to_show = & $data_scheme[ 'params' ][ 'props_to_show_site' ];
 					
 				}
 				
@@ -3020,7 +3020,7 @@ class Unid_api_mdl extends CI_Model{
 	 * @return mixed
 	 */
 	
-	public function parse_ds( & $data_scheme = NULL, $filter_params = FALSE ){
+	public function parse_ds( & $data_scheme = NULL, $filter_params = FALSE, $props_to_show = NULL ){
 		
 		$errors = FALSE;
 		
@@ -3138,7 +3138,7 @@ class Unid_api_mdl extends CI_Model{
 				
 				$data_scheme[ 'params' ][ 'props_to_show_site_list' ] = array();
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_list_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'id', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_list_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
 					
@@ -3152,7 +3152,7 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_list_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'submit_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_list_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
 					
@@ -3166,7 +3166,7 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_list_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'mod_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_list_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
 					
@@ -3180,7 +3180,7 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_detail_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'id', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_detail_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
 					
@@ -3195,7 +3195,7 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_detail_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'submit_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_detail_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
 					
@@ -3209,7 +3209,7 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				if ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_detail_show' ] ) ) {
+				if ( ( $props_to_show AND in_array( 'mod_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_detail_show' ] ) ) ) {
 					
 					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
 					
@@ -3238,8 +3238,8 @@ class Unid_api_mdl extends CI_Model{
 							
 						}
 						
-						if ( check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ){
-							
+						if ( ( $props_to_show AND in_array( $prop[ 'alias' ], $props_to_show ) ) OR ( ! $props_to_show AND check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ) ) {
+						
 							$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
 							
 							$new_column[ 'alias' ] = $prop[ 'alias' ];
@@ -3248,8 +3248,8 @@ class Unid_api_mdl extends CI_Model{
 							
 						}
 						
-						if ( check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ){
-							
+						if ( ( $props_to_show AND in_array( $prop[ 'alias' ], $props_to_show ) ) OR ( ! $props_to_show AND check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ) ) {
+						
 							$new_column_d = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
 							
 							$new_column_d[ 'alias' ] = $prop[ 'alias' ];

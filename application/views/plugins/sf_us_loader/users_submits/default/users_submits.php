@@ -12,7 +12,7 @@ $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index'
 
 ?>
 
-<section id="users-submits-<?= $unique_hash; ?>" class="ud-data-schema ud-data-schema-item users-submits <?= $params['wc']; ?> item item-<?= $__index; ?>">
+<section id="users-submits-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-data-schema ud-data-schema-item users-submits <?= $params[ 'wc' ]; ?> item item-<?= $__index; ?>">
 	
 	<?php if ( $params['st'] ) { ?>
 	<header class="heading">

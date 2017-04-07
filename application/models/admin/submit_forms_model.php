@@ -948,6 +948,32 @@ class Submit_forms_model extends CI_Model{
 				$_tmp = array(
 					
 					'type' => 'select',
+					'name' => 'ud_d_list_site_override_visible_props',
+					'label' => 'ud_d_list_site_override_visible_props',
+					'tip' => 'tip_ud_d_list_site_override_visible_props',
+					'validation' => array(
+						
+						'rules' => 'trim|required',
+						
+					),
+					'options' => array(
+						
+						'1' => 'yes',
+						'0' => 'no',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'ud_d_list_site_override_visible_props' ] = 0;
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'select',
 					'name' => 'ud_d_list_site_override_presentation_props',
 					'label' => 'ud_d_list_site_override_presentation_props',
 					'tip' => 'tip_ud_d_list_site_override_presentation_props',
@@ -968,6 +994,154 @@ class Submit_forms_model extends CI_Model{
 				$params[ 'params_spec_values' ][ 'ud_d_list_site_override_presentation_props' ] = 0;
 				
 				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					
+					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+					
+					if ( $alias ) {
+						
+						$fields_options[ $alias ] = $field[ 'label' ];
+						
+					}
+					
+				}
+				
+				if ( check_var( $current_params_values[ 'ud_d_list_site_override_visible_props' ] ) ) {
+					
+					//------------------------------------------------------
+					
+					$new_params[] = array(
+						
+						'type' => 'spacer',
+						'label' => 'props_to_show',
+						'tip' => 'tip_props_to_show',
+						
+					);
+					
+					//------------------------------------------------------
+					
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'props_to_show[id]',
+						'label' => 'id',
+						'value' => 'id',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[id]' ] = 'id';
+						
+					}
+					
+					$new_params[] = $_tmp;
+					
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'props_to_show[submit_datetime]',
+						'label' => 'submit_datetime',
+						'value' => 'submit_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[submit_datetime]' ] = 'submit_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					$_tmp = array(
+						
+						'type' => 'checkbox',
+						'inline' => TRUE,
+						'name' => 'props_to_show[mod_datetime]',
+						'label' => 'mod_datetime',
+						'value' => 'mod_datetime',
+						'validation' => array(
+							
+							'rules' => 'trim',
+							
+						),
+						
+					);
+
+					if ( $new_flag ) {
+						
+						// $params[ 'params_spec_values' ][ 'ud_title_prop[mod_datetime]' ] = 'mod_datetime';
+						
+					}
+
+					$new_params[] = $_tmp;
+
+					/*
+					* ------------------------------------
+					*/
+
+					foreach ( $fields_options as $alias => $label ) {
+						
+						$_tmp = array(
+							
+							'type' => 'checkbox',
+							'inline' => TRUE,
+							'name' => 'props_to_show[' . $alias . ']',
+							'label' => $label,
+							'value' => $alias,
+							'validation' => array(
+								
+								'rules' => 'trim',
+								
+							),
+							
+						);
+						
+						if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+							
+							if ( $new_flag ) {
+								
+								// $params[ 'params_spec_values' ][ 'ud_title_prop[' . $alias . ']' ] = $alias;
+								
+							}
+							
+						}
+						
+						if ( $field[ 'field_type' ] == 'combo_box' ) {
+							
+							$select_fields[] = $field;
+							
+						}
+						
+						$new_params[] = $_tmp;
+						
+					}
+					
+				}
 				
 				//------------------------------------------------------
 				
@@ -1000,19 +1174,7 @@ class Submit_forms_model extends CI_Model{
 				
 				$new_params[] = $_tmp;
 				
-				//------------------------------------------------------
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
-					
-					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
-					
-					if ( $alias ) {
-						
-						$fields_options[ $alias ] = $field[ 'label' ];
-						
-					}
-					
-				}
 				
 				if ( check_var( $current_params_values[ 'ud_d_list_site_override_presentation_props' ] ) ) {
 					
@@ -1846,6 +2008,27 @@ class Submit_forms_model extends CI_Model{
 					),
 					
 				);
+				
+				$new_params[] = $_tmp;
+				
+				//------------------------------------------------------
+				
+				$_tmp = array(
+					
+					'type' => 'number',
+					'inline' => TRUE,
+					'name' => 'ud_data_list_max_columns',
+					'label' => 'ud_data_list_max_columns',
+					'tip' => 'tip_ud_data_list_max_columns',
+					'validation' => array(
+						
+						'rules' => 'trim',
+						
+					),
+					
+				);
+				
+				$params[ 'params_spec_values' ][ 'ud_data_list_max_columns' ] = 3;
 				
 				$new_params[] = $_tmp;
 				

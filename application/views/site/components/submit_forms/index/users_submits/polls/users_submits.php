@@ -110,7 +110,7 @@ if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 	
 	<div id="component-content">
 		
-		<div id="users-submits-search-results-wrapper" class="users-submits-wrapper results"><?php
+		<div id="ud-d-search-results-wrapper" class="users-submits-wrapper results"><?php
 			
 			if ( check_var( $users_submits ) AND check_var( $params[ 'poll_data_field' ] ) ) {
 				

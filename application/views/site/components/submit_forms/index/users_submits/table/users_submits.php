@@ -27,7 +27,7 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 
 ?>
 
-<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
+<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
 	
 	<?php if ( check_var( $params['show_page_content_title'] ) ) { ?>
 	<header class="component-heading">

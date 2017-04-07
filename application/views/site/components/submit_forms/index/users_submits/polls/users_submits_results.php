@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' ); ?>
 
-<div id="users-submits-search-results-wrapper" class="users-submits-wrapper results">
+<div id="ud-d-search-results-wrapper" class="users-submits-wrapper results">
 	
 	<?php if ( check_var( $users_submits ) ) { ?>
 		

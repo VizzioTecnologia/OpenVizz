@@ -144,7 +144,7 @@
 	margin-right: auto;
 	
 }
-.submit-form .vui-interactive-el-wrapper{
+.submit-form .vui-interactive-el-wrapper {
 	
 	<?= $vui->css->display_inline_block(); ?>
 	width: 100%;
@@ -501,6 +501,13 @@
 	width: 100%;
 	
 }
+.sf-us-loader-plugin-wrapper .ud-data {
+	
+	padding: 0;
+	margin: 0;
+	
+}
+
 .ud-data * {
 	
 	word-break: normal;
@@ -529,6 +536,36 @@
 }
 
 <?php } ?>
+
+
+<?= '@media screen and ( max-width: 1040px ) {' ?>
+	
+	.ud-data-list:not( .columns-1 ):not( .columns-2 ):not( .columns-3 ) .ud-data {
+		
+		width: <?= 100 / 3; ?>% !important;
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 700px ) {' ?>
+	
+	.ud-data-list:not( .columns-1 ):not( .columns-2 ):not( .columns-3 ) .ud-data {
+		
+		width: 50% !important;
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 600px ) {' ?>
+	
+	.ud-data-list:not( .columns-1 ):not( .columns-2 ):not( .columns-3 ) .ud-data {
+		
+		width: 100% !important;
+		
+	}
+	
+}
+
 
 
 

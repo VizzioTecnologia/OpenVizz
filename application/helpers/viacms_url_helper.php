@@ -378,6 +378,12 @@ function get_url( $original_url = NULL, $itemid = NULL ){
 						$_url_path = NULL;
 						unset( $_url_path );
 						
+						if ( $filters ) {
+							
+							$uri_segments[ 'f' ] = $CI->unid->url_encode_ud_filters( $uri_segments[ 'f' ] );
+							
+						}
+						
 						$final_url = $CI->uri->assoc_to_uri( $uri_segments );
 						
 					}

@@ -2487,9 +2487,7 @@ $logo_height = 90;
 	<?= $vui->css->display_inline_block(); ?>;
 	background-color: rgba(41, 89, 130, 0.05);
 	padding:<?= VUI_SPACING; ?>em;
-
-	<?= DEFAULT_BORDER_RADIUS; ?>
-
+	
 	margin-left:<?= VUI_SPACING / 2; ?>em;
 	margin-right:<?= VUI_SPACING / 2; ?>em;
 	margin-bottom:<?= VUI_SPACING; ?>em;
@@ -2633,10 +2631,15 @@ $logo_height = 90;
 
 
 
-
-
-
-
+#cartas-intro-wrapper .sf-us-loader-plugin-wrapper {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+	width: calc( 50% - <?= VUI_SPACING * 2.0004; ?>em );
+	
+	margin: 0 <?= VUI_SPACING; ?>em;
+	
+}
 
 
 
@@ -2647,37 +2650,180 @@ $logo_height = 90;
 #cartas-intro-wrapper {
 	
 }
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper {
+.sf-us-loader-plugin-wrapper {
 	
 	position: relative;
-	<?= $vui->css->display_inline_block(); ?>;
 	
-	width: 50%;
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper {
+	
+	position: relative;
 	
 	padding: <?= VUI_SPACING; ?>em;
 	
 }
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper .heading {
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper {
 	
-	text-align: center;
+	background-position: right -6em top -6em;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
 	
 }
-
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper td,
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper thead td,
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper th,
-#cartas-intro-wrapper .sf-us-loader-plugin-wrapper table caption{
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper:before {
+	
+	position: absolute;
+	left: -20px;
+	top: -20px;
+	
+	margin: 0 auto;
+	
+	width: 100px;
+	height: 100px;
+	
+	<?= $vui->css->transition( 'all 0.1s ease-in-out' ) ?>
+	<?= $vui->css->transform_origin( '50% 50%' ); ?>
+	<?= $vui->css->transform( 'scale( 1 )' ); ?>
+	
+	<?= $vui->css->border_radius( '100%' ) ?>
+	background-position: center center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper td,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper thead td,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper th,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper table caption{
 	
 	border: none;
-	border-bottom: thin solid <?= $vui->colors->vui_table_border->rgba_s(); ?>;
 	padding: <?= VUI_SPACING / 1.5; ?>em <?= VUI_SPACING; ?>em;
+	
+	text-overflow: ellipsis;
+	
+	white-space: nowrap;
 	
 }
 
+<?php
+	
+	$colors = array(
+		
+		'base',
+		'base_alt',
+		'red',
+		'green',
+		'orange',
+		'yellow',
+		'purple',
+		'blue',
+		
+	);
+	
+	$icons = array(
+		
+		'car',
+		'calendar',
+		'college',
+		'contact',
+		'find',
+		'facebook',
+		'gplus',
+		'home',
+		'homecar',
+		'image',
+		'instagram',
+		'poll',
+		'quote',
+		'readmore',
+		'select',
+		'twitter',
+		'youtube',
+		
+	);
+	
+	foreach( $colors as $color ) {
+	
+?>
 
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s(); ?>;
+	
+	background-color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> * {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s(); ?>;
+	
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> a:hover,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> a:focus,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> a:active {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 200, TRUE )->rgba_s(); ?>;
+	
+}
 
+<?php foreach( $icons as $icon ) { ?>
+	
+	.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-icon-<?= $icon; ?> .heading {
+		
+		margin-left: 80px;
+		
+	}
+	
+	.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-icon-<?= $icon; ?>.vui-color-<?= $color; ?> {
+		
+		background-image: url(<?= $vui->svg_file( 'icon-' . $icon, $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s( 30 ) ); ?>);
+		
+	}
+	
+	.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-icon-<?= $icon; ?>.vui-color-<?= $color; ?>:before {
+		
+		content: '';
+		
+		background-image: url(<?= $vui->svg_file( 'icon-' . $icon, $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s() ); ?>);
+		background-color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+		
+	}
+	
+<?php } ?>
 
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> table {
+	
+	background-color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s( 20 ); ?>;
+	
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> td,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> thead td,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> th,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> table caption,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> tr:nth-child( odd ) td {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s(); ?>;
+	
+	border-bottom: thin solid <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s( 50 ); ?>;
+	
+}
 
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> tr:hover td,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> tr.selected td {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	background-color: <?= $vui->colors->{ 'vui_' . $color }->get_ro_color( 50, TRUE )->rgba_s(); ?>;
+	
+}
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> tr:hover td *,
+.sf-us-loader-plugin-wrapper .ud-d-list-wrapper.vui-color-<?= $color; ?> tr.selected td * {
+	
+	color: <?= $vui->colors->{ 'vui_' . $color }->rgba_s(); ?>;
+	
+}
+
+<?php } ?>
 
 
 

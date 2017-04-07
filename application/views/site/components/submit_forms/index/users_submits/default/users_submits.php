@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
+$__index = isset( $__index ) ? $__index : 1;
+
 $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
 
 $filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
@@ -18,7 +20,7 @@ if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 
 ?>
 
-<section id="submit-form-users-submits-<?= $unique_hash; ?>" class="submit-form users-submits <?= @$params['page_class']; ?>">
+<section id="submit-form-users-submits-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-d-list-wrapper submit-form users-submits <?= @$params['page_class']; ?> item item-<?= $__index; ?>">
 	
 	<?php if ( @$params['show_page_content_title'] ) { ?>
 	<header class="component-heading">
@@ -111,4 +113,8 @@ if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 	
 </script>
 
-<?php } ?>
+<?php }
+
+$__index++;
+
+?>

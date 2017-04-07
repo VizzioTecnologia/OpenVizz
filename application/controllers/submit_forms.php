@@ -2412,8 +2412,6 @@ class Submit_forms extends Main {
 		
 		else if ( $action === 'us' AND ( $data_scheme_id AND is_numeric( $data_scheme_id ) AND is_int( $data_scheme_id + 0 ) ) ){
 			
-			$layout = isset( $menu_item_params[ 'ud_d_list_layout_site' ] ) ? $menu_item_params[ 'ud_d_list_layout_site' ] : 'default';
-			
 			// get data scheme params
 			$gdsp = array(
 				
@@ -2434,7 +2432,7 @@ class Submit_forms extends Main {
 				$this->load->helper( array( 'pagination' ) );
 				$this->load->library( 'search' );
 				
-				$this->ud_api->parse_ds( $data_scheme );
+				$this->ud_api->parse_ds( $data_scheme, FALSE, ( ( check_var( $menu_item_params[ 'ud_d_list_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'props_to_show' ] ) ) ? $menu_item_params[ 'props_to_show' ] : NULL ) );
 				
 				$data[ 'submit_form' ] = & $data_scheme;
 				
@@ -2446,7 +2444,7 @@ class Submit_forms extends Main {
 				$data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ], TRUE );
 				$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params, TRUE );
 				
-// 				echo '<pre>' . print_r( $data[ 'params' ][ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';exit;
+// 				echo '<pre>' . print_r( $data[ 'params' ], TRUE ) . '</pre>';exit;
 				
 				// Params filtering
 				// -------------------------------------------------
@@ -2557,9 +2555,9 @@ class Submit_forms extends Main {
 					$obd = urldecode( $data[ 'get' ][ 'obd' ] );
 					
 				}
-				else if ( isset( $f_params[ 'ob' ] ) ) {
+				else if ( isset( $f_params[ 'obd' ] ) ) {
 					
-					$obd = $f_params[ 'ob' ];
+					$obd = $f_params[ 'obd' ];
 					
 				}
 				else if ( isset( $data[ 'params' ][ 'users_submits_order_by_direction' ] ) ) {

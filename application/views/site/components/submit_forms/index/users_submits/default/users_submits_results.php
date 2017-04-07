@@ -139,7 +139,7 @@
 	
 ?>
 
-<div id="users-submits-search-results-wrapper" class="<?= check_var( $wrapper_class ) ? $wrapper_class : ''; ?>">
+<div id="ud-d-search-results-wrapper" class="<?= check_var( $wrapper_class ) ? $wrapper_class : ''; ?>">
 	
 	<?php if ( check_var( $ud_data_list ) ) { ?>
 		

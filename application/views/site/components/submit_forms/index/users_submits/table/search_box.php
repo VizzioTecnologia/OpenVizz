@@ -25,7 +25,7 @@
 		
 	?>
 	
-	<?= form_open_multipart( get_url( $this->uri->ruri_string() ) . '#users-submits-search-results-wrapper', array( 'id' => 'us-search-form', ) );
+	<?= form_open_multipart( get_url( $this->uri->ruri_string() ) . '#ud-d-search-results-wrapper', array( 'id' => 'us-search-form', ) );
 		
 		$combo_box_fields_to_search = array();
 		

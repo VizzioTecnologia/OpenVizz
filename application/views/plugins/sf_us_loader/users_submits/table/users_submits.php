@@ -21,13 +21,15 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 	
 }
 
+// echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
+
 // print_r( $params );
 
 ?>
 
-<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="ud-d-list-wrapper <?= @$params['page_class']; ?>">
+<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-data-schema-item users-submits ud-d-list-wrapper <?= $params[ 'wc' ]; ?> item item-<?= $__index; ?>">
 	
-	<?php if ( $params['st'] ) { ?>
+	<?php if ( $params[ 'st' ] ) { ?>
 	<header class="heading">
 		
 		<h3>

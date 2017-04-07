@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-?>
+if ( check_var( $us_output_html ) ) {
 
-<div class="sf-us-loader-plugin-wrapper <?= $wrapper_params[ 'wc' ]; ?> ud-data-schema-list items-list total-items-list-<?= count( $us_output_html ); ?>">
+?><div class="sf-us-loader-plugin-wrapper <?= $wrapper_params[ 'wc' ]; ?> ud-data-schema-list items-list total-items-list-<?= count( $us_output_html ); ?>">
 	
 	<?php
 		
@@ -14,4 +14,8 @@
 		
 	?>
 	
-</div>
+</div><?php
+
+}
+
+?>
