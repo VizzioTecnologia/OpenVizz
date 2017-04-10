@@ -4,13 +4,6 @@
 
 $_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'table' . DS;
 
-$data_scheme = & $submit_form;
-$props = & $data_scheme[ 'fields' ];
-
-$props_to_show = & $params[ 'props_to_show_site_list' ];
-
-
-
 $filter_fields_input_name = 'users_submits_search[dinamic_filter_fields]';
 
 $pre_text_pos = 'before_search_fields';
@@ -27,7 +20,7 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 
 ?>
 
-<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
+<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-d-list-wrapper submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
 	
 	<?php if ( check_var( $params['show_page_content_title'] ) ) { ?>
 	<header class="component-heading">
@@ -53,9 +46,9 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 		
 		if ( check_var( $params[ 'use_search' ] ) ) {
 			
-			if ( file_exists( $_path . 'search_box.php' ) ) {
+			if ( file_exists( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS . 'search_box.php' ) ) {
 				
-				require( $_path . 'search_box.php' );
+				require( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS . 'search_box.php' );
 				
 			}
 			

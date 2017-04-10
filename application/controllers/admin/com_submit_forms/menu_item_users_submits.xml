@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <params>
 	
-	<section name="users_submits_config">
+	<section name="ud_params_section_d_list_general_params">
 		
 		<!-- as options deste campo são criadas via php -->
 		<param name="submit_form_id" type="select" default="" label="select_submit_form" tip="tip_select_submit_form" inline="1">
@@ -10,10 +10,29 @@
 			
 		</param>
 		
+	</section>
+	
+	<section name="ud_params_section_d_list_params">
+		
 		<!-- as options deste campo são criadas via php -->
-		<param name="ud_d_list_layout_site" type="select" default="default" label="ud_d_list_layout_site" tip="tip_ud_d_list_layout_site" inline="1">
+		<param name="ud_d_list_layout_site" type="select" default="global" label="ud_d_list_layout_site" tip="tip_ud_d_list_layout_site" inline="1">
 			
 			<validation rules="trim|required" />
+			
+			<option value="global">global</option>
+			
+		</param>
+		
+	</section>
+	
+	<section name="ud_params_section_d_detail_params">
+		
+		<!-- as options deste campo são criadas via php -->
+		<param name="ud_d_detail_layout_site" type="select" default="global" label="ud_d_detail_layout_site" tip="tip_ud_d_detail_layout_site" inline="1">
+			
+			<validation rules="trim|required" />
+			
+			<option value="global">global</option>
 			
 		</param>
 		

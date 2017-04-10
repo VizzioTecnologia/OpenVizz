@@ -74,11 +74,25 @@
 			
 		}
 		
+		$props_options = array(
+			
+			'id' => lang( 'id' ),
+			'submit_datetime' => lang( 'submit_datetime' ),
+			'mod_datetime' => lang( 'mod_datetime' ),
+			
+		);
+		
 		foreach ( $props as $key_2 => $field ) {
 			
 			$field_name = url_title( $field[ 'alias' ], '-', TRUE );
 			$formatted_field_name = 'form[' . $field_name . ']';
 			$field_value = ( isset( $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] ) ) ? $post[ 'users_submits_search' ][ 'dinamic_filter_fields' ][ $field_name ] : '';
+			
+			if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html' ) ) ) {
+				
+				$props_options[ $field[ 'alias' ] ] = $field[ 'label' ];
+				
+			}
 			
 			//print_r( $params[ 'ud_data_availability_site_search' ] ); exit;
 			
@@ -200,9 +214,65 @@
 			
 			}
 			
-		} ?>
+		}
 		
-		<div class="submit-form-field-wrapper ud-search-box-search-button-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
+		?><div class="submit-form-field-wrapper submit-form-field-wrapper-order-by">
+			
+			<?= form_label( lang( 'order_by' ) ); ?>
+			
+			<div class="submit-form-field-control">
+				
+				<?= vui_el_dropdown(
+					
+					array(
+						
+						'id' => 'submit-form-' . $field[ 'alias' ],
+						'title' => isset( $field[ 'description' ] ) ? lang( $field[ 'description' ] ) : NULL,
+						'value' => $order_by,
+						'name' => 'users_submits_search[order_by]',
+						'options' => $props_options,
+						'class' => 'form-element submit-form submit-form-' . $field[ 'alias' ],
+						
+					)
+					
+				); ?>
+				
+			</div>
+			
+		</div><?php
+		
+		?><div class="submit-form-field-wrapper submit-form-field-wrapper-order-by-direction">
+			
+			<?= form_label( lang( 'order_by_direction' ) ); ?>
+			
+			<div class="submit-form-field-control">
+				
+				<?= vui_el_dropdown(
+					
+					array(
+						
+						'id' => 'submit-form-' . $field[ 'alias' ],
+						'title' => isset( $field[ 'description' ] ) ? lang( $field[ 'description' ] ) : NULL,
+						'value' => $order_by_direction,
+						'name' => 'users_submits_search[order_by_direction]',
+						'options' => array(
+							
+							'asc' => lang( 'ordering_asc' ),
+							'desc' => lang( 'ordering_desc' ),
+							'random' => lang( 'ordering_random' ),
+							
+						),
+						'class' => 'form-element submit-form submit-form-' . $field[ 'alias' ],
+						
+					)
+					
+				); ?>
+				
+			</div>
+			
+		</div><?php
+		
+		?><div class="submit-form-field-wrapper ud-search-box-search-button-wrapper submit-form-field-wrapper-submit_search submit-form-field-wrapper-button">
 			
 			<div class="submit-form-field-control">
 				

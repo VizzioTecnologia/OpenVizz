@@ -1,55 +1,56 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-$ud_data_list = & $users_submits;
-// echo '<pre>' . print_r( $props_to_show, TRUE ) . '</pre>';
-
 ?>
 
 
 <div class="users-submits-wrapper results">
 	
-	<?php if ( check_var( $ud_data_list ) ) { ?>
+	<?php if ( check_var( $ud_data_array ) ) { ?>
 		
 		<?php if ( check_var( $params[ 'show_results_count' ] ) ) { ?>
 		
-		<div class="users-submits-search-results-title-wrapper ud-data-list-count">
+		<div class="ud-d-list-results-title-wrapper ud-d-list-results-count-wrapper">
 			
-			<h3 class="users-submits-search-results-title">
+			<span class="s1">
 				
-				<?php
+				<span class="ud-d-list-results-title">
 					
-					if ( $ud_data_list_total_results > 1 ) {
+					<?php
 						
-						if ( check_var( $params[ 'users_submits_search_results_string' ] ) ) {
+						if ( $ud_data_list_total_results > 1 ) {
 							
-							echo sprintf( $params[ 'users_submits_search_results_string' ], '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
+							if ( check_var( $params[ 'ud_d_list_search_results_string' ] ) ) {
+								
+								echo sprintf( $params[ 'ud_d_list_search_results_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'ud_d_list_search_results_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						else {
 							
-							echo sprintf( lang( 'users_submits_search_results_string' ), '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
+							if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
+								
+								echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						
-					}
-					else {
-						
-						if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
-							
-							echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
-							
-						}
-						else {
-							
-							echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
-							
-						}
-						
-					}
+					?>
 					
-				?>
+				</span>
 				
-			</h3>
+			</span>
 			
 		</div>
 		
@@ -59,26 +60,118 @@ $ud_data_list = & $users_submits;
 			
 			<table class="ud-d-list responsive multi-selection-table">
 				
-				<tr>
-					
-					<?php foreach ( $props_to_show as $key => $prop ) { ?>
-						
-						<?php $current_column = $prop[ 'alias' ]; ?>
-						
-						<th class="col-<?= $current_column; ?><?= check_var( $props[ $current_column ][ 'ud_data_list_css_class' ] ) ? ' ' . $props[ $current_column ][ 'ud_data_list_css_class' ] : ''; ?>">
-						
-							<?= lang( $prop[ 'title' ] ); ?>
-							
-						</th>
-						
-					<?php } ?>
-					
-				</tr>
+				<?php
 				
-				<?php foreach( $ud_data_list as & $ud_data ) {
+				$___index = TRUE;
+				
+				foreach( $ud_data_array as & $ud_data ) {
 					
 					$this->ud_api->parse_ud_data( $ud_data, $props_to_show );
 					
+					$_ud_data_wrapper_class = array();
+					
+					reset( $ud_data[ 'parsed_data' ][ 'full' ] );
+					
+					while ( list( $_pk, $parsed_array ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
+						
+						$prop_value = & $ud_data[ 'parsed_data' ][ 'full' ][ $_pk ][ 'value' ];
+						
+						$_prop = NULL;
+						
+						if ( isset( $props[ $_pk ] ) ) {
+							
+							$_prop = $props[ $_pk ];
+							
+						}
+						
+						if ( check_var( $_prop[ 'field_type' ] ) ){
+							
+							// date
+							if ( $_prop[ 'field_type' ] == 'date' ){
+								
+								if ( check_var( $_prop[ 'sf_date_field_relative_datetime' ] ) AND date_is_valid( $prop_value ) ) {
+									
+									$date = new DateTime( $prop_value );
+									$now = new DateTime( date( 'Y-m-d', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) ) );
+									$yesterday = new DateTime( date( 'Y-m-d', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) ) );
+									$yesterday->sub( date_interval_create_from_date_string( '1 day' ) );
+									$tomorrow = new DateTime( date( 'Y-m-d', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) ) );
+									$tomorrow->add( date_interval_create_from_date_string( '1 day' ) );
+									
+									if ( $date == $now ) {
+										
+										$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-today';
+										
+										$_ud_data_wrapper_class[] = 'is-today';
+										
+									}
+									else if ( $date == $yesterday ) {
+										
+										$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-yesterday';
+										
+										$_ud_data_wrapper_class[] = 'is-yesterday';
+										
+									}
+									else if ( $date == $tomorrow ) {
+										
+										$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-tomorrow';
+										
+										$_ud_data_wrapper_class[] = 'is-tomorrow';
+										
+									}
+									
+								}
+								
+							}
+							
+							if ( check_var( $prop_value ) AND check_var( $_prop[ 'advanced_options' ][ 'prop_is_ud_content' ] ) ) {
+								
+								$content_word_limit = check_var( $params[ 'users_submit_content_word_limit' ] ) ? $params[ 'users_submit_content_word_limit' ] : 120;
+								$word_limit_str = '...';
+								
+								if ( $content_word_limit > 0 AND strlen( $prop_value ) > $content_word_limit ) {
+									
+									$prop_value = word_limiter( htmlspecialchars_decode( $prop_value ), $content_word_limit, $word_limit_str );
+									
+								}
+								else {
+									
+									$prop_value = word_limiter( htmlspecialchars_decode( $prop_value ) );
+									
+								}
+								
+							}
+							
+						}
+						
+						$_ud_data_wrapper_class[] = 'ud-data-item-' . $_pk . '-value-' . word_limiter( str_replace( '_', '-', url_title( $prop_value, '-', TRUE ) ), 20, '' );
+						
+					}
+					
+					$_ud_data_wrapper_class = join( ' ', $_ud_data_wrapper_class );
+					
+					if ( isset( $___index ) ) {
+						
+						echo '<tr>';
+						
+						foreach ( $props_to_show as $alias => $v ) {
+							
+							echo '<th class="col-' . $alias . ( check_var( $props[ $alias ][ 'ud_data_list_css_class' ] ) ? ' ' . $props[ $alias ][ 'ud_data_list_css_class' ] : '' ) . '">';
+							
+							echo lang( $ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'label' ] );
+							
+							echo '</th>';
+							
+						}
+						
+						echo '</tr>';
+						
+						$___index = NULL;
+						unset( $___index );
+						
+					}
+					
+					$ud_status_prop_class = array();
 					$_us_status = array();
 					$_us_status_classes = '';
 					$_us_has_status = FALSE;
@@ -121,6 +214,8 @@ $ud_data_list = & $users_submits;
 										
 										if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'data' ][ $alias ] ) AND $ud_data[ 'data' ][ $alias ] == $status_field[ 'advanced_options' ][ $_item ] ) {
 											
+											$ud_status_prop_class[ $alias ][ $_item ] = $_item . ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+											
 											$_us_status[ $alias ] = $_item . ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
 											
 											$_us_has_status = TRUE;
@@ -145,16 +240,15 @@ $ud_data_list = & $users_submits;
 					
 				?>
 				
-				<tr class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?>">
+				<tr class="ud-data-wrapper <?= $_us_has_status ? $_us_status_classes : ''; ?> modal ud-data <?= $_ud_data_wrapper_class; ?>">
 					
-					<?php foreach ( $props_to_show as $key => $prop_to_show ) {
+					<?php foreach ( $props_to_show as $alias => $prop_to_show ) {
 						
 						$_prop_is_ud_status = FALSE;
 						
-						$advanced_options = check_var( $props[ $prop_to_show[ 'alias' ] ][ 'advanced_options' ] ) ? $props[ $prop_to_show[ 'alias' ] ][ 'advanced_options' ] : FALSE;
+						$advanced_options = check_var( $props[ $alias ][ 'advanced_options' ] ) ? $props[ $alias ][ 'advanced_options' ] : FALSE;
 						
 						$pd = NULL;
-						$alias = $prop_to_show[ 'alias' ];
 						
 						reset( $ud_data[ 'parsed_data' ][ 'full' ] );
 						
@@ -226,7 +320,7 @@ $ud_data_list = & $users_submits;
 						
 							echo '<span class="ud-data-value-wrapper">';
 							
-							if ( check_var( $data_scheme[ 'ud_title_prop' ][ $alias ] ) AND check_var( $params[ 'ud_data_list_d_readmore_link' ] ) ) {
+							if ( check_var( $data_scheme[ 'ud_title_prop' ][ $alias ] ) AND check_var( $params[ 'ud_data_list_d_titles_as_link' ] ) ) {
 								
 								echo '<a href="' . $ud_data[ 'site_link' ] . '">';
 								
@@ -260,7 +354,7 @@ $ud_data_list = & $users_submits;
 				
 			</table>
 			
-			<?php if ( check_var( $ud_data_list ) ) { ?>
+			<?php if ( check_var( $ud_data_array ) ) { ?>
 			
 				<div class="clear"></div>
 				
@@ -320,15 +414,15 @@ $ud_data_list = & $users_submits;
 			
 		} ?>
 		
-		<h4 class="title">
+		<div class="ud-d-list-no-search-results-desc-wrapper no-results">
 		
-			<div class="users-submits-description-no-search-results">
+			<span class="ud-d-list-no-search-results-desc">
 				
 				<?= $_result_string; ?>
 				
-			</div>
+			</span>
 			
-		</h4>
+		</div>
 		
 	<?php } ?>
 	

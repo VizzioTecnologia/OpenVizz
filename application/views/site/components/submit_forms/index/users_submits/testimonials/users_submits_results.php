@@ -6,44 +6,48 @@
 		
 		<?php if ( check_var( $params[ 'show_results_count' ] ) ) { ?>
 		
-		<div class="users-submits-search-results-title-wrapper">
+		<div class="ud-d-list-results-title-wrapper ud-d-list-results-count-wrapper">
 			
-			<h3 class="users-submits-search-results-title">
+			<span class="s1">
 				
-				<?php
+				<span class="ud-d-list-results-title">
 					
-					if ( $users_submits_total_results > 1 ) {
+					<?php
 						
-						if ( check_var( $params[ 'users_submits_search_results_string' ] ) ) {
+						if ( $ud_data_list_total_results > 1 ) {
 							
-							echo sprintf( $params[ 'users_submits_search_results_string' ], '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
+							if ( check_var( $params[ 'ud_d_list_search_results_string' ] ) ) {
+								
+								echo sprintf( $params[ 'ud_d_list_search_results_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'ud_d_list_search_results_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						else {
 							
-							echo sprintf( lang( 'users_submits_search_results_string' ), '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
+							if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
+								
+								echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						
-					}
-					else {
-						
-						if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
-							
-							echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
-							
-						}
-						else {
-							
-							echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
-							
-						}
-						
-					}
+					?>
 					
-				?>
+				</span>
 				
-			</h3>
+			</span>
 			
 		</div>
 		
@@ -321,13 +325,25 @@
 		
 		<?php if ( $this->input->post( NULL, TRUE ) OR ! check_var( $users_submits ) ) { ?>
 			
-			<h4 class="title"><?= lang( 'no_results' ); ?></h4>
+			<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+			
+				<span class="ud-d-list-no-search-results-desc">
+					
+					<?= lang( 'no_results' ); ?>
+					
+				</span>
+				
+			</div>
 			
 		<?php } else { ?>
 			
-			<div class="users-submits-description-no-search-results">
-				
-				<?= lang( 'users_submits_description_no_search_results' ); ?>
+			<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+			
+				<span class="ud-d-list-no-search-results-desc">
+					
+					<?= lang( 'users_submits_description_no_search_results' ); ?>
+					
+				</span>
 				
 			</div>
 			

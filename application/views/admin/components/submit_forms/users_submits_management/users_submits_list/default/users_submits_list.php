@@ -469,20 +469,20 @@
 		
 		<?php if ( isset( $users_submits_total_results ) ) { ?>
 		
-		<div class="users-submits-search-results-title-wrapper">
+		<div class="ud-d-list-results-title-wrapper ud-d-list-results-count-wrapper">
 			
-			<h3 class="users-submits-search-results-title">
+			<h3 class="ud-d-list-results-title">
 				
 				<?php
 					
 					if ( $users_submits_total_results > 1 ) {
 						
-						echo sprintf( lang( 'users_submits_search_results_string' ), '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
+						echo sprintf( lang( 'ud_d_list_search_results_string' ), '<span class="ud-d-list-results-count">' . $users_submits_total_results . '</span>' );
 						
 					}
 					else {
 						
-						echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="users-submits-search-count">' . $users_submits_total_results . '</span>' );
+						echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $users_submits_total_results . '</span>' );
 						
 					}
 					

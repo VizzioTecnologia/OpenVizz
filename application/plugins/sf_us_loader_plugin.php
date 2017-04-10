@@ -91,9 +91,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 					
 					foreach ( $json as $_sf_id => $_us_params ) {
 						
-						if ( is_numeric( $_sf_id ) AND $submit_form = $this->sfcm->get_submit_forms( array( 'where_condition' => 't1.id = ' . $_sf_id, 'limit' => 1, ) )->row_array() ) {
-							
-							$this->ud_api->parse_ds( $submit_form );
+						if ( is_numeric( $_sf_id ) AND $data_scheme = $this->sfcm->get_submit_forms( array( 'where_condition' => 't1.id = ' . $_sf_id, 'limit' => 1, ) )->row_array() ) {
 							
 							// Default params values
 							
@@ -104,19 +102,26 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'us_id' => 0, // user(s) submit(s) id(s) can be array
 								'pts' => NULL, // props to show
 								't' => NULL, // search terms
+								'src' => '0', // show_results_count
+								'rs' => NULL, // ud_d_list_results_string
+								'srs' => NULL, // ud_d_list_single_result_string
+								'nrs' => NULL, // no result string
 								
-								'if' => NULL, // Images fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
-								'tf' => NULL, // Title fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
 								'tal' => TRUE, // title_as_link_on_site_list
-								'cf' => '*', // Content fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
-								'oif' => NULL, // Other info fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
-								'sf' => NULL, // Status fields: can be an asterisk (*), meaning that all fields will be used, or an array containing the fields
+								
+								'ip' => NULL, // Image props
+								'edp' => NULL, // Event datetime props
+								'tp' => NULL, // Title props
+								'cp' => NULL, // Content props
+								'oip' => NULL, // Other info props
+								'sp' => NULL, // Status props
 								
 								'mc' => 2, // max columns, this param depends on css
 								
 								'f' => NULL, // filter
 								'ni' => 0, // number of items, 0 = all users submits
 								'ob' => NULL, // order by
+								'miid' => 0, // menu item id
 								'obd' => NULL, // order by direction: (A or ASC), (D or DESC)
 								'l' => 'default', // layout
 								'wc' => NULL, // css wrapper class
@@ -192,7 +197,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 									}
 									
 								}
-								else if ( in_array( $_config, array( 'if', 'tf', 'cf','oif','sf', ) ) ) {
+								else if ( in_array( $_config, array( 'ip', 'edp', 'tp', 'cp','oip','sp', ) ) ) {
 									
 									if ( ! empty( $_value ) ) {
 										
@@ -203,6 +208,12 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 											case 'if':
 												
 												$___config = 'ud_image_prop';
+												
+												break;
+												
+											case 'edp':
+												
+												$___config = 'ud_event_datetime_prop';
 												
 												break;
 												
@@ -230,6 +241,18 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 												
 												break;
 												
+											$_tmp = get_params( $us_params[ $_config ] );
+											
+											if ( is_array( $_tmp ) ) {
+												
+												$_value = $_tmp;
+												
+											}
+											
+// 											echo '<pre>' . print_r( $_value, TRUE ) . '</pre>';
+											
+											$_tmp = NULL;
+											unset( $_tmp );
 											
 										}
 										
@@ -237,18 +260,18 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 											
 											if ( is_array( $_value ) ) {
 												
-												$submit_form[ 'ud_image_prop' ] = array();
+												$data_scheme[ $___config ] = array();
 												
 												foreach ( $_value as $_v ) {
 													
-													$submit_form[ 'ud_image_prop' ][ $_v ] = 1;
+													$data_scheme[ $___config ][ $_v ] = 1;
 													
 												}
 												
 											}
 											else {
 												
-												$submit_form[ 'ud_image_prop' ] = array(
+												$data_scheme[ $___config ] = array(
 													
 													$_value => 1,
 													
@@ -284,79 +307,102 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							$us_params[ 'ud_data_list_max_columns' ] = & $us_params[ 'mc' ];
 							$us_params[ 'ud_d_list_layout_site' ] = & $us_params[ 'l' ];
 							$us_params[ 'show_default_results' ] = TRUE;
+							$us_params[ 'ud_data_no_result_str' ] =  & $us_params[ 'nrs' ];
+							$us_params[ 'show_results_count' ] =  & $us_params[ 'src' ];
+							$us_params[ 'ud_d_list_search_results_string' ] =  & $us_params[ 'rs' ];
+							$us_params[ 'ud_d_list_search_single_result_string' ] =  & $us_params[ 'srs' ];
+							$us_params[ 'us_default_results_filters' ] =  & $us_params[ 'f' ];
+							$us_params[ 'props_to_show' ] =  & $us_params[ 'pts' ];
 							
 							$this->load->library( 'search' );
-							
-							$submit_form[ 'data_list_site_link' ] = ( check_var( $us_params[ 'crl' ] ) AND is_string( $us_params[ 'crl' ] ) ) ? get_url( $us_params[ 'crl' ] ) : $this->unid->get_link(
-								
-								array (
-									
-									'url_alias' => 'site_data_list',
-									'ds' => $submit_form,
-									'filters' => $us_params[ 'f' ],
-									
-								)
-								
-							);
-							
-							$view_data[ 'submit_forms' ][ $_sf_id ] = & $submit_form;
-							$us_view_data[ '__index' ] = $__index;
-							$us_view_data[ 'submit_form' ] = & $view_data[ 'submit_forms' ][ $_sf_id ];
-							$us_view_data[ 'data_scheme' ] = & $us_view_data[ 'submit_form' ];
-							$submit_form[ 'plugin_params' ] = & $us_params;
-							
-							
-							// -------------------------------------------------
-							// Params filtering
-							
-							$component_params = $this->mcm->components[ 'submit_forms' ][ 'params' ];
-							$us_view_data[ 'params' ] = filter_params( $component_params, $submit_form[ 'params' ] );
-							$us_view_data[ 'params' ] = filter_params( $us_view_data[ 'params' ], $us_params );
 							
 							if ( isset( $us_params[ 'pts' ] ) ) {
 								
 								$us_params[ 'pts' ] = explode( ',', $us_params[ 'pts' ] );
 								
-								reset( $submit_form[ 'params' ][ 'props_to_show_site_list' ] );
+								reset( $us_params[ 'pts' ] );
 								
 								$tmp = array();
 								
 								while ( list( $k, $prop_to_show ) = each( $us_params[ 'pts' ] ) ) {
 									
-									if ( in_array( $prop_to_show, array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
-										
-										$tmp[] = array(
-											
-											'alias' => $prop_to_show,
-											'title' => ( check_var( $submit_form[ 'params' ][ 'ud_ds_default_data_' . $prop_to_show . '_pres_title' ] ) ? lang( $submit_form[ 'params' ][ 'ud_ds_default_data_' . $prop_to_show . '_pres_title' ] ) : lang( $prop_to_show ) ),
-											'type' => 'built_in',
-											
-										);
-										
-									}
-									else if ( isset( $submit_form[ 'fields' ][ $prop_to_show ] ) ){
+									if ( isset( $data_scheme[ 'fields' ][ $prop_to_show ] ) ){
 									
-										$prop = $submit_form[ 'fields' ][ $prop_to_show ];
-										
-										$tmp[] = array(
-											
-											'alias' => $prop_to_show,
-											'title' => ( isset( $prop[ 'presentation_label' ] ) AND $prop[ 'presentation_label' ] ) ? $prop[ 'presentation_label' ] : $prop[ 'label' ],
-											'type' => $prop[ 'field_type' ],
-											
-										);
+										$prop = $data_scheme[ 'fields' ][ $prop_to_show ];
 										
 									}
+									
+									$tmp[ $prop_to_show ] = $prop_to_show;
 									
 								}
 								
-								$us_view_data[ 'params' ][ 'props_to_show_site_list' ] = $tmp;
+								$us_params[ 'props_to_show' ] = $tmp;
 								
 							}
+							else {
+							
+								$us_params[ 'props_to_show' ] = array();
+								
+							}
+							
+							$view_data[ 'data_schemes' ][ $_sf_id ] = & $data_scheme;
+							$us_view_data[ '__index' ] = $__index;
+							$us_view_data[ 'data_scheme' ] = & $view_data[ 'data_schemes' ][ $_sf_id ];
+							$us_view_data[ 'props' ] = & $us_view_data[ 'data_scheme' ][ 'fields' ];
+							
+							// -------------------------------------------------
+							
+							$menu_item_params = array();
+							
+							if ( check_var( $us_params[ 'miid' ] ) AND is_numeric( $us_params[ 'miid' ] ) AND ( $menu_item = $this->menus->get_menu_item( ( int ) $us_params[ 'miid' ] ) ) ) {
+								
+								$menu_item_params = get_params( $menu_item[ 'params' ] );
+								$menu_item_params[ 'us_default_results_filters' ] = get_params( $menu_item_params[ 'us_default_results_filters' ] );
+								
+							}
+							
+							// -------------------------------------------------
+							
+							if ( ! check_var( $us_params[ 'props_to_show' ] ) ) {
+								
+								$us_params[ 'props_to_show' ] = ( ( check_var( $menu_item_params[ 'ud_d_list_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'ud_d_list_site_props_to_show' ] ) ) ? $menu_item_params[ 'ud_d_list_site_props_to_show' ] : NULL );
+								
+							}
+							
+							$menu_item_params[ 'ud_d_list_site_props_to_show' ] = NULL;
+							unset( $menu_item_params[ 'ud_d_list_site_props_to_show' ] );
+							
+							$this->ud_api->parse_ds( $data_scheme, FALSE, $us_params[ 'props_to_show' ] );
+							
+							$data_scheme[ 'params' ][ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ];
+							$us_view_data[ 'params' ][ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ];
+							$us_view_data[ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ];
+							$us_params[ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ];
+							
+							$data_scheme[ 'plugin_params' ] = & $us_params;
+							
+							// -------------------------------------------------
+							// Params filtering
+							
+							$component_params = $this->mcm->components[ 'submit_forms' ][ 'params' ];
+							$us_view_data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ] );
+							$us_view_data[ 'params' ] = filter_params( $us_view_data[ 'params' ], $menu_item_params );
+							$us_view_data[ 'params' ] = filter_params( $us_view_data[ 'params' ], $us_params );
 							
 							// Params filtering
 							// -------------------------------------------------
 							
+							$data_scheme[ 'data_list_site_link' ] = ( check_var( $us_params[ 'crl' ] ) AND is_string( $us_params[ 'crl' ] ) ) ? get_url( $us_params[ 'crl' ] ) : $this->unid->get_link(
+								
+								array (
+									
+									'url_alias' => 'site_data_list',
+									'ds' => $data_scheme,
+									'filters' => $us_view_data[ 'params' ][ 'us_default_results_filters' ],
+									
+								)
+								
+							);
 							
 							//------------------------------------------------------
 							
@@ -385,7 +431,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 										
 										'sf_id' => $_sf_id,
 										'us_id' => $us_params[ 'us_id' ],
-										'filters' => $us_params[ 'f' ],
+										'filters' => $us_view_data[ 'params' ][ 'us_default_results_filters' ],
 										'order_by' => $us_params[ 'ob' ],
 										'order_by_direction' => $us_params[ 'obd' ],
 										
@@ -399,33 +445,28 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							
 							$this->search->reset_config();
 							$this->search->config( $search_config );
-							$submit_form[ 'users_submits' ] = $this->search->get_full_results( 'sf_us_search', TRUE );
+							$us_view_data[ 'ud_data_array' ] = $this->search->get_full_results( 'sf_us_search', TRUE );
+							$us_view_data[ 'ud_data_list_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
 							
 							//------------------------------------------------------
 							// view dos envios
 							
-							$us_theme_load_views_path = call_user_func( $this->mcm->environment . '_theme_plugins_views_path' ) . 'sf_us_loader' . DS . 'users_submits' . DS . $us_params[ 'l' ] . DS;
+							$us_theme_load_views_path = call_user_func( $this->mcm->environment . '_theme_plugins_views_path' ) . 'sf_us_loader' . DS . 'ud_data_list' . DS . $us_params[ 'l' ] . DS;
 							$us_theme_views_path = THEMES_PATH . $us_theme_load_views_path;
 							
-							$us_default_load_views_path = PLUGINS_DIR_NAME . DS . 'sf_us_loader' . DS . 'users_submits' . DS . $us_params[ 'l' ] . DS;
+							$us_default_load_views_path = PLUGINS_DIR_NAME . DS . 'sf_us_loader' . DS . 'ud_data_list' . DS . $us_params[ 'l' ] . DS;
 							$us_default_views_path = VIEWS_PATH . $us_default_load_views_path;
 							
-							$us_view_filename = 'users_submits';
+							$us_view_filename = 'ud_data_list';
 							
 							// verificando se o tema atual possui a view
 							if ( file_exists( $us_theme_views_path . $us_view_filename . '.php' ) ){
-								
-								$data[ 'module_data' ][ 'load_view_path' ] = $us_theme_views_path;
-								$data[ 'module_data' ][ 'view_path' ] = $us_theme_views_path;
 								
 								$us_output_html[ $_sf_id ] = $this->load->view( $us_theme_load_views_path . $us_view_filename, $us_view_data, TRUE );
 								
 							}
 							// verificando se a view existe no diretório de views padrão
 							else if ( file_exists( $us_default_views_path . $us_view_filename . '.php' ) ){
-								
-								$data[ 'module_data' ][ 'load_view_path' ] = $us_default_load_views_path;
-								$data[ 'module_data' ][ 'view_path' ] = $us_default_views_path;
 								
 								$us_output_html[ $_sf_id ] = $this->load->view( $us_default_load_views_path . $us_view_filename, $us_view_data, TRUE );
 								

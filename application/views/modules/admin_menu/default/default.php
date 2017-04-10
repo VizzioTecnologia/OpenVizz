@@ -55,13 +55,13 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 			
 			?><li><?php
 				
-				echo vui_el_button( array( 'url' => 'admin/main/switch_profiler', 'text' => lang( 'switch_profiler' ), 'icon' => 'profiler', 'only_icon' => TRUE, 'class' => ( check_var( $this->session->userdata[ 'user_data' ][ $this->mcm->environment ][ 'profiler' ] ) ? 'active profiler-on' : 'profiler-off' ), ) );
+				echo vui_el_button( array( 'url' => 'admin/main/switch_profiler', 'text' => lang( 'switch_profiler' ), 'icon' => 'profiler', 'only_icon' => TRUE, 'class' => ( check_var( $CI->session->userdata[ 'user_data' ][ $CI->mcm->environment ][ 'profiler' ] ) ? 'active profiler-on' : 'profiler-off' ), ) );
 				
 			?></li><?php
 			
 			?><li><?php
 				
-				echo vui_el_button( array( 'url' => 'admin/users/users_management/edit_user/'.base64_encode(base64_encode(base64_encode(base64_encode($this->users->user_data['id'])))), 'text' => lang('logged_as').' '.$this->users->user_data['name'], 'icon' => 'user', 'only_icon' => TRUE, ) );
+				echo vui_el_button( array( 'url' => 'admin/users/users_management/edit_user/'.base64_encode(base64_encode(base64_encode(base64_encode($CI->users->user_data['id'])))), 'text' => lang('logged_as').' '.$CI->users->user_data['name'], 'icon' => 'user', 'only_icon' => TRUE, ) );
 				
 			?></li><?php
 			
@@ -90,7 +90,7 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 					
 					$_components = array();
 					
-					foreach ( $this->mcm->components as $key => $component ) {
+					foreach ( $CI->mcm->components as $key => $component ) {
 						
 						if ( $component[ 'status' ] == 1 AND $component[ 'unique_name' ] != 'main' ) {
 							
@@ -113,8 +113,8 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 								
 								$_menu_types = array();
 								
-								$this->load->model( 'menus_mdl', 'menus' );
-								$menu_types = menus_mdl::get_menu_types();
+								$CI->load->model( 'menus_mdl' );
+								$menu_types = $CI->menus_mdl->get_menu_types();
 								
 								if ( $menu_types ) {
 									
@@ -131,7 +131,7 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 									foreach ( $_menu_types as $key => $menu_type ) {
 										
 										echo '<li>';
-										echo vui_el_button( array( 'url' => menus_mdl::get_mi_url( 'list', array( 'menu_type_id' => $menu_type[ 'id' ], ) ), 'text' => lang( $menu_type[ 'title' ] ), 'icon' => 'menus', ) );
+										echo vui_el_button( array( 'url' => $CI->menus_mdl->get_mi_url( 'list', array( 'menu_type_id' => $menu_type[ 'id' ], ) ), 'text' => lang( $menu_type[ 'title' ] ), 'icon' => 'menus', ) );
 										echo '</li>';
 										
 									}
@@ -158,7 +158,7 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 
 </section>
 
-<?php if ( $this->plugins->load( 'fancybox' ) ){ ?>
+<?php if ( $CI->plugins->load( 'fancybox' ) ){ ?>
 
 <script type="text/javascript" >
 	

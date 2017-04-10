@@ -16,7 +16,7 @@ $lang['no_results'] = 																			"Sem resultados";
 $lang['ud_data_no_result_string_value'] = 														"Sem resultados";
 $lang['user_submit_polls_no_results'] = 														"Esta enquete ainda não possui votos";
 $lang['users_submits_search_single_result_string'] = 											"%s resultado encontrado";
-$lang['users_submits_search_results_string'] = 													"%s resultados encontrados";
+$lang['ud_d_list_search_results_string'] = 													"%s resultados encontrados";
 
 $lang['combobox_select_day'] = 																	"-- Dia --";
 $lang['combobox_select_month'] = 																"-- Mês --";

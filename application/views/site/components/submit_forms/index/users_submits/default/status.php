@@ -1,14 +1,27 @@
 <?php if ( $_field ) {
 	
-	?><div class="ud-data-prop user-submit-field-wrapper user-submit-alias-<?= url_title( $_alias ); ?> user-submit-status-<?= url_title( $_field[ 'label' ] ); ?> user-submit-<?= url_title( $_alias ); ?>-<?= url_title( $_field[ 'value' ] ); ?>">
+	?><div class="
 		
-		<span class="title"><?= lang( $_field[ 'label' ] ); ?>: </span>
-		<span class="value">
+		ud-data-prop
+		ud-data-prop-alias-<?= url_title( $_alias ); ?>
+		ud-data-prop-ud-status
+		col-<?= $_alias; ?>
+		<?= isset( $_field[ 'value' ] ) ? ' ud-data-prop-value-' . $_alias . '-' . word_limiter( url_title( base64_encode( $_field[ 'value' ] ), '-', TRUE ) ) : ''; ?>
+		<?= isset( $ud_status_prop_class[ $_alias ] ) ? ' ' . join( ' ', $ud_status_prop_class[ $_alias ] ) : ''; ?>
+		
+	">
+		
+		<span class="ud-data-value-wrapper">
 			
-			<?= $_field[ 'value' ]; ?>
+			<span class="title"><?= lang( $_field[ 'label' ] ); ?>: </span>
+			<span class="value">
+				
+				<?= $_field[ 'value' ]; ?>
+				
+			</span>
 			
 		</span>
-	
+		
 	</div><?php
 	
 } ?>

@@ -71,15 +71,27 @@ $unique_hash = md5( uniqid( rand(), true ) );
 				
 				<?php if ( check_var( $params[ 'us_module_no_results_message' ] ) ) { ?>
 					
-					<div class="users-submits-description-no-search-results no-results">
-						
-						<?= $params[ 'us_module_no_results_message' ]; ?>
+					<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+					
+						<span class="ud-d-list-no-search-results-desc">
+							
+							<?= $params[ 'us_module_no_results_message' ]; ?>
+							
+						</span>
 						
 					</div>
 					
 				<?php } else { ?>
 					
-					<h4 class="title"><?= lang( 'users_submits_description_no_search_results' ); ?></h4>
+					<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+					
+						<span class="ud-d-list-no-search-results-desc">
+							
+							<?= lang( 'users_submits_description_no_search_results' ); ?>
+							
+						</span>
+						
+					</div>
 					
 				<?php } ?>
 				

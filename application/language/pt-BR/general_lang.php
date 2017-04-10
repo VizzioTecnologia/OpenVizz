@@ -48,6 +48,12 @@ $lang['form_required_string'] = 																"*";
 $lang['breadcrumb_you_are_here'] = 																"Você está aqui:";
 $lang['breadcrumb_separator'] = 																" &#187; ";
 $lang['options'] = 																				"Opções";
+$lang['order_by'] = 																			"Ordenar por";
+$lang['order_by_direction'] = 																	"Ordenação";
+$lang['ordering_asc'] = 																		"Crescente";
+$lang['ordering_desc'] = 																		"Decrescente";
+$lang['ordering_random'] = 																		"Ordem aleatória";
+$lang['random'] = 																				"Aleatório";
 
 $lang['contact'] = 																				"Contato";
 $lang['contacts'] = 																			"Contatos";

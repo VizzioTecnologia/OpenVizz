@@ -723,6 +723,26 @@ class Submit_forms_common_model extends CI_Model{
 			
 		}
 		
+		// carregando os layouts do tema atual
+		$layouts = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'ud_data_detail' );
+		// carregando os layouts do diretório de views padrão
+		$layouts = array_merge( $layouts, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'ud_data_detail' ) );
+		
+		foreach ( $params[ 'params_spec' ][ $current_section ] as $key => $element ) {
+			
+			if ( $element[ 'name' ] == 'ud_d_detail_layout_site' ){
+				
+				$spec_options = array();
+				
+				if ( isset( $params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ] ) )
+					$spec_options = $params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ];
+					
+				$params[ 'params_spec' ][ $current_section ][ $key ][ 'options' ] = is_array( $spec_options ) ? $spec_options + $layouts : $layouts;
+				
+			}
+			
+		}
+		
 		// ------------------------------------
 		// Receivers layout specific params
 		
@@ -1349,18 +1369,6 @@ class Submit_forms_common_model extends CI_Model{
 				}
 				
 			}
-			
-			/*
-			foreach ( $us as $key => $item ) {
-				
-				if ( key_exists( 'id', $item ) ) {
-					
-					$this->parse_us( $item );
-					
-				}
-				
-			}
-			*/
 			
 		}
 		

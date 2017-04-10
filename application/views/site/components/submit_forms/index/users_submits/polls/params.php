@@ -5,7 +5,7 @@ $new_params = array();
 /*
 * ------------------------------------
 */
-//$params[ 'params_spec' ][ 'users_submits_config' ] = $params[ 'params_spec' ][ 'users_submits_config' ] + $new_params;
+//$params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ] = $params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ] + $new_params;
 
 //echo '<pre>' . print_r( $params[ 'params_spec_values' ], TRUE ) . '</pre>'; exit;
 
@@ -24,13 +24,13 @@ $_keys_to_keep = array(
 	
 );
 
-foreach ( $params[ 'params_spec' ][ 'users_submits_config' ] as $k => $p ) {
+foreach ( $params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ] as $k => $p ) {
 	
 	foreach ( $_keys_to_keep as $v ) {
 		
 		if ( ! ( check_var( $p[ 'name' ] ) AND in_array( $p[ 'name' ], $_keys_to_keep ) ) ) {
 			
-			unset( $params[ 'params_spec' ][ 'users_submits_config' ][ $k ] );
+			unset( $params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ][ $k ] );
 			
 		}
 		
@@ -87,9 +87,9 @@ $params[ 'params_spec_values' ][ 'show_readmore_link' ] = 0;
 $new_params[] = $_tmp;
 
 
-array_push_pos( $params[ 'params_spec' ][ 'users_submits_config' ], $new_params, 2  );
+array_push_pos( $params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ], $new_params, 2  );
 
 
 
-//echo '<pre>' . print_r( $params[ 'params_spec' ][ 'users_submits_config' ], TRUE ) . '</pre>'; exit;
+//echo '<pre>' . print_r( $params[ 'params_spec' ][ 'ud_params_section_d_list_general_params' ], TRUE ) . '</pre>'; exit;
 

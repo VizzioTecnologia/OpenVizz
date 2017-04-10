@@ -3020,7 +3020,10 @@ class Unid_api_mdl extends CI_Model{
 	 * @return mixed
 	 */
 	
-	public function parse_ds( & $data_scheme = NULL, $filter_params = FALSE, $props_to_show = NULL ){
+	public function parse_ds( & $data_scheme = NULL, $filter_params = FALSE, $props_to_show_site_list = NULL, $props_to_show_site_detail = NULL ){
+		
+		$props_to_show_site_list = check_var( $props_to_show_site_list ) ? $props_to_show_site_list : FALSE;
+		$props_to_show_site_detail = check_var( $props_to_show_site_detail ) ? $props_to_show_site_detail : FALSE;
 		
 		$errors = FALSE;
 		
@@ -3138,224 +3141,187 @@ class Unid_api_mdl extends CI_Model{
 				
 				$data_scheme[ 'params' ][ 'props_to_show_site_list' ] = array();
 				
-				if ( ( $props_to_show AND in_array( 'id', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_list_show' ] ) ) ) {
+				if ( ( $props_to_show_site_list AND in_array( 'id', $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_list_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ 'id' ];
 					
-					$new_column = array(
-						
-						'alias' => 'id',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'id';
 					
 				}
 				
-				if ( ( $props_to_show AND in_array( 'submit_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_list_show' ] ) ) ) {
+				if ( ( $props_to_show_site_list AND in_array( 'submit_datetime', $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_list_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ 'submit_datetime' ];
 					
-					$new_column = array(
-						
-						'alias' => 'submit_datetime',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'submit_datetime';
 					
 				}
 				
-				if ( ( $props_to_show AND in_array( 'mod_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_list_show' ] ) ) ) {
+				if ( ( $props_to_show_site_list AND in_array( 'mod_datetime', $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_list_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ 'mod_datetime' ];
 					
-					$new_column = array(
-						
-						'alias' => 'mod_datetime',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'mod_datetime';
 					
 				}
 				
-				if ( ( $props_to_show AND in_array( 'id', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_detail_show' ] ) ) ) {
+				if ( ( $props_to_show_site_detail AND in_array( 'id', $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_detail_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ 'id' ];
 					
-					$new_column = array(
-						
-						'alias' => 'id',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) ),
-						'visible' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_site_list_show' ] ) ? TRUE : FALSE ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'id';
 					
 				}
 				
-				if ( ( $props_to_show AND in_array( 'submit_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_detail_show' ] ) ) ) {
+				if ( ( $props_to_show_site_detail AND in_array( 'submit_datetime', $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_site_detail_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ 'submit_datetime' ];
 					
-					$new_column = array(
-						
-						'alias' => 'submit_datetime',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'submit_datetime';
 					
 				}
 				
-				if ( ( $props_to_show AND in_array( 'mod_datetime', $props_to_show ) ) OR ( ! $props_to_show AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_detail_show' ] ) ) ) {
+				if ( ( $props_to_show_site_detail AND in_array( 'mod_datetime', $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_site_detail_show' ] ) ) ) {
 					
-					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
+					$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ 'mod_datetime' ];
 					
-					$new_column = array(
-						
-						'alias' => 'mod_datetime',
-						'title' => ( check_var( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) ),
-						'type' => 'built_in',
-						
-					);
+					$new_column = 'mod_datetime';
 					
 				}
 				
 				foreach( $data_scheme[ 'fields' ] as $k => & $prop ) {
 					
-					if ( ! in_array( $prop[ 'field_type' ], array( 'html', 'button' ) ) ){
+					if ( check_var( $prop ) ) {
 						
-						if ( check_var( $prop[ 'availability' ][ 'site' ] ) ) {
+						if ( ! in_array( $prop[ 'field_type' ], array( 'html', 'button' ) ) ){
 							
-							$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = $prop[ 'alias' ];
+							if ( check_var( $prop[ 'availability' ][ 'site' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = $prop[ 'alias' ];
+								
+							}
+							else {
+								
+								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = 0;
+								
+							}
+							
+							if ( ( $props_to_show_site_list AND in_array( $prop[ 'alias' ], $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ) ) {
+								
+								$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ $prop[ 'alias' ] ];
+								
+								$new_column = $prop[ 'alias' ];
+								
+							}
+							
+							if ( ( $props_to_show_site_detail AND in_array( $prop[ 'alias' ], $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ) ) {
+								
+								$new_column_d = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ $prop[ 'alias' ] ];
+								
+								$new_column_d = $prop[ 'alias' ];
+								
+							}
+							
+						}
+						
+						if ( ! check_var( $prop[ 'key' ] ) ) {
+							
+							unset( $data_scheme[ 'fields' ][ $k ] );
+							//$prop[ 'alias' ] = isset( $prop[ 'alias' ] ) ? $prop[ 'alias' ] : $this->make_field_name( $prop[ 'label' ] );
 							
 						}
 						else {
 							
-							$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = 0;
-							
-						}
-						
-						if ( ( $props_to_show AND in_array( $prop[ 'alias' ], $props_to_show ) ) OR ( ! $props_to_show AND check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ) ) {
-						
-							$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][];
-							
-							$new_column[ 'alias' ] = $prop[ 'alias' ];
-							$new_column[ 'title' ] = ( isset( $prop[ 'presentation_label' ] ) AND $prop[ 'presentation_label' ] ) ? $prop[ 'presentation_label' ] : $prop[ 'label' ];
-							$new_column[ 'type' ] = $prop[ 'field_type' ];
-							
-						}
-						
-						if ( ( $props_to_show AND in_array( $prop[ 'alias' ], $props_to_show ) ) OR ( ! $props_to_show AND check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ) ) {
-						
-							$new_column_d = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][];
-							
-							$new_column_d[ 'alias' ] = $prop[ 'alias' ];
-							$new_column_d[ 'title' ] = ( isset( $prop[ 'presentation_label' ] ) AND $prop[ 'presentation_label' ] ) ? $prop[ 'presentation_label' ] : $prop[ 'label' ];
-							$new_column_d[ 'type' ] = $prop[ 'field_type' ];
-							
-						}
-						
-					}
-					
-					if ( ! check_var( $prop[ 'key' ] ) ) {
-						
-						unset( $data_scheme[ 'fields' ][ $k ] );
-						//$prop[ 'alias' ] = isset( $prop[ 'alias' ] ) ? $prop[ 'alias' ] : $this->make_field_name( $prop[ 'label' ] );
-						
-					}
-					else {
-						
-						if ( empty( $prop[ 'label' ] ) ) {
-							
-							if ( isset( $prop[ 'presentation_label' ] ) ) {
+							if ( empty( $prop[ 'label' ] ) ) {
 								
-								$prop[ 'label' ] = $prop[ 'presentation_label' ];
-								
-							}
-							else {
-								
-								$prop[ 'label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
+								if ( isset( $prop[ 'presentation_label' ] ) ) {
+									
+									$prop[ 'label' ] = $prop[ 'presentation_label' ];
+									
+								}
+								else {
+									
+									$prop[ 'label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
+									
+								}
 								
 							}
 							
-						}
-						
-						if ( empty( $prop[ 'presentation_label' ] ) ) {
-							
-							if ( isset( $prop[ 'label' ] ) ) {
+							if ( empty( $prop[ 'presentation_label' ] ) ) {
 								
-								$prop[ 'presentation_label' ] = $prop[ 'label' ];
-								
-							}
-							else {
-								
-								$prop[ 'presentation_label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
-								
-							}
-							
-						}
-						
-						if ( empty( $prop[ 'alias' ] ) ) {
-							
-							if ( isset( $prop[ 'label' ] ) ) {
-								
-								$prop[ 'alias' ] = $this->make_field_name( $prop[ 'label' ] );
-								
-							}
-							else {
-								
-								$prop[ 'alias' ] = $this->make_field_name( lang( 'field' ) . ' ' . $prop[ 'key' ] );
+								if ( isset( $prop[ 'label' ] ) ) {
+									
+									$prop[ 'presentation_label' ] = $prop[ 'label' ];
+									
+								}
+								else {
+									
+									$prop[ 'presentation_label' ] = lang( 'field' ) . ' ' . $prop[ 'key' ];
+									
+								}
 								
 							}
 							
+							if ( empty( $prop[ 'alias' ] ) ) {
+								
+								if ( isset( $prop[ 'label' ] ) ) {
+									
+									$prop[ 'alias' ] = $this->make_field_name( $prop[ 'label' ] );
+									
+								}
+								else {
+									
+									$prop[ 'alias' ] = $this->make_field_name( lang( 'field' ) . ' ' . $prop[ 'key' ] );
+									
+								}
+								
+							}
+							
+							// -------------------------------------------------
+							// Properties types
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_image' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_image_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_title' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_title_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_content' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_content_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_other_info' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_other_info_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_status' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_status_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_event_datetime' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_event_datetime_prop' ][ $prop[ 'alias' ] ] = 1;
+								
+							}
+							
+							// Properties types
+							// -------------------------------------------------
+							
+							$_fields[ $prop[ 'alias' ] ] = $prop;
+							
 						}
-						
-						// -------------------------------------------------
-						// Properties types
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_image' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_image_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_title' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_title_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_content' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_content_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_other_info' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_other_info_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_status' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_status_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						if ( isset( $prop[ 'advanced_options' ][ 'prop_is_ud_event_datetime' ] ) ) {
-							
-							$data_scheme[ 'params' ][ 'ud_event_datetime_prop' ][ $prop[ 'alias' ] ] = 1;
-							
-						}
-						
-						// Properties types
-						// -------------------------------------------------
-						
-						$_fields[ $prop[ 'alias' ] ] = $prop;
 						
 					}
 					

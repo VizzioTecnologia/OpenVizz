@@ -10,11 +10,9 @@ $pre_text_pos = 'before_search_fields';
 
 $unique_hash = md5( uniqid( rand(), true ) );
 
-$props = & $submit_form[ 'fields' ];
-
-if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
+if ( check_var( $data_scheme[ 'params' ][ 'us_pre_text_position' ] ) ) {
 	
-	$pre_text_pos = $submit_form[ 'params' ][ 'us_pre_text_position' ];
+	$pre_text_pos = $data_scheme[ 'params' ][ 'us_pre_text_position' ];
 	
 }
 
@@ -84,7 +82,7 @@ if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 
 </section>
 
-<?php if ( $this->plugins->load( 'fancybox' ) ){ ?>
+<?php if ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) AND $this->plugins->load( 'fancybox' ) ){ ?>
 
 <script type="text/javascript" >
 	
@@ -94,17 +92,35 @@ if ( check_var( $submit_form[ 'params' ][ 'us_pre_text_position' ] ) ) {
 		
 		$( "#submit-form-users-submits-<?= $unique_hash; ?> .modal" ).fancybox({
 			
+			//live: true,
+			type: 'ajax',
+			autoSize: true,
+			closeBtn: true,
+			helpers: {
+				
+				overlay: {
+					
+					showEarly  : true
+					
+				}
+				
+			},
 			content: fbContent,
 			beforeShow: function(){
 				
 				fbContent = $( this ).html();
-				$(".fancybox-overlay").addClass("user-submit-detail");
+				$(".fancybox-overlay").addClass( "ud-d-detail" );
 				
 			},
 			afterClose: function(){
 				fbContent = '';
 			},
-			onComplete: function(){
+			'onComplete' : function(){
+				jQuery.fancybox.showActivity();
+				jQuery('#fancybox-frame').load(function(){
+					jQuery.fancybox.hideActivity();
+				});
+
 			}
 			
 		});

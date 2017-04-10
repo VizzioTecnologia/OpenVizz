@@ -21,6 +21,8 @@ class Admin_menu_module extends CI_Model{
 		
 		$data[ 'module_data' ] = & $module_data;
 		
+		$data[ 'CI' ] = & $this;
+		
 		$output_html = lang( 'layout_not_found' );
 		
 		// verificando se o tema atual possui a view

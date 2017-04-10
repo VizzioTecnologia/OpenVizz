@@ -14,7 +14,7 @@
    width="202.59589"
    height="65"
    id="svg2"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.92.1 r"
    sodipodi:docname="logo-proposals-pdf.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -30,8 +30,8 @@
      id="namedview18"
      showgrid="false"
      inkscape:zoom="3.2478448"
-     inkscape:cx="151.73867"
-     inkscape:cy="22.407695"
+     inkscape:cx="41.033744"
+     inkscape:cy="45.091613"
      inkscape:window-x="-1"
      inkscape:window-y="21"
      inkscape:window-maximized="1"
@@ -94,7 +94,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

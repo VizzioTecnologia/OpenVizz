@@ -248,7 +248,7 @@
 
 		foreach ( $contact[ 'addresses' ] as $key => $address ) {
 
-			if ( @$phone[ 'publicly_visible' ] ){
+			if ( @$address[ 'publicly_visible' ] ){
 
 				$addresses[] = $address;
 

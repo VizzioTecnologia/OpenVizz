@@ -920,6 +920,7 @@ class Submit_forms extends Main {
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$articles = $this->search->get_full_results( 'articles_search', TRUE );
@@ -2432,22 +2433,29 @@ class Submit_forms extends Main {
 				$this->load->helper( array( 'pagination' ) );
 				$this->load->library( 'search' );
 				
+				$menu_item_params[ 'props_to_show' ] = ( ( check_var( $menu_item_params[ 'ud_d_list_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'ud_d_list_site_props_to_show' ] ) ) ? $menu_item_params[ 'ud_d_list_site_props_to_show' ] : NULL );
+				
+				$menu_item_params[ 'ud_d_list_site_props_to_show' ] = NULL;
+				unset( $menu_item_params[ 'ud_d_list_site_props_to_show' ] );
+				
 				$this->ud_api->parse_ds( $data_scheme, FALSE, ( ( check_var( $menu_item_params[ 'ud_d_list_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'props_to_show' ] ) ) ? $menu_item_params[ 'props_to_show' ] : NULL ) );
 				
-				$data[ 'submit_form' ] = & $data_scheme;
+				$data_scheme[ 'params' ][ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ];
 				
 				// -------------------------------------------------
 				// Params filtering
-				
-// 				echo '<pre>' . print_r( $data_scheme[ 'params' ][ 'ud_data_availability_site_search' ], TRUE ) . '</pre>';
 				
 				$data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ], TRUE );
 				$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params, TRUE );
 				
-// 				echo '<pre>' . print_r( $data[ 'params' ], TRUE ) . '</pre>';exit;
-				
 				// Params filtering
 				// -------------------------------------------------
+				
+				$data[ 'data_scheme' ] = & $data_scheme;
+				$data[ 'props' ] = & $data_scheme[ 'fields' ];
+				$data[ 'props_to_show' ] = & $data[ 'params' ][ 'props_to_show' ];
+				
+// 				echo '<pre>' . print_r( $data[ 'props_to_show' ], TRUE ) . '</pre>';exit;
 				
 				$search_config = array(
 					
@@ -2476,7 +2484,7 @@ class Submit_forms extends Main {
 					
 				);
 				
-				foreach( $data[ 'submit_form' ][ 'fields' ] as $k => $field ){
+				foreach( $data[ 'data_scheme' ][ 'fields' ] as $k => $field ){
 					
 					if ( ! in_array( $field[ 'field_type' ], array( 'html', 'button' ) ) ) {
 						
@@ -2573,12 +2581,15 @@ class Submit_forms extends Main {
 				}
 				else {
 					
-					$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by' ] = $data[ 'order_by' ] = $ob;
-					$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by_direction' ] = $data[ 'order_by_direction' ] = $obd;
+					$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by' ] = $ob;
+					$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by_direction' ] = $obd;
 					$search_config[ 'order_by' ][ 'sf_us_search' ] = $ob;
 					$search_config[ 'order_by_direction' ][ 'sf_us_search' ] = $obd;
 					
 				}
+				
+				$data[ 'order_by' ] = $ob;
+				$data[ 'order_by_direction' ] = $obd;
 				
 				/*
 				--------------------------------------------------------
@@ -2752,7 +2763,7 @@ class Submit_forms extends Main {
 				$search_config[ 'ipp' ] = $ipp;
 				$search_config[ 'cp' ] = $cp;
 				
-				$users_submits = array();
+				$ud_data_array = array();
 				
 				if ( check_var( $data[ 'post' ][ 'users_submits_search' ][ 'submit_search' ] ) OR
 					check_var( $data[ 'post' ][ 'users_submits_search' ][ 'submit_search' ] ) OR
@@ -2760,8 +2771,9 @@ class Submit_forms extends Main {
 					( ! check_var( $data[ 'params' ][ 'use_search' ] ) ) OR
 					( check_var( $data[ 'params' ][ 'use_search' ] ) AND check_var( $data[ 'params' ][ 'show_default_results' ] ) ) ) {
 					
+					$this->search->reset_config();
 					$this->search->config( $search_config );
-					$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
+					$ud_data_array = $this->search->get_full_results( 'sf_us_search', TRUE );
 					
 				}
 				
@@ -2802,7 +2814,7 @@ class Submit_forms extends Main {
 				********************************************************
 				*/
 				
-				$data[ 'users_submits' ] = $users_submits;
+				$data[ 'ud_data_array' ] = $ud_data_array;
 				
 				$this->_page(
 					
@@ -2826,8 +2838,6 @@ class Submit_forms extends Main {
 		
 		else if ( $action === 'dd' AND $ud_data_id ){
 			
-			$layout = isset( $menu_item_params[ 'user_submit_layout' ] ) ? $menu_item_params[ 'user_submit_layout' ] : 'default';
-			
 			$this->load->library( 'search' );
 			
 			$search_config = array(
@@ -2839,6 +2849,7 @@ class Submit_forms extends Main {
 					'sf_us_search' => array(
 						
 						'us_id' => $ud_data_id,
+						'sf_id' => check_var( $menu_item_params[ 'submit_form_id' ] ) ? $menu_item_params[ 'submit_form_id' ] : 0,
 						'menu_item_id' => $this->mcm->current_menu_item[ 'id' ],
 						
 					),
@@ -2847,12 +2858,16 @@ class Submit_forms extends Main {
 				
 			);
 			
+			$search_config[ 'ipp' ] = 1;
+			$search_config[ 'cp' ] = 1;
+			
+			$this->search->reset_config();
 			$this->search->config( $search_config );
-			$user_submit = $this->search->get_full_results( 'sf_us_search', TRUE );
+			$ud_data = $this->search->get_full_results( 'sf_us_search', TRUE );
 			
-			$user_submit = $user_submit[ 0 ];
+			$ud_data = $ud_data[ 0 ];
 			
-			$data_scheme_id = $user_submit[ 'submit_form_id' ];
+			$data_scheme_id = $ud_data[ 'submit_form_id' ];
 			
 			// get data scheme params
 			$gdsp = array(
@@ -2869,13 +2884,50 @@ class Submit_forms extends Main {
 				redirect();
 				
 			}
-			else if ( $user_submit ) {
+			else if ( $ud_data ) {
 				
-				$this->ud_api->parse_ds( $data_scheme );
+				$menu_item_params[ 'props_to_show' ] = ( ( check_var( $menu_item_params[ 'ud_d_detail_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'ud_d_detail_site_props_to_show' ] ) ) ? $menu_item_params[ 'ud_d_detail_site_props_to_show' ] : NULL );
 				
-				$data[ 'submit_form' ] = & $data_scheme;
+				$menu_item_params[ 'ud_d_detail_site_props_to_show' ] = NULL;
+				unset( $menu_item_params[ 'ud_d_detail_site_props_to_show' ] );
 				
-				$data[ 'user_submit' ] = & $user_submit;
+				$this->ud_api->parse_ds( $data_scheme, FALSE, NULL, ( ( check_var( $menu_item_params[ 'ud_d_detail_site_override_visible_props' ] ) AND isset( $menu_item_params[ 'props_to_show' ] ) ) ? $menu_item_params[ 'props_to_show' ] : NULL ) );
+				
+				$data_scheme[ 'params' ][ 'props_to_show' ] = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ];
+				
+				// -------------------------------------------------
+				// Params filtering
+				
+				$data[ 'params' ] = filter_params( $component_params, $data_scheme[ 'params' ], TRUE );
+				$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params, TRUE );
+				
+				// Params filtering
+				// -------------------------------------------------
+				
+				$data[ 'data_scheme' ] = & $data_scheme;
+				$data[ 'props' ] = & $data_scheme[ 'fields' ];
+				$data[ 'props_to_show' ] = & $data[ 'params' ][ 'props_to_show' ];
+				$data[ 'ud_data' ] = & $ud_data;
+				
+				$data[ 'params' ][ 'ud_d_detail_layout_site' ] = ( ( check_var( $data[ 'params' ][ 'ud_d_detail_layout_site' ] ) AND $data[ 'params' ][ 'ud_d_detail_layout_site' ] != 'global' ) ? $data[ 'params' ][ 'ud_d_detail_layout_site' ] : 'default' );
+				
+				$this->ud_api->parse_ud_data( $ud_data, $data[ 'props_to_show' ], TRUE );
+				
+				$page_title = array();
+				
+				if ( check_var( $data[ 'params' ][ 'ud_title_prop' ] ) ) {
+					
+					foreach ( $data[ 'params' ][ 'ud_title_prop' ] as $alias => $v ) {
+						
+						if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'value' ], TRUE ) ) {
+							
+							$page_title[] = $ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'value' ];
+							
+						}
+						
+					}
+					
+				}
 				
 				if ( @$data[ 'params' ][ 'custom_page_title' ] ) {
 					
@@ -2884,7 +2936,7 @@ class Submit_forms extends Main {
 				}
 				else {
 					
-					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data_scheme, $user_submit );
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data_scheme, $ud_data );
 					
 				}
 				
@@ -2894,9 +2946,9 @@ class Submit_forms extends Main {
 						
 						'component_view_folder' => $this->component_view_folder,
 						'function' => __FUNCTION__,
-						'action' => 'user_submit',
-						'layout' => $layout,
-						'view' => 'user_submit',
+						'action' => 'ud_data_detail',
+						'layout' => $data[ 'params' ][ 'ud_d_detail_layout_site' ],
+						'view' => 'ud_data_detail',
 						'data' => $data,
 						
 					)

@@ -765,6 +765,7 @@ class Submit_forms extends Main {
 				);
 				
 				$this->load->library( 'search' );
+				$this->search->reset_config();
 				$this->search->config( $search_config );
 				
 				$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -1947,7 +1948,7 @@ class Submit_forms extends Main {
 		// -------------------------------------------------
 		// Last url ----------------------------------------
 		
-		if ( ! in_array( $action, array( 'cob', 'cp' ) ) ) {
+		if ( ! in_array( $action, array( 'cob', 'cp', 'b', 'aus', 'eus' ) ) ) {
 			
 			set_last_url( $a_url );
 			
@@ -3509,6 +3510,7 @@ class Submit_forms extends Main {
 						);
 						
 						$this->load->library( 'search' );
+						$this->search->reset_config();
 						$this->search->config( $search_config );
 						
 						$articles = $this->search->get_full_results( 'articles_search', TRUE );
@@ -4056,12 +4058,12 @@ class Submit_forms extends Main {
 		
 		
 		/*
-			********************************************************
-			--------------------------------------------------------
-			Batch
-			--------------------------------------------------------
-			*/
-
+		********************************************************
+		--------------------------------------------------------
+		Batch
+		--------------------------------------------------------
+		*/
+		
 		else if ( $action == 'b' ){
 			
 			$ids = array();
@@ -4442,6 +4444,7 @@ class Submit_forms extends Main {
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -4563,6 +4566,7 @@ class Submit_forms extends Main {
 					);
 					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );

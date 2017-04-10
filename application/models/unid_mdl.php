@@ -48,7 +48,7 @@ class Unid_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_data_title_prop_html( $submit_form, $user_submit, $items_prefix = '<span class="ud-title-prop item">', $items_suffix = '</span>' ){
+	public function get_data_title_prop_html( $submit_form, $ud_data, $items_prefix = '<span class="ud-title-prop item">', $items_suffix = '</span>' ){
 		
 		if ( isset( $submit_form[ 'params' ][ 'ud_title_prop' ] ) ) {
 			
@@ -56,11 +56,11 @@ class Unid_mdl extends CI_Model{
 			
 			foreach( $submit_form[ 'params' ][ 'ud_title_prop' ] as $k => $item ) {
 				
-				if ( isset( $user_submit[ $k ] ) ) {
+				if ( isset( $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ] ) ) {
 					
 					$title .= $items_prefix;
 					
-					$title .= $user_submit[ $k ];
+					$title .= $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ];
 					
 					$title .= $items_suffix;
 					

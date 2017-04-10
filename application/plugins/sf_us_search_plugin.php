@@ -180,6 +180,18 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				
 				$default_condition_array[ 'us_condition' ] = $us_condition;
 				
+				if ( ! $sf_id ) {
+					
+					$this->db->select( 't1.submit_form_id' );
+					$this->db->from( 'tb_submit_forms_us t1' );
+					$this->db->where( 'id', $us_id );
+					$sf_id = $this->db->get()->row_array();
+					
+					if ( check_var( $sf_id[ 'submit_form_id' ] ) ) $sf_id = $sf_id[ 'submit_form_id' ];
+					else $sf_id = NULL;
+					
+				}
+				
 			}
 			
 			// User submit filtering ---------------------------

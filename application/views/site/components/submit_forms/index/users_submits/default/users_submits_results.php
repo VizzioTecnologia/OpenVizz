@@ -1,39 +1,22 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 	
-	$props = & $submit_form[ 'fields' ];
-	
-	$ud_data_list = & $users_submits;
-	
-	$props_to_show = & $params[ 'props_to_show_site_list' ];
-	
 	$_is_presentation = FALSE;
-	
-	$_ud_image_props =
-	$_ud_title_props =
-	$_ud_content_props =
-	$_ud_other_info_props =
-	$_ud_status_props =
-	$_ud_event_datetime_props = array();
-	
-	if (
-		
-		isset( $params[ 'ud_image_prop' ] ) OR
-		isset( $params[ 'ud_title_prop' ] ) OR
-		isset( $params[ 'ud_content_prop' ] ) OR
-		isset( $params[ 'ud_other_info_prop' ] ) OR
-		isset( $params[ 'ud_status_prop' ] )
-		
-	) {
-		
-		$_is_presentation = TRUE;
-		
-	}
 	
 	$wrapper_class = array(
 		
-		'users-submits-wrapper',
+		'ud-data-list-wrapper',
 		'results',
-		'ud-data-list',
+		
+	);
+	
+	$property_presentation_types = array(
+		
+		'image',
+		'title',
+		'event_datetime',
+		'content',
+		'other_info',
+		'status',
 		
 	);
 	
@@ -43,91 +26,29 @@
 		
 	}
 	
-	if ( check_var( $params[ 'ud_image_prop' ] ) ) {
+	reset( $property_presentation_types );
+	
+	while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 		
-		foreach ( $params[ 'ud_image_prop' ] as $_alias => & $_value ) {
+		${ '_ud_' . $v . '_props' } = array();
+		
+		if ( isset( $params[ 'ud_' . $v . '_prop' ] ) ) {
 			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
-				
-				$wrapper_class[] = 'has-ud-image-prop';
-				break;
-				
-			}
+			$_is_presentation = TRUE;
 			
 		}
 		
-	}
-	
-// 	echo '<pre>' . print_r( $submit_form, TRUE ) . '</pre>';exit;
-	
-	if ( check_var( $params[ 'ud_title_prop' ] ) ) {
-		
-		foreach ( $params[ 'ud_title_prop' ] as $_alias => & $_value ) {
+		if ( check_var( $params[ 'ud_' . $v . '_prop' ] ) ) {
 			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
-				
-				$wrapper_class[] = 'has-ud-title-prop';
-				break;
-				
-			}
+			reset( $params[ 'ud_' . $v . '_prop' ] );
 			
-		}
-		
-	}
-	
-	if ( check_var( $params[ 'ud_content_prop' ] ) ) {
-		
-		foreach ( $params[ 'ud_content_prop' ] as $_alias => & $_value ) {
-			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
+			while ( list( $_alias, $_field ) = each( $params[ 'ud_' . $v . '_prop' ] ) ) {
 				
-				$wrapper_class[] = 'has-content-prop';
-				break;
-				
-			}
-			
-		}
-		
-	}
-	
-	if ( check_var( $params[ 'ud_other_info_prop' ] ) ) {
-		
-		foreach ( $params[ 'ud_other_info_prop' ] as $_alias => & $_value ) {
-			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
-				
-				$wrapper_class[] = 'has-other-info-prop';
-				break;
-				
-			}
-			
-		}
-		
-	}
-	
-	if ( check_var( $params[ 'ud_status_prop' ] ) ) {
-		
-		foreach ( $params[ 'ud_status_prop' ] as $_alias => & $_value ) {
-			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
-				
-				$wrapper_class[] = 'has-status-prop';
-				break;
-				
-			}
-			
-		}
-		
-	}
-	
-	if ( check_var( $params[ 'ud_event_datetime_prop' ] ) ) {
-		
-		foreach ( $params[ 'ud_event_datetime_prop' ] as $_alias => & $_value ) {
-			
-			if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) ) {
-				
-				$wrapper_class[] = 'has-event-datetime-prop';
-				break;
+				if ( check_var( $props_to_show[ $_alias ] ) ) {
+					
+					$wrapper_class[ $_alias ] = 'has-ud-' . str_replace( '_', '-', url_title( $v, '-', TRUE ) ) . '-prop';
+					
+				}
 				
 			}
 			
@@ -139,73 +60,101 @@
 	
 ?>
 
-<div id="ud-d-search-results-wrapper" class="<?= check_var( $wrapper_class ) ? $wrapper_class : ''; ?>">
+<div id="ud-d-search-results-wrapper" class="<?= $wrapper_class; ?>">
 	
-	<?php if ( check_var( $ud_data_list ) ) { ?>
+	<?php if ( check_var( $ud_data_array ) ) { ?>
 		
 		<?php if ( check_var( $params[ 'show_results_count' ] ) ) { ?>
 		
-		<div class="users-submits-search-results-title-wrapper ud-data-list-count">
+		<div class="ud-d-list-results-title-wrapper ud-d-list-results-count-wrapper">
 			
-			<h3 class="users-submits-search-results-title">
+			<span class="s1">
 				
-				<?php
+				<span class="ud-d-list-results-title">
 					
-					if ( $ud_data_list_total_results > 1 ) {
+					<?php
 						
-						if ( check_var( $params[ 'users_submits_search_results_string' ] ) ) {
+						if ( $ud_data_list_total_results > 1 ) {
 							
-							echo sprintf( $params[ 'users_submits_search_results_string' ], '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
+							if ( check_var( $params[ 'ud_d_list_search_results_string' ] ) ) {
+								
+								echo sprintf( $params[ 'ud_d_list_search_results_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'ud_d_list_search_results_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						else {
 							
-							echo sprintf( lang( 'users_submits_search_results_string' ), '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
+							if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
+								
+								echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
+							else {
+								
+								echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+								
+							}
 							
 						}
 						
-					}
-					else {
-						
-						if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
-							
-							echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
-							
-						}
-						else {
-							
-							echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="users-submits-search-count">' . $ud_data_list_total_results . '</span>' );
-							
-						}
-						
-					}
+					?>
 					
-				?>
+				</span>
 				
-			</h3>
+			</span>
 			
 		</div>
 		
-		<?php } ?>
+		<?php }
 		
-		<?php
+		echo '<div class="items ud-data-items ud-d-list">';
 		
-// 		echo '<pre>' . print_r( $ud_data_list, TRUE ) . '</pre>';
-		
-		echo '<div class="items ud-data-items">';
-		
-		foreach ( $ud_data_list as $key => $ud_data ) {
+		foreach ( $ud_data_array as $key => $ud_data ) {
 			
 			$this->ud_api->parse_ud_data( $ud_data, $props_to_show );
 			
-			$_us_wrapper_class = array();
+			$_ud_data_wrapper_class = array();
 			
-			// ----------------------------
-			// translating values
+			reset( $property_presentation_types );
 			
-			foreach ( $ud_data[ 'parsed_data' ][ 'full' ] as $_pk => & $parsed_array ) {
+			while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 				
-				$prop_value = & $parsed_array[ 'value' ];
+				if ( check_var( $params[ 'ud_' . $v . '_prop' ] ) ) {
+					
+					$__class = FALSE;
+					
+					reset( $params[ 'ud_' . $v . '_prop' ] );
+					
+					while ( list( $_alias, $_field ) = each( $params[ 'ud_' . $v . '_prop' ] ) ) {
+						
+						if ( check_var( $props_to_show[ $_alias ] ) AND check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ], TRUE ) ) {
+							
+							if ( ! $__class ) $__class = 'has-ud-' . $v;
+							
+							${ '_ud_' . $v . '_props' }[ $_alias ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'label' ];
+							${ '_ud_' . $v . '_props' }[ $_alias ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ];
+							
+						}
+						
+					}
+					
+					if ( $__class ) $_ud_data_wrapper_class[ $__class ] = $__class;
+					
+				}
+				
+			}
+			
+			reset( $ud_data[ 'parsed_data' ][ 'full' ] );
+			
+			while ( list( $_pk, $parsed_array ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
+				
+				$prop_value = & $ud_data[ 'parsed_data' ][ 'full' ][ $_pk ][ 'value' ];
 				
 				$_prop = NULL;
 				
@@ -231,23 +180,23 @@
 							
 							if ( $date == $now ) {
 								
-								$_us_wrapper_class[] = 'has-ud-event-datetime-is-today';
+								$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-today';
 								
-								$_us_wrapper_class[] = 'is-today';
+								$_ud_data_wrapper_class[] = 'is-today';
 								
 							}
 							else if ( $date == $yesterday ) {
 								
-								$_us_wrapper_class[] = 'has-ud-event-datetime-is-yesterday';
+								$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-yesterday';
 								
-								$_us_wrapper_class[] = 'is-yesterday';
+								$_ud_data_wrapper_class[] = 'is-yesterday';
 								
 							}
 							else if ( $date == $tomorrow ) {
 								
-								$_us_wrapper_class[] = 'has-ud-event-datetime-is-tomorrow';
+								$_ud_data_wrapper_class[] = 'has-ud-event-datetime-is-tomorrow';
 								
-								$_us_wrapper_class[] = 'is-tomorrow';
+								$_ud_data_wrapper_class[] = 'is-tomorrow';
 								
 							}
 							
@@ -275,352 +224,125 @@
 					
 				}
 				
-				$_us_wrapper_class[] = 'ud-data-item-value-' . url_title( $prop_value, '-', TRUE );
+				$_ud_data_wrapper_class[] = 'ud-data-item-' . $_pk . '-value-' . word_limiter( str_replace( '_', '-', url_title( $prop_value, '-', TRUE ) ), 20, '' );
 				
 			}
 			
-			//echo '---------------------<pre>' . print_r( $ud_data, TRUE ) . '</pre>'; exit;
-			
-			// translating values
 			// ----------------------------
 			
 			if ( $_is_presentation ) {
 				
-				$property_metadata_types = array(
-					
-					'ud_image_prop',
-					'ud_title_prop',
-					'ud_event_datetime_prop',
-					'ud_content_prop',
-					'ud_other_info_prop',
-					'ud_status_prop',
-					'ud_image_prop',
-					
-				);
-				
-				foreach ( $property_metadata_types as $property_metadata_type ) {
-					
-					${ '_' . $property_metadata_type . 's' } = array();
-					
-					if ( check_var( $params[ $property_metadata_type ] ) ) {
-						
-						$__class = FALSE;
-						
-						if ( check_var( $params[ $property_metadata_type ] ) ) {
-							
-							if ( check_var( $params[ $property_metadata_type ] ) AND in_array( 'id', $params[ $property_metadata_type ] ) ) {
-								
-								${ '_' . $property_metadata_type . 's' }[ 'id' ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'label' ];
-								${ '_' . $property_metadata_type . 's' }[ 'id' ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'value' ];
-								
-							}
-							
-							if ( check_var( $params[ $property_metadata_type ] ) AND in_array( 'submit_datetime', $params[ $property_metadata_type ] ) ) {
-								
-								${ '_' . $property_metadata_type . 's' }[ 'submit_datetime' ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'submit_datetime' ][ 'label' ];
-								${ '_' . $property_metadata_type . 's' }[ 'submit_datetime' ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'submit_datetime' ][ 'value' ];
-								
-							}
-							
-							if ( check_var( $params[ $property_metadata_type ] ) AND in_array( 'mod_datetime', $params[ $property_metadata_type ] ) ) {
-								
-								${ '_' . $property_metadata_type . 's' }[ 'mod_datetime' ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'mod_datetime' ][ 'label' ];
-								${ '_' . $property_metadata_type . 's' }[ 'mod_datetime' ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'mod_datetime' ][ 'value' ];
-								
-							}
-							
-						}
-						
-						foreach ( $params[ $property_metadata_type ] as $_alias => $_field ) {
-							
-							if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ], TRUE ) ) {
-								
-								if ( ! $__class ) $__class = 'has-ud-image';
-								
-								${ '_' . $property_metadata_type . 's' }[ $_alias ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'label' ];
-								${ '_' . $property_metadata_type . 's' }[ $_alias ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ];
-								
-							}
-							
-						}
-						
-						if ( $__class ) $_us_wrapper_class[] = $__class;
-						
-					}
-					
-				}
-				
-				$_us_status = array();
-				$_us_status_classes = '';
-				$_us_has_status = FALSE;
+				$ud_status_prop_class = array();
+				$_ud_status = array();
+				$_ud_status_classes = '';
+				$_ud_has_status = FALSE;
 				
 				if ( check_var( $params[ 'ud_status_prop' ] ) ) {
 					
-					foreach( $submit_form[ 'fields' ] as $status_field ) {
+					foreach( $params[ 'ud_status_prop' ] as $alias => $v ) {
 						
-						if ( isset( $params[ 'ud_status_prop' ][ $status_field[ 'alias' ] ] ) ) {
-							
-							if ( check_var( $status_field[ 'options_from_users_submits' ] )
-							AND ( check_var( $status_field[ 'options_title_field' ] )
-							OR check_var( $status_field[ 'options_title_field_custom' ] ) ) ) {
-								
-								$_current_field_array = array(
-									
-									'prop_is_ud_status_active',
-									'prop_is_ud_status_inactive',
-									'prop_is_ud_status_enabled',
-									'prop_is_ud_status_disabled',
-									'prop_is_ud_status_canceled',
-									'prop_is_ud_status_postponed',
-									'prop_is_ud_status_archived',
-									'prop_is_ud_status_published',
-									'prop_is_ud_status_unpublished',
-									'prop_is_ud_status_scheduled',
-									
-								);
-								
-								foreach( $_current_field_array as $_item ) {
-									
-									if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $status_field[ 'alias' ] ] ) AND $ud_data[ 'parsed_data' ][ 'full' ][ $status_field[ 'alias' ] ] == $status_field[ 'advanced_options' ][ $_item ] ) {
-										
-										if ( $_item == 'prop_is_ud_status_active' ) {
-											
-											$_us_status[ 'active' ] = 'status-active';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_inactive' ) {
-											
-											$_us_status[ 'inactive' ] = 'status-inactive';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_enabled' ) {
-											
-											$_us_status[ 'enabled' ] = 'status-enabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_disabled' ) {
-											
-											$_us_status[ 'disabled' ] = 'status-disabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_canceled' ) {
-											
-											$_us_status[ 'disabled' ] = 'status-disabled';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_postponed' ) {
-											
-											$_us_status[ 'postponed' ] = 'status-postponed';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_archived' ) {
-											
-											$_us_status[ 'archived' ] = 'status-archived';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_published' ) {
-											
-											$_us_status[ 'published' ] = 'status-published';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_unpublished' ) {
-											
-											$_us_status[ 'unpublished' ] = 'status-unpublished';
-											
-										}
-										else if ( $_item == 'prop_is_ud_status_scheduled' ) {
-											
-											$_us_status[ 'scheduled' ] = 'status-scheduled';
-											
-										}
-										
-										$_us_has_status = TRUE;
-										
-									}
-									
-								};
-								
-							}
-							
-						}
+						$status_field = $props[ $alias ];
 						
-					}
-					
-				}
-				
-				if ( $_us_has_status ) {
-					
-					$_us_status_classes = join( $_us_status, ' ' );
-					
-				}
-				
-				$_us_wrapper_class = join( ' ', $_us_wrapper_class );
-				
-				echo '<div class="item ud-data ' . $_us_wrapper_class . ' ' . $_us_status_classes . '">';
-				
-				$__main_image = FALSE;
-				
-				if ( ! empty( $_ud_image_props ) ) {
-					
-					echo '<div class="item ud-images-wrapper">';
-					
-					foreach ( $_ud_image_props as $_alias => $_field ) {
-						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
+						if ( check_var( $status_field[ 'options_from_users_submits' ] )
+						AND ( check_var( $status_field[ 'options_title_field' ] )
+						OR check_var( $status_field[ 'options_title_field_custom' ] ) ) ) {
 							
-							//echo '<pre>' . print_r( $ud_data, TRUE ) . '</pre>';
-							
-							if ( ! $__main_image ) {
+							$_current_field_array = array(
 								
-								$__main_image = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias . '_thumb_default' ] );
-								
-							}
-							
-							$thumb_params = array( 
-								
-								'wrapper_class' => 'us-image-wrapper',
-								'src' => get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias . '_thumb_default' ] ),
-								'href' => get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ),
-								'rel' => 'us-thumb',
-								'title' => $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ],
-								'modal' => TRUE,
-								'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_' . environment() ] ) ? TRUE : FALSE,
+								'prop_is_ud_status_active',
+								'prop_is_ud_status_inactive',
+								'prop_is_ud_status_enabled',
+								'prop_is_ud_status_disabled',
+								'prop_is_ud_status_canceled',
+								'prop_is_ud_status_postponed',
+								'prop_is_ud_status_archived',
+								'prop_is_ud_status_published',
+								'prop_is_ud_status_unpublished',
+								'prop_is_ud_status_scheduled',
 								
 							);
 							
-							echo vui_el_thumb( $thumb_params );
+							foreach( $_current_field_array as $_item ) {
+								
+								if ( check_var( $status_field[ 'advanced_options' ][ $_item ] ) AND check_var( $ud_data[ 'data' ][ $alias ], TRUE ) AND $ud_data[ 'data' ][ $alias ] == $status_field[ 'advanced_options' ][ $_item ] ) {
+									
+									$ud_status_prop_class[ $alias ][ $_item ] = $_item . ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+									
+									$_ud_status[ $alias ] = $_item . ' status-' . str_replace( 'prop_is_ud_status_', '', $_item );
+									
+									$_ud_has_status = TRUE;
+									
+								}
+								
+							};
 							
 						}
 						
 					}
 					
-					echo '</div>';
+				}
+				
+				if ( $_ud_has_status ) {
+					
+					$_ud_status_classes = join( $_ud_status, ' ' );
 					
 				}
 				
-				if ( ! empty( $_ud_event_datetime_props ) ) {
+				$_ud_data_wrapper_class = join( ' ', $_ud_data_wrapper_class );
+				
+				echo '<div rel="ud-d-list-' . $unique_hash . '" href="' . $ud_data[ 'site_link' ] . ' .ud-data" class="item ' . ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) ? 'modal' : '' ) . ' ud-data ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
+				
+				$__main_image = FALSE;
+				
+				reset( $property_presentation_types );
+				
+				$__item_count = 1;
+				
+				while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 					
-					echo '<div class="item ud-event-datetimes-wrapper"' . ( $__main_image ? ' style="background-image:url(\'' . $__main_image . '\');"' : '' ) . '>';
-					
-					foreach ( $_ud_event_datetime_props as $_alias => $_field ) {
+					if ( ! empty( ${ '_ud_' . $v . '_props' } ) ) {
 						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
+						if ( $v == 'image' ) {
 							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
+							foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
 								
-								require( 'event_datetimes.php' );
+								if ( $_field AND isset( $props[ $_alias ] ) ) {
+									
+									if ( ! $__main_image ) {
+										
+										$__main_image = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias . '_thumb_default' ] );
+										
+									}
+									
+								}
 								
 							}
 							
 						}
 						
-					}
-					
-					echo '</div>';
-					
-				}
-				
-				if ( ! empty( $_ud_title_props ) ) {
-					
-					echo '<div class="item ud-titles-wrapper">';
-					
-					foreach ( $_ud_title_props as $_alias => $_field ) {
+						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper ' . ( $__main_image ? ' style="background-image:url(\'' . $__main_image . '\');"' : '' ) . '">';
 						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
+						$__item_count = 1;
+						
+						foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
 							
 							if ( $_field AND isset( $props[ $_alias ] ) ) {
 								
-								require( 'titles.php' );
+								require( rtrim( $v, 's' ) . 's.php' );
 								
 							}
 							
-						}
-						
-					}
-					
-					echo '</div>';
-					
-				}
-				
-				if ( ! empty( $_ud_content_props ) ) {
-					
-					echo '<div class="item ud-contents-wrapper">';
-					
-					foreach ( $_ud_content_props as $_alias => $_field ) {
-						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
-							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
-								
-								require( 'contents.php' );
-								
-							}
+							$__item_count++;
 							
 						}
 						
-					}
-					
-					echo '</div>';
-					
-				}
-				
-// 				echo '<pre>' . print_r( $_ud_other_info_props, TRUE ) . '</pre>';exit;
-				
-				if ( ! empty( $_ud_other_info_props ) ) {
-					
-					echo '<div class="item ud-other-infos-wrapper">';
-					
-					echo '<table class="">';
-					
-					foreach ( $_ud_other_info_props as $_alias => $_field ) {
-						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
-							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
-								
-								require( 'other_info.php' );
-								
-							}
-							
-						}
+						echo '</div>';
 						
 					}
 					
-					echo '</table>';
-					
-					echo '</div>';
-					
 				}
 				
-				if ( ! empty( $_ud_status_props ) ) {
-					
-					echo '<div class="item ud-status-wrapper">';
-					
-					foreach ( $_ud_status_props as $_alias => $_field ) {
-						
-						if ( check_var( $props[ $_alias ][ 'visibility' ][ 'site' ][ 'list' ] ) AND isset( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) AND ! empty( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ] ) ) {
-							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
-								
-								require( 'status.php' );
-								
-							}
-							
-						}
-						
-					}
-					
-					echo '<div class="clear"></div>';
-					
-					echo '</div>';
-					
-				}
-				
-				/* ---------------------------------------------------------------------------
-				* ---------------------------------------------------------------------------
-				* Read more
-				* ---------------------------------------------------------------------------
-				*/
+				// ---------------------------
 				
 				if ( file_exists( $_path . 'readmore.php' ) ) {
 					
@@ -672,15 +394,15 @@
 			
 		} ?>
 		
-		<h4 class="title">
+		<div class="ud-d-list-no-search-results-desc-wrapper no-results">
 		
-			<div class="users-submits-description-no-search-results">
+			<span class="ud-d-list-no-search-results-desc">
 				
 				<?= $_result_string; ?>
 				
-			</div>
+			</span>
 			
-		</h4>
+		</div>
 		
 	<?php } ?>
 	

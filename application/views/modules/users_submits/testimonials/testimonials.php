@@ -73,13 +73,25 @@ $unique_hash = md5( uniqid( rand(), true ) );
 				
 				<?php if ( $this->input->post( NULL, TRUE ) OR ! check_var( $users_submits ) ) { ?>
 					
-					<h4 class="title"><?= lang( 'no_results' ); ?></h4>
+					<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+					
+						<span class="ud-d-list-no-search-results-desc">
+							
+							<?= lang( 'no_results' ); ?>
+							
+						</span>
+						
+					</div>
 					
 				<?php } else { ?>
 					
-					<div class="users-submits-description-no-search-results">
-						
-						<?= lang( 'users_submits_description_no_search_results' ); ?>
+					<div class="ud-d-list-no-search-results-desc-wrapper no-results">
+					
+						<span class="ud-d-list-no-search-results-desc">
+							
+							<?= lang( 'users_submits_description_no_search_results' ); ?>
+							
+						</span>
 						
 					</div>
 					

@@ -1,6 +1,6 @@
 <?php  if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-function get_url( $original_url = NULL, $itemid = NULL ){
+function get_url( $original_url = NULL, $menu_item_id = NULL ){
 	
 	if ( ! $original_url ) {
 		
