@@ -293,6 +293,7 @@
 								
 								echo vui_el_button( array(
 									
+									'url' => $this->menus->get_mi_url( 'set_home_page', $menu_item ),
 									'text' => lang( 'is_home_page' ),
 									'icon' => ( 'ok' ),
 									'only_icon' => TRUE, )

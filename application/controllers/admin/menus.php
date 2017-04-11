@@ -832,7 +832,7 @@ class Menus extends Main {
 						
 						if ( $type == 'html_content' ) {
 							
-							$menu_item[ 'html_content' ] = $menu_item[ 'params' ][ 'html_content' ];
+							$menu_item[ 'html_content' ] = check_var( $menu_item[ 'params' ][ 'html_content' ] ) ? $menu_item[ 'params' ][ 'html_content' ] : '';
 							
 						}
 						
@@ -981,7 +981,7 @@ class Menus extends Main {
 										);
 										
 									}
-									else if ( $type == 'blank_content' OR $type == 'html_content' OR $type == 'external_link' ){
+									else if ( in_array( $type, array( 'blank_content', 'html_content', 'external_link' ) ) ){
 										
 										$gmiup = array(
 											

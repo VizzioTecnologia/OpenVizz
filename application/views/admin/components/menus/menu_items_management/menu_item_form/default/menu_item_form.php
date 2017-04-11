@@ -354,7 +354,7 @@
 							
 							<?= form_error( 'html_content', '<div class="msg-inline-error">', '</div>' ); ?>
 							<?= form_label( lang( 'html_content' ) ); ?>
-							<?= form_textarea( array( 'id' => 'html_content', 'name' => 'html_content', 'class' => 'js-editor' ), set_value( 'html_content', @$menu_item[ 'html_content' ] ) ); ?>
+							<?= form_textarea( array( 'id' => 'html_content', 'name' => 'html_content', 'class' => 'js-editor' ), set_value( 'html_content', ( check_var( $menu_item[ 'html_content' ] ) ? $menu_item[ 'html_content' ] : NULL ) ) ); ?>
 							
 						</div>
 							
@@ -369,13 +369,17 @@
 					* após a chamada da função $this->form_validation->run()
 					*/
 					
-					echo params_to_html( $params_spec, $params_values );
+					if ( check_var( $params_spec ) ) {
+						
+						echo params_to_html( $params_spec, $params_values );
+						
+					}
 					
 				?>
 				
 			</div>
 			
-			<?= form_hidden( 'menu_item_id', @$menu_item[ 'id' ] ); ?>
+			<?= form_hidden( 'menu_item_id', $menu_item[ 'id' ] ); ?>
 			
 		<?= form_close(); ?>
 		

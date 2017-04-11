@@ -361,7 +361,7 @@ class Users extends Main {
 				$field_rules = join( '|', $field_rules );
 				
 				if ( ( ( $user_id != $this->users->user_data[ 'id' ] AND $this->users->check_privileges( 'users_management_can_change_id_others' ) )
-					OR ( $user_id == $this->users->user_data[ 'id' ] AND $this->users->check_privileges( 'users_management_can_change_id_email' ) ) )
+					OR ( $user_id == $this->users->user_data[ 'id' ] AND $this->users->check_privileges( 'users_management_can_change_own_id' ) ) )
 					) {
 					
 					$this->form_validation->set_rules( 'id', lang( 'id' ), $field_rules );

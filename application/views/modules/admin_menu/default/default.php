@@ -61,7 +61,7 @@ echo vui_el_button( array( 'wrapper_class' => 'admin-menu-switch', 'url' => 'adm
 			
 			?><li><?php
 				
-				echo vui_el_button( array( 'url' => 'admin/users/users_management/edit_user/'.base64_encode(base64_encode(base64_encode(base64_encode($CI->users->user_data['id'])))), 'text' => lang('logged_as').' '.$CI->users->user_data['name'], 'icon' => 'user', 'only_icon' => TRUE, ) );
+				echo vui_el_button( array( 'url' => 'admin/users/um/a/e/uid/' . $this->users->encode_user_id( $CI->users->user_data['id'] ), 'text' => lang( 'logged_as' ).' '.$CI->users->user_data['name'], 'icon' => 'user', 'only_icon' => TRUE, ) );
 				
 			?></li><?php
 			

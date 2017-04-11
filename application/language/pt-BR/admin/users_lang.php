@@ -38,6 +38,10 @@ $lang[ 'set_user_username' ] = 																	"Nome de login";
 $lang[ 'tip_set_user_username' ] = 																"Nome de login";
 $lang[ 'set_user_own_username' ] = 																"Seu nome de login";
 $lang[ 'tip_set_user_own_username' ] = 															"Nome de login da sua conta";
+$lang[ 'set_user_own_password' ] = 																"Nova senha";
+$lang[ 'tip_set_user_own_password' ] = 															"<p>Informe sua nova senha.</p><p class=\"warning\">Manter este campo vazio não redefinirá sua senha.</p>";
+$lang[ 'set_user_own_confirm_password' ] = 														"Confirme a senha";
+$lang[ 'tip_set_user_own_confirm_password' ] = 													"Confirme sua nova senha";
 
 $lang[ 'set_user_name' ] = 																		"Nome completo do usuário";
 $lang[ 'tip_set_user_name' ] = 																	"Nome completo do usuário";
