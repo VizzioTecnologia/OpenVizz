@@ -6,7 +6,6 @@
 
 			$this->plugins->load( array( 'names' => array( 'jquery', 'modal_rf_file_picker' ), 'types' => array( 'js_tooltip', 'js_image_preloader', ) ) );
 			
-			$this->voutput->append_head_script( 'php.js', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/php.js' );
 			$this->voutput->append_head_script( 'jquery.ba-outside-events', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.ba-outside-events.min.js' );
 			$this->voutput->append_head_script( 'jquery.number', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/jquery.number.min.js' );
 			$this->voutput->append_head_script( 'js_numeral', ADMIN_THEMES_URL . '/' . admin_theme() . '/assets/js/numeral-js/numeral.js' );
@@ -235,14 +234,14 @@
 		
 		<div id="fake-top-block"></div>
 		
-		<?php if ( @$this->mcm->loaded_modules[ 'main_tools' ] ){ ?>
+		<?php if ( check_var( $this->mcm->loaded_modules[ 'main_tools' ] ) ) { ?>
 			
 			<div id="main-tools-modules" class="">
 				
 				<?php if ( ! check_var( $this->session->userdata[ 'user_data' ][ $this->mcm->environment ][ 'select_on' ] ) ){ ?>
-				<?php foreach ( @$this->mcm->loaded_modules[ 'main_tools' ] as $key => $module ) { ?>
+				<?php foreach ( $this->mcm->loaded_modules[ 'main_tools' ] as $key => $module ) { ?>
 					
-					<?= @$module; ?>
+					<?= $module; ?>
 					
 				<?php } ?>
 				<?php } ?>
@@ -252,7 +251,7 @@
 		<?php } ?>
 		
 		<?php if ( isset( $toolbar ) AND trim( $toolbar ) !== '' ) { ?>
-		<div id="toolbar" class="<?= ( @$this->mcm->loaded_modules[ 'main_tools' ] ? 'with-main-tools' : '' ) ?>">
+		<div id="toolbar" class="<?= ( check_var( $this->mcm->loaded_modules[ 'main_tools' ] ) ? 'with-main-tools' : '' ) ?>">
 			
 			<div id="toolbar-main" class="toolbar-child" >
 				

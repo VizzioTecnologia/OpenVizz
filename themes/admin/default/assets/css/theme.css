@@ -20,8 +20,6 @@ hr{
 	overflow: hidden;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 	
-	background-image: url('<?= THEME_IMAGE_DIR_URL; ?>/divisor-h.png');
-	
 }
 
 .hidden{

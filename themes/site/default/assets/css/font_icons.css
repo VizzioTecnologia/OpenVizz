@@ -1,19 +1,19 @@
 
 /*
+ * *************************************************************************************************
  **************************************************************************************************
- **************************************************************************************************
- --------------------------------------------------------------------------------------------------
- Icons fonts
- --------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------
+ * Icons fonts
+ * --------------------------------------------------------------------------------------------------
  */
 
 @font-face {
 	font-family: 'openvizz-set';
-	src: url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/fonts/openvizz-set.eot?8fy3fc');
-	src: url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/fonts/openvizz-set.eot?8fy3fc#iefix') format('embedded-opentype'),
-		url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/fonts/openvizz-set.ttf?8fy3fc') format('truetype'),
-		url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/fonts/openvizz-set.woff?8fy3fc') format('woff'),
-		url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/fonts/openvizz-set.svg?8fy3fc#openvizz-set') format('svg');
+	src: url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/openvizz-set.eot');
+	src: url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/openvizz-set.eot?#iefix') format('embedded-opentype'),
+	url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/openvizz-set.svg#openvizz-set') format('svg'),
+	url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/openvizz-set.woff') format('woff'),
+	url('<?= THEME_FONTS_DIR_URL; ?>/openvizz-set/openvizz-set.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -28,10 +28,10 @@
 }
 .icon:before,
 .ui-icon:before {
-
+	
 	font-size: inherit;
 	line-height: inherit;
-
+	
 }
 
 
@@ -70,6 +70,7 @@
 	content: "\e605";
 }
 .icon-articles:before,
+.icon-articles_module_config:before,
 .icon-article_detail:before,
 .icon-articles_management:before,
 .icon-articles_search:before,
@@ -93,6 +94,7 @@
 .icon-contacts:before,
 .icon-contact_details:before,
 .icon-contact:before,
+.icon-contact_module_config_contact:before,
 .icon-contacts_management:before {
 	content: "\e609";
 }
@@ -115,7 +117,8 @@
 	
 }
 .icon-menus:before,
-.icon-menus_management:before {
+.icon-menus_management:before,
+.icon-menu_module_config:before {
 	content: "\e60d";
 }
 .icon-preferences:before {
@@ -337,7 +340,8 @@
 .icon-add-menu:before {
 	content: "\e615";
 }
-.icon-menu-items:before {
+.icon-menu-items:before,
+.icon-menu_item:before {
 	content: "\e616";
 }
 .icon-add-menu-item:before {
@@ -394,7 +398,8 @@
 }
 .icon-places:before,
 .icon-places_management:before,
-.icon-addresses:before {
+.icon-addresses:before,
+.icon-contact_module_config_addresses:before {
 	content: "\e621";
 }
 .icon-coord:before {
@@ -418,10 +423,12 @@
 .icon-ordering:before {
 	content: "\e628";
 }
+.icon-module:before,
 .icon-modules:before,
 .icon-modules_management:before {
 	content: "\e629";
 }
+.icon-contact_form:before,
 .icon-contact_forms:before,
 .icon-sending:before,
 .icon-submitter_message_receiving:before {
@@ -431,6 +438,7 @@
 	content: "\e034";
 }
 .icon-websites:before,
+.icon-contact_module_config_websites:before,
 .icon-preview_site:before {
 	content: "\e62b";
 }
@@ -457,10 +465,12 @@
 }
 .icon-email:before,
 .icon-email_config:before,
+.icon-contact_module_config_emails:before,
 .icon-emails:before {
 	content: "\e630";
 }
-.icon-facebook:before {
+.icon-facebook:before,
+.icon-facebook_module_config:before {
 	content: "\e631";
 }
 .icon-info:before {
@@ -491,10 +501,13 @@
 	content: "\e639";
 }
 .icon-phone:before,
+.icon-contact_module_config_phones:before,
 .icon-phones:before{
 	content: "\e63a";
 }
+.icon-layout_specific_params:before,
 .icon-appearence:before,
+.icon-contact_module_config_look_and_feel:before,
 .icon-look_and_feel:before,
 .icon-c_users_look_and_feel:before {
 	
@@ -503,7 +516,8 @@
 }
 .icon-users_submits:before,
 .icon-users-submits:before,
-.icon-users_submits_list:before{
+.icon-users_submits_list:before,
+.icon-users_submits_module_config:before {
 	content: "\e63c";
 }
 .icon-move-handle:before{
@@ -532,6 +546,7 @@
 .icon-user-messages:before {
 	content: "\e644";
 }
+.icon-unid:before,
 .icon-unified-data:before,
 .icon-unified_data:before {
 	content: "\e645";
@@ -547,7 +562,8 @@
 .icon-csv:before {
 	content: "\e648";
 }
-.icon-html:before {
+.icon-html:before,
+.icon-html_module_config:before {
 	content: "\e649";
 }
 .icon-txt:before {
@@ -562,7 +578,8 @@
 .icon-ipp:before {
 	content: "\e64d";
 }
-.icon-start:before {
+.icon-start:before,
+.icon-admin_menu_module_config:before {
 	content: "\e64e";
 }
 .icon-input-text:before {
@@ -615,11 +632,19 @@
 .icon-detail:before {
 	content: "\e902";
 }
+.icon-instagram:before,
+.icon-instagram_snapwidget_module_config:before {
+	content: "\e907";
+}
+.icon-slides:before,
+.icon-nivo_slider_module_config:before {
+	content: "\e908";
+}
 
 /*
- --------------------------------------------------------------------------------------------------
- Icons fonts
- --------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------
+ * Icons fonts
+ * --------------------------------------------------------------------------------------------------
  **************************************************************************************************
  **************************************************************************************************
  */

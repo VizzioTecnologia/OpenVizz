@@ -36,6 +36,12 @@ if ( ! defined( 'VUI_SITE_WIDTH_1400_1920' ) ) define( 'VUI_SITE_WIDTH_1400_1920
 if ( ! defined( 'VUI_MAX_COLUMNS' ) ) define( 'VUI_MAX_COLUMNS', 20 );
 
 
+
+$logo_width = 210;
+$logo_height = 90;
+
+
+
 //------------------------------------------------------
 //------------------------------------------------------
 // Inputs text

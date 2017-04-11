@@ -17,7 +17,7 @@ function get_pagination( $ruri_string_tmpl, $page = 1, $items_per_page = 10, $to
 		$data['tp'] = $total_pages;
 		$data['uri_sfx'] = $url_suffix;
 		
-		$hide_pagination_when_only_one_page = @$CI->main_model->params[ environment() . '_hide_pagination_when_only_one_page'] ? $CI->main_model->params[ environment() . '_hide_pagination_when_only_one_page'] : TRUE;
+		$hide_pagination_when_only_one_page = check_var( $CI->main_model->params[ environment() . '_hide_pagination_when_only_one_page'] ) ? $CI->main_model->params[ environment() . '_hide_pagination_when_only_one_page'] : TRUE;
 		
 		if ( ( $hide_pagination_when_only_one_page AND $total_pages > 1 ) OR ! $hide_pagination_when_only_one_page ){
 			

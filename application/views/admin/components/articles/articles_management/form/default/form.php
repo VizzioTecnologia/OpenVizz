@@ -613,7 +613,7 @@
 											'id' => 'user-group-' . $user_group[ 'id' ],
 											'value' => '>' . $user_group[ 'id' ] . '<',
 											'checked' => ( $this->input->post( 'access_type' ) === 'users_groups' AND $post_access_user_group_id AND in_array( html_escape( '>' . $user_group['id'] . '<' ), $post_access_user_group_id ) ) ? TRUE : FALSE,
-											'text' => $user_group[ 'indented_title' ],
+											'text' => check_var( $user_group[ 'indented_title' ] ) ? $user_group[ 'indented_title' ] : '',
 											
 										);
 										

@@ -121,7 +121,7 @@
 .msg-type-success a,
 .msg-type-success a:hover {
 
-	color: <?= $vui->colors->vui_success_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
 	border-bottom: thin dashed <?= $vui->colors->vui_success_fg->rgba_s(); ?>;
 
 }
@@ -136,7 +136,7 @@
 .msg-type-error a,
 .msg-type-error a:hover {
 
-	color: <?= $vui->colors->vui_error_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
 	border-bottom: thin dashed <?= $vui->colors->vui_error_fg->rgba_s(); ?>;
 
 }
@@ -151,7 +151,7 @@
 .msg-type-warning a,
 .msg-type-warning a:hover {
 
-	color: <?= $vui->colors->vui_warning_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
 	border-bottom: thin dashed <?= $vui->colors->vui_warning_fg->rgba_s(); ?>;
 
 }
@@ -166,7 +166,7 @@
 .msg-type-info a,
 .msg-type-info a:hover {
 
-	color: <?= $vui->colors->vui_info_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
 	border-bottom: thin dashed <?= $vui->colors->vui_info_fg->rgba_s(); ?>;
 
 }

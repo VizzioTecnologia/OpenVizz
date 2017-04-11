@@ -6,6 +6,16 @@
  ---------------------------------------------------------
  */
 /*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
+
+/* ------------------------------------------------------ */
+/* Fancybox */
+
+html.fancybox-margin {
+	
+	margin: 0;
+	
+}
+
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -32,24 +42,25 @@
 }
 
 .fancybox-skin {
+	
 	position: relative;
 	
 	padding: <?= VUI_SPACING * 2; ?>em !important;
 	
-	background: <?= $vui->colors->vui_modal_bg->hex_s; ?>;
-	color: <?= $vui->colors->vui_modal_fg->hex_s; ?>;
+	background: <?= $vui->colors->vui_modal_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_modal_fg->rgba_s(); ?>;
 	text-shadow: none;
 	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
 	
 }
 
 .fancybox-opened {
-	z-index: 8030;
+	z-index: 100001;
 }
 
 .fancybox-opened .fancybox-skin {
 	
-	<?= $vui->css->box_shadow( '0 10px 50px ' . $vui->colors->vui_modal_shadow->rgba_s( 150 ) ); ?>
+	<?= $vui->css->box_shadow( '0 10px 50px ' . $vui->colors->vui_modal_shadow->rgba_s() ); ?>
 	
 }
 
@@ -84,28 +95,13 @@
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-	background-image: url(fancybox_sprite.png);
+
 }
 
-#fancybox-loading {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -22px;
-	margin-left: -22px;
-	background-position: 0 -108px;
-	opacity: 0.8;
-	cursor: pointer;
-	z-index: 8060;
-}
 
-#fancybox-loading div {
-	width: 44px;
-	height: 44px;
-	background: url(fancybox_loading.gif) center center no-repeat;
-}
 
 .fancybox-close {
+	
 	position: absolute;
 	top: -18px;
 	right: -18px;
@@ -113,6 +109,15 @@
 	height: 36px;
 	cursor: pointer;
 	z-index: 8040;
+	
+	background-color: <?= $vui->colors->vui_modal_close_bg->rgba_s(); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-close', $vui->colors->vui_modal_close_fg->rgba_s() ); ?>);
+	background-size: calc( 100% - <?= VUI_SPACING; ?>em ) auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	
+	<?= $vui->css->border_radius( '100000px' ) ?>
+	
 }
 
 .fancybox-nav {
@@ -123,8 +128,8 @@
 	cursor: pointer;
 	text-decoration: none;
 	
-	background-color: <?= $vui->colors->vui_modal_overlay->rgba_s( 50 ); ?>;
-	background-image: url(<?= $vui->svg_file( 'icon-arrow-left', $vui->colors->vui_modal_overlay->get_ro_color( 100 )->hex_s, 'vui_change_color' ); ?>);
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-arrow-left', $vui->colors->vui_modal_overlay_bg->get_ro_color( 100 )->rgba_s(), 'vui_change_color' ); ?>);
 	background-size: calc( 100% - <?= VUI_SPACING * 2; ?>em * 2 ) auto;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -146,7 +151,9 @@
 }
 
 .fancybox-nav span {
+	
 	position: absolute;
+	display: none;
 	top: 50%;
 	width: 48px;
 	height: 48px;
@@ -160,7 +167,7 @@
 
 .fancybox-next {
 	
-	background-image: url(<?= $vui->svg_file( 'icon-arrow-right', $vui->colors->vui_modal_overlay->get_ro_color( 100 )->hex_s, 'vui_change_color' ); ?>)
+	background-image: url(<?= $vui->svg_file( 'icon-arrow-right', $vui->colors->vui_modal_overlay_bg->get_ro_color( 100 )->rgba_s(), 'vui_change_color' ); ?>)
 	
 }
 
@@ -182,26 +189,28 @@
 /* Overlay helper */
 
 .fancybox-lock {
-    overflow: visible !important;
-    width: auto;
+	overflow: visible !important;
+	width: auto;
 }
 
 .fancybox-lock body {
-    overflow: hidden !important;
+	overflow: hidden !important;
 }
 
 .fancybox-lock-test {
-    overflow-y: hidden !important;
+	overflow-y: hidden !important;
 }
 
 .fancybox-overlay {
+	
 	position: absolute;
 	top: 0;
 	left: 0;
 	overflow: hidden;
 	display: none;
-	z-index: 8010;
-	background: <?= $vui->colors->vui_modal_overlay->rgba_s( 192 ); ?>;
+	z-index: 100000;
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
+	
 }
 
 .fancybox-overlay-fixed {
@@ -211,8 +220,10 @@
 }
 
 .fancybox-lock .fancybox-overlay {
+	
 	overflow: auto;
-	overflow-y: scroll;
+	/* 	overflow-y: scroll; */
+	
 }
 
 /* Title helper */
@@ -243,7 +254,7 @@
 	
 	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING; ?>em;
 	
-	background: <?= $vui->colors->vui_modal_overlay->rgba_s( 192 ); ?>;
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
 	
 	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
 	
@@ -277,19 +288,11 @@
 }
 
 /*Retina graphics!*/
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-	   only screen and (min--moz-device-pixel-ratio: 1.5),
-	   only screen and (min-device-pixel-ratio: 1.5){
-
-	#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-		background-image: url(fancybox_sprite@2x.png);
-		background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
-	}
-
-	#fancybox-loading div {
-		background-image: url(fancybox_loading@2x.gif);
-		background-size: 24px 24px; /*The size of the normal image, half the size of the hi-res image*/
-	}
+<?= '@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5)'; ?> {
+	
+	
 }
 	
 /*

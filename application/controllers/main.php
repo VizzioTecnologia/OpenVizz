@@ -607,39 +607,37 @@ class Main extends CI_controller {
 		// Parsing vars ------------------------------------
 		
 		// atribuindo valores às variávies
-		$component_view_folder =				@isset( $f_params[ 'component_view_folder' ] ) ? $f_params[ 'component_view_folder' ] : 'main';
-		$function =								@isset( $f_params[ 'function' ] ) ? $f_params[ 'function' ] : 'errors';
-		$action =								@isset( $f_params[ 'action' ] ) ? $f_params[ 'action' ] : 'error_404';
-		$layout =								@isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : 'default';
-		$view =									@isset( $f_params[ 'view' ] ) ? $f_params[ 'view' ] : '404';
-		$data =									@isset( $f_params[ 'data' ] ) ? $f_params[ 'data' ] : array();
-		$html =									@isset( $f_params[ 'html' ] ) ? $f_params[ 'html' ] : FALSE;
-		$load_index =							@isset( $f_params[ 'load_index' ] ) ? $f_params[ 'load_index' ] : TRUE;
-		$blank_content =						@isset( $f_params[ 'blank_content' ] ) ? $f_params[ 'blank_content' ] : FALSE;
-		$html_content =							@isset( $f_params[ 'html_content' ] ) ? $f_params[ 'html_content' ] : FALSE;
+		$component_view_folder =				isset( $f_params[ 'component_view_folder' ] ) ? $f_params[ 'component_view_folder' ] : 'main';
+		$function =								isset( $f_params[ 'function' ] ) ? $f_params[ 'function' ] : 'errors';
+		$action =								isset( $f_params[ 'action' ] ) ? $f_params[ 'action' ] : 'error_404';
+		$layout =								isset( $f_params[ 'layout' ] ) ? $f_params[ 'layout' ] : 'default';
+		$view =									isset( $f_params[ 'view' ] ) ? $f_params[ 'view' ] : '404';
+		$data =									isset( $f_params[ 'data' ] ) ? $f_params[ 'data' ] : array();
+		$html =									isset( $f_params[ 'html' ] ) ? $f_params[ 'html' ] : FALSE;
+		$load_index =							isset( $f_params[ 'load_index' ] ) ? $f_params[ 'load_index' ] : TRUE;
+		$blank_content =						isset( $f_params[ 'blank_content' ] ) ? $f_params[ 'blank_content' ] : FALSE;
+		$html_content =							isset( $f_params[ 'html_content' ] ) ? $f_params[ 'html_content' ] : FALSE;
 		
 		// Parsing vars ------------------------------------
 		// -------------------------------------------------
-
+		
 		if ( ( $component_view_folder AND $function AND $action AND $view ) OR $blank_content ){
-
+			
 			$data[ 'component_name' ] = ( isset( $this->current_component ) AND $this->current_component ) ? $this->current_component[ 'unique_name' ] : 'main';
 			$data[ 'current_component' ] = ( isset( $this->current_component ) AND $this->current_component ) ? $this->current_component : array();
 			$data[ 'component_function' ] = ( isset( $this->component_function ) AND $this->component_function ) ? $this->component_function : '';
 			$data[ 'component_function_action' ] = ( isset( $this->component_function_action ) AND $this->component_function_action ) ? $this->component_function_action : '';;
-
+			
 			/*-------------------------------------------------------
 			 * Parâmetros do item de menu atual
 			 */
-
-			if ( ! @$data[ 'params' ] AND $this->mcm->current_menu_item ){
-
+			
+			if ( ! check_var( $data[ 'params' ] ) AND $this->mcm->current_menu_item ){
+				
 				$data[ 'params' ] = get_params( $this->mcm->current_menu_item[ 'params' ] );
-
+				
 			}
-
-
-
+			
 			/*
 			 * html_data var list:
 			 *

@@ -68,7 +68,7 @@ body.vui {
 	position: relative;
 	display: block;
 	margin: 0;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 
 }
@@ -96,7 +96,7 @@ body.vui {
 	border: none;
 	border-bottom: thin solid <?= $vui->colors->vui_darker->rgba_s( 30 ); ?>;
 	margin: 0;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 
 }
@@ -266,7 +266,7 @@ body.vui {
 	font-size: <?= ( $min + ( $diff * 5 ) ) . $meas_unit; ?>;
 	font-weight: 100;
 	line-height: normal;
-	margin-top: <?= VUI_SPACING / 2; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING / 2; ?>em;
 	
 	text-transform: uppercase;
@@ -377,7 +377,7 @@ body.vui {
 
 	padding: 0;
 	margin: 0;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 
 }
@@ -413,7 +413,7 @@ body.vui {
 
 	position: relative;
 	display: block;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 
 }
@@ -435,7 +435,7 @@ body.vui {
 		position: relative;
 		display: list-item;
 
-		margin-top: <?= VUI_SPACING; ?>em;
+		margin-top: 0;
 		margin-bottom: <?= VUI_SPACING; ?>em;
 		margin-left: <?= VUI_SPACING * 2; ?>em;
 
@@ -490,7 +490,7 @@ body.vui {
 
 	position: relative;
 	display: block;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 
 }
@@ -660,7 +660,7 @@ body.vui {
 	border: none;
 	text-align: center;
 	min-width: 100%;
-	margin-top: <?= VUI_SPACING; ?>em;
+	margin-top: 0;
 	margin-bottom: <?= VUI_SPACING; ?>em;
 	
 	background-color: <?= $vui->colors->vui_table_bg->rgba_s(); ?>;

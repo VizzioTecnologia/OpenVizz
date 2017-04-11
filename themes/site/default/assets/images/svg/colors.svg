@@ -24,8 +24,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.50000001"
-     inkscape:cx="65.686734"
-     inkscape:cy="143.37211"
+     inkscape:cx="901.47792"
+     inkscape:cy="-241.12744"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -226,6 +226,14 @@
          x="1659.9999"
          y="1348.9349" />
     </clipPath>
+    <filter
+       inkscape:collect="always"
+       id="filter5603">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="31.163147"
+         id="feGaussianBlur5605" />
+    </filter>
   </defs>
   <metadata
      id="metadata7">
@@ -252,6 +260,24 @@
      inkscape:groupmode="layer"
      inkscape:label="Camada 1">
     <rect
+       y="704.93359"
+       x="317.28574"
+       height="132"
+       width="134"
+       id="vui_lawn_green"
+       style="fill:#9aed23;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
+       inkscape:label="vui_color"
+       ry="66" />
+    <rect
+       inkscape:label="vui_color"
+       style="fill:#2faeff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
+       id="vui_blue"
+       width="134"
+       height="132"
+       x="317.28574"
+       y="534.93359"
+       ry="66" />
+    <rect
        y="-1061.906"
        x="1325.8823"
        height="5514.5996"
@@ -275,7 +301,8 @@
        width="134"
        height="132"
        x="-587"
-       y="704.93359" />
+       y="704.93359"
+       ry="66" />
     <rect
        y="534.93359"
        x="-587"
@@ -283,7 +310,8 @@
        width="134"
        id="vui_red"
        style="fill:#c62f14;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
+       inkscape:label="vui_color"
+       ry="66" />
     <rect
        y="704.93359"
        x="-400.03046"
@@ -291,7 +319,8 @@
        width="134"
        id="vui_forest_green"
        style="fill:#52991a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
+       inkscape:label="vui_color"
+       ry="66" />
     <rect
        inkscape:label="vui_color"
        style="fill:#2dc02d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
@@ -299,7 +328,8 @@
        width="134"
        height="132"
        x="-400.03046"
-       y="534.93359" />
+       y="534.93359"
+       ry="66" />
     <rect
        y="704.93359"
        x="-44.142864"
@@ -307,7 +337,8 @@
        width="134"
        id="vui_midnight_blue"
        style="fill:#1e40bc;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
+       inkscape:label="vui_color"
+       ry="66" />
     <rect
        inkscape:label="vui_color"
        style="fill:#ffe344;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
@@ -315,7 +346,8 @@
        width="134"
        height="132"
        x="-44.142864"
-       y="534.93359" />
+       y="534.93359"
+       ry="66" />
     <rect
        y="704.93359"
        x="-223.13271"
@@ -323,7 +355,8 @@
        width="134"
        id="vui_grey"
        style="fill:#9da8ba;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
+       inkscape:label="vui_color"
+       ry="65.053825" />
     <rect
        inkscape:label="vui_color"
        style="fill:#e97828;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
@@ -331,7 +364,8 @@
        width="134"
        height="132"
        x="-223.13271"
-       y="534.93359" />
+       y="534.93359"
+       ry="66" />
     <rect
        y="704.93359"
        x="137.28572"
@@ -339,7 +373,8 @@
        width="134"
        id="vui_pink"
        style="fill:#ff447e;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
+       inkscape:label="vui_color"
+       ry="66" />
     <rect
        inkscape:label="vui_color"
        style="fill:#6d45de;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
@@ -347,23 +382,18 @@
        width="134"
        height="132"
        x="137.28572"
-       y="534.93359" />
+       y="534.93359"
+       ry="66" />
     <rect
-       y="704.93359"
-       x="317.28574"
+       ry="66"
+       y="-55.066391"
+       x="586.79034"
        height="132"
        width="134"
-       id="vui_lawn_green"
-       style="fill:#9aed23;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       inkscape:label="vui_color" />
-    <rect
+       id="vui_hot"
+       style="fill:#ffd692;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
        inkscape:label="vui_color"
-       style="fill:#2faeff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:0.17353198"
-       id="vui_blue"
-       width="134"
-       height="132"
-       x="317.28574"
-       y="534.93359" />
+       rx="66" />
     <rect
        y="-1061.906"
        x="1325.8823"
@@ -938,7 +968,7 @@
        id="g4761"
        clip-path="url(#clipPath4763)">
       <rect
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#00334c;fill-opacity:0.11126009;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#00334c;fill-opacity:0.06306306;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
          id="vui_search_box_bg"
          width="720.12396"
          height="90.374489"
@@ -1479,6 +1509,216 @@
        inkscape:label="vui_color"
        rx="5"
        ry="5" />
+    <rect
+       y="1106.6277"
+       x="161.30833"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_active_bg"
+       style="fill:#95c21e;fill-opacity:0.15183249;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198"
+       inkscape:label="vui_color" />
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_active_fg"
+       y="1181.3163"
+       x="199.63235"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#4b5f16;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       xml:space="preserve"><tspan
+         y="1181.3163"
+         x="199.63235"
+         id="tspan3891-8-02-3-4-6"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;stroke:none;stroke-width:0.99999994">Active</tspan></text>
+    <rect
+       inkscape:label="vui_color"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#b94632;fill-opacity:0.35862074;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       id="vui_status_canceled_bg"
+       width="351.08511"
+       height="119.50807"
+       x="556.44379"
+       y="1400.9734" />
+    <rect
+       y="1251.6075"
+       x="556.44379"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_disabled_bg"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#3a678e;fill-opacity:0.20413794;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       inkscape:label="vui_color" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#8c0000;fill-opacity:0.77586209;stroke:none;stroke-width:0.99999994"
+       x="594.43097"
+       y="1476.6561"
+       id="vui_status_canceled_fg"
+       inkscape:label="vui_color"
+       transform="scale(1.0033763,0.99663504)"><tspan
+         style="font-size:35.9810791px;line-height:1.25;fill:#8c0000;fill-opacity:0.77586209;stroke:none;stroke-width:0.99999994"
+         sodipodi:role="line"
+         id="tspan5351"
+         x="594.43097"
+         y="1476.6561">Canceled</tspan></text>
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_disabled_fg"
+       y="1326.7861"
+       x="593.09576"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#1d2934;fill-opacity:0.73448277;stroke:none;stroke-width:0.99999994"
+       xml:space="preserve"><tspan
+         y="1326.7861"
+         x="593.09576"
+         id="tspan3891-8-02-3-4-4-5"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;fill:#1d2934;fill-opacity:0.73448277;stroke:none;stroke-width:0.99999994">Disabled</tspan></text>
+    <rect
+       inkscape:label="vui_color"
+       style="fill:#00c2ec;fill-opacity:0.25103449;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198"
+       id="vui_status_published_bg"
+       width="351.08511"
+       height="119.50807"
+       x="161.30833"
+       y="953.69916" />
+    <rect
+       y="1249.6897"
+       x="161.30833"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_enabled_bg"
+       style="fill:#b6fbbc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198"
+       inkscape:label="vui_color" />
+    <text
+       xml:space="preserve"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#155571;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       x="196.10103"
+       y="1027.8718"
+       id="vui_status_published_fg"
+       inkscape:label="vui_color"
+       transform="scale(1.0033763,0.99663504)"><tspan
+         style="font-size:35.9810791px;line-height:1.25;fill:#155571;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+         sodipodi:role="line"
+         id="tspan5378"
+         x="196.10103"
+         y="1027.8718">Published</tspan></text>
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_enabled_fg"
+       y="1324.8613"
+       x="196.10103"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#225f16;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       xml:space="preserve"><tspan
+         y="1324.8613"
+         x="196.10103"
+         id="tspan3891-8-02-3-4-6-7"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;fill:#225f16;fill-opacity:1;stroke:none;stroke-width:0.99999994">Enabled</tspan></text>
+    <rect
+       y="1556.5013"
+       x="161.30833"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_scheduled_bg"
+       style="fill:#3232cd;fill-opacity:0.38413792;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198"
+       inkscape:label="vui_color" />
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_scheduled_fg"
+       y="1632.7089"
+       x="197.77007"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#12124c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       xml:space="preserve"><tspan
+         y="1632.7089"
+         x="197.77007"
+         id="tspan5386"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;fill:#12124c;fill-opacity:1;stroke:none;stroke-width:0.99999994">Scheduled</tspan></text>
+    <rect
+       y="1558.1456"
+       x="556.44379"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_postponed_bg"
+       style="opacity:1;vector-effect:none;fill:#ff8200;fill-opacity:0.35862074;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none"
+       inkscape:label="vui_color" />
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_postponed_fg"
+       y="1634.359"
+       x="593.09576"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.9810791px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;display:inline;overflow:visible;visibility:visible;opacity:1;vector-effect:none;fill:#8c0d00;fill-opacity:0.73103446;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+       xml:space="preserve"><tspan
+         y="1634.359"
+         x="593.09576"
+         id="tspan5386-5"
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.9810791px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;vector-effect:none;fill:#8c0d00;fill-opacity:0.73103446;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">Postponed</tspan></text>
+    <rect
+       y="953.69916"
+       x="557.60657"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_unpublished_bg"
+       style="fill:#ff37a7;fill-opacity:0.24344829;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198"
+       inkscape:label="vui_color" />
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_unpublished_fg"
+       y="1030.4795"
+       x="593.35931"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#93122f;fill-opacity:0.86137935;fill-rule:nonzero;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       xml:space="preserve"><tspan
+         y="1030.4795"
+         x="593.35931"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;fill:#93122f;fill-opacity:0.86137935;stroke:none;stroke-width:0.99999994"
+         id="tspan5432">Unpublished</tspan></text>
+    <rect
+       y="1107.7671"
+       x="556.44379"
+       height="119.50807"
+       width="351.08511"
+       id="vui_status_inactive_bg"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#b46550;fill-opacity:0.1786207;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       inkscape:label="vui_color" />
+    <text
+       transform="scale(1.0033763,0.99663504)"
+       inkscape:label="vui_color"
+       id="vui_status_inactive_fg"
+       y="1182.4597"
+       x="593.09576"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.90623856px;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';letter-spacing:0px;word-spacing:0px;fill:#3d1b14;fill-opacity:0.50827589;stroke:none;stroke-width:0.99999994"
+       xml:space="preserve"><tspan
+         y="1182.4597"
+         x="593.09576"
+         id="tspan3891-8-02-3-4-4-5-7"
+         sodipodi:role="line"
+         style="font-size:35.9810791px;line-height:1.25;fill:#3d1b14;fill-opacity:0.50827589;stroke:none;stroke-width:0.99999994">Disabled</tspan></text>
+    <rect
+       inkscape:label="vui_color"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;vector-effect:none;fill:#b148da;fill-opacity:0.38413792;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+       id="vui_status_archived_bg"
+       width="351.08511"
+       height="119.50807"
+       x="161.30833"
+       y="1406.2651" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.9810791px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;opacity:1;vector-effect:none;fill:#5c2eaf;fill-opacity:1;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none"
+       x="199.63235"
+       y="1481.9656"
+       id="vui_status_archived_fg"
+       inkscape:label="vui_color"
+       transform="scale(1.0033763,0.99663504)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.9810791px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;vector-effect:none;fill:#5c2eaf;fill-opacity:1;stroke:none;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none"
+         sodipodi:role="line"
+         x="199.63235"
+         y="1481.9656"
+         id="tspan5478">Archived</tspan></text>
   </g>
   <rect
      inkscape:label="vui_color"
@@ -1768,4 +2008,117 @@
        d="m 313.73907,4.5886552 c -1.18262,0 -2.27752,-0.206208 -3.28594,-0.618752 -1.00843,-0.412536 -1.8791,-0.985352 -2.6125,-1.718752 -0.73341,-0.724232 -1.31111,-1.59489604 -1.73281,-2.61249604 -0.41254,-1.00843196 -0.61876,-2.10822396 -0.61876,-3.29999996 l 0,-3.768752 c 0,-1.200944 0.20622,-2.305632 0.61876,-3.3140642 0.4217,-1.008424 0.9994,-1.879088 1.73281,-2.612496 0.7334,-0.7334 1.60407,-1.306208 2.6125,-1.718752 1.00842,-0.403376 2.10332,-0.604688 3.28594,-0.604688 l 4.84062,0 c 1.18261,0 2.27417,0.201312 3.27344,0.604688 1.00843,0.412544 1.87909,0.985352 2.61249,1.718752 0.7334,0.733408 1.30622,1.604072 1.71876,2.612496 0.41254,1.0084322 0.61875,2.1131202 0.61875,3.3140642 l 0,3.768752 c 0,1.191776 -0.20621,2.291568 -0.61875,3.29999996 -0.41254,1.0176 -0.98536,1.88826404 -1.71876,2.61249604 -0.7334,0.7334 -1.60406,1.306216 -2.61249,1.718752 -0.99927,0.412544 -2.09083,0.618752 -3.27344,0.618752 l -4.84062,0 z m -15.41407,-0.275 0,-19.7187522 3.575,0 0,19.7187522 -3.575,0 z m 15.41407,-3.3 4.84062,0 c 0.68757,0 1.31599,-0.11456804 1.88437,-0.34375204 0.57756,-0.220016 1.06851,-0.535896 1.47188,-0.94844 0.41254,-0.403368 0.72842,-0.89431996 0.94844,-1.47187196 0.22918,-0.568384 0.34375,-1.20504 0.34375,-1.910936 l 0,-3.768752 c 0,-0.705896 -0.11457,-1.34744 -0.34375,-1.925 -0.22002,-0.568384 -0.5359,-1.0577682 -0.94844,-1.4703122 -0.41254,-0.403368 -0.90839,-0.720808 -1.48594,-0.95 -0.56838,-0.220024 -1.20014,-0.329688 -1.89687,-0.329688 l -4.81406,0 c -0.69674,0 -1.33339,0.109664 -1.91094,0.329688 -0.56839,0.229192 -1.05934,0.546632 -1.47188,0.95 -0.41254,0.412544 -0.73331,0.9019282 -0.9625,1.4703122 -0.22002,0.57756 -0.32968,1.219104 -0.32968,1.925 l 0,3.768752 c 0,0.705896 0.10966,1.342552 0.32968,1.910936 0.22919,0.577552 0.54996,1.06850396 0.9625,1.47187196 0.41254,0.412544 0.90349,0.728424 1.47188,0.94844 0.57755,0.229184 1.2142,0.34375204 1.91094,0.34375204 z m 0.84844,-4.529688 c -0.26099,0 -0.47032,-0.210456 -0.47032,-0.470312 l 0,-3.117192 c 0,-0.259848 0.20933,-0.470312 0.47032,-0.470312 l 3.11718,0 c 0.25986,0 0.47031,0.210464 0.47031,0.470312 l 0,3.117192 c 0,0.259856 -0.21045,0.470312 -0.47031,0.470312 l -3.11718,0 z"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:125%;font-family:Audiowide;-inkscape-font-specification:Audiowide;letter-spacing:0px;word-spacing:0px;clip-rule:nonzero;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto" />
   </g>
+  <rect
+     inkscape:label="vui_color"
+     y="-288.8287"
+     x="2893.562"
+     height="1431.1107"
+     width="1363.1395"
+     id="vui_modal_overlay_bg"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#003b59;fill-opacity:0.73665977;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate;font-variant-east_asian:normal;opacity:1;vector-effect:none" />
+  <rect
+     inkscape:label="vui_color"
+     y="451.12296"
+     x="4737.5186"
+     height="1021.4785"
+     width="972.96289"
+     id="vui_modal_shadow"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#002f46;fill-opacity:0.43035343;fill-rule:nonzero;stroke:none;stroke-width:1.4757772;marker:none;filter:url(#filter5603);enable-background:new;font-variant-east_asian:normal;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     transform="matrix(0.67760906,0,0,0.67760906,38.409447,-207.6219)" />
+  <rect
+     inkscape:label="vui_color"
+     y="83.831207"
+     x="3251.1333"
+     height="686.8327"
+     width="654.21124"
+     id="vui_modal_bg"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.00673223;marker:none;enable-background:new" />
+  <flowRoot
+     transform="matrix(0.75098333,0,0,0.75098333,1601.8123,-10.862597)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:monospace;-inkscape-font-specification:Monospace;letter-spacing:0px;word-spacing:0px;fill:#525960;fill-opacity:1;stroke:none"
+     id="vui_modal_fg"
+     xml:space="preserve"
+     inkscape:label="vui_color"><flowRegion
+       id="flowRegion3121-2"
+       style="font-family:monospace"><rect
+         y="274.36218"
+         x="2240"
+         height="782"
+         width="772"
+         id="rect3123-4"
+         style="font-family:monospace;fill:#525960;fill-opacity:1" /></flowRegion><flowPara
+       id="flowPara3242-0"
+       style="font-size:16px;line-height:1.25;font-family:monospace">[BASE FONT COLOR][base_font_fg]</flowPara><flowPara
+       id="flowPara3455-3"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3457-7"
+       style="font-size:16px;line-height:1.25;font-family:monospace">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean luctus vulputate turpis. </flowPara><flowPara
+       id="flowPara3244-6"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3246-5"
+       style="font-size:16px;line-height:1.25;font-family:monospace">In consectetuer, lorem eu lobortis egestas, velit odio imperdiet eros, sit amet sagittis nunc mi ac neque. Aliquam imperdiet lobortis metus. Donec sit amet enim. Integer tempus malesuada pede. In hac habitasse platea dictumst. </flowPara><flowPara
+       id="flowPara3248-8"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3250-1"
+       style="font-size:16px;line-height:1.25;font-family:monospace">Etiam pede nunc, vestibulum vel, rutrum et, tincidunt eu, enim. Sed elementum, felis quis porttitor sollicitudin, augue nulla sodales sapien, sit amet posuere quam purus at lacus. Curabitur lorem risus, sagittis vitae, accumsan a, iaculis id, metus. Sed a lorem ut est tincidunt consectetuer. Suspendisse viverra placerat tortor. </flowPara><flowPara
+       id="flowPara3252-5"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3254-4"
+       style="font-size:16px;line-height:1.25;font-family:monospace">Vestibulum viverra varius enim. Pellentesque et arcu. Maecenas viverra. </flowPara><flowPara
+       id="flowPara3256-8"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3258-3"
+       style="font-size:16px;line-height:1.25;font-family:monospace">Morbi a mauris. Phasellus at purus sed purus cursus iaculis. </flowPara><flowPara
+       id="flowPara3260-4"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara><flowPara
+       id="flowPara3262-8"
+       style="font-size:16px;line-height:1.25;font-family:monospace">In hac habitasse platea dictumst. Etiam sodales orci nec ligula. Mauris urna sem, suscipit vitae, dignissim id, ultrices sed, nunc. Curabitur nunc ante, ullamcorper vel, auctor a, aliquam at, tortor. In consectetuer, lorem eu lobortis egestas, velit odio imperdiet eros, sit amet sagittis nunc mi ac neque. </flowPara><flowPara
+       id="flowPara3264-7"
+       style="font-size:16px;line-height:1.25;font-family:monospace"> </flowPara></flowRoot>  <rect
+     inkscape:label="vui_color"
+     y="83.831207"
+     x="3251.1333"
+     height="58.921883"
+     width="654.21124"
+     id="vui_modal_title_bg"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#008ec9;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.25;marker:none;enable-background:new;font-variant-east_asian:normal;opacity:1;vector-effect:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <text
+     transform="scale(1.0033763,0.99663506)"
+     inkscape:label="vui_color"
+     id="vui_modal_title_fg"
+     y="122.42911"
+     x="3273.5908"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+     xml:space="preserve"><tspan
+       y="122.42911"
+       x="3273.5908"
+       id="tspan3891-8-6-1"
+       sodipodi:role="line"
+       style="font-size:23.34539986px;line-height:1.25">Title color</tspan></text>
+  <circle
+     r="24.5"
+     cy="86.226715"
+     cx="3906.6321"
+     style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#b94632;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.17353198;marker:none;enable-background:accumulate"
+     id="vui_modal_close_bg"
+     inkscape:label="vui_color" />
+  <path
+     inkscape:connector-curvature="0"
+     id="vui_modal_close_fg"
+     d="m 3898.6959,77.320403 -0.9704,0.9704 7.9358,7.9359 -7.9358,7.9358 0.9704,0.9704 7.9359,-7.9358 7.9358,7.9358 0.9704,-0.9704 -7.9358,-7.9358 7.9358,-7.9359 -0.9704,-0.9704 -7.9358,7.9358 z"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"
+     inkscape:label="vui_color" />
+  <text
+     transform="scale(1.0033763,0.99663506)"
+     inkscape:label="vui_color"
+     id="vui_modal_overlay_fg"
+     y="-214.70505"
+     x="2928.8359"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;enable-background:accumulate"
+     xml:space="preserve"><tspan
+       y="-214.70505"
+       x="2928.8359"
+       id="tspan3891-8-6-1-4"
+       sodipodi:role="line"
+       style="font-size:23.34539986px;line-height:1.25">Overlay text color</tspan></text>
 </svg>
