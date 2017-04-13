@@ -16,7 +16,7 @@ class Unid_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function menu_item_get_link_ud_data( $menu_item_id = NULL, $params = NULL ){
+	public function menu_item_get_link_ud_data_detail( $menu_item_id = NULL, $params = NULL ){
 		
 		return 'submit_forms/index' . '/miid/' . $menu_item_id . '/a/dd/did/' . ( isset( $params[ 'ud_data_id' ] ) ? $params[ 'ud_data_id' ] : 0 );
 		
@@ -48,21 +48,31 @@ class Unid_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_data_title_prop_html( $submit_form, $ud_data, $items_prefix = '<span class="ud-title-prop item">', $items_suffix = '</span>' ){
+	public function get_data_title_prop_html( $params, $ud_data ){
 		
-		if ( isset( $submit_form[ 'params' ][ 'ud_title_prop' ] ) ) {
+		if ( isset( $params[ 'ud_title_prop' ] ) ) {
 			
 			$title = '';
 			
-			foreach( $submit_form[ 'params' ][ 'ud_title_prop' ] as $k => $item ) {
+			foreach( $params[ 'ud_title_prop' ] as $k => $item ) {
 				
 				if ( isset( $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ] ) ) {
 					
-					$title .= $items_prefix;
+					$title .= '<span class="item ud-title-prop ud-title-prop ' . $k . ' ud-data-value-wrapper">';
+					
+					$title .= '<span class="title">';
+					
+					$title .= $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'label' ];
+					
+					$title .= '</span> ';
+					
+					$title .= '<span class="value">';
 					
 					$title .= $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ];
 					
-					$title .= $items_suffix;
+					$title .= '</span>';
+					
+					$title .= '</span>';
 					
 				}
 				

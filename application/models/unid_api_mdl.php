@@ -2356,9 +2356,11 @@ class Unid_api_mdl extends CI_Model{
 				$us_fields[ 'mod_datetime' ][ 'value' ] = strftime( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] ) ? $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] : lang( 'ud_data_datetime' ) ), strtotime( $ud_data[ 'mod_datetime' ] ) );
 				$us_fields[ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'mod_datetime', $ds_props_to_show ) ) ? TRUE : FALSE;
 				
-				foreach ( $ud_data[ 'data' ] as $key_2 => $ds_prop_value ) {
+				foreach ( $ud_data[ 'data' ] as $key_2 => $value ) {
 					
-					//echo '<pre>' . $key_2 . ': ' . print_r( $ds_prop_value, TRUE ) . '</pre><br/>'; 
+					$ds_prop_value = $value;
+					
+// 					echo '<pre>' . $key_2 . ': ' . print_r( $ds_prop_value, TRUE ) . '</pre><br/>'; 
 					
 					if ( isset( $ds_props[ $key_2 ] ) ) {
 						
@@ -2772,7 +2774,7 @@ class Unid_api_mdl extends CI_Model{
 						
 					}
 					
-					if ( check_var( $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] ) ) {
+					if ( check_var( $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] ) AND check_var( $ds_prop_value, TRUE ) ) {
 						
 						$regex = '/\{(.*?):value\}/i';
 						
@@ -3193,37 +3195,6 @@ class Unid_api_mdl extends CI_Model{
 					
 					if ( check_var( $prop ) ) {
 						
-						if ( ! in_array( $prop[ 'field_type' ], array( 'html', 'button' ) ) ){
-							
-							if ( check_var( $prop[ 'availability' ][ 'site' ] ) ) {
-								
-								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = $prop[ 'alias' ];
-								
-							}
-							else {
-								
-								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = 0;
-								
-							}
-							
-							if ( ( $props_to_show_site_list AND in_array( $prop[ 'alias' ], $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ) ) {
-								
-								$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ $prop[ 'alias' ] ];
-								
-								$new_column = $prop[ 'alias' ];
-								
-							}
-							
-							if ( ( $props_to_show_site_detail AND in_array( $prop[ 'alias' ], $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ) ) {
-								
-								$new_column_d = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ $prop[ 'alias' ] ];
-								
-								$new_column_d = $prop[ 'alias' ];
-								
-							}
-							
-						}
-						
 						if ( ! check_var( $prop[ 'key' ] ) ) {
 							
 							unset( $data_scheme[ 'fields' ][ $k ] );
@@ -3320,6 +3291,37 @@ class Unid_api_mdl extends CI_Model{
 							// -------------------------------------------------
 							
 							$_fields[ $prop[ 'alias' ] ] = $prop;
+							
+						}
+						
+						if ( ! in_array( $prop[ 'field_type' ], array( 'html', 'button' ) ) ){
+							
+							if ( check_var( $prop[ 'availability' ][ 'site' ] ) ) {
+								
+								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = $prop[ 'alias' ];
+								
+							}
+							else {
+								
+								$data_scheme[ 'params' ][ 'ud_data_availability_site_search' ][ $prop[ 'alias' ] ] = 0;
+								
+							}
+							
+							if ( ( $props_to_show_site_list AND in_array( $prop[ 'alias' ], $props_to_show_site_list ) ) OR ( ! $props_to_show_site_list AND check_var( $prop[ 'visibility' ][ 'site' ][ 'list' ] ) ) ) {
+								
+								$new_column = & $data_scheme[ 'params' ][ 'props_to_show_site_list' ][ $prop[ 'alias' ] ];
+								
+								$new_column = $prop[ 'alias' ];
+								
+							}
+							
+							if ( ( $props_to_show_site_detail AND in_array( $prop[ 'alias' ], $props_to_show_site_detail ) ) OR ( ! $props_to_show_site_detail AND check_var( $prop[ 'visibility' ][ 'site' ][ 'detail' ] ) ) ) {
+								
+								$new_column_d = & $data_scheme[ 'params' ][ 'props_to_show_site_detail' ][ $prop[ 'alias' ] ];
+								
+								$new_column_d = $prop[ 'alias' ];
+								
+							}
 							
 						}
 						

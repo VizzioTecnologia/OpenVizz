@@ -1403,7 +1403,7 @@ class Submit_forms_common_model extends CI_Model{
 			
 			$us[ 'data' ] = get_params( $us[ 'data' ] );
 			
-			$us[ 'site_link' ] = $this->unid->menu_item_get_link_ud_data( $menu_item_id, array( 'ud_data_id' => $us[ 'id' ] ) );
+			$us[ 'site_link' ] = $this->unid->menu_item_get_link_ud_data_detail( $menu_item_id, array( 'ud_data_id' => $us[ 'id' ] ) );
 			
 		}
 		

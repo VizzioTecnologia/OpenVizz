@@ -1508,33 +1508,6 @@ class Submit_forms_model extends CI_Model{
 						
 					}
 					
-					/*
-					* ------------------------------------
-					*/
-					
-					$_tmp = array(
-						
-						'type' => 'number',
-						'name' => 'users_submit_content_word_limit',
-						'min' => 1,
-						'label' => 'users_submit_content_word_limit',
-						'validation' => array(
-							
-							'rules' => 'trim|integer',
-							
-						),
-						
-					);
-					
-					if ( ! check_var( $current_params_values[ 'users_submit_content_word_limit' ] ) ) {
-						
-						$params[ 'params_spec_values' ][ 'users_submit_content_word_limit' ] = 120;
-						
-					}
-					
-					$new_params[] = $_tmp;
-					
-					
 					
 					
 					
@@ -1873,7 +1846,7 @@ class Submit_forms_model extends CI_Model{
 					
 					'type' => 'text',
 					'inline' => TRUE,
-					'name' => 'search_terms_string',
+					'name' => 'custom_page_content_title',
 					'label' => 'search_terms_string',
 					'tip' => 'tip_search_terms_string',
 					'validation' => array(
@@ -2550,7 +2523,15 @@ class Submit_forms_model extends CI_Model{
 	//------------------------------------------------------
 	// Menu item user submit detail
 	
-	public function menu_item_ud_data( $menu_item = NULL ){
+	public function menu_item_ud_data_detail( $menu_item = NULL, $menu_params_spec = NULL ){
+		
+// 		echo '<pre>' . print_r( $menu_params_spec, TRUE ) . '</pre>'; exit;
+		
+		if ( ! $this->load->is_model_loaded( 'ud_api' ) ) {
+			
+			$this->load->model( 'unid_api_mdl', 'ud_api' );
+			
+		}
 		
 		//------------------------------------------------------
 		// Loading submit forms common model
@@ -2561,72 +2542,303 @@ class Submit_forms_model extends CI_Model{
 			
 		}
 		
-		$submit_forms = $this->sfcm->get_submit_forms()->result_array();
-		
 		$group_str = 'menu_item_ud_data_config';
 		
-		if ( $submit_forms ) {
+		if ( isset( $menu_item[ 'params' ][ 'ud_data_id' ] ) ) {
 			
-			$params = array(
+			$ud_data = $this->ud_api->get_ud_data( $menu_item[ 'params' ][ 'ud_data_id' ] );
+			
+			if ( check_var( $ud_data[ 'submit_form_id' ] ) ) {
 				
-				'params_spec' => array(
+				// get data scheme params
+				$gdsp = array(
 					
-					$group_str => array(),
+					'where_condition' => 't1.id = ' . $ud_data[ 'submit_form_id' ],
+					'limit' => 1,
 					
-				),
-				'params_spec_values' => array(),
+				);
 				
-			);
-			
-			//------------------------------------------------------
-			// parsing submit forms / creating submit forms options
-			
-			$submit_forms_options = array();
-			
-			foreach( $submit_forms as $key => & $submit_form ) {
+				$data_scheme = $this->ud_api->get_data_schemes( $gdsp )->row_array();
 				
-				$this->sfcm->parse_sf( $submit_form );
-				
-				$submit_forms_options[ $submit_form[ 'id' ] ] = $submit_form[ 'title' ];
+				if ( $data_scheme ) {
+					
+					$this->ud_api->parse_ds( $data_scheme );
+					
+					//------------------------------------------------------
+					
+					$_tmp = array(
+						
+						'type' => 'text',
+						'inline' => TRUE,
+						'name' => 'ud_data_id',
+						'label' => 'ud_data_id',
+						'tip' => 'tip_ud_data_id',
+						'validation' => array(
+							
+							'rules' => 'trim|required',
+							
+						),
+						
+					);
+					
+					$params[ 'params_spec_values' ][ 'ud_data_id' ] = 0;
+					
+					$new_params[] = $_tmp;
+					
+					//------------------------------------------------------
+					
+					// obtendo a lista de layouts
+					// carregando os layouts do tema atual
+					$_options_dd_layouts = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . get_class_name( get_class() ) . DS . 'index' . DS . 'ud_data_detail' );
+					// carregando os layouts do diretório de views padrão
+					$_options_dd_layouts = array_merge( $_options_dd_layouts, dir_list_to_array( VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . get_class_name( get_class() ) . DS . 'index' . DS . 'ud_data_detail' ) );
+					
+					$_tmp = array(
+						
+						'type' => 'select',
+						'inline' => TRUE,
+						'icon' => 'template',
+						'name' => 'ud_d_detail_layout_site',
+						'label' => 'ud_d_detail_layout_site',
+						'tip' => 'tip_ud_d_detail_layout_site',
+						'validation' => array(
+							
+							'rules' => 'trim|required',
+							
+						),
+						'options' => array(
+							
+							'global' => 'global',
+							
+						) + $_options_dd_layouts,
+						
+					);
+					
+					$params[ 'params_spec_values' ][ 'ud_data_id' ] = 0;
+					
+					$new_params[] = $_tmp;
+					
+					//------------------------------------------------------
+					
+					$new_params[] = array(
+						
+						'type' => 'spacer',
+						'label' => 'ud_d_detail_site_props_to_show',
+						'tip' => 'tip_ud_d_detail_site_props_to_show',
+						
+					);
+					
+					//------------------------------------------------------
+					
+					$_tmp = array(
+						
+						'type' => 'select',
+						'name' => 'ud_d_detail_site_override_visible_props',
+						'label' => 'ud_d_detail_site_override_visible_props',
+						'tip' => 'tip_ud_d_detail_site_override_visible_props',
+						'validation' => array(
+							
+							'rules' => 'trim|required',
+							
+						),
+						'options' => array(
+							
+							'1' => 'yes',
+							'0' => 'no',
+							
+						),
+						
+					);
+					
+					$params[ 'params_spec_values' ][ 'ud_d_detail_site_override_visible_props' ] = 0;
+					
+					$new_params[] = $_tmp;
+					
+					//------------------------------------------------------
+					
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
+						
+						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+						
+						if ( $alias ) {
+							
+							$fields_options[ $alias ] = $field[ 'label' ];
+							
+						}
+						
+					}
+					
+					if ( check_var( $menu_item[ 'params' ][ 'ud_d_detail_site_override_visible_props' ] ) ) {
+						
+						//------------------------------------------------------
+						
+						$new_params[] = array(
+							
+							'type' => 'spacer',
+							
+						);
+						
+						//------------------------------------------------------
+						
+						$_tmp = array(
+							
+							'type' => 'checkbox',
+							'inline' => TRUE,
+							'name' => 'ud_d_detail_site_props_to_show[id]',
+							'label' => 'id',
+							'value' => 'id',
+							'validation' => array(
+								
+								'rules' => 'trim',
+								
+							),
+							
+						);
+
+						if ( $new_flag ) {
+							
+							// $params[ 'params_spec_values' ][ 'ud_title_prop[id]' ] = 'id';
+							
+						}
+						
+						$new_params[] = $_tmp;
+						
+						//------------------------------------------------------
+						
+						$_tmp = array(
+							
+							'type' => 'checkbox',
+							'inline' => TRUE,
+							'name' => 'ud_d_detail_site_props_to_show[submit_datetime]',
+							'label' => 'submit_datetime',
+							'value' => 'submit_datetime',
+							'validation' => array(
+								
+								'rules' => 'trim',
+								
+							),
+							
+						);
+						
+						if ( $new_flag ) {
+							
+							// $params[ 'params_spec_values' ][ 'ud_title_prop[submit_datetime]' ] = 'submit_datetime';
+							
+						}
+						
+						$new_params[] = $_tmp;
+						
+						//------------------------------------------------------
+						
+						$_tmp = array(
+							
+							'type' => 'checkbox',
+							'inline' => TRUE,
+							'name' => 'ud_d_detail_site_props_to_show[mod_datetime]',
+							'label' => 'mod_datetime',
+							'value' => 'mod_datetime',
+							'validation' => array(
+								
+								'rules' => 'trim',
+								
+							),
+							
+						);
+
+						if ( $new_flag ) {
+							
+							// $params[ 'params_spec_values' ][ 'ud_title_prop[mod_datetime]' ] = 'mod_datetime';
+							
+						}
+						
+						$new_params[] = $_tmp;
+						
+						//------------------------------------------------------
+						
+						foreach ( $fields_options as $alias => $label ) {
+							
+							$_tmp = array(
+								
+								'type' => 'checkbox',
+								'inline' => TRUE,
+								'name' => 'ud_d_detail_site_props_to_show[' . $alias . ']',
+								'label' => $label,
+								'value' => $alias,
+								'validation' => array(
+									
+									'rules' => 'trim',
+									
+								),
+								
+							);
+							
+							if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+								
+								if ( $new_flag ) {
+									
+									// $params[ 'params_spec_values' ][ 'ud_title_prop[' . $alias . ']' ] = $alias;
+									
+								}
+								
+							}
+							
+							if ( $field[ 'field_type' ] == 'combo_box' ) {
+								
+								$select_fields[] = $field;
+								
+							}
+							
+							$new_params[] = $_tmp;
+							
+						}
+						
+					}
+					
+					//------------------------------------------------------
+					
+					//echo '<pre>' . print_r( $params, TRUE ) . '</pre>'; exit;
+					
+					$ud_d_detail_layout_site = ( isset( $menu_item[ 'params' ][ 'ud_d_detail_layout_site' ] ) AND $menu_item[ 'params' ][ 'ud_d_detail_layout_site' ] != 'global' ) ? $menu_item[ 'params' ][ 'ud_d_detail_layout_site' ] : 'global';
+					
+					if ( $ud_d_detail_layout_site != 'global' ) {
+						
+						$system_views_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . get_class_name( get_class() ) . DS . 'index' . DS . 'ud_data_detail' . DS;
+						$theme_views_path = THEMES_PATH . site_theme_components_views_path() . get_class_name( get_class() ) . DS . 'index' . DS . 'ud_data_detail' . DS;
+						
+						if ( file_exists( $system_views_path . $ud_d_detail_layout_site . DS . 'params.xml' ) ) {
+							
+							$layout_params = get_params_spec_from_xml( $system_views_path . $ud_d_detail_layout_site . DS . 'params.xml' );
+							
+							if ( file_exists( $system_views_path . $ud_d_detail_layout_site . DS . 'params.php' ) ) {
+								
+								include_once $system_views_path . $ud_d_detail_layout_site . DS . 'params.php';
+								
+							}
+							
+						}
+						else if ( file_exists( $theme_views_path . $ud_d_detail_layout_site . DS . 'params.xml' ) ) {
+							
+							$layout_params = get_params_spec_from_xml( $theme_views_path . $ud_d_detail_layout_site . DS . 'params.xml' );
+							
+							if ( file_exists( $theme_views_path . $ud_d_detail_layout_site . DS . 'params.php' ) ) {
+								
+								include_once $theme_views_path . $ud_d_detail_layout_site . DS . 'params.php';
+								
+							}
+							
+						}
+						
+						//echo '<pre>' . print_r( $layout_params, TRUE ) . '</pre>';
+						
+					}
+					
+					$params[ 'params_spec' ][ $group_str ] = $new_params;
+					
+					return $params;
+					
+				}
 				
 			}
-			
-			//------------------------------------------------------
-			// Loading submit forms common model
-			
-			//------------------------------------------------------
-			
-			$_tmp = array(
-				
-				'type' => 'text',
-				'inline' => TRUE,
-				'name' => 'ud_data_id',
-				'label' => 'ud_data_id',
-				'tip' => 'tip_ud_data_id',
-				'validation' => array(
-					
-					'rules' => 'trim|required',
-					
-				),
-				'options' => array(
-					
-					'' => 'combobox_select',
-					
-				) + $submit_forms_options,
-				
-			);
-			
-			$params[ 'params_spec_values' ][ 'show_readmore_link' ] = 0;
-			
-			$new_params[] = $_tmp;
-			
-			//------------------------------------------------------
-			
-			$params[ 'params_spec' ][ $group_str ] = $new_params;
-			
-			//echo '<pre>' . print_r( $params, TRUE ) . '</pre>'; exit;
-			
-			return $params;
 			
 		}
 		
@@ -2637,9 +2849,9 @@ class Submit_forms_model extends CI_Model{
 	//------------------------------------------------------
 	// Menu item user submit detail link
 	
-	public function menu_item_get_link_ud_data( $menu_item_id = NULL, $params = NULL ){
+	public function menu_item_get_link_ud_data_detail( $menu_item_id = NULL, $params = NULL ){
 		
-		return $this->unid->menu_item_get_link_ud_data( $menu_item_id, $params );
+		return $this->unid->menu_item_get_link_ud_data_detail( $menu_item_id, $params );
 		
 	}
 	

@@ -26,6 +26,8 @@
 		$ip = array();
 		if ( ( int )$maxlength > 0 ) $ip[ 'maxlength' ] = $maxlength;
 		
+		$ip[ 'disabled' ] = $disabled;
+		
 		echo vui_el_dropdown(
 			
 			array(

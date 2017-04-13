@@ -96,7 +96,7 @@ class Vui_color{
 	
 	function rgba_s( $opacity_index = NULL ){
 		
-		if ( ! $opacity_index ) {
+		if ( ! isset( $opacity_index ) ) {
 			
 			$opacity_index = $this->default_opacity_index;
 			

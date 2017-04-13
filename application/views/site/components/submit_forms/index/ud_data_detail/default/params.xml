@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+
+	<section name="layout_specific_params">
+
+		<param type="spacer" label="categories" />
+
+		<!-- related to the categories -->
+
+		<param name="show_categories_on_list_view" type="select" default="global" label="show_categories_on_list_view" tip="tip_show_categories_on_list_view">
+
+			<option value="global">global</option>
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_category_on_no_articles" type="select" default="0" label="show_category_on_no_articles" tip="tip_show_category_on_no_articles">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="load_categories_recursively" type="select" default="1" label="load_categories_recursively" tip="tip_load_categories_recursively">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="max_cols_per_row" type="number" default="5" min="0" label="max_cols_per_row" tip="tip_max_cols_per_row" />
+
+		<param name="auto_adjust_number_of_cols_per_row" type="select" default="1" label="auto_adjust_number_of_cols_per_row" tip="tip_auto_adjust_number_of_cols_per_row">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_categories_images" type="select" default="1" label="show_categories_images" tip="tip_show_categories_images">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_category_readmore" type="select" default="1" label="show_category_readmore" tip="tip_show_category_readmore">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="categories_readmore_text" type="text" default="readmore" label="categories_readmore_text" tip="tip_categories_readmore_text"/>
+
+		<!-- related to the articles -->
+
+		<param name="max_articles_per_category" type="number" default="5" min="-1" label="max_articles_per_category" tip="tip_max_articles_per_category" />
+
+		<param name="load_articles_categories_recursively" type="select" default="1" label="load_articles_categories_recursively" tip="tip_load_articles_categories_recursively">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="max_category_articles_columns" type="number" default="5" min="0" label="max_category_articles_columns" tip="tip_max_category_articles_columns" />
+
+		<param name="articles_per_category_order_by" type="select" default="random" label="articles_per_category_order_by" tip="tip_articles_per_category_order_by">
+
+			<!-- dinamically loaded -->
+
+		</param>
+
+		<!-- This setting also affects displaying the "read more" link -->
+		<param name="articles_categories_content_word_limit" type="number" default="10" min="-1" label="articles_categories_content_word_limit" tip="tip_articles_categories_content_word_limit" />
+
+		<param name="show_articles_categories_images" type="select" default="1" label="show_articles_categories_images" tip="tip_show_articles_categories_images">
+
+			<option value="1">yes</option>
+			<option value="0">no</option>
+
+		</param>
+
+		<param name="show_articles_categories_readmore" type="select" default="force" label="show_articles_categories_readmore" tip="tip_show_articles_categories_readmore">
+
+			<option value="1">when_necessary</option> <!-- Ignore articles params -->
+			<option value="0">no</option> <!-- force to false -->
+			<option value="force">always</option> <!-- force to true -->
+			<option value="from_article">from_article_param</option> <!-- get from article -->
+
+		</param>
+
+	</section>
+
+</params>

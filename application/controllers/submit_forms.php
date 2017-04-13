@@ -2904,6 +2904,29 @@ class Submit_forms extends Main {
 				// Params filtering
 				// -------------------------------------------------
 				
+				if ( check_var( $menu_item_params[ 'ud_d_detail_site_override_presentation_props' ] ) AND isset( $data[ 'params' ][ 'props_to_show' ] ) ) {
+				
+					$property_presentation_types = array(
+						
+						'image',
+						'title',
+						'event_datetime',
+						'content',
+						'other_info',
+						'status',
+						
+					);
+					
+					reset( $property_presentation_types );
+					
+					while ( list( $k, $v ) = each( $property_presentation_types ) ) {
+						
+						$data[ 'params' ][ 'ud_' . $v . '_prop' ] = check_var( $menu_item_params[ 'ud_' . $v . '_prop' ] ) ? $menu_item_params[ 'ud_' . $v . '_prop' ] : array();
+						
+					}
+					
+				}
+				
 				$data[ 'data_scheme' ] = & $data_scheme;
 				$data[ 'props' ] = & $data_scheme[ 'fields' ];
 				$data[ 'props_to_show' ] = & $data[ 'params' ][ 'props_to_show' ];
@@ -2913,30 +2936,19 @@ class Submit_forms extends Main {
 				
 				$this->ud_api->parse_ud_data( $ud_data, $data[ 'props_to_show' ], TRUE );
 				
-				$page_title = array();
-				
-				if ( check_var( $data[ 'params' ][ 'ud_title_prop' ] ) ) {
+				if ( check_var( $data[ 'params' ][ 'ud_d_detail_page_content_title_from_metadata' ] ) OR ! check_var( $data[ 'params' ][ 'title' ] ) ) {
 					
-					foreach ( $data[ 'params' ][ 'ud_title_prop' ] as $alias => $v ) {
-						
-						if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'value' ], TRUE ) ) {
-							
-							$page_title[] = $ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'value' ];
-							
-						}
-						
-					}
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data[ 'params' ], $ud_data );
 					
 				}
-				
-				if ( @$data[ 'params' ][ 'custom_page_title' ] ) {
+				else if ( check_var( $data[ 'params' ][ 'custom_page_title' ] ) ) {
 					
 					$this->mcm->html_data[ 'content' ][ 'title' ] = $data[ 'params' ][ 'custom_page_title' ];
 					
 				}
-				else {
+				else if ( check_var( $data[ 'params' ][ 'title' ] ) ) {
 					
-					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data_scheme, $ud_data );
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $data[ 'params' ][ 'title' ];
 					
 				}
 				

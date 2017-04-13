@@ -1,71 +1,5 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 	
-	$_is_presentation = FALSE;
-	
-	$wrapper_class = array(
-		
-		'ud-data-detail-wrapper',
-		
-	);
-	
-	$_ud_data_wrapper_class = array();
-	
-	$property_presentation_types = array(
-		
-		'image',
-		'title',
-		'event_datetime',
-		'content',
-		'other_info',
-		'status',
-		
-	);
-	
-	reset( $property_presentation_types );
-	
-	while ( list( $k, $v ) = each( $property_presentation_types ) ) {
-		
-		${ '_ud_' . $v . '_props' } = array();
-		
-		if ( isset( $params[ 'ud_' . $v . '_prop' ] ) ) {
-			
-			$_is_presentation = TRUE;
-			
-		}
-		
-		if ( check_var( $params[ 'ud_' . $v . '_prop' ] ) ) {
-			
-			$__class = FALSE;
-			
-			reset( $params[ 'ud_' . $v . '_prop' ] );
-			
-			while ( list( $_alias, $_field ) = each( $params[ 'ud_' . $v . '_prop' ] ) ) {
-				
-				if ( check_var( $props_to_show[ $_alias ] ) ) {
-					
-					$wrapper_class[ $_alias ] = 'has-ud-' . str_replace( '_', '-', url_title( $v, '-', TRUE ) ) . '-prop';
-					
-				}
-				
-				if ( check_var( $props_to_show[ $_alias ] ) AND check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ], TRUE ) ) {
-					
-					if ( ! $__class ) $__class = 'has-ud-' . $v;
-					
-					${ '_ud_' . $v . '_props' }[ $_alias ][ 'label' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'label' ];
-					${ '_ud_' . $v . '_props' }[ $_alias ][ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ];
-					
-				}
-				
-			}
-			
-			if ( $__class ) $_ud_data_wrapper_class[ $__class ] = $__class;
-			
-		}
-		
-	}
-	
-	$wrapper_class = join( ' ', $wrapper_class );
-	
 ?>
 
 <div class="<?= $wrapper_class; ?>">
@@ -262,49 +196,47 @@
 			
 			echo '<div class="ud-data ud-d-detail-layout-' . $params[ 'ud_d_detail_layout_site' ] . ' ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
 			
-			$__main_image = FALSE;
-			
 			reset( $property_presentation_types );
 			
 			while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 				
 				if ( ! empty( ${ '_ud_' . $v . '_props' } ) ) {
 					
-					if ( $v == 'image' ) {
+					if ( $v != 'title' OR ( $v == 'title' AND ! $params[ 'ud_d_detail_page_content_title_from_metadata' ] ) ) {
 						
-						foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
+						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper"' . ( $__main_image ? ' style="background-image:url(\'' . htmlspecialchars( $__main_image ) . '\');"' : '' ) . '>';
+						
+						if ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) {
 							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
+							$this->voutput->append_head_stylesheet_declaration( 'ud_data_' . $ud_data[ 'id' ] . $unique_hash, '
 								
-								if ( ! $__main_image ) {
+								#submit-form-user-submit-detail-' . $unique_hash . '.ud-image-on-title > .page-title {
 									
-									$__main_image = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias . '_thumb_default' ] );
+									background-image: url(\'' . $__main_image . '\');
 									
 								}
 								
+							' );
+							
+						}
+						
+						$__item_count = 1;
+						
+						foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
+							
+							if ( $_field AND ( isset( $props[ $_alias ] ) ) OR in_array( $_alias, array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
+								
+								require( rtrim( $v, 's' ) . 's.php' );
+								
 							}
 							
-						}
-						
-					}
-					
-					echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper ' . ( $__main_image ? ' style="background-image:url(\'' . $__main_image . '\');"' : '' ) . '">';
-					
-					$__item_count = 1;
-					
-					foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
-						
-						if ( $_field AND isset( $props[ $_alias ] ) ) {
-							
-							require( rtrim( $v, 's' ) . 's.php' );
+							$__item_count++;
 							
 						}
 						
-						$__item_count++;
+						echo '</div>';
 						
 					}
-					
-					echo '</div>';
 					
 				}
 				

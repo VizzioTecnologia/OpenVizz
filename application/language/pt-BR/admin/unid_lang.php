@@ -2,8 +2,8 @@
 /* tradução: franksouza.com.br */
 
 $lang[ 'menu_item_ud_data_config' ] = 															"Configurações da página de detalhes de dado";
-$lang[ 'ud_data_id' ] = 																		"ID do dado";
-$lang[ 'tip_ud_data_id' ] = 																	"Informe ID do dado";
+$lang[ 'ud_data_id' ] = 																		"ID do Dado UniD";
+$lang[ 'tip_ud_data_id' ] = 																	"Informe ID do Dado UniD";
 
 $lang[ 'ud_field_conditions' ] = 																"Condições";
 $lang[ 'tip_ud_field_is_required' ] = 															"Se marcado, o campo deverá ser preenchido";
@@ -73,6 +73,30 @@ $lang['sfsmr_message_prefix_custom'] = 															"Pré-texto personalizado"
 $lang['sfsmr_message_suffix_custom'] = 															"Pós-texto personalizado";
 $lang['sfsmr_show_empty_fields'] = 																"Exibir campos com valores vazios";
 
+$lang['ud_data_list_search_results'] = 															"Resultados de pesquisa";
+$lang['ud_data_list_search_results_specific_config'] = 											"Configurações específicas para as pesquisas";
+$lang['ud_data_availability_site_search_lbl'] = 												"Campos de pesquisa visíveis";
+$lang['ud_data_availability_site_search'] = 													"Campos de pesquisa visíveis";
+$lang['ud_data_list_prop_search_field_terms'] = 												"Campos de termos de pesquisa";
+
+$lang['ud_title_prop'] = 																		"Titulos";
+$lang['tip_ud_title_prop'] = 																	"Determina quais propriedades serão tratadas como título";
+$lang['ud_content_prop'] = 																		"Conteúdos";
+$lang['tip_ud_content_prop'] = 																	"Determina quais propriedades serão tratadas como conteúdo";
+$lang['ud_other_info_prop'] = 																	"Outras informações";
+$lang['tip_ud_other_info_prop'] = 																"Determina quais propriedades serão tratadas como informação extra";
+$lang['ud_image_prop'] = 																		"Imagens";
+$lang['tip_ud_image_prop'] = 																	"Determina quais propriedades serão tratadas como imagem";
+$lang['ud_data_list_d_titles_as_link'] = 														"Titulos como links";
+$lang['ud_data_list_ds_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada esquema de dados";
+$lang['ud_data_list_ds_readmore_link_custom_str'] = 											"Texto personalizado";
+$lang['ud_data_list_ds_readmore_link_url'] = 													"Endereço URL";
+$lang['ud_data_list_ds_readmore_link_target'] = 												"Alvo";
+$lang['ud_data_list_d_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada Dado UniD";
+$lang['ud_data_list_d_readmore_link_custom_str'] = 												"Texto personalizado";
+$lang['ud_data_list_d_readmore_link_url'] = 													"Endereço URL";
+$lang['ud_data_list_d_readmore_link_target'] = 													"Alvo";
+
 // ----------------------------
 // Look and Feel
 
@@ -80,6 +104,18 @@ $lang['ud_ds_look_and_feel'] = 																	"Aparência";
 $lang['ud_ds_form_layout_site'] = 																"Layout do formulário no site";
 $lang['ud_ds_disallow_anon_page'] = 															"Restringir página anônima";
 $lang['tip_ud_ds_disallow_anon_page'] = 														"Se marcado, qualquer tentativa de acesso ao formulário através de uma página anônima (onde o id da página é 0) resultará numa página de erro 404.";
+$lang['ud_d_list_layout_site'] = 																"Layout de listagem";
+$lang['ud_d_list_site_props_to_show'] = 														"Propriedades visíveis";
+$lang['ud_d_list_site_override_visible_props'] = 												"Sobrescrever visibilidade";
+$lang['ud_d_detail_site_override_presentation_props'] = 										"Sobrescrever metadados";
+$lang['tip_ud_d_detail_site_override_presentation_props'] = 									"<p>Sobrescreve as especificações de metadados das propriedades.</p> <p>O uso de metadados permite a apresentação dos Dados UniD de uma forma mais distinta, categorizada basicamente por <strong>Títulos (cabeçalhos)</strong>, <strong>Conteúdo</strong> e <strong>Outras informações</strong>.</p> <p>A forma visual como estas informações são apresentadas dependem dos layouts e/ou temas utilizados.</p>";
+$lang['tip_ud_d_list_site_override_visible_props'] = 											"<p>Se ativo, as configurações de visibilidade serão sobrescritas pelas definidas aqui.</p><p>Se nenhuma propriedade for marcada como visível, as configurações de visibilidade do Esquema de Dados serão usadas.</p>";
+$lang['ud_d_detail_layout_site'] = 																"Layout de detalhamento";
+$lang['tip_ud_d_detail_layout_site'] = 															"Selecione o Layout para a vista de detalhamento de um Dado UniD.";
+$lang['ud_d_detail_page_content_title_from_metadata'] = 										"Usar Metadado como título";
+$lang['ud_d_detail_site_props_to_show'] = 														& $lang['ud_d_list_site_props_to_show'];
+$lang['ud_d_detail_site_override_visible_props'] = 												& $lang['ud_d_list_site_override_visible_props'];
+$lang['tip_ud_d_detail_site_override_visible_props'] = 											& $lang['tip_ud_d_list_site_override_visible_props'];
 
 // ----------------------------
 // Export

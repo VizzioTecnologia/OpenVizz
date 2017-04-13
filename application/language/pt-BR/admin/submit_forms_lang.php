@@ -445,10 +445,6 @@ $lang['ud_params_section_d_list_general_params'] = 												"Parâmetros gera
 $lang['ud_params_section_d_list_params'] = 														"Listagem";
 $lang['ud_params_section_d_detail_params'] = 													"Detalhamento";
 $lang['select_submit_form'] = 																	"Selecione o Esquema de Dados";
-$lang['ud_d_list_layout_site'] = 																"Layout de listagem";
-$lang['ud_d_list_site_props_to_show'] = 														"Propriedades visíveis";
-$lang['ud_d_list_site_override_visible_props'] = 												"Sobrescrever visibilidade";
-$lang['tip_ud_d_list_site_override_visible_props'] = 											"<p>Se ativo, as configurações de visibilidade serão sobrescritas pelas definidas aqui.</p><p>Se nenhuma propriedade for marcada como visível, as configurações de visibilidade do Esquema de Dados serão usadas.</p>";
 $lang['users_submits_search'] = 																"Pesquisa dos Dados UniD";
 $lang['use_search'] = 																			"Usar pesquisa";
 $lang['search_terms_string'] = 																	"Título do campo \"<strong>Termos de pesquisa</strong>\"";
@@ -488,28 +484,6 @@ $lang['us_default_results_filters'] = 															"Filtros padrões";
 $lang['tip_us_default_results_filters'] = 														"Estes filtros serão aplicados a todos os resultados gerados através desta página no site. Se novos filtros forem gerados (ex.: através de uma pesquisa), o mesmos serão adicionados aos fitros aqui especificados.";
 $lang['us_results'] = 																			"Envios";
 $lang['users_submits_num_items_to_show'] = 														"Número de Dados UniD a mostrar";
-
-$lang['ud_data_list_search_results'] = 															"Resultados de pesquisa";
-$lang['ud_data_list_search_results_specific_config'] = 											"Configurações específicas para as pesquisas";
-$lang['ud_data_availability_site_search_lbl'] = 											"Campos de pesquisa visíveis";
-$lang['ud_data_availability_site_search'] = 												"Campos de pesquisa visíveis";
-$lang['ud_data_list_prop_search_field_terms'] = 												"Campos de termos de pesquisa";
-
-$lang['ud_title_prop'] = 																		"Titulos";
-$lang['tip_ud_title_prop'] = 																	"Determina quais propriedades serão tratadas como título";
-$lang['ud_content_prop'] = 																		"Conteúdos";
-$lang['tip_ud_content_prop'] = 																	"Determina quais propriedades serão tratadas como conteúdo";
-$lang['ud_other_info_prop'] = 																	"Outras informações";
-$lang['tip_ud_other_info_prop'] = 																"Determina quais propriedades serão tratadas como informação extra";
-$lang['ud_data_list_d_titles_as_link'] = 														"Titulos como links";
-$lang['ud_data_list_ds_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada esquema de dados";
-$lang['ud_data_list_ds_readmore_link_custom_str'] = 											"Texto personalizado";
-$lang['ud_data_list_ds_readmore_link_url'] = 													"Endereço URL";
-$lang['ud_data_list_ds_readmore_link_target'] = 												"Alvo";
-$lang['ud_data_list_d_readmore_link'] = 														"Link \"<strong>Leia mais</strong>\" para cada Dado UniD";
-$lang['ud_data_list_d_readmore_link_custom_str'] = 												"Texto personalizado";
-$lang['ud_data_list_d_readmore_link_url'] = 													"Endereço URL";
-$lang['ud_data_list_d_readmore_link_target'] = 													"Alvo";
 
 // post sending messages
 $lang['post_sending_messages'] = 																"Mensagens pós Dado UniD";

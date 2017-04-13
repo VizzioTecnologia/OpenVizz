@@ -752,7 +752,7 @@ class Menus extends Main {
 						}
 						
 						// obtendo as especificações dos parâmetros do componente
-						$comp_params_spec = $this->{ $target_component[ 'unique_name' ] . '_model' }->{ 'menu_item_' . $component_item }( $menu_item );
+						$comp_params_spec = $this->{ $target_component[ 'unique_name' ] . '_model' }->{ 'menu_item_' . $component_item }( $menu_item, $menu_params_spec );
 						
 						$params_spec = array_merge_recursive_distinct( $menu_params_spec, $comp_params_spec );
 						

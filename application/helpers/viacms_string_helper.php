@@ -14,7 +14,7 @@ function mask( $val, $config ) {
 	
 	$config[ 'mask_type' ] = isset( $config[ 'mask_type' ] ) ? $config[ 'mask_type' ] : 'custom_mask';
 	
-	if ( $config[ 'mask_type' ] == 'money' ) {
+	if ( $config[ 'mask_type' ] == 'money' AND check_var( $val, TRUE ) ) {
 		
 		$cs = isset( $config[ 'currency_symbol' ] ) ? $config[ 'currency_symbol' ] : '';
 		$dp = isset( $config[ 'decimal_point' ] ) ? $config[ 'decimal_point' ] : ',';

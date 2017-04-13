@@ -566,7 +566,8 @@
 .icon-html_module_config:before {
 	content: "\e649";
 }
-.icon-txt:before {
+.icon-txt:before,
+.icon-menu_item_ud_data_config:before {
 	content: "\e64a";
 }
 .icon-xls:before {

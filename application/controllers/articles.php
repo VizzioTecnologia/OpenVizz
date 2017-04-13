@@ -264,9 +264,21 @@ class Articles extends Main {
 		/***************** Article detail *****************/
 
 		else if ( $action === 'article_detail' ){
-
+			
+			// obtendo os parâmetros do item de menu
+			if ( $this->mcm->current_menu_item ){
+				
+				$menu_item_params = get_params( $this->mcm->current_menu_item[ 'params' ] );
+				
+			}
+			else{
+				
+				$menu_item_params = array();
+				
+			}
+			
 			$article_id = $var1;
-
+			
 			$this->articles->increment_hit( $article_id );
 
 			// get articles params
@@ -281,9 +293,27 @@ class Articles extends Main {
 
 				$url = get_url( $this->uri->ruri_string() );
 				set_last_url( $url );
-
+				
+				$article[ 'category_url' ] = $this->articles->get_a_url( 'list', array(
+					
+					'menu_item_id' => current_menu_id(),
+					'category_id' => $article[ 'category_id' ],
+					
+				) );
+				
+				$article[ 'params' ] = get_params( $article[ 'params' ] );
+				
+				// -------------------------------------------------
+				// Params filtering
+				
+				$data[ 'params' ] = filter_params( $this->mcm->filtered_system_params, $article[ 'params' ], TRUE );
+				$data[ 'params' ] = filter_params( $data[ 'params' ], $menu_item_params, TRUE );
+				
+				// Params filtering
+				// -------------------------------------------------
+				
 				// obtendo o título do conteúdo da página,
-				$data[ 'params' ][ 'show_page_content_title' ] = @$data[ 'params' ][ 'show_page_content_title' ];
+				$data[ 'params' ][ 'show_page_content_title' ] = check_var( $data[ 'params' ][ 'show_page_content_title' ] );
 
 				if ( get_url( $this->mcm->current_menu_item[ 'link' ] ) != $url ){
 
@@ -292,7 +322,7 @@ class Articles extends Main {
 				}
 				else if ( get_url( $this->mcm->current_menu_item[ 'link' ] ) == $url ){
 
-					if ( @$data[ 'params' ][ 'custom_page_content_title' ] ){
+					if ( check_var( $data[ 'params' ][ 'custom_page_content_title' ], TRUE ) ){
 
 						$this->mcm->html_data[ 'content' ][ 'title' ] = $data[ 'params' ][ 'custom_page_content_title' ];
 
@@ -313,19 +343,6 @@ class Articles extends Main {
 
 
 				//$this->mcm->html_data[ 'head' ][ 'title' ] = $this->mcm->html_data[ 'content' ][ 'title' ];
-
-				$article[ 'category_url' ] = $this->articles->get_a_url( 'list', array(
-
-					'menu_item_id' => current_menu_id(),
-					'category_id' => $article[ 'category_id' ],
-					
-				) );
-				
-				$article[ 'params' ] = get_params( $article[ 'params' ] );
-				
-				$data[ 'params' ] = $article[ 'params' ] = filter_params( $data[ 'params' ], $article[ 'params' ] );
-				
-				$this->mcm->filtered_system_params = filter_params( $this->mcm->filtered_system_params, $data[ 'params' ] );
 
 				$data[ 'article' ] = $article;
 				$data[ 'article' ][ 'url' ] = $url;

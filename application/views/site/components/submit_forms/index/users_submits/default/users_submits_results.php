@@ -30,8 +30,6 @@
 	
 	while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 		
-		${ '_ud_' . $v . '_props' } = array();
-		
 		if ( isset( $params[ 'ud_' . $v . '_prop' ] ) ) {
 			
 			$_is_presentation = TRUE;
@@ -125,6 +123,8 @@
 			
 			while ( list( $k, $v ) = each( $property_presentation_types ) ) {
 				
+				${ '_ud_' . $v . '_props' } = array();
+				
 				if ( check_var( $params[ 'ud_' . $v . '_prop' ] ) ) {
 					
 					$__class = FALSE;
@@ -143,6 +143,8 @@
 						}
 						
 					}
+					
+// 					echo '<pre>' . '${ _ud_' . $v . '_props }' . ': ' . print_r( ${ '_ud_' . $v . '_props' }, TRUE ) . '</pre><br/>'; 
 					
 					if ( $__class ) $_ud_data_wrapper_class[ $__class ] = $__class;
 					
@@ -310,7 +312,7 @@
 									
 									if ( ! $__main_image ) {
 										
-										$__main_image = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias . '_thumb_default' ] );
+										$__main_image = get_url( $ud_data[ 'data' ][ $_alias ] );
 										
 									}
 									
@@ -320,7 +322,7 @@
 							
 						}
 						
-						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper ' . ( $__main_image ? ' style="background-image:url(\'' . $__main_image . '\');"' : '' ) . '">';
+						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper"' . ( $__main_image ? ' style="background-image:url(\'' . htmlspecialchars( $__main_image ) . '\');"' : '' ) . '>';
 						
 						$__item_count = 1;
 						

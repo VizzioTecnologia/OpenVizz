@@ -379,7 +379,15 @@
 				
 			</div>
 			
-			<?= form_hidden( 'menu_item_id', $menu_item[ 'id' ] ); ?>
+			<?php
+				
+				if ( check_var( $menu_item[ 'id' ] ) ) {
+					
+					echo form_hidden( 'menu_item_id', $menu_item[ 'id' ] );
+					
+				}
+				
+			?>
 			
 		<?= form_close(); ?>
 		
