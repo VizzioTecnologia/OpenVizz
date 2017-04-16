@@ -10,7 +10,7 @@
 			</div>
 			<?php } ?>
 
-			<table class="data-list responsive">
+			<table class="data-list ud-ds-list-layout-default responsive">
 
 				<tr>
 
@@ -111,21 +111,31 @@
 
 					<td class="col-<?= $current_column; ?>">
 						
-						<?php if ( $submit_form[ 'users_submit_count' ] ){ ?>
+						<?php
 						
-						<?= vui_el_button( array( 'url' => $submit_form[ 'users_submits_link' ], 'text' => ( $submit_form[ 'users_submit_count' ] > 1 ? lang( 'ud_dsl_data_count', NULL, $submit_form[ 'users_submit_count' ] ) : lang( 'ud_dsl_data_count_one' ) ), 'icon' => 'users_submits', 'only_icon' => TRUE, ) ); ?>
+						if ( $submit_form[ 'users_submit_count' ] ){
+							
+							echo vui_el_button( array( 'url' => $submit_form[ 'users_submits_link' ], 'text' => ( $submit_form[ 'users_submit_count' ] > 1 ? lang( 'ud_dsl_data_count', NULL, $submit_form[ 'users_submit_count' ] ) : lang( 'ud_dsl_data_count_one' ) ), 'icon' => 'users_submits', 'only_icon' => TRUE, ) );
+							
+						} else {
+							
+							echo vui_el_button( array( 'text' => lang( 'ud_dsl_data_count_zero' ), 'icon' => 'users_submits disabled', 'only_icon' => TRUE, ) );
+							
+						}
 						
-						<?php } else { ?>
+						echo vui_el_button( array( 'url' => $submit_form[ 'users_submits_add_link' ], 'text' => lang( 'add_user_submit' ), 'icon' => 'add', 'only_icon' => TRUE, ) );
 						
-						<?= vui_el_button( array( 'text' => lang( 'ud_dsl_data_count_zero' ), 'icon' => 'users_submits disabled', 'only_icon' => TRUE, ) ); ?>
+						echo vui_el_button( array( 'url' => $submit_form[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) );
 						
-						<?php } ?>
+						echo form_open( get_url( 'admin/submit_forms/sfm/a/c/sfid/' . $submit_form[ 'id' ] ), array( 'id' => 'copy-ds-' . $submit_form[ 'id' ], ) );
 						
-						<?= vui_el_button( array( 'url' => $submit_form[ 'users_submits_add_link' ], 'text' => lang( 'add_user_submit' ), 'icon' => 'add', 'only_icon' => TRUE, ) ); ?>
+						echo vui_el_button( array( 'text' => lang( 'copy' ), 'icon' => 'copy', 'class' => 'multi-selection-action-input', 'button_type' => 'button', 'type' => 'submit', 'value' => 'copy', 'name' => 'submit_copy', 'id' => 'submit-copy', 'form' => 'copy-ds-' . $submit_form[ 'id' ], 'only_icon' => TRUE, ) );
 						
-						<?= vui_el_button( array( 'url' => $submit_form[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
+						echo form_close();
 						
-						<?= vui_el_button( array( 'url' => $submit_form[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>
+						echo vui_el_button( array( 'url' => $submit_form[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) );
+						
+						?>
 
 					</td>
 

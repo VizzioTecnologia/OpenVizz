@@ -123,16 +123,16 @@
 						
 					</th>
 					
-					<th>
+					<th class="col-id">
 						<?= lang('id'); ?>
 					</th>
-					<th>
+					<th class="col-title">
 						<?= lang('title'); ?>
 					</th>
-					<th>
+					<th class="col-menu-link">
 						<?= lang('link'); ?>
 					</th>
-					<th>
+					<th class="col-menu-item-type">
 						<?= lang('type'); ?>
 					</th>
 					
@@ -143,15 +143,15 @@
 						
 					</th>
 					
-					<th>
+					<th class="col-status">
 						<?= lang('status'); ?>
 					</th>
 					
-					<th>
+					<th class="col-home-page">
 						<?= lang('home_page'); ?>
 					</th>
 					
-					<th class="op-column">
+					<th class="col-operations">
 						<?= lang('operations'); ?>
 					</th>
 				</tr>
@@ -181,7 +181,7 @@
 						
 					</td>
 					
-					<td class="menu-id ta-center">
+					<td class="col-menu-item-id">
 						<?= $menu_item[ 'id' ]; ?>
 					</td>
 					
@@ -192,10 +192,10 @@
 						
 					</td>
 					
-					<td class="menu-link ta-center">
+					<td class="col-menu-link">
 						<?= anchor( get_url( $menu_item[ 'link' ] ), $menu_item[ 'link' ], 'target="_blank" class="" title="' . lang( 'action_view' ) . '"' ); ?>
 					</td>
-					<td class="menu-item-type ta-center">
+					<td class="col-menu-item-type">
 						<?= lang( $menu_item[ 'type' ] ); ?>
 					</td>
 					
@@ -257,7 +257,7 @@
 						
 					</td>
 					
-					<td class="status">
+					<td class="col-status">
 						
 						<?=
 							
@@ -274,7 +274,7 @@
 						
 					</td>
 					
-					<td class="home-page">
+					<td class="col-home-page">
 						
 						<?php
 							
@@ -306,7 +306,7 @@
 						
 					</td>
 					
-					<td class="operations">
+					<td class="col-operations">
 						
 						<?= vui_el_button( array( 'url' => $menu_item[ 'link' ], 'text' => lang( 'action_view' ), 'target' => '_blank', 'icon' => 'view', 'only_icon' => TRUE, ) ); ?>
 						

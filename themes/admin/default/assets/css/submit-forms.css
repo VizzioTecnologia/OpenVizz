@@ -1048,6 +1048,12 @@
 }
 
 
+.ud-ds-list-layout-default form {
+	
+	<?= $vui->css->display_inline_block(); ?>;
+	
+}
+
 .ud-d-list .col-adm .ud-data-value-wrapper {
 	
 	<?= $vui->css->display_inline_block(); ?>;

@@ -2578,7 +2578,7 @@ class Unid_api_mdl extends CI_Model{
 												
 												if ( is_string( $value ) ) {
 													
-													$value = htmlspecialchars_decode( $value );
+													$value = html_entity_decode( htmlspecialchars_decode( $value ) );
 													
 													if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
 														
@@ -2641,7 +2641,7 @@ class Unid_api_mdl extends CI_Model{
 									
 								}
 								
-								$ds_prop_value = htmlspecialchars_decode( $ds_prop_value );
+								$ds_prop_value = html_entity_decode( htmlspecialchars_decode( $ds_prop_value ) );
 								
 								if ( in_array( $ds_props[ $key_2 ][ 'field_type' ], array( 'input_text' ) ) AND check_var( $ds_props[ $key_2 ][ 'validation_rule' ] ) AND in_array( 'mask', $ds_props[ $key_2 ][ 'validation_rule' ] ) AND check_var( $ds_props[ $key_2 ][ 'ud_validation_rule_parameter_mask_type' ] ) ) {
 									

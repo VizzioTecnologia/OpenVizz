@@ -16,7 +16,7 @@ if ( $component_function_action != 'sfl' ) {
 		array(
 			
 			'id' => 'parent',
-			'title' => isset( $submit_form[ 'title' ] ) ? $submit_form[ 'title' ] : lang( 'add_submit_form' ),
+			'title' => check_var( $submit_form[ 'title' ] ) ? $submit_form[ 'title' ] : lang( 'add_submit_form' ),
 			'link' => $component_function_action == 'asf' ? $c_urls[ 'sf_add_link' ] : $submit_form[ 'edit_link' ],
 			'icon' => $component_function_action == 'asf' ? 'add-submit-form' : 'submit-forms',
 			
@@ -141,7 +141,11 @@ if ( isset( $submit_form[ 'id' ] ) ) {
 		
 	);
 	
-	echo vui_el_button( array( 'url' => $submit_form[ 'users_submits_add_link' ], 'text' => lang( 'add_user_submit' ), 'icon' => 'add', 'only_icon' => TRUE, ) );
+	if ( check_var( $submit_form[ 'users_submits_add_link' ] ) ) {
+		
+		echo vui_el_button( array( 'url' => $submit_form[ 'users_submits_add_link' ], 'text' => lang( 'add_user_submit' ), 'icon' => 'add', 'only_icon' => TRUE, ) );
+		
+	}
 	
 }
 

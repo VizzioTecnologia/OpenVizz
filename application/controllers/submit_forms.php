@@ -857,14 +857,6 @@ class Submit_forms extends Main {
 									$comp .= '[' . $field[ 'validation_rule_parameter_less_than'] . ']';
 									break;
 									
-								case 'valid_email':
-									
-									if ( ! isset( $data[ 'post' ][ 'form' ][ $prop_name ] ) OR $data[ 'post' ][ 'form' ][ $prop_name ] != '' ) {
-										
-										$rules[] = $rule . $comp;
-										
-									}
-									
 								case 'mask':
 									
 									if ( $data[ 'post' ][ 'form' ][ $field[ 'alias' ] ] AND isset( $field[ 'ud_validation_rule_parameter_mask_type' ] ) ) {

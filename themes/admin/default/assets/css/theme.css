@@ -53,10 +53,9 @@ hr{
 	
 }
 *.min-width,
-.vui *.min-width,
-.vui td.col-id {
+.vui *.min-width {
 	
-	width: 0;
+	width: 1px;
 	
 }
 td.min-width,
@@ -97,6 +96,16 @@ td.min-width,
 
 
 
+.data-list td .vui-btn-wrapper {
+	
+	<?= $vui->css->opacity( 0 ); ?>;
+	
+}
+.data-list tr:hover td .vui-btn-wrapper {
+	
+	<?= $vui->css->opacity( 1 ); ?>;
+	
+}
 
 
 /* ---------------------------------------------------- */

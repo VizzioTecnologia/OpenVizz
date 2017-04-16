@@ -6,20 +6,30 @@
  ---------------------------------------------------------
  */
 
-th.col-checkbox,
-th.col-id,
-th.col-image,
-th.col-operations,
-th.col-status,
-th.col-order,
-th.col-ordering,
-td.col-checkbox,
-td.col-id,
-td.col-image,
-td.col-priority,
-td.col-status,
-td.col-operations,
-td.col-ordering{
+.data-list th.col-checkbox,
+.data-list th.col-id,
+.data-list th.col-image,
+.data-list th.col-title,
+.data-list th.col-alias,
+.data-list th.col-priority,
+.data-list th.col-status,
+.data-list th.col-operations,
+.data-list th.col-ordering,
+.data-list th.col-submit_datetime,
+.data-list th.col-mod_datetime,
+
+.data-list td.col-checkbox,
+.data-list td.col-id,
+.data-list td.col-image,
+.data-list td.col-title,
+.data-list td.col-alias,
+.data-list td.col-priority,
+.data-list td.col-status,
+.data-list td.col-operations,
+.data-list td.col-ordering,
+.data-list td.col-submit_datetime,
+.data-list td.col-mod_datetime,
+.data-list td.col-home-page {
 	
 	text-align: center;
 	white-space: nowrap;
@@ -27,19 +37,37 @@ td.col-ordering{
 	
 	width: 1px;
 	
+	max-width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	
 }
-.vui table.no-bg tr td,
-.vui table.no-bg tr:nth-child(odd) td,
-.vui table.no-bg tr:nth-child(even) td,
-.vui table.no-bg tr.odd td,
-.vui table.no-bg tr.even td{
+.data-list td.col-title {
+	
+}
+.data-list td.col-title,
+.data-list td.col-description {
+	
+	text-align: left;
+	max-width: 50%;
+	
+}
+.data-list td.col-home-page {
+	
+}
+table.no-bg tr td,
+table.no-bg tr:nth-child(odd) td,
+table.no-bg tr:nth-child(even) td,
+table.no-bg tr.odd td,
+table.no-bg tr.even td{
 
 	background: none;
 
 }
 
-tr th.col-hidden,
-tr td.col-hidden{
+tr .col-hidden,
+tr .col-hidden{
 
 	display: none;
 
@@ -208,23 +236,23 @@ td a.list-link-cover-me:hover{
  */
 
 
-.vui .col-checkbox{
+.col-checkbox{
 	
 	vertical-align: middle;
 	text-align: center;
 	
 }
-.vui .col-checkbox input{
+.col-checkbox input{
 	
 	margin: 0;
 	
 }
 
 
-.vui input[type=text].inputbox-order,
-.vui input[type=text].inputbox-ordering,
-.vui input[type=number].inputbox-order,
-.vui input[type=number].inputbox-ordering{
+input[type=text].inputbox-order,
+input[type=text].inputbox-ordering,
+input[type=number].inputbox-order,
+input[type=number].inputbox-ordering{
 	
 	text-align:center;
 	min-width:70px;
@@ -232,48 +260,48 @@ td a.list-link-cover-me:hover{
 	
 }
 
-.vui input[type=text].address-type{
+input[type=text].address-type{
 	
 	width:150px;
 	
 }
-.vui input[type=text].address-country-title{
+input[type=text].address-country-title{
 	
 	width:150px;
 	
 }
-.vui input[type=text].address-state-acronym{
+input[type=text].address-state-acronym{
 	
 	min-width: 70px;
 	width: 70px;
 	
 }
-.vui input[type=text].address-city-title{
+input[type=text].address-city-title{
 	
 	min-width: 150px;
 	width: 150px;
 	
 }
-.vui input[type=text].address-neighborhood-title{
+input[type=text].address-neighborhood-title{
 	
 	min-width: 150px;
 	width: 150px;
 	
 }
-.vui input[type=text].address-postal-code{
+input[type=text].address-postal-code{
 	
 	min-width: 130px;
 	width: 130px;
 	
 }
-.vui input.ipp{
+input.ipp{
 	
 	text-align: center !important;
 	min-width: 108px;
 	width: 108px;
 	
 }
-.vui input[type=text].address-number{
+input[type=text].address-number{
 	
 	text-align:center;
 	
@@ -281,30 +309,30 @@ td a.list-link-cover-me:hover{
 	width: 70px;
 	
 }
-.vui td input[type=text],
-.vui td input[type=number],
-.vui td input[type=button],
-.vui td textarea,
-.vui td select,
-.vui td .button{
+td input[type=text],
+td input[type=number],
+td input[type=button],
+td textarea,
+td select,
+td .button{
 	
 	margin: 0;
 	
 }
 
-.vui .field-error{
+.field-error{
 	
 	box-shadow: <?= ERROR_BOX_SHADOW; ?> !important;
 	
 }
-.vui .field-highlight{
+.field-highlight{
 	
 	box-shadow: <?= HIGHLIGHT_BOX_SHADOW; ?> !important;
 	
 }
 
 
-.vui .input-file-wrapper{
+.input-file-wrapper{
 	
 	position:relative;
 	<?= $vui->css->display_inline_block(); ?>;
@@ -312,9 +340,9 @@ td a.list-link-cover-me:hover{
 	margin-bottom:<?= VUI_SPACING; ?>em;
 	
 }
-.vui .input-file-wrapper input[type=file],
-.vui .input-file-wrapper input[type=file]:hover,
-.vui .input-file-wrapper input[type=file]:focus{
+.input-file-wrapper input[type=file],
+.input-file-wrapper input[type=file]:hover,
+.input-file-wrapper input[type=file]:focus{
 	
 	position:absolute;
 	display:block;

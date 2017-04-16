@@ -35,11 +35,12 @@ $vui = new Vui(
  **************************************************************************************************
  */
 
+$ua_browser = isset( $_GET[ 'uab' ] ) ? $_GET[ 'uab' ] : 'unknow';
+
 include( 'defs.php' );
 include( 'reset.css' );
-// include( 'fonts.css' );
 include( 'font_icons.css' );
-include( 'html.css' );
+include( 'basic.css' );
 include( 'tooltips.css' );
 
 include( 'inputs.css' );
@@ -77,7 +78,7 @@ if ( isset( $_GET[ 'ct' ] ) AND $_GET[ 'ct' ] == 1 ) {
 include( 'jquery-scrolltop.css' );
 include( 'msg.css' );
 
-/*
+
 include( 'html.css.php' );
 include( 'template.css.php' );
 
@@ -99,6 +100,6 @@ include( 'dashboard.css.php' );
 include( 'articles.css.php' );
 include( 'vesm.css.php' );
 include( 'adjustments.css.php' );
-*/
+
 ?>
 

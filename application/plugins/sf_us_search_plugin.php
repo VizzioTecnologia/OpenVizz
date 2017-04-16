@@ -63,6 +63,12 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				$order_by_direction =								( isset( $order_by_direction[ 'sf_us_search' ] ) ) ? $order_by_direction[ 'sf_us_search' ] : 'DESC';
 				$order_by_direction =								strtoupper( ( isset( $plugin_params[ 'order_by_direction' ] ) ) ? $plugin_params[ 'order_by_direction' ] : $order_by_direction );
 				
+				if ( in_array( strtoupper( $order_by ), array( 'RANDOM', ) ) ) {
+					
+					$order_by_direction = 'RANDOM';
+					$random = TRUE;
+					
+				}
 				if ( in_array( $order_by_direction, array( 'A', 'ASC', 'D', 'DESC', 'R', 'RANDOM', ) ) ) {
 					
 					if ( $order_by_direction === 'A' ) {
@@ -85,6 +91,8 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				}
 				
 			}
+			
+// 			echo '<h3>search:</h3><pre>' . print_r( $random, TRUE ) . '</pre>';
 			
 			// Parsing vars ------------------------------------
 			// -------------------------------------------------
@@ -482,8 +490,6 @@ class Sf_us_search_plugin extends Plugins_mdl{
 				
 				
 			}
-			
-// 			echo '<pre>' . print_r( $order_by, TRUE ) . '</pre>'; exit;
 			
 			$search_config[ 'random' ] = $random;
 			

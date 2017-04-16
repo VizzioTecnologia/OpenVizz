@@ -579,20 +579,24 @@ class Modules extends Main {
 				
 				foreach ( $menus_types as $key => $menu_type ) {
 					
-					$menu_items[ $menu_type[ 'title' ] ] = $this->menus_model->get_menu_tree( 0, 0, 'list', $menu_type[ 'id' ] );
-					
-					foreach ( $menu_items[ $menu_type[ 'title' ] ] as $key => $menu_item ) {
+					if ( check_var( $menu_items[ $menu_type[ 'title' ] ] = $this->menus_model->get_menu_tree( 0, 0, 'list', $menu_type[ 'id' ] ) ) ) {
 						
-						$data[ 'menus_items_options' ][ $menu_type[ 'title' ] ][ $menu_item[ 'id' ] ] = $menu_item[ 'indented_title' ];
+						foreach ( $menu_items[ $menu_type[ 'title' ] ] as $key => $menu_item ) {
+							
+							$data[ 'menus_items_options' ][ $menu_type[ 'title' ] ][ $menu_item[ 'id' ] ] = $menu_item[ 'indented_title' ];
+							
+							$menu_items_count++;
+							
+						}
 						
 						$menu_items_count++;
 						
 					}
 					
-					$menu_items_count++;
-					
 				}
 				
+// 			echo '<h3>$menu_items:</h3><pre>' . print_r( $menus_types, TRUE ) . '</pre>'; exit;
+			
 				$data[ 'menu_items_count' ] = $menu_items_count;
 				
 				/*

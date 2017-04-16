@@ -1044,7 +1044,7 @@ class Contacts extends Main {
 						
 						if ( $this->input->post( 'submit_apply' ) ){
 							
-							redirect( 'admin/contacts/contacts_management/edit_contact/' . $return_id );
+							redirect( 'admin/cosntacts/contacts_management/edit_contact/' . $return_id );
 							
 						}
 						else{
@@ -1056,15 +1056,15 @@ class Contacts extends Main {
 					
 				}
 				else if ( $action == 'edit_contact' ) {
-
+					
 					if ( $this->contacts_model->update_contact( $db_data, array( 'id' => $var1 ) ) ){
-
+						
 						msg( ( 'contact_updated' ), 'success' );
-
+						
 						if ( $this->input->post( 'submit_apply' ) ){
-
-							redirect( 'admin/' . $this->uri->ruri_string() );
-
+							
+							redirect( get_url( 'admin' . $this->uri->ruri_string() ) );
+							
 						}
 						else{
 

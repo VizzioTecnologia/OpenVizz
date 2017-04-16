@@ -3,12 +3,6 @@
 	$this->plugins->load( NULL, 'js_text_editor' );
 	$this->plugins->load( NULL, 'js_time_picker' );
 
-	$created_date_time = ( @$article->created_date ) ? strtotime( $article->created_date ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-
-	$created_date = $this->input->post( 'created_date' ) ? $this->input->post( 'created_date' ) : date( 'Y-m-d', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) );
-
-	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : date( 'H:i:s', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) );
-	
 	if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) ) {
 		
 		$users_fields = $this->current_component[ 'params' ][ 'users_fields' ];
@@ -3791,17 +3785,17 @@
 	
 	check_mask = function( $field_wrapper ){
 		
-		var jthis = $field_wrapper.find( '.sf-field-validation_rule' );
+		var jthis = $field_wrapper.find( '.sf-field-validation_rule[value="mask"]' );
 		
 		if ( jthis.is( ':checked' ) ) {
 			
 			check_validation_rule_mask_type( $field_wrapper );
-			jthis.closest( '.field-wrapper' ).find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).show();
+			$field_wrapper.find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).show();
 			
 		}
 		else {
 			
-			jthis.closest( '.field-wrapper' ).find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).hide();
+			$field_wrapper.find( '.ud_validation_rule_parameter_mask_elements_wrapper' ).hide();
 			
 		}
 		

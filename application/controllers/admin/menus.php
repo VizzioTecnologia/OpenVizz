@@ -758,7 +758,7 @@ class Menus extends Main {
 						
 						if ( $action == 'a' ){
 							
-							$params_values = $params_spec[ 'params_spec_values' ];
+							$params_values = check_var( $params_spec[ 'params_spec_values' ] ) ? $params_spec[ 'params_spec_values' ] : array();
 							
 						}
 						

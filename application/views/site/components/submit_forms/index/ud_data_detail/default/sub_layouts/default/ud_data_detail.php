@@ -204,7 +204,7 @@
 					
 					if ( $v != 'title' OR ( $v == 'title' AND ! $params[ 'ud_d_detail_page_content_title_from_metadata' ] ) ) {
 						
-						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper"' . ( $__main_image ? ' style="background-image:url(\'' . htmlspecialchars( $__main_image ) . '\');"' : '' ) . '>';
+						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper">';
 						
 						if ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) {
 							

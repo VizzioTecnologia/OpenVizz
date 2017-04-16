@@ -54,6 +54,7 @@ $lang['ordering_asc'] = 																		"Crescente";
 $lang['ordering_desc'] = 																		"Decrescente";
 $lang['ordering_random'] = 																		"Ordem aleatória";
 $lang['random'] = 																				"Aleatório";
+$lang['invalid_json'] = 																		"Código JSON inválido.";
 
 $lang['contact'] = 																				"Contato";
 $lang['contacts'] = 																			"Contatos";

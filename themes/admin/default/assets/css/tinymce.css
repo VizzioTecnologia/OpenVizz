@@ -1514,6 +1514,8 @@ body.vui .mce-abs-layout-item, .vui .mce-abs-end {
 	
 	<?= DEFAULT_INPUTS_STYLESHEET; ?>
 	
+	font-family: <?= VUI_MONO_FONT_FAMILY; ?>;
+	
 	vertical-align: middle;
 	
 	margin: 0;

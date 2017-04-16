@@ -26,6 +26,12 @@
 	margin: 0;
 	
 }
+.vui textarea,
+.vui .vui-textarea-wrapper > .el {
+	
+	font-family: <?= VUI_MONO_FONT_FAMILY; ?>;
+	
+}
 .vui .vui-interactive-el-wrapper > .el:hover,
 .vui .vui-interactive-el-wrapper > .el:focus,
 .vui .vui-interactive-el-wrapper > .el:active,

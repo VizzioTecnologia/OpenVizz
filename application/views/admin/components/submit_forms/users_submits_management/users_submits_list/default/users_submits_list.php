@@ -573,7 +573,7 @@
 		
 		<div class="table-wrapper">
 			
-			<table id="ud-data-list-main-table" class="arrow-nav data-list responsive multi-selection-table">
+			<table id="ud-data-list-main-table" class="ud-d-list-layout-default arrow-nav data-list responsive multi-selection-table">
 				
 				<tr>
 					

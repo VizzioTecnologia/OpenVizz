@@ -91,36 +91,7 @@
 			$( ".thumb-modal" ).fancybox({
 				
 			});
-			/*
-			$ ( document ).on('webkitAnimationEnd animationend MSAnimationEnd oanimationend', '.thumb .s2 img', function(e){
-				
-				var $jthis = $( this );
-				var $wtapper = $jthis.closest( '.thumb' );
-				
-				$jthis.css( 'opacity', 0 );
-				
-				$wtapper.addClass( 'loading' );
-				
-				var src = this.src;
-				
-				this.src = '';
-				
-				if ( src ) {
-					
-					this.onload = function() {
-						
-						$jthis.animate( { 'opacity': 1 }, 200, 'linear' );
-					
-						$wtapper.removeClass( 'loading' );
-						$wtapper.addClass( 'loaded' );
-						
-					};
-					this.src = src;
-					
-				}
-				
-			});
-			*/
+			
 		});
 		
 	</script>

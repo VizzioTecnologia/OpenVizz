@@ -240,7 +240,7 @@ class Main_common_model extends CI_Model{
 					
 					log_message( 'info', '[DB Upgrade] "tb_users" already upgraded' );
 					
-					$db_upgrade_cache_vars[ 'users_images_col' ] = TRUE;;
+					$db_upgrade_cache_vars[ 'users_images_col' ] = TRUE;
 					
 				}
 				
@@ -279,6 +279,65 @@ class Main_common_model extends CI_Model{
 				$db_upgrade_cache_vars[ 'sfus_xml_data_col' ] = TRUE;;
 				
 				$write = TRUE;
+				
+			}
+			
+			// tb_submit_forms_us, update submit forms users submits xml_data collumn
+			// ----------------------------
+			
+			// ----------------------------
+			// ud data detail menu item type
+			
+			if ( ! check_var( $db_upgrade_cache_vars[ 'ud_data_detail_menu_item_type' ] ) ) {
+				
+				log_message( 'info', '[DB Upgrade] Updating "xml_data" collumn in "tb_submit_forms_us" table' );
+				
+				$this->load->model( 'common/submit_forms_common_model', 'sfcm' );
+				
+				$this->db->select( 'id' );
+				$this->db->from( 'tb_components' );
+				$this->db->where( 'unique_name', 'submit_forms' );
+				$component = $this->db->get()->row_array();
+				
+				if ( check_var( $component ) ) {
+					
+					$this->db->select( 'id' );
+					$this->db->from( 'tb_menu_items_types' );
+					$this->db->where( 'title', 'submit_forms' );
+					$parent_id = $this->db->get()->row_array();
+					
+					if ( check_var( $parent_id ) ) {
+						
+						$parent_id = $parent_id[ 'id' ];
+						
+						$this->db->select( 'id' );
+						$this->db->from( 'tb_menu_items_types' );
+						$this->db->where( 'component_item', 'ud_data_detail' );
+						$row = $this->db->get()->row_array();
+						
+						if ( ! check_var( $row ) ) {
+							
+							$this->db->insert( 'tb_menu_items_types', array(
+								
+								'type' => 'component',
+								'component_id' => $component[ 'id' ],
+								'component_item' => 'ud_data_detail',
+								'title' => 'ud_data_component_item_title',
+								'parent' => $parent_id,
+								
+							));
+							
+							log_message( 'info', '[DB Upgrade] Adding ud_data_detail menu item type done!' );
+							
+							$db_upgrade_cache_vars[ 'ud_data_detail_menu_item_type' ] = TRUE;
+							
+							$write = TRUE;
+							
+						}
+						
+					}
+					
+				}
 				
 			}
 			
@@ -543,27 +602,27 @@ class Main_common_model extends CI_Model{
 		static $tree = array();
 		static $u_array = array(); // unidimensional array
 		static $child = FALSE;
-
+		
 		// Detect the current branch to append files/directories to
 		if ( $child !== FALSE AND isset( $tree[ $child ] ) ) {
-
+			
 			$branch =& $tree[ $child ];
-
+			
 		}
 		else
 		{
 			$branch =& $tree;
 		}
-
+		
 		// Force trailing slash on directory
 		$dir = rtrim( $dir, DS ) . DS;
 		$dirlen = strlen( $dir );
-
+		
 		// Find files/directories
 		$items = glob( $dir . '*' );
 		
 		foreach( $items as $key => $item ) {
-
+			
 			// Get basename
 			$base = pathinfo( $item ); //substr($item, $dirlen);
 			$base_name = $base[ 'basename' ]; //substr($item, $dirlen);
@@ -571,14 +630,14 @@ class Main_common_model extends CI_Model{
 			//print_r( pathinfo( $item ) );
 			// always skip dot files
 			if ( $base_name[ 0 ] == '.' ) continue;
-
+			
 			// If is file
 			if ( is_file( $item ) AND is_readable( $item ) ) {
-
+				
 				if ( $include_files ) {
-
+					
 					$level++;
-
+					
 					$u_array[ $item ] =  str_repeat( '&nbsp;' , $level * 4 + 4 ) . $indented_symbol . pathinfo( $item, PATHINFO_BASENAME );
 
 					$branch[] = $base_name;
@@ -605,17 +664,16 @@ class Main_common_model extends CI_Model{
 				$u_array[ $dir_name ] = str_repeat( '&nbsp;' , $level * 4 + 4 ) . $indented_symbol . pathinfo( $dir_name, PATHINFO_BASENAME );
 
 				$level++;
-
+				
 				$u_array[ $item ] =  str_repeat( '&nbsp;' , $level * 4 + 4 ) . $indented_symbol . pathinfo( $item, PATHINFO_BASENAME );
-
+				
 				$branch[ $base_name ] = array();
 				$child = $base_name;
-
-
+				
 				$this->dir_tree(
-
+					
 					array(
-
+						
 						'dir' => $item,
 						'level' => $level,
 						'var_set' => FALSE,
@@ -636,7 +694,7 @@ class Main_common_model extends CI_Model{
 		}
 
 		// Only return from the root call
-		if ( $child === FALSE ) {
+		if ( $level === 0 ) {
 
 			$_tree = $tree;
 			$_u_array = $u_array;

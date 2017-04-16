@@ -825,7 +825,32 @@ class Submit_forms extends Main {
 		--------------------------------------------------------
 		********************************************************
 		*/
-
+		
+		/*
+		********************************************************
+		--------------------------------------------------------
+		Copy
+		--------------------------------------------------------
+		*/
+		
+		else if ( ( $action == 'c' ) AND $ds_id ){
+			
+			if ( $this->unid->copy_ds( $ds_id ) ){
+				
+				msg( 'ud_ds_copied_success', 'success' );
+				redirect_last_url();
+				
+			}
+			
+		}
+		
+		/*
+			--------------------------------------------------------
+		Copy
+		--------------------------------------------------------
+		********************************************************
+		*/
+		
 		/*
 		********************************************************
 		--------------------------------------------------------
@@ -1647,77 +1672,6 @@ class Submit_forms extends Main {
 	
 	
 	
-	/*
-	 **************************************************************************************************
-	 **************************************************************************************************
-	 --------------------------------------------------------------------------------------------------
-	 Users submits (Função em desenvolvimento)
-	 --------------------------------------------------------------------------------------------------
-	*/
-	
-	public function us(){
-		
-		$get = $this->input->get();
-		$post = $this->input->post();
-		$f_params = $this->sfcm->get_us_url_params();
-		
-		// Updating the current component's info
-		$this->component_function = __FUNCTION__;
-		$this->component_function_action = $f_params[ 'action' ];
-		/*
-		******************************************
-		******************************************
-		------------------------------------------
-		Users submits list
-		------------------------------------------
-		*/
-		
-		if ( $f_params[ 'action' ] == 'l' ){
-			
-			$api_config[ 'a' ] = 'getsf';
-			$api_config[ 'ius' ] = TRUE;
-			
-			
-			// loading the string utils and search libraries
-			$this->load->library( array( 'str_utils', 'search', ) );
-			
-			// loading the pagination helper
-			$this->load->helper( array( 'pagination' ) );
-			
-			// Preparing users submits search plugin params
-			$search_config = array(
-				
-				'plugins' => 'sf_us_search',
-				'allow_empty_terms' => TRUE,
-				
-			);
-			
-		}
-		
-		/*
-		------------------------------------------
-		Users submits list
-		------------------------------------------
-		******************************************
-		******************************************
-		*/
-		
-		print_r( $f_params );
-		
-	}
-	
-	/*
-	 --------------------------------------------------------------------------------------------------
-	 Users submits
-	 --------------------------------------------------------------------------------------------------
-	 **************************************************************************************************
-	 **************************************************************************************************
-	*/
-	
-	
-	
-	
-	
 	
 	
 	
@@ -1863,7 +1817,7 @@ class Submit_forms extends Main {
 	
 	public function usm( $f_params ){
 		
-		log_message( 'debug', "[Components] Submit forms function [" . __FUNCTION__ . "] called." );
+		log_message( 'debug', "[Components] UniD controller method [" . __FUNCTION__ . "] called." );
 		
 		$get = $this->input->get( NULL, TRUE );
 		$post = $this->input->post( NULL, TRUE );
@@ -1948,7 +1902,12 @@ class Submit_forms extends Main {
 		// -------------------------------------------------
 		// Last url ----------------------------------------
 		
-		if ( ! in_array( $action, array( 'cob', 'cp', 'b', 'aus', 'eus' ) ) ) {
+		if ( $this->input->post( 'redirect_c_function', TRUE ) ) {
+			
+			set_last_url( get_url( 'admin' . $this->input->post( 'redirect_c_function', TRUE ) ) );
+			
+		}
+		else if ( ! in_array( $action, array( 'cob', 'cp', 'b', 'aus', 'eus' ) ) ) {
 			
 			set_last_url( $a_url );
 			
@@ -3447,14 +3406,6 @@ class Submit_forms extends Main {
 										$comp .= '[' . $prop[ 'validation_rule_parameter_less_than'] . ']';
 										break;
 										
-									case 'valid_email':
-										
-										if ( ! isset( $data[ 'post' ][ 'form' ][ $prop_name ] ) OR $data[ 'post' ][ 'form' ][ $prop_name ] != '' ) {
-											
-											$rules[] = $rule . $comp;
-											
-										}
-										
 									case 'mask':
 										
 										if ( $data[ 'post' ][ 'form' ][ $prop[ 'alias' ] ] AND isset( $prop[ 'ud_validation_rule_parameter_mask_type' ] ) ) {
@@ -3539,7 +3490,7 @@ class Submit_forms extends Main {
 						
 						if ( isset( $user_submit[ 'data' ][ $prop[ 'alias' ] ] ) AND ! is_array( $user_submit[ 'data' ][ $prop[ 'alias' ] ] ) ) {
 							
-							$user_submit[ 'data' ][ $prop[ 'alias' ] ] = htmlspecialchars_decode( $user_submit[ 'data' ][ $prop[ 'alias' ] ] );
+							$user_submit[ 'data' ][ $prop[ 'alias' ] ] = html_entity_decode( htmlspecialchars_decode( $user_submit[ 'data' ][ $prop[ 'alias' ] ] ) );
 							
 						}
 						

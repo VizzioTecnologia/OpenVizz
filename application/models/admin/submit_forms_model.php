@@ -374,7 +374,7 @@ class Submit_forms_model extends CI_Model{
 					'tip' => 'tip_readmore_text',
 					'validation' => array(
 						
-						'rules' => 'trim|required',
+						'rules' => 'trim',
 						
 					),
 					'options' => array(
@@ -952,7 +952,7 @@ class Submit_forms_model extends CI_Model{
 			* -------------------------------------------------------------------------------------------------
 			*/
 			
-			$submit_form = FALSE;
+			$data_scheme = FALSE;
 			
 			if ( check_var( $current_params_values[ 'submit_form_id' ] ) ) {
 				
@@ -964,13 +964,13 @@ class Submit_forms_model extends CI_Model{
 					
 				);
 				
-				$submit_form = $this->ud_api->get_data_schemes( $gdsp )->row_array();
+				$data_scheme = $this->ud_api->get_data_schemes( $gdsp )->row_array();
 				
 			}
 			
-			if ( $submit_form ) {
+			if ( $data_scheme ) {
 				
-				$this->ud_api->parse_ds( $submit_form );
+				$this->ud_api->parse_ds( $data_scheme );
 				
 				//------------------------------------------------------
 				
@@ -1010,7 +1010,7 @@ class Submit_forms_model extends CI_Model{
 				
 				//------------------------------------------------------
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+				foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 					
 					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
 					
@@ -1463,7 +1463,7 @@ class Submit_forms_model extends CI_Model{
 					* ------------------------------------
 					*/
 					
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 						
 						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
 						
@@ -1618,7 +1618,7 @@ class Submit_forms_model extends CI_Model{
 					* ------------------------------------
 					*/
 
-					foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+					foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 						
 						$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
 						
@@ -1667,6 +1667,84 @@ class Submit_forms_model extends CI_Model{
 				
 				
 				
+					//------------------------------------------------------
+					
+					$new_params[] = array(
+						
+						'type' => 'spacer',
+						'label' => 'ud_image_prop',
+						'tip' => 'tip_ud_image_prop',
+						
+					);
+					
+					//------------------------------------------------------
+					
+					$_tmp = array(
+						
+						'type' => 'select',
+						'name' => 'ud_d_main_image_on_title',
+						'label' => 'ud_d_main_image_on_title',
+						'tip' => 'tip_ud_d_main_image_on_title',
+						'default' => '1',
+						'validation' => array(
+							
+							'rules' => 'trim|required',
+							
+						),
+						'options' => array(
+							
+							'0' => 'no',
+							'1' => 'yes',
+							
+						),
+						
+					);
+					
+					$params[ 'params_spec_values' ][ 'ud_d_main_image_on_title' ] = TRUE;
+					
+					$new_params[] = $_tmp;
+					
+					//------------------------------------------------------
+					
+					if ( check_var( $menu_item[ 'params' ][ 'ud_d_list_site_override_presentation_props' ] ) ) {
+						
+						foreach ( $data_scheme[ 'fields' ] as $key => $prop ) {
+							
+							$alias = check_var( $prop[ 'alias' ] ) ? $prop[ 'alias' ] : FALSE;
+							
+							if ( $alias AND ! in_array( $prop[ 'field_type' ], array( 'button', 'html', ) ) ) {
+								
+								$fieldss_options[ $alias ] = $prop[ 'label' ];
+								
+								$_tmp = array(
+									
+									'type' => 'checkbox',
+									'inline' => TRUE,
+									'name' => 'ud_image_prop[' . $alias . ']',
+									'label' => $prop[ 'label' ],
+									'value' => $alias,
+									'validation' => array(
+										
+										'rules' => 'trim',
+										
+									),
+									
+								);
+								
+								if ( $prop[ 'field_type' ] == 'combo_box' ) {
+									
+									$select_fields[] = $prop;
+									
+								}
+								
+								$new_params[] = $_tmp;
+								
+							}
+							
+						}
+						
+					}
+		
 				
 				
 				
@@ -1783,7 +1861,7 @@ class Submit_forms_model extends CI_Model{
 				
 				//------------------------------------------------------
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+				foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 					
 					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
 					
@@ -2200,7 +2278,7 @@ class Submit_forms_model extends CI_Model{
 					'tip' => 'tip_ud_data_list_d_readmore_link_custom_str',
 					'validation' => array(
 						
-						'rules' => 'trim|required',
+						'rules' => 'trim',
 						
 					),
 					
@@ -2328,7 +2406,7 @@ class Submit_forms_model extends CI_Model{
 				
 				//------------------------------------------------------
 				
-				foreach ( $submit_form[ 'fields' ] as $key => $field ) {
+				foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
 					
 					$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
 					
@@ -2544,6 +2622,27 @@ class Submit_forms_model extends CI_Model{
 		
 		$group_str = 'menu_item_ud_data_config';
 		
+		//------------------------------------------------------
+		
+		$_tmp = array(
+			
+			'type' => 'text',
+			'inline' => TRUE,
+			'name' => 'ud_data_id',
+			'label' => 'ud_data_id',
+			'tip' => 'tip_ud_data_id',
+			'validation' => array(
+				
+				'rules' => 'trim|required',
+				
+			),
+			
+		);
+		
+		$params[ 'params_spec_values' ][ 'ud_data_id' ] = 0;
+		
+		$new_params[] = $_tmp;
+		
 		if ( isset( $menu_item[ 'params' ][ 'ud_data_id' ] ) ) {
 			
 			$ud_data = $this->ud_api->get_ud_data( $menu_item[ 'params' ][ 'ud_data_id' ] );
@@ -2563,27 +2662,6 @@ class Submit_forms_model extends CI_Model{
 				if ( $data_scheme ) {
 					
 					$this->ud_api->parse_ds( $data_scheme );
-					
-					//------------------------------------------------------
-					
-					$_tmp = array(
-						
-						'type' => 'text',
-						'inline' => TRUE,
-						'name' => 'ud_data_id',
-						'label' => 'ud_data_id',
-						'tip' => 'tip_ud_data_id',
-						'validation' => array(
-							
-							'rules' => 'trim|required',
-							
-						),
-						
-					);
-					
-					$params[ 'params_spec_values' ][ 'ud_data_id' ] = 0;
-					
-					$new_params[] = $_tmp;
 					
 					//------------------------------------------------------
 					
@@ -2832,17 +2910,15 @@ class Submit_forms_model extends CI_Model{
 						
 					}
 					
-					$params[ 'params_spec' ][ $group_str ] = $new_params;
-					
-					return $params;
-					
 				}
 				
 			}
 			
 		}
 		
-		return FALSE;
+		$params[ 'params_spec' ][ $group_str ] = $new_params;
+		
+		return $params;
 		
 	}
 	

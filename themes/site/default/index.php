@@ -7,6 +7,8 @@
 			
 			$this->plugins->load( array( 'names' => array( 'jquery', 'jquery_scrolltop' ), 'types' => array( 'js_tooltip' ) ) );
 			
+			$get_args[] = 'uab=' . url_title( $this->ua->browser() );
+			
 			if ( $this->voutput->get_head_stylesheet( 'fancybox' ) ) {
 				
 				$this->voutput->unset_head_stylesheet( 'fancybox' );
@@ -27,7 +29,7 @@
 				
 			}
 			
-			$this->voutput->append_head_stylesheet( 'google_font', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700|Open+Sans:400,300,300italic,400italic,700,700italic' );
+			$this->voutput->append_head_stylesheet( 'google_font', 'https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700|Open+Sans:400,300,300italic,400italic,700,700italic' );
 			$this->voutput->append_head_stylesheet( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/css/theme.css.php' . ( ! empty( $get_args ) ? '?' . join( '&', $get_args ) : '' ) );
 			$this->voutput->append_head_script( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/js/functions.js' );
 			
@@ -62,7 +64,7 @@
 		
 	</head>
 	
-	<body class="vui content-disp-<?= $content_disp; ?> <?= $this->ua->is_mobile() ? 'mobile' : 'desktop'; ?> <?= ( check_var( $this->mcm->loaded_modules[ 'top_banner' ] ) ) ? 'with-top-banner' : ''; ?>">
+	<body class="vui content-disp-<?= $content_disp; ?> <?= $this->ua->is_browser() ? 'ua-browser-' . url_title( $this->ua->browser() ) : ''; ?> <?= $this->ua->is_mobile() ? 'mobile' : 'desktop'; ?> <?= ( check_var( $this->mcm->loaded_modules[ 'top_banner' ] ) ) ? 'with-top-banner' : ''; ?>">
 		
 		<?= $this->voutput->get_body_start(); ?>
 		

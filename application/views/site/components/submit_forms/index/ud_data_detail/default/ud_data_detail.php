@@ -108,7 +108,7 @@
 	
 	?>
 	
-	<section id="submit-form-user-submit-detail-<?= $unique_hash; ?>" class="<?= $__main_image ? 'ud-image-on-title ' : ''; ?>unid ud-d-detail-layout-<?= $params[ 'ud_d_detail_layout_site' ]; ?> ud-d-detail-wrapper submit-form user-submit <?= @$params['page_class']; ?>">
+	<article id="submit-form-user-submit-detail-<?= $unique_hash; ?>" class="<?= ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) ? 'ud-image-on-title ' : ''; ?>unid ud-d-detail-layout-<?= $params[ 'ud_d_detail_layout_site' ]; ?> ud-d-detail-wrapper submit-form user-submit <?= @$params['page_class']; ?>">
 	
 		<?php if ( ! isset( $params[ 'show_page_content_title' ] ) OR check_var( $params[ 'show_page_content_title' ] ) ) { ?>
 		<header class="page-title">
@@ -121,6 +121,8 @@
 			
 		</header>
 		<?php } ?>
+		
+		
 		
 		<div class="component-content">
 			
@@ -142,5 +144,5 @@
 			
 		</div>
 		
-	</section>
+	</article>
 	

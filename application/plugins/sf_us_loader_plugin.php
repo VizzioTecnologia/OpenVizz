@@ -98,8 +98,9 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							$us_params = array(
 								
 								'st' => TRUE, // Show submit form title
+								'dstal' => TRUE, // Data Scheme title as link
 								'csft' => FALSE, // Custom title: override the submit form title
-								'us_id' => 0, // user(s) submit(s) id(s) can be array
+								'ud_id' => 0, // user(s) submit(s) id(s) can be array
 								'pts' => NULL, // props to show
 								't' => NULL, // search terms
 								'src' => '0', // show_results_count
@@ -107,7 +108,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'srs' => NULL, // ud_d_list_single_result_string
 								'nrs' => NULL, // no result string
 								
-								'tal' => TRUE, // title_as_link_on_site_list
+								'tal' => TRUE, // ud data title_as_link_on_site_list
 								
 								'ip' => NULL, // Image props
 								'edp' => NULL, // Event datetime props
@@ -126,6 +127,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								'l' => 'default', // layout
 								'wc' => NULL, // css wrapper class
 								'srml' => TRUE, // show data readmore links
+								'sdsrml' => TRUE, // show data schemes readmore links
 								'sfl' => NULL, // Submit form link: array:
 									
 									/*
@@ -293,17 +295,14 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 									}
 									
 								}
-								else {
-									
-									$us_params[ $_config ] = $_value;
-									
-								}
 								
 							}
 							
 							$us_params[ 'props_to_show_site_list' ] = & $us_params[ 'pts' ];
 							$us_params[ 'ud_data_list_d_titles_as_link' ] = & $us_params[ 'tal' ];
-							$us_params[ 'ud_data_list_d_readmore_link' ] = & $us_params[ 'srml' ];
+							$us_params[ 'ud_ds_title_as_link_on_list' ] = & $us_params[ 'dstal' ];
+							$us_params[ 'ud_data_list_d_readmore_link' ] = ! check_var( $us_params[ 'ud_data_list_d_readmore_link' ], TRUE ) ? $us_params[ 'srml' ] : $us_params[ 'ud_data_list_d_readmore_link' ];
+							$us_params[ 'ud_data_list_ds_readmore_link' ] = & $us_params[ 'sdsrml' ];
 							$us_params[ 'ud_data_list_max_columns' ] = & $us_params[ 'mc' ];
 							$us_params[ 'ud_d_list_layout_site' ] = & $us_params[ 'l' ];
 							$us_params[ 'show_default_results' ] = TRUE;
@@ -406,9 +405,11 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 							
 							//------------------------------------------------------
 							
+// 							echo '<h3>Loader:</h3><pre>' . print_r( $us_params[ 'ob' ], TRUE ) . '</pre>';
+							
 							$_tmp = get_params( $us_params[ 'ob' ] );
 							
-							if ( is_array( $_tmp ) ) {
+							if ( is_array( $_tmp ) AND check_var( $_tmp ) ) {
 								
 								$us_params[ 'ob' ] = $_tmp;
 								
@@ -430,7 +431,7 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 									'sf_us_search' => array(
 										
 										'sf_id' => $_sf_id,
-										'us_id' => $us_params[ 'us_id' ],
+										'us_id' => $us_params[ 'ud_id' ],
 										'filters' => $us_view_data[ 'params' ][ 'us_default_results_filters' ],
 										'order_by' => $us_params[ 'ob' ],
 										'order_by_direction' => $us_params[ 'obd' ],
@@ -440,8 +441,6 @@ class Sf_us_loader_plugin extends Plugins_mdl{
 								),
 								
 							);
-							
-							//echo '<pre>' . print_r( $search_config, TRUE ) . '</pre>';
 							
 							$this->search->reset_config();
 							$this->search->config( $search_config );

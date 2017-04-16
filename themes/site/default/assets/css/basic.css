@@ -1,0 +1,862 @@
+
+.vui::-webkit-scrollbar-track,
+::-webkit-scrollbar-track{
+
+	-webkit-box-shadow: none;
+	border: none;
+
+}
+
+.vui::-webkit-scrollbar,
+::-webkit-scrollbar{
+
+	width: 12px;
+	height: 12px;
+	border: none;
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+
+}
+
+.vui::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb{
+
+	border: 3px solid <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+
+}
+
+
+html,
+body,
+body{
+	
+	color: <?= VUI_DEFAULT_FONT_COLOR; ?>;
+	
+	background-color: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	background-image: url(<?= $vui->svg_file( 'site_bg_1', $vui->colors->vui_site_fg->rgba_s() ); ?>);
+	background-repeat: repeat;
+	
+}
+body,
+body{
+
+	position: relative;
+	display: block;
+	margin: 0;
+	font-family: <?= VUI_DEFAULT_FONT_FAMILY; ?>;
+	font-size: <?= VUI_DEFAULT_FONT_SIZE; ?>;
+	line-height: <?= VUI_DEFAULT_LINE_HEIGHT; ?>;
+	font-weight: <?= VUI_DEFAULT_FONT_WEIGHT; ?>;
+	
+}
+
+strong{
+
+	font-weight: bold;
+
+}
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Paragraphs
+ ---------------------------------------------------------
+ */
+
+p{
+
+	position: relative;
+	display: block;
+	margin: 0;
+	margin-top: <?= VUI_SPACING_FIXED; ?>;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Paragraphs
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Rules
+ ---------------------------------------------------------
+ */
+
+hr {
+
+	position: relative;
+	display: block;
+	clear: both;
+	height: 0;
+	border: none;
+	
+	border-bottom: <?= VUI_DEFAULT_BORDER; ?>;
+	
+	margin: 0;
+	margin-top: <?= VUI_SPACING_FIXED; ?>;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Rules
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Pre, code, samp
+ ---------------------------------------------------------
+ */
+
+code,
+pre,
+samp{
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	font-family: <?= VUI_MONO_FONT_FAMILY; ?>;
+	font-weight: normal;
+	padding-left: <?= VUI_SPACING_FIXED; ?>;
+	padding-right: <?= VUI_SPACING_FIXED; ?>;
+	background-color: <?= $vui->colors->vui_light->rgba_s(); ?>;
+	
+	vertical-align: initial;
+	
+}
+pre{
+	
+	position: relative;
+	display: block;
+	padding: <?= VUI_SPACING_FIXED; ?>;
+	margin-top: <?= VUI_SPACING_FIXED; ?>;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+	
+	overflow: auto;
+	
+	white-space: pre;
+	
+}
+pre code,
+pre samp{
+
+	font-family: inherit;
+	font-weight: inherit;
+	padding: 0;
+	background: none;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Pre, code, samp
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Mark
+ ---------------------------------------------------------
+ */
+
+mark{
+
+	background: <?= $vui->colors->vui_yellow->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_yellow->get_ro_color( 35 )->rgba_s(); ?>;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Mark
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ SVG
+ ---------------------------------------------------------
+ */
+
+svg{
+
+	width: 100%;
+	height: auto;
+
+}
+
+/*
+ ---------------------------------------------------------
+ SVG
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Blockquote
+ ---------------------------------------------------------
+ */
+
+blockquote,
+q {
+
+	font-style: italic;
+	
+	vertical-align: initial;
+	
+}
+blockquote:before,
+q:before {
+
+	content: '';
+
+}
+blockquote {
+	
+	padding: <?= VUI_SPACING_FIXED; ?>;
+	margin: <?= VUI_SPACING_FIXED; ?>;
+	margin-left: <?= VUI_SPACING_VALUE_FIXED * 3; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+	background: <?= $vui->colors->vui_darker->rgba_s( 10 ); ?>;
+	border-left: 0.5em solid <?= $vui->colors->vui_darker->rgba_s( 15 ); ?>;
+	font-style: italic;
+	
+}
+blockquote > *:first-child {
+	
+	margin-top: 0;
+	
+}
+blockquote > *:last-child {
+	
+	margin-bottom: 0;
+	
+}
+
+/*
+ ---------------------------------------------------------
+ Blockquote
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Headings
+ ---------------------------------------------------------
+ */
+
+<?php
+
+	$max = 3;
+	$min = 1;
+	$meas_unit = 'em';
+	$diff = ( $max - $min ) / 5;
+
+?>
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+	
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	color: <?= VUI_SEC_FONT_COLOR; ?>;
+	font-size: <?= ( $min + ( $diff * 5 ) ) . $meas_unit; ?>;
+	
+	font-weight: 400;
+	
+	line-height: 100%;
+	margin-top: <?= VUI_SPACING_FIXED; ?>;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+	
+}
+h1 {
+	
+}
+h2 {
+
+	font-size: <?= ( $min + ( $diff * 4 ) ) . $meas_unit; ?>;
+	
+}
+h3 {
+
+	font-size: <?= ( $min + ( $diff * 3 ) ) . $meas_unit; ?>;
+	
+}
+h4 {
+
+	font-size: <?= ( $min + ( $diff * 2 ) ) . $meas_unit; ?>;
+	
+}
+h5 {
+
+	font-size: <?= ( $min + ( $diff * 1 ) ) . $meas_unit; ?>;
+	
+}
+h6 {
+
+	font-size: <?= ( $min + $diff ) . $meas_unit; ?>;
+	
+}
+
+
+/*
+ ---------------------------------------------------------
+ Headings
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ * ********************************************************
+ * ---------------------------------------------------------
+ * Links
+ * ---------------------------------------------------------
+ */
+
+a{
+	
+	text-decoration: none;
+	color: <?= $vui->colors->vui_link->rgba_s(); ?>;
+	
+}
+a:hover{
+	
+	color: <?= $vui->colors->vui_link_hover->rgba_s(); ?>;
+	
+}
+
+/*
+ * ---------------------------------------------------------
+ * Links
+ * ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ * ********************************************************
+ * ---------------------------------------------------------
+ * address
+ * ---------------------------------------------------------
+ */
+
+address {
+	
+	font-style: italic;
+	
+}
+
+/*
+ * ---------------------------------------------------------
+ * address
+ * ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Emphatized texts
+ ---------------------------------------------------------
+ */
+
+em{
+
+	font-style: italic;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Emphatized texts
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ **************************************************************************************************
+ **************************************************************************************************
+ --------------------------------------------------------------------------------------------------
+ Figures
+ --------------------------------------------------------------------------------------------------
+ */
+
+figure{
+	
+	position: relative;
+	display: block;
+	
+	padding: 0;
+	margin: 0;
+	margin-top: 0;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+	
+}
+figcaption{
+	
+	position: relative;
+	display: block;
+	
+	font-size: 90%;
+	
+	margin: 0;
+	padding: <?= VUI_SPACING_FIXED; ?> 0;
+	
+}
+
+/*
+ --------------------------------------------------------------------------------------------------
+ Figures
+ --------------------------------------------------------------------------------------------------
+ **************************************************************************************************
+ **************************************************************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ List items
+ ---------------------------------------------------------
+ */
+
+ul,
+ol{
+
+	position: relative;
+	display: block;
+	margin-top: <?= VUI_SPACING_FIXED; ?>;
+	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
+
+}
+ul ol,
+ul ul,
+ol ol,
+ol ul{
+
+
+
+}
+ol{
+
+	counter-reset: ol-counter;
+
+}
+	li{
+
+		position: relative;
+		display: list-item;
+
+		margin-top: <?= VUI_SPACING_VALUE_FIXED / 1.5; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+		margin-bottom: <?= VUI_SPACING_VALUE_FIXED / 1.5; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+		margin-left: <?= VUI_SPACING_VALUE_FIXED * 2; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+
+		padding-left: 0;
+		list-style-type: disc;
+		list-style-position: outside;
+
+	}
+		li li{
+
+		}
+
+	ol li{
+
+		display: block;
+		margin-left: <?= VUI_SPACING_VALUE_FIXED + ( VUI_SPACING_VALUE_FIXED * 2 ) - ( VUI_SPACING_VALUE_FIXED / 2 ); ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+		padding-left: 0;
+
+	}
+	ol li:before{
+
+		content: counter( ol-counter, decimal );
+		counter-increment: ol-counter;
+		
+		margin-left: -<?= ( VUI_SPACING_VALUE_FIXED + ( VUI_SPACING_VALUE_FIXED * 2 ) - ( VUI_SPACING_VALUE_FIXED / 2 ) ) / 2; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+		padding-right: <?= ( VUI_SPACING + ( VUI_SPACING * 2 ) - ( VUI_SPACING / 2 ) ) / 2; ?>em;
+		
+		text-align: center;
+		width: <?= VUI_SPACING * 2; ?>em;
+
+		font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+		font-weight: bold;
+
+	}
+
+/*
+ ---------------------------------------------------------
+ List items
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Definitions lists
+ ---------------------------------------------------------
+ */
+
+dl,
+dt,
+dd{
+
+	position: relative;
+	display: block;
+	margin-top: 0;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+
+}
+
+dt{
+
+	font-size: 130%;
+	font-weight: bold;
+
+}
+dd{
+
+	left: <?= VUI_SPACING; ?>em;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Definitions lists
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Details, summary
+ ---------------------------------------------------------
+ */
+
+details{
+
+	position: relative;
+	display: block;
+
+	padding: <?= VUI_SPACING; ?>em;
+	margin: <?= VUI_SPACING; ?>em;
+
+	border: thin solid <?= $vui->colors->vui_lighter->darken( 8, TRUE )->rgba_s(); ?>;
+
+}
+details[open]{
+
+	border: thin solid <?= $vui->colors->vui_base->rgba_s(); ?>;
+
+}
+details > summary{
+
+	display: block;
+	position: relative;
+
+}
+details > summary *{
+
+}
+details > summary:before,
+details > summary:after{
+
+	content: '';
+	position: absolute;
+	top: -1em;
+	right: -1em;
+	bottom: -1em;
+	left: -1em;
+	background-color: yellow;
+	<?= $vui->colors->vui_lighter->getCssGradient( 2 ); ?>
+
+	z-index: -1;
+
+}
+details > summary:after{
+
+	background: none;
+	z-index: 1;
+
+}
+details[open] > summary{
+
+	color: <?= $vui->colors->vui_base->rgba_s(); ?>;
+	margin-bottom: <?= VUI_SPACING * 2; ?>em;
+
+}
+
+/* ---------------------------------------------------- */
+/* Fix for Firefox */
+
+@-moz-document url-prefix() {
+
+	details > summary{
+
+		margin-bottom: <?= VUI_SPACING_VALUE_FIXED * 2; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+
+	}
+
+}
+/*
+ ---------------------------------------------------------
+ Details, summary
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Forms
+ ---------------------------------------------------------
+ */
+
+form{
+
+	position: relative;
+	display: block;
+
+}
+fieldset{
+	
+	border: <?= VUI_DEFAULT_BORDER; ?>;
+	
+	padding: <?= VUI_SPACING_FIXED; ?>;
+	margin: <?= VUI_SPACING_FIXED; ?>;
+	margin-top: 0;
+	
+}
+legend{
+
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+
+	color: <?= VUI_SEC_FONT_COLOR; ?>;
+	
+	padding: <?= VUI_SPACING_VALUE_FIXED / 2; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
+	
+	margin: 0;
+
+}
+legend:after{
+
+	position: relative;
+	content: '';
+	display: block;
+	clear: both;
+	height: 2px;
+
+}
+
+/*
+ ---------------------------------------------------------
+ Forms
+ ---------------------------------------------------------
+ *********************************************************
+ */
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Tables
+ ---------------------------------------------------------
+ */
+
+.table-wrapper {
+	
+	overflow-x: auto;
+	
+}
+table{
+	
+	display: table;
+	
+	border-collapse: collapse;
+	border: none;
+	text-align: center;
+	min-width: 100%;
+	margin-top: 0;
+	margin-bottom: <?= VUI_SPACING; ?>em;
+	
+	background-color: <?= $vui->colors->vui_table_bg->rgba_s(); ?>;
+	
+}
+tr{
+
+	border:none;
+
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+
+}
+td,
+thead td,
+th,
+table caption{
+
+	border: thin solid <?= $vui->colors->vui_table_border->rgba_s(); ?>;
+	border-top: none;
+	padding: <?= VUI_SPACING; ?>em <?= VUI_SPACING; ?>em;
+	vertical-align: middle;
+
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ); ?>
+
+}
+tr:hover,
+td:hover,
+th:hover{
+
+}
+table:hover tr{
+
+}
+table tr:hover{
+
+}
+td:first-child,
+th:first-child{
+
+	border-left: none;
+
+}
+td:last-child,
+th:last-child{
+
+	border-right: none;
+
+}
+tr:last-of-type td,
+tr:last-of-type th{
+
+	border-bottom: none;
+
+}
+th,
+table caption{
+
+	font-weight: bold;
+
+}
+td{
+	
+	position:relative;
+	text-align: left;
+	
+	color: <?= $vui->colors->vui_table_cell_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_cell_bg->rgba_s(); ?>;
+	
+}
+
+
+thead td,
+th,
+table caption {
+	
+	text-align: center;
+	
+	color: <?= $vui->colors->vui_table_header_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_header_bg->rgba_s(); ?>;
+	
+	white-space: nowrap;
+	
+}
+tr.selected{
+	
+}
+
+
+
+th a{
+
+}
+th a:hover{
+
+}
+
+tr:nth-child(odd){
+
+}
+tr:nth-child(odd) td{
+
+	color: <?= $vui->colors->vui_table_cell_alt_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_cell_alt_bg->rgba_s(); ?>;
+	
+}
+tr:nth-child(even) td{
+
+}
+tr.odd{
+
+}
+tr.even{
+
+}
+tr:hover,
+tr.selected {
+	
+	color: <?= $vui->colors->vui_table_row_selected_fg->rgba_s(); ?>;
+	
+}
+tr:hover td,
+tr.selected td {
+	
+	color: <?= $vui->colors->vui_table_row_selected_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_row_selected_bg->rgba_s(); ?>;
+	
+}
+
+
+tfoot tr td,
+tfoot tr:nth-child(odd) td,
+tfoot tr:nth-child(even) td {
+	
+	text-align: center;
+	
+	color: <?= $vui->colors->vui_table_footer_fg->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_table_footer_bg->rgba_s(); ?>;
+	
+}
+
+
+table.no-bg tr td,
+table.no-bg tr:nth-child(odd) td,
+table.no-bg tr:nth-child(even) td,
+table.no-bg tr.odd td,
+table.no-bg tr.even td{
+
+	background: none;
+
+}
+
+tr th.col-hidden,
+tr td.col-hidden{
+
+	display: none;
+
+}
+
+
+
+/*
+ ---------------------------------------------------------
+ Tables
+ ---------------------------------------------------------
+ *********************************************************
+ */

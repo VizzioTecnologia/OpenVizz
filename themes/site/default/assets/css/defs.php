@@ -2,19 +2,22 @@
 
 if ( ! defined( 'VUI_SCALE' ) ) define( 'VUI_SCALE', 0.9 );
 if ( ! defined( 'VUI_SPACING' ) ) define( 'VUI_SPACING', 1 * VUI_SCALE );
+if ( ! defined( 'VUI_SPACING_VALUE_FIXED' ) ) define( 'VUI_SPACING_VALUE_FIXED', 16 * VUI_SCALE );
+if ( ! defined( 'VUI_SPACING_UNIT_FIXED' ) ) define( 'VUI_SPACING_UNIT_FIXED', 'px' );
+if ( ! defined( 'VUI_SPACING_FIXED' ) ) define( 'VUI_SPACING_FIXED', VUI_SPACING_VALUE_FIXED . VUI_SPACING_UNIT_FIXED );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_FAMILY' ) ) define( 'VUI_DEFAULT_FONT_FAMILY', '\'Open Sans\', \'Arial\', sans-serif' );
-if ( ! defined( 'VUI_SEC_FONT_FAMILY' ) ) define( 'VUI_SEC_FONT_FAMILY', '\'Open Sans\', \'Arial\', sans-serif' );
+if ( ! defined( 'VUI_SEC_FONT_FAMILY' ) ) define( 'VUI_SEC_FONT_FAMILY', '\'Quicksand\', \'Arial\', sans-serif' );
 if ( ! defined( 'VUI_MONO_FONT_FAMILY' ) ) define( 'VUI_MONO_FONT_FAMILY', '\'Droid Sans Mono\', \'Menlo\', \'Monaco\', monospace' );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_COLOR' ) ) define( 'VUI_DEFAULT_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
-if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_site_fg->rgba_s() );
+if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_site_title_fg->rgba_s() );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', ( 1 * VUI_SCALE ) . 'em' );
 if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', 'normal' );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', ( 1.5 * VUI_SCALE ) . 'em' );
 
-if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', '1px solid ' . $vui->colors->vui_extra_3->rgba_s( 40 ) );
+if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', 'thin solid ' . $vui->colors->vui_site_fg->rgba_s( 60 ) );
 if ( ! defined( 'VUI_SEC_BORDER' ) ) define( 'VUI_SEC_BORDER', '1px solid ' . $vui->colors->vui_lighter->rgba_s( 200 ) );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER_RADIUS' ) ) define( 'VUI_DEFAULT_BORDER_RADIUS', '0.25em' );
@@ -88,7 +91,7 @@ define( 'DEFAULT_INPUTS_STYLESHEET', '
 	
 	' . $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ) . '
 	
-	' . $vui->css->transition( VUI_DEFAULT_TRANSITION ) . '
+	' . $vui->css->transition( VUI_DEFAULT_TRANSITION . ',width 1ms, height 1ms, min-width 1ms, min-height 1ms, max-width 1ms, max-height 1ms'  ) . '
 	
 	' . $vui->css->box_shadow( 'none' ) . '
 	

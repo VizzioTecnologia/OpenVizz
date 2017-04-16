@@ -48,6 +48,68 @@ class Unid_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Copy a Data Scheme
+	 *
+	 * @access public
+	 * @param numeric
+	 * @return bool
+	 */
+	
+	public function copy_ds( $id = NULL ){
+		
+		$result = FALSE;
+		
+		if ( $id ) {
+			
+			// get Data Scheme params
+			$gdsp = array(
+				
+				'where_condition' => 't1.id = ' . $id,
+				'limit' => 1,
+				
+			);
+			
+			$data_scheme = $this->ud_api->get_data_schemes( $gdsp )->row_array();
+			
+			if ( check_var( $data_scheme ) ) {
+				
+				$data_scheme = elements( array(
+					
+					'alias',
+					'title',
+					'create_datetime',
+					'mod_datetime',
+					'ordering',
+					'status',
+					'fields',
+					'params',
+					
+				), $data_scheme );
+				
+				$data_scheme[ 'title' ] = $data_scheme[ 'title' ] . ' ' . lang( 'ud_ds_filename_copy_sufix' );
+				$data_scheme[ 'alias' ] = url_title( $data_scheme[ 'title' ],'-',TRUE );
+				
+				$return_id = $this->sfcm->insert( $data_scheme );
+				
+				if ( $return_id ){
+				
+					$result = $return_id;
+					
+				}
+				
+			}
+			
+		}
+		
+		return $result;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
 	public function get_data_title_prop_html( $params, $ud_data ){
 		
 		if ( isset( $params[ 'ud_title_prop' ] ) ) {

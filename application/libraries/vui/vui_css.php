@@ -192,6 +192,63 @@ class Vui_css extends Vui{
 		return $this->_minify( $css );
 		
 	}
+	function mask_image( $value = NULL ) {
+		
+		if ( isset( $value ) ) {
+			
+			$css = '';
+			
+			$css .= "-webkit-mask-image: $value;";
+			$css .= "-moz-mask-image: $value;";
+			$css .= "-o-mask-image: $value;";
+			$css .= "mask-image: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
+			
+		}
+		
+		return FALSE;
+		
+	}
+	function mask_size( $value = NULL ) {
+		
+		if ( isset( $value ) ) {
+			
+			$css = '';
+			
+			$css .= "-webkit-mask-size: $value;";
+			$css .= "-moz-mask-size: $value;";
+			$css .= "-o-mask-size: $value;";
+			$css .= "mask-size: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
+			
+		}
+		
+		return FALSE;
+		
+	}
+	function mask_position( $value = NULL ) {
+		
+		if ( isset( $value ) ) {
+			
+			$css = '';
+			
+			$css .= "-webkit-mask-position: $value;";
+			$css .= "-moz-mask-position: $value;";
+			$css .= "-o-mask-position: $value;";
+			$css .= "mask-position: $value;";
+			
+			// Return our CSS
+			return $this->_minify( $css );
+			
+		}
+		
+		return FALSE;
+		
+	}
 	function transform_style( $value = 'preserve-3d' ) {
 		
 		if ( isset( $value ) ) {

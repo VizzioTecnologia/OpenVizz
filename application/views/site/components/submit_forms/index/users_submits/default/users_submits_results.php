@@ -26,6 +26,8 @@
 		
 	}
 	
+	$__main_image = FALSE;
+	
 	reset( $property_presentation_types );
 	
 	while ( list( $k, $v ) = each( $property_presentation_types ) ) {
@@ -115,7 +117,7 @@
 		
 		foreach ( $ud_data_array as $key => $ud_data ) {
 			
-			$this->ud_api->parse_ud_data( $ud_data, $props_to_show );
+			$this->ud_api->parse_ud_data( $ud_data, $props_to_show, TRUE );
 			
 			$_ud_data_wrapper_class = array();
 			
@@ -292,9 +294,37 @@
 				
 				$_ud_data_wrapper_class = join( ' ', $_ud_data_wrapper_class );
 				
-				echo '<div rel="ud-d-list-' . $unique_hash . '" href="' . $ud_data[ 'site_link' ] . ' .ud-data" class="item ' . ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) ? 'modal' : '' ) . ' ud-data ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
-				
 				$__main_image = FALSE;
+				
+				if ( check_var( $params[ 'ud_image_prop' ] ) ) {
+					
+					reset( $params[ 'ud_image_prop' ] );
+					
+					$ud_main_image_prop_alias = key( $params[ 'ud_image_prop' ] );
+					
+					if ( ! $__main_image AND $ud_main_image_prop_alias AND check_var( $ud_data[ 'data' ][ $ud_main_image_prop_alias ] ) ) {
+						
+						$__main_image = get_url( $ud_data[ 'data' ][ $ud_main_image_prop_alias ] );
+						
+						if ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) {
+							
+							$this->voutput->append_head_stylesheet_declaration( 'ud_data_' . $ud_data[ 'id' ] . $unique_hash, '
+								
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ' .ud-titles-wrapper {
+									
+									background-image: url(\'' . $__main_image . '\');
+									
+								}
+								
+							' );
+							
+						}
+						
+					}
+					
+				}
+				
+				echo '<div id="ud-d-list-data-' . $ud_data[ 'id' ] . '" rel="ud-d-list-' . $unique_hash . '" href="' . $ud_data[ 'site_link' ] . ' .ud-data" class="' . ( ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) ? 'ud-image-on-title ' : '' ) . 'item ' . ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) ? 'modal' : '' ) . ' ud-data ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
 				
 				reset( $property_presentation_types );
 				
@@ -304,31 +334,13 @@
 					
 					if ( ! empty( ${ '_ud_' . $v . '_props' } ) ) {
 						
-						if ( $v == 'image' ) {
-							
-							foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
-								
-								if ( $_field AND isset( $props[ $_alias ] ) ) {
-									
-									if ( ! $__main_image ) {
-										
-										$__main_image = get_url( $ud_data[ 'data' ][ $_alias ] );
-										
-									}
-									
-								}
-								
-							}
-							
-						}
-						
-						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper"' . ( $__main_image ? ' style="background-image:url(\'' . htmlspecialchars( $__main_image ) . '\');"' : '' ) . '>';
+						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper">';
 						
 						$__item_count = 1;
 						
 						foreach ( ${ '_ud_' . $v . '_props' } as $_alias => $_field ) {
 							
-							if ( $_field AND isset( $props[ $_alias ] ) ) {
+							if ( $_field AND ( isset( $props[ $_alias ] ) ) OR in_array( $_alias, array( 'id', 'submit_datetime', 'mod_datetime' ) ) ) {
 								
 								require( rtrim( $v, 's' ) . 's.php' );
 								
