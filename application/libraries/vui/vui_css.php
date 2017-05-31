@@ -700,19 +700,24 @@ class Vui_css extends Vui{
 		return $this->_minify( $css );
 		
 	}
-	function filter( $value ){
+	function filter( $value, $important = FALSE ){
 		
 		if ( is_array( $value ) ){
 			
 			$css_value = '';
 			$svg = '<svg height="0" xmlns="http://www.w3.org/2000/svg">';
-			$svg .= '<filter id="filter">';
+			$svg .= '<filter id="filter" color-interpolation-filters="sRGB" style="color-interpolation-filters:sRGB;">';
 			
 			if ( isset( $value[ 'blur' ] ) ){
 				
 				$svg .= '<feGaussianBlur in="SourceGraphic" stdDeviation="' . $value[ 'blur' ] . '"/>';
 				
 				$css_value .= ' blur(' . $value[ 'blur' ] . 'px)';
+				
+			}
+			if ( isset( $value[ 'test' ] ) ){
+				
+				$svg .= '';
 				
 			}
 			if ( isset( $value[ 'brightness' ] ) ){
@@ -735,6 +740,11 @@ class Vui_css extends Vui{
 				$svg .= '</feComponentTransfer>';
 				
 				$css_value .= ' contrast(' . $value[ 'contrast' ] . ')';
+				
+			}
+			if ( isset( $value[ 'duotone' ] ) ){
+				
+				$svg .= '<feColorMatrix color-interpolation-filters="sRGB" type="matrix" values="0.9 0 0 0 0.4 0.95 0 0 0 -0.1 -0.2 0 0 0 0.65 0 0 0 1 0"></feColorMatrix> ';
 				
 			}
 			if ( isset( $value[ 'opacity' ] ) ){
@@ -760,6 +770,16 @@ class Vui_css extends Vui{
 				$css_value .= ' hue-rotate(' . $value[ 'hue-rotate' ] . 'deg)';
 				
 			}
+			if ( isset( $value[ 'grayscale' ] ) ){
+				
+				$css_value .= ' grayscale(' . $value[ 'grayscale' ] . ')';
+				
+			}
+			if ( isset( $value[ 'sepia' ] ) ){
+				
+				$css_value .= ' sepia(' . $value[ 'sepia' ] . ')';
+				
+			}
 			
 			$svg .= '</filter>';
 			$svg .= '</svg>';
@@ -767,21 +787,30 @@ class Vui_css extends Vui{
 			$css = '';
 			$css .= 'data:image/svg+xml;base64,' . base64_encode( $svg );
 			
-			$css = "filter: url($css#filter);";
+			if ( isset( $value[ 'duotone' ] ) OR isset( $value[ 'colorize' ] ) ){
+				
+				$css_value .= " url($css#filter)";
+				
+			}
 			
-			$css .= "-webkit-filter: $css_value;";
-			$css .= "-moz-filter: $css_value;";
-			$css .= "-o-filter: $css_value;";
-			$css .= "-ms-filter: $css_value;";
-			$css .= "filter: $css_value;";
+			$css = "-webkit-filter: $css_value" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-moz-filter: $css_value" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-o-filter: $css_value" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-ms-filter: $css_value" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "filter: $css_value" . ( $important ? ' !important' : '' ) . ";";
 			
-			// Return our CSS
 			return $this->_minify( $css );
 			
 		}
 		else {
 			
-			return FALSE;
+			$css = "-webkit-filter: none" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-moz-filter: none" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-o-filter: none" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "-ms-filter: none" . ( $important ? ' !important' : '' ) . ";";
+			$css .= "filter: none" . ( $important ? ' !important' : '' ) . ";";
+			
+			return $this->_minify( $css );
 			
 		}
 	}

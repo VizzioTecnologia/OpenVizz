@@ -393,6 +393,7 @@ td.min-width,
 	
 }
 .vui .loading:after,
+#fancybox-loading:before,
 #fancybox-loading:after {
 	
 	position: absolute;
@@ -406,15 +407,15 @@ td.min-width,
 	
 }
 #fancybox-loading:before,
-#fancybox-loading:after {
-	
-	position: absolute;
+#fancybox-loading:after,
+.vui .loading:after {
 	
 	left: 50%;
 	top: 50%;
 	
-	margin-left: -<?= $preload_size / 2; ?>px;
-	margin-top: -<?= $preload_size / 2; ?>px;
+	<?= $vui->css->transform( 'translate(-50%, -50%)' ); ?>
+	
+	z-index: 1000;
 	
 }
 

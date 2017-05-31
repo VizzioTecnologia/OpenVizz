@@ -999,7 +999,8 @@ class Submit_forms extends Main {
 			// Verificações de requisições POST
 			
 			// capturando os dados obtidos via post, e guardando-os na variável $post_data
-			$post_data = $this->input->post( NULL, TRUE );
+// 			$post_data = $this->input->post( NULL, TRUE );
+			$post_data = $this->input->post();
 			
 			// Se não temos dados POST
 			if ( ! $post_data ){
@@ -1319,7 +1320,7 @@ class Submit_forms extends Main {
 					), $post_data );
 					
 					$modified_date_time = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-					$modified_date_time = strftime( '%Y-%m-%d %T', $modified_date_time );
+					$modified_date_time = ov_strftime( '%Y-%m-%d %T', $modified_date_time );
 					
 					$db_data[ 'mod_datetime' ] = $modified_date_time;
 
@@ -2524,7 +2525,7 @@ class Submit_forms extends Main {
 				
 			}
 			
-			$terms = isset( $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] ) ? $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] : ( isset( $data[ 'get' ][ 'q' ][ 'terms' ] ) ? urldecode( $data[ 'get' ][ 'q' ][ 'terms' ] ) : FALSE );
+			$terms = isset( $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] ) ? $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] : ( isset( $data[ 'get' ][ 'q' ] ) ? urldecode( $data[ 'get' ][ 'q' ] ) : FALSE );
 			$data[ 'terms' ] = $terms;
 			$search_config[ 'terms' ] = $terms;
 			
@@ -2728,7 +2729,7 @@ class Submit_forms extends Main {
 			/*
 			if ( $this->input->post() ) {
 				
-				echo '<pre>' . print_r( $this->input->post(), TRUE ) . '</pre>'; 
+				
 				exit;
 				
 			}
@@ -3554,7 +3555,7 @@ class Submit_forms extends Main {
 					), $post );
 					
 					$mod_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-					$mod_datetime = strftime( '%Y-%m-%d %T', $mod_datetime );
+					$mod_datetime = ov_strftime( '%Y-%m-%d %T', $mod_datetime );
 					
 					$db_data[ 'id' ] = $user_submit_id;
 					$db_data[ 'submit_form_id' ] = $ds_id;
@@ -3621,7 +3622,9 @@ class Submit_forms extends Main {
 						
 						$db_data[ 'params' ] = json_encode( $db_data[ 'params' ] );
 						
-						if ( $this->sfcm->update_user_submit( $db_data, array( 'id' => $user_submit_id ) ) ){
+// 					echo '<pre>' . print_r( $user_submit_id, TRUE ) . '</pre>'; exit;
+					
+						if ( $this->ud_api->update_ud_data( $db_data, $user_submit_id ) ){
 							
 							msg( ( 'submit_form_user_submit_updated' ), 'success' );
 							
@@ -4554,7 +4557,7 @@ class Submit_forms extends Main {
 				);
 				
 				$now = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-				$now = strftime( '%Y-%m-%d %T', $now );
+				$now = ov_strftime( '%Y-%m-%d %T', $now );
 				
 				$dl_filename = url_title( $now );
 				$data[ 'dl_filename' ] = & $dl_filename;
@@ -5017,6 +5020,7 @@ class Submit_forms extends Main {
 				);
 				
 				$c_urls[ 'us_export_download_json_link' ] = $c_urls[ 'us_export_download_json_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );
+				
 				$c_urls[ 'us_export_download_csv_link' ] = $c_urls[ 'us_export_download_csv_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );
 				$c_urls[ 'us_export_download_xls_link' ] = $c_urls[ 'us_export_download_xls_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );
 				$c_urls[ 'us_export_download_html_link' ] = $c_urls[ 'us_export_download_html_link' ] . '/' . $this->uri->assoc_to_uri( $us_export_base_link_array );

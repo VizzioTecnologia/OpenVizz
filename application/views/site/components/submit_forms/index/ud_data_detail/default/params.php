@@ -1,5 +1,17 @@
 <?php
 	
+	foreach ( $data_scheme[ 'fields' ] as $key => $field ) {
+		
+		$alias = check_var( $field[ 'alias' ] ) ? $field[ 'alias' ] : FALSE;
+		
+		if ( $alias ) {
+			
+			$props_combobox_options[ $alias ] = $field[ 'label' ];
+			
+		}
+		
+	}
+	
 	$this->plugins->load( 'jquery_ui' );
 	
 	$head_script_declaration = "
@@ -52,6 +64,34 @@
 	$_tmp = array(
 		
 		'type' => 'select',
+		'name' => 'ud_d_detail_show_page_content_title',
+		'label' => 'ud_d_detail_show_page_content_title',
+		'tip' => 'tip_ud_d_detail_show_page_content_title',
+		'default' => '1',
+		'validation' => array(
+			
+			'rules' => 'trim',
+			
+		),
+		'options' => array(
+			
+			'global' => 'global',
+			'0' => 'no',
+			'1' => 'yes',
+			
+		),
+		
+	);
+	
+	$params[ 'params_spec_values' ][ 'ud_d_detail_show_page_content_title' ] = '1';
+	
+	$new_params[] = $_tmp;
+	
+	//------------------------------------------------------
+	
+	$_tmp = array(
+		
+		'type' => 'select',
 		'name' => 'ud_d_detail_page_content_title_from_metadata',
 		'label' => 'ud_d_detail_page_content_title_from_metadata',
 		'tip' => 'tip_ud_d_detail_page_content_title_from_metadata',
@@ -72,7 +112,171 @@
 	
 	$params[ 'params_spec_values' ][ 'ud_d_detail_page_content_title_from_metadata' ] = '1';
 	
-	$params[ 'params_spec' ][ 'menu_item' ][ 'ud_d_detail_page_content_title_from_metadata' ] = $_tmp;
+	$new_params[] = $_tmp;
+	
+	//------------------------------------------------------
+	
+	$new_params[] = array(
+		
+		'type' => 'spacer',
+		'label' => 'ud_d_detail_site_props_to_show',
+		'tip' => 'tip_ud_d_detail_site_props_to_show',
+		
+	);
+	
+	//------------------------------------------------------
+	
+	$_tmp = array(
+		
+		'type' => 'select',
+		'name' => 'ud_d_detail_site_override_visible_props',
+		'label' => 'ud_d_detail_site_override_visible_props',
+		'tip' => 'tip_ud_d_detail_site_override_visible_props',
+		'validation' => array(
+			
+			'rules' => 'trim|required',
+			
+		),
+		'options' => array(
+			
+			'1' => 'yes',
+			'0' => 'no',
+			
+		),
+		
+	);
+	
+	$params[ 'params_spec_values' ][ 'ud_d_detail_site_override_visible_props' ] = 0;
+	
+	$new_params[] = $_tmp;
+	
+	//------------------------------------------------------
+	
+	if ( check_var( $menu_item[ 'params' ][ 'ud_d_detail_site_override_visible_props' ] ) ) {
+		
+		//------------------------------------------------------
+		
+		$new_params[] = array(
+			
+			'type' => 'spacer',
+			
+		);
+		
+		//------------------------------------------------------
+		
+		$_tmp = array(
+			
+			'type' => 'checkbox',
+			'inline' => TRUE,
+			'name' => 'ud_d_detail_site_props_to_show[id]',
+			'label' => 'id',
+			'value' => 'id',
+			'validation' => array(
+				
+				'rules' => 'trim',
+				
+			),
+			
+		);
+
+		if ( $new_flag ) {
+			
+			// $params[ 'params_spec_values' ][ 'ud_title_prop[id]' ] = 'id';
+			
+		}
+		
+		$new_params[] = $_tmp;
+		
+		//------------------------------------------------------
+		
+		$_tmp = array(
+			
+			'type' => 'checkbox',
+			'inline' => TRUE,
+			'name' => 'ud_d_detail_site_props_to_show[submit_datetime]',
+			'label' => 'submit_datetime',
+			'value' => 'submit_datetime',
+			'validation' => array(
+				
+				'rules' => 'trim',
+				
+			),
+			
+		);
+		
+		if ( $new_flag ) {
+			
+			// $params[ 'params_spec_values' ][ 'ud_title_prop[submit_datetime]' ] = 'submit_datetime';
+			
+		}
+		
+		$new_params[] = $_tmp;
+		
+		//------------------------------------------------------
+		
+		$_tmp = array(
+			
+			'type' => 'checkbox',
+			'inline' => TRUE,
+			'name' => 'ud_d_detail_site_props_to_show[mod_datetime]',
+			'label' => 'mod_datetime',
+			'value' => 'mod_datetime',
+			'validation' => array(
+				
+				'rules' => 'trim',
+				
+			),
+			
+		);
+
+		if ( $new_flag ) {
+			
+			// $params[ 'params_spec_values' ][ 'ud_title_prop[mod_datetime]' ] = 'mod_datetime';
+			
+		}
+		
+		$new_params[] = $_tmp;
+		
+		//------------------------------------------------------
+		
+		foreach ( $props_combobox_options as $alias => $label ) {
+			
+			$_tmp = array(
+				
+				'type' => 'checkbox',
+				'inline' => TRUE,
+				'name' => 'ud_d_detail_site_props_to_show[' . $alias . ']',
+				'label' => $label,
+				'value' => $alias,
+				'validation' => array(
+					
+					'rules' => 'trim',
+					
+				),
+				
+			);
+			
+			if ( ! in_array( $field[ 'field_type' ], array( 'button', 'html', ) ) ) {
+				
+				if ( $new_flag ) {
+					
+					// $params[ 'params_spec_values' ][ 'ud_title_prop[' . $alias . ']' ] = $alias;
+					
+				}
+				
+			}
+			
+			if ( $field[ 'field_type' ] == 'combo_box' ) {
+				
+				$select_fields[] = $field;
+				
+			}
+			
+			$new_params[] = $_tmp;
+			
+		}
+		
+	}
 	
 	//------------------------------------------------------
 	
@@ -205,7 +409,7 @@
 		
 		//------------------------------------------------------
 		
-		foreach ( $fields_options as $alias => $label ) {
+		foreach ( $props_combobox_options as $alias => $label ) {
 			
 			$_tmp = array(
 				
@@ -349,7 +553,7 @@
 			
 			if ( $alias ) {
 				
-				$fields_options[ $alias ] = $field[ 'label' ];
+				$props_combobox_options[ $alias ] = $field[ 'label' ];
 				
 				$_tmp = array(
 					
@@ -546,9 +750,9 @@
 	$_tmp = array(
 		
 		'type' => 'select',
-		'name' => 'ud_d_main_image_on_title',
-		'label' => 'ud_d_main_image_on_title',
-		'tip' => 'tip_ud_d_main_image_on_title',
+		'name' => 'ud_d_detail_main_image_on_title',
+		'label' => 'ud_d_detail_main_image_on_title',
+		'tip' => 'tip_ud_d_detail_main_image_on_title',
 		'default' => '1',
 		'validation' => array(
 			
@@ -564,7 +768,7 @@
 		
 	);
 	
-	$params[ 'params_spec_values' ][ 'ud_d_main_image_on_title' ] = TRUE;
+	$params[ 'params_spec_values' ][ 'ud_d_detail_main_image_on_title' ] = TRUE;
 	
 	$new_params[] = $_tmp;
 	

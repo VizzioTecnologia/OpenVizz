@@ -65,7 +65,7 @@ class Submit_forms extends Main {
 		// Setting the file name
 		
 		$_fn_prefix = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-		$_fn_prefix = strftime( '%Y-%m-%d %T', $_fn_prefix );
+		$_fn_prefix = ov_strftime( '%Y-%m-%d %T', $_fn_prefix );
 		$_fn_prefix = 'sf-api-' . $_fn_prefix;
 		
 		$filename =  url_title( ( ( $filename ) ? $filename : $_fn_prefix ) );
@@ -447,7 +447,7 @@ class Submit_forms extends Main {
 		}
 		else {
 			
-			$data[ 'post' ] = NULL;
+			$data[ 'post' ] = array();
 			
 		}
 		
@@ -458,7 +458,7 @@ class Submit_forms extends Main {
 		}
 		else {
 			
-			$data[ 'get' ] = NULL;
+			$data[ 'get' ] = array();
 			
 		}
 		
@@ -871,7 +871,7 @@ class Submit_forms extends Main {
 									
 							}
 							
-							if ( ! $skip ) {
+							if ( ! check_var( $skip ) ) {
 								
 								$rules[] = $rule . $comp;
 								
@@ -1168,7 +1168,57 @@ class Submit_forms extends Main {
 			// Validating uploaded files
 			// -----------------------------------------------
 			
-			if ( $data[ 'post' ] AND $this->form_validation->run() AND ! check_var( $file_upload_errors ) ){
+			$captcha = TRUE;
+			
+			if ( check_var( $data[ 'params' ][ 'ud_dsf_enable_captcha' ] ) AND check_var( $data[ 'params' ][ 'ud_dsf_captcha_site_key' ] ) AND check_var( $data[ 'params' ][ 'ud_dsf_captcha_secret' ] ) ) {
+				
+				$this->voutput->append_head_script( 'recaptcha', 'https://www.google.com/recaptcha/api.js' );
+				
+				if ( check_var( $data[ 'post' ]['g-recaptcha-response'] ) ) {
+					
+					$recaptcha_config = array(
+						
+						'site_key' => $data[ 'params' ][ 'ud_dsf_captcha_site_key' ],
+						'secret' => $data[ 'params' ][ 'ud_dsf_captcha_secret' ],
+						
+					);
+					
+					$this->load->library( 'recaptcha', $recaptcha_config );
+					
+					$resp = $this->recaptcha->verify( $data[ 'post' ][ 'g-recaptcha-response' ], $_SERVER[ 'REMOTE_ADDR' ] );
+					
+					if ( ! ( ( bool ) $resp->isSuccess() ) ) {
+						
+						echo '$data[ \'post\' ][\'g-recaptcha-response\']:<pre>' . print_r( $data[ 'post' ]['g-recaptcha-response'], TRUE ) . '</pre>'; 
+						
+						$_errors = array();
+						
+						foreach ( $resp->getErrorCodes() as $code ) {
+							
+							$_errors[] = '<kbd>' . $code . '</kbd> ';
+							
+						}
+						
+						msg( lang( 'Captcha inválido' ), 'title' );
+						msg( join( '', $_errors ), 'error' );
+						
+						$captcha = FALSE;
+							
+					}
+					
+				}
+				
+				else if ( check_var( $data[ 'post' ] ) AND ! check_var( $data[ 'post' ]['g-recaptcha-response'] ) ) {
+					
+					msg( lang( 'Captcha inválido' ), 'error' );
+					
+					$captcha = FALSE;
+					
+				}
+				
+			}
+			
+			if ( $captcha AND $data[ 'post' ] AND $this->form_validation->run() AND ! check_var( $file_upload_errors ) ){
 				
 				// We need set this variable again, because some validation rules may change its values on $this->input->post()
 				$data[ 'post' ] = $this->input->post( NULL, $xss_filtering );
@@ -1400,10 +1450,30 @@ class Submit_forms extends Main {
 					$replace = array();
 					
 					$find[] = '{submit_form_id}';
-					$find[] = '{submit_form_url}';
-					$find[] = '{submit_form_title}';
+					$find[] = '{data_scheme_id}';
+					$find[] = '{ds_id}';
+					$find[] = '{dsid}';
 					$replace[] = $data_scheme[ 'id' ];
+					$replace[] = $data_scheme[ 'id' ];
+					$replace[] = $data_scheme[ 'id' ];
+					$replace[] = $data_scheme[ 'id' ];
+					
+					$find[] = '{submit_form_url}';
+					$find[] = '{data_scheme_url}';
+					$find[] = '{ds_url}';
+					$find[] = '{dsurl}';
 					$replace[] = $data_scheme[ 'url' ];
+					$replace[] = $data_scheme[ 'url' ];
+					$replace[] = $data_scheme[ 'url' ];
+					$replace[] = $data_scheme[ 'url' ];
+					
+					$find[] = '{submit_form_title}';
+					$find[] = '{data_scheme_title}';
+					$find[] = '{ds_title}';
+					$find[] = '{dstitle}';
+					$replace[] = $data_scheme[ 'title' ];
+					$replace[] = $data_scheme[ 'title' ];
+					$replace[] = $data_scheme[ 'title' ];
 					$replace[] = $data_scheme[ 'title' ];
 					
 					// ------------------
@@ -1472,7 +1542,7 @@ class Submit_forms extends Main {
 									
 									$format = 'sf_us_dt_ft_pt_' . $format . '_' . $field[ 'sf_date_field_presentation_format' ];
 									
-									$field_value =  strftime( lang( $format ), strtotime( $field_value ) );
+									$field_value =  ov_strftime( lang( $format ), strtotime( $field_value ) );
 									
 								}
 								else if ( in_array( $field[ 'field_type' ], array( 'checkbox', 'radiobox', 'combo_box', ) ) ){
@@ -1512,6 +1582,11 @@ class Submit_forms extends Main {
 											$field_value = isset( $_user_submit[ 'data' ][ $field[ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $field[ 'options_title_field' ] ] : $_user_submit[ 'id' ];
 											
 										}
+										else {
+											
+											$field_value = $data[ 'post' ][ 'form' ][ $field_alias ];
+											
+										}
 										
 									}
 									
@@ -1525,13 +1600,13 @@ class Submit_forms extends Main {
 							}
 							
 							
-							$find[] = '{' . $field_alias . ':' . 'presentation_label}';
-							$find[] = '{' . $field_alias . ':' . 'label}';
-							$find[] = '{' . $field_alias . ':' . 'value}';
+							$find[ $field_alias ] = '{' . $field_alias . ':' . 'presentation_label}';
+							$find[ $field_alias ] = '{' . $field_alias . ':' . 'label}';
+							$find[ $field_alias ] = '{' . $field_alias . ':' . 'value}';
 							
-							$replace[] = $field_presentation_label;
-							$replace[] = $field_label;
-							$replace[] = $field_value;
+							$replace[ $field_alias ] = $field_presentation_label;
+							$replace[ $field_alias ] = $field_label;
+							$replace[ $field_alias ] = $field_value;
 							
 						}
 						
@@ -1546,7 +1621,7 @@ class Submit_forms extends Main {
 					$ud_d_db_insert_data = array();
 					
 					$submit_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-					$submit_datetime = strftime( '%Y-%m-%d %T', $submit_datetime );
+					$submit_datetime = ov_strftime( '%Y-%m-%d %T', $submit_datetime );
 					
 					// ------------------
 					// Parsing and moving the uploaded files
@@ -1719,10 +1794,14 @@ class Submit_forms extends Main {
 						$data[ 'ud_data' ][ 'id' ] = $ud_data_id;
 						
 						$find[] = '{user_submit_id}';
-						$find[] = '{ud_data_submit_datetime}';
-						$find[] = '{ud_data_mod_datetime}';
+						$find[] = '{ud_data_id}';
 						$replace[] = $ud_data_id;
+						$replace[] = $ud_data_id;
+						
+						$find[] = '{ud_data_submit_datetime}';
 						$replace[] = $data[ 'ud_data' ][ 'submit_datetime' ];
+						
+						$find[] = '{ud_data_mod_datetime}';
 						$replace[] = $data[ 'ud_data' ][ 'mod_datetime' ];
 						
 						if ( check_var( $data[ 'params' ][ 'sfpsm_user_submit_save_into_db_success_title' ] ) ) {
@@ -2088,7 +2167,7 @@ class Submit_forms extends Main {
 					
 					if ( check_var( $ud_d_db_update_data ) ){
 						
-						if ( $this->sfcm->update_user_submit( $ud_d_db_update_data, array( 'id' => $ud_data_id ) ) ) {
+						if ( $this->ud_api->update_ud_data( $ud_d_db_update_data, $ud_data_id ) ){
 							
 							log_message( 'debug', '[Submit forms] User submit (' . $ud_data_id . ') updated successfully' );
 							
@@ -2466,7 +2545,6 @@ class Submit_forms extends Main {
 					
 				);
 				
-				$get_query = array();
 				$ob_fields = array(
 					
 					'id',
@@ -2500,6 +2578,12 @@ class Submit_forms extends Main {
 				if ( isset( $data[ 'post' ][ 'users_submits_search' ] ) ) {
 					
 					$sfsp = $data[ 'post' ][ 'users_submits_search' ];
+					
+					if ( isset( $data[ 'post' ][ 'users_submits_search_terms' ] ) ) {
+						
+						$sfsp[ 'terms' ] = $data[ 'post' ][ 'users_submits_search_terms' ];
+						
+					}
 					
 				}
 				else if ( isset( $data[ 'get' ][ 'sfsp' ] ) ) {
@@ -2619,14 +2703,15 @@ class Submit_forms extends Main {
 				--------------------------------------------------------
 				*/
 				
-				if ( isset( $sfsp[ 'terms' ] ) AND ! isset( $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] ) ){
+				if ( isset( $sfsp[ 'terms' ] ) AND ! isset( $data[ 'post' ][ 'users_submits_search_terms' ] ) ){
 					
-					$data[ 'post' ][ 'users_submits_search' ][ 'terms' ] = $sfsp[ 'terms' ];
+					$data[ 'post' ][ 'users_submits_search_terms' ] = $sfsp[ 'terms' ];
 					
 				}
 				
-				$terms = isset( $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] ) ? $data[ 'post' ][ 'users_submits_search' ][ 'terms' ] : ( isset( $data[ 'get' ][ 'q' ][ 'terms' ] ) ? urldecode( $data[ 'get' ][ 'q' ][ 'terms' ] ) : FALSE );
-				$data[ 'terms' ] = $terms;
+				$terms = isset( $data[ 'post' ][ 'users_submits_search_terms' ] ) ? $data[ 'post' ][ 'users_submits_search_terms' ] : ( isset( $data[ 'get' ][ 'q' ] ) ? urldecode( $data[ 'get' ][ 'q' ] ) : FALSE );
+				
+				$data[ 'terms' ] = $sfsp[ 'terms' ] = $terms;
 				$search_config[ 'terms' ] = $terms;
 				
 				if ( ( isset( $data[ 'post' ][ 'users_submits_search' ][ 'submit_search' ] ) OR $terms ) ){
@@ -2638,6 +2723,8 @@ class Submit_forms extends Main {
 					}
 					
 				}
+				
+// 				echo '<strong>$sfsp:</strong><pre>' . print_r( $sfsp, TRUE ) . '</pre>';
 				
 				/*
 				--------------------------------------------------------
@@ -2780,20 +2867,20 @@ class Submit_forms extends Main {
 					
 				}
 				
-				foreach( $get_query as $k => & $query ) {
+				foreach( $data[ 'get' ] as $k => & $query ) {
 					
 					$query = $k . '=' . urlencode( $query );
 					
 				}
 				
-				$get_query = ! empty( $get_query ) ? '?' . join( '&', $get_query ) : '';
+				$data[ 'get' ] = ! empty( $data[ 'get' ] ) ? '?' . join( '&', $data[ 'get' ] ) : '';
 				$s = $s ? '/s/1' : '';
 				
 				$sfsp = $this->unid->url_encode_ud_filters( $sfsp );
 				
-				$pagination_url = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $get_query;
+				$pagination_url = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . '/cp/%p%/ipp/%ipp%' . $data[ 'get' ];
 				
-				$data[ 'page_url' ] = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . $get_query;
+				$data[ 'page_url' ] = 'submit_forms/index' . '/miid/' . $miid . '/a/us/sfid/' . $data_scheme_id . $s . '/sfsp/' . $sfsp . '/f/' . $filters_url . $data[ 'get' ];
 // 				echo $data[ 'page_url' ];
 				$data[ 'ud_data_list_total_results' ] = $this->search->count_all_results( 'sf_us_search' );
 				
@@ -2928,9 +3015,15 @@ class Submit_forms extends Main {
 				
 				$this->ud_api->parse_ud_data( $ud_data, $data[ 'props_to_show' ], TRUE );
 				
-				if ( check_var( $data[ 'params' ][ 'ud_d_detail_page_content_title_from_metadata' ] ) OR ! check_var( $data[ 'params' ][ 'title' ] ) ) {
+				if ( check_var( $data[ 'params' ][ 'ud_d_detail_page_content_title_from_metadata' ] ) ) {
 					
-					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title_prop_html( $data[ 'params' ], $ud_data );
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->unid->get_data_title( $data[ 'params' ], $ud_data, $data_scheme );
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $this->mcm->html_data[ 'content' ][ 'title' ][ 'value' ];
+					
+				}
+				else if ( check_var( $data[ 'params' ][ 'custom_page_content_title' ] ) ) {
+					
+					$this->mcm->html_data[ 'content' ][ 'title' ] = $data[ 'params' ][ 'custom_page_content_title' ];
 					
 				}
 				else if ( check_var( $data[ 'params' ][ 'custom_page_title' ] ) ) {
@@ -2941,6 +3034,12 @@ class Submit_forms extends Main {
 				else if ( check_var( $data[ 'params' ][ 'title' ] ) ) {
 					
 					$this->mcm->html_data[ 'content' ][ 'title' ] = $data[ 'params' ][ 'title' ];
+					
+				}
+				
+				if ( check_var( $data[ 'params' ][ 'custom_page_content_title' ] ) ) {
+					
+					$this->voutput->set_head_title( $data[ 'params' ][ 'custom_page_content_title' ] );
 					
 				}
 				

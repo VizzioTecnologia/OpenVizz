@@ -27,11 +27,24 @@
 	
 }
 
+.vui .pagination .vui-interactive-el-wrapper {
+	
+	z-index: 1;
+	
+}
+.vui .pagination .vui-interactive-el-wrapper:hover {
+	
+	z-index: 2;
+	
+}
 .vui .pagination .vui-interactive-el-wrapper > .el {
 	
 	text-align: center;
 	margin-bottom: 0;
 	width: 100%;
+	
+	border-left: none;
+	border-right: none;
 	
 	<?= $vui->css->border_radius( 0 ); ?>
 	
@@ -248,7 +261,6 @@
 
 
 
-.vui .pagination .vui-interactive-el-wrapper.current,
 .vui .pagination .vui-interactive-el-wrapper.inactive {
 	
 	opacity: .4;

@@ -8,6 +8,16 @@
 		
 		if ( isset( $options ) AND is_array( $options ) ) {
 			
+			if ( count( $options ) > 1 ) {
+				
+				echo '<label title="' . $tip . '" class="' . $class . '" data-ext-tip="' . $ext_tip . '" for="param-' . $name . '">';
+				
+				echo $label;
+				
+				echo '</label>';
+				
+			}
+			
 			$_options = array();
 			
 			foreach( $options as $k => $v ) {

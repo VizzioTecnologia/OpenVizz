@@ -224,7 +224,7 @@ class Submit_forms_common_model extends CI_Model{
 
 	// --------------------------------------------------------------------
 	
-	public function get_submit_form_params( $submit_form, $current_params_values ){
+	public function get_submit_form_params( $data_scheme, $current_params_values ){
 		
 		$params = get_params_spec_from_xml( APPPATH . 'controllers/admin/com_submit_forms/submit_form_params.xml' );
 		
@@ -723,6 +723,8 @@ class Submit_forms_common_model extends CI_Model{
 			
 		}
 		
+		$current_section = 'ud_params_section_d_detail_params';
+		
 		// carregando os layouts do tema atual
 		$layouts = dir_list_to_array( THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'ud_data_detail' );
 		// carregando os layouts do diretório de views padrão
@@ -930,8 +932,6 @@ class Submit_forms_common_model extends CI_Model{
 				
 			}
 			
-// 			echo '<pre>' . print_r( $params, TRUE ) . '</pre>';
-			
 		}
 		
 		// Receivers layout specific params
@@ -939,6 +939,28 @@ class Submit_forms_common_model extends CI_Model{
 		
 		// print_r($params);
 
+		//------------------------------------------------------
+		
+		$new_params = array();
+		
+		$layout = ( isset( $current_params_values[ 'ud_d_detail_layout_site' ] ) AND $current_params_values[ 'ud_d_detail_layout_site' ] != 'global' ) ? $current_params_values[ 'ud_d_detail_layout_site' ] : 'default';
+		
+		$system_views_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'ud_data_detail' . DS;
+		$theme_views_path = THEMES_PATH . site_theme_components_views_path() . 'submit_forms' . DS . 'index' . DS . 'ud_data_detail' . DS;
+		
+		if ( file_exists( $system_views_path . $layout . DS . 'params.php' ) ) {
+			
+			include_once $system_views_path . $layout . DS . 'params.php';
+			
+		}
+		else if ( file_exists( $theme_views_path . $layout . DS . 'params.php' ) ) {
+			
+			include_once $theme_views_path . $layout . DS . 'params.php';
+			
+		}
+		
+		array_push_pos( $params[ 'params_spec' ][ 'ud_params_section_d_detail_params' ], $new_params, 1  );
+		
 		return $params;
 	}
 	
@@ -1594,7 +1616,7 @@ class Submit_forms_common_model extends CI_Model{
 								
 								$format = 'sf_us_dt_ft_pt_' . $format . '_' . $field[ 'sf_date_field_presentation_format' ];
 								
-								$value =  strftime( lang( $format ), strtotime( $value ) );
+								$value =  ov_strftime( lang( $format ), strtotime( $value ) );
 								
 							}
 							else {
@@ -1626,7 +1648,9 @@ class Submit_forms_common_model extends CI_Model{
 									
 									if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->sfcm->get_user_submit( $value ) ) {
 										
-										$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										$this->ud_api->parse_ud_data( $_user_submit, NULL, TRUE );
+										
+										$value = isset( $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] ) ? $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] : $_user_submit[ 'id' ];
 										
 									}
 									else {
@@ -1659,7 +1683,9 @@ class Submit_forms_common_model extends CI_Model{
 											
 											if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $v ) AND $_user_submit = $this->sfcm->get_user_submit( $v ) ) {
 												
-												$v = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												$this->ud_api->parse_ud_data( $_user_submit, NULL, TRUE );
+												
+												$v = isset( $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] ) ? $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] : $_user_submit[ 'id' ];
 												
 											}
 											
@@ -1678,7 +1704,9 @@ class Submit_forms_common_model extends CI_Model{
 								
 								if ( check_var( $fields[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $fields[ $alias ][ 'options_title_field' ] ) OR check_var( $fields[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_user_submit( $value, NULL, TRUE ) ) {
 									
-									$value = isset( $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $fields[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+									$this->ud_api->parse_ud_data( $_user_submit, NULL, TRUE );
+									
+									$value = isset( $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] ) ? $_user_submit[ 'parsed_data' ][ 'full' ][ $fields[ $alias ][ 'options_title_field' ] ][ 'value' ] : $_user_submit[ 'id' ];
 									
 								}
 								

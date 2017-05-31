@@ -58,7 +58,7 @@
 											
 											$format = 'sf_us_dt_ft_pt_' . $format . '_' . $_tmp_array[ $us_key ][ 'sf_date_field_presentation_format' ];
 											
-											echo strftime( lang( $format ), strtotime( $user_submit[ $us_key ] ) );
+											echo ov_strftime( lang( $format ), strtotime( $user_submit[ $us_key ] ) );
 											
 										}
 										

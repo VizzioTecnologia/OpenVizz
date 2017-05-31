@@ -1,29 +1,35 @@
 
+.search-box-expanded #jquery-scrolltop {
+	
+	display: none;
+	
+}
+
 #jquery-scrolltop {
 	
-	background-image: url(<?= $vui->svg_file( 'icon-arrow-up', $vui->colors->vui_base->get_ro_color()->hex_s ); ?>);
-	background-repeat: no-repeat, no-repeat;
-	background-color: <?= $vui->colors->vui_base->darken( 50, TRUE )->rgba_s( 100 ); ?>;
-	background-position: center center, center center;
-	background-size: auto auto, 100% 100%;
+	top: auto;
 	
-	color: <?= $vui->colors->vui_base->get_ro_color()->hex_s; ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-arrow-up', $vui->colors->vui_modal_overlay_fg->rgba_s() ); ?>);
 	
-	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	color: <?= $vui->colors->vui_modal_overlay_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->opacity( 1 ) ?>
 	<?= $vui->css->border_radius( '100%' ) ?>
 	
-	bottom: -64px;
+	bottom: -<?= ( VUI_SPACING_VALUE_FIXED + 48 ) . VUI_SPACING_UNIT_FIXED; ?>;
+	
+	z-index: 10000;
 	
 }
 #jquery-scrolltop.jquery-scrolltop-on{
 	
 	bottom: 10px;
-	opacity: 0.3;
+	<?= $vui->css->opacity( 1 ) ?>
 	
 }
 #jquery-scrolltop:hover{
 	
-	opacity: 1;
+	<?= $vui->css->opacity( 1 ) ?>
 	
 }
 

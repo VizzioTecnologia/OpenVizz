@@ -145,8 +145,11 @@ class Unid_api_mdl extends CI_Model{
 		}
 		
 		$act =												isset( $post[ 'a' ] ) ?  urldecode( $post[ 'a' ] ) : ( isset( $config[ 'a' ] ) ? urldecode( $config[ 'a' ] ) : NULL ); // action
+		
 		$username =											isset( $post[ 'u' ] ) ?  urldecode( $post[ 'u' ] ) : ( isset( $config[ 'u' ] ) ? urldecode( $config[ 'u' ] ) : NULL ); // user
+		
 		$password =											isset( $post[ 'p' ] ) ?  urldecode( $post[ 'p' ] ) : ( isset( $config[ 'p' ] ) ? urldecode( $config[ 'p' ] ) : NULL ); // password
+		
 		$rt =												isset( $post[ 'rt' ] ) ?  urldecode( $post[ 'rt' ] ) : ( isset( $config[ 'rt' ] ) ? urldecode( $config[ 'rt' ] ) : 'json' ); // Return type: json, php_print_r
 		
 		if ( ! isset( $act ) ) {
@@ -456,7 +459,10 @@ class Unid_api_mdl extends CI_Model{
 			else if ( $act == 'gdspo' ) {
 				
 				$dsid =										isset( $post[ 'dsi' ] ) ?  urldecode( $post[ 'dsi' ] ) : ( isset( $config[ 'dsi' ] ) ? urldecode( $config[ 'dsi' ] ) : NULL ); // Data Scheme id (submit form id)
+				
 				$pa =										isset( $post[ 'pa' ] ) ?  urldecode( $post[ 'pa' ] ) : ( isset( $config[ 'pa' ] ) ? urldecode( $config[ 'pa' ] ) : NULL ); // Property alias
+				
+				$wabor =									isset( $post[ 'wabor' ] ) ?  urldecode( $post[ 'wabor' ] ) : ( isset( $config[ 'wabor' ] ) ? urldecode( $config[ 'wabor' ] ) : NULL ); // Workaround from browser objects reindexing
 				
 				if ( ! check_var( $dsid ) ) {
 					
@@ -538,30 +544,33 @@ class Unid_api_mdl extends CI_Model{
 												
 												$_POST = array(
 													
+													'dsi' => $data_scheme[ 'fields' ][ $pa ][ 'options_from_users_submits' ],
 													'a' => 'gd',
+													'ob' => ( isset( $data_scheme[ 'fields' ][ $pa ][ 'options_filter_order_by' ] ) ? $data_scheme[ 'fields' ][ $pa ][ 'options_filter_order_by' ] : $data_scheme[ 'fields' ][ $pa ][ 'options_title_field' ] ),
+													'obd' => ( isset( $data_scheme[ 'fields' ][ $pa ][ 'options_filter_order_by_direction' ] ) ? $data_scheme[ 'fields' ][ $pa ][ 'options_filter_order_by_direction' ] : 'ASC' ),
 													'u' => urlencode( $username ),
 													'p' => urlencode( $password ),
 													'rt' => 'json',
-													'f' => urlencode(
-														
-														json_encode(
-															
-															array(
-																
-																array(
-																	
-																	'alias' => 'submit_form_id',
-																	'comp_op' => '=',
-																	'value' => $data_scheme[ 'fields' ][ $pa ][ 'options_from_users_submits' ],
-																	'value_type' => 'num',
-																	
-																),
-																
-															)
-															
-														)
-														
-													)
+// 													'f' => urlencode(
+// 														
+// 														json_encode(
+// 															
+// 															array(
+// 																
+// 																array(
+// 																	
+// 																	'alias' => 'submit_form_id',
+// 																	'comp_op' => '=',
+// 																	'value' => $data_scheme[ 'fields' ][ $pa ][ 'options_from_users_submits' ],
+// 																	'value_type' => 'num',
+// 																	
+// 																),
+// 																
+// 															)
+// 															
+// 														)
+// 														
+// 													)
 													
 												);
 												
@@ -571,14 +580,25 @@ class Unid_api_mdl extends CI_Model{
 												
 												if ( check_var( $_tmp[ 'out' ] ) ) {
 													
+													$options = array();
+													
 													while ( list( $key, $ud_data ) = each( $_tmp[ 'out' ] ) ) {
 														
-														$out[ 'out' ][ $ud_data[ 'id' ] ] = $ud_data[ 'data' ][ $data_scheme[ 'fields' ][ $pa ][ 'options_title_field' ] ];
+														$this->ud_api->parse_ud_data( $ud_data, NULL, TRUE );
+														
+														$options += array( ( string ) ( $wabor ? '___rplc' : '' ) . $ud_data[ 'id' ] => ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $data_scheme[ 'fields' ][ $pa ][ 'options_title_field' ] ][ 'value' ] ) ? $ud_data[ 'parsed_data' ][ 'full' ][ $data_scheme[ 'fields' ][ $pa ][ 'options_title_field' ] ][ 'value' ] : '' ),
+														
+														);
 														
 													}
 													
+													$out[ 'out' ] = $options;
+													
 												}
 												
+// 		echo '<pre>' . print_r( json_encode( array( $options ) ), TRUE ) . '</pre>'; exit;
+// 		echo json_encode( array( $options ) ); exit;
+				
 												$_tmp = NULL;
 												unset( $_tmp );
 												
@@ -627,6 +647,23 @@ class Unid_api_mdl extends CI_Model{
 			
 			else if ( $act == 'gd' ) {
 				
+				$dsid =										isset( $post[ 'dsi' ] ) ?  urldecode( $post[ 'dsi' ] ) : ( isset( $config[ 'dsi' ] ) ? urldecode( $config[ 'dsi' ] ) : NULL ); // Data Scheme id (submit form id)
+				
+				$ob =										isset( $post[ 'ob' ] ) ?  urldecode( $post[ 'ob' ] ) : ( isset( $config[ 'ob' ] ) ? urldecode( $config[ 'ob' ] ) : NULL ); // Filters
+				
+				$obd =										isset( $post[ 'obd' ] ) ?  urldecode( $post[ 'obd' ] ) : ( isset( $config[ 'obd' ] ) ? urldecode( $config[ 'obd' ] ) : NULL ); // Filters
+				
+				$_tmp = get_params( $ob );
+				
+				if ( is_array( $_tmp ) AND check_var( $_tmp ) ) {
+					
+					$ob = $_tmp;
+					
+				}
+				
+				$_tmp = NULL;
+				unset( $_tmp );
+				
 				$f =										isset( $post[ 'f' ] ) ?  urldecode( $post[ 'f' ] ) : ( isset( $config[ 'f' ] ) ? urldecode( $config[ 'f' ] ) : NULL ); // Filters
 				
 				$f = get_params( $f );
@@ -647,15 +684,38 @@ class Unid_api_mdl extends CI_Model{
 							
 							'sf_us_search' => array(
 								
-								'filters' => $f,
-								
 							),
 							
 						),
 						
 					);
 					
+					if ( check_var( $f ) ) {
+						
+						$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'filters' ] = $f;
+						
+					}
+					
+					if ( check_var( $dsid ) ) {
+						
+						$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'sf_id' ] = $dsid;
+						
+					}
+					
+					if ( check_var( $ob ) ) {
+						
+						$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by' ] = $ob;
+						
+					}
+					
+					if ( check_var( $obd ) ) {
+						
+						$search_config[ 'plugins_params' ][ 'sf_us_search' ][ 'order_by_direction' ] = $obd;
+						
+					}
+					
 					$this->load->library( 'search' );
+					$this->search->reset_config();
 					$this->search->config( $search_config );
 					
 					$ud_data = $this->search->get_full_results( 'sf_us_search', TRUE );
@@ -1042,7 +1102,7 @@ class Unid_api_mdl extends CI_Model{
 															$ud_data[ 'data' ][ $pa ] = $nv;
 															
 															$mod_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-															$mod_datetime = strftime( '%Y-%m-%d %T', $mod_datetime );
+															$mod_datetime = ov_strftime( '%Y-%m-%d %T', $mod_datetime );
 															
 															$db_data[ 'mod_datetime' ] = $mod_datetime;
 															$ud_data[ 'params' ][ 'modified_by_user_id' ] = $user[ 'id' ];
@@ -1248,7 +1308,7 @@ class Unid_api_mdl extends CI_Model{
 												if ( ! isset( $out[ 'errors' ] ) ) {
 													
 													$mod_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-													$mod_datetime = strftime( '%Y-%m-%d %T', $mod_datetime );
+													$mod_datetime = ov_strftime( '%Y-%m-%d %T', $mod_datetime );
 													
 													if ( $user[ 'id' ] ) {
 													
@@ -1465,7 +1525,7 @@ class Unid_api_mdl extends CI_Model{
 														if ( ! isset( $out[ 'errors' ] ) ) {
 															
 															$mod_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-															$mod_datetime = strftime( '%Y-%m-%d %T', $mod_datetime );
+															$mod_datetime = ov_strftime( '%Y-%m-%d %T', $mod_datetime );
 															
 															if ( $user[ 'id' ] ) {
 															
@@ -1954,6 +2014,21 @@ class Unid_api_mdl extends CI_Model{
 		}
 		else {
 			
+			$mod_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
+			$mod_datetime = ov_strftime( '%Y-%m-%d %T', $mod_datetime );
+			
+			$data[ 'mod_datetime' ] = $mod_datetime;
+			
+			if ( $this->users->is_logged_in() ) {
+				
+				$data[ 'params' ] = get_params( $data[ 'params' ] );
+				
+				$data[ 'params' ][ 'modified_by_user_id' ] = $this->users->user_data[ 'id' ];
+				
+				$data[ 'params' ] = json_encode( $data[ 'params' ] );
+				
+			}
+			
 			if ( ! isset( $data[ 'id' ] ) ) {
 				
 				$data[ 'id' ] = $id;
@@ -1998,6 +2073,8 @@ class Unid_api_mdl extends CI_Model{
 					$data[ 'submit_form_id' ] = $current_data[ 'submit_form_id' ];
 					
 					foreach( $diff as $changed_prop_alias ) {
+						
+						log_message( 'debug', '[UniD Api] Adjusting changed referenced property: ' . $changed_prop_alias );
 						
 						$this->adjust_referenced_data( $data, $changed_prop_alias );
 						
@@ -2134,7 +2211,7 @@ class Unid_api_mdl extends CI_Model{
 								
 								$format = 'sf_us_dt_ft_pt_' . $format . '_' . $ds_prop[ 'sf_date_field_presentation_format' ];
 								
-								$value =  strftime( lang( $format ), strtotime( $value ) );
+								$value =  ov_strftime( lang( $format ), strtotime( $value ) );
 								
 							}
 							else {
@@ -2164,9 +2241,9 @@ class Unid_api_mdl extends CI_Model{
 									
 									$value = $value[ 0 ];
 									
-									if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
+									if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $__ud_data = $this->get_ud_data( $value ) ) {
 										
-										$value = isset( $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+										$value = isset( $__ud_data[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] ) ? $__ud_data[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] : $__ud_data[ 'id' ];
 										
 									}
 									else {
@@ -2197,9 +2274,9 @@ class Unid_api_mdl extends CI_Model{
 										
 										if ( is_string( $v ) ) {
 											
-											if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $v ) AND $_user_submit = $this->get_ud_data( $v ) ) {
+											if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $v ) AND $__ud_data = $this->get_ud_data( $v ) ) {
 												
-												$v = isset( $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												$v = isset( $__ud_data[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] ) ? $__ud_data[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] : $__ud_data[ 'id' ];
 												
 											}
 											
@@ -2216,9 +2293,11 @@ class Unid_api_mdl extends CI_Model{
 							}
 							else {
 								
-								if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value, NULL, TRUE ) ) {
+								if ( check_var( $ds_props[ $alias ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $alias ][ 'options_title_field' ] ) OR check_var( $ds_props[ $alias ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $__ud_data = $this->get_ud_data( $value, NULL, TRUE ) ) {
 									
-									$value = isset( $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $alias ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+									$this->parse_ud_data( $__ud_data, NULL, TRUE );
+									
+									$value = isset( $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $alias ][ 'options_title_field' ] ][ 'value' ] ) ? $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $alias ][ 'options_title_field' ] ][ 'value' ] : $__ud_data[ 'id' ];
 									
 								}
 								
@@ -2342,29 +2421,72 @@ class Unid_api_mdl extends CI_Model{
 					
 				}
 				
-				$us_fields = $_titles_fields = $_contents_fields = array();
+				$ud_data[ 'parsed_data' ][ 'full' ] = $_titles_fields = $_contents_fields = array();
 				
-				$us_fields[ 'id' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) );
-				$us_fields[ 'id' ][ 'value' ] = $ud_data[ 'id' ];
-				$us_fields[ 'id' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'id', $ds_props_to_show ) ) ? TRUE : FALSE;
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_id_pres_title' ] ) : lang( 'id' ) );
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'value' ] = $ud_data[ 'id' ];
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'id' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'id', $ds_props_to_show ) ) ? TRUE : FALSE;
 				
-				$us_fields[ 'submit_datetime' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) );
-				$us_fields[ 'submit_datetime' ][ 'value' ] = strftime( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_dt_format' ] ) ? $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_dt_format' ] : lang( 'ud_data_datetime' ) ), strtotime( $ud_data[ 'submit_datetime' ] ) );
-				$us_fields[ 'submit_datetime' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'submit_datetime', $ds_props_to_show ) ) ? TRUE : FALSE;
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'submit_datetime' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_pres_title' ] ) : lang( 'submit_datetime' ) );
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'submit_datetime' ][ 'value' ] = ov_strftime( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_dt_format' ] ) ? $data_scheme[ 'params' ][ 'ud_ds_default_data_sdt_dt_format' ] : lang( 'ud_data_datetime' ) ), strtotime( $ud_data[ 'submit_datetime' ] ) );
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'submit_datetime' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'submit_datetime', $ds_props_to_show ) ) ? TRUE : FALSE;
 				
-				$us_fields[ 'mod_datetime' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) );
-				$us_fields[ 'mod_datetime' ][ 'value' ] = strftime( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] ) ? $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] : lang( 'ud_data_datetime' ) ), strtotime( $ud_data[ 'mod_datetime' ] ) );
-				$us_fields[ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'mod_datetime', $ds_props_to_show ) ) ? TRUE : FALSE;
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'mod_datetime' ][ 'label' ] = ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) ? lang( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_pres_title' ] ) : lang( 'mod_datetime' ) );
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'mod_datetime' ][ 'value' ] = ov_strftime( ( isset( $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] ) ? $data_scheme[ 'params' ][ 'ud_ds_default_data_mdt_dt_format' ] : lang( 'ud_data_datetime' ) ), strtotime( $ud_data[ 'mod_datetime' ] ) );
+				$ud_data[ 'parsed_data' ][ 'full' ][ 'mod_datetime' ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( 'mod_datetime', $ds_props_to_show ) ) ? TRUE : FALSE;
 				
-				foreach ( $ud_data[ 'data' ] as $key_2 => $value ) {
+				$find = array();
+				$replace = array();
+				
+				$find[] = '{submit_form_id}';
+				$find[] = '{data_scheme_id}';
+				$find[] = '{ds_id}';
+				$find[] = '{dsid}';
+				$replace[] = $data_scheme[ 'id' ];
+				$replace[] = $data_scheme[ 'id' ];
+				$replace[] = $data_scheme[ 'id' ];
+				$replace[] = $data_scheme[ 'id' ];
+				
+				$find[] = '{submit_form_url}';
+				$find[] = '{data_scheme_url}';
+				$find[] = '{ds_url}';
+				$find[] = '{dsurl}';
+				$replace[] = $data_scheme[ 'site_link' ];
+				$replace[] = $data_scheme[ 'site_link' ];
+				$replace[] = $data_scheme[ 'site_link' ];
+				$replace[] = $data_scheme[ 'site_link' ];
+				
+				$find[] = '{submit_form_title}';
+				$find[] = '{data_scheme_title}';
+				$find[] = '{ds_title}';
+				$find[] = '{dstitle}';
+				$replace[] = $data_scheme[ 'title' ];
+				$replace[] = $data_scheme[ 'title' ];
+				$replace[] = $data_scheme[ 'title' ];
+				$replace[] = $data_scheme[ 'title' ];
+				
+				$find[] = '{user_submit_id}';
+				$find[] = '{ud_data_id}';
+				$replace[] = $ud_data[ 'id' ];
+				$replace[] = $ud_data[ 'id' ];
+				
+				$find[] = '{ud_data_submit_datetime}';
+				$replace[] = $ud_data[ 'parsed_data' ][ 'full' ][ 'submit_datetime' ][ 'value' ];
+				
+				$find[] = '{ud_data_mod_datetime}';
+				$replace[] = $ud_data[ 'parsed_data' ][ 'full' ][ 'mod_datetime' ][ 'value' ];
+				
+				reset( $ud_data[ 'data' ] );
+				
+				while ( list( $key_2, $value ) = each( $ud_data[ 'data' ] ) ) {
+					
+					$find[ $key_2 ] = '{' . $key_2 . ':value}';
 					
 					$ds_prop_value = $value;
 					
 // 					echo '<pre>' . $key_2 . ': ' . print_r( $ds_prop_value, TRUE ) . '</pre><br/>'; 
 					
 					if ( isset( $ds_props[ $key_2 ] ) ) {
-						
-						//echo $key_2 . ': <br/><pre>' . print_r( $ds_props[ $key_2 ], TRUE ) . '</pre><br/>'; 
 						
 						if ( ! is_numeric( $key_2 ) ) {
 							
@@ -2511,7 +2633,7 @@ class Unid_api_mdl extends CI_Model{
 									
 								if ( $format != '' ) {
 									
-									$ds_prop_value .= '<span class="normal-datetime">' . strftime( lang( $format ), strtotime( $_prop_value ) ) . '</span>';
+									$ds_prop_value .= '<span class="normal-datetime">' . ov_strftime( lang( $format ), strtotime( $_prop_value ) ) . '</span>';
 									
 								}
 								
@@ -2545,9 +2667,11 @@ class Unid_api_mdl extends CI_Model{
 											
 											$ds_prop_value = $ds_prop_value[ 0 ];
 											
-											if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
+											if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $__ud_data = $this->get_ud_data( $ds_prop_value ) ) {
 												
-												$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												$this->parse_ud_data( $__ud_data, NULL, $value_html );
+												
+												$ds_prop_value = isset( $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] ) ? $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] : $__ud_data[ 'id' ];
 												
 											}
 											else {
@@ -2580,9 +2704,11 @@ class Unid_api_mdl extends CI_Model{
 													
 													$value = html_entity_decode( htmlspecialchars_decode( $value ) );
 													
-													if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
+													if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $__ud_data = $this->get_ud_data( $value ) ) {
 														
-														$value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+														$this->parse_ud_data( $__ud_data, NULL, $value_html );
+														
+														$value = isset( $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] ) ? $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] : $__ud_data[ 'id' ];
 														
 													}
 													
@@ -2604,9 +2730,11 @@ class Unid_api_mdl extends CI_Model{
 											$ds_prop_value = $ud_data[ $key_2 ];
 											
 										}
-										else if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $_user_submit = $this->get_ud_data( $ds_prop_value ) ) {
+										else if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $ds_prop_value ) AND $__ud_data = $this->get_ud_data( $ds_prop_value ) ) {
 											
-											$ds_prop_value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+											$this->parse_ud_data( $__ud_data, NULL, $value_html );
+											
+											$value = isset( $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] ) ? $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] : $__ud_data[ 'id' ];
 											
 										}
 										
@@ -2625,9 +2753,11 @@ class Unid_api_mdl extends CI_Model{
 										
 										if ( is_string( $value ) ) {
 											
-											if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $_user_submit = $this->get_ud_data( $value ) ) {
+											if ( check_var( $ds_props[ $key_2 ][ 'options_from_users_submits' ] ) AND ( check_var( $ds_props[ $key_2 ][ 'options_title_field' ] ) OR check_var( $ds_props[ $key_2 ][ 'options_title_field_custom' ] ) ) AND is_numeric( $value ) AND $__ud_data = $this->get_ud_data( $value ) ) {
 												
-												$value = isset( $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] ) ? $_user_submit[ 'data' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ] : $_user_submit[ 'id' ];
+												$this->parse_ud_data( $__ud_data, NULL, $value_html );
+												
+												$value = isset( $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] ) ? $__ud_data[ 'parsed_data' ][ 'full' ][ $ds_props[ $key_2 ][ 'options_title_field' ] ][ 'value' ] : $__ud_data[ 'id' ];
 												
 											}
 											
@@ -2663,158 +2793,184 @@ class Unid_api_mdl extends CI_Model{
 								
 							}
 							
-							// image prop type out
-							
-							if ( check_var( $ds_prop_value ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_image' ] ) ) {
-								
-								$us_fields[ $key_2 ][ 'thumb_url' ] = get_url( $ds_prop_value );
-								
-								if ( ! url_is_absolute( $ds_prop_value ) ) {
-									
-									$us_fields[ $key_2 ][ 'thumb_url' ] = get_url( THUMBS_DIR_NAME . '/' . $ds_prop_value );
-									
-								}
-								
-								$ds_prop_value = get_url( $ds_prop_value );
-								
-								if ( $value_html ) {
-									
-									$thumb_params = array(
-										
-										'wrapper_class' => 'us-image-wrapper',
-										'src' => url_is_absolute( $ds_prop_value ) ? $ds_prop_value : get_url( 'thumbs/' . $ds_prop_value ),
-										'href' => get_url( $ds_prop_value ),
-										'rel' => 'us-thumb',
-										'title' => $ds_prop_value,
-										'modal' => TRUE,
-										'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
-										
-									);
-									
-									$ds_prop_value = vui_el_thumb( $thumb_params );
-									
-								}
-								
-							}
-							
-							// url prop type out
-							
-							if ( check_var( $ds_prop_value ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_url' ] ) ) {
-								
-								$_tmp = preg_split( "/(;| |,)/", $ds_prop_value );
-								$_tmp_2 = array();
-								
-								if ( is_array( $_tmp ) ) {
-									
-									foreach( $_tmp as $k => $v ) {
-										
-										if ( trim( $v ) != '' ) {
-											
-											$v = get_url( $v );
-											$_tmp_2[] = $value_html ? ( '<a href="' . $v . '" target="_blank">' . $v . '</a>' ) : $v;
-											
-										}
-										
-									}
-									
-									$ds_prop_value = join( ( $value_html ? ',<br/> ' : ', ' ), $_tmp_2 );
-									
-								}
-								else {
-									
-									$___url = get_url( $ds_prop_value );
-									$ds_prop_value = $value_html ? ( '<a href="' . $___url . '" target="_blank"' . '>' . $___url . '</a>' ) : $___url;
-									
-								}
-								
-							}
-							
-							// email prop type out
-							
-							if ( check_var( $ds_prop_value ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_email' ] ) ) {
-								
-								$_tmp = preg_split( "/(;| |,|\/)/", $ds_prop_value );
-								$_tmp_2 = array();
-								
-								if ( is_array( $_tmp ) ) {
-									
-									foreach( $_tmp as $k => $v ) {
-										
-										if ( trim( $v ) != '' ) {
-											
-											$_tmp_2[] = $value_html ? ( '<a href="mailto:' . $v . '" target="_blank">' . $v . '</a>' ) : $v;
-											
-										}
-										
-									}
-									
-									$ds_prop_value = join( ( $value_html ? ',<br/> ' : ', ' ), $_tmp_2 );
-									
-								}
-								else {
-									
-									$ds_prop_value = '<a href="mailto:' . $ds_prop_value . '">' . $ds_prop_value . '</a>';
-									
-								}
-								
-							}
-							
-							$us_fields[ $key_2 ][ 'label' ] = isset( $ds_props[ $key_2 ][ 'presentation_label' ] ) ? $ds_props[ $key_2 ][ 'presentation_label' ] : $ds_props[ $key_2 ][ 'label' ];
-							$us_fields[ $key_2 ][ 'value' ] = $ds_prop_value;
-							$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( $key_2, $ds_props_to_show ) ) ? TRUE : FALSE;
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'label' ] = isset( $ds_props[ $key_2 ][ 'presentation_label' ] ) ? $ds_props[ $key_2 ][ 'presentation_label' ] : $ds_props[ $key_2 ][ 'label' ];
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = $ds_prop_value;
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( $key_2, $ds_props_to_show ) ) ? TRUE : FALSE;
 							
 						}
 						
 					}
 					else {
 						
-						$us_fields[ $key_2 ][ 'label' ] = '[' . $key_2 . ']';
-						$us_fields[ $key_2 ][ 'value' ] = $ds_prop_value;
-						$us_fields[ $key_2 ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( $key_2, $ds_props_to_show ) ) ? TRUE : FALSE;
+						$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'label' ] = '[' . $key_2 . ']';
+						$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = $ds_prop_value;
+						$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( $key_2, $ds_props_to_show ) ) ? TRUE : FALSE;
 						
 					}
 					
-					if ( check_var( $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] ) AND check_var( $ds_prop_value, TRUE ) ) {
+					$replace[ $key_2 ] = $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ];
+					
+				}
+				
+// 				echo '<pre>' . print_r( $find, TRUE ) . '</pre>';
+				
+				reset( $ud_data[ 'data' ] );
+				
+				while ( list( $alias, $prop ) = each( $data_scheme[ 'fields' ] ) ) {
+					
+					if ( check_var( $ds_props[ $alias ][ 'update_ud_data_out_format' ] ) ) {
 						
 						$regex = '/\{(.*?):value\}/i';
 						
-						$content = $ds_props[ $key_2 ][ 'update_ud_data_out_format' ];
+						$content = $ds_props[ $alias ][ 'update_ud_data_out_format' ];
 						
 						preg_match_all( $regex, $content, $matches );
 						
 						if ( count( $matches[ 1 ] ) ){
 							
-							$find = array(
-								
-								$key_2 => '{' . $key_2 . ':value}',
-								
-							);
-							$replace = array(
-								
-								$key_2 => $ds_prop_value,
-								
-							);
-							
 							foreach( $matches[ 1 ] as $match ) {
 								
-								if ( $match != $key_2 AND check_var( $ud_data[ $match ], TRUE ) ) {
+								if ( ( $match == $alias AND ! check_var( $ud_data[ $match ], TRUE ) ) ) {
 									
 									$find[ $match ] = '{' . $match . ':value}';
-									$replace[ $match ] = $ud_data[ $match ];
+									$replace[ $match ] = '';
 									
 								}
 								
 							}
 							
-							$us_fields[ $key_2 ][ 'value' ] = str_replace( $find, $replace, $ds_props[ $key_2 ][ 'update_ud_data_out_format' ] );
+						}
+						
+						$ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'label' ] = isset( $ds_props[ $alias ][ 'presentation_label' ] ) ? $ds_props[ $alias ][ 'presentation_label' ] : $ds_props[ $alias ][ 'label' ];
+						$ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'value' ] = str_replace( $find, $replace, $ds_props[ $alias ][ 'update_ud_data_out_format' ] );
+						$ud_data[ 'parsed_data' ][ 'full' ][ $alias ][ 'visible' ] = ( ! check_var( $ds_props_to_show ) OR in_array( $alias, $ds_props_to_show ) ) ? TRUE : FALSE;
+						
+					}
+					
+					// image prop type out
+					
+				}
+				
+// 				echo '<pre>' . print_r( $find, TRUE ) . '</pre>';
+// 				echo '<pre>' . print_r( $replace, TRUE ) . '</pre>';
+				
+				$find = $replace = NULL;
+				unset( $find );
+				unset( $replace );
+				
+				reset( $ud_data[ 'data' ] );
+				
+				while ( list( $key_2, $value ) = each( $ud_data[ 'data' ] ) ) {
+					
+					if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_image' ] ) ) {
+						
+						
+						$thumb_title = $this->unid->get_data_title( $data_scheme, $ud_data, $data_scheme );
+						
+						$thumb_title = check_var( $thumb_title[ 'value' ] ) ? $thumb_title[ 'value' ] : FALSE;
+						
+						$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'thumb_url' ] = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ], NULL, FALSE );
+						
+						if ( ! url_is_absolute( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] ) ) {
+							
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'thumb_url' ] = get_url( THUMBS_DIR_NAME . '/' . $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ], NULL, FALSE );
 							
 						}
-			
+						
+						$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ], NULL, FALSE );
+						
+						if ( $value_html ) {
+							
+							$thumb_params = array(
+								
+								'wrapper_class' => 'us-image-wrapper',
+								'href' => get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ], NULL, FALSE ),
+								'rel' => 'us-thumb',
+								'title' => $thumb_title ? $thumb_title : $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ],
+								'modal' => TRUE,
+								'prevent_cache' => check_var( $advanced_options[ 'prop_is_ud_image_thumb_prevent_cache_admin' ] ) ? TRUE : FALSE,
+								
+							);
+							
+							$tmp = str_replace( trim( BASE_URL, '/' ) . '/', '', $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] );
+							
+							if ( ! url_is_absolute( $tmp ) ) {
+								
+								$thumb_params[ 'src' ] = THUMBS_DIR_URL . '/' . ltrim( $tmp, '/' );
+								
+							}
+							
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = vui_el_thumb( $thumb_params );
+							
+						}
+						
+					}
+					
+					// url prop type out
+					
+					if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_url' ] ) ) {
+						
+						$_tmp = preg_split( "/(;| |,)/", $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] );
+						$_tmp_2 = array();
+						
+						if ( is_array( $_tmp ) ) {
+							
+							foreach( $_tmp as $k => $v ) {
+								
+								if ( trim( $v ) != '' ) {
+									
+									$v = get_url( $v );
+									$_tmp_2[] = $value_html ? ( '<a href="' . $v . '" target="_blank">' . $v . '</a>' ) : $v;
+									
+								}
+								
+							}
+							
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = join( ( $value_html ? ',<br/> ' : ', ' ), $_tmp_2 );
+							
+						}
+						else {
+							
+							$___url = get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] );
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = $value_html ? ( '<a href="' . $___url . '" target="_blank"' . '>' . $___url . '</a>' ) : $___url;
+							
+						}
+						
+					}
+					
+					// email prop type out
+					
+					if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] ) AND check_var( $ds_props[ $key_2 ][ 'advanced_options' ][ 'prop_is_ud_email' ] ) ) {
+						
+						$_tmp = preg_split( "/(;| |,|\/)/", $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] );
+						$_tmp_2 = array();
+						
+						if ( is_array( $_tmp ) ) {
+							
+							foreach( $_tmp as $k => $v ) {
+								
+								if ( trim( $v ) != '' ) {
+									
+									$_tmp_2[] = $value_html ? ( '<a href="mailto:' . $v . '" target="_blank">' . $v . '</a>' ) : $v;
+									
+								}
+								
+							}
+							
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = join( ( $value_html ? ',<br/> ' : ', ' ), $_tmp_2 );
+							
+						}
+						else {
+							
+							$ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] = '<a href="mailto:' . $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] . '">' . $ud_data[ 'parsed_data' ][ 'full' ][ $key_2 ][ 'value' ] . '</a>';
+							
+						}
+						
 					}
 					
 				}
 				
-				$ud_data[ 'parsed_data' ][ 'full' ] = $us_fields;
+// 				$ud_data[ 'parsed_data' ][ 'full' ] = $us_fields;
 				
 				return $ud_data;
 				
@@ -3379,19 +3535,23 @@ class Unid_api_mdl extends CI_Model{
 	
 	public function adjust_referenced_data( $data, $changed_prop_alias ) {
 		
+		log_message( 'debug', '[UniD Api] Adjusting property: ' . $changed_prop_alias );
+		
+		log_message( 'debug', '[UniD Api] Looking for UniD Data using the Data Scheme ' . $data[ 'submit_form_id' ] . ' as reference ...' );
+		
 		// We select data schemes that use the property of this data as reference
 		
 		$this->db->select( 'id' );
 		$this->db->from( 'tb_submit_forms' );
 		$this->db->where( '`fields` LIKE \'%"options_from_users_submits":"' . $data[ 'submit_form_id' ] . '"%\' COLLATE \'utf8_general_ci\'' );
-		
+		/*
 		$where = '(';
 		$where .= '`fields` LIKE \'%"options_title_field":"' . $changed_prop_alias . '"%\' COLLATE \'utf8_general_ci\' OR ';
 		$where .= '`fields` LIKE \'%"options_filter_order_by":"' . $changed_prop_alias . '"%\' COLLATE \'utf8_general_ci\'';
 		$where .= ')';
 		
 		$this->db->where( $where );
-		
+		*/
 		$ds_ids = $this->db->get()->result_array();
 		
 		if ( $ds_ids ) {
@@ -3407,7 +3567,11 @@ class Unid_api_mdl extends CI_Model{
 			
 			$where_1 = array();
 			
+			log_message( 'debug', '[UniD Api] ' . count( $ds_ids ) . ' Data Schemes found using the Data Scheme ' . $data[ 'submit_form_id' ] . ' as reference: ' );
+			
 			foreach( $ds_ids as $value ) {
+				
+				log_message( 'debug', '[UniD Api] ' . '<pre>' . print_r( $value, TRUE ) . '</pre>' );
 				
 				$id = $value[ 'id' ];
 				
@@ -3433,21 +3597,42 @@ class Unid_api_mdl extends CI_Model{
 			
 			$this->db->where( $where );
 			
+			log_message( 'debug', '[UniD Api] DB Query: ' . $this->db->_compile_select() );
+			
 			$data_results = $this->db->get()->result_array();
+			
+			log_message( 'debug', '[UniD Api] ' . count( $data_results ) . ' UniD Data found using the UniD Data ' . $changed_prop_alias . ' as reference:' );
+			
+			log_message( 'debug', '[UniD Api] ' . '<pre>' . print_r( $data_results, TRUE ) . '</pre>' );
 			
 			if ( $data_results ) {
 				
 				foreach( $data_results as $_data ) {
 					
-					$_data[ 'xml_data' ] = $this->us_json_data_to_xml( $_data );
-					
 					$_d_id = $_data[ 'id' ];
+					
+					$_tmp = $this->get_ud_data( $_d_id, NULL, TRUE );
+					$_data[ 'params' ] = $_tmp[ 'params' ];
+					
+					$_tmp[ 'params' ] = json_encode( $_tmp[ 'params' ] );
+					$_tmp[ 'data' ] = json_encode( $_tmp[ 'data' ] );
+					
+// 					$this->ud_api->parse_ud_data( $_data, NULL, TRUE );
+					
+					$_data[ 'xml_data' ] = $this->us_json_data_to_xml( $_tmp );
+					
+					$_data[ 'params' ][ 'modified_by_user_id' ] = $this->users->user_data[ 'id' ];
+					
+					$_data[ 'params' ] = json_encode( $_data[ 'params' ] );
+					$_data[ 'params' ] = json_encode( $_data[ 'params' ] );
 					
 					unset( $_data[ 'id' ] );
 					
 					if ( ! $this->db->update( 'tb_submit_forms_us', $_data, array( 'id' => $_d_id ) ) ){
 						
 						msg( lang( $data[ 'params' ][ 'ud_data_update_fail_referenced_data' ], NULL, $data[ 'id' ] ), 'error' );
+						
+						log_message( 'debug', '[UniD Api] ' . lang( $data[ 'params' ][ 'ud_data_update_fail_referenced_data' ], NULL, $data[ 'id' ] ) );
 						
 					}
 					

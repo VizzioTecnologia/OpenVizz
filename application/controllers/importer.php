@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require( APPPATH . 'controllers/main.php' );
+
 class Importer extends CI_controller {
 	
 	public function __construct(){
@@ -16,7 +18,7 @@ class Importer extends CI_controller {
 	}
 	
 	public function index(){
-		
+		/*
 		exit;
 		
 		$this->load->model( 'common/submit_forms_common_model', 'sfcm' );
@@ -26,17 +28,76 @@ class Importer extends CI_controller {
 		$users_submits = $this->db->get()->result_array();
 		
 		$db_data = array();
+		*/
 		
-		foreach( $users_submits as $k => $us ) {
+		$this->load->library( 'form_validation' );
+		
+		$this->load->model( 'common/main_common_model', 'mcm' );
+		
+		$this->load->model( 'common/submit_forms_common_model', 'sfcm' );
+		
+		$produtos = array();
+		
+		$csv = array_map('str_getcsv', file( APPPATH . 'controllers' . DS . 'produtos.csv'));
+		
+		foreach( $csv as $k => & $row ) {
 			
-			$n_us[ 'xml_data' ] = $this->sfcm->us_json_data_to_xml( $us );
+			foreach( $row as $k2 => & $col ) {
+				
+				$col = $this->form_validation->normalizar_nome_ptbr( $col );
+				
+			}
 			
-			$this->db->update( 'tb_submit_forms_us', $n_us, array( 'id' => $us[ 'id' ] ) );
+			$produtos[ $row[ 0 ] ] = array();
+			
+			$produto = & $produtos[ $row[ 0 ] ];
+			
+			$produto[ 'sku' ] = $row[ 0 ];
+			$produto[ 'brand' ] = $row[ 3 ];
+			$produto[ 'title' ] = $row[ 1 ];
+			
+			$filters = array(
+				
+				'alias' => 'name',
+				'comp_op' => '=',
+				'value' => $produto[ 'brand' ],
+				
+			);
+			
+			$search_config = array(
+				
+				'plugins' => 'sf_us_search',
+				'allow_empty_terms' => TRUE,
+				'terms' => $produto[ 'brand' ],
+				'ignore_terms' => FALSE,
+				'ipp' => 1,
+				'cp' => NULL,
+				'plugins_params' => array(
+					
+					'sf_us_search' => array(
+						
+						'sf_id' => 15,
+						'filters' => $filters,
+						
+					),
+					
+				),
+				
+			);
+			
+			$this->load->library( 'search' );
+			$this->search->reset_config();
+			$this->search->config( $search_config );
+			
+// 			$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
+			
+// 			echo '<pre>' . print_r( $_users_submits, TRUE ) . '</pre><br/>'; 
 			
 		}
 		
+		echo '<pre>' . print_r( $produtos, TRUE ) . '</pre>'; exit;
 		
-		print_r( $db_data );
+		echo '<pre>' . print_r( $csv, TRUE ) . '</pre>'; exit;
 		
 		/*
 		

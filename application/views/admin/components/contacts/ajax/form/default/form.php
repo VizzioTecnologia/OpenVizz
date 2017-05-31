@@ -1,11 +1,11 @@
 <?php
 	
 	$created_date_time = ( check_var( $contact[ 'birthday_date' ] ) ) ? strtotime( $contact[ 'birthday_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-	$created_date = $this->input->post( 'created_date' ) ? $this->input->post( 'created_date' ) : strftime( '%Y-%m-%d', $created_date_time );
-	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : strftime( '%T', $created_date_time );
+	$created_date = $this->input->post( 'created_date' ) ? $this->input->post( 'created_date' ) : ov_strftime( '%Y-%m-%d', $created_date_time );
+	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : ov_strftime( '%T', $created_date_time );
 	
 	$contact[ 'birthday_date' ] = ( check_var( $contact[ 'birthday_date' ] ) ) ? strtotime( $contact[ 'birthday_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-	$contact[ 'birthday_date' ] = strftime( '%Y-%m-%d', $contact[ 'birthday_date' ] );
+	$contact[ 'birthday_date' ] = ov_strftime( '%Y-%m-%d', $contact[ 'birthday_date' ] );
 	
 ?>
 

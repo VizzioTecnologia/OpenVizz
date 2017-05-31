@@ -1,5 +1,37 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+function ov_strftime( $format, $timestamp ){
+	
+	// Check for Windows to find and replace the %e 
+	// modifier correctly
+	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+		
+		$format = preg_replace('#(?<!%)((?:%%)*)%e#', '\1%#d', $format );
+		
+	}
+	
+	$format = str_replace(
+		
+		array(
+			
+			'%T',
+			
+		),
+		
+		array(
+			
+			'%H:%M:%S',
+			
+		),
+		
+		$format
+		
+	);
+	
+	return strftime( $format, $timestamp );
+	
+}
+
 function created_date( $date_time, $format ){
 	
 	$time = human_to_unix( $date_time );

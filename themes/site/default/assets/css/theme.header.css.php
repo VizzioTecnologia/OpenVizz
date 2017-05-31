@@ -19,7 +19,7 @@ for ( $i = 1; $i <= 3; $i++ ){
 }
 
 $template = $template_path[ count( $template_path ) - 1 ];
-echo $template;
+
 $base_path = join( DS, $base_path ) . DS;
 
 if ( ! defined( 'BASE_PATH' ) ) define( 'BASE_PATH', $base_path );
@@ -44,8 +44,24 @@ if ( ! defined( 'PROTOCOL' ) ) define( 'PROTOCOL',															'http' );
 
 }
 
+$_tmp = '/' . ltrim( isset( $_SERVER[ 'PATH_INFO' ] ) ? $_SERVER[ 'PATH_INFO' ] : ltrim( $_SERVER[ 'QUERY_STRING' ], 'url=' ), '/' );
+$_tmp = explode( '/', $_tmp );
 
-if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( '/themes/site/' . $template . '/assets/css/theme.css.php', '', $_SERVER[ 'PHP_SELF' ] ), '/' ) );
+reset( $_tmp );
+while ( list( $k, $v ) = each( $_tmp ) ) {
+	
+	$_tmp[ $k ] = urlencode( $v );
+	
+}
+
+$_tmp = '/' . trim( join( '/', $_tmp ), '/' );
+
+$_rel = $_SERVER[ 'REQUEST_URI' ];
+$_rel = explode( '?', $_rel );
+$_rel = rtrim( $_rel[ 0 ], '/' );
+$_rel = preg_replace( '/'. preg_quote( $_tmp, '/' ) . '$/', '', $_rel );
+
+if ( ! defined( 'RELATIVE_BASE_URL' ) ) define( 'RELATIVE_BASE_URL',											rtrim( str_replace( '/themes/site/' . $template . '/assets/css/theme.css.php', '', $_rel ), '/' ) );
 
 if ( ! defined( 'HTTP_HOST' ) ) define( 'HTTP_HOST',															PROTOCOL . '://' . HOST . ( SERVER_PORT ? ':' . SERVER_PORT : '' ) );
 if ( ! defined( 'BASE_URL' ) ) define( 'BASE_URL',																HTTP_HOST . RELATIVE_BASE_URL );

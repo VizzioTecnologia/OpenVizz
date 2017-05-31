@@ -58,7 +58,7 @@
 							
 							$format = 'sf_us_dt_ft_pt_' . $format . '_' . $field[ 'sf_date_field_presentation_format' ];
 							
-							$us_out[] = strftime( lang( $format ), strtotime( $value_value ) );
+							$us_out[] = ov_strftime( lang( $format ), strtotime( $value_value ) );
 							
 						} else {
 							

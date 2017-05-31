@@ -12,11 +12,14 @@ $lang['notif_ud_ds_no_access_to_current_user'] = 												"Você não pode ac
 
 $lang['search_terms'] = 																		"Termos de pesquisa";
 $lang['submit_search'] = 																		"Pesquisar";
+$lang['submit_reset_filter'] = 																	"Limpar pesquisa";
 $lang['no_results'] = 																			"Sem resultados";
 $lang['ud_data_no_result_string_value'] = 														"Sem resultados";
 $lang['user_submit_polls_no_results'] = 														"Esta enquete ainda não possui votos";
 $lang['users_submits_search_single_result_string'] = 											"%s resultado encontrado";
-$lang['ud_d_list_search_results_string'] = 													"%s resultados encontrados";
+$lang['ud_d_list_results_string'] = 															"%s resultados";
+$lang['ud_d_list_search_results_string'] = 														"%s resultados encontrados";
+$lang['ud_d_list_single_result_string'] = 														"%s resultado encontrado";
 
 $lang['combobox_select_day'] = 																	"-- Dia --";
 $lang['combobox_select_month'] = 																"-- Mês --";

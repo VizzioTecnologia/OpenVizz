@@ -535,6 +535,8 @@ class Menus extends Main {
 			
 			else if ( $action == 'a' OR $action == 'e' ){
 				
+				$this->plugins->load( NULL, 'js_text_editor' );
+				
 				$this->load->helper( 'menus' );
 				
 				$menu_item = array();
@@ -764,8 +766,12 @@ class Menus extends Main {
 						
 // 						echo '<strong>$params_values:</strong><pre>' . print_r( $params_values, TRUE ) . '</pre>';EXIT;
 						
-						foreach( $params_values as $k => $item ) {
-							
+						$_params_values = $params_values;
+						
+						reset( $_params_values );
+						
+						while ( list( $k, $item ) = each( $_params_values ) ) {
+						
 							$new_values = array();
 							
 							if ( is_array( $item ) ) {
@@ -779,6 +785,9 @@ class Menus extends Main {
 							$params_values = $params_values + $new_values;
 							
 						}
+						
+						$_params_values = NULL;
+						unset( $_params_values );
 						
 // 						echo '<strong>$params_values:</strong><pre>' . print_r( $params_values, TRUE ) . '</pre>';EXIT;
 						

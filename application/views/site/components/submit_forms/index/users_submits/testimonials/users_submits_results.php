@@ -75,14 +75,14 @@
 				if ( check_var( $params[ 'ud_title_prop' ] ) AND in_array( 'submit_datetime', $params[ 'ud_title_prop' ] ) ) {
 					
 					$_titles_fields[ 'submit_datetime' ][ 'label' ] = lang( 'submit_datetime' );
-					$_titles_fields[ 'submit_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
+					$_titles_fields[ 'submit_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
 					
 				}
 				
 				if ( check_var( $params[ 'ud_title_prop' ] ) AND in_array( 'mod_datetime', $params[ 'ud_title_prop' ] ) ) {
 					
 					$_titles_fields[ 'mod_datetime' ][ 'label' ] = lang( 'mod_datetime' );
-					$_titles_fields[ 'mod_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
+					$_titles_fields[ 'mod_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
 					
 				}
 				
@@ -100,14 +100,14 @@
 				if ( check_var( $params[ 'ud_content_prop' ] ) AND in_array( 'submit_datetime', $params[ 'ud_content_prop' ] ) ) {
 					
 					$_contents_fields[ 'submit_datetime' ][ 'label' ] = lang( 'submit_datetime' );
-					$_contents_fields[ 'submit_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
+					$_contents_fields[ 'submit_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
 					
 				}
 				
 				if ( check_var( $params[ 'ud_content_prop' ] ) AND in_array( 'mod_datetime', $params[ 'ud_content_prop' ] ) ) {
 					
 					$_contents_fields[ 'mod_datetime' ][ 'label' ] = lang( 'mod_datetime' );
-					$_contents_fields[ 'mod_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
+					$_contents_fields[ 'mod_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
 					
 				}
 				
@@ -125,7 +125,7 @@
 				if ( check_var( $params[ 'ud_other_info_prop' ] ) AND in_array( 'submit_datetime', $params[ 'ud_other_info_prop' ] ) ) {
 					
 					$_ud_other_info_prop[ 'submit_datetime' ][ 'label' ] = lang( 'submit_datetime' );
-					$_ud_other_info_prop[ 'submit_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
+					$_ud_other_info_prop[ 'submit_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'submit_datetime' ] ) );
 					
 				}
 				
@@ -133,7 +133,7 @@
 					
 					$_ud_other_info_prop[ 'mod_datetime' ][ 'label' ] = lang( 'mod_datetime' );
 					$_ud_other_info_prop[ 'mod_datetime' ][ 'value' ] = $user_submit[ 'mod_datetime' ];
-					$_ud_other_info_prop[ 'mod_datetime' ][ 'value' ] = strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
+					$_ud_other_info_prop[ 'mod_datetime' ][ 'value' ] = ov_strftime( lang( 'sf_us_dt_ft_pt_ymd_1' ), strtotime( $user_submit[ 'mod_datetime' ] ) );
 					
 				}
 				
@@ -153,7 +153,7 @@
 						
 						$format = 'sf_us_dt_ft_pt_' . $format . '_' . $fields[ $key_2 ][ 'sf_date_field_presentation_format' ];
 						
-						$field_value =  strftime( lang( $format ), strtotime( $field_value ) );
+						$field_value =  ov_strftime( lang( $format ), strtotime( $field_value ) );
 						
 					}
 					else if ( in_array( $fields[ $key_2 ][ 'field_type' ], array( 'checkbox', 'combo_box', 'radiobox', ) ) ){

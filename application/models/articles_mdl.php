@@ -739,7 +739,7 @@ class Articles_mdl extends CI_Model{
 			$article[ 'title' ] = html_entity_decode( $article[ 'title' ] );
 			$article[ 'introtext' ] = check_var( $article[ 'introtext' ] ) ? html_entity_decode( $article[ 'introtext' ] ) : '';
 			$article[ 'fulltext' ] = check_var( $article[ 'fulltext' ] ) ? html_entity_decode( $article[ 'fulltext' ] ) : '';
-			$article[ 'fullcontent' ] = $article[ 'introtext' ] . ( check_var( $article[ 'introtext' ] ) ? '<hr id="vcms-readmore" />' : '' ) . $article[ 'fulltext' ];
+			$article[ 'fullcontent' ] = $article[ 'introtext' ] . ( check_var( $article[ 'introtext' ] ) ? '<hr id="ov-readmore" />' : '' ) . $article[ 'fulltext' ];
 			$article[ 'status' ] = ( int ) $article[ 'status' ];
 
 			if ( $article[ 'access_type' ] === 'users' ){

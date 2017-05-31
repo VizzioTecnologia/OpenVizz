@@ -108,9 +108,14 @@ function file_list_to_array( $dir, $matche_pattern ){
 	
 	$result = array();
 	
-	foreach ( glob( $dir . $matche_pattern ) as $file ) {
+	// verificando se o diretório existe
+	if ( file_exists( $dir ) AND is_dir( $dir ) ){
 		
-		$result[] = basename( $file );
+		foreach ( glob( rtrim( $dir, DS ) . DS . $matche_pattern ) as $file ) {
+			
+			$result[ basename( $file ) ] = basename( $file );
+			
+		}
 		
 	}
 	

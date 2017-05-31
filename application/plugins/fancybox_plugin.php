@@ -10,8 +10,8 @@ class Fancybox_plugin extends Plugins_mdl{
 			
 			log_message( 'debug', '[Plugins] Fancybox plugin initialized' );
 			
-			$this->voutput->append_head_stylesheet( 'fancybox', JS_DIR_URL . '/plugins/fancybox/fancyBox-master/source/jquery.fancybox.css' );
-			$this->voutput->append_head_script( 'fancybox', JS_DIR_URL . '/plugins/fancybox/fancyBox-master/source/jquery.fancybox.pack.js' );
+			$this->voutput->append_head_stylesheet( 'fancybox', JS_DIR_URL . '/plugins/fancybox/fancybox-3.0/dist/jquery.fancybox.min.css' );
+			$this->voutput->append_head_script( 'fancybox', JS_DIR_URL . '/plugins/fancybox/fancybox-3.0/dist/jquery.fancybox.min.js' );
 			
 			$return = TRUE;
 			

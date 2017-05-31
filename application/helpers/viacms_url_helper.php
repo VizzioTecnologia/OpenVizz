@@ -1,25 +1,75 @@
 <?php  if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-function get_url( $original_url = NULL, $menu_item_id = NULL ){
+function get_url( $original_url = NULL, $menu_item_id = NULL, $include_index_page = TRUE ){
+	
+	//echo '<small>' . print_r( $original_url, TRUE ) . '</small>';
+	$CI =& get_instance();
+	
+	$old_ip = $CI->config->item( 'index_page' );
+	
+	// -------------------------
+	// Getting Queries
+	
+	$query = array();
+	
+	$tmp = parse_url( $original_url );
+	
+	if ( isset( $tmp[ 'query' ] ) ) {
+		
+		parse_str( $tmp[ 'query' ], $query );
+		
+	}
+	
+	if ( $CI->input->get( 'theme', TRUE ) ) {
+		
+		$query[ 'theme' ] = $CI->input->get( 'theme', TRUE );
+		
+	}
+	
+	// -------------------------
+	
+	if ( $include_index_page === FALSE ) {
+		
+		$CI->config->set_item( 'index_page', '' );
+		
+	}
+	
+	// -------------------------
 	
 	if ( ! $original_url ) {
 		
-		return site_url();
+		$return = add_trailing_slash( site_url() ) . assoc_array_to_qs( $query );
+		
+		$CI->config->set_item( 'index_page', $old_ip );
+		
+		return $return;
 		
 	}
 	
+	// -------------------------
+	
 	if ( $original_url == '#' ) {
 		
-		return current_url() . '#';
+		$return = add_trailing_slash( current_url() ) . assoc_array_to_qs( $query ) . '#';
+		
+		$CI->config->set_item( 'index_page', $old_ip );
+		
+		return $return;
 		
 	}
+	
+	// -------------------------
 	
 	// if the url is absolute, return this
 	if ( url_is_absolute( $original_url ) ) {
 		
+		$CI->config->set_item( 'index_page', $old_ip );
+		
 		return $original_url;
 		
 	}
+	
+	// -------------------------
 	
 	$_tmp = explode( '/', $original_url );
 	
@@ -30,27 +80,35 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 		
 	) {
 		
-		return 'http://' . $original_url;
+		$CI->config->set_item( 'index_page', $old_ip );
+		
+		$return = add_trailing_slash( 'http://' . $original_url );
+		
+		return $return;
 		
 	}
 	
-	$original_url = trim( $original_url, '/' );
+	// -------------------------
+	
+	$original_url = trim( str_replace( '//', '/', $original_url ), '/' );
 	
 	if ( parse_url( $original_url, PHP_URL_SCHEME ) != '' ) {
+		
+		$CI->config->set_item( 'index_page', $old_ip );
+		
+		$return = add_trailing_slash( $original_url ) . assoc_array_to_qs( $query );
 		
 		return $original_url;
 		
 	}
 	
-	//echo '<small>' . print_r( $original_url, TRUE ) . '</small>';
-	$CI =& get_instance();
+	// -------------------------
 	
 	$reverse_urls = isset( $CI->mcm->system_params[ 'reverse_urls' ] ) ? $CI->mcm->system_params[ 'reverse_urls' ] : NULL;
 	
-	
-	if ( ( isset( $reverse_urls ) AND is_array( $reverse_urls ) ) ) {
+	if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND ( isset( $reverse_urls ) AND is_array( $reverse_urls ) ) ) {
 		
-		if ( 0 === strpos( $original_url, 'submit_forms' ) ) {
+		if ( 0 === strpos( $original_url, 'submit_forms' ) AND environment() ) {
 			
 			// -------------------------
 			// Loading UniD model
@@ -70,40 +128,20 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 				
 			}
 			
-			// -------------------------
-			// Getting Queries
-			
-			$query = array();
-			
-			$tmp = parse_url( $original_url );
-			
-			if ( isset( $tmp[ 'query' ] ) ) {
-				
-				parse_str( $tmp[ 'query' ], $query );
-				
-			}
+			$_original_url = check_var( $tmp[ 'path' ] ) ? $tmp[ 'path' ] : $original_url;
 			
 			// -------------------------
 			// Getting URI segments
 			
-			$segments = explode( '/', $original_url );
+			$segments = explode( '/', $_original_url );
 			
 			if ( in_array( 'index', $segments ) ) {
 				
-				$final_url = $original_url;
+				$final_url = $_original_url;
 				$friendly_url = check_var( $CI->mcm->filtered_system_params[ 'friendly_urls' ] );
 				$sef_url = FALSE;
 				$cp = FALSE;
 				$filters = FALSE;
-				
-				$tmp = parse_url( $original_url );
-				$query = array();
-				
-				if ( isset( $tmp[ 'query' ] ) ) {
-					
-					parse_str( $tmp[ 'query' ], $query );
-					
-				}
 				
 				$uri_segments = array(
 					
@@ -137,7 +175,7 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 						// -------------------------
 						// Move these params to query string
 						
-						if ( $friendly_url AND in_array( $v, array( 'ipp', 'sfsp', 's', 'ob', 'obd' ) ) ) {
+						if ( $friendly_url AND in_array( $v, array( 'ipp', 'sfsp', 'q', 's', 'ob', 'obd' ) ) ) {
 							
 							$query[ $v ] = $segments[ $k + 1 ];
 							
@@ -251,7 +289,7 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 						
 						$db_search_url = $CI->uri->assoc_to_uri( $db_search_url );
 						
-						$db_search_query = 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $db_search_url . '$\' LIMIT 1';
+						$db_search_query = 'SELECT * FROM tb_urls WHERE target REGEXP \'^' . $db_search_url . '$\' /*and sef_url != "default_controller"*/ LIMIT 1';
 						
 // 						echo 'searching for: <pre>' . print_r( $db_search_query, TRUE ) . '</pre>';
 						
@@ -263,9 +301,21 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 						
 						if ( isset( $db_url[ 'sef_url' ] ) ) {
 							
+							if ( $db_url[ 'sef_url' ] == 'default_controller' ) {
+								
+								$db_url[ 'sef_url' ] = '';
+								
+							}
+							
 // 							echo 'we\'ve found: <pre>' . print_r( $db_search_query, TRUE ) . '</pre>';
 							
-							return ( $cp ? site_url( str_replace( '(:num)', $cp, $db_url[ 'sef_url' ] ) ) : site_url( $db_url[ 'sef_url' ] ) ) . assoc_array_to_qs( $query );
+							$return = add_trailing_slash( ( $cp ? site_url( str_replace( '(:num)', $cp, $db_url[ 'sef_url' ] ) ) : site_url( $db_url[ 'sef_url' ] ) ) . assoc_array_to_qs( $query ) );
+							
+// 							echo '$return: <pre>' . print_r( $return, TRUE ) . '</pre>';
+							
+							$CI->config->set_item( 'index_page', $old_ip );
+							
+							return $return;
 							
 						}
 						else {
@@ -525,12 +575,21 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 					
 				}
 				
-				return site_url( $final_url ) . assoc_array_to_qs( $query );
+// 		echo '<pre>' . print_r( $final_url, TRUE ) . '</pre>';
+		
+// 		echo '<pre>' . print_r( $query, TRUE ) . '</pre>';
+		/*
+				$return = add_trailing_slash( site_url( $final_url ) . assoc_array_to_qs( $query ) );
 				
+				$CI->config->set_item( 'index_page', $old_ip );
+				
+				return $return;
+				*/
 			}
 			
 		}
-		else if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND 0 === strpos( $original_url, 'articles' ) AND environment() != ADMIN_ALIAS ) {
+		
+		else if ( 0 === strpos( $original_url, 'articles' ) AND environment() ) {
 
 			if ( ! $CI->load->is_model_loaded( 'articles' ) ) {
 
@@ -547,167 +606,10 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 			$segments = explode( '/', $original_url );
 			
 			$component_item = $segments[ 2 ];
-			/*
-			if ( $component_item == 'article_detail' ){
-
-				$article_id = $segments[ 4 ];
-
-				$gap = array(
-
-					'art_id' => $article_id,
-					'limit' => 1,
-
-				);
-
-				$query = $CI->db->query( 'SELECT * FROM tb_urls WHERE target RLIKE \'^articles/index/' . $component_item . '/([0-9]*[0-9])/' . $article_id . '$\' LIMIT 1' );
-
-				$url = $query->row_array();
-
-				// if we not found the url, create new
-				if ( empty( $url ) AND $article = $CI->articles->get( $article_id ) ){
-
-					$category = $CI->articles->get_category( $article[ 'category_id' ] );
-
-					if ( ! empty( $category ) ){
-
-						$category_path = '';
-						$category_path_array = $CI->articles_model->get_category_path( $article[ 'category_id' ] );
-
-						foreach ( $category_path_array as $key => $value ) {
-
-							$category_path .= $value[ 'alias' ] . '/';
-
-						}
-
-						$category = $category_path . $category[ 'alias' ] . '/';
-
-					}
-					else{
-
-						$category = '';
-
-					}
-
-					$tb_urls_data = array(
-
-						'sef_url' => $category . $article[ 'alias' ],
-						'target' => $article[ 'url' ]
-
-					);
-
-					if ( $CI->urls_common_model->insert( $tb_urls_data ) === FALSE ){
-
-						msg( ( 'error_trying_insert_' . $component_item . '_url' ), 'title' );
-						log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_' . $component_item . '_url' ) );
-
-					}
-					else {
-
-						return site_url( $tb_urls_data[ 'sef_url' ] );
-
-					}
-
-				}
-				else {
-
-					return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $tb_urls_data[ 'sef_url' ] ) );
-
-				}
-
-			}
-			else if ( $component_item == 'articles_list' ){
-
-				//echo '$component_item é: ' . $component_item . '<br />';
-
-				$category = NULL;
-				$category_id = $segments[ 4 ];
-				$u = isset( $segments[ 5 ] ) ? $segments[ 5 ] : '0';
-				$p = isset( $segments[ 6 ] ) ? $segments[ 6 ] : '0';
-				$ipp = isset( $segments[ 7 ] ) ? $segments[ 7 ] : '0';
-
-				//echo $original_url . '<br />';
-				//print_r( $segments );
-
-				if ( $category_id == '-1' OR $category_id == '0' OR $category = $CI->articles->get_category( $category_id ) ){
-
-					$category_alias = '';
-
-					if ( $category ){
-
-						$category_path = '';
-						$category_path_array = $CI->articles_model->get_category_path( $category_id );
-
-						foreach ( $category_path_array as $key => $value ) {
-
-							$category_path .= $value[ 'alias' ] . '/';
-
-						}
-
-						$category_alias = $category_path . $category[ 'alias' ];
-
-					}
-					else if ( $category_id == '-1' ){
-
-						$category_alias = lang( 'url_all_articles' );
-
-					}
-					else if ( $category_id == '0' ){
-
-						$category_alias = lang( 'url_articles_without_categories' );
-
-					}
-
-					//echo '$category_alias é: ' . $category_alias . '<br />';
-					$query = $CI->db->query( 'SELECT * FROM tb_urls WHERE target RLIKE \'^articles/index/' . $component_item . '/([0-9]*[0-9])/' . ( $category_id == '0' ? '0' : $category_id ) . '/([0-9]*[0-9])' . ( isset ( $p ) ? '/' . $p : '' ) . ( isset ( $ipp ) ? '/' . $ipp : '' ) . '$\' LIMIT 1' );
-
-					$url = $query->row_array();
-
-					if ( empty( $url ) ){
-
-						//echo 'chamando article list do url_helper <br />';
-						//echo 'p = ' . $p . '<br />';
-
-						$tb_urls_data = array(
-
-							'sef_url' => $category_alias . ( $p ? '/' . $p : '' ),
-							'target' => $category[ 'url' ]
-
-						);
-
-						//echo 'target = ' . $tb_urls_data[ 'target' ] . '<br />';
-
-						if ( $CI->urls_common_model->insert( $tb_urls_data ) === FALSE ){
-
-							msg( ( 'error_trying_insert_' . $component_item . '_url' ), 'title' );
-							log_message( 'error', '[Urls] ' . lang( 'error_trying_insert_' . $component_item . '_url' ) );
-
-						}
-						else {
-
-							return site_url( $tb_urls_data[ 'sef_url' ] );
-
-						}
-
-					}
-					else{
-
-
-
-						return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $url[ 'sef_url' ] ) );
-
-					}
-
-				}
-				else{
-
-
-
-				}
-
-			}*/
-
+			
 		}
-		else if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND 0 === strpos( $original_url, 'contacts' ) AND environment() != ADMIN_ALIAS ) {
+		
+		else if ( 0 === strpos( $original_url, 'contacts' ) AND environment() ) {
 
 			$CI->load->model(
 
@@ -771,15 +673,23 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 
 						}
 						else {
-
-							return site_url( $tb_urls_data[ 'sef_url' ] );
+							
+							$return = add_trailing_slash( site_url( $tb_urls_data[ 'sef_url' ] ) );
+							
+							$CI->config->set_item( 'index_page', $old_ip );
+							
+							return $return;
 
 						}
 
 					}
 					else{
-
-						return ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $url[ 'sef_url' ] ) );
+						
+						$return = add_trailing_slash( ( $url[ 'sef_url' ] == 'default_controller' ? site_url() : site_url( $url[ 'sef_url' ] ) ) ) . assoc_array_to_qs( $query );
+						
+						$CI->config->set_item( 'index_page', $old_ip );
+						
+						return $return;
 
 					}
 
@@ -788,15 +698,45 @@ function get_url( $original_url = NULL, $menu_item_id = NULL ){
 			}
 
 		}
-		if ( $CI->mcm->filtered_system_params[ 'friendly_urls' ] AND array_key_exists( $original_url, $reverse_urls ) ){
 		
+		if ( array_key_exists( $original_url, $reverse_urls ) ) {
+			
+			$return = add_trailing_slash( site_url( $reverse_urls[ $original_url ] ) ) . assoc_array_to_qs( $query );
+			
+// 			echo '<pre>' . print_r( $original_url, TRUE ) . '</pre>';
+		
+			$CI->config->set_item( 'index_page', $old_ip );
+			
 			//echo 'array_key_exists é: ' . $reverse_urls[ $original_url ] . ' : ' . $original_url . '<br />';
-			return site_url( $reverse_urls[ $original_url ] );
+			return $return;
 			
 		}
+		
 	}
 	
-	return site_url( $original_url );
+	$return = add_trailing_slash( site_url( $original_url ) ) . assoc_array_to_qs( $query );
+	
+	$CI->config->set_item( 'index_page', $old_ip );
+	
+	return $return;
+	
+}
+
+function add_trailing_slash( $url ){
+	
+	$ext = pathinfo( $url , PATHINFO_EXTENSION );
+	
+	if ( ! $ext ) {
+		
+		$url = parse_url( $url );
+		
+		if( ! isset( $url[ 'path'] ) ) $url[ 'path' ] = '/';
+		
+		return $url[ 'scheme' ] . "://" . $url[ 'host' ] . rtrim( $url[ 'path' ], '/' ) . '/' . ( isset( $url[ 'query' ] ) ? '?' . $url[ 'query' ] : '' ) . ( isset( $url[ 'fragment' ] ) ? '#' . $url[ 'fragment' ] : '' );
+		
+	}
+	
+	return $url;
 	
 }
 
@@ -1032,34 +972,42 @@ function url_title($str, $separator = '-', $lowercase = TRUE){
 // --------------------------------------------------------------------
 
 /**
- * Return a associative array from a given absolute url string
+ * Return a associative array from a given relative url string
  *
  * @access public
  * @param string
  * @return array
  * @author Frank Souza
  */
-/*
-function url_string_to_assoc_array( $url_string = NULL ) {
+
+function url_segment_to_assoc_array( $url_string = NULL ) {
 	
-	if ( ! isset( $url_string ) ) {
+	if ( isset( $url_string ) ) {
 		
 		$CI =& get_instance();
 		
-		// if the url is absolute, return this
-		if ( valid_domain( $url_string ) AND url_is_absolute( $url_string ) ) {
+		$_tmp = explode( '/', $url_string );
+		
+		$final_array = array();
+		
+		foreach( $_tmp as $k => $v ) {
 			
-			return $original_url;
+			if ( ! ( $k % 2 ) AND isset( $_tmp[ $k + 1 ] ) ) {
+				
+				$final_array[ $v ] = $_tmp[ $k + 1 ];
+				
+			}
 			
 		}
 		
-		$_tmp = explode( '/', $original_url );
+		
+		return $final_array;
 		
 	}
 	
-	return array();
+	return FALSE;
 	
-}*/
+}
 
 // --------------------------------------------------------------------
 

@@ -6,8 +6,8 @@ class Href_parser_plugin extends Plugins_mdl{
 		
 		log_message( 'debug', '[Plugins] Href parser plugin initialized' );
 		
-		$regex = '#(href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#';
-		//$textarea = preg_replace('/href\s*=\s*(?<href>"[^\\"]*"|\'[^\\\']*\')/e', 'expand_links("$1")', $textarea);
+		$regex = '#(action|href|src)="([^:"]*)("|(?:(?:%20|\s|\+)[^"]*"))#';
+		// $textarea = preg_replace('/href\s*=\s*(?<href>"[^\\"]*"|\'[^\\\']*\')/e', 'expand_links("$1")', $textarea);
 		
 		$content = $this->voutput->get_content();
 		

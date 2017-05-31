@@ -98,7 +98,7 @@
 								
 								$format = 'sf_us_dt_ft_pt_' . $format . '_' . $_tmp_array[ $f_key ][ 'sf_date_field_presentation_format' ];
 								
-								$sf_out[ 'users_submits' ][ $user_submit[ 'id' ] ][ $f_key ][ 'value' ] = strftime( lang( $format ), strtotime( $value ) );
+								$sf_out[ 'users_submits' ][ $user_submit[ 'id' ] ][ $f_key ][ 'value' ] = ov_strftime( lang( $format ), strtotime( $value ) );
 								
 							} else {
 								

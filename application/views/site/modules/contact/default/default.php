@@ -1,4 +1,10 @@
-<?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' ); ?>
+<?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
+
+$_rich_card_params = '';
+
+?>
+
+
 
 <section class="module-wrapper contact-module contact-module-wrapper <?= $module_data[ 'params' ][ 'module_class' ]; ?>">
 	
@@ -15,11 +21,33 @@
 	
 	}
 	
-	?><div class="module-content contact-module-layout-<?= $module_data[ 'params' ][ 'contact_module_layout' ]; ?> contact-module-theme-<?= $module_data[ 'params' ][ 'contact_module_theme' ]; ?>" itemscope itemtype="http://schema.org/Organization">
+	?><div class="module-content contact-module-layout-<?= $module_data[ 'params' ][ 'contact_module_layout' ]; ?> contact-module-theme-<?= $module_data[ 'params' ][ 'contact_module_theme' ]; ?>">
 
+		<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_image' ] ) AND $module_data[ 'params' ][ 'contact_module_show_image' ] AND check_var( $contact[ 'photo_local' ] ) ) { ?>
+		
+		<div class="thumb">
+			
+			<div class="s1 inner">
+				
+				<div class="s2">
+					
+					<span>
+						
+						<?= img( array( 'src' => $contact[ 'photo_local' ], 'width' => 148, 'itemprop' => 'image' ) ); ?>
+						
+					</span>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<?php } ?>
+		
 		<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_name' ] ) ) { ?>
 
-		<h4 itemprop="name" class="contact-name"><?= $contact[ 'name' ]; ?></h4>
+		<h4 class="contact-name"><?= $contact[ 'name' ]; ?></h4>
 
 		<?php } ?>
 
@@ -53,9 +81,25 @@
 						
 					<?php } ?>
 					
-				<?php } ?>
+				<?php }
 				
-				<?php foreach ( $phones as $key => $phone ) { ?>
+				$_rich_card_params .= ',"ContactPoint": [';
+				
+				$i = 1;
+				
+				foreach ( $phones as $key => $phone ) {
+					
+					$_value = ( check_var( $phone[ 'int_code' ] ) ? '<span class="int-code">+' . $phone[ 'int_code' ] . '</span> ' : '' ) . ( check_var( $phone[ 'area_code' ] ) ? '<span class="area-code">(' . $phone[ 'area_code' ] . ')</span> ' : '' ) . '<span class="number">' . $phone[ 'number' ] . '</span> <span class="extension-number">' . $phone[ 'extension_number' ] . '</span>';
+					
+					$_rich_card_params .= ( $i > 1 ? ',' : '' ) . '
+					{
+						"@type": "ContactPoint",
+						"telephone": "' . trim( strip_tags( $_value ) ) . '"
+					';
+					
+					$i++;
+					
+				?>
 					
 					<?php if ( in_array( $phone[ 'key' ], $module_data[ 'params' ][ 'contact_module_phones_to_show' ] ) ) { ?>
 						
@@ -63,15 +107,30 @@
 							
 							<a href="tel://<?= str_replace( array( ' ', '-', '(', ')' ), '', ( check_var( $phone[ 'int_code' ] ) ? '+' . $phone[ 'int_code' ] : '' ) . ( check_var( $phone[ 'area_code' ] ) ? $phone[ 'area_code' ] : '' ) . $phone[ 'number' ] . ( check_var( $phone[ 'extension_number' ] ) ? $phone[ 'extension_number' ] : '' ) ); ?>">
 								
-								<span class="contact-module-phone-number" itemprop="telephone">
+								<span class="contact-module-phone-number">
 									
-									<?= ( check_var( $phone[ 'int_code' ] ) ? '<span class="int-code">+' . $phone[ 'int_code' ] . '</span>' : '' ); ?> <?= ( check_var( $phone[ 'area_code' ] ) ? '<span class="area-code">(' . $phone[ 'area_code' ] . ')</span>' : '' ); ?> <span class="number"><?= $phone[ 'number' ]; ?></span> <span class="extension-number"><?= $phone[ 'extension_number' ]; ?></span>
+									<?= $_value; ?>
 									
 								</span>
 								
 							</a>
 							
-							<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_phones_titles' ] ) AND check_var( $phone[ 'phone_title_publicly_visible' ] ) AND check_var( $phone[ 'title' ] ) ){ ?>
+							<?php
+								
+								if ( check_var( trim( $phone[ 'title' ] ) ) AND in_array( strtolower( $phone[ 'title' ] ), array( "customer support", "technical support", "billing support", "bill payment", "sales", "reservations", "credit card support", "emergency", "baggage tracking", "roadside assistance", "package tracking" ) ) ) {
+									
+									$_rich_card_params .= ',"contactType": "' . strtolower( $phone[ 'title' ] ) . '"';
+									
+								}
+								else {
+									
+									$_rich_card_params .= ',"contactType": "customer support"';
+									
+								}
+								
+							?>
+							
+							<?php if ( check_var( $module_data[ 'params' ][ 'contact_module_show_phones_titles' ] ) AND check_var( $phone[ 'phone_title_publicly_visible' ] ) AND check_var( trim( $phone[ 'title' ] ) ) ) { ?>
 								
 								<span class="contact-item-title phone-title-<?= url_title( $phone[ 'title' ], '-', TRUE ); ?>">
 									
@@ -83,9 +142,15 @@
 							
 						</span>
 						
-					<?php } ?>
+					<?php }
 					
-				<?php } ?>
+					$_rich_card_params .= '}';
+					
+				}
+			
+				$_rich_card_params .= ']';
+				
+				?>
 				
 			</p>
 			
@@ -125,9 +190,25 @@
 							
 						<?php } ?>
 						
-					<?php } ?>
+					<?php }
 					
-					<?php foreach ( $emails as $key => $email ) { ?>
+					$_rich_card_params .= ',"ContactPoint": [';
+					
+					$i = 1;
+					
+					foreach ( $emails as $key => $email ) {
+			
+						$_value = $email[ 'email' ];
+						
+						$_rich_card_params .= ( $i > 1 ? ',' : '' ) . '
+						{
+							"@type": "ContactPoint",
+							"email": "' . trim( strip_tags( $_value ) ) . '"
+						';
+						
+						$i++;
+						
+					?>
 						
 						<?php if ( in_array( $email[ 'key' ], $module_data[ 'params' ][ 'contact_module_emails_to_show' ] ) ) { ?>
 							
@@ -135,11 +216,26 @@
 							
 							<span class="contact-module-email">
 								
-								<a href="mailto:<?= $contact[ 'name' ]; ?><<?= $email[ 'email' ]; ?>>" class="contact-module-email-value" itemprop="email">
+								<a href="mailto:<?= $contact[ 'name' ]; ?><<?= strip_tags( $email[ 'email' ] ); ?>>" class="contact-module-email-value">
 									
-									<?= $email[ 'email' ]; ?>
+									<?= $_value; ?>
 									
 								</a>
+								
+								<?php
+									
+									if ( check_var( trim( $email[ 'title' ] ) ) AND in_array( strtolower( $email[ 'title' ] ), array( "customer support", "technical support", "billing support", "bill payment", "sales", "reservations", "credit card support", "emergency", "baggage tracking", "roadside assistance", "package tracking" ) ) ) {
+										
+										$_rich_card_params .= ',"contactType": "' . strtolower( $email[ 'title' ] ) . '"';
+										
+									}
+									else {
+										
+										$_rich_card_params .= ',"contactType": "customer support"';
+										
+									}
+									
+								?>
 								
 								<?php if ( $show_email_title ){ ?>
 									
@@ -153,9 +249,15 @@
 								
 							</span>
 							
-						<?php } ?>
+						<?php }
 						
-					<?php } ?>
+						$_rich_card_params .= '}';
+						
+					}
+				
+					$_rich_card_params .= ']';
+					
+					?>
 					
 				</p>
 				
@@ -224,7 +326,7 @@
 
 						?>
 
-						<a href="<?= prep_url( $website[ 'url' ] ); ?>" class="contact-module-website-value <?= ( 'list-info-wrapper-website-' . $website[ 'title' ] ); ?>" target="_blank" itemprop="website">
+						<a href="<?= prep_url( $website[ 'url' ] ); ?>" class="contact-module-website-value <?= ( 'list-info-wrapper-website-' . $website[ 'title' ] ); ?>" target="_blank">
 
 							<?= $website[ 'url' ]; ?>
 
@@ -258,7 +360,7 @@
 
 		<?php if ( isset( $module_data[ 'params' ][ 'contact_module_show_addresses' ] ) AND $module_data[ 'params' ][ 'contact_module_show_addresses' ] AND $contact[ 'addresses' ] AND ! empty( $addresses ) ) { ?>
 
-			<p class="contact-addresses contact-info-item" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+			<p class="contact-addresses contact-info-item">
 
 				<?php if ( @$module_data[ 'params' ][ 'contact_module_show_addresses_title' ] ) {?>
 
@@ -272,9 +374,22 @@
 
 					<?php } ?>
 
-				<?php } ?>
+				<?php }
 
-				<?php foreach ( $contact[ 'addresses' ] as $key => $address ) { ?>
+				$_rich_card_params .= ',"address": [';
+				
+				$i = 1;
+				
+				foreach ( $contact[ 'addresses' ] as $key => $address ) {
+					
+					$_rich_card_params .= ( $i > 1 ? ',' : '' ) . '
+					{
+						"@type": "PostalAddress"
+					';
+					
+					$i++;
+					
+				?>
 
 					<?php if ( @$module_data[ 'params' ][ 'contact_module_show_addresses_titles' ] AND @$address[ 'address_title_publicly_visible' ] AND @$address[ 'title' ] ){ ?>
 
@@ -293,10 +408,16 @@
 
 					<?php if ( @$address[ 'public_area_title' ] OR @$address[ 'number' ] OR @$address[ 'complement' ] OR @$address[ 'neighborhood_title' ] ) { ?>
 
-						<span class="contact-module-address-street" itemprop="streetAddress">
-
+						<span class="contact-module-address-street" >
+							
+							<?php if ( check_var( $address[ 'public_area_title' ] ) ) {
+								
+								$_rich_card_params .= ', "streetAddress": "' . $address[ 'public_area_title' ] . '"';
+								
+							} ?>
+							
 							<?php if ( @$module_data[ 'params' ][ 'contact_module_show_public_area' ] AND @$address[ 'public_area_title' ] ) { ?>
-
+								
 								<span class="contact-module-address-public-area">
 
 									<?= @$address[ 'public_area_title' ]; ?>
@@ -362,10 +483,17 @@
 					<?php if ( @$address[ 'city_title' ] OR @$address[ 'state_acronym' ] ) { ?>
 
 						<span class="contact-module-address-city-state">
-
+							
+							<?php if ( check_var( $address[ 'city_title' ] ) ) {
+								
+								$_rich_card_params .= ', "addressLocality": "' . $address[ 'city_title' ] . '"';
+								
+							} ?>
+							
 							<?php if ( @$module_data[ 'params' ][ 'contact_module_show_city' ] AND @$address[ 'city_title' ] ) { ?>
+								
 
-								<span class="contact-module-address-city" itemprop="addressLocality">
+								<span class="contact-module-address-city">
 
 									<?= @$address[ 'city_title' ]; ?>
 
@@ -376,11 +504,17 @@
 
 							<?php } ?>
 
+							<?php if ( check_var( $address[ 'state_acronym' ] ) ) {
+								
+								$_rich_card_params .= ', "addressRegion": "' . $address[ 'state_acronym' ] . '"';
+								
+							} ?>
+							
 							<?php if ( @$module_data[ 'params' ][ 'contact_module_show_state' ] AND @$address[ 'state_acronym' ] ) { ?>
 
 								<?= ( $pre_text_line_2 ? '-' : '' ); ?>
 
-								<span class="contact-module-address-state" itemprop="addressRegion">
+								<span class="contact-module-address-state">
 
 									<?= @$address[ 'state_acronym' ]; ?>
 
@@ -397,10 +531,16 @@
 
 
 					<?php $pre_text_line_3 = FALSE; ?>
-
+					
+					<?php if ( check_var( $address[ 'postal_code' ] ) ) {
+						
+						$_rich_card_params .= ', "postalCode": "' . $address[ 'postal_code' ] . '"';
+						
+					} ?>
+					
 					<?php if ( @$module_data[ 'params' ][ 'contact_module_show_postal_code' ] AND @$address[ 'postal_code' ] ) { ?>
 
-						<span class="contact-module-address-postal-code" itemprop="postalCode">
+						<span class="contact-module-address-postal-code" >
 
 							<span class="contact-module-address-postal-code-title">
 
@@ -408,7 +548,7 @@
 
 							</span>
 
-							<span itemprop="postalCode">
+							<span>
 
 								<?= @$address[ 'postal_code' ]; ?>
 
@@ -424,10 +564,16 @@
 
 
 					<?php $pre_text_line_4 = FALSE; ?>
-
+					
+					<?php if ( check_var( $address[ 'country_title' ] ) ) {
+						
+						$_rich_card_params .= ', "addressCountry": "' . $address[ 'country_title' ] . '"';
+						
+					} ?>
+					
 					<?php if ( @$module_data[ 'params' ][ 'contact_module_show_country' ] AND @$address[ 'country_title' ] ) { ?>
-
-						<span class="contact-module-address-country" itemprop="addressCountry">
+						
+						<span class="contact-module-address-country">
 
 							<?= @$address[ 'country_title' ]; ?>
 
@@ -436,10 +582,16 @@
 
 						</span>
 
-					<?php } ?>
-
-				<?php } ?>
-
+					<?php }
+					
+					$_rich_card_params .= '}';
+					
+				}
+			
+				$_rich_card_params .= ']';
+				
+				?>
+				
 			</p>
 			
 		<?php } ?>
@@ -450,5 +602,23 @@
 	
 </section>
 
+
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": "<?= $contact[ 'name' ]; ?>",
+	"url": "<?= BASE_URL; ?>"
+	
+	<?php if ( check_var( $contact[ 'photo_local' ] ) ) { ?>
+		
+		, "logo": "<?= get_url( $contact[ 'photo_local' ] ); ?>"
+		
+	<?php } ?>
+	
+	<?= $_rich_card_params; ?>
+	
+}
+</script>
 
 

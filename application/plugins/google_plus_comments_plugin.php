@@ -83,14 +83,14 @@ class Google_plus_comments_plugin extends Plugins_mdl{
 		}
 		else if( $current_component[ 'unique_name' ] === 'menus' ){
 			
-			if ( NULL !== $this->articles_model->menu_item_component_item ){
+			if ( NULL !== $this->menu_item_component_item ){
 				
-				if ( $this->articles_model->menu_item_component_item === 'menu_item_article_detail' ){
+				if ( $this->menu_item_component_item === 'menu_item_article_detail' ){
 					
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'google_plus_comments/articles/article_detail.xml' ) );
 					
 				}
-				else if ( $this->articles_model->menu_item_component_item === 'menu_item_articles_list' ){
+				else if ( $this->menu_item_component_item === 'menu_item_articles_list' ){
 					
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'google_plus_comments/articles/articles_list.xml' ) );
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'google_plus_comments/articles/article_detail.xml' ) );

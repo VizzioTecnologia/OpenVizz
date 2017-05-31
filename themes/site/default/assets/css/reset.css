@@ -55,6 +55,12 @@ textarea:focus, input:focus, select:focus{
 	outline-style: none;
 }
 
+p:empty {
+	
+	display: none;
+	
+}
+
 /*
  --------------------------------------------------------------------------------------------------
  reset.css.php

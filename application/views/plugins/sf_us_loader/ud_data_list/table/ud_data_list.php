@@ -20,9 +20,9 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 
 // print_r( $params );
 
-?>
 
-<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-data-schema-item users-submits ud-d-list-wrapper <?= $params[ 'wc' ]; ?> item item-<?= $__index; ?>">
+
+?><section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-data-schema-item users-submits ud-d-list-wrapper <?= $params[ 'wc' ]; ?> item item-<?= $__index; ?>">
 	
 	<?php if ( $params[ 'st' ] ) { ?>
 	<header class="heading">
@@ -56,55 +56,54 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 	</header>
 	<?php } ?>
 	
-	<div id="component-content">
+	<div class="users-submits-wrapper ud-d-list-results results">
 		
-		<?php
+		<div class="s1">
 			
-			/* ---------------------------------------------------------------------------
-			* ---------------------------------------------------------------------------
-			* Users submits
-			* ---------------------------------------------------------------------------
-			*/
-			
-			if ( file_exists( $_path . 'users_submits_results.php' ) ) {
+			<?php
 				
-				require( $_path . 'users_submits_results.php' );
+				/* ---------------------------------------------------------------------------
+				* ---------------------------------------------------------------------------
+				* UniD Data
+				* ---------------------------------------------------------------------------
+				*/
 				
-			}
+				if ( file_exists( $_path . 'users_submits_results.php' ) ) {
+					
+					require( $_path . 'users_submits_results.php' );
+					
+				}
+				
+			?>
 			
-		?>
+			<?php if ( check_var( $ud_data_array ) ) { ?>
+			
+				<div class="clear"></div>
+				
+				<?php
+					
+					/* ---------------------------------------------------------------------------
+					* ---------------------------------------------------------------------------
+					* Read more
+					* ---------------------------------------------------------------------------
+					*/
+					
+					$_default_path = VIEWS_PATH . SITE_COMPONENTS_VIEWS_PATH . 'submit_forms' . DS . 'index' . DS . 'users_submits' . DS . 'default' . DS;
+					
+					if ( check_var( $params[ 'ud_data_list_ds_readmore_link' ] ) AND file_exists( $_default_path . 'ds_readmore.php' ) ) {
+						
+						require( $_default_path . 'ds_readmore.php' );
+						
+					}
+					
+				?>
+			
+			<?php } ?>
+			
+		</div>
+		
+		<div class="clear"></div>
 		
 	</div>
-
+	
 </section>
-
-<?php if ( $this->plugins->load( 'fancybox' ) ){ ?>
-
-<script type="text/javascript" >
-	
-	$( document ).on( 'ready', function( e ){
-		
-		var fbContent;
-		
-		$( "#submit-form-users-submits-<?= $unique_hash; ?> .modal" ).fancybox({
-			
-			content: fbContent,
-			beforeShow: function(){
-				
-				fbContent = $( this ).html();
-				$(".fancybox-overlay").addClass("user-submit-detail");
-				
-			},
-			afterClose: function(){
-				fbContent = '';
-			},
-			onComplete: function(){
-			}
-			
-		});
-		
-	});
-	
-</script>
-
-<?php } ?>

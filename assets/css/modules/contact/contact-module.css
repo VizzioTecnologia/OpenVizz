@@ -51,6 +51,8 @@
 }
 .list-info-wrapper-website-facebookcom,
 .list-info-wrapper-website-wwwfacebookcom,
+.list-info-wrapper-website-wwwinstagramcom,
+.list-info-wrapper-website-instagramcom,
 .list-info-wrapper-website-plusgooglecom,
 .list-info-wrapper-website-twittercom,
 .list-info-wrapper-website-wwwtwittercom,
@@ -67,6 +69,12 @@
 	overflow: hidden;
 	
 	background: url('../../../images/modules/contact/themes/icon-website-facebook.png') no-repeat center center;
+	
+}
+.list-info-wrapper-website-wwwinstagramcom,
+.list-info-wrapper-website-instagramcom{
+	
+	background-image: url('../../../images/modules/contact/themes/icon-website-instagram.png');
 	
 }
 .list-info-wrapper-website-plusgooglecom{

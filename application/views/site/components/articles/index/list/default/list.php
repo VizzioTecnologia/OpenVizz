@@ -303,10 +303,10 @@
 			<?php
 
 				$created_date_time = ( check_var( $article[ 'created_date' ] ) ) ? strtotime( $article[ 'created_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-				$created_date_time = strftime( ( ( check_var( $params[ 'created_date_time_format' ] ) ) ? lang( $params[ 'created_date_time_format' ] ) : lang( 'articles_created_datetime_format' ) ), $created_date_time );
+				$created_date_time = ov_strftime( ( ( check_var( $params[ 'created_date_time_format' ] ) ) ? lang( $params[ 'created_date_time_format' ] ) : lang( 'articles_created_datetime_format' ) ), $created_date_time );
 				
 				$modified_date_time = ( check_var( $article[ 'modified_date' ] ) ) ? strtotime( $article[ 'modified_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-				$modified_time = strftime( '%T', $modified_date_time );
+				$modified_time = ov_strftime( '%T', $modified_date_time );
 
 			?>
 

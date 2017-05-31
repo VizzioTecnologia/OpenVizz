@@ -280,7 +280,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 					
 					if ( ! is_array( $order_by ) ) {
 						
-						if ( $order_by AND ! in_array( $order_by, array( 'id', 'submit_datetime', 'mod_datetime', ) ) AND $order_by == $field[ 'alias' ] ) {
+						if ( ( $order_by AND ! in_array( $order_by, array( 'id', 'submit_datetime', 'mod_datetime', ) ) AND $order_by == $field[ 'alias' ] ) OR in_array( $order_by, array( 'id', 'submit_datetime', 'mod_datetime', ) ) ) {
 							
 							$order_by_allowed = TRUE;
 							
@@ -506,6 +506,7 @@ class Sf_us_search_plugin extends Plugins_mdl{
 			
 			if ( $full_search_results ) {
 				
+// 		echo '<pre>' . print_r( $search_config, TRUE ) . '</pre>';
 				$default_search_results = array();
 				
 				reset( $full_search_results );

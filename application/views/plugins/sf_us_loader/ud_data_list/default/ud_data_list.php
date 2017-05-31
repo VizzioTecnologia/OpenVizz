@@ -42,7 +42,7 @@ $ud_data_array_total_results = count( $ud_data_array );
 	</header>
 	<?php } ?>
 	
-	<div class="users-submits-wrapper results">
+	<div class="users-submits-wrapper ud-d-list-results results">
 		
 		<div class="s1">
 			
@@ -50,7 +50,7 @@ $ud_data_array_total_results = count( $ud_data_array );
 				
 				/* ---------------------------------------------------------------------------
 				* ---------------------------------------------------------------------------
-				* Users submits
+				* UniD Data
 				* ---------------------------------------------------------------------------
 				*/
 				

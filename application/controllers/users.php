@@ -817,7 +817,7 @@ class Users extends Main {
 					$db_data[ 'params' ] = get_params( $valid_code[ 'user' ][ 'params' ] );
 					
 					$last_pass_update_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-					$last_pass_update_datetime = strftime( '%Y-%m-%d %T', $last_pass_update_datetime );
+					$last_pass_update_datetime = ov_strftime( '%Y-%m-%d %T', $last_pass_update_datetime );
 					
 					$db_data[ 'params' ][ 'last_pass_update_datetime' ] = $last_pass_update_datetime;
 					

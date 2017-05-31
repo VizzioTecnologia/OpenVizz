@@ -28,12 +28,12 @@ function set_current_component( $component_name = NULL ){
 
 	}
 	else{
-
+		
 		log_message( 'error', "[Components] Unable to set current component to " . $CI->component_name );
 		msg( lang( 'Component dependecies error' ), 'title' );
 		msg( lang( 'Unable to set current component to ' . $CI->component_name ), 'error' );
 		redirect( 'admin' );
-
+		
 	}
 }
 

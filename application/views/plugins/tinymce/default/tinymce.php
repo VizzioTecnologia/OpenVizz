@@ -70,18 +70,18 @@ TinyMCE
 		
 		
 		
-		tinymce.PluginManager.add('viacms', function(editor, url) {
+		tinymce.PluginManager.add('ov_readmore', function(editor, url) {
 			
-			editor.addButton('viacms', {
+			editor.addButton('ov_readmore', {
 				text: '<?= lang( 'readmore' ); ?>',
 				icon: false,
 				onclick: function() {
 					var content = editor.getContent();
-					if (content.match(/<hr\s+id=(\"|')vcms-readmore(\"|')\s*\/*>/i)) {
+					if (content.match(/<hr\s+id=(\"|')ov-readmore(\"|')\s*\/*>/i)) {
 						alert('<?= lang( 'editor_readmore_already_exists' ); ?>');
 						return false;
 					} else {
-						editor.insertContent('<hr id=\"vcms-readmore\" />');
+						editor.insertContent('<hr id=\"ov-readmore\" />');
 					}
 					
 				}
@@ -98,20 +98,20 @@ TinyMCE
 			menubar: false,
 			entity_encoding : "raw",
 			plugins: [
-				"viacms advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+				"ov_readmore advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 				"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 				"save table contextmenu directionality emoticons template paste textcolor responsivefilemanager"
 			],
 			
-			toolbar1: "viacms save newdocument print searchreplace | undo redo | cut copy paste pastetext | table hr | link unlink anchor | image media charmap | preview code visualblocks fullscreen",
+			toolbar1: "ov_readmore save newdocument print searchreplace | undo redo | cut copy paste pastetext | table hr | link unlink anchor | image media charmap | preview code visualblocks fullscreen",
 			toolbar2: "styleselect removeformat | bold italic underline strikethrough subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent forecolor backcolor",
 			image_advtab: true,
 			
 			valid_children : "+body[style]",
 			
 			valid_elements : '*[*]',
-//  			extend_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align]"
-//  				+",td[title|style|class|id|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup]",
+ 			extend_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align],pre"
+ 				+",td[title|style|class|id|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup]",
 			
 			//forced_root_block: false, // http://www.tinymce.com/wiki.php/Configuration:forced_root_block
 			
@@ -127,12 +127,17 @@ TinyMCE
 			<?php if ( $this->mcm->filtered_system_params[ $this->mcm->environment . '_language' ] != 'english' ) { ?>
 			language : '<?= $this->mcm->filtered_system_params[ $this->mcm->environment . '_language' ]; ?>',
 			<?php } ?>
-			
+			gecko_spellcheck : true,
+			remove_linebreaks : false,
+// 			force_p_newlines : true,
+// 			force_br_newlines : true,
 			external_filemanager_path:"<?= JS_DIR_URL; ?>/responsivefilemanager/filemanager/",
 			filemanager_access_key:"<?= md5( $this->config->item( 'encryption_key' ) ); ?>" ,
 			filemanager_title: '<?= lang('select_file'); ?>' ,
 			external_plugins: { "filemanager" : "<?= JS_DIR_URL; ?>/responsivefilemanager/filemanager/plugin.min.js"},
-			content_css : "<?= SITE_THEMES_URL . '/' . $this->mcm->filtered_system_params[ 'site_theme' ] . '/assets/css'; ?>/js-editor.css"
+			content_css : "<?= SITE_THEMES_URL . '/' . $this->mcm->filtered_system_params[ 'site_theme' ] . '/assets/css'; ?>/js-editor.css.php",
+			schema: 'html5',
+			valid_children : '+pre[p|div]'
 			
 		});
 			

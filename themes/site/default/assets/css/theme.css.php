@@ -64,9 +64,15 @@ if ( isset( $_GET[ 'tmm' ] ) AND $_GET[ 'tmm' ] == 1 ) {
 	
 }
 
+// nivo slider
+if ( isset( $_GET[ 'ns' ] ) AND $_GET[ 'ns' ] == 1 ) {
+	
+	include( 'nivo-slider.css' );
+	
+}
+
 include( 'articles.css' );
 include( 'submit-forms.css' );
-include( 'companies-trademarks.css' );
 
 if ( isset( $_GET[ 'ct' ] ) AND $_GET[ 'ct' ] == 1 ) {
 	
@@ -74,32 +80,8 @@ if ( isset( $_GET[ 'ct' ] ) AND $_GET[ 'ct' ] == 1 ) {
 	
 }
 
-
 include( 'jquery-scrolltop.css' );
 include( 'msg.css' );
-
-
-include( 'html.css.php' );
-include( 'template.css.php' );
-
-include( 'params.css.php' );
-include( 'info_cards.css.php' );
-include( 'tabs.css.php' );
-include( 'modals.css.php' );
-include( 'search.css.php' );
-include( 'buttons.css.php' );
-include( 'jquery_switch.css.php' );
-
-
-include( 'jquery_ui.css.php' );
-include( 'qtip2.css.php' );
-include( 'tinymce.css.php' );
-
-
-include( 'dashboard.css.php' );
-include( 'articles.css.php' );
-include( 'vesm.css.php' );
-include( 'adjustments.css.php' );
 
 ?>
 

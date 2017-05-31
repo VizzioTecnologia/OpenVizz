@@ -38,6 +38,23 @@ class Facebook_comments_plugin extends Plugins_mdl{
 				}
 				
 			}
+			else if( $this->current_component[ 'unique_name' ] === 'submit_forms' ){
+				
+				if ( NULL !== $this->component_function ){
+					
+					if ( $this->component_function === 'index' ){
+						
+						if ( $this->component_function_action === 'dd' ){
+							
+							$ok = check_var( $this->mcm->filtered_system_params[ 'ud_d_detail_show_facebook_comments' ] );
+							
+						}
+						
+					}
+					
+				}
+				
+			}
 			
 			if ( $ok ){
 				
@@ -100,17 +117,27 @@ class Facebook_comments_plugin extends Plugins_mdl{
 		}
 		else if( $component_name === 'menus' ){
 			
-			if ( NULL !== $this->articles_model->menu_item_component_item ){
+			if ( NULL !== $this->menu_item_component_item ){
 				
-				if ( $this->articles_model->menu_item_component_item === 'menu_item_article_detail' ){
+				if ( $this->menu_item_component_item === 'menu_item_article_detail' ){
 					
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'facebook_comments/articles/article_detail.xml' ) );
 					
 				}
-				else if ( $this->articles_model->menu_item_component_item === 'menu_item_articles_list' ){
+				else if ( $this->menu_item_component_item === 'menu_item_articles_list' ){
 					
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'facebook_comments/articles/articles_list.xml' ) );
 					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'facebook_comments/articles/article_detail.xml' ) );
+					
+				}
+				else if ( $this->menu_item_component_item === 'menu_item_users_submits' ){
+					
+					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'facebook_comments/unid/ud_d_detail.xml' ) );
+					
+				}
+				else if ( $this->menu_item_component_item === 'menu_item_ud_data_detail' ){
+					
+					$params = array_merge_recursive( $params, get_params_spec_from_xml( PLUGINS_PATH . 'facebook_comments/unid/ud_d_detail.xml' ) );
 					
 				}
 				

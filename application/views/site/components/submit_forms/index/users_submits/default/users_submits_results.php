@@ -27,6 +27,7 @@
 	}
 	
 	$__main_image = FALSE;
+	$__page_main_image = FALSE;
 	
 	reset( $property_presentation_types );
 	
@@ -58,13 +59,66 @@
 	
 	$wrapper_class = join( ' ', $wrapper_class );
 	
-?>
-
-<div id="ud-d-search-results-wrapper" class="<?= $wrapper_class; ?>">
+?><div id="ud-d-search-results-wrapper" class="<?= $wrapper_class; ?>">
 	
-	<?php if ( check_var( $ud_data_array ) ) { ?>
+	<?php if ( check_var( $ud_data_array ) ) {
 		
-		<?php if ( check_var( $params[ 'show_results_count' ] ) ) { ?>
+		$show_results_count = FALSE;
+		$show_results_count_str = '';
+		
+		if ( check_var( $params[ 'show_results_count' ] ) AND ! check_var( $search_mode ) ) {
+			
+			$show_results_count = TRUE;
+			
+		}
+		else if ( check_var( $params[ 'show_search_results_count' ] ) AND check_var( $search_mode ) ) {
+			
+			$show_results_count = TRUE;
+			
+		}
+		
+		if ( $show_results_count ) {
+		
+			if ( $ud_data_list_total_results > 1 ) {
+				
+				if ( check_var( $params[ 'ud_d_list_results_string' ] ) AND ! check_var( $search_mode ) ) {
+					
+					$show_results_count_str = lang( $params[ 'ud_d_list_results_string' ] , NULL, '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				else if ( check_var( $params[ 'ud_d_list_search_results_string' ] ) AND check_var( $search_mode ) ) {
+					
+					$show_results_count_str = lang( $params[ 'ud_d_list_search_results_string' ] , NULL, '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				else {
+					
+					$show_results_count_str = lang( 'ud_d_list_search_results_string' , NULL, '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				
+			}
+			else {
+				
+				if ( check_var( $params[ 'ud_d_list_single_result_string' ] ) AND ! check_var( $search_mode ) ) {
+					
+					$show_results_count_str = sprintf( $params[ 'ud_d_list_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				else if ( check_var( $params[ 'ud_d_list_search_single_result_string' ] ) AND check_var( $search_mode ) ) {
+					
+					$show_results_count_str = sprintf( $params[ 'ud_d_list_search_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				else {
+					
+					$show_results_count_str = sprintf( lang( 'ud_d_list_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
+					
+				}
+				
+			}
+			
+		?>
 		
 		<div class="ud-d-list-results-title-wrapper ud-d-list-results-count-wrapper">
 			
@@ -72,38 +126,7 @@
 				
 				<span class="ud-d-list-results-title">
 					
-					<?php
-						
-						if ( $ud_data_list_total_results > 1 ) {
-							
-							if ( check_var( $params[ 'ud_d_list_search_results_string' ] ) ) {
-								
-								echo sprintf( $params[ 'ud_d_list_search_results_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
-								
-							}
-							else {
-								
-								echo sprintf( lang( 'ud_d_list_search_results_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
-								
-							}
-							
-						}
-						else {
-							
-							if ( check_var( $params[ 'users_submits_search_single_result_string' ] ) ) {
-								
-								echo sprintf( $params[ 'users_submits_search_single_result_string' ], '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
-								
-							}
-							else {
-								
-								echo sprintf( lang( 'users_submits_search_single_result_string' ), '<span class="ud-d-list-results-count">' . $ud_data_list_total_results . '</span>' );
-								
-							}
-							
-						}
-						
-					?>
+					<?= $show_results_count_str; ?>
 					
 				</span>
 				
@@ -112,6 +135,12 @@
 		</div>
 		
 		<?php }
+		
+		if ( check_var( $pagination ) ) {
+			
+			echo $pagination;
+			
+		}
 		
 		echo '<div class="items ud-data-items ud-d-list">';
 		
@@ -158,6 +187,8 @@
 			
 			while ( list( $_pk, $parsed_array ) = each( $ud_data[ 'parsed_data' ][ 'full' ] ) ) {
 				
+				$ud_data_unique_hash = md5( uniqid( rand(), true ) );
+				
 				$prop_value = & $ud_data[ 'parsed_data' ][ 'full' ][ $_pk ][ 'value' ];
 				
 				$_prop = NULL;
@@ -165,6 +196,36 @@
 				if ( isset( $props[ $_pk ] ) ) {
 					
 					$_prop = $props[ $_pk ];
+					
+				}
+				
+				if ( check_var( $ud_data[ 'data' ][ $_prop[ 'alias' ] ] ) AND in_array( $_prop[ 'field_type' ], array( 'combo_box', 'radiobox' ) ) AND check_var( $params[ 'ud_data_availability_site_search' ][ $_prop[ 'alias' ] ] ) ) {
+					
+					$search_filter_url = url_segment_to_assoc_array( $data_scheme[ 'data_list_site_link' ] );
+					
+					$search_filter_url[ 'sfsp' ] = check_var( $search_filter_url[ 'sfsp' ] ) ? $this->unid->url_decode_ud_filters( $search_filter_url[ 'sfsp' ] ) : array();
+					
+					$update = TRUE;
+					
+					if (
+						
+						check_var( $search_filter_url[ 'sfsp' ][ 'dinamic_filter_fields' ][ $_prop[ 'alias' ] ] ) AND $search_filter_url[ 'sfsp' ][ 'dinamic_filter_fields' ][ $_prop[ 'alias' ] ] == $ud_data[ 'data' ][ $_prop[ 'alias' ] ]
+						
+					) {
+						
+						$update = FALSE;
+						
+					}
+					
+					if ( $update ) {
+						
+						$search_filter_url[ 'sfsp' ][ 'dinamic_filter_fields' ][ $_prop[ 'alias' ] ] = $ud_data[ 'data' ][ $_prop[ 'alias' ] ];
+						
+					}
+					
+					$search_filter_url[ 'sfsp' ] = $this->unid->url_encode_ud_filters( $search_filter_url[ 'sfsp' ] );
+					
+					$ud_data[ 'parsed_data' ][ 'full' ][ $_pk ][ 'search_filter_url' ] = $this->uri->assoc_to_uri( $search_filter_url );
 					
 				}
 				
@@ -304,15 +365,28 @@
 					
 					if ( ! $__main_image AND $ud_main_image_prop_alias AND check_var( $ud_data[ 'data' ][ $ud_main_image_prop_alias ] ) ) {
 						
-						$__main_image = get_url( $ud_data[ 'data' ][ $ud_main_image_prop_alias ] );
+						$__main_image = get_url( $ud_data[ 'data' ][ $ud_main_image_prop_alias ], NULL, FALSE );
 						
-						if ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) {
+						if ( check_var( $params[ 'ud_d_list_main_image_on_title' ] ) ) {
 							
-							$this->voutput->append_head_stylesheet_declaration( 'ud_data_' . $ud_data[ 'id' ] . $unique_hash, '
+							$tmp = str_replace( trim( BASE_URL, '/' ) . '/', '', $__main_image );
+							
+							if ( ! url_is_absolute( $tmp ) ) {
 								
-								#ud-d-list-data-' . $ud_data[ 'id' ] . ' .ud-titles-wrapper {
+								$bg_image = THUMBS_DIR_URL . '/' . ltrim( $tmp, '/' );
+								
+							}
+							else $bg_image = & $__main_image;
+							
+							$this->voutput->append_head_stylesheet_declaration( 'ud_data_' . $ud_data[ 'id' ], '
+								
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ',
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ':before,
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ':after,
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ' .ud-titles-wrapper,
+								#ud-d-list-data-' . $ud_data[ 'id' ] . ' .ud-titles-wrapper .ud-data-prop {
 									
-									background-image: url(\'' . $__main_image . '\');
+									background-image: url(\'' . $bg_image . '\');
 									
 								}
 								
@@ -324,7 +398,7 @@
 					
 				}
 				
-				echo '<div id="ud-d-list-data-' . $ud_data[ 'id' ] . '" rel="ud-d-list-' . $unique_hash . '" href="' . $ud_data[ 'site_link' ] . ' .ud-data" class="' . ( ( $__main_image AND check_var( $params[ 'ud_d_main_image_on_title' ] ) ) ? 'ud-image-on-title ' : '' ) . 'item ' . ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) ? 'modal' : '' ) . ' ud-data ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
+				echo '<div id="ud-d-list-data-' . $ud_data[ 'id' ] . '" data-fancybox="ud-d-list-' . $unique_hash . '" data-src="' . $ud_data[ 'site_link' ] . '" data-selector=".ud-data" data-type="ajax" class="' . $ud_data_unique_hash . ( ( $__main_image AND check_var( $params[ 'ud_d_list_main_image_on_title' ] ) ) ? ' ud-image-on-title ' : ' ' ) . 'item ' . ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) ? 'modal' : '' ) . ' ud-data ' . $_ud_data_wrapper_class . ' ' . $_ud_status_classes . '">';
 				
 				reset( $property_presentation_types );
 				
@@ -334,7 +408,35 @@
 					
 					if ( ! empty( ${ '_ud_' . $v . '_props' } ) ) {
 						
-						echo '<div class="item ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper">';
+						if ( $v != 'title' OR ( $v == 'title' AND ! check_var( $params[ 's' ] ) ) ) {
+							
+							if ( $__main_image ) {
+								
+								if ( check_var( $params[ 'ud_d_list_main_image_on_title' ] ) ) {
+									
+								}
+								
+								if ( ! $__page_main_image AND check_var( $params[ 'ud_d_list_page_content_title_image' ] ) ) {
+									
+									$this->voutput->append_head_stylesheet_declaration( 'ud_page_title', '
+										
+										#submit-form-users-submits-' . $unique_hash . ' > .page-title {
+											
+											background-image: url(\'' . $__main_image . '\');
+											
+										}
+										
+									' );
+									
+									$__page_main_image = TRUE;
+									
+								}
+								
+							}
+							
+						}
+						
+						echo '<div class="item items-' . count( ${ '_ud_' . $v . '_props' } ) . ' ud-' . str_replace( '_', '-', rtrim( url_title( $v, '-', TRUE ), 's' ) ) . 's-wrapper">';
 						
 						$__item_count = 1;
 						
@@ -373,6 +475,12 @@
 		}
 		
 		echo '</div>';
+		
+		if ( check_var( $pagination ) ) {
+			
+			echo $pagination;
+			
+		}
 		
 	} else {
 		
@@ -416,9 +524,122 @@
 				
 			</span>
 			
-		</div>
+		</div><?php
 		
-	<?php } ?>
+	}
 	
-</div>
+?>
+
+
+<?php if ( check_var( $params[ 'ud_data_list_d_use_modal' ] ) AND $this->plugins->load( 'fancybox' ) ){ ?>
+
+	<?php
+		
+		$script = "
+			
+			$( document ).on( 'ready', function( e ){
+				
+				$( '#submit-form-users-submits-" . $unique_hash . " .modal' ).fancybox({
+					
+					type: 'ajax',
+					onInit: function(){
+						
+						$( \"html, body\" ).addClass( \"fancybox-opened\" );
+						$('.fancybox-container').addClass( 'ud-d-detail' );
+						
+					},
+					afterClose: function(){
+						
+						$( \"html, body\" ).removeClass( \"fancybox-opened\" );
+						
+					},
+					onComplete : function(){
+						
+					},
+					
+					smallBtn : 'auto',
+					image : {
+						
+						protect : true
+						
+					},
+					
+					spinnerTpl : '<div class=\"fancybox-loading\"><div></div></div>'
+					
+				});
+				
+			});
+			
+		";
+		
+		$this->voutput->append_head_script_declaration( 'fancybox_ud_d_detail_' . $unique_hash, $script );
+		
+	?>
 	
+<script type="text/javascript" >
+	
+	$( document ).on( 'ready', function( e ){
+		/*
+		var fbContent;
+		
+		$( "#submit-form-users-submits-<?= $unique_hash; ?> .modal" ).attr( 'data-fancybox', 'ud-modal-group-<?= $unique_hash; ?>' ).fancybox({
+			
+			//live: true,
+			fitToView: true,
+			closeBtn: true,
+			helpers: {
+				
+				overlay: {
+					
+					showEarly  : true
+					
+				}
+				
+			},
+			content: fbContent,
+			beforeShow: function(){
+				
+				fbContent = $( this ).html();
+				$(".fancybox-overlay").addClass( "ud-d-detail" );
+				
+			},
+			afterClose: function(){
+				fbContent = '';
+			},
+			'onComplete' : function(){
+				
+				jQuery.fancybox.showActivity();
+				jQuery('#fancybox-frame').load(function(){
+					jQuery.fancybox.hideActivity();
+				});
+				
+				$("html, body").addClass( "fancybox-opened" );
+				
+			}
+			<?php
+				
+				if ( $this->ua->is_mobile() ) {
+					
+					echo ",
+						
+						'openEffect': 'none',
+						'closeEffect': 'none',
+						'nextEffect': 'none',
+						'prevEffect': 'none'
+						
+					";
+					
+				}
+				
+			?>
+			
+		});
+		*/
+	});
+	
+</script>
+
+<?php } ?>
+
+
+</div><?php

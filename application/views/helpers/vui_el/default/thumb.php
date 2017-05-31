@@ -18,13 +18,14 @@
 				class="s3 <?= $modal ? 'thumb-modal' : ''; ?>"
 				href="<?= $href; ?>"
 				data-fancybox-href="<?= $href; ?>"
-				data-fancybox-group="<?= $rel ? $rel : 'thumb-modal'; ?>"
+				data-fancybox="<?= $rel ? $rel : 'thumb-modal'; ?>"
+				data-caption="<?= $title; ?>"
 				<?= element_title( $title ); ?>
 				<?= $target ? 'target="' . $target . '"' : ''; ?>
 				<?= $rel ? 'rel="' . $rel . '"' : ''; ?>>
 				
 			<?php }
-			
+				
 				if ( $src AND $prevent_cache ) {
 					
 					$url_parts = parse_url( $src );
@@ -82,7 +83,49 @@
 	
 	<?php if ( $this->plugins->load( 'fancybox' ) AND ! defined( 'MODAL_THUMBS_ON' ) ){ ?>
 	
-	<?php define( 'MODAL_THUMBS_ON', TRUE ); ?>
+	<?php
+		
+		define( 'MODAL_THUMBS_ON', TRUE );
+		
+		$script = "
+			
+			$( document ).on( 'ready', function( e ){
+				
+				$( '.thumb-modal' ).fancybox({
+					
+					onInit: function(){
+						
+						$( \"html, body\" ).addClass( \"fancybox-opened\" );
+						
+					},
+					afterClose: function(){
+						
+						$( \"html, body\" ).removeClass( \"fancybox-opened\" );
+						
+					},
+					onComplete : function(){
+						
+					},
+					
+					image : {
+						
+						protect : true
+						
+					},
+					
+					spinnerTpl : '<div class=\"fancybox-loading\"><div></div></div>'
+					
+				});
+				
+			});
+			
+		";
+		
+		$this->voutput->append_head_script_declaration( 'fancybox_thumbs', $script );
+		
+	?>
+	
+	<?php /*
 	
 	<script type="text/javascript" >
 		
@@ -90,11 +133,34 @@
 			
 			$( ".thumb-modal" ).fancybox({
 				
+				<?php
+					
+					if ( $this->ua->is_mobile() ) {
+						
+						echo ",
+							
+							'openEffect': 'none',
+							'closeEffect': 'none',
+							'nextEffect': 'none',
+							'prevEffect': 'none',
+							
+							'padding': 0,
+							'margin': 13,
+							'autoCenter': true,
+							'fitToView': true
+							
+						";
+						
+					}
+					
+				?>
+				
 			});
 			
 		});
 		
 	</script>
+	*/ ?>
 	
 	<?php } ?>
 	

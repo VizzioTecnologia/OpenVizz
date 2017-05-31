@@ -81,8 +81,8 @@ class Main extends CI_controller {
 
 			array(
 
-				SITE_DIR_NAME . DS . 'main_model',
-				SITE_DIR_NAME . DS . 'users_model',
+				SITE_DIR_NAME . '/main_model',
+				SITE_DIR_NAME . '/users_model',
 				'common/menus_common_model',
 				'common/modules_common_model',
 				'common/plugins_common_model',
@@ -95,7 +95,7 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Obtendo as configurações iniciais do sistema a partir do arquivo de configurações do Codeigniter
@@ -164,14 +164,14 @@ class Main extends CI_controller {
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 */
-
-
-
+		
+		
+		
 		/*
 		 * -------------------------------------------------------------------------------------------------
 		 * Encurtando o acesso ao model $this->modules_common_model
 		 */
-
+		
 		$this->modc = &$this->modules_common_model;
 
 		/*
@@ -238,6 +238,8 @@ class Main extends CI_controller {
 		 * Componentes
 		 */
 
+// 		echo '<pre>' . print_r( $this->current_component[ 'params' ], TRUE ) . '</pre>';
+		
 		$this->mcm->get_components();
 
 		$this->mcm->system_params = array_merge( $this->mcm->system_params, $this->mcm->components[ 'main' ][ 'params' ] );
@@ -245,6 +247,26 @@ class Main extends CI_controller {
 		$this->mcm->system_params[ 'language' ] = $this->mcm->system_params[ $this->mcm->environment . '_language' ];
 
 		$this->mcm->filtered_system_params = filter_params( $this->mcm->system_params, $this->current_component[ 'params' ] );
+		
+		
+		
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 * Setting the site theme
+		 */
+		
+		if ( $this->input->get( 'theme' ) ) {
+			
+			echo $this->config->set_item( 'site_theme', $this->input->get( 'theme' ) );
+			$this->mcm->filtered_system_params[ 'site_theme' ] = $this->input->get( 'theme' );
+			
+		}
+		
+		/*
+		 * -------------------------------------------------------------------------------------------------
+		 */
+		
+		
 		
 		foreach ( $this->config->config as $key => $value) {
 			
@@ -553,6 +575,384 @@ class Main extends CI_controller {
 
 	}
 
+	// função para conteúdo do tipo html
+	public function temp(){
+		
+		$this->load->library( 'form_validation' );
+		
+		$this->load->model( 'common/main_common_model', 'mcm' );
+		
+		$this->load->model( 'common/submit_forms_common_model', 'sfcm' );
+		
+		$find = array(
+			
+			'  ',
+			'  ',
+			'essencia',
+			'narguile',
+			'plastico',
+			'acessorio',
+			'macarico',
+			'carvao',
+			'pinca',
+			'medio',
+			'saida',
+			'numero',
+			' mao',
+			' mao ',
+			'coracao',
+			'pacoq',
+			' pe ',
+			'prestigio',
+			'cacau',
+			'hortela',
+			'limao',
+			'caju',
+			'guarana antartica',
+			'citrica',
+			'gas ',
+			'partagás',
+			'longás',
+			'recarregavel',
+			'portatil',
+			'fogao',
+			'melao',
+			'pessego',
+			'guarana',
+			'parmesao',
+			'sensacoes',
+			'sensacao',
+			'requeijao',
+			
+		);
+		
+		$replace = array(
+			
+			' ',
+			' ',
+			'essência',
+			'narguilé',
+			'plástico',
+			'acessório',
+			'maçarico',
+			'carvão',
+			'pinça',
+			'médio',
+			'saída',
+			'número',
+			' mão',
+			' mão ',
+			'coração',
+			'paçoq',
+			' pé ',
+			'prestígio',
+			'cacáu',
+			'hortelã',
+			'limão',
+			'cajú',
+			'guaraná antarctica',
+			'cítrica',
+			'gás ',
+			'partagas',
+			'longas',
+			'recarregável',
+			'portátil',
+			'fogão',
+			'melão',
+			'pêssego',
+			'guaraná',
+			'parmesão',
+			'sensações',
+			'sensação',
+			'requeijão',
+			
+		);
+		
+		$produtos = array();
+		
+		$produtos_novos = 0;
+		$produtos_atualizados = 0;
+		$produtos_sem_fotos = 0;
+		$produtos_com_fotos = 0;
+		
+		$csv = array_map('str_getcsv', file( APPPATH . 'controllers' . DS . 'produtos.csv'));
+		
+// 		echo '<h1>$csv</h1><pre>' . print_r( $csv, TRUE ) . '</pre><br/>'; 
+		
+		foreach( $csv as $k => & $row ) {
+			
+			$produtos[ $row[ 0 ] ] = array();
+			
+			$produto = & $produtos[ $row[ 0 ] ];
+			
+			$produto[ 'sku' ] = $row[ 0 ];
+			$produto[ 'brand' ] = $row[ 3 ];
+			$produto[ 'unit' ] = $this->form_validation->normalizar_nome_ptbr( $row[ 4 ] );
+			$produto[ 'bar_code' ] = $row[ 34 ];
+			
+			$produto[ 'title' ] = strtolower( trim( $row[ 1 ] ) );
+			$produto[ 'title' ] = str_replace( $find, $replace, $produto[ 'title' ] );
+			$produto[ 'title' ] = $this->form_validation->normalizar_nome_ptbr( $produto[ 'title' ] );
+			
+			$produto[ 'price' ] = str_replace( array( '.', ',' ), array( '', '.' ), trim( $row[ 11 ] ) );
+			$produto[ 'status' ] = "168";
+			
+			if ( check_var( $produto[ 'brand' ] ) ) {
+				
+				$filters = array(
+					
+					array(
+						
+						'alias' => 'name',
+						'comp_op' => '=',
+						'value' => $produto[ 'brand' ],
+						
+					)
+					
+				);
+				
+				$search_config = array(
+					
+					'plugins' => 'sf_us_search',
+					'allow_empty_terms' => TRUE,
+					'terms' => $produto[ 'brand' ],
+					'ignore_terms' => FALSE,
+					'ipp' => 1,
+					'cp' => NULL,
+					'plugins_params' => array(
+						
+						'sf_us_search' => array(
+							
+							'sf_id' => 15,
+							'filters' => $filters,
+							
+						),
+						
+					),
+					
+				);
+				
+// 				echo '<pre>' . print_r( $search_config, TRUE ) . '</pre><br/>'; 
+				
+				$this->load->library( 'search' );
+				$this->search->reset_config();
+				$this->search->config( $search_config );
+				
+				$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
+				
+				if ( ! check_var( $_users_submits ) AND $produto[ 'brand' ] ) {
+					
+					$ud_d_db_insert_data = array(
+						
+						'submit_form_id' => 15,
+						
+						'data' => array(
+							
+							'name' => $produto[ 'brand' ],
+							
+						),
+						
+						'params' => array(
+							
+							'created_by_user_id' => 1,
+							
+						),
+						
+					);
+					
+					$submit_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
+					$submit_datetime = ov_strftime( '%Y-%m-%d %T', $submit_datetime );
+					
+					$ud_d_db_insert_data[ 'submit_datetime' ] = $ud_d_db_insert_data[ 'mod_datetime' ] = $submit_datetime;
+					
+					$ud_d_db_insert_data[ 'data' ] = json_encode( $ud_d_db_insert_data[ 'data' ] );
+					$ud_d_db_insert_data[ 'params' ] = json_encode( $ud_d_db_insert_data[ 'params' ] );
+					
+// 					echo '<pre>' . print_r( $ud_d_db_insert_data, TRUE ) . '</pre><br/>'; 
+					
+					if ( $ud_data_id = $this->sfcm->insert_user_submit( $ud_d_db_insert_data ) ){
+						
+						$produto[ 'brand' ] = $ud_data_id;
+						
+// 						echo '<pre>' . print_r( $ud_data_id, TRUE ) . '</pre><br/>'; 
+						
+					}
+					
+				}
+				else {
+					
+					$produto[ 'brand' ] = $_users_submits[ 0 ][ 'id' ];
+					
+// 					echo '<pre>' . print_r( $_users_submits[ 0 ], TRUE ) . '</pre><br/>'; 
+					
+				}
+				
+			}
+			
+			
+			
+			$_filters = array(
+				
+				array(
+					
+					'alias' => 'sku',
+					'comp_op' => '=',
+					'value' => $produto[ 'sku' ],
+					
+				)
+				
+			);
+			
+			$_search_config = array(
+				
+				'plugins' => 'sf_us_search',
+				'allow_empty_terms' => TRUE,
+				'ignore_terms' => TRUE,
+				'ipp' => 1,
+				'cp' => NULL,
+				'plugins_params' => array(
+					
+					'sf_us_search' => array(
+						
+						'sf_id' => 3,
+						'filters' => $_filters,
+						
+					),
+					
+				),
+				
+			);
+			
+// 				echo '<pre>' . print_r( $_search_config, TRUE ) . '</pre><br/>'; 
+			
+			$this->load->library( 'search' );
+			$this->search->reset_config();
+			$this->search->config( $_search_config );
+			
+			$_users_submits = $this->search->get_full_results( 'sf_us_search', TRUE );
+			
+			$insert = FALSE;
+			
+			$ud_d_db_data = array(
+				
+				'submit_form_id' => 3,
+				
+				'data' => $produto,
+				
+				'params' => array(
+					
+					'created_by_user_id' => 1,
+					
+				),
+				
+			);
+			
+			$submit_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
+			$submit_datetime = ov_strftime( '%Y-%m-%d %T', $submit_datetime );
+			
+			$ud_d_db_data[ 'submit_datetime' ] = $ud_d_db_data[ 'mod_datetime' ] = $submit_datetime;
+			
+// 				echo print_r( $produto[ 'sku' ], TRUE ) . '<br/>'; 
+			
+			$dir = MEDIA_PATH . 'produtos' . DS . $produto[ 'sku' ] . DS;
+			
+			if ( file_exists( $dir ) ) {
+				
+				$i = 0;
+				
+				foreach( glob( $dir . '*.jpg' ) as $file ) {
+					
+					$i++;
+					
+					$file = pathinfo( $file );
+					
+					$old_name = $file[ 'basename' ];
+					$new_name = url_title( $produto[ 'sku' ] . '-' . $i . '-' . $produto[ 'title' ] ) . '.' . $file[ 'extension' ];
+					
+					if ( ! file_exists( $file[ 'dirname' ] . '/' . $new_name ) ) {
+						
+						rename( $file[ 'dirname' ] . '/' . $old_name, $file[ 'dirname' ] . '/' . $new_name );
+						
+					}
+					
+					$file = $file[ 'basename' ];
+					
+					$ud_d_db_data[ 'data' ][ 'image_' . $i ] = MEDIA_DIR_NAME . '/produtos/' . $produto[ 'sku' ] . '/' . $new_name;
+					
+				}
+				
+				if ( $i == 0 ) {
+					
+					$ud_d_db_data[ 'data' ][ 'status' ] = "169";
+					
+					$produtos_sem_fotos++;
+					
+				}
+				else {
+					
+					$produtos_com_fotos++;
+					
+				}
+				
+			}
+			else {
+				
+				$ud_d_db_data[ 'data' ][ 'status' ] = "169";
+				
+				$produtos_sem_fotos++;
+				
+			}
+			
+			
+			if ( check_var( $_users_submits ) ) {
+				
+				$ud_d_db_data[ 'id' ] = $_users_submits[ 0 ][ 'id' ];
+				$ud_d_db_data[ 'data' ] = array_merge_recursive_distinct( $_users_submits[ 0 ][ 'data' ], $ud_d_db_data[ 'data' ] );
+				$ud_d_db_data[ 'params' ] = array_merge_recursive_distinct( $_users_submits[ 0 ][ 'params' ], $ud_d_db_data[ 'params' ] );
+				$ud_d_db_data[ 'submit_datetime' ] = $_users_submits[ 0 ][ 'submit_datetime' ];
+				$ud_d_db_data[ 'params' ][ 'modified_by_user_id' ] = 1;
+				
+// 				echo '<h1>' . ( $insert ? 'Inserir:' : 'Atualizar:' ) . '</h1><pre>' . print_r( $ud_d_db_data[ 'data' ], TRUE ) . '</pre><br/>'; 
+				
+// 				echo '<pre>' . print_r( $_users_submits[ 0 ][ 'data' ], TRUE ) . '</pre><br/>';
+				
+			}
+			else {
+				
+				$insert = TRUE;
+				
+			}
+			
+			$ud_d_db_data[ 'data' ] = json_encode( $ud_d_db_data[ 'data' ] );
+			$ud_d_db_data[ 'params' ] = json_encode( $ud_d_db_data[ 'params' ] );
+			
+			if ( $insert ) {
+				
+				$produtos_novos++;
+				
+				$this->sfcm->insert_user_submit( $ud_d_db_data );
+				
+			}
+			else {
+				
+				$produtos_atualizados++;
+				
+				$this->sfcm->update_user_submit( $ud_d_db_data, array( 'id' => $ud_d_db_data[ 'id' ] ) );
+				
+			}
+			
+		}
+		
+		echo '<h1>novos</h1><pre>' . print_r( $produtos_novos, TRUE ) . '</pre><br/>'; 
+		
+		echo '<h1>atualizados</h1><pre>' . print_r( $produtos_atualizados, TRUE ) . '</pre><br/>'; 
+		
+		echo '<h1>produtos com fotos</h1><pre>' . print_r( $produtos_com_fotos, TRUE ) . '</pre><br/>'; 
+		
+		echo '<h1>produtos sem fotos</h1><pre>' . print_r( $produtos_sem_fotos, TRUE ) . '</pre><br/>'; 
+		
+	}
+
 	public function plg(){
 
 		$get = $this->input->get();
@@ -695,6 +1095,10 @@ class Main extends CI_controller {
 			$this->voutput->append_head_meta( 'X-UA-Compatible', 'http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"' );
 			$this->voutput->append_head_meta( 'copyright', 'name="copyright" content="' . @$this->mcm->filtered_system_params[ 'site_copyright' ] . '"' );
 			$this->voutput->append_head_meta( 'author', 'name="author" content="' . @$this->mcm->filtered_system_params[ 'author_name' ] . '"' );
+			
+			$this->voutput->append_head_meta( 'site_name', 'itemprop="name" content="' . @$this->mcm->filtered_system_params[ 'site_name' ] . '"' );
+			$this->voutput->append_head_meta( 'site_url', 'itemprop="url" content="' . BASE_URL . '"' );
+			
 			$this->voutput->append_head_meta( 'viewport', 'name="viewport" content="width=device-width, initial-scale=1.0"' );
 			$this->voutput->append_head_meta( 'HandheldFriendly', 'name="HandheldFriendly" content="True"' );
 			$this->voutput->append_head_meta( 'MobileOptimized', 'name="MobileOptimized" content="320"' );
@@ -849,7 +1253,7 @@ class Main extends CI_controller {
 			
 			if ( $load_index ){
 				
-				$this->load->view( get_constant_name( $this->mcm->environment . '_DIR_NAME' ) . DS . call_user_func( $this->mcm->environment . '_theme' ) . DS . 'index' , $data, $html );
+				$this->load->view( get_constant_name( $this->mcm->environment . '_DIR_NAME' ) . '/' . call_user_func( $this->mcm->environment . '_theme' ) . '/' . 'index' , $data, $html );
 				
 			}
 			

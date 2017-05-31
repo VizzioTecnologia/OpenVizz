@@ -27,7 +27,6 @@
 
 
 html,
-body,
 body{
 	
 	color: <?= VUI_DEFAULT_FONT_COLOR; ?>;
@@ -36,8 +35,9 @@ body{
 	background-image: url(<?= $vui->svg_file( 'site_bg_1', $vui->colors->vui_site_fg->rgba_s() ); ?>);
 	background-repeat: repeat;
 	
+	text-transform: <?= VUI_DEFAULT_TEXT_TRANSFORM; ?>;
+	
 }
-body,
 body{
 
 	position: relative;
@@ -54,6 +54,17 @@ strong{
 
 	font-weight: bold;
 
+}
+
+<?= '@media screen and ( max-width: 500px ) {' ?>
+	
+	.vui body,
+	body.vui{
+		
+		font-size: <?= preg_replace( "/[^0-9\.]/", '', VUI_DEFAULT_FONT_SIZE ) * 0.9; ?>em;
+		
+	}
+	
 }
 
 /*
@@ -87,20 +98,21 @@ p{
  ---------------------------------------------------------
  */
 
-hr {
+hr,
+.divisor-h {
 
 	position: relative;
 	display: block;
 	clear: both;
-	height: 0;
+	height: 7px;
 	border: none;
-	
-	border-bottom: <?= VUI_DEFAULT_BORDER; ?>;
 	
 	margin: 0;
 	margin-top: <?= VUI_SPACING_FIXED; ?>;
 	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
-
+	
+	<?= DEFAULT_SPACER_STYLESHEET; ?>;
+	
 }
 
 /*
@@ -128,7 +140,7 @@ samp{
 	font-weight: normal;
 	padding-left: <?= VUI_SPACING_FIXED; ?>;
 	padding-right: <?= VUI_SPACING_FIXED; ?>;
-	background-color: <?= $vui->colors->vui_light->rgba_s(); ?>;
+	background-color: <?= $vui->colors->vui_site_fg->rgba_s( 30 ); ?>;
 	
 	vertical-align: initial;
 	
@@ -231,8 +243,8 @@ blockquote {
 	padding: <?= VUI_SPACING_FIXED; ?>;
 	margin: <?= VUI_SPACING_FIXED; ?>;
 	margin-left: <?= VUI_SPACING_VALUE_FIXED * 3; ?><?= VUI_SPACING_UNIT_FIXED; ?>;
-	background: <?= $vui->colors->vui_darker->rgba_s( 10 ); ?>;
-	border-left: 0.5em solid <?= $vui->colors->vui_darker->rgba_s( 15 ); ?>;
+	background: <?= $vui->colors->vui_site_fg->rgba_s( 10 ); ?>;
+	border-left: 0.5em solid <?= $vui->colors->vui_site_fg->rgba_s( 15 ); ?>;
 	font-style: italic;
 	
 }
@@ -263,7 +275,7 @@ blockquote > *:last-child {
 
 <?php
 
-	$max = 3;
+	$max = 2.3;
 	$min = 1;
 	$meas_unit = 'em';
 	$diff = ( $max - $min ) / 5;
@@ -281,9 +293,11 @@ h6{
 	color: <?= VUI_SEC_FONT_COLOR; ?>;
 	font-size: <?= ( $min + ( $diff * 5 ) ) . $meas_unit; ?>;
 	
-	font-weight: 400;
+	font-weight: <?= VUI_SEC_FONT_WEIGHT; ?>;
 	
-	line-height: 100%;
+	text-transform: <?= VUI_SEC_TEXT_TRANSFORM; ?>;
+	
+	line-height: <?= VUI_SEC_LINE_HEIGHT; ?>;
 	margin-top: <?= VUI_SPACING_FIXED; ?>;
 	margin-bottom: <?= VUI_SPACING_FIXED; ?>;
 	
@@ -317,6 +331,58 @@ h6 {
 	
 }
 
+<?= '@media screen and ( max-width: 500px ) {' ?>
+	
+	<?php
+		
+		$_max = 1.9;
+		$_min = 1;
+		$_meas_unit = 'em';
+		$_diff = ( $_max - $_min ) / 5;
+		
+	?>
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6{
+		
+		font-size: <?= ( $_min + ( $_diff * 5 ) ) . $_meas_unit; ?>;
+		
+	}
+	h1 {
+		
+	}
+	h2 {
+		
+		font-size: <?= ( $_min + ( $_diff * 4 ) ) . $_meas_unit; ?>;
+		
+	}
+	h3 {
+		
+		font-size: <?= ( $_min + ( $_diff * 3 ) ) . $_meas_unit; ?>;
+		
+	}
+	h4 {
+		
+		font-size: <?= ( $_min + ( $_diff * 2 ) ) . $_meas_unit; ?>;
+		
+	}
+	h5 {
+		
+		font-size: <?= ( $_min + ( $_diff * 1 ) ) . $_meas_unit; ?>;
+		
+	}
+	h6 {
+		
+		font-size: <?= ( $_min + $_diff ) . $_meas_unit; ?>;
+		
+	}
+	
+}
+
 
 /*
  ---------------------------------------------------------
@@ -332,13 +398,13 @@ h6 {
  * ---------------------------------------------------------
  */
 
-a{
+a {
 	
 	text-decoration: none;
 	color: <?= $vui->colors->vui_link->rgba_s(); ?>;
 	
 }
-a:hover{
+a:hover {
 	
 	color: <?= $vui->colors->vui_link_hover->rgba_s(); ?>;
 	
@@ -664,6 +730,11 @@ legend:after{
 	clear: both;
 	height: 2px;
 
+}
+fieldset > legend + * {
+	
+	margin-top: 0;
+	
 }
 
 /*

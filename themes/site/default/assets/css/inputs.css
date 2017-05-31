@@ -117,6 +117,8 @@ textarea:active {
 	margin-top: calc( -<?= DEFAULT_ICON_SIZE; ?> / 2 );
 	margin-left: calc( -<?= DEFAULT_ICON_SIZE; ?> / 2 );
 	
+	line-height: normal;
+	
 }
 .vui-interactive-el-wrapper .icon-wrapper .icon:before {
 	
@@ -175,6 +177,11 @@ label {
 	position: relative;
 	display: block;
 	margin-bottom: <?= VUI_SPACING / 2; ?>em;
+	
+}
+label + br{
+	
+	display: none;
 	
 }
 

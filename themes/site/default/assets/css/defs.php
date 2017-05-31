@@ -14,8 +14,13 @@ if ( ! defined( 'VUI_DEFAULT_FONT_COLOR' ) ) define( 'VUI_DEFAULT_FONT_COLOR', $
 if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->colors->vui_site_title_fg->rgba_s() );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', ( 1 * VUI_SCALE ) . 'em' );
-if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', 'normal' );
+if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', '400' );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', ( 1.5 * VUI_SCALE ) . 'em' );
+if ( ! defined( 'VUI_DEFAULT_TEXT_TRANSFORM' ) ) define( 'VUI_DEFAULT_TEXT_TRANSFORM', 'none' );
+
+if ( ! defined( 'VUI_SEC_FONT_WEIGHT' ) ) define( 'VUI_SEC_FONT_WEIGHT', '100' );
+if ( ! defined( 'VUI_SEC_LINE_HEIGHT' ) ) define( 'VUI_SEC_LINE_HEIGHT', '130%' );
+if ( ! defined( 'VUI_SEC_TEXT_TRANSFORM' ) ) define( 'VUI_SEC_TEXT_TRANSFORM', 'uppercase' );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', 'thin solid ' . $vui->colors->vui_site_fg->rgba_s( 60 ) );
 if ( ! defined( 'VUI_SEC_BORDER' ) ) define( 'VUI_SEC_BORDER', '1px solid ' . $vui->colors->vui_lighter->rgba_s( 200 ) );
@@ -38,12 +43,25 @@ if ( ! defined( 'VUI_SITE_WIDTH_1400_1920' ) ) define( 'VUI_SITE_WIDTH_1400_1920
 
 if ( ! defined( 'VUI_MAX_COLUMNS' ) ) define( 'VUI_MAX_COLUMNS', 20 );
 
+if ( ! defined( 'VUI_CONTENT_COLUMNS_WIDTH_VALUE' ) ) define( 'VUI_CONTENT_COLUMNS_WIDTH_VALUE', 250 );
+if ( ! defined( 'VUI_CONTENT_COLUMNS_WIDTH_UNIT' ) ) define( 'VUI_CONTENT_COLUMNS_WIDTH_UNIT', 'px' );
+if ( ! defined( 'VUI_CONTENT_COLUMNS_WIDTH' ) ) define( 'VUI_CONTENT_COLUMNS_WIDTH', VUI_CONTENT_COLUMNS_WIDTH_VALUE . VUI_CONTENT_COLUMNS_WIDTH_UNIT );
+
 
 
 $logo_width = 210;
 $logo_height = 90;
 
 
+
+define( 'DEFAULT_SPACER_STYLESHEET', '
+	
+	background-image: url("' . $vui->svg_file( 'h-spacer', $vui->colors->vui_site_fg->rgba_s( 70 ) ) . '");
+	background-size: auto;
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	
+');
 
 //------------------------------------------------------
 //------------------------------------------------------

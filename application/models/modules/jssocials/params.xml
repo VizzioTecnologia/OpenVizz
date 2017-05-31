@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+	
+	<section name="jssocials_module_config">
+		
+		<param name="jssocials_show_count" type="select" default="1" label="jssocials_show_count" tip="tip_jssocials_show_count" inline="1" >
+			
+			<validation rules="trim" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<param name="jssocials_show_label" type="select" default="1" label="jssocials_show_label" tip="tip_jssocials_show_label" inline="1" >
+			
+			<validation rules="trim" />
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			
+		</param>
+		
+		<!-- dinamic -->
+		<param name="jssocials_layout" type="select" default="default" label="jssocials_layout" tip="tip_jssocials_layout">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<!-- dinamic -->
+		<param name="jssocials_theme" type="select" default="default" label="jssocials_theme" tip="tip_jssocials_theme">
+			
+			<validation rules="trim|required" />
+			
+		</param>
+		
+		<param type="spacer" label="jssocials_shares" />
+		
+		<param name="jssocials_shares[email]" type="checkbox" value="email" label="jssocials_shares_email" inline="1" />
+		
+		<param name="jssocials_shares[twitter]" type="checkbox" value="twitter" label="jssocials_shares_twitter" inline="1" />
+		
+		<param name="jssocials_shares[facebook]" type="checkbox" value="facebook" label="jssocials_shares_facebook" inline="1" />
+		
+		<param name="jssocials_shares[googleplus]" type="checkbox" value="googleplus" label="jssocials_shares_googleplus" inline="1" />
+		
+		<param name="jssocials_shares[linkedin]" type="checkbox" value="linkedin" label="jssocials_shares_linkedin" inline="1" />
+		
+		<param name="jssocials_shares[pinterest]" type="checkbox" value="pinterest" label="jssocials_shares_pinterest" inline="1" />
+		
+		<param name="jssocials_shares[stumbleupon]" type="checkbox" value="stumbleupon" label="jssocials_shares_stumbleupon" inline="1" />
+		
+		<param name="jssocials_shares[pocket]" type="checkbox" value="pocket" label="jssocials_shares_pocket" inline="1" />
+		
+		<param name="jssocials_shares[whatsapp]" type="checkbox" value="whatsapp" label="jssocials_shares_whatsapp" inline="1" />
+		
+		<param name="jssocials_shares[viber]" type="checkbox" value="viber" label="jssocials_shares_viber" inline="1" />
+		
+		<param name="jssocials_shares[messenger]" type="checkbox" value="messenger" label="jssocials_shares_messenger" inline="1" />
+		
+		<param name="jssocials_shares[vkontakte]" type="checkbox" value="vkontakte" label="jssocials_shares_vkontakte" inline="1" />
+		
+		<param name="jssocials_shares[telegram]" type="checkbox" value="telegram" label="jssocials_shares_telegram" inline="1" />
+		
+		<param name="jssocials_shares[line]" type="checkbox" value="line" label="jssocials_shares_line" inline="1" />
+		
+	</section>
+	
+</params>

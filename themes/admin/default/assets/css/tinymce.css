@@ -279,7 +279,8 @@ div.mce-tinymce-inline {
 }
 .vui.mce-fullscreen .mce-panel {
 	
-	background: <?= $vui->colors->vui_base->rgba_s( 5 ); ?>;
+	background: <?= $vui->colors->vui_site_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_site_fg->rgba_s(); ?>;
 	
 }
 .vui .mce-floatpanel {

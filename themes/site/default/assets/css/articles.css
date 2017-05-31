@@ -53,18 +53,6 @@
 }
 <?php } ?>
 
-<?= '@media screen and ( max-width: 1200px ) {' ?>
-	
-	.items-list > .item {
-		
-		<?= $vui->css->display_inline_block(); ?>
-		
-		width: 100%;
-		
-	}
-	
-}
-
 .inline-articles .article-wrapper.columns-<?= $i; ?>,
 .inline-items-list.total-items-list-<?= $i; ?>{
 
@@ -75,6 +63,55 @@
 }
 
 <?php } ?>
+
+<?= '@media screen and ( max-width: 1200px ) {' ?>
+	
+	.items-list > .item {
+		
+		<?= $vui->css->display_inline_block(); ?>
+		
+	}
+	
+	<?php for( $i = 4; $i < VUI_MAX_COLUMNS; $i += 2 ) { echo '.total-items-list-' . $i . ' > .item' . ( $i < ( VUI_MAX_COLUMNS - 2 ) ? ', ' : '' ); } ?> {
+		
+		width: <?= 100 / 4 ?>%;
+		
+	}
+	.total-items-list-2 > .item {
+		
+		width: 50%;
+		
+	}
+	.total-items-list-3 > .item {
+		
+		width: <?= 100 / 3 ?>%;
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 900px ) {' ?>
+	
+	<?php for( $i = 2; $i < VUI_MAX_COLUMNS; $i += 2 ) { echo '.total-items-list-' . $i . ' > .item' . ( $i < ( VUI_MAX_COLUMNS - 2 ) ? ', ' : '' ); } ?> {
+		
+		width: 50%;
+		
+	}
+	.total-items-list-3 > .item {
+		
+		width: 100%;
+		
+	}
+	
+}
+<?= '@media screen and ( max-width: 540px ) {' ?>
+	
+	<?php for( $i = 1; $i < VUI_MAX_COLUMNS; $i++ ) { echo '.total-items-list-' . $i . ' > .item' . ( $i < ( VUI_MAX_COLUMNS - 1 ) ? ', ' : '' ); } ?> {
+		
+		width: 100%;
+		
+	}
+	
+}
 
 .articles-wrapper .article{
 

@@ -14,7 +14,7 @@
 		
 	</head>
 	
-	<body style="margin: 0; padding: <?= number_format( DEFAULT_SPACING * 2, 2, '.', '' ); ?>em 0 0; background: <?= $bg_color; ?>; font-family: 'Verdana', 'Arial'; font-size: <?= number_format( DEFAULT_SPACING, 2, '.', '' ); ?>em;">
+	<body style="margin: 0; padding: <?= number_format( DEFAULT_SPACING * 2, 2, '.', '' ); ?>em 0 0; background: <?= $bg_color; ?>; font-family: 'Verdana', 'Arial';">
 		
 		<table width="100%" style="border-collapse: collapse; table-layout: fixed;" cellpadding="0" cellspacing="0">
 			
@@ -64,7 +64,7 @@
 					
 					<?php if ( $show_footer_text ) { ?>
 					
-					<table width="80%" style="font-size: <?= number_format( DEFAULT_SPACING / 1.2, 2, '.', '' ); ?>em; background: <?= $content_bg_color; ?>; color: <?= $content_fg_color; ?>; margin: 0 auto; text-align: left; border-collapse: collapse; border: none; border-top: thin solid <?= $content_border_color; ?>; width:80%" cellpadding="0" cellspacing="0">
+					<table width="80%" style="background: <?= $content_bg_color; ?>; color: <?= $content_fg_color; ?>; margin: 0 auto; text-align: left; border-collapse: collapse; border: none; border-top: thin solid <?= $content_border_color; ?>; width:80%" cellpadding="0" cellspacing="0">
 						
 						<tr>
 							

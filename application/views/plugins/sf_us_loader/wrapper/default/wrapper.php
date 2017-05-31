@@ -12,6 +12,22 @@ if ( check_var( $us_output_html ) ) {
 			
 		}
 		
+		if ( check_var( $wrapper_params[ 'ud_show_global_readmore' ] ) AND check_var( $wrapper_params[ 'ud_global_readmore_link' ] ) ) {
+			
+			echo '<div class="item read-more readmore ud-ds-readmore-link-wrapper ud-d-list-ds-readmore-link-wrapper"><div class="s1"><div class="s2">';
+			
+			echo vui_el_button(array(
+				
+				'class' => 'read-more-link',
+				'url' => $wrapper_params[ 'ud_global_readmore_link' ],
+				'text' => check_var( $wrapper_params[ 'ud_global_readmore_label' ] ) ? lang( $wrapper_params[ 'ud_global_readmore_label' ] ) : lang( 'readmore' ),
+				
+			));
+			
+			echo '</div></div></div>';
+			
+		}
+		
 	?>
 	
 </div><?php

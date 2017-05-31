@@ -2,12 +2,6 @@
 
 	<script type="text/javascript">
 		
-		$( document ).bind( 'ready', function() {
-			
-			$( '#ns-<?= $unique_module_hash; ?>' ).parent().append( '<div class="preload-wrapper"><div class="preload on"></div></div>' );
-			
-		})
-		
 		var beforeChange_<?= $unique_module_hash; ?> = function(){
 			
 			/*
@@ -38,6 +32,12 @@
 		var afterLoad_<?= $unique_module_hash; ?> = function(){
 			
 		};
+		
+		$( document ).bind( 'ready', function() {
+			
+			$( '#ns-<?= $unique_module_hash; ?>' ).parent().append( '<div class="preload-wrapper"><div class="preload on"></div></div>' );
+			
+		});
 		
 		$( window ).load(function() {
 			

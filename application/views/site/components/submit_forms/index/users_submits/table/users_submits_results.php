@@ -1,9 +1,9 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
-?>
 
 
-<div class="users-submits-wrapper results">
+
+?><div id="ud-d-search-results-wrapper" class="ud-data-list-wrapper users-submits-wrapper results">
 	
 	<?php if ( check_var( $ud_data_array ) ) { ?>
 		
@@ -54,10 +54,18 @@
 			
 		</div>
 		
-		<?php } ?>
+		<?php }
 		
-		<div class="s1 table-wrapper">
+		if ( check_var( $pagination ) ) {
 			
+			echo $pagination;
+			
+		}
+		
+		echo '<div class="items ud-data-items ud-d-list table-wrapper">';
+		
+		?>
+		
 			<table class="ud-d-list responsive multi-selection-table">
 				
 				<?php
@@ -345,12 +353,7 @@
 					
 				</tr>
 				
-				<?php
-				
-					$ud_data = NULL;
-					unset( $ud_data );
-					
-				} ?>
+				<?php } ?>
 				
 			</table>
 			

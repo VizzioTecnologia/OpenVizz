@@ -12,7 +12,7 @@ class Tinymce_plugin extends Plugins_mdl{
 				
 				log_message( 'debug', '[Plugins] TinyMCE plugin initialized' );
 				
-				$this->voutput->append_head_script( 'tinymce', JS_DIR_URL . '/plugins/tinymce/tinymce.min.js' );
+				$this->voutput->append_head_script( 'tinymce', JS_DIR_URL . '/plugins/tinymce/tinymce_4.6.1/js/tinymce/tinymce.min.js' );
 				$this->voutput->append_head_script_declaration( 'tinymce', $this->load->view( 'plugins/tinymce/default/tinymce', NULL, TRUE ), NULL, NULL );
 				
 				$return = TRUE;

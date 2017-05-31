@@ -428,11 +428,11 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.28"
-     inkscape:cx="1697.6894"
-     inkscape:cy="-2222.0436"
+     inkscape:zoom="0.45254834"
+     inkscape:cx="4782.472"
+     inkscape:cy="-990.15819"
      inkscape:document-units="px"
-     inkscape:current-layer="use4753"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1013"
@@ -3294,7 +3294,7 @@
        height="1431.1107"
        width="1363.1395"
        id="vui_modal_overlay_bg"
-       style="color:#000000;fill:#0e7ede;fill-opacity:0.7329843;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999994000000003;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="color:#000000;fill:#0e61a9;fill-opacity:0.87031901;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.99999994;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
        inkscape:label="vui_color"
        y="451.12296"

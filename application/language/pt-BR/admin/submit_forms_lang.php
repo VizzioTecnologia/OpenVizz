@@ -461,10 +461,11 @@ $lang['ud_dsl_data_count_zero'] = 																"Este Esquema de Dados ainda n
 
 $lang['hide_on_no_results'] = 																	"Ocultar quando não existirem resultados";
 $lang['show_results_count'] = 																	"Exibir número de resultados";
-$lang['users_submits_search_single_result_string'] = 											"%s resultado encontrado";
-$lang['users_submits_search_single_result_string_config_label'] = 								"String para um único resultado";
-$lang['tip_users_submits_search_single_result_string_config_label'] = 							"Frase padrão para um resultado encontrado. %s será substituído pelo número 1";
-$lang['ud_d_list_search_results_string'] = 													"%s resultados encontrados";
+$lang['show_search_results_count'] = 															"Exibir número de resultados ao pesquisar";
+$lang['ud_d_list_search_single_result_string'] = 												"%s resultado encontrado";
+$lang['ud_d_list_search_single_result_string_config_label'] = 									"String para um único resultado";
+$lang['tip_ud_d_list_search_single_result_string_config_label'] = 								"Frase padrão para um resultado encontrado. %s será substituído pelo número 1";
+$lang['ud_d_list_search_results_string'] = 														"%s resultados encontrados";
 $lang['ud_data_no_result_str'] = 																"Texto para \"sem resultados\"";
 $lang['tip_ud_data_no_result_str'] = 															"Frase padrão para quando não existirem Dados UniD a serem mostrados";
 $lang['ud_data_no_result_str_value'] = 															"Sem resultados";
@@ -472,18 +473,21 @@ $lang['ud_data_no_search_result_str'] = 														"Texto para \"sem resultad
 $lang['tip_ud_data_no_search_result_str'] = 													"Frase padrão para quando não existirem Dados UniD a serem mostrados, exibido somente ao efetuar uma pesquisa";
 $lang['ud_data_no_search_result_str_value'] = 													"Sem resultados";
 $lang['ud_data_list_init_search_str'] = 														"Inicie uma pesquisa preenchendo o formulário de pesquisa.";
-$lang['ud_d_list_search_results_string_config_label'] = 									"String para vários resultados";
-$lang['tip_ud_d_list_search_results_string_config_label'] = 								"Frase padrão para resultados encontrados (plural). %s será substituído pelo número de resultados";
+$lang['ud_d_list_search_results_string_config_label'] = 										"String para vários resultados";
+$lang['tip_ud_d_list_search_results_string_config_label'] = 									"Frase padrão para resultados encontrados (plural). %s será substituído pelo número de resultados";
 $lang['results_title_field'] = 																	"Título dos resultados";
 $lang['tip_results_title_field'] = 																"Especifica qual campo, de cada Dado UniD, será tratado como título do resultado.";
-$lang['users_submits_order_by_field'] = 														"Ordenação dos Dados UniD";
+$lang['users_submits_order_by_field'] = 														"Ordenar Dados UniD por";
 $lang['users_submits_order_by_direction'] = 													"Direção da ordenação";
 $lang['users_submits_items_per_page'] = 														"Itens por página";
+$lang['ud_data_list_results'] = 																"Listagem de resultados";
 $lang['show_default_results'] = 																"Exibir resultados iniciais";
 $lang['us_default_results_filters'] = 															"Filtros padrões";
 $lang['tip_us_default_results_filters'] = 														"Estes filtros serão aplicados a todos os resultados gerados através desta página no site. Se novos filtros forem gerados (ex.: através de uma pesquisa), o mesmos serão adicionados aos fitros aqui especificados.";
 $lang['us_results'] = 																			"Envios";
 $lang['users_submits_num_items_to_show'] = 														"Número de Dados UniD a mostrar";
+$lang['ud_d_list_show_page_content_title'] = 													"Exibir título do conteúdo da página";
+$lang['ud_d_detail_show_page_content_title'] = 													"Exibir título do conteúdo da página";
 
 // post sending messages
 $lang['post_sending_messages'] = 																"Mensagens pós Dado UniD";
@@ -1286,10 +1290,14 @@ $lang['sfsmr_message_suffix_custom'] = 															"Pós-texto personalizado"
 $lang['sfsmr_show_empty_fields'] = 																"Exibir campos com valores vazios";
 
 $lang['ud_data_list_search_results'] = 															"Resultados de pesquisa";
-$lang['ud_data_list_search_results_specific_config'] = 											"Configurações específicas para as pesquisas";
+$lang['ud_data_list_search'] = 																	"Pesquisa";
 $lang['ud_data_availability_site_search_lbl'] = 												"Campos de pesquisa visíveis";
 $lang['ud_data_availability_site_search'] = 													"Campos de pesquisa visíveis";
-$lang['ud_data_list_prop_search_field_terms'] = 												"Campos de termos de pesquisa";
+$lang['ud_data_list_prop_search_field_terms'] = 												"Campo \"<strong>Termos de pesquisa</strong>\"";
+
+$lang['ud_d_list_show_order_by_controls'] = 													"Exibir controles de ordenação";
+$lang['ud_d_list_order_by'] = 																	"Ordenação";
+$lang['ud_d_list_order_by_visible_props'] = 													"Opções de ordenação visíveis";
 
 $lang['ud_title_prop'] = 																		"Titulos";
 $lang['tip_ud_title_prop'] = 																	"Determina quais propriedades serão tratadas como título";
@@ -1320,15 +1328,22 @@ $lang['tip_ud_ds_disallow_anon_page'] = 														"Se marcado, qualquer tent
 $lang['ud_d_list_layout_site'] = 																"Layout de listagem";
 $lang['ud_d_list_site_props_to_show'] = 														"Propriedades visíveis";
 $lang['ud_d_list_site_override_visible_props'] = 												"Sobrescrever visibilidade";
-$lang['ud_d_detail_site_override_presentation_props'] = 										"Sobrescrever metadados";
+$lang['ud_d_detail_site_override_presentation_props'] = 										"Sobrescrever Metadados";
+$lang['ud_d_list_site_presentation_props'] = 													"Metadados";
+$lang['ud_d_detail_site_presentation_props'] = 													"Metadados";
+$lang['ud_d_list_site_override_presentation_props'] = 											"Sobrescrever Metadados";
 $lang['tip_ud_d_detail_site_override_presentation_props'] = 									"<p>Sobrescreve as especificações de metadados das propriedades.</p> <p>O uso de metadados permite a apresentação dos Dados UniD de uma forma mais distinta, categorizada basicamente por <strong>Títulos (cabeçalhos)</strong>, <strong>Conteúdo</strong> e <strong>Outras informações</strong>.</p> <p>A forma visual como estas informações são apresentadas dependem dos layouts e/ou temas utilizados.</p>";
 $lang['tip_ud_d_list_site_override_visible_props'] = 											"<p>Se ativo, as configurações de visibilidade serão sobrescritas pelas definidas aqui.</p><p>Se nenhuma propriedade for marcada como visível, as configurações de visibilidade do Esquema de Dados serão usadas.</p>";
 $lang['ud_d_detail_layout_site'] = 																"Layout de detalhamento";
 $lang['tip_ud_d_detail_layout_site'] = 															"Selecione o Layout para a vista de detalhamento de um Dado UniD.";
-$lang['ud_d_detail_page_content_title_from_metadata'] = 										"Usar Metadado como título";
+$lang['ud_d_detail_page_content_title_from_metadata'] = 										"Usar Metadado como título principal";
 $lang['ud_d_detail_site_props_to_show'] = 														& $lang['ud_d_list_site_props_to_show'];
 $lang['ud_d_detail_site_override_visible_props'] = 												& $lang['ud_d_list_site_override_visible_props'];
 $lang['tip_ud_d_detail_site_override_visible_props'] = 											& $lang['tip_ud_d_list_site_override_visible_props'];
+
+$lang['ud_d_list_main_image_on_title'] = 														"Imagem no título";
+$lang['ud_d_detail_main_image_on_title'] = 														"Imagem no título";
+$lang['tip_ud_d_detail_main_image_on_title'] = 													"Exibe a imagem principal (primeira imagem encontrada) do Dado  UniD como plano de fundo do título";
 
 // ----------------------------
 // Export

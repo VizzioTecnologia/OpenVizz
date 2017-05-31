@@ -103,9 +103,9 @@ class Main extends CI_controller {
 
 			array(
 
-				ADMIN_DIR_NAME . DS . 'main_model',
-				ADMIN_DIR_NAME . DS . 'users_model',
-				ADMIN_DIR_NAME . DS . 'places_model',
+				ADMIN_DIR_NAME . '/main_model',
+				ADMIN_DIR_NAME . '/users_model',
+				ADMIN_DIR_NAME . '/places_model',
 				'common/modules_common_model',
 				'common/plugins_common_model',
 				'common/urls_common_model',

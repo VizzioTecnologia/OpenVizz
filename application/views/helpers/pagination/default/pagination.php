@@ -36,7 +36,7 @@
 			array(
 				
 				'text' => lang( 'previous_page' ),
-				'wrapper_class' => 'prev current inactive',
+				'wrapper_class' => 'prev inactive',
 				
 			)
 			
@@ -76,7 +76,7 @@
 					array(
 						
 						'text' => $i,
-						'wrapper_class' => 'page-num current inactive',
+						'wrapper_class' => 'page-num current',
 						
 					)
 					
@@ -119,7 +119,7 @@
 						array(
 							
 							'text' => $i,
-							'wrapper_class' => 'page-num current inactive',
+							'wrapper_class' => 'page-num current',
 							
 						)
 						
@@ -236,7 +236,7 @@
 						array(
 							
 							'text' => $i,
-							'wrapper_class' => 'page-num current inactive',
+							'wrapper_class' => 'page-num current',
 							
 						)
 						
@@ -352,7 +352,7 @@
 						array(
 							
 							'text' => $i,
-							'wrapper_class' => 'page-num current inactive',
+							'wrapper_class' => 'page-num current',
 							
 						)
 						
@@ -393,7 +393,7 @@
 			array(
 				
 				'text' => lang( 'next_page' ),
-				'wrapper_class' => 'next current inactive',
+				'wrapper_class' => 'next inactive',
 				
 			)
 			

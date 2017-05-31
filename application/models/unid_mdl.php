@@ -110,35 +110,58 @@ class Unid_mdl extends CI_Model{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_data_title_prop_html( $params, $ud_data ){
+	public function get_data_title( $params, $ud_data, $data_scheme ){
+		
+		$return = array();
 		
 		if ( isset( $params[ 'ud_title_prop' ] ) ) {
 			
-			$title = '';
-			
 			foreach( $params[ 'ud_title_prop' ] as $k => $item ) {
 				
-				if ( isset( $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ] ) ) {
+				if ( isset( $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ] ) AND isset( $data_scheme[ 'fields' ][ $k ][ 'presentation_label' ] ) ) {
 					
-					$title .= '<span class="item ud-title-prop ud-title-prop ' . $k . ' ud-data-value-wrapper">';
+// 					echo '<pre>' . print_r( $ud_data[ 'parsed_data' ][ 'full' ][ $k ], TRUE ) . '</pre><br/>';
 					
-					$title .= '<span class="title">';
-					
-					$title .= $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'label' ];
-					
-					$title .= '</span> ';
-					
-					$title .= '<span class="value">';
-					
-					$title .= $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ];
-					
-					$title .= '</span>';
-					
-					$title .= '</span>';
+					$return[ 'label' ] = $data_scheme[ 'fields' ][ $k ][ 'presentation_label' ];
+					$return[ 'value' ] = $ud_data[ 'parsed_data' ][ 'full' ][ $k ][ 'value' ];
 					
 				}
 				
 			}
+			
+			return $return;
+			
+		}
+		
+		return $return;
+		
+	}
+	
+	// --------------------------------------------------------------------
+	
+	public function get_data_title_prop_html( $params, $ud_data, $data_scheme ){
+		
+		if ( isset( $params[ 'ud_title_prop' ] ) ) {
+			
+			$_tmp = $this->get_data_title( $params, $ud_data, $data_scheme );
+			
+			$title = '';
+			
+			$title .= '<span class="item ud-title-prop ud-title-prop ' . $k . ' ud-data-value-wrapper">';
+			
+			$title .= '<span class="title">';
+			
+			$title .= $_tmp[ 'label' ];
+			
+			$title .= '</span> ';
+			
+			$title .= '<span class="value">';
+			
+			$title .= $_tmp[ 'value' ];
+			
+			$title .= '</span>';
+			
+			$title .= '</span>';
 			
 			return $title;
 			

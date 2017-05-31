@@ -231,7 +231,7 @@ class Articles extends Main {
 								$article[ 'access_id' ] = 0;
 
 								$created_date_time = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-								$created_date_time = strftime( '%Y-%m-%d %T', $created_date_time );
+								$created_date_time = ov_strftime( '%Y-%m-%d %T', $created_date_time );
 								$article[ 'created_date' ] = $article[ 'modified_date' ] = $article[ 'publish_datetime' ] = $created_date_time;
 								$article[ 'created_by_id' ] = $article[ 'modified_by_id' ] = $article[ 'publish_user_id' ] = $this->users->user_data[ 'id' ];
 
@@ -950,7 +950,7 @@ class Articles extends Main {
 					}
 					else if ( $this->input->post( 'fullcontent' ) ){
 
-						$content = explode( html_escape( '<hr id="vcms-readmore" />' ), $this->input->post( 'fullcontent' ) );
+						$content = explode( html_escape( '<hr id="ov-readmore" />' ), $this->input->post( 'fullcontent' ) );
 
 						if ( check_var( $content[ 1 ] ) ){
 
@@ -967,7 +967,7 @@ class Articles extends Main {
 					}
 
 					$modified_date_time = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-					$modified_date_time = strftime( '%Y-%m-%d %T', $modified_date_time );
+					$modified_date_time = ov_strftime( '%Y-%m-%d %T', $modified_date_time );
 
 					$db_data[ 'modified_date' ] = $modified_date_time;
 

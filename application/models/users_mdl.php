@@ -422,7 +422,7 @@ class Users_mdl extends CI_Model{
 			
 			if ( ! isset( $data[ 'created_datetime' ] ) ) {
 				
-				$data[ 'created_datetime' ] = strftime( '%Y-%m-%d %T', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) );
+				$data[ 'created_datetime' ] = ov_strftime( '%Y-%m-%d %T', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) );
 				
 			}
 			
@@ -544,7 +544,7 @@ class Users_mdl extends CI_Model{
 		}
 
 		// editores de texto
-		$this->plugins->load( 'js_text_editor' );
+		$this->plugins->load( NULL, 'js_text_editor' );
 		foreach ( $this->plugins->get_plugins( 'js_text_editor' ) as $key => $plugin ) {
 
 			if ( $plugin['status'] == 1 ){
@@ -1625,7 +1625,7 @@ class Users_mdl extends CI_Model{
 	
 	public function clear_expired_tmp_codes() {
 		
-		$this->db->query( "DELETE FROM tb_users_acodes WHERE validity_datetime < '" . strftime( '%Y-%m-%d %T', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) ) . "'" );	
+		$this->db->query( "DELETE FROM tb_users_acodes WHERE validity_datetime < '" . ov_strftime( '%Y-%m-%d %T', gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] ) ) . "'" );	
 		
 	}
 	
@@ -1783,7 +1783,7 @@ class Users_mdl extends CI_Model{
 			);
 			
 			$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-			$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
+			$created_datetime = ov_strftime( '%Y-%m-%d %T', $created_datetime );
 			
 			$db_data[ 'created_datetime' ] = $created_datetime;
 			
@@ -2030,7 +2030,7 @@ class Users_mdl extends CI_Model{
 			);
 			
 			$created_datetime = gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-			$created_datetime = strftime( '%Y-%m-%d %T', $created_datetime );
+			$created_datetime = ov_strftime( '%Y-%m-%d %T', $created_datetime );
 			
 			$db_data[ 'created_datetime' ] = $created_datetime;
 			

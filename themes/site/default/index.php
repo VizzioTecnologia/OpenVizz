@@ -1,13 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="<?= $this->mcm->filtered_system_params[ $this->mcm->environment . '_language' ]; ?>" prefix="og: http://ogp.me/ns#" >
-	<head>
+	<head itemscope itemtype="http://schema.org/WebSite">
 		
 		<?php
 			
 			$this->plugins->load( array( 'names' => array( 'jquery', 'jquery_scrolltop' ), 'types' => array( 'js_tooltip' ) ) );
 			
 			$get_args[] = 'uab=' . url_title( $this->ua->browser() );
+			
+			
+			
+			if ( $this->voutput->get_head_stylesheet( 'nivo_slider' ) ) {
+				
+				$this->voutput->unset_head_stylesheet( 'nivo_slider' );
+				
+				$get_args[] = 'ns=1';
+				
+			}
 			
 			if ( $this->voutput->get_head_stylesheet( 'fancybox' ) ) {
 				
@@ -29,14 +39,15 @@
 				
 			}
 			
-			$this->voutput->append_head_stylesheet( 'google_font', 'https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700|Open+Sans:400,300,300italic,400italic,700,700italic' );
+			$this->voutput->append_head_stylesheet( 'google_font', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' );
 			$this->voutput->append_head_stylesheet( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/css/theme.css.php' . ( ! empty( $get_args ) ? '?' . join( '&', $get_args ) : '' ) );
+			$this->voutput->append_head_script( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/js/js.cookie.js' );
 			$this->voutput->append_head_script( 'theme', SITE_THEMES_URL . '/' . site_theme() . '/assets/js/functions.js' );
-			
+			/*
 			$google_font_script = "
 				
 				WebFontConfig = {
-					google: { families: [ 'Open+Sans+Condensed:300,300italic,700:latin', 'Open+Sans:400,300,300italic,400italic,700,700italic:latin' ] }
+					google: { families: [ 'Open+Sans:300,400,700:latin' ] }
 				};
 				(function() {
 					var wf = document.createElement('script');
@@ -51,7 +62,7 @@
 			";
 			
 			$this->voutput->append_head_script_declaration( 'theme', $google_font_script );
-			
+			*/
 			echo $this->voutput->get_head();
 			
 			$content_disp = '';
@@ -82,7 +93,7 @@
 						
 						<?php } else { ?>
 						
-						<a id="logo" href="<?= site_url(); ?>"></a>
+						<a id="logo" href="<?= get_url(); ?>"></a>
 						
 						<?php } ?>
 						
@@ -357,6 +368,28 @@
 					</div>
 					
 					<?php } ?>
+					
+				</div>
+				
+			</footer>
+			
+			<?php } ?>
+			
+			<?php if ( check_var( $this->mcm->loaded_modules[ 'footer_bottom' ] ) ){ ?>
+			
+			<footer id="footer-bottom-block">
+				
+				<div class="s1">
+					
+					<div id="footer-module-bottom" class="footer-bottom">
+						
+						<div class="s1">
+							
+							<?php foreach ( $this->mcm->loaded_modules[ 'footer_bottom' ] as $key => $module ) { echo @$module; } ?>
+							
+						</div>
+						
+					</div>
 					
 				</div>
 				

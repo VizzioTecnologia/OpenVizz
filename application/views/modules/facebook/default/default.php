@@ -35,7 +35,7 @@
 		
 		<div class="facebook-wrapper">
 			
-			<div class="fb-page" data-href="https://www.facebook.com/<?= $module_data[ 'params' ][ 'fb_page_id' ]; ?>" data-width="1000" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"></div></div>
+			<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F<?= $module_data[ 'params' ][ 'fb_page_id' ]; ?>%2F&tabs&width=500&height=214&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=289346507923979" width="100%" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 			
 		</div>
 		

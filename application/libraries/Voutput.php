@@ -30,7 +30,7 @@ class Voutput{
 	
 	// --------------------------------------------------------------------
 	
-	public function get_buffer( $value = NULL ){
+	public function get_buffer(){
 		
 		return $this->_buffer;
 		
@@ -41,13 +41,13 @@ class Voutput{
 	public function set_head_title( $value = NULL ){
 
 		if ( $value AND is_string( $value ) ){
-
+			
 			$this->_head_title = $value;
-
+			
 			$this->_buffer[ 'head' ][ 'title' ] = '<title>' . $this->_head_title . '</title>';
-
+			
 			return TRUE;
-
+			
 		}
 
 		return FALSE;
@@ -413,7 +413,7 @@ class Voutput{
 
 	public function get_head_title(){
 
-		return $this->_head_title;
+		return strip_tags( $this->_head_title );
 
 	}
 

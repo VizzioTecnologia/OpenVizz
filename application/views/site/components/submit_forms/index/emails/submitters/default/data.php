@@ -8,7 +8,7 @@
 	
 ?>
 
-<table width="80%" style="font-size: <?= number_format( SUBMITTERS_DEFAULT_SPACING / 1.1, 2, '.', '' ); ?>em; background: <?= $content_bg_color; ?>; color: <?= $content_fg_color; ?>; margin: 0 auto; text-align: left; border-collapse: collapse; border: none; width:80%" cellpadding="0" cellspacing="0">
+<table width="80%" style="background: <?= $content_bg_color; ?>; color: <?= $content_fg_color; ?>; margin: 0 auto; text-align: left; border-collapse: collapse; border: none; width:80%" cellpadding="0" cellspacing="0">
 	
 	<?php
 	

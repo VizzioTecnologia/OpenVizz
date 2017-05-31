@@ -85,7 +85,9 @@
 					
 					$field_name = $field[ 'alias' ];
 					$formatted_field_name = 'form[' . $field_name . ']';
+				
 					$field_value = ( check_var( $field[ 'default_value' ] ) ) ? $field[ 'default_value' ] : NULL;
+					$field_value = ( isset( $get[ $field_name ] ) ) ? $get[ $field_name ] : $field_value;
 					$field_value = ( isset( $post[ 'form' ][ $field_name ] ) ) ? $post[ 'form' ][ $field_name ] : ( ( isset( $user_submit[ 'data' ][ $field_name ] ) ) ? $user_submit[ 'data' ][ $field_name ] : $field_value );
 					$error = form_error( $formatted_field_name, '<span class="msg-inline-error error">', '</span>' );
 					
@@ -251,19 +253,33 @@
 									
 									$users_submits = $CI->search->get_full_results( 'sf_us_search', TRUE );
 									
-									foreach( $users_submits as & $_user_submit ) {
+									foreach( $users_submits as & $_ud_data ) {
 										
-										$_user_submit[ 'data' ] = get_params( $_user_submit[ 'data' ] );
+										$this->ud_api->parse_ud_data( $_ud_data, NULL, TRUE );
 										
-										if ( $field[ 'options_title_field' ] ) {
+// 										$_ud_data[ 'data' ] = get_params( $_ud_data[ 'data' ] );
+										
+										if ( $_data_scheme = $this->sfcm->get_submit_forms( array( 'where_condition' => 't1.id = ' . $_ud_data[ 'submit_form_id' ], 'limit' => 1, ) )->row_array() ) {
 											
-											foreach( $_user_submit[ 'data' ] as $_dk => $_data ) {
+											$this->ud_api->parse_ds( $_data_scheme );
+											
+// 											echo '<pre>' . print_r( $_data_scheme, TRUE ) . '</pre>';
+											
+											if ( check_var( $_data_scheme[ 'fields' ][ $field[ 'options_title_field' ] ] ) ) {
 												
-												if ( $_dk == $field[ 'options_title_field' ] )
+												$options[ $_ud_data[ 'id' ] ] = check_var( $_ud_data[ 'parsed_data' ][ 'full' ][ $field[ 'options_title_field' ] ][ 'value' ] ) ? $_ud_data[ 'parsed_data' ][ 'full' ][ $field[ 'options_title_field' ] ][ 'value' ] : '';
 												
-												$options[ $_user_submit[ 'id' ] ] = $_data;
+												/*
+												foreach( $_ud_data[ 'data' ] as $_dk => $_data ) {
+													
+													if ( $_dk == $field[ 'options_title_field' ] )
+													
+													$options[ $_ud_data[ 'id' ] ] = $_ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'value' ];
+													
+												};
+												*/
 												
-											};
+											}
 											
 										}
 										

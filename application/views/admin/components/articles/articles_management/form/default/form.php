@@ -3,12 +3,12 @@
 	$this->plugins->load( array( 'names' => array( 'image_cropper', 'fancybox', 'modal_rf_file_picker', 'yetii' ), 'types' => array( 'js_text_editor', 'js_time_picker', ) ) );
 	
 	$created_date_time = ( check_var( $article[ 'created_date' ] ) ) ? strtotime( $article[ 'created_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-	$created_date = $this->input->post( 'created_date' ) ? $this->input->post( 'created_date' ) : strftime( '%Y-%m-%d', $created_date_time );
-	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : strftime( '%T', $created_date_time );
+	$created_date = $this->input->post( 'created_date' ) ? $this->input->post( 'created_date' ) : ov_strftime( '%Y-%m-%d', $created_date_time );
+	$created_time = $this->input->post( 'created_time' ) ? $this->input->post( 'created_time' ) : ov_strftime( '%T', $created_date_time );
 	
 	$modified_date_time = ( check_var( $article[ 'modified_date' ] ) ) ? strtotime( $article[ 'modified_date' ] ) : gmt_to_local( now(), $this->mcm->filtered_system_params[ 'time_zone' ], $this->mcm->filtered_system_params[ 'dst' ] );
-	$modified_date = strftime( '%Y-%m-%d', $modified_date_time );
-	$modified_time = strftime( '%T', $modified_date_time );
+	$modified_date = ov_strftime( '%Y-%m-%d', $modified_date_time );
+	$modified_time = ov_strftime( '%T', $modified_date_time );
 	
 ?>
 
@@ -72,7 +72,7 @@
 							
 							<div class="article-info-item article-info-modified-by">
 								
-								<?= sprintf( lang( 'articles_created_by_name_date_time' ), '<span class="created-by-name">' . $article[ 'created_by_name' ] . '</span>', '<span class="created-date-time">' . strftime( lang( 'articles_created_datetime_format' ), $created_date_time ) . '</span>' ); ?>
+								<?= sprintf( lang( 'articles_created_by_name_date_time' ), '<span class="created-by-name">' . $article[ 'created_by_name' ] . '</span>', '<span class="created-date-time">' . ov_strftime( lang( 'articles_created_datetime_format' ), $created_date_time ) . '</span>' ); ?>
 								
 							</div>
 							
@@ -80,7 +80,7 @@
 							
 							<div class="article-info-item article-info-last-modification">
 								
-								<?= sprintf( lang( 'articles_modified_by_name_date_time' ), '<span class="modified-by-name">' . $article[ 'modified_by_name' ] . '</span>', '<span class="modified-date-time">' . strftime( lang( 'articles_modified_datetime_format' ), $modified_date_time ) . '</span>' ); ?>
+								<?= sprintf( lang( 'articles_modified_by_name_date_time' ), '<span class="modified-by-name">' . $article[ 'modified_by_name' ] . '</span>', '<span class="modified-date-time">' . ov_strftime( lang( 'articles_modified_datetime_format' ), $modified_date_time ) . '</span>' ); ?>
 								
 							</div>
 							
@@ -88,7 +88,7 @@
 							
 							<div class="article-info-item article-info-last-modification">
 								
-								<?= strftime( lang( 'articles_last_modification_in_datetime_format' ), $modified_date_time ); ?>
+								<?= ov_strftime( lang( 'articles_last_modification_in_datetime_format' ), $modified_date_time ); ?>
 								
 							</div>
 							

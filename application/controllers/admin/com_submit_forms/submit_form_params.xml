@@ -590,6 +590,10 @@
 			
 		</param>
 		
+	</section>
+	
+	<section name="ud_params_section_d_detail_params">
+		
 		<!-- as options deste campo são criadas via php -->
 		<param name="ud_d_detail_layout_site" type="select" default="default" label="ud_d_detail_layout_site" tip="tip_ud_d_detail_layout_site" inline="1">
 			

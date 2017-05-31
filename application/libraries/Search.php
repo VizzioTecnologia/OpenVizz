@@ -9,7 +9,7 @@ class Search{
 		'terms' => NULL,
 		'separate_terms' => NULL,
 		'allow_empty_terms' => TRUE, // if no terms given, decide if we must show all results or not
-		'ignore_terms' => FALSE, // enable if you want ignore any terms source (from config, post and get)
+		'ignore_terms' => TRUE, // enable if you want ignore any terms source (from config, post and get)
 		'ipp' => NULL,
 		'cp' => NULL,
 		'order_by' => NULL,
@@ -207,7 +207,7 @@ class Search{
 
 			$this->_config[ 'terms' ] =							( isset( $this->_config[ 'terms' ] ) AND is_string( $this->_config[ 'terms' ] ) ) ? $this->_config[ 'terms' ] : NULL;
 			$this->_config[ 'terms' ] =							( ! isset( $this->_config[ 'terms' ] ) AND is_string( $this->CI->input->post( 'terms' ) ) ) ? $this->CI->input->post( 'terms' ) : $this->_config[ 'terms' ];
-			$this->_config[ 'terms' ] =							( ! isset( $this->_config[ 'terms' ] ) AND is_string( $this->CI->input->get( 'q' ) ) ) ? $this->CI->input->get( 'q' ) : $this->_config[ 'terms' ];
+			$this->_config[ 'terms' ] =							( ! isset( $this->_config[ 'terms' ] ) AND ! check_var( $this->_config[ 'ignore_terms' ] ) AND is_string( $this->CI->input->get( 'q' ) ) ) ? $this->CI->input->get( 'q' ) : $this->_config[ 'terms' ];
 
 			// Setting terms -----------
 			// -------------------------

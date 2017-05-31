@@ -2,7 +2,7 @@
 	
 	$unique_hash_id = md5( rand( 100, 1000 ) ) . uniqid();
 	
-	$this->ud_api->parse_ud_data( $user_submit );
+	$this->ud_api->parse_ud_data( $user_submit, NULL, TRUE );
 	
 	$ud_data = & $user_submit;
 	

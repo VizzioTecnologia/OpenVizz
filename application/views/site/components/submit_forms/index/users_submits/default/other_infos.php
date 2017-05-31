@@ -32,7 +32,27 @@
 		<td class="title"><?= lang( $_field[ 'label' ] ); ?>: </td><?php
 		?><td class="value">
 			
+			<?php
+				
+				if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'search_filter_url' ] ) ) {
+					
+					echo '<a href="' . get_url( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'search_filter_url' ] ) . '">';
+					
+				}
+				
+			?>
+			
 			<?= $_field[ 'value' ]; ?>
+			
+			<?php
+				
+				if ( check_var( $ud_data[ 'parsed_data' ][ 'full' ][ $_alias ][ 'search_filter_url' ] ) ) {
+					
+					echo '</a>';
+					
+				}
+				
+			?>
 			
 		</td>
 	

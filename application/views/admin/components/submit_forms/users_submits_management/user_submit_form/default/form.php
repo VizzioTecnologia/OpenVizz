@@ -81,8 +81,8 @@
 										$thumb_params = array(
 											
 											'wrapper_class' => 'us-image-wrapper',
-											'src' => url_is_absolute( $field_value ) ? $field_value : get_url( 'thumbs/' . $field_value ),
-											'href' => get_url( $field_value ),
+											'src' => url_is_absolute( $field_value ) ? $field_value : get_url( 'thumbs/' . $field_value, NULL, FALSE ),
+											'href' => get_url( $field_value, NULL, FALSE ),
 											'rel' => 'us-thumb',
 											'title' => $field_value,
 											'id' => 'thumb-submit-form-' . $field_name,

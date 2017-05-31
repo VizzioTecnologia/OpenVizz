@@ -370,7 +370,8 @@
 }
 .icon-cancel:before,
 .icon-error:before,
-.icon-disabled:before {
+.icon-disabled:before,
+.icon-reset:before {
 	content: "\e61e";
 }
 .icon-vecms:before,
@@ -613,8 +614,7 @@
 }
 .icon-redirect:before,
 .icon-redirecting:before,
-.icon-sf_redirecting:before,
-.icon-reset:before {
+.icon-sf_redirecting:before {
 	content: "\e904";
 }
 .icon-components:before {

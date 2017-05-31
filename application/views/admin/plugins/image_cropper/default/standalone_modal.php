@@ -14,41 +14,45 @@
 			
 			<div class="image-cropper-preview"></div>
 			
-			<?php
+			<div class="image-cropper-buttons">
 				
-				$options = array(
+				<?php
 					
-					'url' => 'admin/main/plg/pn/image_cropper',
-					'text' => lang( 'action_ok' ),
-					'icon' => 'apply',
-					'only_icon' => FALSE,
-					'class' => 'submit-ok',
+					$options = array(
+						
+						'url' => 'admin/main/plg/pn/image_cropper',
+						'text' => lang( 'action_ok' ),
+						'icon' => 'apply',
+						'only_icon' => FALSE,
+						'class' => 'submit-ok',
+						
+					);
 					
-				);
-				
-				$ok_button = vui_el_button( $options );
-				
-			?>
-			
-			<?= $ok_button; ?>
-			
-			<?php
-				
-				$options = array(
+					$ok_button = vui_el_button( $options );
 					
-					'url' => '#',
-					'text' => lang( 'action_cancel' ),
-					'icon' => 'cancel',
-					'only_icon' => FALSE,
-					'class' => 'submit-cancel',
+				?>
+				
+				<?= $ok_button; ?>
+				
+				<?php
 					
-				);
+					$options = array(
+						
+						'url' => '#',
+						'text' => lang( 'action_cancel' ),
+						'icon' => 'cancel',
+						'only_icon' => FALSE,
+						'class' => 'submit-cancel',
+						
+					);
+					
+					$cancel_button = vui_el_button( $options );
+					
+				?>
 				
-				$cancel_button = vui_el_button( $options );
+				<?= $cancel_button; ?>
 				
-			?>
-			
-			<?= $cancel_button; ?>
+			</div>
 			
 		</div>
 		

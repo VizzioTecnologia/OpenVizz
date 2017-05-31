@@ -2,6 +2,9 @@
 
 if ( ! defined( 'VUI_SCALE' ) ) define( 'VUI_SCALE', 0.75 );
 if ( ! defined( 'VUI_SPACING' ) ) define( 'VUI_SPACING', 1 * VUI_SCALE );
+if ( ! defined( 'VUI_SPACING_VALUE_FIXED' ) ) define( 'VUI_SPACING_VALUE_FIXED', 16 * VUI_SCALE );
+if ( ! defined( 'VUI_SPACING_UNIT_FIXED' ) ) define( 'VUI_SPACING_UNIT_FIXED', 'px' );
+if ( ! defined( 'VUI_SPACING_FIXED' ) ) define( 'VUI_SPACING_FIXED', VUI_SPACING_VALUE_FIXED . VUI_SPACING_UNIT_FIXED );
 
 if ( ! defined( 'VUI_DEFAULT_FONT_FAMILY' ) ) define( 'VUI_DEFAULT_FONT_FAMILY', '\'Roboto\', \'Arial\', sans-serif' );
 if ( ! defined( 'VUI_SEC_FONT_FAMILY' ) ) define( 'VUI_SEC_FONT_FAMILY', '\'Oxygen\', \'Open Sans Condensed\', \'Arial\', sans-serif' );
@@ -13,9 +16,11 @@ if ( ! defined( 'VUI_SEC_FONT_COLOR' ) ) define( 'VUI_SEC_FONT_COLOR', $vui->col
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE_NUM' ) ) define( 'VUI_DEFAULT_FONT_SIZE_NUM', ( 1 * VUI_SCALE ) );
 if ( ! defined( 'VUI_DEFAULT_FONT_SIZE' ) ) define( 'VUI_DEFAULT_FONT_SIZE', VUI_DEFAULT_FONT_SIZE_NUM . 'em' );
 if ( ! defined( 'VUI_DEFAULT_FONT_WEIGHT' ) ) define( 'VUI_DEFAULT_FONT_WEIGHT', 'normal' );
-if ( ! defined( 'VUI_SEC_FONT_WEIGHT' ) ) define( 'VUI_SEC_FONT_WEIGHT', 'normal' );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT_NUM' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT_NUM', ( 1.7 * VUI_SCALE ) );
 if ( ! defined( 'VUI_DEFAULT_LINE_HEIGHT' ) ) define( 'VUI_DEFAULT_LINE_HEIGHT', VUI_DEFAULT_LINE_HEIGHT_NUM . 'em' );
+
+if ( ! defined( 'VUI_SEC_FONT_WEIGHT' ) ) define( 'VUI_SEC_FONT_WEIGHT', 'normal' );
+if ( ! defined( 'VUI_SEC_LINE_HEIGHT' ) ) define( 'VUI_SEC_LINE_HEIGHT', '130%' );
 
 if ( ! defined( 'VUI_DEFAULT_BORDER' ) ) define( 'VUI_DEFAULT_BORDER', '1px solid ' . $vui->colors->vui_extra_3->rgba_s( 40 ) );
 if ( ! defined( 'VUI_SEC_BORDER' ) ) define( 'VUI_SEC_BORDER', '1px solid ' . $vui->colors->vui_lighter->rgba_s( 200 ) );

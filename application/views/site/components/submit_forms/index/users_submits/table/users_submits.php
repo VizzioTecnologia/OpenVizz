@@ -16,11 +16,22 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 	
 }
 
+if ( check_var( $params[ 'ud_d_list_site_search_box_positioning' ] ) AND in_array( $params[ 'ud_d_list_site_search_box_positioning' ], array( 'l', 'r', 't', ) ) ) {
+	
+	$search_box_pos = $params[ 'ud_d_list_site_search_box_positioning' ];
+	
+}
+else {
+	
+	$search_box_pos = 't';
+	
+}
+
 // print_r( $params );
 
 ?>
 
-<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-d-list-wrapper submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
+<section id="ud-d-list-wrapper-<?= $unique_hash; ?>" class="unid ud-d-list-layout-<?= $params[ 'ud_d_list_layout_site' ]; ?> ud-d-list-search-box-pos-<?= $search_box_pos; ?> ud-d-list-wrapper submit-form ud-d-list-wrapper <?= @$params['page_class']; ?>">
 	
 	<?php if ( check_var( $params['show_page_content_title'] ) ) { ?>
 	<header class="component-heading">
@@ -54,31 +65,19 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 			
 		}
 		
+		/* ---------------------------------------------------------------------------
+		* ---------------------------------------------------------------------------
+		* Users submits
+		* ---------------------------------------------------------------------------
+		*/
+		
+		if ( file_exists( $_path . 'users_submits_results.php' ) ) {
+			
+			require( $_path . 'users_submits_results.php' );
+			
+		}
+		
 		?>
-		
-		<?php if ( $pagination ) { ?>
-		<?= $pagination; ?>
-		<?php } ?>
-		
-		<?php
-			
-			/* ---------------------------------------------------------------------------
-			* ---------------------------------------------------------------------------
-			* Users submits
-			* ---------------------------------------------------------------------------
-			*/
-			
-			if ( file_exists( $_path . 'users_submits_results.php' ) ) {
-				
-				require( $_path . 'users_submits_results.php' );
-				
-			}
-			
-		?>
-		
-		<?php if ( $pagination ){ ?>
-		<?= $pagination; ?>
-		<?php } ?>
 		
 	</div>
 
@@ -89,7 +88,7 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 <script type="text/javascript" >
 	
 	$( document ).on( 'ready', function( e ){
-		
+		/*
 		var fbContent;
 		
 		$( "#submit-form-users-submits-<?= $unique_hash; ?> .modal" ).fancybox({
@@ -108,7 +107,7 @@ if ( check_var( $params[ 'us_pre_text_position' ] ) ) {
 			}
 			
 		});
-		
+		*/
 	});
 	
 </script>

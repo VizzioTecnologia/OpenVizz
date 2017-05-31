@@ -44,11 +44,11 @@
 						
 						<div class="s2">
 							
-							<a href="<?= get_url( $contact[ 'photo_local' ] ); ?>">
+							<span itemprop="logo">
 								
 								<?= img( array( 'src' => $contact[ 'thumb_local' ], 'width' => 96 ) ); ?>
 								
-							</a>
+							</span>
 							
 						</div>
 						

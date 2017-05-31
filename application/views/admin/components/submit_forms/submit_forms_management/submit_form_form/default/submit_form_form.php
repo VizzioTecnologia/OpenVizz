@@ -2,7 +2,8 @@
 	
 	$this->plugins->load( NULL, 'js_text_editor' );
 	$this->plugins->load( NULL, 'js_time_picker' );
-
+	$this->plugins->load( 'fancybox' );
+	
 	if ( check_var( $this->current_component[ 'params' ][ 'users_fields' ] ) ) {
 		
 		$users_fields = $this->current_component[ 'params' ][ 'users_fields' ];
@@ -839,13 +840,13 @@
 										
 										<?= form_label( lang( $current_field ) ); ?>
 										
-										<?= vui_el_input_text(
-												
+										<?= vui_el_textarea(
+											
 											array(
 												
 												'text' => lang( $current_field ),
 												'value' => isset( $field[ $current_field ] ) ? $field[ $current_field ] : '',
-												'id' => 'prop-' . $current_field . '-' . $key,
+												'id' => 'field-' . $current_field . '-' . $key,
 												'name' => 'fields[' . $key . '][' . $current_field . ']',
 												'class' => 'ud-ds-prop-' . $current_field,
 												'title' => lang( 'tip_field_' . $current_field )
@@ -1468,7 +1469,7 @@
 												
 												for ( $opts = 1; $opts <= 2; $opts++ ) {
 													
-													$options[ $opts ] = strftime( lang( 'sf_us_dt_ft_op_pt_' . $opts ) );
+													$options[ $opts ] = ov_strftime( lang( 'sf_us_dt_ft_op_pt_' . $opts ) );
 													
 												}
 												
@@ -2072,7 +2073,6 @@
 															'names' => array(
 																
 																'image_cropper',
-																'fancybox',
 																'modal_rf_file_picker',
 																
 															),
@@ -2135,7 +2135,6 @@
 															'names' => array(
 																
 																'image_cropper',
-																'fancybox',
 																'modal_rf_file_picker',
 																
 															),
@@ -4698,9 +4697,9 @@
 	// Fancybox dialog
 	
 	function fancyAlert(msg) {
-		jQuery.fancybox({
+		$.fancybox({
 			'modal' : true,
-			'content' : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input style=\"margin:3px;padding:0px;\" type=\"button\" onclick=\"jQuery.fancybox.close();\" value=\"Ok\"></div></div>"
+			'content' : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input style=\"margin:3px;padding:0px;\" type=\"button\" onclick=\"$.fancybox.close();\" value=\"Ok\"></div></div>"
 		});
 	}
 	
@@ -4708,55 +4707,58 @@
 		
 		var ret;
 		
-		jQuery.fancybox({
+		var content = '<?php // field is required
+				
+			$unique_hash_id = md5( rand( 100, 1000 ) ) . uniqid();
+			
+			$_html = '<div id="modal-content-' . $unique_hash_id . '" class="modal-content">';
+			
+			$_html .=  '{"} + msg + {"}';
+			
+			$_html .= '</div>';
+			$_html .= '<div id="modal-controls-' . $unique_hash_id . '" class="modal-controls modal-controls-bottom controls total-2">';
+			$_html .= vui_el_button(
+				
+				array(
+					
+					'id' => 'fancyConfirm_cancel',
+					'text' => lang( 'action_cancel' ),
+					'icon' => 'cancel',
+					'wrapper_class' => 'item',
+					'only_icon' => TRUE,
+					
+				)
+				
+			);
+			$_html .= vui_el_button(
+				
+				array(
+					
+					'id' => 'fancyConfirm_ok',
+					'text' => lang( 'action_ok' ),
+					'icon' => 'ok',
+					'wrapper_class' => 'item',
+					'only_icon' => TRUE,
+					
+				)
+				
+			);
+			
+			$_html .= '</div>';
+			
+			echo str_replace( array( "'", '{"}' ), array( "\'", "'" ), $_html );
+			
+		?>';
+		
+		$.fancybox.open(content);
+		/*
+		$.fancybox.open({
 			
 			modal : true,
 			wrapCSS: 'vui-modal',
 			openEffect: 'none',
 			closeEffect: 'none',
 			minHeight: 'auto',
-			content : '<?php // field is required
-				
-				$unique_hash_id = md5( rand( 100, 1000 ) ) . uniqid();
-				
-				$_html = '<div id="modal-content-' . $unique_hash_id . '" class="modal-content">';
-				
-				$_html .=  '{"} + msg + {"}';
-				
-				$_html .= '</div>';
-				$_html .= '<div id="modal-controls-' . $unique_hash_id . '" class="modal-controls modal-controls-bottom controls total-2">';
-				$_html .= vui_el_button(
-					
-					array(
-						
-						'id' => 'fancyConfirm_cancel',
-						'text' => lang( 'action_cancel' ),
-						'icon' => 'cancel',
-						'wrapper_class' => 'item',
-						'only_icon' => TRUE,
-						
-					)
-					
-				);
-				$_html .= vui_el_button(
-					
-					array(
-						
-						'id' => 'fancyConfirm_ok',
-						'text' => lang( 'action_ok' ),
-						'icon' => 'ok',
-						'wrapper_class' => 'item',
-						'only_icon' => TRUE,
-						
-					)
-					
-				);
-				
-				$_html .= '</div>';
-				
-				echo str_replace( array( "'", '{"}' ), array( "\'", "'" ), $_html );
-				
-			?>',
 				
 			afterLoad : function() {
 				
@@ -4776,7 +4778,7 @@
 						
 					}
 					
-					jQuery.fancybox.close();
+					$.fancybox.close();
 					
 				});
 				$( document ).on( 'click', "#fancyConfirm_ok", function() {
@@ -4795,7 +4797,7 @@
 						
 					}
 					
-					jQuery.fancybox.close();
+					$.fancybox.close();
 					
 				});
 				
@@ -4837,7 +4839,7 @@
 			}
 			
 		});
-		
+		*/
 	}
 	
 $( document ).on( 'ready', function(){
@@ -5022,6 +5024,12 @@ $( document ).on( 'ready', function(){
 		var $field_wrapper = jthis.closest( '.field-wrapper' );
 		var field_wrapper_index = jthis.closest( '.field-wrapper' ).index();
 		
+		
+		$field_wrapper.remove();
+		
+		updateKeys( field_wrapper_index );
+		
+		/*
 		fancyConfirm( "<?= str_replace( '"', '\"', lang( 'question_delete_field' ) ); ?>", function( action ) {
 			
 			if ( action ) {
@@ -5037,7 +5045,7 @@ $( document ).on( 'ready', function(){
 			}
 			
 		});
-		
+		*/
 	});
 	
 	$( document ).on( "keydown keyup change", '#fields-wrapper .field-wrapper .content .sf-field-label', function( event ){

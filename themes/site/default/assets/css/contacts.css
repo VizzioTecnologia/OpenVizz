@@ -104,6 +104,12 @@
 	font-size: 100%;
 	
 }
+.contact-module-phone-number .int-code,
+.contact-module-phone-number .area-code {
+	
+	font-size: 60%;
+	
+}
 
 .contact-details .contact-item-title {
 	
@@ -112,6 +118,16 @@
 	<?= $vui->css->opacity( '0.6' ); ?>
 	
 }
+
+
+
+
+.contact-module-wrapper > .module-content > .thumb {
+	
+	
+	
+}
+
 
 
 /* ---------------------------------------------------- */

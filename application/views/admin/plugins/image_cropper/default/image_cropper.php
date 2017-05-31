@@ -56,6 +56,7 @@
 			
 			type: "GET",
 			url: $.imageCrop.img.attr( "src" ) + '?' + Math.floor( ( Math.random() * 100 ) + 1 ),
+// 			url: 'sdsds',
 			success: function( data ){
 				
 				$.imageCrop.opened = true;
@@ -105,8 +106,8 @@
 							
 							image_data: {
 								
-								width: 96,
-								height: 96
+								width: <?= check_var( $this->mcm->filtered_system_params[ 'thumbnails_width' ] ) ? ( int ) $this->mcm->filtered_system_params[ 'thumbnails_width' ] : 96; ?>,
+								height: <?= check_var( $this->mcm->filtered_system_params[ 'thumbnails_height' ] ) ? ( int ) $this->mcm->filtered_system_params[ 'thumbnails_height' ] : 96; ?>
 								
 							}
 							

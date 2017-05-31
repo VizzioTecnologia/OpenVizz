@@ -1,4 +1,11 @@
 
+#menu-item-form textarea#html_content {
+	
+	width: 100%;
+	min-height: 600px;
+	
+}
+
 .vui .params-group{
 	
 	position: relative;
@@ -42,15 +49,53 @@
 	width: 100%;
 	
 }
-.vui .field-param-wrapper.field-param-wrapper-spacer{
-	
-	border-bottom: thin solid <?= $vui->colors->vui_site_fg->rgba_s( 50 ); ?>;
-	
-}
 .vui .field-param-wrapper .vui-interactive-el-wrapper,
 .vui .field-param-wrapper .vui-interactive-el-wrapper > .el{
 	
 	width: 100%;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer {
+	
+	position: relative;
+	display: block;
+	
+	overflow: hidden;
+	
+	padding: 0;
+	margin: 0;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer > * {
+	
+	position: relative;
+	<?= $vui->css->display_inline_block(); ?>
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer > *:before,
+.vui .field-param-wrapper.field-param-wrapper-spacer > *:after {
+	
+	content: '';
+	
+	position: absolute;
+	display: block;
+	
+	top: 50%;
+	left: calc( 100% + <?= VUI_SPACING; ?>em );
+	
+	width: 20000%;
+	height: 0;
+	
+	border-bottom: thin solid <?= $vui->colors->vui_site_fg->rgba_s( 30 ); ?>;
+	
+}
+.vui .field-param-wrapper.field-param-wrapper-spacer > *:after {
+	
+	left: auto;
+	right: calc( 100% + <?= VUI_SPACING; ?>em );
 	
 }
 

@@ -134,9 +134,9 @@
 						
 						$.fancybox.open({
 							
-							href : jthis.attr( 'href' ),
-							title : '<?= lang( 'choose_file' ); ?>',
+							src : jthis.attr( 'href' ),
 							type: "iframe",
+							title : '<?= lang( 'choose_file' ); ?>',
 							isDom: false,
 							fitToView: true,
 							minWidth: 860,
@@ -146,7 +146,7 @@
 						});
 						
 					}
-					$.fancybox.reposition();
+// 					$.fancybox.reposition();
 					
 				});
 				

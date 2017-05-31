@@ -702,7 +702,7 @@ function get_param_element( $element = NULL, $params_values = NULL, $params_spec
 		
 		$data[ 'element_value' ] = & $element_value;
 		
-		if ( ! in_array( $type, array( 'checkbox', 'radiobox' ) ) ){
+		if ( ! in_array( $type, array( 'checkbox', 'radio' ) ) ){
 			
 			set_value( $formatted_name, $element_value );
 			

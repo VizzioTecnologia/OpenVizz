@@ -914,11 +914,11 @@
 								
 								array(
 									
-									'url' => $ud_data[ 'view_link' ],
+									'url' => get_url( $ud_data[ 'view_link' ] ),
 									'text' => lang( 'action_view' ),
 									'icon' => 'view',
 									'only_icon' => TRUE,
-									'class' => 'modal-users-submits',
+									'class' => 'modal-ud-data',
 									'attr' => array(
 										
 										'rel' => 'submit-form-users-submits-' . $ud_data[ 'submit_form_id' ],
@@ -935,7 +935,7 @@
 							
 						?>
 						
-						<?= vui_el_button( array( 'url' => $ud_data[ 'edit_link' ], 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
+						<?= vui_el_button( array( 'url' => get_url( $ud_data[ 'edit_link' ] ), 'text' => lang( 'action_edit' ), 'icon' => 'edit', 'only_icon' => TRUE, ) ); ?>
 						
 						<!--<?= vui_el_button( array( 'url' => $ud_data[ 'remove_link' ], 'text' => lang( 'action_delete' ), 'icon' => 'remove', 'only_icon' => TRUE, ) ); ?>-->
 						
@@ -1097,6 +1097,8 @@
 	// edit function
 	window.ud_data_ile_ef = function( $cv, $ile_el_id ){
 		
+		console.debug( 'Inline Edit called' );
+		
 		var $ile_el = $( '#' + $ile_el_id );
 		var $ile_cfg_el = $( '#ile-cfg-el-' + $ile_el_id );
 		var $ile_el_allowed = ! $ile_el.parent().hasClass( 'col-id' ) && ! $ile_el.parent().hasClass( 'col-submit_datetime' ) && ! $ile_el.parent().hasClass( 'col-mod_datetime' ) ? true : false;
@@ -1121,6 +1123,8 @@
 			}
 			
 			$ile_cfg_el.attr( 'data-lp', 25 );
+			
+			console.debug( '[UniD API] Get Data Scheme Property ' );
 			
 			$.ajax({
 			
@@ -1164,6 +1168,8 @@
 							ajax: true,
 							
 						}
+						
+						console.debug( '[UniD API] Get UniD Data Property' );
 						
 						console.log( $data2 )
 						
@@ -1360,9 +1366,12 @@
 											a: "gdspo",
 											dsi: $dsi,
 											pa: $pa,
-											ajax: true
+											ajax: true,
+											wabor: true
 											
 										}
+										
+										console.debug( '[UniD API] Get Data Scheme Property Options' );
 										
 										$ile_cfg_el.attr( 'data-lp', 70 );
 										
@@ -1394,7 +1403,7 @@
 													var $ile_el_options = gdspo_data.out;
 													
 													console.debug( '$ile_el_options: ' );
-													console.debug( $ile_el_options );
+													console.debug( gdspo_data );
 													
 													$options_length = Object.getOwnPropertyNames( $ile_el_options ).length;
 													
@@ -1410,7 +1419,7 @@
 														
 														for( var val in $ile_el_options ) {
 															
-															$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+															$( '<option value="' + val.replace("___rplc", "") + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
 															
 															break;
 															
@@ -1440,7 +1449,7 @@
 															
 															for( var val in $ile_el_options ) {
 																
-																$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+																$( '<option value="' + val.replace("___rplc", "") + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
 																
 															}
 															
@@ -1458,7 +1467,7 @@
 															
 															for( var val in $ile_el_options ) {
 																
-																$( '<option value="' + val + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
+																$( '<option value="' + val.replace("___rplc", "") + '" >' + $ile_el_options[ val ] + '</option>' ).appendTo(s);
 																
 															}
 															
@@ -1503,7 +1512,9 @@
 											},
 											error: function( jqXHR, textStatus, errorThrown ) {
 												
-												console.debug( textStatus );
+												console.error( '[UniD API] ' + textStatus + ":\n" + errorThrown + ":\n" + gdspo_data );
+												
+												createGrowl( '<strong>[UniD API] ' + textStatus + ":</strong><br>\n" + errorThrown, null, null, 'msg-type-error' );
 												
 												$ile_cfg_el.attr( 'data-lp', 100 );
 												
@@ -1536,7 +1547,9 @@
 							},
 							error: function( jqXHR, textStatus, errorThrown ) {
 								
-								console.debug( textStatus );
+								console.error( '[UniD API] ' + textStatus + ":\n" + errorThrown + ":\n" + gdspo_data );
+								
+								createGrowl( '<strong>[UniD API] ' + textStatus + ":</strong><br>\n" + errorThrown, null, null, 'msg-type-error' );
 								
 							}
 							

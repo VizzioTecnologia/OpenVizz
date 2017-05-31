@@ -17,6 +17,10 @@ $lang['parent_menu_item'] = 																			"Item de menu pai";
 $lang['select_component'] = 																			"Selecione o componente";
 $lang['select_component_item'] = 																		"Selecione o item do componente";
 
+$lang['html_content'] = 																				"Conteúdo personalizado";
+$lang['blank_content'] = 																				"Página vazia";
+$lang['external_link'] = 																				"Link personalizado";
+
 $lang['action_goback_to_menus'] = 																		"Voltar para os menus";
 $lang['action_goback_to_menu_items'] = 																	"Voltar para os itens de menus";
 $lang['action_goback_to_select_component'] = 															"Voltar para a seleção do componente";

@@ -27,6 +27,20 @@
 			
 		</param>
 		
+		<param type="spacer" label="captcha" />
+		
+		<param name="ud_dsf_enable_captcha" type="select" default="global" label="ud_dsf_enable_captcha" tip="tip_ud_dsf_enable_captcha">
+			
+			<option value="1">yes</option>
+			<option value="0">no</option>
+			<option value="global">Global</option>
+			
+		</param>
+		
+		<param name="ud_dsf_captcha_site_key" type="text" default="" label="ud_dsf_captcha_site_key" tip="tip_ud_dsf_captcha_site_key"></param>
+		
+		<param name="ud_dsf_captcha_secret" type="text" default="" label="ud_dsf_captcha_secret" tip="tip_ud_dsf_captcha_secret"></param>
+		
 	</section>
 	
 </params>

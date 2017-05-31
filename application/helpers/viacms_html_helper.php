@@ -47,7 +47,7 @@ function _ul_menu_items( $menuArray ){
 			
 			if ( isset( $node[ 'home' ] ) AND $node[ 'home' ] ){
 				
-				$link = site_url();
+				$link = get_url();
 				//echo 'home <br/>';
 				
 			}

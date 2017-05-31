@@ -1,0 +1,669 @@
+
+/*
+ *********************************************************
+ ---------------------------------------------------------
+ Fancybox
+ ---------------------------------------------------------
+ */
+/*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
+
+/* ------------------------------------------------------ */
+/* Fancybox */
+
+html.fancybox-margin {
+	
+	margin: 0;
+	
+}
+
+.fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp
+{
+	
+	padding: 0;
+	margin: 0;
+	border: 0;
+	outline: none;
+	vertical-align: top;
+	
+}
+
+.fancybox-wrap {
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	z-index: 8020;
+	
+}
+.mobile .fancybox-wrap {
+	
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	
+}
+
+.fancybox-skin {
+	
+	position: relative;
+	
+	padding: <?= VUI_SPACING_VALUE_FIXED; ?><?= VUI_SPACING_UNIT_FIXED; ?> !important;
+	
+	background: <?= $vui->colors->vui_modal_bg->rgba_s(); ?>;
+	color: <?= $vui->colors->vui_modal_fg->rgba_s(); ?>;
+	text-shadow: none;
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+	
+}
+.mobile .fancybox-skin {
+	
+	padding: <?= VUI_SPACING_VALUE_FIXED / 2; ?><?= VUI_SPACING_UNIT_FIXED; ?> !important;
+	
+}
+
+.fancybox-opened {
+	
+	z-index: 100001;
+	
+}
+
+.fancybox-opened .fancybox-skin {
+	
+	<?= $vui->css->box_shadow( '0 10px 50px ' . $vui->colors->vui_modal_shadow->rgba_s() ); ?>
+	
+}
+.mobile .fancybox-opened .fancybox-skin {
+	
+	<?= $vui->css->box_shadow( 'none' ); ?>
+	
+}
+body.mobile.fancybox-opened {
+	
+	overflow: hidden;
+	
+}
+
+.fancybox-outer, .fancybox-inner {
+	position: relative;
+}
+
+.fancybox-inner {
+	overflow: hidden;
+}
+
+.fancybox-type-iframe .fancybox-inner {
+	-webkit-overflow-scrolling: touch;
+}
+
+.fancybox-error {
+	color: #444;
+	margin: 0;
+	padding: 15px;
+	white-space: nowrap;
+}
+
+.fancybox-image, .fancybox-iframe {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.fancybox-image {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+
+}
+.vui .loading > *,
+#fancybox-loading > div {
+	
+	display: none;
+	
+}
+#fancybox-loading {
+	
+	position: fixed;
+	display: block;
+	
+	left: 0;
+	top: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	z-index: 100002;
+	
+	mix-blend-mode: overlay;
+	
+}
+#fancybox-loading > div {
+	
+	position: absolute;
+	display: block;
+	
+	left: 50%;
+	top: 50%;
+	
+	width: 70px;
+	height: 70px;
+	
+	margin: 0;
+	
+	text-align: center;
+	
+	<?= $vui->css->animation( 'vui_loading_rotate 2.0s infinite linear' ); ?>
+	
+	<?= $vui->css->border_radius( '100%' ) ?>
+	
+	padding: <?= VUI_SPACING_FIXED; ?>;
+	
+}
+
+#fancybox-loading > div:before,
+#fancybox-loading > div:after {
+	
+	content: '';
+	
+	width: 50%;
+	height: 50%;
+	display: inline-block;
+	position: absolute;
+	top: <?= VUI_SPACING_FIXED; ?>;
+	
+	<?= $vui->css->border_radius( '100%' ) ?>
+	
+	background: <?= $vui->colors->vui_modal_overlay_fg->rgba_s(); ?>;
+	
+	<?= $vui->css->animation( 'vui_loading_bounce 2.0s infinite ease-in-out' ); ?>
+	
+}
+
+#fancybox-loading > div:after {
+	
+	top: auto;
+	bottom: <?= VUI_SPACING_FIXED; ?>;
+	
+	<?= $vui->css->animation_delay( '-1.0s' ); ?>
+	
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
+	
+}
+
+<?php
+	
+	$vui_loading_rotate = '
+		
+		0% {
+			
+			background: ' . $vui->colors->vui_modal_overlay_fg->rgba_s( 100 ) . ';
+			
+			' . $vui->css->transform( 'translatex( -50% ) translateY( -50% ) rotate( 0deg )' ) . '
+			
+		}
+		
+		50% {
+			
+			background: ' . $vui->colors->vui_modal_overlay_bg->rgba_s( 100 ) . ';
+			
+			' . $vui->css->transform( 'translatex( -50% ) translateY( -50% ) rotate( 180deg )' ) . '
+			
+		}
+		
+		100% {
+			
+			background: ' . $vui->colors->vui_modal_overlay_fg->rgba_s( 100 ) . ';
+			
+			' . $vui->css->transform( 'translatex( -50% ) translateY( -50% ) rotate( 360deg )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'vui_loading_rotate', $vui_loading_rotate );
+	
+?>
+
+<?php
+	
+	$vui_loading_bounce = '
+		
+		0%, 100% {
+			
+			' . $vui->css->transform( 'scale( 0.0 )' ) . '
+			
+		}
+		
+		50% {
+			
+			' . $vui->css->transform( 'scale( 1.0 )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'vui_loading_bounce', $vui_loading_bounce );
+	
+?>
+
+
+
+
+
+
+
+.fancybox-close {
+	
+	position: absolute;
+	top: -18px;
+	right: -18px;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	z-index: 8040;
+	
+	<?= $vui->css->transform( 'scale( 1 )' ); ?>
+	
+	background-color: <?= $vui->colors->vui_modal_close_bg->rgba_s(); ?>;
+	background-image: url(<?= $vui->svg_file( 'icon-close', $vui->colors->vui_modal_close_fg->rgba_s() ); ?>);
+	background-size: calc( 100% - <?= VUI_SPACING; ?>em ) auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	
+	<?= $vui->css->border_radius( '100%' ) ?>
+	
+	mix-blend-mode: hard-light;
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	
+}
+.fancybox-close:hover {
+	
+	<?= $vui->css->transform( 'scale( 1.2 )' ); ?>
+	
+}
+.fancybox-close:active {
+	
+	<?= $vui->css->transform( 'scale( 0.95 )' ); ?>
+	
+}
+
+.fancybox-nav {
+	
+	position: fixed;
+	top: 0;
+	width: calc( <?= VUI_SPACING * 2; ?>em * 2 + 48px * 2 );
+	height: 100%;
+	cursor: pointer;
+	text-decoration: none;
+	
+	background-color: transparent;
+	background-image: url(<?= $vui->svg_file( 'icon-arrow-left', $vui->colors->vui_modal_overlay_fg->rgba_s(), 'vui_change_color' ); ?>);
+	background-size: calc( 100% - <?= VUI_SPACING * 2; ?>em * 2 ) auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	
+	<?= $vui->css->opacity( 0.3 ); ?>
+	
+	z-index: 8040;
+	
+	<?= $vui->css->transition( VUI_DEFAULT_TRANSITION ) ?>
+	
+	mix-blend-mode: hard-light;
+	
+}
+
+.mobile .fancybox-close,
+.mobile .fancybox-nav,
+#jquery-scrolltop {
+	
+	position: fixed;
+	
+	top: <?= VUI_SPACING_FIXED; ?>;
+	right: <?= VUI_SPACING_FIXED; ?>;
+	cursor: pointer;
+	z-index: 8040;
+	
+	<?= $vui->css->border_radius( '100%' ) ?>
+	
+	width: calc( <?= VUI_SPACING_FIXED; ?> + 48px );
+	height: calc( <?= VUI_SPACING_FIXED; ?> + 48px );
+	
+	<?= $vui->css->transform_style() ?>
+	<?= $vui->css->transform_origin() ?>
+	<?= $vui->css->transform( 'scale( 1 )' ) ?>
+	<?= $vui->css->transition( 'all 0.3s' ) ?>
+	
+	<?= $vui->css->opacity( 1 ); ?>
+	
+	border: thin solid <?= $vui->colors->vui_modal_overlay_fg->rgba_s( 50 ); ?>;
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 70 ); ?>;
+	background-size: calc( 100% - <?= ( VUI_SPACING_VALUE_FIXED ) . VUI_SPACING_UNIT_FIXED; ?> ) auto;
+	
+	<?= $vui->css->animation( 'fancybox_nav_2 0.1s forwards ease-in' ); ?>
+	
+	mix-blend-mode: hard-light;
+	
+}
+.mobile .fancybox-close,
+#jquery-scrolltop {
+	
+	<?= $vui->css->transform( 'scale( 1 )' ) ?>
+	<?= $vui->css->animation( 'button_pressed_anim 0.1s forwards ease-out' ); ?>
+	
+	mix-blend-mode: initial;
+	
+}
+.mobile .fancybox-close {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-close', $vui->colors->vui_modal_close_fg->rgba_s() ); ?>);
+	background-color: <?= $vui->colors->vui_modal_close_bg->rgba_s(); ?>;
+	
+}
+.mobile .fancybox-nav {
+	
+	top: 50%;
+	
+	<?= $vui->css->transform( 'translateY(-50%) scale( 1 )' ) ?>
+	
+	<?= $vui->css->animation( 'fancybox_nav_2 0.1s forwards ease-in' ); ?>
+	
+	height: <?= 100 / 2; ?>%;
+	
+	<?= $vui->css->border_radius( '10em' ) ?>
+	
+}
+.mobile .fancybox-nav,
+.mobile .fancybox-nav * {
+	
+	<?= $vui->css->user_select( 'none' ); ?>
+	
+}
+.mobile .fancybox-nav:hover,
+.mobile .fancybox-close:hover,
+#jquery-scrolltop:hover {
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 255 ); ?>;
+	
+}
+.mobile .fancybox-nav:focus,
+.mobile .fancybox-close:focus,
+#jquery-scrolltop:focus {
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 255 ); ?>;
+	
+}
+.mobile .fancybox-nav:active {
+	
+	<?= $vui->css->animation( 'fancybox_nav 0.1s forwards ease-out' ); ?>
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 255 ); ?>;
+	
+}
+.mobile .fancybox-close:active,
+#jquery-scrolltop:active {
+	
+	<?= $vui->css->animation( 'button_pressed_anim_2 0.1s forwards ease-out' ); ?>
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 255 ); ?>;
+	
+}
+
+<?php
+	
+	$fancybox_nav = '
+		
+		0% {
+			
+			' . $vui->css->transform( 'translateY(-50%) scale( 1 )' ) . '
+			
+		}
+		
+		100% {
+			
+			' . $vui->css->transform( 'translateY(-50%) scale( 0.9 )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'fancybox_nav', $fancybox_nav );
+	
+	$fancybox_nav_2 = '
+		
+		0% {
+			
+			' . $vui->css->transform( 'translateY(-50%) scale( 0.9 )' ) . '
+			
+		}
+		
+		100% {
+			
+			' . $vui->css->transform( 'translateY(-50%) scale( 1 )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'fancybox_nav_2', $fancybox_nav_2 );
+	
+	$button_pressed_anim = '
+		
+		0% {
+			
+			' . $vui->css->transform( 'scale( 0.9 )' ) . '
+			
+		}
+		
+		100% {
+			
+			' . $vui->css->transform( 'scale( 1 )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'button_pressed_anim', $button_pressed_anim );
+	
+	$button_pressed_anim_2 = '
+		
+		0% {
+			
+			' . $vui->css->transform( 'scale( 1 )' ) . '
+			
+		}
+		
+		100% {
+			
+			' . $vui->css->transform( 'scale( 0.9 )' ) . '
+			
+		}
+		
+	';
+	
+	echo $vui->css->keyframes( 'button_pressed_anim_2', $button_pressed_anim_2 );
+	
+?>
+
+.fancybox-prev {
+	
+	left: <?= VUI_SPACING_FIXED; ?>;
+	
+}
+
+.fancybox-next {
+	
+	right: <?= VUI_SPACING_FIXED; ?>;
+	
+}
+
+.fancybox-nav span {
+	
+	position: absolute;
+	display: none;
+	top: 50%;
+	width: 48px;
+	height: 48px;
+	margin-top: -24px;
+	cursor: pointer;
+	z-index: 8040;
+	
+	<?= $vui->css->border_radius( '100%' ); ?>
+	
+}
+
+.fancybox-next {
+	
+	background-image: url(<?= $vui->svg_file( 'icon-arrow-right', $vui->colors->vui_modal_overlay_bg->get_ro_color( 100 )->rgba_s(), 'vui_change_color' ); ?>)
+	
+}
+
+.fancybox-nav:hover {
+	
+	background-color: <?= $vui->colors->vui_modal_overlay_bg->rgba_s( 50 ); ?>;
+	<?= $vui->css->opacity( 1 ); ?>
+	
+}
+
+.fancybox-tmp {
+	position: absolute;
+	top: -99999px;
+	left: -99999px;
+	max-width: 99999px;
+	max-height: 99999px;
+	overflow: visible !important;
+}
+
+/* Overlay helper */
+
+.fancybox-lock {
+	overflow: visible !important;
+	width: auto;
+}
+
+.fancybox-lock body {
+	overflow: hidden !important;
+}
+
+.fancybox-lock-test {
+	overflow-y: hidden !important;
+}
+
+.fancybox-overlay {
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	display: none;
+	z-index: 100000;
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
+	
+}
+
+.fancybox-overlay-fixed {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
+.fancybox-lock .fancybox-overlay {
+	
+	overflow: auto;
+	/* 	overflow-y: scroll; */
+	
+}
+
+/* Title helper */
+
+.fancybox-title {
+	visibility: hidden;
+	position: relative;
+	text-shadow: none;
+	z-index: 8050;
+}
+
+.fancybox-opened .fancybox-title {
+	visibility: visible;
+}
+
+.fancybox-title-float-wrap {
+	
+	position: absolute;
+	bottom: 0;
+	right: 50%;
+	margin-bottom: -35px;
+	z-index: 8050;
+	text-align: center;
+	
+	mix-blend-mode: hard-light;
+	
+}
+
+.fancybox-title-float-wrap .child {
+	
+	display: inline-block;
+	margin-right: -100%;
+	
+	padding: <?= VUI_SPACING / 2; ?>em <?= VUI_SPACING; ?>em;
+	
+	background: <?= $vui->colors->vui_modal_overlay_bg->rgba_s(); ?>;
+	
+	<?= $vui->css->border_radius( VUI_DEFAULT_BORDER_RADIUS ); ?>
+	
+	text-shadow: 0 1px 2px #222;
+	color: #FFF;
+	font-size: <?= ( $min ) . $meas_unit; ?>;
+	font-family: <?= VUI_SEC_FONT_FAMILY; ?>;
+	font-weight: bold;
+	line-height: normal;
+	white-space: nowrap;
+	
+}
+
+.fancybox-title-outside-wrap {
+	position: relative;
+	margin-top: 10px;
+	color: #fff;
+}
+
+.fancybox-title-inside-wrap {
+	padding-top: 10px;
+}
+
+.fancybox-title-over-wrap {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+	padding: 10px;
+	background: #000;
+	background: rgba(0, 0, 0, .8);
+}
+
+/*Retina graphics!*/
+<?= '@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5)'; ?> {
+	
+	
+}
+	
+/*
+ ---------------------------------------------------------
+ Fancybox
+ ---------------------------------------------------------
+ *********************************************************
+ */

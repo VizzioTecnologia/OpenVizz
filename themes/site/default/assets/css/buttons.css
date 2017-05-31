@@ -75,7 +75,8 @@ input[ type=reset ]:focus,
 .vui-interactive-el-wrapper.vui-btn-wrapper:hover > .el,
 .read-more-link:hover,
 .read-more-link:active,
-.read-more-link:focus {
+.read-more-link:focus,
+.vui .pagination .vui-interactive-el-wrapper.current > .el {
 	
 	color: <?= $vui->colors->vui_button_active_fg->rgba_s(); ?>;
 	
@@ -119,7 +120,8 @@ input[ type=reset ]:focus,
 	
 }
 
-.vui-interactive-el-wrapper.vui-btn-wrapper .icon-wrapper {
+.vui-interactive-el-wrapper.vui-btn-wrapper .icon-wrapper,
+.vui .pagination .vui-interactive-el-wrapper.current .icon-wrapper{
 	
 	color: <?= $vui->colors->vui_button_fg->rgba_s(); ?>;
 	
@@ -186,6 +188,8 @@ select[ size="1" ] option {
 	<?= $vui->css->text_shadow( 'none' ); ?>
 	
 	text-align: left;
+	
+	font-size: initial;
 	
 }
 /* Hiding dropdown arrows on IE*/
